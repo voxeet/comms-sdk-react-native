@@ -13,6 +13,10 @@ _WIP_
 
 `$ npm install @voxeet/react-native-voxeet-sdk --save`
 
+or 
+
+`$ npm install https://github.com/codlab/react-native-voxeet-sdk --save`
+
 ### Mostly automatic installation
 
 `$ react-native link @voxeet/react-native-voxeet-sdk`
