@@ -11,9 +11,15 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
+import io.dolby.sdk.events.AbstractEventEmitter;
+import io.dolby.sdk.events.ConferenceStatusEventEmitter;
+import io.dolby.sdk.events.ConferenceUserEventEmitter;
 import io.dolby.sdk.utils.Lock;
 
 public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
@@ -24,10 +30,21 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
     private ReentrantLock lockAwaitingToken = new ReentrantLock();
     private List<TokenCallback> mAwaitingTokenCallback;
+    private final List<AbstractEventEmitter> eventEmitters;
 
     public RNVoxeetSdkModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        mAwaitingTokenCallback = new ArrayList<>();
+
+        eventEmitters = new ArrayList<>();
+        eventEmitters.add(new ConferenceStatusEventEmitter(reactContext, EventBus.getDefault()));
+        eventEmitters.add(new ConferenceUserEventEmitter(reactContext, EventBus.getDefault()));
+
+        for (AbstractEventEmitter emitter : eventEmitters) {
+            emitter.register();
+        }
+
     }
 
     @Override

@@ -13,6 +13,7 @@ export interface TokenRefreshCallback {
 class _VoxeetSDK {
   refreshAccessTokenCallback: RefreshCallback|null = null;
   public session = new SessionService();
+  public events = new NativeEventEmitter(RNVoxeetSDK);
 
   initialize(consumerKey: string, consumerSecret: string): Promise<any> {
       return RNVoxeetSDK.initialize(consumerKey, consumerSecret);

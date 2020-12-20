@@ -7,6 +7,7 @@ var _VoxeetSDK = /** @class */ (function () {
     function _VoxeetSDK() {
         this.refreshAccessTokenCallback = null;
         this.session = new SessionService();
+        this.events = new NativeEventEmitter(RNVoxeetSDK);
     }
     _VoxeetSDK.prototype.initialize = function (consumerKey, consumerSecret) {
         return RNVoxeetSDK.initialize(consumerKey, consumerSecret);

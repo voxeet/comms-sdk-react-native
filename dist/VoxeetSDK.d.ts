@@ -8,6 +8,7 @@ export interface TokenRefreshCallback {
 declare class _VoxeetSDK {
     refreshAccessTokenCallback: RefreshCallback | null;
     session: SessionService;
+    events: any;
     initialize(consumerKey: string, consumerSecret: string): Promise<any>;
     initializeToken(accessToken: string | undefined, refreshToken: TokenRefreshCallback): any;
 }
