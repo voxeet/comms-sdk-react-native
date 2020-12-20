@@ -1,10 +1,12 @@
 import { DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import SessionService from "./services/SessionService";
 var RNVoxeetSDK = NativeModules.RNVoxeetSDK;
 ;
 ;
 var _VoxeetSDK = /** @class */ (function () {
     function _VoxeetSDK() {
         this.refreshAccessTokenCallback = null;
+        this.session = new SessionService();
     }
     _VoxeetSDK.prototype.initialize = function (consumerKey, consumerSecret) {
         return RNVoxeetSDK.initialize(consumerKey, consumerSecret);

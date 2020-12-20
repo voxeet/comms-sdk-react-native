@@ -1,3 +1,4 @@
+import SessionService from "./services/SessionService";
 export interface RefreshCallback {
     (): void;
 }
@@ -6,6 +7,7 @@ export interface TokenRefreshCallback {
 }
 declare class _VoxeetSDK {
     refreshAccessTokenCallback: RefreshCallback | null;
+    session: SessionService;
     initialize(consumerKey: string, consumerSecret: string): Promise<any>;
     initializeToken(accessToken: string | undefined, refreshToken: TokenRefreshCallback): any;
 }

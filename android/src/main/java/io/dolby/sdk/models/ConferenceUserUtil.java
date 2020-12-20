@@ -2,6 +2,7 @@ package io.dolby.sdk.models;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
@@ -75,4 +76,11 @@ public final class ConferenceUserUtil {
 
         return map;
     }
+
+    public static ParticipantInfo toParticipantInfo(ReadableMap map) {
+        return new ParticipantInfo(map.getString(PARTICIPANT_NAME),
+                map.getString(PARTICIPANT_EXTERNAL_ID),
+                map.getString(PARTICIPANT_AVATAR_URL));
+    }
+
 }

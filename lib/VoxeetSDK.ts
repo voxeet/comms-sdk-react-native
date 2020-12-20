@@ -1,5 +1,5 @@
 import { DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform } from 'react-native';
-import { VoxeetSDK } from '.';
+import SessionService from "./services/SessionService";
 const { RNVoxeetSDK } = NativeModules;
 
 export interface RefreshCallback {
@@ -12,7 +12,7 @@ export interface TokenRefreshCallback {
 
 class _VoxeetSDK {
   refreshAccessTokenCallback: RefreshCallback|null = null;
-
+  public session = new SessionService();
 
   initialize(consumerKey: string, consumerSecret: string): Promise<any> {
       return RNVoxeetSDK.initialize(consumerKey, consumerSecret);
