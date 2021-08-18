@@ -1,12 +1,24 @@
 import { NativeModules } from 'react-native';
 import ConferenceUser from "../types/ConferenceUser";
+import { Participant } from "../types";
 
 const { RNSessionServiceModule } = NativeModules;
 
 export default class SessionService {
-  open = async (participant: ConferenceUser): Promise<boolean> => {
-      return RNSessionServiceModule.open(participant);
+  //TODO make sure open() is also possible
+  public async open(participant: ConferenceUser): Promise<boolean> {
+    return RNSessionServiceModule.open(participant);
   }
 
-  close = async (): Promise<boolean> => RNSessionServiceModule.close();
+  public async close(): Promise<boolean> {
+    return RNSessionServiceModule.close();
+  }
+
+  public async isLocalParticipant(participant: Participant): Promise<boolean> {
+    throw "not implemented";
+  }
+
+  public async isSocketOpen(): Promise<boolean> {
+    throw "not implemented";
+  }
 }
