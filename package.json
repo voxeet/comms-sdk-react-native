@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
+    "configure": "cp ./hooks/* .git/hooks/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,6 +17,7 @@
     "react-native": "^0.41.2"
   },
   "devDependencies": {
-    "@types/react-native": "^0.64.13"
+    "@types/react-native": "^0.64.13",
+    "typescript": "^4.3.5"
   }
 }

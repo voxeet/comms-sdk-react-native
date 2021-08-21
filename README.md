@@ -7,6 +7,12 @@ Before using the latest version of the react-native plugin, please review and ac
 
 ## Documentation
 
+### Development
+
+Please use `npm run configure` or `yarn run configure` after checking out.
+
+Transpilation : `npm run tsc` will make sure the current project tsc version is used. _TODO check if necessary_
+
 _WIP_
 
 ## Getting started
@@ -29,19 +35,13 @@ or
 
 **Note: to enable Firebase on Android (for Push Notification), please add also the [react-native-voxeet-firebase](https://github.com/voxeet/react-native-voxeet-firebase) library**
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import io.dolby.sdk.RNVoxeetSdkPackage;` to the imports at the top of the file
-  - Add `voxeet` to the list returned by the `getPackages()` method
-  - Add a field in the `MainApplication` class named voxeet : `private RNVoxeetSdkPackage voxeet;`
-  - in the `onCreate` method, instantiate the `voxeet` field to a new instance of the `RNVoxeetSdkPackage` class : `voxeet = new RNVoxeetSdkPackage(MainApplication.this);`
-
-2. Append the following lines to `android/settings.gradle`:
+1. Append the following lines to `android/settings.gradle`:
   	```
   	include ':@voxeet_react-native-voxeet-sdk'
   	project(':@voxeet_react-native-voxeet-sdk').projectDir = new File(rootProject.projectDir, 	'../node_modules/@voxeet/react-native-voxeet-sdk/android')
   	```
 
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+2. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
       compile (project(':@voxeet_react-native-voxeet-sdk')) {
           transitive = true
@@ -88,9 +88,18 @@ android {
 }
 ```
 
+##### MainActivity
+
+_TODO fill when android is implemented_
+
 ##### MainApplication
 
-Follow the implementation from the `link` documentation, first step
+Open up `android/app/src/main/java/[...]/MainApplication.java`
+
+  - Add `import io.dolby.sdk.RNVoxeetSdkPackage;` to the imports at the top of the file
+  - Add `voxeet` to the list returned by the `getPackages()` method
+  - Add a field in the `MainApplication` class named voxeet : `private RNVoxeetSdkPackage voxeet;`
+  - in the `onCreate` method, instantiate the `voxeet` field to a new instance of the `RNVoxeetSdkPackage` class : `voxeet = new RNVoxeetSdkPackage(MainApplication.this);`
 
 #### app/src/main/AndroidManifest.xml
 
