@@ -1,4 +1,6 @@
-export default class Participant {
+import { ParticipantInfo } from "./ConferenceParticipant";
+
+export default class Participant implements ParticipantInfo {
   
   constructor(
     public participantId: string,

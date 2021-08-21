@@ -1,4 +1,4 @@
-import { VideoPresentation } from "./video";
+import { VideoPresentation } from "./presentation";
 
 
 //TODO export its events

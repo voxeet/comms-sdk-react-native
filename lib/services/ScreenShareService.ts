@@ -1,5 +1,4 @@
-import Point from "../types/Point";
-import ScreenInfo from "../types/ScreenInfo";
+import { Point, ScreenInfo } from "../types";
 
 export default class ScreenShareService {
 

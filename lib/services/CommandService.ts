@@ -1,4 +1,4 @@
-import ConferenceService from "./ConferenceService";
+import { Conference } from "./conference";
 
 export default class CommandService {
   

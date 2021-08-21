@@ -1,3 +1,6 @@
+import { FilePresentationConverted } from "../events/FilePresentationEvents";
+import { FilePresentation } from "./presentation";
+
 export default class FilePresentationService {
   public async getImage(fileId: string, pageNumber: number): Promise<string> {
     throw "not implemented";

@@ -25,10 +25,13 @@ const screenShare = new ScreenShareService();
 const session = new SessionService();
 const videoPresentation = new VideoPresentationService();
 
+const events = new NativeEventEmitter(RNVoxeetSDK);
+
 //TODO convert to frozen object
 class _VoxeetSDK {
   refreshAccessTokenCallback: RefreshCallback|null = null;
-  public events = new NativeEventEmitter(RNVoxeetSDK);
+
+  get events() { return events; }
 
   get audio() { return audio; }
 

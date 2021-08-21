@@ -1,12 +1,11 @@
 import { NativeModules } from 'react-native';
-import ConferenceUser from "../types/ConferenceUser";
-import { Participant } from "../types";
+import { Participant, ParticipantInfo } from "./conference";
 
 const { RNSessionServiceModule } = NativeModules;
 
 export default class SessionService {
   //TODO make sure open() is also possible
-  public async open(participant: ConferenceUser): Promise<boolean> {
+  public async open(participant: ParticipantInfo): Promise<boolean> {
     return RNSessionServiceModule.open(participant);
   }
 

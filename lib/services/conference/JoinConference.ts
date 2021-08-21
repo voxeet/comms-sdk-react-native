@@ -2,11 +2,11 @@ export enum UserType {
   USER = "user",
   LISTENER = "listener"
 }
-  
+
 export interface JoinUserInfo {
   type?:  UserType;
 }
-  
-export default interface JoinOptions {
+
+export interface JoinOptions {
   user?: JoinUserInfo;
 }
