@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ -e .hook_commit ]
+  then
+  rm .hook_commit
+
+  cd $(git rev-parse --show-toplevel)
+
+  # make sure to always have latest transpilation results
+  npm run tsc || ( echo "unable to run tsc properly" ; exit 1 )
+
+  # add the output to the commit
+  git add ./dist || exit 1
+
+  # edit current commit with generated files
+  git commit --amend -C HEAD --no-verify || exit 1
+fi
+
+exit

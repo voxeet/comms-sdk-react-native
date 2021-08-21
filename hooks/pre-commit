@@ -1,7 +1,6 @@
-#!/bin/sh
+#!/bin/sh 
 
-# make sure to always have latest transpilation results
-exec npm run tsc || ( echo "unable to run tsc properly" ; exit 1 )
+# prepare file to prevent commit edit loop
+touch .hook_commit
 
-# add the output to the commit
-exec git add ./dist || exit 0 
+exit
