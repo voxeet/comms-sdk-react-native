@@ -1,84 +1,133 @@
 //promise call done using https://pspdfkit.com/blog/2018/advanced-techniques-for-react-native-ui-components/
 //TODO lock call ?
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 import React, { Component } from 'react';
-import { requireNativeComponent, findNodeHandle, UIManager } from 'react-native';
-var RCTVoxeetVideoView = requireNativeComponent('RCTVoxeetSDKVideoView');
+import { requireNativeComponent, findNodeHandle, UIManager, Platform, View } from 'react-native';
+import VoxeetSDK from './VoxeetSDK';
+const RCTVoxeetVideoView = requireNativeComponent('RCTVoxeetVideoView');
+const ValidProps = ["style", "isMirror", "scaleType"];
 /**
  * Composes `View`.
  *
- * - attach: MediaStream
- * - cornerRadius: number
- * - isCircle: boolean
- * - hasFlip: boolean
- * - isAutoUnAttach: boolean
+ * - isMirror: boolean
  * - scaleType: 'fit' | 'fill'
+ *
+ *
+ * Public methods :
+ *
+ * attach(participant: Participant, mediaStream: MediaStream): Promise<void>
+ * unattach(): Promise<void>
+ * isAttached(): Promise<boolean>
+ * isScreenShare(): Promise<boolean>
  */
-var VideoView = /** @class */ (function (_super) {
-    __extends(VideoView, _super);
-    function VideoView(props) {
-        var _this = _super.call(this, props) || this;
-        _this._UiManager = UIManager;
-        _this._nextRequestId = 1;
-        _this._requestMap = new Map();
-        _this._onCallReturn = function (event) {
-            var _a = event.nativeEvent, requestId = _a.requestId, result = _a.result, error = _a.error;
-            var promise = _this._requestMap[requestId];
-            if (result) {
-                promise.resolve(result);
+export default class VideoView extends Component {
+    constructor(props) {
+        super(props);
+        this._UiManager = UIManager;
+        this._requestMap = new Map();
+        this.state = {};
+        this._onCallReturn = (event) => {
+            !!event.nativeEvent && this._onEvent(event.nativeEvent);
+        };
+        this._onEvent = (event) => {
+            console.warn("event is", event);
+            if (!event)
+                return;
+            const { requestId, error, message, peerId, streamId, attach, isAttached } = event;
+            const promise = this._requestMap[requestId];
+            this._requestMap.delete(requestId);
+            if (error && message && promise) {
+                promise.reject(`${error} ${message}`);
+            }
+            else if (promise) {
+                promise.resolve(event);
+            }
+        };
+        this._videoViewHandler = null;
+        this._videoView = null;
+    }
+    filteredProps() {
+        const result = {};
+        Object.keys(this.props).filter(k => ValidProps).forEach(k => result[k] = this.props[k]);
+        return result;
+    }
+    componentDidMount() {
+        VoxeetSDK.events.addListener("VoxeetConferencekitVideoView", this._onEvent);
+    }
+    componentWillUnmount() {
+        VoxeetSDK.events.removeListener("VoxeetConferencekitVideoView", this._onEvent);
+    }
+    attach(participant, mediaStream) {
+        if (Platform.OS == "android") {
+            this.setState({ mediaStream });
+            return Promise.resolve();
+        }
+        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.attach, participant.participantId, mediaStream.streamId).then(() => { });
+    }
+    unattach() {
+        if (Platform.OS == "android") {
+            this.setState({ mediaStream: undefined });
+            return Promise.resolve();
+        }
+        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.unattach).then(() => { });
+    }
+    isAttached() {
+        if (Platform.OS == "android") {
+            if (!this._videoView || !this._videoViewHandler)
+                return Promise.resolve(false);
+            if (!this.state.mediaStream)
+                return Promise.resolve(false);
+        }
+        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isAttached)
+            .then(r => !!r.isAttached);
+    }
+    isScreenShare() {
+        if (Platform.OS == "android") {
+            if (!this._videoView || !this._videoViewHandler)
+                return Promise.resolve(false);
+            if (!this.state.mediaStream)
+                return Promise.resolve(false);
+        }
+        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isScreenShare)
+            .then(r => !!r.isScreenShare);
+    }
+    _sendCallReturn(command, param1, param2) {
+        const requestId = VideoView._nextRequestId++;
+        const requestMap = this._requestMap;
+        const promise = new Promise((resolve, reject) => {
+            requestMap[requestId] = { resolve, reject };
+        });
+        this._UiManager.dispatchViewManagerCommand(this._videoViewHandler, command, [requestId, param1, param2]);
+        return promise;
+    }
+    setVideoView(v) {
+        if (!!v) {
+            this._videoView = v;
+            this._videoViewHandler = findNodeHandle(this._videoView);
+        }
+        else {
+            this._videoView = null;
+            this._videoViewHandler = null;
+        }
+    }
+    render() {
+        const props = this.filteredProps();
+        if (Platform.OS == "android") {
+            if (!this.state.mediaStream) {
+                return <View {...props}/>;
             }
             else {
-                promise.reject(error);
+                return (<RCTVoxeetVideoView {...props} attach={this.state.mediaStream} ref={(v) => this.setVideoView(v)} {...{ onCallReturn: (event) => this._onCallReturn(event) }}/>);
             }
-            _this._requestMap.delete(requestId);
-        };
-        _this._videoViewHandler = null;
-        _this._videoView = null;
-        return _this;
+        }
+        return (<RCTVoxeetVideoView {...props} ref={(v) => this.setVideoView(v)} {...{ onCallReturn: (event) => this._onCallReturn(event) }}/>);
     }
-    VideoView.prototype.componentDidMount = function () {
-        this._videoViewHandler = findNodeHandle(this._videoView);
-    };
-    //android
-    VideoView.prototype.isAttached = function () {
-        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isAttached);
-    };
-    //android
-    VideoView.prototype.isScreenShare = function () {
-        return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isScreenShare);
-    };
-    VideoView.prototype._sendCallReturn = function (command) {
-        var requestId = this._nextRequestId++;
-        var requestMap = this._requestMap;
-        var promise = new Promise(function (resolve, reject) {
-            requestMap[requestId] = { resolve: resolve, reject: reject };
-        });
-        this._UiManager.dispatchViewManagerCommand(this._videoViewHandler, command, [requestId]);
-        return promise;
-    };
-    VideoView.prototype.render = function () {
-        var _this = this;
-        return (<RCTVoxeetVideoView {...this.props} ref={function (v) { return _this._videoView = v; }} {...{ onCallReturn: function (event) { return _this._onCallReturn(event); } }}/>);
-    };
-    VideoView.defaultProps = {
-        isCircle: false,
-        hasFlip: false,
-        isAutoUnAttach: true,
-        scaleType: 'fill'
-    };
-    return VideoView;
-}(Component));
-export default VideoView;
+}
+VideoView.defaultProps = {
+    isCircle: false,
+    isMirror: false,
+    hasFlip: false,
+    isAutoUnAttach: true,
+    scaleType: 'fill'
+};
+VideoView._nextRequestId = 1;
 //# sourceMappingURL=VideoView.js.map

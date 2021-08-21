@@ -1,5 +1,7 @@
-import ConferenceUser from "../types/ConferenceUser";
+import { Participant, ParticipantInfo } from "./conference";
 export default class SessionService {
-    open: (participant: ConferenceUser) => Promise<boolean>;
-    close: () => Promise<boolean>;
+    open(participant: ParticipantInfo): Promise<boolean>;
+    close(): Promise<boolean>;
+    isLocalParticipant(participant: Participant): Promise<boolean>;
+    isSocketOpen(): Promise<boolean>;
 }
