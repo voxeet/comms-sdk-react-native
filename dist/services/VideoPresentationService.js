@@ -7,36 +7,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { NativeModules } from "react-native";
+const { RNFilePresentationService } = NativeModules;
 //TODO export its events
 export default class VideoPresentationService {
     start(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.start(url);
         });
     }
     stop() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.stop();
         });
     }
     play() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.play();
         });
     }
     pause(timestamp) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.pause(timestamp);
         });
     }
     seek(timestamp) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.seek(timestamp);
         });
     }
     getCurrentPresentation() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNFilePresentationService.getCurrentPresentation();
         });
     }
 }

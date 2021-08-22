@@ -1,2 +1,2 @@
-export { default as PresentationState } from "./PresentationState";
+export { PresentationState } from "./PresentationState";
 //# sourceMappingURL=index.js.map

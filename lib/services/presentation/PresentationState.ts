@@ -1,4 +1,4 @@
-enum PresentationState {
+export enum PresentationState {
   STARTED,
   PLAY,
   PAUSED,
@@ -7,4 +7,13 @@ enum PresentationState {
   CONVERTED
 }
 
-export default PresentationState;
+
+export function presentationStateToString(state: PresentationState|string): string {
+  if(typeof state === "string") return state;
+  return PresentationState[state];
+}
+
+export function stringToPresentationState(state: PresentationState|string): PresentationState {
+  if(typeof state === "string") return PresentationState[state];
+  return state;
+}

@@ -1,4 +1,4 @@
-import PresentationState from "./PresentationState";
+import { PresentationState } from "./PresentationState";
 
 export default interface VideoPresentation {
   key: string;

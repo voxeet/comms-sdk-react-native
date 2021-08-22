@@ -1,30 +1,32 @@
+import { NativeModules } from "react-native";
 import { VideoPresentation } from "./presentation";
+const { RNFilePresentationService } = NativeModules;
 
 
 //TODO export its events
 export default class VideoPresentationService {
   
   public async start(url: string): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.start(url);
   }
 
   public async stop(): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.stop();
   }
 
   public async play(): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.play();
   }
 
   public async pause(timestamp: number): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.pause(timestamp);
   }
 
   public async seek(timestamp: number): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.seek(timestamp);
   }
 
   public async getCurrentPresentation(): Promise<VideoPresentation> {
-    throw "not implemented";
+    return RNFilePresentationService.getCurrentPresentation();
   }
 }
