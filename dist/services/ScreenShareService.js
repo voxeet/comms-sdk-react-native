@@ -7,22 +7,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { NativeModules } from "react-native";
+const { RNScreenShareServiceModule } = NativeModules;
 export default class ScreenShareService {
     //start screenshare is not defined as it will be implemented in the native side only
     sendRequestStartScreenShare() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNScreenShareServiceModule.sendRequestStartScreenShare();
         });
     }
     stopScreenShare() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNScreenShareServiceModule.stopScreenShare();
         });
     }
     setScreenSizeInformation(screenInfo) {
         return __awaiter(this, void 0, void 0, function* () {
             const point = { x: screenInfo.width, y: screenInfo.height };
-            throw "not implemented";
+            return RNScreenShareServiceModule.setScreenSizeInformation(point);
         });
     }
 }
