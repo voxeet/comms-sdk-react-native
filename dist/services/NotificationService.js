@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  * @param type  the expected type from which event is of type
  * @param event the event content which will be transformed to the expected interface (enum values are string => to transform)
  */
-export function transformSubscription(type, event) {
+function transformSubscription(type, event) {
     throw "not implemented";
 }
 export default class NotificationService {

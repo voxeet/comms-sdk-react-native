@@ -7,26 +7,27 @@ import { ConferenceStatusUpdatedEvent,
   RecordingStatusUpdatedEvent,
   ConferenceDestroyedPush,
   ConferenceEnded
-  } from "../events/ConferenceStatusUpdatedEvent";
+} from "../events/ConferenceStatusUpdatedEvent";
 import { FilePresentationConverted,
   FilePresentationStarted,
   FilePresentationStopped,
   FilePresentationUpdated
- } from "../events/FilePresentationEvents";
- import { VideoPresentationSeek,
+} from "../events/FilePresentationEvents";
+import { VideoPresentationSeek,
   VideoPresentationPlay,
   VideoPresentationStopped,
   VideoPresentationPaused,
   VideoPresentationStarted
- } from "../events/VideoPresentationEvents";
- import { ParticipantAddedEvent,
+} from "../events/VideoPresentationEvents";
+import { ParticipantAddedEvent,
   ParticipantUpdatedEvent,
   StreamAddedEvent,
   StreamRemovedEvent,
   ConferenceParticipantQualityUpdatedEvent,
   StreamUpdatedEvent,
- } from "../events/ConferenceUsersEvent";
+} from "../events/ConferenceUsersEvent";
 import { UnregisterCallback } from '../types';
+import { ConferenceStatus, PermissionRefusedType } from '../services/conference';
  
 const { RNVoxeetConferencekit } = NativeModules;
 
@@ -73,6 +74,25 @@ interface EventMap extends VideoPresentationEvents,
   MediaDeviceEvents,
   ConferenceEvents { }
 
+/**
+ * 
+ * @param type  the expected type from which event is of type
+ * @param event the event content which will be transformed to the expected interface (enum values are string => to transform)
+ */
+function transformNativeEvent<K extends keyof EventMap> (type: K, event: any): EventMap[K] {
+  switch(type) {
+    case "ConferenceStatusUpdatedEvent": return {
+      ...event,
+      status: ConferenceStatus[event.status]
+    };
+    case "PermissionRefusedEvent": return {
+      ...event,
+      permission: PermissionRefusedType[event.permission]
+    }
+    default: return event; //no other transformation from native's string to JS's enum values
+  }
+}
+
 const events = new NativeEventEmitter(RNVoxeetConferencekit);
 
 export default class VoxeetEvents {
@@ -85,7 +105,7 @@ export default class VoxeetEvents {
     type: K,
     listener: (event: EventMap[K]) => void
   ): UnregisterCallback {
-    const callback = (event: EventMap[K]) => listener(event);
+    const callback = (event: EventMap[K]) => listener(transformNativeEvent(type, event));
     events.addListener(type, callback);
 
     return () => {

@@ -10,7 +10,7 @@ SubscriptionMapping } from "./notification";
  * @param type  the expected type from which event is of type
  * @param event the event content which will be transformed to the expected interface (enum values are string => to transform)
  */
-export function transformSubscription<K extends keyof SubscriptionMapping> (type: K, event: any): SubscriptionMapping[K] {
+function transformSubscription<K extends keyof SubscriptionMapping> (type: K, event: any): SubscriptionMapping[K] {
   throw "not implemented";
 }
 
