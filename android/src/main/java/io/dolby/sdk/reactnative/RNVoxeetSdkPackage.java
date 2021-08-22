@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import io.dolby.sdk.reactnative.modules.RNVoxeetSdkModule;
 import io.dolby.sdk.reactnative.video.RNVideoViewManager;
 
 public class RNVoxeetSdkPackage implements ReactPackage {

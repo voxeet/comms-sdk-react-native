@@ -1,5 +1,5 @@
 
-package io.dolby.sdk.reactnative;
+package io.dolby.sdk.reactnative.modules;
 
 import android.app.Application;
 
@@ -20,6 +20,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import io.dolby.sdk.reactnative.events.AbstractEventEmitter;
 import io.dolby.sdk.reactnative.events.ConferenceStatusEventEmitter;
 import io.dolby.sdk.reactnative.events.ConferenceUserEventEmitter;
+import io.dolby.sdk.reactnative.events.EventsManager;
 import io.dolby.sdk.reactnative.utils.Lock;
 
 public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
@@ -28,23 +29,16 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
     private static final String ERROR_SDK_NOT_LOGGED_IN = "ERROR_SDK_NOT_LOGGED_IN";
 
     private final ReactApplicationContext reactContext;
+    private final EventsManager eventsManager;
     private ReentrantLock lockAwaitingToken = new ReentrantLock();
     private List<TokenCallback> mAwaitingTokenCallback;
-    private final List<AbstractEventEmitter> eventEmitters;
 
     public RNVoxeetSdkModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
         mAwaitingTokenCallback = new ArrayList<>();
 
-        eventEmitters = new ArrayList<>();
-        eventEmitters.add(new ConferenceStatusEventEmitter(reactContext, EventBus.getDefault()));
-        eventEmitters.add(new ConferenceUserEventEmitter(reactContext, EventBus.getDefault()));
-
-        for (AbstractEventEmitter emitter : eventEmitters) {
-            emitter.register();
-        }
-
+        eventsManager = new EventsManager();
     }
 
     @Override
@@ -96,6 +90,9 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
         VoxeetSDK.conference().ConferenceConfigurations.TelecomWaitingForParticipantTimeout = 30 * 1000; //30s
 
         VoxeetSDK.instance().register(this);
+        eventsManager.init(VoxeetSDK.instance().getEventBus(),
+                reactContext);
+        eventsManager.register();
     }
 
     @ReactMethod
@@ -135,13 +132,8 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
     }
 
     private void postRefreshAccessToken() {
-        reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("refreshToken", null);
-        /*Log.d("VoxeetCordova", "postRefreshAccessToken: sending call to javascript to refresh token");
-        if(null != refreshAccessTokenCallbackInstance) {
-            refreshAccessTokenCallbackInstance.invoke();
-        }*/
     }
 
 }
