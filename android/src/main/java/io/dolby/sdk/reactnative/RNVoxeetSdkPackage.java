@@ -18,6 +18,7 @@ import io.dolby.sdk.reactnative.services.RNAudioDeviceServiceModule;
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNMediaDeviceServiceModule;
+import io.dolby.sdk.reactnative.services.RNRecordingServiceModule;
 import io.dolby.sdk.reactnative.services.RNScreenShareServiceModule;
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule;
 import io.dolby.sdk.reactnative.services.RNVoxeetSdkModule;
@@ -40,6 +41,8 @@ public class RNVoxeetSdkPackage implements ReactPackage {
                 new RNScreenShareServiceModule(VoxeetSDK.screenShare(),
                         reactContext),
                 new RNMediaDeviceServiceModule(VoxeetSDK.mediaDevice(),
+                        reactContext),
+                new RNRecordingServiceModule(VoxeetSDK.recording(),
                         reactContext));
     }
 

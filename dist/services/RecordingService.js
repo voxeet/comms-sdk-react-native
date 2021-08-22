@@ -7,15 +7,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { NativeModules } from "react-native";
+const { RNScreenShareServiceModule } = NativeModules;
 export default class RecordingService {
     start() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNScreenShareServiceModule.start();
         });
     }
     stop() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNScreenShareServiceModule.stop();
         });
     }
 }
