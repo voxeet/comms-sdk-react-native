@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, DeviceEventEmitter, Platform } from 'react-native';
 import { ConferenceStatusUpdatedEvent,
   PermissionRefusedEvent,
   CameraSwitchSuccessEvent,
@@ -29,7 +29,7 @@ import { ParticipantAddedEvent,
 import { UnregisterCallback } from '../types';
 import { ConferenceStatus, PermissionRefusedType } from '../services/conference';
  
-const { RNVoxeetConferencekit } = NativeModules;
+const { RNVoxeetSDK } = NativeModules;
 
 export interface VideoPresentationEvents {
   ["VideoPresentationSeek"]: VideoPresentationSeek;
@@ -93,7 +93,7 @@ function transformNativeEvent<K extends keyof EventMap> (type: K, event: any): E
   }
 }
 
-const events = new NativeEventEmitter(RNVoxeetConferencekit);
+const events = Platform.OS == "android" ? DeviceEventEmitter : new NativeEventEmitter(RNVoxeetSDK);
 
 export default class VoxeetEvents {
 

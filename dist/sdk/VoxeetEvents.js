@@ -1,6 +1,6 @@
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, DeviceEventEmitter, Platform } from 'react-native';
 import { ConferenceStatus, PermissionRefusedType } from '../services/conference';
-const { RNVoxeetConferencekit } = NativeModules;
+const { RNVoxeetSDK } = NativeModules;
 /**
  *
  * @param type  the expected type from which event is of type
@@ -13,7 +13,7 @@ function transformNativeEvent(type, event) {
         default: return event; //no other transformation from native's string to JS's enum values
     }
 }
-const events = new NativeEventEmitter(RNVoxeetConferencekit);
+const events = Platform.OS == "android" ? DeviceEventEmitter : new NativeEventEmitter(RNVoxeetSDK);
 export default class VoxeetEvents {
     constructor() {
     }

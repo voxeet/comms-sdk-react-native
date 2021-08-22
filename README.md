@@ -90,39 +90,23 @@ android {
 
 ##### MainActivity
 
-_TODO fill when android is implemented_
+
+  - Open `android/app/src/main/java/[...]/MainActivity.java`
+  - Add the following import to the list of `import` :
+
+```java
+import io.dolby.sdk.reactnative.android.activities.VoxeetSDKAppCompatActivity;
+```
+
+  - Change `MainActivity extends AppCompatActivity` to `MainActivity extends VoxeetSDKAppCompatActivity`
 
 ##### MainApplication
 
-Open up `android/app/src/main/java/[...]/MainApplication.java`
-
-  - Add `import io.dolby.sdk.RNVoxeetSdkPackage;` to the imports at the top of the file
+  - Open `android/app/src/main/java/[...]/MainApplication.java`
+  - Add `import io.dolby.sdk.reactnative.RNVoxeetSdkPackage;` to the imports at the top of the file
   - Add `voxeet` to the list returned by the `getPackages()` method
   - Add a field in the `MainApplication` class named voxeet : `private RNVoxeetSdkPackage voxeet;`
   - in the `onCreate` method, instantiate the `voxeet` field to a new instance of the `RNVoxeetSdkPackage` class : `voxeet = new RNVoxeetSdkPackage(MainApplication.this);`
-
-#### app/src/main/AndroidManifest.xml
-
-After the `permissions` required, add those xml nodes :
-
-```
-  <!-- VOXEET PERMISSION - WARNING : THERE MAY BE DUPLICATES - no expected issues -->
-
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.BLUETOOTH" />
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.CAMERA" />
-```
-
 
 ## Usage
 ```javascript
