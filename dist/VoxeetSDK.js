@@ -1,28 +1,18 @@
 import { AudioService, CommandService, ConferenceService, FilePresentationService, MediaDeviceService, NotificationService, RecordingService, ScreenShareService, SessionService, VideoPresentationService } from "./services";
 import VoxeetSDKImpl from './sdk/Implementation';
-const audio = new AudioService();
-const command = new CommandService();
-const conference = new ConferenceService();
-const filePresentation = new FilePresentationService();
-const mediaDevice = new MediaDeviceService();
-const notification = new NotificationService();
-const recording = new RecordingService();
-const screenShare = new ScreenShareService();
-const session = new SessionService();
-const videoPresentation = new VideoPresentationService();
 const implementation = new VoxeetSDKImpl();
 const VoxeetSDK = {
     //services
-    audio,
-    command,
-    conference,
-    filePresentation,
-    mediaDevice,
-    notification,
-    recording,
-    screenShare,
-    session,
-    videoPresentation,
+    audio: new AudioService(),
+    command: new CommandService(),
+    conference: new ConferenceService(),
+    filePresentation: new FilePresentationService(),
+    mediaDevice: new MediaDeviceService(),
+    notification: new NotificationService(),
+    recording: new RecordingService(),
+    screenShare: new ScreenShareService(),
+    session: new SessionService(),
+    videoPresentation: new VideoPresentationService(),
     // specific implementation
     events: implementation.events,
     initialize: (consumerKey, consumerSecret) => implementation.initialize(consumerKey, consumerSecret),
