@@ -1,3 +1,4 @@
+export { conferenceToMap } from "./Conference";
 export { default as ConferenceParticipant } from "./ConferenceParticipant";
 export { RTCPMode, Mode, Codec } from "./CreateConference";
 export { UserType } from "./JoinConference";

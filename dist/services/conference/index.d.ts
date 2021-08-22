@@ -1,4 +1,4 @@
-export { Conference } from "./Conference";
+export { Conference, conferenceToMap } from "./Conference";
 export { default as ConferenceParticipant, ParticipantInfo } from "./ConferenceParticipant";
 export { CreateOptions, RTCPMode, Mode, Codec, CreateParameters } from "./CreateConference";
 export { JoinOptions, UserType, JoinUserInfo } from "./JoinConference";

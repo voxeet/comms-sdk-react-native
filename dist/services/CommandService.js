@@ -7,10 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { NativeModules } from 'react-native';
+import { conferenceToMap } from "./conference";
+const { RNCommandServiceModule } = NativeModules;
 export default class CommandService {
     send(conference, message) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNCommandServiceModule.send(conferenceToMap(conference), message);
         });
     }
 }

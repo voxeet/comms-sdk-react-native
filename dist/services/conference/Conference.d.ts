@@ -7,3 +7,10 @@ export interface Conference {
     participants: Participant[];
     status: ConferenceStatus;
 }
+export declare function conferenceToMap(conference: Conference): {
+    status: ConferenceStatus;
+    conferenceId?: string | undefined;
+    conferenceAlias?: string | undefined;
+    isNew?: boolean | undefined;
+    participants: Participant[];
+};

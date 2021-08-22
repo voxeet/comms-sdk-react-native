@@ -1,1 +1,1 @@
-{"version":3,"file":"Conference.js","sourceRoot":"","sources":["../../../lib/services/conference/Conference.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Conference.js","sourceRoot":"","sources":["../../../lib/services/conference/Conference.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,oBAAoB,CAAC;AAWtD,MAAM,UAAU,eAAe,CAAC,UAAsB;IACpD,uCACK,UAAU;QACb,oFAAoF;QACpF,MAAM,EAAE,gBAAgB,CAAC,UAAU,CAAC,MAAM,CAAC,IAC5C;AACH,CAAC"}

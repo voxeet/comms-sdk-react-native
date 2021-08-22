@@ -42,11 +42,11 @@ export default class AudioService extends AbstractService {
   }
 
   public async registerUpdateDevices(callback: UpdateDeviceCallback): Promise<UnregisterCallback> {
-    this.emitter.addListener("MediaDevices", callback);
+    this.#emitter.addListener("MediaDevices", callback);
 
     return () => {
       //this will unregister the listener
-      this.emitter.removeListener("MediaDevices", callback);
+      this.#emitter.removeListener("MediaDevices", callback);
     };
   }
 

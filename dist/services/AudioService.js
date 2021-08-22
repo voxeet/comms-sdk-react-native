@@ -43,10 +43,10 @@ export default class AudioService extends AbstractService {
     }
     registerUpdateDevices(callback) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.emitter.addListener("MediaDevices", callback);
+            __classPrivateFieldGet(this, _AudioService_emitter, "f").addListener("MediaDevices", callback);
             return () => {
                 //this will unregister the listener
-                this.emitter.removeListener("MediaDevices", callback);
+                __classPrivateFieldGet(this, _AudioService_emitter, "f").removeListener("MediaDevices", callback);
             };
         });
     }

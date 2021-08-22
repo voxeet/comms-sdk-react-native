@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.dolby.sdk.reactnative.services.RNAudioDeviceServiceModule;
+import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule;
 import io.dolby.sdk.reactnative.services.RNVoxeetSdkModule;
@@ -31,6 +32,8 @@ public class RNVoxeetSdkPackage implements ReactPackage {
                         reactContext),
                 new RNAudioDeviceServiceModule(VoxeetSDK.audio(),
                         eventBus,
+                        reactContext),
+                new RNCommandServiceModule(VoxeetSDK.command(),
                         reactContext));
     }
 
