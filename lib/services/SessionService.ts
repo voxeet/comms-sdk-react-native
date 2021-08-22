@@ -14,10 +14,10 @@ export default class SessionService {
   }
 
   public async isLocalParticipant(participant: Participant): Promise<boolean> {
-    throw "not implemented";
+    return RNSessionServiceModule.isLocalParticipant(participant);
   }
 
   public async isSocketOpen(): Promise<boolean> {
-    throw "not implemented";
+    return RNSessionServiceModule.isSocketOpen();
   }
 }

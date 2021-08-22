@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import io.dolby.sdk.reactnative.models.ConferenceUserUtil;
+import io.dolby.sdk.reactnative.models.ConferenceParticipantUtil;
 import io.dolby.sdk.reactnative.models.MediaStreamUtil;
 
 
@@ -91,14 +91,14 @@ public class ConferenceUserEventEmitter extends AbstractEventEmitter {
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull Participant user, @Nullable MediaStream mediaStream) {
-        map.putMap("participant", ConferenceUserUtil.toMap(user));
+        map.putMap("participant", ConferenceParticipantUtil.toMap(user));
         if (null != mediaStream) {
             map.putMap("mediaStream", MediaStreamUtil.toMap(mediaStream));
         }
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull Participant user) {
-        map.putMap("participant", ConferenceUserUtil.toMap(user));
+        map.putMap("participant", ConferenceParticipantUtil.toMap(user));
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull String peerId, @Nullable MediaStream mediaStream) {

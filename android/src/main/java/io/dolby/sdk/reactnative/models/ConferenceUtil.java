@@ -57,7 +57,7 @@ public final class ConferenceUtil {
         WritableNativeArray array = new WritableNativeArray();
         List<Participant> users = conference.getParticipants();
         for (Participant user : users) {
-            array.pushMap(ConferenceUserUtil.toMap(user));
+            array.pushMap(ConferenceParticipantUtil.toMap(user));
         }
         map.putArray(CONFERENCE_PARTICIPANTS, array);
 
@@ -73,7 +73,7 @@ public final class ConferenceUtil {
         WritableNativeArray array = new WritableNativeArray();
         List<SdkParticipant> users = conference.getParticipants();
         for (SdkParticipant user : users) {
-            array.pushMap(ConferenceUserUtil.toMap(user));
+            array.pushMap(ConferenceParticipantUtil.toMap(user));
         }
         map.putArray(CONFERENCE_PARTICIPANTS, array);
 
@@ -96,7 +96,7 @@ public final class ConferenceUtil {
         map.putString(CONFERENCE_ALIAS, conference.getConferenceAlias());
         map.putString(CONFERENCE_TYPE, conference.getConferenceType());
         map.putString(CONFERENCE_OWNER_ID, conference.getOwnerId());
-        map.putString(ConferenceUserUtil.PARTICIPANT_ID, conference.getUserId());
+        map.putString(ConferenceParticipantUtil.PARTICIPANT_ID, conference.getUserId());
         map.putDouble(CONFERENCE_DURATION, conference.getConferenceDuration());
         map.putDouble(CONFERENCE_RECORDING_DURATION, conference.getConferenceRecordingDuration());
         map.putDouble(CONFERENCE_TIMESTAMP, conference.getConferenceTimestamp());
@@ -107,9 +107,9 @@ public final class ConferenceUtil {
 
     private static WritableMap toMap(MetaData metadata) {
         WritableMap map = new WritableNativeMap();
-        map.putString(ConferenceUserUtil.PARTICIPANT_NAME, metadata.getExternalName());
-        map.putString(ConferenceUserUtil.PARTICIPANT_AVATAR_URL, metadata.getExternalPhotoUrl());
-        map.putString(ConferenceUserUtil.PARTICIPANT_EXTERNAL_ID, metadata.getExternalId());
+        map.putString(ConferenceParticipantUtil.PARTICIPANT_NAME, metadata.getExternalName());
+        map.putString(ConferenceParticipantUtil.PARTICIPANT_AVATAR_URL, metadata.getExternalPhotoUrl());
+        map.putString(ConferenceParticipantUtil.PARTICIPANT_EXTERNAL_ID, metadata.getExternalId());
 
         return map;
     }

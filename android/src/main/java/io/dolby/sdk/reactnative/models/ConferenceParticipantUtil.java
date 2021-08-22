@@ -13,7 +13,7 @@ import com.voxeet.sdk.models.v1.ConferenceParticipantStatus;
 import com.voxeet.sdk.models.v1.SdkParticipant;
 import com.voxeet.sdk.utils.Opt;
 
-public final class ConferenceUserUtil {
+public final class ConferenceParticipantUtil {
     @Deprecated
     public final static String USER_ID = "userId";
     public final static String PARTICIPANT_ID = "participantId";
@@ -22,7 +22,7 @@ public final class ConferenceUserUtil {
     public final static String PARTICIPANT_AVATAR_URL = "avatarUrl";
     public final static String CONFERENCE_STATUS = "conferenceStatus";
 
-    private ConferenceUserUtil() {
+    private ConferenceParticipantUtil() {
 
     }
 

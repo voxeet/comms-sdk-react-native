@@ -23,12 +23,12 @@ export default class SessionService {
     }
     isLocalParticipant(participant) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNSessionServiceModule.isLocalParticipant(participant);
         });
     }
     isSocketOpen() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNSessionServiceModule.isSocketOpen();
         });
     }
 }
