@@ -3,10 +3,10 @@
 
 
 import React, {Component} from 'react';
-import { requireNativeComponent, findNodeHandle, UIManager, Platform, NativeModules, View } from 'react-native';
+import { requireNativeComponent, findNodeHandle, UIManager, Platform, View } from 'react-native';
 
-import { Participant, MediaStream } from './services/conference';
-import VoxeetSDK from './VoxeetSDK';
+import { Participant, MediaStream } from '../services/conference';
+import VoxeetSDK from '../VoxeetSDK';
 
 const RCTVoxeetVideoView: any = requireNativeComponent('RCTVoxeetVideoView');
 
