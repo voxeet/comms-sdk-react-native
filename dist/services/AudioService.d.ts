@@ -1,9 +1,10 @@
+import { UnregisterCallback } from "../types";
 import { MediaDevice } from "./audio";
 export interface UpdateDeviceCallback {
     (devices: MediaDevice[]): void;
 }
 export default class AudioService {
-    registerUpdateDevices(callback: UpdateDeviceCallback): Promise<() => void>;
+    registerUpdateDevices(callback: UpdateDeviceCallback): Promise<UnregisterCallback>;
     enumerateDevices(): Promise<MediaDevice[]>;
     currentMediaDevice(): Promise<MediaDevice>;
     connect(mediaDevice: MediaDevice): Promise<boolean>;

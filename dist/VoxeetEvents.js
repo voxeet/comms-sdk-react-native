@@ -1,14 +1,15 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
 const { RNVoxeetConferencekit } = NativeModules;
+const events = new NativeEventEmitter(RNVoxeetConferencekit);
 export default class VoxeetEvents {
     constructor() {
-        this.events = new NativeEventEmitter(RNVoxeetConferencekit);
     }
     addListener(type, listener) {
-        this.events.addListener(type, listener);
-    }
-    removeListener(type, listener) {
-        this.events.removeListener(type, listener);
+        const callback = (event) => listener(event);
+        events.addListener(type, callback);
+        return () => {
+            events.removeListener(type, callback);
+        };
     }
 }
 //# sourceMappingURL=VoxeetEvents.js.map

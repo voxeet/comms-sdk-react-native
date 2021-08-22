@@ -2,6 +2,7 @@ import { ConferenceStatusUpdatedEvent, PermissionRefusedEvent, CameraSwitchSucce
 import { FilePresentationConverted, FilePresentationStarted, FilePresentationStopped, FilePresentationUpdated } from "./events/FilePresentationEvents";
 import { VideoPresentationSeek, VideoPresentationPlay, VideoPresentationStopped, VideoPresentationPaused, VideoPresentationStarted } from "./events/VideoPresentationEvents";
 import { ParticipantAddedEvent, ParticipantUpdatedEvent, StreamAddedEvent, StreamRemovedEvent, ConferenceParticipantQualityUpdatedEvent, StreamUpdatedEvent } from "./events/ConferenceUsersEvent";
+import { UnregisterCallback } from './types';
 export interface VideoPresentationEvents {
     ["VideoPresentationSeek"]: VideoPresentationSeek;
     ["VideoPresentationPlay"]: VideoPresentationPlay;
@@ -38,9 +39,7 @@ export interface RecordingEvents {
 interface EventMap extends VideoPresentationEvents, FilePresentationEvents, MediaDeviceEvents, ConferenceEvents {
 }
 export default class VoxeetEvents {
-    private events;
     constructor();
-    addListener<K extends keyof EventMap>(type: K, listener: (event: EventMap[K]) => void): void;
-    removeListener<K extends keyof EventMap>(type: K, listener: (event: EventMap[K]) => void): void;
+    addListener<K extends keyof EventMap>(type: K, listener: (event: EventMap[K]) => void): UnregisterCallback;
 }
 export {};

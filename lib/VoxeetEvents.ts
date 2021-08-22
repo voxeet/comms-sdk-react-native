@@ -26,6 +26,7 @@ import { FilePresentationConverted,
   ConferenceParticipantQualityUpdatedEvent,
   StreamUpdatedEvent,
  } from "./events/ConferenceUsersEvent";
+import { UnregisterCallback } from './types';
  
 const { RNVoxeetConferencekit } = NativeModules;
 
@@ -72,8 +73,9 @@ interface EventMap extends VideoPresentationEvents,
   MediaDeviceEvents,
   ConferenceEvents { }
 
+const events = new NativeEventEmitter(RNVoxeetConferencekit);
+
 export default class VoxeetEvents {
-  private events = new NativeEventEmitter(RNVoxeetConferencekit);
 
   constructor() {
 
@@ -82,14 +84,12 @@ export default class VoxeetEvents {
   public addListener<K extends keyof EventMap>(
     type: K,
     listener: (event: EventMap[K]) => void
-  ): void {
-    this.events.addListener(type, listener);
-  }
+  ): UnregisterCallback {
+    const callback = (event: EventMap[K]) => listener(event);
+    events.addListener(type, callback);
 
-  public removeListener<K extends keyof EventMap>(
-    type: K,
-    listener: (event: EventMap[K]) => void
-  ): void {
-    this.events.removeListener(type, listener);
+    return () => {
+      events.removeListener(type, callback);
+    }
   }
 }

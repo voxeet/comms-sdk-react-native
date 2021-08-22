@@ -1,4 +1,5 @@
-import { MediaDevice, ConnectionState, DeviceType, toConnectionState, toDeviceType } from "./audio";
+import { UnregisterCallback } from "../types";
+import { MediaDevice, toConnectionState, toDeviceType } from "./audio";
 
 export interface UpdateDeviceCallback {
   (devices: MediaDevice[]): void
@@ -6,7 +7,7 @@ export interface UpdateDeviceCallback {
 
 export default class AudioService {
 
-  public async registerUpdateDevices(callback: UpdateDeviceCallback): Promise<() => void> {
+  public async registerUpdateDevices(callback: UpdateDeviceCallback): Promise<UnregisterCallback> {
     const real_callback = (devices: any) => {
       const mapped = devices.map((d: any) => {
         //map the various non enum to the JS's enum values
