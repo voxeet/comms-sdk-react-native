@@ -7,3 +7,4 @@ export declare enum DeviceType {
     USB = "USB"
 }
 export declare function toDeviceType(value: DeviceType | string): DeviceType;
+export declare function fromDeviceType(value: DeviceType): string;

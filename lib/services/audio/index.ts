@@ -2,6 +2,6 @@ import { toConnectionState } from "./ConnectionState";
 
 export { default as MediaDevice } from "./MediaDevice";
 
-export { ConnectionState, toConnectionState } from "./ConnectionState";
+export { ConnectionState, toConnectionState, fromConnectionState } from "./ConnectionState";
 
-export { DeviceType, toDeviceType } from "./DeviceType";
+export { DeviceType, toDeviceType, fromDeviceType } from "./DeviceType";

@@ -12,4 +12,9 @@ export function toDeviceType(value) {
         return DeviceType[value];
     return value;
 }
+export function fromDeviceType(value) {
+    if (typeof value === "string")
+        return value;
+    return DeviceType[value];
+}
 //# sourceMappingURL=DeviceType.js.map

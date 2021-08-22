@@ -1,3 +1,3 @@
 export { default as MediaDevice } from "./MediaDevice";
-export { ConnectionState, toConnectionState } from "./ConnectionState";
-export { DeviceType, toDeviceType } from "./DeviceType";
+export { ConnectionState, toConnectionState, fromConnectionState } from "./ConnectionState";
+export { DeviceType, toDeviceType, fromDeviceType } from "./DeviceType";

@@ -1,5 +1,5 @@
 
-package io.dolby.sdk.reactnative.modules;
+package io.dolby.sdk.reactnative.services;
 
 import android.app.Application;
 
@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import io.dolby.sdk.reactnative.events.AbstractEventEmitter;
-import io.dolby.sdk.reactnative.events.ConferenceStatusEventEmitter;
-import io.dolby.sdk.reactnative.events.ConferenceUserEventEmitter;
 import io.dolby.sdk.reactnative.events.EventsManager;
 import io.dolby.sdk.reactnative.utils.Lock;
 

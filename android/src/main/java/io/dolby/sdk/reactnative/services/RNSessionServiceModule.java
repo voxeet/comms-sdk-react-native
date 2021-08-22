@@ -7,15 +7,21 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.voxeet.VoxeetSDK;
+import com.voxeet.sdk.services.SessionService;
 
 import io.dolby.sdk.reactnative.models.ConferenceUserUtil;
 
 public class RNSessionServiceModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
+    private final SessionService sessionService;
 
-    public RNSessionServiceModule(ReactApplicationContext reactContext) {
+    public RNSessionServiceModule(
+            SessionService sessionService,
+            ReactApplicationContext reactContext) {
         super(reactContext);
+
+        this.sessionService = sessionService;
         this.reactContext = reactContext;
     }
 
@@ -27,13 +33,13 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void open(ReadableMap participantInfo, Promise promise) {
-        VoxeetSDK.session().open(ConferenceUserUtil.toParticipantInfo(participantInfo))
+        sessionService.open(ConferenceUserUtil.toParticipantInfo(participantInfo))
                 .then(promise::resolve).error(promise::reject);
     }
 
     @ReactMethod
     public void close(Promise promise) {
-        VoxeetSDK.session().close().then(promise::resolve).error(promise::reject);
+        sessionService.close().then(promise::resolve).error(promise::reject);
     }
 
 }

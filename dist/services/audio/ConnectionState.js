@@ -10,4 +10,9 @@ export function toConnectionState(value) {
         return ConnectionState[value];
     return value;
 }
+export function fromConnectionState(value) {
+    if (typeof value === "string")
+        return value;
+    return ConnectionState[value];
+}
 //# sourceMappingURL=ConnectionState.js.map

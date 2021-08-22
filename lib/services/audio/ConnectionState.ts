@@ -9,3 +9,8 @@ export function toConnectionState(value: ConnectionState|string): ConnectionStat
   if(typeof value === "string") return ConnectionState[value];
   return value;
 }
+
+export function fromConnectionState(value: ConnectionState|string): string {
+  if(typeof value === "string") return value;
+  return ConnectionState[value];
+}

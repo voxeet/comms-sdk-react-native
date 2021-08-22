@@ -5,3 +5,4 @@ export declare enum ConnectionState {
     DISCONNECTING = "DISCONNECTING"
 }
 export declare function toConnectionState(value: ConnectionState | string): ConnectionState;
+export declare function fromConnectionState(value: ConnectionState | string): string;

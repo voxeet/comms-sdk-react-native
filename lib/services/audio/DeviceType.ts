@@ -11,3 +11,8 @@ export function toDeviceType(value: DeviceType|string): DeviceType {
   if(typeof value === "string") return DeviceType[value];
   return value;
 }
+
+export function fromDeviceType(value: DeviceType): string {
+  if(typeof value === "string") return value;
+  return DeviceType[value];
+}

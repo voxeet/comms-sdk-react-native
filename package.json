@@ -19,5 +19,8 @@
   "devDependencies": {
     "@types/react-native": "^0.64.13",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "eventemitter2": "^6.4.4"
   }
 }

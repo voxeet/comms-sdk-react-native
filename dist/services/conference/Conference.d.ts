@@ -1,4 +1,4 @@
-import { ConferenceStatus } from "../../events/ConferenceStatusUpdatedEvent";
+import { ConferenceStatus } from "./ConferenceStatus";
 import Participant from "./Participant";
 export interface Conference {
     conferenceId?: string;
