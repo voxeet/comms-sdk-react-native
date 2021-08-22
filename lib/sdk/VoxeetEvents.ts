@@ -7,26 +7,26 @@ import { ConferenceStatusUpdatedEvent,
   RecordingStatusUpdatedEvent,
   ConferenceDestroyedPush,
   ConferenceEnded
-  } from "./events/ConferenceStatusUpdatedEvent";
+  } from "../events/ConferenceStatusUpdatedEvent";
 import { FilePresentationConverted,
   FilePresentationStarted,
   FilePresentationStopped,
   FilePresentationUpdated
- } from "./events/FilePresentationEvents";
+ } from "../events/FilePresentationEvents";
  import { VideoPresentationSeek,
   VideoPresentationPlay,
   VideoPresentationStopped,
   VideoPresentationPaused,
   VideoPresentationStarted
- } from "./events/VideoPresentationEvents";
+ } from "../events/VideoPresentationEvents";
  import { ParticipantAddedEvent,
   ParticipantUpdatedEvent,
   StreamAddedEvent,
   StreamRemovedEvent,
   ConferenceParticipantQualityUpdatedEvent,
   StreamUpdatedEvent,
- } from "./events/ConferenceUsersEvent";
-import { UnregisterCallback } from './types';
+ } from "../events/ConferenceUsersEvent";
+import { UnregisterCallback } from '../types';
  
 const { RNVoxeetConferencekit } = NativeModules;
 
