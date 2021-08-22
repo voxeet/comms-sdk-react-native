@@ -7,20 +7,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { NativeModules } from "react-native";
+import { ComfortNoiseLevel } from "./mediaDevice";
+const { RNMediaDeviceServiceModule } = NativeModules;
 export default class MediaDeviceService {
     switchCamera() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            return RNMediaDeviceServiceModule.switchCamera();
         });
     }
     setComfortNoiseLevel(comfortNoise) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            const str = ComfortNoiseLevel[comfortNoise];
+            return RNMediaDeviceServiceModule.setComfortNoiseLevel(str);
         });
     }
     getComfortNoiseLevel() {
         return __awaiter(this, void 0, void 0, function* () {
-            throw "not implemented";
+            const output = RNMediaDeviceServiceModule.getComfortNoiseLevel();
+            return ComfortNoiseLevel[output] || ComfortNoiseLevel.DEFAULT;
         });
     }
 }

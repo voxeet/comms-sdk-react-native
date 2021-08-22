@@ -2,17 +2,17 @@ export declare enum ComfortNoiseLevel {
     /**
      * The default comfort noise level that is based on the device database. The database includes the proper comfort noise levels, individual for all devices.
      */
-    DEFAULT = 0,
+    DEFAULT = "DEFAULT",
     /**
     * The medium comfort noise level.
     */
-    MEDIUM = 1,
+    MEDIUM = "MEDIUM",
     /**
     * The low comfort noise level.
     */
-    LOW = 2,
+    LOW = "LOW",
     /**
     * The disabled comfort noise.
     */
-    OFF = 3
+    OFF = "OFF"
 }
