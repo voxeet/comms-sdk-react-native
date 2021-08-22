@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import io.dolby.sdk.video.RNVoxeetSDKVideoViewManager;
+import io.dolby.sdk.video.RNVideoViewManager;
 
 public class RNVoxeetSdkPackage implements ReactPackage {
     @Override
@@ -26,6 +26,6 @@ public class RNVoxeetSdkPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.singletonList(new RNVoxeetSDKVideoViewManager());
+        return Collections.singletonList(new RNVideoViewManager());
     }
 }

@@ -16,7 +16,6 @@ import com.voxeet.sdk.events.sdk.QualityIndicators;
 import com.voxeet.sdk.events.sdk.SdkLogoutSuccessEvent;
 import com.voxeet.sdk.events.sdk.StartScreenShareAnswerEvent;
 import com.voxeet.sdk.events.sdk.StopScreenShareAnswerEvent;
-import com.voxeet.sdk.events.sdk.StopVideoAnswerEvent;
 import com.voxeet.sdk.json.ConferenceDestroyedPush;
 import com.voxeet.sdk.json.ConferenceEnded;
 import com.voxeet.sdk.json.MediaResponse;
@@ -56,7 +55,7 @@ public class ConferenceStatusEventEmitter extends AbstractEventEmitter {
             void transform(@NonNull WritableMap map, @NonNull ConferenceStatusUpdatedEvent instance) {
                 map.putString("conferenceId", null != instance.conference ? instance.conference.getId() : null);
                 map.putString("conferenceAlias", instance.conferenceAlias);
-                map.putString("state", instance.state.name());
+                map.putString("status", instance.state.name());
             }
         }).register(new EventFormatterCallback<GetConferenceStatusErrorEvent>(GetConferenceStatusErrorEvent.class) {
             @Override
@@ -87,7 +86,7 @@ public class ConferenceStatusEventEmitter extends AbstractEventEmitter {
             @Override
             void transform(@NonNull WritableMap map, @NonNull RecordingStatusUpdatedEvent instance) {
                 map.putString("conferenceId", instance.conferenceId);
-                map.putString("userId", instance.participantId);
+                map.putString("participantId", instance.participantId);
                 map.putString("recordingStatus", instance.recordingStatus);
                 map.putString("type", instance.getType());
             }
@@ -132,11 +131,6 @@ public class ConferenceStatusEventEmitter extends AbstractEventEmitter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MediaResponse event) {
-        emit(event);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(StopVideoAnswerEvent event) {
         emit(event);
     }
 

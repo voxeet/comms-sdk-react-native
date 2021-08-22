@@ -11,6 +11,7 @@ import com.voxeet.sdk.events.v2.ParticipantAddedEvent;
 import com.voxeet.sdk.events.v2.ParticipantUpdatedEvent;
 import com.voxeet.sdk.events.v2.StreamAddedEvent;
 import com.voxeet.sdk.events.v2.StreamRemovedEvent;
+import com.voxeet.sdk.events.v2.StreamUpdatedEvent;
 import com.voxeet.sdk.models.Participant;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,6 +47,11 @@ public class ConferenceUserEventEmitter extends AbstractEventEmitter {
             public void transform(@NonNull WritableMap map, @NonNull StreamRemovedEvent instance) {
                 toMap(map, instance.participant, instance.mediaStream);
             }
+        }).register(new EventFormatterCallback<StreamUpdatedEvent>(StreamUpdatedEvent.class) {
+            @Override
+            public void transform(@NonNull WritableMap map, @NonNull StreamUpdatedEvent instance) {
+                toMap(map, instance.participant, instance.mediaStream);
+            }
         }).register(new EventFormatterCallback<ConferenceParticipantQualityUpdatedEvent>(ConferenceParticipantQualityUpdatedEvent.class) {
             @Override
             public void transform(@NonNull WritableMap map, @NonNull ConferenceParticipantQualityUpdatedEvent instance) {
@@ -70,6 +76,11 @@ public class ConferenceUserEventEmitter extends AbstractEventEmitter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(StreamUpdatedEvent event) {
+        emit(event);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(StreamRemovedEvent event) {
         emit(event);
     }
@@ -80,14 +91,14 @@ public class ConferenceUserEventEmitter extends AbstractEventEmitter {
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull Participant user, @Nullable MediaStream mediaStream) {
-        map.putMap("user", ConferenceUserUtil.toMap(user));
+        map.putMap("participant", ConferenceUserUtil.toMap(user));
         if (null != mediaStream) {
             map.putMap("mediaStream", MediaStreamUtil.toMap(mediaStream));
         }
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull Participant user) {
-        map.putMap("user", ConferenceUserUtil.toMap(user));
+        map.putMap("participant", ConferenceUserUtil.toMap(user));
     }
 
     private void toMap(@NonNull WritableMap map, @NonNull String peerId, @Nullable MediaStream mediaStream) {

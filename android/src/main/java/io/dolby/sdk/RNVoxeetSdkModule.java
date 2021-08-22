@@ -2,6 +2,7 @@
 package io.dolby.sdk;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -9,6 +10,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
+import com.voxeet.sdk.authent.token.RefreshTokenCallback;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,7 +65,7 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
             VoxeetSDK.setApplication(application);
             VoxeetSDK.initialize(
                     accessToken,
-                    callback -> {
+                    (isRequired, callback) -> {
                         Lock.lock(lockAwaitingToken);
                         if (!mAwaitingTokenCallback.contains(callback)) {
                             mAwaitingTokenCallback.add(callback);
