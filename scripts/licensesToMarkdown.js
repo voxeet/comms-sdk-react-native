@@ -5,8 +5,9 @@ const licenses = require("../licenses.json");
 
 function url(link) {
   const patterns = [
+    ["git:", "https:"],
     ["git+https", "https"],
-    [".git$", ""],
+    [new RegExp("\.git$"), ""],
   ]
 
   patterns.forEach(([from, to]) => {
