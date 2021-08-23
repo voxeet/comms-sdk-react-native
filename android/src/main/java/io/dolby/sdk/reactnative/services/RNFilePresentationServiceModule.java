@@ -1,25 +1,18 @@
 
 package io.dolby.sdk.reactnative.services;
 
-import android.support.annotation.NonNull;
-
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.voxeet.promise.solve.ErrorPromise;
-import com.voxeet.promise.solve.ThenVoid;
 import com.voxeet.sdk.models.v1.FilePresentationConverted;
 import com.voxeet.sdk.services.FilePresentationService;
-import com.voxeet.sdk.services.SessionService;
 import com.voxeet.sdk.services.presentation.file.FilePresentation;
 
 import java.io.File;
 
-import io.dolby.sdk.reactnative.models.ConferenceParticipantUtil;
 import io.dolby.sdk.reactnative.models.PresentationUtil;
-import io.dolby.sdk.reactnative.utils.RNUtils;
 
 public class RNFilePresentationServiceModule extends ReactContextBaseJavaModule {
 

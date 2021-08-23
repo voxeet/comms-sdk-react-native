@@ -11,8 +11,6 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;

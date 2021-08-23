@@ -5,14 +5,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableMap;
-import com.voxeet.sdk.models.v1.FilePresentationConverted;
-import com.voxeet.sdk.services.FilePresentationService;
 import com.voxeet.sdk.services.VideoPresentationService;
-import com.voxeet.sdk.services.presentation.file.FilePresentation;
 import com.voxeet.sdk.services.presentation.video.VideoPresentation;
-
-import java.io.File;
 
 import io.dolby.sdk.reactnative.models.PresentationUtil;
 

@@ -3,29 +3,16 @@ package io.dolby.sdk.reactnative.models;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.voxeet.sdk.json.ConferencePermission;
-import com.voxeet.sdk.models.Conference;
-import com.voxeet.sdk.models.Participant;
 import com.voxeet.sdk.models.ParticipantNotification;
-import com.voxeet.sdk.models.v1.CreateConferenceResult;
-import com.voxeet.sdk.models.v1.HistoryConference;
-import com.voxeet.sdk.models.v1.MetaData;
-import com.voxeet.sdk.models.v1.SdkParticipant;
-import com.voxeet.sdk.models.v1.SubscribeConference;
 import com.voxeet.sdk.push.center.invitation.InvitationBundle;
 import com.voxeet.sdk.push.center.subscription.event.ConferenceCreatedNotificationEvent;
 import com.voxeet.sdk.push.center.subscription.event.ConferenceEndedNotificationEvent;
 import com.voxeet.sdk.push.center.subscription.event.InvitationReceivedNotificationEvent;
 import com.voxeet.sdk.push.center.subscription.event.ParticipantJoinedNotificationEvent;
 import com.voxeet.sdk.push.center.subscription.event.ParticipantLeftNotificationEvent;
-import com.voxeet.sdk.push.center.subscription.register.SubscribeConferenceCreated;
-import com.voxeet.sdk.push.center.subscription.register.SubscribeParticipantLeft;
-
-import java.util.List;
 
 public final class NotificationUtil {
 

@@ -1,22 +1,12 @@
 
 package io.dolby.sdk.reactnative.services;
 
-import android.graphics.Point;
-import android.support.annotation.NonNull;
-
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableMap;
 import com.voxeet.android.media.MediaEngine;
-import com.voxeet.android.media.errors.MediaEngineException;
-import com.voxeet.promise.solve.ErrorPromise;
-import com.voxeet.promise.solve.ThenVoid;
 import com.voxeet.sdk.services.MediaDeviceService;
-import com.voxeet.sdk.services.ScreenShareService;
-
-import io.dolby.sdk.reactnative.utils.RNUtils;
 
 public class RNMediaDeviceServiceModule extends ReactContextBaseJavaModule {
 

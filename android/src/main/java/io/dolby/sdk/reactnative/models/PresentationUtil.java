@@ -1,22 +1,16 @@
 package io.dolby.sdk.reactnative.models;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.voxeet.android.media.MediaStream;
-import com.voxeet.sdk.models.v1.File;
 import com.voxeet.sdk.models.v1.FilePresentationConverted;
 import com.voxeet.sdk.services.presentation.file.FilePresentation;
 import com.voxeet.sdk.services.presentation.video.VideoPresentation;
 import com.voxeet.sdk.utils.Opt;
 
 import io.dolby.sdk.reactnative.utils.RNUtils;
-import io.dolby.sdk.reactnative.video.RNVideoViewManager;
 
 public final class PresentationUtil {
 

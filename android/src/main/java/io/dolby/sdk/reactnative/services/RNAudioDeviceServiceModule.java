@@ -9,7 +9,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.voxeet.VoxeetSDK;
 import com.voxeet.audio2.devices.MediaDevice;
 import com.voxeet.sdk.media.audio.SoundManager;
 import com.voxeet.sdk.services.AudioService;

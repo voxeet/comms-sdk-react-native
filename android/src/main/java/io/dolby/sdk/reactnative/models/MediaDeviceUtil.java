@@ -8,10 +8,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.voxeet.android.media.MediaStream;
 import com.voxeet.audio2.devices.MediaDevice;
-
-import io.dolby.sdk.reactnative.video.RNVideoViewManager;
 
 public final class MediaDeviceUtil {
 
