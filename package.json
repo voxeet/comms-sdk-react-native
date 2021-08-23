@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "configure": "cp ./hooks/* .git/hooks/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "licenses": "license-report --package=package.json > licenses.json ; node ./scripts/licensesToMarkdown.js > LICENSES.md"
   },
   "keywords": [
     "react-native"
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@types/react-native": "^0.64.13",
+    "license-report": "^4.5.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {

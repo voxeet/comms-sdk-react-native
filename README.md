@@ -158,4 +158,8 @@ npm i -D @types/react ...
    limitations under the License.
 ```
 
+## Third Party licenses
+
+Direct licenses can be found [./LICENSES.md](here)
+
 © Voxeet, 2020

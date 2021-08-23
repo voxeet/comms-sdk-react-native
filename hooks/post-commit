@@ -12,6 +12,9 @@ if [ -e .hook_commit ]
   # add the output to the commit
   git add ./dist || exit 1
 
+  npm run licenses
+  git add ./LICENSES.md
+
   # edit current commit with generated files
   git commit --amend -C HEAD --no-verify || exit 1
 fi
