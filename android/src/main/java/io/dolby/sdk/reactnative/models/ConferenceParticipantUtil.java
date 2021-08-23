@@ -1,6 +1,7 @@
 package io.dolby.sdk.reactnative.models;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
@@ -45,6 +46,26 @@ public final class ConferenceParticipantUtil {
             if (null != userInfo.getAvatarUrl()) {
                 map.putString(PARTICIPANT_AVATAR_URL, userInfo.getAvatarUrl());
             }
+        }
+
+        return map;
+    }
+
+
+    @NonNull
+    public static WritableMap toMap(@Nullable ParticipantInfo participant) {
+        WritableMap map = new WritableNativeMap();
+
+        if (null == participant) return map;
+
+        if (null != participant.getName()) {
+            map.putString(PARTICIPANT_NAME, participant.getName());
+        }
+        if (null != participant.getExternalId()) {
+            map.putString(PARTICIPANT_EXTERNAL_ID, participant.getExternalId());
+        }
+        if (null != participant.getAvatarUrl()) {
+            map.putString(PARTICIPANT_AVATAR_URL, participant.getAvatarUrl());
         }
 
         return map;

@@ -1,12 +1,20 @@
 import { ParticipantInfo } from "../conference";
 import { ParticipantNotification } from "./ParticipantNotification";
 
-export enum Subscription {
-  ConferenceCreated = "ConferenceCreated",
-  ConferenceEnded = "ConferenceEnded",
-  InvitationReceived = "InvitationReceived",
-  ParticipantJoined = "ParticipantJoined",
-  ParticipantLeft = "ParticipantLeft"
+export enum SubscriptionType {
+  ConferenceCreatedNotification,
+  ConferenceEndedNotification,
+  InvitationReceivedNotification,
+  ParticipantJoinedNotification,
+  ParticipantLeftNotification
+}
+
+/**
+ * conferenceAlias is not used for InvitationReceived
+ */
+export interface Subscription {
+  type: SubscriptionType,
+  conferenceAlias?: string
 }
 
 export interface ConferenceCreatedNotification {
@@ -21,25 +29,25 @@ export interface ConferenceEndedNotification {
 
 export interface InvitationReceivedNotification {
   conferenceId: string,
-  inviter: ParticipantInfo
+  participant: ParticipantNotification
 }
 
 export interface ParticipantJoinedNotification {
   conferenceId: string,
-  conferenceAlias: string,
+  conferenceAlias?: string,
   participant: ParticipantNotification
 }
 
 export interface ParticipantLeftNotification {
   conferenceId: string,
-  conferenceAlias: string,
+  conferenceAlias?: string,
   participant: ParticipantNotification
 }
 
 export interface SubscriptionMapping {
-  [Subscription.ConferenceCreated]: ConferenceCreatedNotification,
-  [Subscription.ConferenceEnded]: ConferenceEndedNotification,
-  [Subscription.InvitationReceived]: InvitationReceivedNotification,
-  [Subscription.ParticipantJoined]: ParticipantJoinedNotification,
-  [Subscription.ParticipantLeft]: ParticipantLeftNotification,
+  [SubscriptionType.ConferenceCreatedNotification]: ConferenceCreatedNotification,
+  [SubscriptionType.ConferenceEndedNotification]: ConferenceEndedNotification,
+  [SubscriptionType.InvitationReceivedNotification]: InvitationReceivedNotification,
+  [SubscriptionType.ParticipantJoinedNotification]: ParticipantJoinedNotification,
+  [SubscriptionType.ParticipantLeftNotification]: ParticipantLeftNotification,
 }

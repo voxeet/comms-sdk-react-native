@@ -3,6 +3,7 @@ package io.dolby.sdk.reactnative.utils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 
 public class RNUtils {
@@ -29,6 +30,15 @@ public class RNUtils {
     public static ReadableMap getMap(@NonNull ReadableMap map, @NonNull String key) {
         try {
             return map.hasKey(key) ? map.getMap(key) : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ReadableArray getArray(ReadableMap map, String key) {
+        try {
+            return map.hasKey(key) ? map.getArray(key) : null;
         } catch (Exception e) {
             e.printStackTrace();
         }
