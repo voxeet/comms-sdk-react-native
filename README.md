@@ -160,6 +160,6 @@ npm i -D @types/react ...
 
 ## Third Party licenses
 
-Direct licenses can be found [./LICENSES.md](here)
+Direct licenses can be found [here](./LICENSES.md)
 
 © Voxeet, 2020
