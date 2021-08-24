@@ -1,5 +1,5 @@
 import { ConferenceStatus } from "./ConferenceStatus";
-import Participant from "./Participant";
+import Participant, { toParticipant } from "./Participant";
 
 export interface Conference {
   conferenceId?: string;
@@ -14,5 +14,13 @@ export function conferenceToMap(conference: Conference) {
     ...conference,
     //no need to map the Participant since the fields are public -> stringify of strings
     status: ConferenceStatus[conference.status],
+  }
+}
+
+export function mapToConference(conference: any): Conference {
+  return {
+    ...conference,
+    participants: conference.participants.map(toParticipant),
+    status: ConferenceStatus[status]
   }
 }

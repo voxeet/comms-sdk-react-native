@@ -11,3 +11,9 @@ export default class Participant implements ParticipantInfo {
   }
 
 }
+
+export const toParticipant = (raw: any) => new Participant(raw.participantId, 
+  raw.conferenceStatus,
+  raw.externalId,
+  raw.name,
+  raw.avatarUrl);

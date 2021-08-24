@@ -7,4 +7,5 @@ export default class Participant {
         this.avatarUrl = avatarUrl;
     }
 }
+export const toParticipant = (raw) => new Participant(raw.participantId, raw.conferenceStatus, raw.externalId, raw.name, raw.avatarUrl);
 //# sourceMappingURL=Participant.js.map

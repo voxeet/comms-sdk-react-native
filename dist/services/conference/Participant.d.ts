@@ -7,3 +7,4 @@ export default class Participant implements ParticipantInfo {
     avatarUrl?: string | undefined;
     constructor(participantId: string, conferenceStatus?: string | undefined, externalId?: string | undefined, name?: string | undefined, avatarUrl?: string | undefined);
 }
+export declare const toParticipant: (raw: any) => Participant;

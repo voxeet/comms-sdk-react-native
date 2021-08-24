@@ -54,4 +54,14 @@ public class RNUtils {
         }
         return null;
     }
+
+    @Nullable
+    public static ReadableMap getMap(ReadableArray array, int index) {
+        try {
+            return array.getMap(index);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

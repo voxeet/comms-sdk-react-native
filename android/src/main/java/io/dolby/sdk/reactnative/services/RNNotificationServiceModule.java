@@ -30,6 +30,7 @@ import java.util.Set;
 import io.dolby.sdk.reactnative.models.ConferenceParticipantUtil;
 import io.dolby.sdk.reactnative.models.ConferenceUtil;
 import io.dolby.sdk.reactnative.models.NotificationUtil;
+import io.dolby.sdk.reactnative.utils.Execute;
 import io.dolby.sdk.reactnative.utils.RNUtils;
 
 public class RNNotificationServiceModule extends ReactContextBaseJavaModule {
@@ -184,10 +185,5 @@ public class RNNotificationServiceModule extends ReactContextBaseJavaModule {
             default:
                 return null;
         }
-    }
-
-
-    private interface Execute<PARAM, TYPE> {
-        TYPE call(PARAM param);
     }
 }

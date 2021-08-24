@@ -14,3 +14,4 @@ export declare function conferenceToMap(conference: Conference): {
     isNew?: boolean | undefined;
     participants: Participant[];
 };
+export declare function mapToConference(conference: any): Conference;
