@@ -9,4 +9,5 @@ export interface JoinUserInfo {
 
 export interface JoinOptions {
   user?: JoinUserInfo;
+  maxVideoForwarding?: number
 }

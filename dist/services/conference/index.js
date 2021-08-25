@@ -8,4 +8,5 @@ export { ConferenceStatus } from "./ConferenceStatus";
 export { PermissionRefusedType } from "./PermissionRefusedType";
 export { AudioProcessing } from "./AudioProcessing";
 export { ConferenceType } from "./ConferenceType";
+export { Quality } from "./ParticipantQuality";
 //# sourceMappingURL=index.js.map

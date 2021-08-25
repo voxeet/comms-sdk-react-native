@@ -1,4 +1,4 @@
-import { AudioProcessing, Conference, ConferenceType, Participant } from "./conference";
+import { AudioProcessing, Conference, ConferenceStatusResult, ConferenceType, CreateOptions, JoinOptions, Participant, ParticipantPermission, ParticipantQuality } from "./conference";
 export default class ConferenceService {
     mute(mute: boolean, participant?: Participant): Promise<boolean>;
     isMuted(participant?: Participant): Promise<boolean>;
@@ -20,6 +20,13 @@ export default class ConferenceService {
     startVideo(isFrontFacingOrParticipant?: boolean | Participant): Promise<boolean>;
     stopAudio(participant?: Participant): Promise<boolean>;
     stopVideo(participant?: Participant): Promise<boolean>;
+    create(options?: CreateOptions): Promise<Conference>;
+    join(conference: Conference, options?: JoinOptions): Promise<Conference>;
+    kick(participant: Participant): Promise<boolean>;
+    updatePermissions(permissions: ParticipantPermission[]): Promise<Conference>;
+    replay(conference: Conference, offset: number): Promise<Conference>;
+    getConferenceStatus(conferenceId: string): Promise<ConferenceStatusResult>;
+    simulcast(qualities: ParticipantQuality[]): Promise<boolean>;
     getMaxVideoForwarding(): Promise<number | null>;
     videoForwarding(max: number, participants?: Participant[]): Promise<boolean>;
     leave(): Promise<boolean>;

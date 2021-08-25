@@ -33,7 +33,9 @@ public class RNVoxeetSdkPackage implements ReactPackage {
         EventBus eventBus = VoxeetSDK.instance().getEventBus();
 
         return Arrays.asList(new RNVoxeetSdkModule(reactContext),
-                new RNConferenceServiceModule(reactContext),
+                new RNConferenceServiceModule(VoxeetSDK.conference(),
+                        VoxeetSDK.session(),
+                        reactContext),
                 new RNSessionServiceModule(VoxeetSDK.session(),
                         reactContext),
                 new RNAudioDeviceServiceModule(VoxeetSDK.audio(),

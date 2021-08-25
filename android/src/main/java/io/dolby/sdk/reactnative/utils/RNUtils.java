@@ -8,18 +8,18 @@ import com.facebook.react.bridge.ReadableMap;
 
 public class RNUtils {
 
-    public static int getInteger(@NonNull ReadableMap map, @NonNull String key) {
+    public static int getInteger(@Nullable ReadableMap map, @NonNull String key) {
         try {
-            return map.hasKey(key) ? map.getInt(key) : 0;
+            return null != map && map.hasKey(key) ? map.getInt(key) : 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
 
-    public static boolean getBoolean(@NonNull ReadableMap map, @NonNull String key) {
+    public static boolean getBoolean(@Nullable ReadableMap map, @NonNull String key) {
         try {
-            return map.hasKey(key) && map.getBoolean(key);
+            return null != map && map.hasKey(key) && map.getBoolean(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,18 +27,18 @@ public class RNUtils {
     }
 
     @Nullable
-    public static ReadableMap getMap(@NonNull ReadableMap map, @NonNull String key) {
+    public static ReadableMap getMap(@Nullable ReadableMap map, @NonNull String key) {
         try {
-            return map.hasKey(key) ? map.getMap(key) : null;
+            return null != map && map.hasKey(key) ? map.getMap(key) : null;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static ReadableArray getArray(ReadableMap map, String key) {
+    public static ReadableArray getArray(@Nullable ReadableMap map, String key) {
         try {
-            return map.hasKey(key) ? map.getArray(key) : null;
+            return null != map && map.hasKey(key) ? map.getArray(key) : null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,9 +46,9 @@ public class RNUtils {
     }
 
     @Nullable
-    public static String getString(@NonNull ReadableMap map, @NonNull String key) {
+    public static String getString(@Nullable ReadableMap map, @NonNull String key) {
         try {
-            if (map.hasKey(key)) return map.getString(key);
+            if (null != map && map.hasKey(key)) return map.getString(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,5 +63,9 @@ public class RNUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static boolean hasKey(@Nullable ReadableMap map, String key) {
+        return null != map && map.hasKey(key);
     }
 }

@@ -19,3 +19,9 @@ export { PermissionRefusedType } from "./PermissionRefusedType";
 export { AudioProcessing } from "./AudioProcessing";
 
 export { ConferenceType } from "./ConferenceType";
+
+export { ParticipantQuality, Quality } from "./ParticipantQuality";
+
+export { ConferenceStatusResult } from "./ConferenceStatusResult";
+
+export { ParticipantPermission } from "./ParticipantPermission";

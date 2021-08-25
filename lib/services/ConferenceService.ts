@@ -1,5 +1,5 @@
 import { NativeModules } from "react-native";
-import { AudioProcessing, Conference, ConferenceType, Participant } from "./conference";
+import { AudioProcessing, Conference, ConferenceStatusResult, ConferenceType, CreateOptions, JoinOptions, Participant, ParticipantPermission, ParticipantQuality, Quality } from "./conference";
 import { toParticipant } from "./conference/Participant";
 import { mapToConference } from "./conference/Conference";
 
@@ -103,17 +103,33 @@ export default class ConferenceService {
 
   // remaining methods to implement
 
-  //Promise<Conference> create(@NonNull ConferenceCreateOptions conferenceCreateOptions)
-  //Promise<Conference> listen(@NonNull Conference) 
-  //Promise<Conference> listen(@NonNull ConferenceListenOptions options) 
-  //Promise<Conference> broadcast(@NonNull Conference conference)
-  //Promise<Conference> join(@NonNull ConferenceJoinOptions options)
-  //Promise<Boolean> kick(@NonNull Participant participant)
-  //Promise<Boolean> updatePermissions(@NonNull List<ParticipantPermissions> participantPermissions)
-  //Promise<Conference> replay(@NonNull Conference conference, long offset)
-  //java.util.Map<String, JSONArray> localStats()
-  //Promise<ConferenceStatusResult> getConferenceStatus(String conferenceId)
-  //Promise<Boolean> simulcast(@NonNull List<ParticipantQuality> requested) 
+  public async create(options?: CreateOptions): Promise<Conference> {
+    return RNConferenceServiceModule.create(options);
+  }
+
+  public async join(conference: Conference, options?: JoinOptions): Promise<Conference> {
+    return RNConferenceServiceModule.join(conference, options);
+  }
+
+  public async kick(participant: Participant): Promise<boolean> {
+    return RNConferenceServiceModule.kick(participant);
+  }
+  public async updatePermissions(permissions: ParticipantPermission[]): Promise<Conference> {
+    return RNConferenceServiceModule.updatePermissions(permissions);
+  }
+  
+  public async replay(conference: Conference, offset: number): Promise<Conference> {
+    return RNConferenceServiceModule.replay(conference, offset)
+  }
+
+  public async getConferenceStatus(conferenceId: string): Promise<ConferenceStatusResult> {
+    return RNConferenceServiceModule.getConferenceStatus(conferenceId);
+  }
+
+  public async simulcast(qualities: ParticipantQuality[]): Promise<boolean> {
+    const mapped = qualities.map(req => ({...req, quality: Quality[req.quality]}));
+    return RNConferenceServiceModule.simulcast(mapped);
+  }
 
   public async getMaxVideoForwarding(): Promise<number|null> {
     return RNConferenceServiceModule.getMaxVideoForwarding();

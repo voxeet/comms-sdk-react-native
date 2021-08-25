@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { NativeModules } from "react-native";
-import { AudioProcessing, ConferenceType } from "./conference";
+import { AudioProcessing, ConferenceType, Quality } from "./conference";
 import { toParticipant } from "./conference/Participant";
 import { mapToConference } from "./conference/Conference";
 const { RNConferenceServiceModule } = NativeModules;
@@ -132,17 +132,42 @@ export default class ConferenceService {
         });
     }
     // remaining methods to implement
-    //Promise<Conference> create(@NonNull ConferenceCreateOptions conferenceCreateOptions)
-    //Promise<Conference> listen(@NonNull Conference) 
-    //Promise<Conference> listen(@NonNull ConferenceListenOptions options) 
-    //Promise<Conference> broadcast(@NonNull Conference conference)
-    //Promise<Conference> join(@NonNull ConferenceJoinOptions options)
-    //Promise<Boolean> kick(@NonNull Participant participant)
-    //Promise<Boolean> updatePermissions(@NonNull List<ParticipantPermissions> participantPermissions)
-    //Promise<Conference> replay(@NonNull Conference conference, long offset)
-    //java.util.Map<String, JSONArray> localStats()
-    //Promise<ConferenceStatusResult> getConferenceStatus(String conferenceId)
-    //Promise<Boolean> simulcast(@NonNull List<ParticipantQuality> requested) 
+    create(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.create(options);
+        });
+    }
+    join(conference, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.join(conference, options);
+        });
+    }
+    kick(participant) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.kick(participant);
+        });
+    }
+    updatePermissions(permissions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.updatePermissions(permissions);
+        });
+    }
+    replay(conference, offset) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.replay(conference, offset);
+        });
+    }
+    getConferenceStatus(conferenceId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return RNConferenceServiceModule.getConferenceStatus(conferenceId);
+        });
+    }
+    simulcast(qualities) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mapped = qualities.map(req => (Object.assign(Object.assign({}, req), { quality: Quality[req.quality] })));
+            return RNConferenceServiceModule.simulcast(mapped);
+        });
+    }
     getMaxVideoForwarding() {
         return __awaiter(this, void 0, void 0, function* () {
             return RNConferenceServiceModule.getMaxVideoForwarding();
