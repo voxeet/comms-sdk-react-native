@@ -2,7 +2,8 @@ package io.dolby.sdk.reactnative.android.services;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import io.dolby.sdk.reactnative.R;
 

@@ -7,14 +7,6 @@ Before using the latest version of the react-native plugin, please review and ac
 
 ## Documentation
 
-### Development
-
-Please use `npm run configure` or `yarn run configure` after checking out.
-
-Transpilation : `npm run tsc` will make sure the current project tsc version is used. _TODO check if necessary_
-
-_WIP_
-
 ## Getting started
 
 `$ npm install @voxeet/react-native-voxeet-sdk --save`

@@ -1,62 +1,68 @@
 buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    if (project == rootProject) {
+        repositories {
+            google()
+            mavenCentral()
+        }
 
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
+        dependencies {
+            classpath 'com.android.tools.build:gradle:4.2.1'
+        }
     }
-}
-
-repositories {
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url("$rootDir/../node_modules/react-native/android")
-    }
-    maven { url "https://android-sdk.voxeet.com/release" }
-    google()
-    mavenCentral()
-    jcenter()
 }
 
 apply plugin: 'com.android.library'
 
-def ext = rootProject.ext
-def _compile = ext.has("compileSdkVersion") ? ext.compileSdkVersion : 28
-def _buildTools = ext.has("buildToolsVersion") ? ext.buildToolsVersion : "28.0.3"
-def _minSdk = ext.has("minSdkVersion") ? ext.minSdkVersion : 21
-def _targetSdk = ext.has("targetSdkVersion") ? ext.targetSdkVersion : 28
-
-if(_minSdk < 21) _minSdk = 21
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
 
 android {
-    compileSdkVersion _compile
-    buildToolsVersion _buildTools
-
+    compileSdkVersion safeExtGet('DolbyioSdk_compileSdkVersion', 29)
+    buildToolsVersion safeExtGet('DolbyioSdk_buildToolsVersion', '29.0.2')
     defaultConfig {
-        minSdkVersion _minSdk
-        targetSdkVersion _targetSdk
+        minSdkVersion safeExtGet('DolbyioSdk_minSdkVersion', 21)
+        targetSdkVersion safeExtGet('DolbyioSdk_targetSdkVersion', 29)
         versionCode 1
         versionName "1.0"
     }
-    lintOptions {
-        abortOnError false
-    }
 
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    lintOptions {
+        disable 'GradleCompatible'
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+repositories {
+    mavenLocal()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url("$rootDir/../node_modules/react-native/android")
+    }
+    maven {
+        url("http://android-sdk.voxeet.com/release")
+    }
+    google()
+    mavenCentral()
+    maven {
+        url "https://www.jitpack.io"
+    }
+}
+
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    //noinspection GradleDynamicVersion
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.annotation:annotation:1.1.0"
 
-    implementation ('com.voxeet.sdk:sdk:3.2.2')
+    implementation "com.voxeet.sdk:sdk:3.2.3"
 }
