@@ -84,7 +84,8 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn typescript"
+      "pre-commit": "yarn lint && yarn typescript && touch .hook_commit",
+      "post-commit": "( [ -e .hook_commit ] && rm .hook_commit && yarn run licenses && rm licenses.json && git add ./LICENSES.md && git commit --amend -C HEAD --no-verify) || echo \"skipped\" "
     }
   },
   "commitlint": {
