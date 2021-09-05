@@ -22,6 +22,12 @@ public class VideoViewEventEmitter extends AbstractEventEmitter {
                 map.putInt("requestId", event.requestId);
                 map.putBoolean("result", event.result);
             }
+
+            @NonNull
+            @Override
+            String name() {
+              return "VoxeetConferencekitVideoView";
+            }
         });
     }
 

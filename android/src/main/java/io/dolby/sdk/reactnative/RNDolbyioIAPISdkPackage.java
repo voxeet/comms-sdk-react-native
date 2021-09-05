@@ -55,7 +55,6 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         reactContext),
                 new RNNotificationServiceModule(VoxeetSDK.conference(),
                         VoxeetSDK.notification(),
-                        eventBus,
                         reactContext));
     }
 

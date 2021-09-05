@@ -2,5 +2,5 @@ rootProject.name = 'DolbyioSdkExample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
-include ':reactnativedolbyiosdk'
-project(':reactnativedolbyiosdk').projectDir = new File(rootProject.projectDir, '../../android')
+include ':dolbyio_react-native-iapi-sdk'
+project(':dolbyio_react-native-iapi-sdk').projectDir = new File(rootProject.projectDir, '../../android')
