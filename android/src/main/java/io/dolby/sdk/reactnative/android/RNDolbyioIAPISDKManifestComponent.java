@@ -15,17 +15,17 @@ import com.voxeet.sdk.preferences.VoxeetPreferences;
 import com.voxeet.sdk.utils.VoxeetEnvironmentHolder;
 
 import io.dolby.sdk.reactnative.android.services.SystemServiceFactory;
-import io.dolby.sdk.reactnative.android.services.VoxeetSystemService;
-import io.dolby.sdk.reactnative.utils.VoxeetLog;
+import io.dolby.sdk.reactnative.android.services.DolbyioIAPISystemService;
+import io.dolby.sdk.reactnative.utils.IAPILog;
 
-public final class RNVoxeetSDKManifestComponent extends AbstractManifestComponentProvider {
+public final class RNDolbyioIAPISDKManifestComponent extends AbstractManifestComponentProvider {
 
-    private static final String TAG = RNVoxeetSDKManifestComponent.class.getSimpleName();
+    private static final String TAG = RNDolbyioIAPISDKManifestComponent.class.getSimpleName();
 
     @Override
     protected void init(@NonNull Context context, @Nullable ProviderInfo providerInfo) {
         if (!(context instanceof Application)) {
-            VoxeetLog.log(TAG, "init: ISSUE CONTEXT IS NOT AN Application");
+            IAPILog.log(TAG, "init: ISSUE CONTEXT IS NOT AN Application");
             return;
         }
 
@@ -47,12 +47,12 @@ public final class RNVoxeetSDKManifestComponent extends AbstractManifestComponen
         //in sdk mode, no issues
         VoxeetPreferences.init(application, new VoxeetEnvironmentHolder(application));
 
-        SystemServiceFactory.registerSDKServiceClass(VoxeetSystemService.class);
+        SystemServiceFactory.registerSDKServiceClass(DolbyioIAPISystemService.class);
     }
 
     @Override
     protected String getComponentName() {
-        return RNVoxeetSDKManifestComponent.class.getSimpleName();
+        return RNDolbyioIAPISDKManifestComponent.class.getSimpleName();
     }
 
     @Override

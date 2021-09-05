@@ -1,7 +1,7 @@
 {
-  "name": "react-native-dolbyio-sdk",
+  "name": "@dolbyio/react-native-iapi-sdk",
   "version": "0.1.0",
-  "description": "Dolby.io SDK crossplatform react-native implementation",
+  "description": "Dolby.io iAPI SDK crossplatform react-native implementation",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-dolbyio-sdk.podspec",
+    "dolbyio_react-native-iapi-sdk.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",

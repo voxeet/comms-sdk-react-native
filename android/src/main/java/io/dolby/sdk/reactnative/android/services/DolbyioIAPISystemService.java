@@ -7,19 +7,19 @@ import androidx.annotation.NonNull;
 
 import io.dolby.sdk.reactnative.R;
 
-public class VoxeetSystemService extends AbstractSDKService<VoxeetSystemService.VoxeetSystemBinder> {
+public class DolbyioIAPISystemService extends AbstractSDKService<DolbyioIAPISystemService.VoxeetSystemBinder> {
 
-    public static class VoxeetSystemBinder extends SDKBinder<VoxeetSystemService> {
+    public static class VoxeetSystemBinder extends SDKBinder<DolbyioIAPISystemService> {
 
-        private VoxeetSystemService instance;
+        private DolbyioIAPISystemService instance;
 
-        public VoxeetSystemBinder(@NonNull VoxeetSystemService instance) {
+        public VoxeetSystemBinder(@NonNull DolbyioIAPISystemService instance) {
             this.instance = instance;
         }
 
         @NonNull
         @Override
-        public VoxeetSystemService getService() {
+        public DolbyioIAPISystemService getService() {
             return instance;
         }
     }

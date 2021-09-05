@@ -39,7 +39,7 @@ public class RNVideoViewManager extends SimpleViewManager<RNVideoViewWrapper> {
     public static final String SCALE_FILL = "fill";
     public static final String SCALE_BALANCED = "balanced";
 
-    private static final String REACT_CLASS = "RCTVoxeetVideoView";
+    private static final String REACT_CLASS = "RCTIAPIVideoView";
     private static final String TAG = RNVideoViewManager.class.getSimpleName();
     private Handler handler = new Handler(Looper.getMainLooper());
     private String savedScaleType = null;

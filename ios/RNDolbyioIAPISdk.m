@@ -1,6 +1,6 @@
-#import "DolbyioSdk.h"
+#import "RNDolbyioIAPISdk.h"
 
-@implementation DolbyioSdk
+@implementation RNDolbyioIAPISdk
 
 RCT_EXPORT_MODULE()
 

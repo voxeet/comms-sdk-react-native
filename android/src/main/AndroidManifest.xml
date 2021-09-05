@@ -18,15 +18,14 @@
 
     <application>
 
-        <service android:name=".android.services.VoxeetSystemService"
+        <service android:name=".android.services.DolbyioIAPISystemService"
             android:enabled="true"
             android:exported="false" />
 
         <provider
-            android:name=".android.RNVoxeetSDKManifestComponent"
-            android:authorities="${applicationId}.manifests.VoxeetSystemServiceManifestComponent"
+            android:name=".android.RNDolbyioIAPISDKManifestComponent"
+            android:authorities="${applicationId}.manifests.RNDolbyioIAPISDKManifestComponent"
             android:enabled="true"
             android:exported="false" />
     </application>
 </manifest>
-  

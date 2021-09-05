@@ -38,9 +38,9 @@ import io.dolby.sdk.reactnative.android.services.SystemServiceFactory;
  * - deprecated
  * - state in the documentation that the MainActivity should override the new class from the SDK
  */
-public class VoxeetSDKAppCompatActivity extends AppCompatActivity {
+public class DolbyioIAPISDKAppCompatActivity extends AppCompatActivity {
 
-    private static final String TAG = VoxeetSDKAppCompatActivity.class.getSimpleName();
+    private static final String TAG = DolbyioIAPISDKAppCompatActivity.class.getSimpleName();
 
     @Nullable
     private AbstractSDKService sdkService;
@@ -51,7 +51,7 @@ public class VoxeetSDKAppCompatActivity extends AppCompatActivity {
      */
     private boolean _camera_permission_permnantly_banned = false;
 
-    public VoxeetSDKAppCompatActivity() {
+    public DolbyioIAPISDKAppCompatActivity() {
         super();
     }
 

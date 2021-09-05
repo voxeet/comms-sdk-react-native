@@ -6,9 +6,9 @@ import React, {Component} from 'react';
 import { requireNativeComponent, findNodeHandle, UIManager, Platform, View } from 'react-native';
 
 import type { Participant, MediaStream } from '../services/conference';
-import VoxeetSDK from '../VoxeetSDK';
+import IAPISDK from '../IAPISDK';
 
-const RCTVoxeetVideoView: any = requireNativeComponent('RCTVoxeetVideoView');
+const RCTIAPIVideoView: any = requireNativeComponent('RCTIAPIVideoView');
 
 export interface Stream {
   peerId: string;
@@ -95,11 +95,11 @@ export default class VideoView extends Component<Props, State> {
   }
 
   componentDidMount() {
-    VoxeetSDK.events.addListener("VoxeetConferencekitVideoView", this._onEvent);
+    IAPISDK.events.addListener("VoxeetConferencekitVideoView", this._onEvent);
   }
 
   componentWillUnmount() {
-    VoxeetSDK.events.removeListener("VoxeetConferencekitVideoView", this._onEvent);
+    IAPISDK.events.removeListener("VoxeetConferencekitVideoView", this._onEvent);
   }
 
   attach(participant: Participant, mediaStream: MediaStream): Promise<void> {
@@ -196,7 +196,7 @@ export default class VideoView extends Component<Props, State> {
           return <View {...props} />
       } else {
           return (
-            <RCTVoxeetVideoView {...props}
+            <RCTIAPIVideoView {...props}
               attach={this.state.mediaStream}
               ref={(v: React.Component|null) => this.setVideoView(v)}
               {...{ onCallReturn: (event: any) => this._onCallReturn(event) }}/>
@@ -205,7 +205,7 @@ export default class VideoView extends Component<Props, State> {
     }
 
     return (
-      <RCTVoxeetVideoView
+      <RCTIAPIVideoView
         {...props}
         ref={(v: React.Component|null) => this.setVideoView(v)}
         { ...{onCallReturn: (event: any) => this._onCallReturn(event)} }

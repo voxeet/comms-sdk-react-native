@@ -1,4 +1,4 @@
-# Voxeet React Native SDK
+# Dolby.io IAPI React Native SDK
 
 
 ## SDK 3.0 License agreement
@@ -9,7 +9,7 @@ Before using the latest version of the react-native plugin, please review and ac
 
 ## Getting started
 
-`$ npm install @voxeet/react-native-voxeet-sdk --save`
+`$ npm install @dolbyio/react-native-iapi-sdk --save`
 
 or 
 
@@ -17,7 +17,7 @@ or
 
 ### Mostly automatic installation
 
-`$ react-native link @voxeet/react-native-voxeet-sdk`
+`$ react-native link @dolbyio/react-native-iapi-sdk`
 
 **_Note: for iOS & Android, you need to do some [mandatory modification](https://github.com/voxeet/voxeet-uxkit-sdk#mandatory-modification)_ to your project**
 
@@ -87,24 +87,22 @@ android {
   - Add the following import to the list of `import` :
 
 ```java
-import io.dolby.sdk.reactnative.android.activities.VoxeetSDKAppCompatActivity;
+import io.dolby.sdk.reactnative.android.activities.DolbyioIAPISDKAppCompatActivity;
 ```
 
-  - Change `MainActivity extends AppCompatActivity` to `MainActivity extends VoxeetSDKAppCompatActivity`
+  - Change `MainActivity extends AppCompatActivity` to `MainActivity extends DolbyioIAPISDKAppCompatActivity`
 
 ##### MainApplication
 
   - Open `android/app/src/main/java/[...]/MainApplication.java`
-  - Add `import io.dolby.sdk.reactnative.RNVoxeetSdkPackage;` to the imports at the top of the file
+  - Add `import io.dolby.sdk.reactnative.RNDolbyioIAPISdkPackage;` to the imports at the top of the file
   - Add `voxeet` to the list returned by the `getPackages()` method
-  - Add a field in the `MainApplication` class named voxeet : `private RNVoxeetSdkPackage voxeet;`
-  - in the `onCreate` method, instantiate the `voxeet` field to a new instance of the `RNVoxeetSdkPackage` class : `voxeet = new RNVoxeetSdkPackage(MainApplication.this);`
+  - Add a field in the `MainApplication` class named voxeet : `private RNDolbyioIAPISdkPackage voxeet;`
+  - in the `onCreate` method, instantiate the `voxeet` field to a new instance of the `RNDolbyioIAPISdkPackage` class : `voxeet = new RNDolbyioIAPISdkPackage(MainApplication.this);`
 
 ## Usage
-```javascript
-import { VoxeetSDK, ConferenceUser } from "@voxeet/react-native-voxeet-conferencekit";
-...
-```
+
+_TODO_
 
 ## Configuration
 
@@ -116,7 +114,7 @@ _WIP_
 
 ### Android
 
-Please go to [Android SDK Sample](https://github.com/voxeet/android-sdk-sample)
+_TODO_
 
 ## Build locally
 
@@ -135,7 +133,7 @@ npm i -D @types/react ...
 ## License
 
 ```
-   Copyright 2020 - Voxeet
+   Copyright 2021 - Dolby
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -154,4 +152,4 @@ npm i -D @types/react ...
 
 Direct licenses can be found [here](./LICENSES.md)
 
-© Voxeet, 2020
+© Dolby, 2021

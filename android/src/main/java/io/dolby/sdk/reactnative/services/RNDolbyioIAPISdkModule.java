@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import io.dolby.sdk.reactnative.events.EventsManager;
 import io.dolby.sdk.reactnative.utils.Lock;
 
-public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
+public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
 
     private static final String ERROR_SDK_NOT_INITIALIZED = "ERROR_SDK_NOT_INITIALIZED";
     private static final String ERROR_SDK_NOT_LOGGED_IN = "ERROR_SDK_NOT_LOGGED_IN";
@@ -28,7 +28,7 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
     private ReentrantLock lockAwaitingToken = new ReentrantLock();
     private List<TokenCallback> mAwaitingTokenCallback;
 
-    public RNVoxeetSdkModule(ReactApplicationContext reactContext) {
+    public RNDolbyioIAPISdkModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
         mAwaitingTokenCallback = new ArrayList<>();
@@ -38,7 +38,7 @@ public class RNVoxeetSdkModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "RNVoxeetSDK";
+        return "RNDolbyioIAPISdk";
     }
 
 

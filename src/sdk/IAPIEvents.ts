@@ -29,7 +29,7 @@ import type { ParticipantAddedEvent,
 import type { UnregisterCallback } from '../types';
 import { ConferenceStatus, PermissionRefusedType } from '../services/conference';
  
-const { RNVoxeetSDK } = NativeModules;
+const { RNDolbyioIAPISdk } = NativeModules;
 
 export interface VideoPresentationEvents {
   ["VideoPresentationSeek"]: VideoPresentationSeek;
@@ -93,9 +93,9 @@ function transformNativeEvent<K extends keyof EventMap> (type: K, event: any): E
   }
 }
 
-const events = Platform.OS == "android" ? DeviceEventEmitter : new NativeEventEmitter(RNVoxeetSDK);
+const events = Platform.OS == "android" ? DeviceEventEmitter : new NativeEventEmitter(RNDolbyioIAPISdk);
 
-export default class VoxeetEvents {
+export default class IAPIEvents {
 
   constructor() {
 

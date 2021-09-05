@@ -24,15 +24,15 @@ import io.dolby.sdk.reactnative.services.RNRecordingServiceModule;
 import io.dolby.sdk.reactnative.services.RNScreenShareServiceModule;
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule;
 import io.dolby.sdk.reactnative.services.RNVideoPresentationServiceModule;
-import io.dolby.sdk.reactnative.services.RNVoxeetSdkModule;
+import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule;
 import io.dolby.sdk.reactnative.video.RNVideoViewManager;
 
-public class RNVoxeetSdkPackage implements ReactPackage {
+public class RNDolbyioIAPISdkPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         EventBus eventBus = VoxeetSDK.instance().getEventBus();
 
-        return Arrays.asList(new RNVoxeetSdkModule(reactContext),
+        return Arrays.asList(new RNDolbyioIAPISdkModule(reactContext),
                 new RNConferenceServiceModule(VoxeetSDK.conference(),
                         VoxeetSDK.session(),
                         reactContext),

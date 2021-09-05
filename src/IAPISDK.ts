@@ -3,12 +3,12 @@ import {
   NotificationService, RecordingService, ScreenShareService, SessionService, VideoPresentationService
 } from "./services";
 
-import VoxeetSDKImpl, { TokenRefreshCallback } from './sdk/Implementation';
+import IAPISDKImpl, { TokenRefreshCallback } from './sdk/Implementation';
 export { RefreshCallback, TokenRefreshCallback } from "./sdk/Implementation";
 
-const implementation = new VoxeetSDKImpl();
+const implementation = new IAPISDKImpl();
 
-const VoxeetSDK = {
+const IAPISdk = {
   //services
   audio: new AudioService(),
   command: new CommandService(),
@@ -29,4 +29,4 @@ const VoxeetSDK = {
     implementation.initializeToken(accessToken, refreshToken)
 }
 
-export default Object.freeze(VoxeetSDK);
+export default Object.freeze(IAPISdk);
