@@ -13,6 +13,8 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.65.0)
   - fmt (6.2.1)
   - glog (0.3.5)
+  - Permission-Camera (3.0.5):
+    - RNPermissions
   - RCT-Folly (2021.04.26.00):
     - boost-for-react-native
     - DoubleConversion
@@ -286,6 +288,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -332,6 +335,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -395,6 +400,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: c2d85d69490fc5666bc4123dff3b9b72db06a987
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
+  Permission-Camera: ac603073e4128e51e6ca3c39129778f05b4082fa
   RCT-Folly: 0dd9e1eb86348ecab5ba76f910b56f4b5fef3c46
   RCTRequired: 564b40c9e3d5f4d766333577782408770a61dae9
   RCTTypeSafety: d5c4035b39ffc8b86c56577457888ea70044cdc6
@@ -423,6 +429,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
 
-PODFILE CHECKSUM: f75c778f98a54459ff7ff599f144abce02513d81
+PODFILE CHECKSUM: 906de0bd3d3fe1028a1a0258d501f4ad3c5c1170
 
 COCOAPODS: 1.10.1
