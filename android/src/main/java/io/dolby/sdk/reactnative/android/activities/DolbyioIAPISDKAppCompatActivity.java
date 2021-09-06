@@ -9,12 +9,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.react.ReactActivity;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.events.error.PermissionRefusedEvent;
 import com.voxeet.sdk.events.sdk.ConferenceStatusUpdatedEvent;
@@ -38,7 +39,7 @@ import io.dolby.sdk.reactnative.android.services.SystemServiceFactory;
  * - deprecated
  * - state in the documentation that the MainActivity should override the new class from the SDK
  */
-public class DolbyioIAPISDKAppCompatActivity extends AppCompatActivity {
+public class DolbyioIAPISDKAppCompatActivity extends ReactActivity {
 
     private static final String TAG = DolbyioIAPISDKAppCompatActivity.class.getSimpleName();
 
@@ -156,7 +157,7 @@ public class DolbyioIAPISDKAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean managed = VoxeetSDK.screenShare().onActivityResult(requestCode, resultCode, data);
 
         if (!managed) {

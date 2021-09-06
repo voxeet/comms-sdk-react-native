@@ -1,33 +1,88 @@
-import * as React from 'react';
+import React, { Component } from 'react';
+import {
+  Appearance,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  Platform,
+  View,
+} from 'react-native';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { IAPISDK } from '@dolbyio/react-native-iapi-sdk';
+import {
+  Colors,
+} from 'react-native/Libraries/NewAppScreen';
+import Initialization from './init/Init';
+import VoxeetEnvironment from './VoxeetEnvironment';
+import JoinConference from './conference/JoinConference';
+import Login from './login/Login';
+import ParticipantsView from './conference/ParticipantsView';
+import ConferenceControls from './conference/ConferenceControls';
+import ParticipantInviteView from './conference/inside/ParticipantInvite';
 
-export default function App() {
-  IAPISDK.initialize("", "");
-  const [result, setResult] = React.useState<number | undefined>();
+export interface Props {
 
-  React.useEffect(() => {
-    //DolbyioSdk.multiply(3, 7).then(setResult);
-    setResult(0);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+export interface State {
+
+}
+
+export default class App extends Component<Props, State> {
+
+  componentDidMount() {
+    VoxeetEnvironment.addListener("initialization", this.onInit);
+    VoxeetEnvironment.addListener("connect", this.onInit);
+  }
+
+  componentWillUnmount() {
+    VoxeetEnvironment.removeListener("initialization", this.onInit);
+    VoxeetEnvironment.removeListener("connect", this.onInit);
+  }
+
+  private onInit = () => {
+    this.forceUpdate();
+  }
+
+  renderInitialized() {
+    return (<>
+      <Login />
+      <View style={{height: 16}} />
+      <JoinConference />
+      <View style={{height: 16}} />
+      <ConferenceControls />
+      <View style={{height: 16}} />
+      <ParticipantsView />
+      <View style={{height: 16}} />
+      <ParticipantInviteView />
+    </>);
+  }
+
+  render() {
+    const isDarkMode = Appearance.getColorScheme() === 'dark';
+
+    const backgroundStyle = {
+      height: "100%",
+      backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    };
+
+    return (
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior= {(Platform.OS === 'ios')? "padding" : undefined}>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={backgroundStyle}>
+            {
+              !VoxeetEnvironment.initialized
+              ? <Initialization />
+              : this.renderInitialized()
+            }
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    );
+  }
+}

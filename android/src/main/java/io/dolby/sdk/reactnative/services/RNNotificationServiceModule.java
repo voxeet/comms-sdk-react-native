@@ -38,21 +38,16 @@ public class RNNotificationServiceModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
     private final NotificationService notificationService;
     private final ConferenceService conferenceService;
-    private final EventBus eventBus;
 
     public RNNotificationServiceModule(
             ConferenceService conferenceService,
             NotificationService notificationService,
-            EventBus eventBus,
             ReactApplicationContext reactContext) {
         super(reactContext);
 
         this.conferenceService = conferenceService;
         this.notificationService = notificationService;
         this.reactContext = reactContext;
-        this.eventBus = eventBus;
-
-        eventBus.register(this);
     }
 
     @Override
