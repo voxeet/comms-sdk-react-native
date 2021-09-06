@@ -28,7 +28,7 @@ export interface State {
 }
 
 export interface Props {
-  style?: StyleProp<ViewStyle> | undefined,
+  style?: StyleProp<ViewStyle> | undefined;
   isMirror?: boolean;
   scaleType: 'fit' | 'fill'; //[ 'fit', 'fill' ]
 }

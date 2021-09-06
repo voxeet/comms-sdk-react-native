@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
 import Card from "../../ui/Card";
 import { Button } from "react-native-material-ui";
 import { TextField } from 'rn-material-ui-textfield';
@@ -33,6 +32,7 @@ export default class ParticipantInviteView extends Component<Props, State> {
   private onConferenceStatus = async (event: ConferenceStatusUpdatedEvent|undefined) => {
     //future version will bring event.conference as it's an interesting structure to always have
     try {
+      console.log("onConferenceStatus", event);
       const conference = await IAPISDK.conference.getConference();
       this.setState({conference});
     } catch(e) {
@@ -73,10 +73,3 @@ export default class ParticipantInviteView extends Component<Props, State> {
     </Card>);
   }
 }
-
-const styles = StyleSheet.create({
-  main: {
-    flexDirection: "row",
-  },
-  image: {width: 50, height: 50}
-});
