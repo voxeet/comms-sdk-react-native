@@ -1,1 +1,1 @@
-export { ConferenceStatusUpdatedEvent } from "./ConferenceStatusUpdatedEvent";
+export { ConferenceStatusUpdatedEvent } from './ConferenceStatusUpdatedEvent';

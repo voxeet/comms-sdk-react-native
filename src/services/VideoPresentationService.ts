@@ -1,11 +1,9 @@
-import { NativeModules } from "react-native";
-import type { VideoPresentation } from "./presentation";
+import { NativeModules } from 'react-native';
+import type { VideoPresentation } from './presentation';
 const { RNFilePresentationService } = NativeModules;
-
 
 //TODO export its events
 export default class VideoPresentationService {
-  
   public async start(url: string): Promise<VideoPresentation> {
     return RNFilePresentationService.start(url);
   }

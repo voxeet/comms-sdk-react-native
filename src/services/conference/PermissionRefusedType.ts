@@ -1,4 +1,4 @@
 export enum PermissionRefusedType {
-  CAMERA = "CAMERA",
-  MICROPHONE = "MICROPHONE"
+  CAMERA = 'CAMERA',
+  MICROPHONE = 'MICROPHONE',
 }

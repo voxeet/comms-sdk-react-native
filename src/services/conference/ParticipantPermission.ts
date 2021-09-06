@@ -1,5 +1,5 @@
-import type { ConferencePermission } from "../notification/ConferencePermission";
-import type Participant from "./Participant";
+import type { ConferencePermission } from '../notification/ConferencePermission';
+import type Participant from './Participant';
 
 export interface ParticipantPermission {
   participant: Participant;
