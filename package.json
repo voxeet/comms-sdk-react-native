@@ -33,7 +33,7 @@
     "bootstrap": "yarn example && yarn && yarn pods",
     "licenses": "license-report --package=package.json > licenses.json ; node ./scripts/licensesToMarkdown.js > LICENSES.md",
     "generate:licenses": "yarn licenses && rm licenses.json && git add ./LICENSES.md",
-    "generate:documentation": "rm -rf docs && typedoc src/ && git add docs",
+    "generate:documentation": "rm -rf docs && typedoc --disableSources src/ && git add docs",
     "generate": "yarn generate:documentation && yarn generate:licenses"
   },
   "keywords": [
@@ -164,6 +164,7 @@
     ]
   },
   "dependencies": {
-    "eventemitter2": "^6.4.4"
+    "eventemitter2": "^6.4.4",
+    "typedoc-plugin-markdown": "^3.10.4"
   }
 }
