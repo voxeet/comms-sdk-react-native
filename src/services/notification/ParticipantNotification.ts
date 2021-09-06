@@ -1,7 +1,10 @@
-import type { ConferenceParticipantStatus, ParticipantInfo } from "../conference";
+import type {
+  ConferenceParticipantStatus,
+  ParticipantInfo,
+} from '../conference';
 
 export interface ParticipantNotification {
-  id: string,
-  participantInfo: ParticipantInfo,
-  status: ConferenceParticipantStatus
+  id: string;
+  participantInfo: ParticipantInfo;
+  status: ConferenceParticipantStatus;
 }

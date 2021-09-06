@@ -1,13 +1,13 @@
-export { ConferencePermission } from "./ConferencePermission";
+export { ConferencePermission } from './ConferencePermission';
 
-export { default as ParticipantInvited } from "./ParticipantInvited";
+export { default as ParticipantInvited } from './ParticipantInvited';
 
 export {
-  Subscription, 
+  Subscription,
   ConferenceCreatedNotification,
   ConferenceEndedNotification,
   InvitationReceivedNotification,
   ParticipantJoinedNotification,
   ParticipantLeftNotification,
-  SubscriptionMapping
-} from "./Subscriptions";
+  SubscriptionMapping,
+} from './Subscriptions';

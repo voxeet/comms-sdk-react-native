@@ -1,12 +1,20 @@
 //promise call done using https://pspdfkit.com/blog/2018/advanced-techniques-for-react-native-ui-components/
 //TODO lock call ?
 
-
-import React, {Component} from 'react';
-import { requireNativeComponent, findNodeHandle, UIManager, Platform, View } from 'react-native';
+import React, { Component } from 'react';
+import {
+  requireNativeComponent,
+  findNodeHandle,
+  UIManager,
+  Platform,
+  View,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import type { Participant, MediaStream } from '../services/conference';
-import IAPISDK from '../IAPISDK';
+import type { UnregisterCallback } from '../types';
+import IAPIRawEvent from 'src/sdk/IAPIRawEvent';
 
 const RCTIAPIVideoView: any = requireNativeComponent('RCTIAPIVideoView');
 
@@ -16,22 +24,23 @@ export interface Stream {
 }
 
 export interface State {
-  mediaStream?: MediaStream
+  mediaStream?: MediaStream;
 }
 
 export interface Props {
-  isMirror?: boolean,
-  scaleType: "fit"|"fill"; //[ 'fit', 'fill' ]
+  style?: StyleProp<ViewStyle> | undefined,
+  isMirror?: boolean;
+  scaleType: 'fit' | 'fill'; //[ 'fit', 'fill' ]
 }
 
-const ValidProps = [ "style", "isMirror", "scaleType" ];
+const ValidProps = ['style', 'isMirror', 'scaleType'];
 
 export interface Resolve {
-  (result: any): any|undefined;
+  (result: any): any | undefined;
 }
 
 export interface Reject {
-  (error: Error): any|undefined;
+  (error: Error): any | undefined;
 }
 
 export interface Holder {
@@ -40,14 +49,14 @@ export interface Holder {
 }
 
 interface VideoViewAsyncCallResult {
-  requestId: number,
-  error?: string,
-  message?: string,
-  peerId?: string,
-  streamId?: string,
-  attach?: number,
-  isAttached?: number,
-  isScreenShare?: number
+  requestId: number;
+  error?: string;
+  message?: string;
+  peerId?: string;
+  streamId?: string;
+  attach?: number;
+  isAttached?: number;
+  isScreenShare?: number;
 }
 
 /**
@@ -55,10 +64,10 @@ interface VideoViewAsyncCallResult {
  *
  * - isMirror: boolean
  * - scaleType: 'fit' | 'fill'
- * 
- * 
+ *
+ *
  * Public methods :
- * 
+ *
  * attach(participant: Participant, mediaStream: MediaStream): Promise<void>
  * unattach(): Promise<void>
  * isAttached(): Promise<boolean>
@@ -70,17 +79,18 @@ export default class VideoView extends Component<Props, State> {
     isMirror: false,
     hasFlip: false,
     isAutoUnAttach: true,
-    scaleType: 'fill'
-  }
+    scaleType: 'fill',
+  };
 
-  private _UiManager:any = UIManager;
+  private _UiManager: any = UIManager;
 
-  private _videoView: React.Component|null;
+  private _videoView: React.Component | null;
   private _videoViewHandler: null | number;
   private static _nextRequestId = 1;
   private _requestMap: Map<number, Holder> = new Map();
 
   public state: State = {};
+  private onEventUnregister?: UnregisterCallback;
 
   constructor(props: Props) {
     super(props);
@@ -90,56 +100,76 @@ export default class VideoView extends Component<Props, State> {
 
   filteredProps() {
     const result: any = {};
-    Object.keys(this.props).filter(k => ValidProps.includes(k)).forEach(k => result[k] = (this.props as any)[k]);
+    Object.keys(this.props)
+      .filter((k) => ValidProps.includes(k))
+      .forEach((k) => (result[k] = (this.props as any)[k]));
     return result;
   }
 
   componentDidMount() {
-    IAPISDK.events.addListener("VoxeetConferencekitVideoView", this._onEvent);
+    this.onEventUnregister = IAPIRawEvent.addListener(
+      'VoxeetConferencekitVideoView',
+      this._onEvent
+    );
   }
 
   componentWillUnmount() {
-    IAPISDK.events.removeListener("VoxeetConferencekitVideoView", this._onEvent);
+    this.onEventUnregister && this.onEventUnregister();
+    this.onEventUnregister = undefined;
   }
 
   attach(participant: Participant, mediaStream: MediaStream): Promise<void> {
-    if(Platform.OS == "android") {
-        this.setState({mediaStream});
-        return Promise.resolve();
+    if (Platform.OS === 'android') {
+      this.setState({ mediaStream });
+      return Promise.resolve();
     }
-    return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.attach, participant.participantId, mediaStream.streamId).then(() => {});
+    return this._sendCallReturn(
+      this._UiManager.RCTVoxeetVideoView.Commands.attach,
+      participant.participantId,
+      mediaStream.streamId
+    ).then(() => {});
   }
 
   unattach(): Promise<void> {
-    if(Platform.OS == "android") {
-        this.setState({mediaStream: undefined});
-        return Promise.resolve();
+    if (Platform.OS === 'android') {
+      this.setState({ mediaStream: undefined });
+      return Promise.resolve();
     }
 
-    return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.unattach).then(() => {});
+    return this._sendCallReturn(
+      this._UiManager.RCTVoxeetVideoView.Commands.unattach
+    ).then(() => {});
   }
 
   isAttached(): Promise<boolean> {
-    if(Platform.OS == "android") {
-        if(!this._videoView || !this._videoViewHandler) return Promise.resolve(false);
-        if(!this.state.mediaStream) return Promise.resolve(false);
+    if (Platform.OS === 'android') {
+      if (!this._videoView || !this._videoViewHandler)
+        return Promise.resolve(false);
+      if (!this.state.mediaStream) return Promise.resolve(false);
     }
 
-    return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isAttached)
-    .then(r => !!r.isAttached);
+    return this._sendCallReturn(
+      this._UiManager.RCTVoxeetVideoView.Commands.isAttached
+    ).then((r) => !!r.isAttached);
   }
 
   isScreenShare(): Promise<boolean> {
-    if(Platform.OS == "android") {
-        if(!this._videoView || !this._videoViewHandler) return Promise.resolve(false);
-        if(!this.state.mediaStream) return Promise.resolve(false);
+    if (Platform.OS === 'android') {
+      if (!this._videoView || !this._videoViewHandler)
+        return Promise.resolve(false);
+      if (!this.state.mediaStream) return Promise.resolve(false);
     }
 
-    return this._sendCallReturn(this._UiManager.RCTVoxeetVideoView.Commands.isScreenShare)
-    .then(r => !!r.isScreenShare);
+    return this._sendCallReturn(
+      this._UiManager.RCTVoxeetVideoView.Commands.isScreenShare
+    ).then((r) => !!r.isScreenShare);
   }
 
-  _sendCallReturn(command: any, param1?: any, param2?: any): Promise<VideoViewAsyncCallResult> {
+  _sendCallReturn(
+    command: any,
+    param1?: any,
+    param2?: any
+  ): Promise<VideoViewAsyncCallResult> {
     const requestId: number = VideoView._nextRequestId++;
     const requestMap: Map<number, Holder> = this._requestMap;
 
@@ -150,7 +180,7 @@ export default class VideoView extends Component<Props, State> {
     this._UiManager.dispatchViewManagerCommand(
       this._videoViewHandler,
       command,
-      [ requestId, param1, param2]
+      [requestId, param1, param2]
     );
 
     return promise;
@@ -158,29 +188,29 @@ export default class VideoView extends Component<Props, State> {
 
   _onCallReturn = (event: any) => {
     !!event.nativeEvent && this._onEvent(event.nativeEvent);
-  }
-  
+  };
+
   _onEvent = (event: VideoViewAsyncCallResult) => {
-    console.warn("event is", event);
-    if(!event) return;
+    console.warn('event is', event);
+    if (!event) return;
     const { requestId, error, message } = event;
     const promise = this._requestMap.get(requestId);
 
     this._requestMap.delete(requestId);
 
-    if(error && message && promise) {
+    if (error && message && promise) {
       try {
         throw `${error} ${message}`;
-      } catch(e: any) {
+      } catch (e: any) {
         promise.reject(e);
       }
-    } else if(promise) {
-        promise.resolve(event);
+    } else if (promise) {
+      promise.resolve(event);
     }
-  }
+  };
 
-  private setVideoView(v: React.Component|null|undefined) {
-    if(!!v) {
+  private setVideoView(v: React.Component | null | undefined) {
+    if (v) {
       this._videoView = v;
       this._videoViewHandler = findNodeHandle(this._videoView);
     } else {
@@ -191,24 +221,26 @@ export default class VideoView extends Component<Props, State> {
 
   render() {
     const props = this.filteredProps();
-    if(Platform.OS == "android") {
-      if(!this.state.mediaStream) {
-          return <View {...props} />
+    if (Platform.OS === 'android') {
+      if (!this.state.mediaStream) {
+        return <View {...props} />;
       } else {
-          return (
-            <RCTIAPIVideoView {...props}
-              attach={this.state.mediaStream}
-              ref={(v: React.Component|null) => this.setVideoView(v)}
-              {...{ onCallReturn: (event: any) => this._onCallReturn(event) }}/>
-          );
+        return (
+          <RCTIAPIVideoView
+            {...props}
+            attach={this.state.mediaStream}
+            ref={(v: React.Component | null) => this.setVideoView(v)}
+            {...{ onCallReturn: (event: any) => this._onCallReturn(event) }}
+          />
+        );
       }
     }
 
     return (
       <RCTIAPIVideoView
         {...props}
-        ref={(v: React.Component|null) => this.setVideoView(v)}
-        { ...{onCallReturn: (event: any) => this._onCallReturn(event)} }
+        ref={(v: React.Component | null) => this.setVideoView(v)}
+        {...{ onCallReturn: (event: any) => this._onCallReturn(event) }}
       />
     );
   }

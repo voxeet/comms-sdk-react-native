@@ -1,37 +1,43 @@
-import { DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
+import { IAPIEvents } from '..';
+import IAPIRawEvent from './IAPIRawEvent';
 const { RNDolbyioIAPISdk } = NativeModules;
 
 export interface RefreshCallback {
   (): void;
-};
+}
 
 export interface TokenRefreshCallback {
-  (): Promise<string>
-};
+  (): Promise<string>;
+}
 
-const events = new NativeEventEmitter(RNDolbyioIAPISdk);
+const events = new IAPIEvents();
 
 export default class IAPISDKImpl {
-  refreshAccessTokenCallback: RefreshCallback|null = null;
+  refreshAccessTokenCallback: RefreshCallback | null = null;
 
-  get events() { return events; }
-
-  initialize(consumerKey: string, consumerSecret: string): Promise<any> {
-      return RNDolbyioIAPISdk.initialize(consumerKey, consumerSecret);
+  get events() {
+    return events;
   }
 
-  initializeToken(accessToken: string|undefined, refreshToken: TokenRefreshCallback) {
-    if(!this.refreshAccessTokenCallback) {
+  initialize(consumerKey: string, consumerSecret: string): Promise<any> {
+    return RNDolbyioIAPISdk.initialize(consumerKey, consumerSecret);
+  }
+
+  initializeToken(
+    accessToken: string | undefined,
+    refreshToken: TokenRefreshCallback
+  ) {
+    if (!this.refreshAccessTokenCallback) {
       this.refreshAccessTokenCallback = () => {
         refreshToken()
-        .then(token => RNDolbyioIAPISdk.onAccessTokenOk(token))
-        .catch(err => {
-          console.error("Error while refreshing token", err);
-          RNDolbyioIAPISdk.onAccessTokenKo("Token retrieval error");
-        });
-      }
-      const eventEmitter = Platform.OS == "android" ? DeviceEventEmitter : new NativeEventEmitter(RNDolbyioIAPISdk);
-      eventEmitter.addListener("refreshToken", () => {
+          .then((token) => RNDolbyioIAPISdk.onAccessTokenOk(token))
+          .catch((err) => {
+            console.error('Error while refreshing token', err);
+            RNDolbyioIAPISdk.onAccessTokenKo('Token retrieval error');
+          });
+      };
+      IAPIRawEvent.addListener('refreshToken', () => {
         this.refreshAccessTokenCallback && this.refreshAccessTokenCallback();
       });
     }

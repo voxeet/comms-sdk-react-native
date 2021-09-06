@@ -10,5 +10,5 @@ export enum ConferencePermission {
   SHARE_FILE,
   SEND_MESSAGE,
   RECORD,
-  STREAM
+  STREAM,
 }

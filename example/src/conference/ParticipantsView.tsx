@@ -27,6 +27,7 @@ export default class ParticipantsView extends Component<Props, State> {
   }
 
   private update = async (event: any) => {
+    console.log('receiving update', event);
     const participants = await VoxeetEnvironment.participants();
     this.setState({participants: participants.map(p => p.participantId)});
   }

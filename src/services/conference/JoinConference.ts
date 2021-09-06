@@ -1,13 +1,13 @@
 export enum UserType {
-  USER = "user",
-  LISTENER = "listener"
+  USER = 'user',
+  LISTENER = 'listener',
 }
 
 export interface JoinUserInfo {
-  type?:  UserType;
+  type?: UserType;
 }
 
 export interface JoinOptions {
   user?: JoinUserInfo;
-  maxVideoForwarding?: number
+  maxVideoForwarding?: number;
 }

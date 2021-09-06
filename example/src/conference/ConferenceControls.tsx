@@ -59,15 +59,15 @@ export default class ConferenceControls extends Component<Props, State> {
   private checkAndAlert = async (status: "unavailable"|"blocked"|"denied"|"granted"|"limited"): Promise<boolean> => {
     switch(status) {
       case RESULTS.UNAVAILABLE: {
-        alert("Unable to start the camera on your platform !");
+        console.warn('Unable to start the camera on your platform !');
         return false;
       }
       case RESULTS.BLOCKED: {
-        alert("The permission is blocked !");
+        console.warn('The permission is blocked !');
         return false;
       }
       case RESULTS.DENIED: {
-        alert("The permission has been refused !");
+        console.warn('The permission has been refused !');
         return false;
       }
       case RESULTS.GRANTED:
@@ -75,7 +75,7 @@ export default class ConferenceControls extends Component<Props, State> {
         return true;
       }
       default: {
-        alert("Unknown permission result but can't start camera !");
+        console.warn('Unknown permission result but can\'t start camera !');
         return false;
       }
     }

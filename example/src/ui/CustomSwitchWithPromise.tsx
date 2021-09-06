@@ -17,7 +17,6 @@ interface State {
 export default class CustomSwitchWithPromise extends Component<Props, State> {
 
   private deactivated: boolean = false;
-  private last?: boolean = undefined;
 
   constructor(props: Props) {
     super(props);

@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native';
-import type { Participant, ParticipantInfo } from "./conference";
+import type { Participant, ParticipantInfo } from './conference';
 
 const { RNSessionServiceModule } = NativeModules;
 

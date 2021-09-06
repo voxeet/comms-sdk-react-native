@@ -4,16 +4,19 @@ export enum PresentationState {
   PAUSED,
   SEEK,
   STOP,
-  CONVERTED
+  CONVERTED,
 }
 
-
-export function presentationStateToString(state: PresentationState|string): string {
-  if(typeof state === "string") return state;
+export function presentationStateToString(
+  state: PresentationState | string
+): string {
+  if (typeof state === 'string') return state;
   return PresentationState[state];
 }
 
-export function stringToPresentationState(state: PresentationState|string): PresentationState {
-  if(typeof state === "string") return PresentationState[state as "STARTED"];
+export function stringToPresentationState(
+  state: PresentationState | string
+): PresentationState {
+  if (typeof state === 'string') return PresentationState[state as 'STARTED'];
   return state;
 }

@@ -1,10 +1,10 @@
 export enum Quality {
   SD,
   MD,
-  HD
+  HD,
 }
 
 export interface ParticipantQuality {
-  participantId: string,
-  quality: Quality
+  participantId: string;
+  quality: Quality;
 }

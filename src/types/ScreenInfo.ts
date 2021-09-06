@@ -1,4 +1,4 @@
 export default interface ScreenInfo {
   width: number;
-  height: number
+  height: number;
 }

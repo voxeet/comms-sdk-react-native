@@ -1,17 +1,17 @@
 export enum RTCPMode {
-  WORST = "worst",
-  AVERAGE = "average",
-  BEST = "best"
+  WORST = 'worst',
+  AVERAGE = 'average',
+  BEST = 'best',
 }
-  
+
 export enum Mode {
-  STANDARD = "standard",
-  PUSH = "push"
+  STANDARD = 'standard',
+  PUSH = 'push',
 }
-  
+
 export enum Codec {
-  VP8 = "VP8",
-  H264 = "H264"
+  VP8 = 'VP8',
+  H264 = 'H264',
 }
 
 export interface CreateParameters {

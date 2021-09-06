@@ -70,6 +70,7 @@ export default class ParticipantView extends Component<Props, State> {
   }
 
   private update = async (event: any) => {
+    console.log('receiving update', event);
     await VoxeetEnvironment.participants();
     this.participant = VoxeetEnvironment.participant(this.props.participant);
     this.forceUpdate();

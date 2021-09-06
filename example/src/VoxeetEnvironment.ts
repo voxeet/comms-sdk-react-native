@@ -2,6 +2,7 @@ import { ConferenceStatusUpdatedEvent, IAPIEvents, IAPISDK, Participant, Confere
 import { EventEmitter2 } from "eventemitter2";
 import type { ParticipantAddedEvent, ParticipantUpdatedEvent, StreamAddedEvent, StreamRemovedEvent, StreamUpdatedEvent } from "@dolbyio/react-native-iapi-sdk";
 import { inConference } from "./Utils";
+// @ts-ignore
 import { DOLBYIO_TOKEN_URL } from 'react-native-dotenv';
 
 export interface OnInitialization {
@@ -84,7 +85,6 @@ class VoxeetEnvironment {
 
   public participant = (p: string) => this._cache[p];
 
-  private i = 0;
   public participants = async () => {
     try {
       const current = this.currentJoinedConference();
