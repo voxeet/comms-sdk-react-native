@@ -90,7 +90,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typescript && touch .hook_commit",
-      "post-commit": "( [ -e .hook_commit ] && rm .hook_commit && yarn generate && git commit --amend -C HEAD --no-verify) || echo \"skipped\" "
+      "post-commit": " ( [ -e .hook_commit ] && rm .hook_commit && yarn generate && git commit --amend -C HEAD --no-verify) "
     }
   },
   "commitlint": {
