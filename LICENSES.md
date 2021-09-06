@@ -7,6 +7,13 @@ Distributed under MIT
 
 
 
+## typedoc-plugin-markdown
+
+Version 3.10.4. Find this library [here](https://github.com/tgreyuk/typedoc-plugin-markdown)
+Distributed under MIT
+
+
+
 ## @commitlint/config-conventional
 
 Version 11.0.0. Find this library [here](https://github.com/conventional-changelog/commitlint)
@@ -105,6 +112,13 @@ Distributed under MIT
 
 
 
+## license-report
+
+Version 4.5.0. Find this library [here](https://github.com/ironSource/license-report)
+Distributed under MIT
+
+
+
 ## pod-install
 
 Version 0.1.0. Find this library [here](https://github.com/expo/expo-cli)
@@ -144,6 +158,13 @@ Distributed under MIT
 
 Version 14.2.2. Find this library [here](https://github.com/release-it/release-it)
 Distributed under MIT
+
+
+
+## typedoc
+
+Version 0.21.9. Find this library [here](https://github.com/TypeStrong/TypeDoc)
+Distributed under Apache-2.0
 
 
 
