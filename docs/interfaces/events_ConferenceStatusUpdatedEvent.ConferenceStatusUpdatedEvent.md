@@ -31,4 +31,4 @@ ___
 
 ### status
 
-• **status**: [`ConferenceStatus`](../enums/services_conference_ConferenceStatus.ConferenceStatus.md)
+• **status**: [`ConferenceStatus`](../enums/services_conference_models_ConferenceStatus.ConferenceStatus.md)

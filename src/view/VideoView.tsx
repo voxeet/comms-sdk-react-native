@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 
 import type { Participant, MediaStream } from '../services/conference';
-import type { UnregisterCallback } from '../types';
 import IAPIRawEvent from 'src/sdk/IAPIRawEvent';
+import type { UnregisterCallback } from 'src/sdk/models';
 
 const RCTIAPIVideoView: any = requireNativeComponent('RCTIAPIVideoView');
 

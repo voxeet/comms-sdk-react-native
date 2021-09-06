@@ -14,4 +14,4 @@
 
 ### mediaStream
 
-• `Optional` **mediaStream**: [`default`](services_conference_MediaStream.default.md)
+• `Optional` **mediaStream**: [`default`](services_conference_models_MediaStream.default.md)
