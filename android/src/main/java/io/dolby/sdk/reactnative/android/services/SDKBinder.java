@@ -1,7 +1,8 @@
 package io.dolby.sdk.reactnative.android.services;
 
 import android.os.Binder;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * This will be set inside the SDK in the future

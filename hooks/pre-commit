@@ -1,6 +1,0 @@
-#!/bin/sh 
-
-# prepare file to prevent commit edit loop
-touch .hook_commit
-
-exit
