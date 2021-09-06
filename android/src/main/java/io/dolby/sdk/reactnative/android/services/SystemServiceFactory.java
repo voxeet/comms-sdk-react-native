@@ -1,6 +1,6 @@
 package io.dolby.sdk.reactnative.android.services;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import io.dolby.sdk.reactnative.android.activities.DolbyioIAPISDKAppCompatActivity;
 

@@ -9,11 +9,11 @@ Before using the latest version of the react-native plugin, please review and ac
 
 ## Getting started
 
-`$ npm install @dolbyio/react-native-iapi-sdk --save`
+`$ yarn add @dolbyio/react-native-iapi-sdk --save`
 
 or 
 
-`$ npm install https://github.com/codlab/react-native-voxeet-sdk --save`
+`$ yarn add https://github.com/codlab/react-native-voxeet-sdk --save`
 
 ### Mostly automatic installation
 
@@ -121,7 +121,17 @@ _TODO_
 To build locally 
 
 ```bash
-npm run build-library
+yarn bootstrap
+```
+
+To run the sample app : (don't forget to set example/.env with the expected token retrieval url)
+
+```
+yarn example android
+
+# or
+
+yarn example ios
 ```
 
 the typescript command line needs local dev resolutions (available in the `package.json`)

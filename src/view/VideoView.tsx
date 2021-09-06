@@ -8,6 +8,8 @@ import {
   UIManager,
   Platform,
   View,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
 import type { Participant, MediaStream } from '../services/conference';
@@ -26,6 +28,7 @@ export interface State {
 }
 
 export interface Props {
+  style?: StyleProp<ViewStyle> | undefined;
   isMirror?: boolean;
   scaleType: 'fit' | 'fill'; //[ 'fit', 'fill' ]
 }

@@ -8,3 +8,9 @@ export { default as RecordingService } from './RecordingService';
 export { default as ScreenShareService } from './ScreenShareService';
 export { default as SessionService } from './SessionService';
 export { default as VideoPresentationService } from './VideoPresentationService';
+
+export * from './audio';
+export * from './conference';
+export * from './mediaDevice';
+export * from './notification';
+export * from './presentation';
