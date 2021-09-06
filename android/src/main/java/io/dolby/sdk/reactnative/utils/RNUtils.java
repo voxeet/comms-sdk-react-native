@@ -36,7 +36,7 @@ public class RNUtils {
         return null;
     }
 
-    public static ReadableArray getArray(@Nullable ReadableMap map, String key) {
+    public static ReadableArray getArray(@Nullable ReadableMap map, @NonNull String key) {
         try {
             return null != map && map.hasKey(key) ? map.getArray(key) : null;
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class RNUtils {
     }
 
     @Nullable
-    public static ReadableMap getMap(ReadableArray array, int index) {
+    public static ReadableMap getMap(@Nullable ReadableArray array, int index) {
         try {
             return array.getMap(index);
         } catch (Throwable e) {
@@ -65,7 +65,11 @@ public class RNUtils {
         }
     }
 
-    public static boolean hasKey(@Nullable ReadableMap map, String key) {
+    public static boolean hasKey(@Nullable ReadableMap map, @NonNull String key) {
         return null != map && map.hasKey(key);
     }
+
+  public static boolean isNull(@Nullable ReadableMap map, @NonNull String key) {
+    return hasKey(map, key) && map.isNull(key);
+  }
 }

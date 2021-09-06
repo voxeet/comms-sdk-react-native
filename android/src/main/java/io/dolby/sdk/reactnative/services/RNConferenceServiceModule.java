@@ -199,8 +199,8 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
             ConferenceJoinOptions.Builder joinOptions = new ConferenceJoinOptions.Builder(conference)
                     .setConferenceParticipantType(type);
 
-            if (null != options && !options.isNull("maxVideoForwarding")) {
-                joinOptions.setMaxVideoForwarding(options.getInt("maxVideoForwarding"));
+            if (RNUtils.hasKey(options, "maxVideoForwarding")) {
+                joinOptions.setMaxVideoForwarding(RNUtils.getInteger(options,"maxVideoForwarding"));
             }
 
             conferenceService.join(joinOptions.build()).then(conference1 -> {

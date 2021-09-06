@@ -2,9 +2,7 @@ import { ConferenceStatusUpdatedEvent, IAPIEvents, IAPISDK, Participant, Confere
 import { EventEmitter2 } from "eventemitter2";
 import type { ParticipantAddedEvent, ParticipantUpdatedEvent, StreamAddedEvent, StreamRemovedEvent, StreamUpdatedEvent } from "@dolbyio/react-native-iapi-sdk";
 import { inConference } from "./Utils";
-
-export const VOXEET_APPID = "";
-export const VOXEET_APPSECRET = "";
+import { DOLBYIO_TOKEN_URL } from 'react-native-dotenv';
 
 export interface OnInitialization {
   sdk: typeof IAPISDK
@@ -21,6 +19,7 @@ interface EventMap {
   ["StreamUpdatedEvent"]: StreamUpdatedEvent;
 }
 
+export const DEFAULT_URL = DOLBYIO_TOKEN_URL;
 
 class VoxeetEnvironment {
   private emitter: EventEmitter2 = new EventEmitter2();
