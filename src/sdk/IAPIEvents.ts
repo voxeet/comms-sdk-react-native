@@ -29,7 +29,7 @@ import type {
   ConferenceParticipantQualityUpdatedEvent,
   StreamUpdatedEvent,
 } from '../events/ConferenceUsersEvent';
-import type { UnregisterCallback } from '../types';
+import type { UnregisterCallback } from 'src/sdk/models';
 import {
   ConferenceStatus,
   PermissionRefusedType,

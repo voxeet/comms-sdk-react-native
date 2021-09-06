@@ -4,14 +4,6 @@
 
 [services/AbstractService](../modules/services_AbstractService.md).default
 
-## Hierarchy
-
-- **`default`**
-
-  ↳ [`default`](services_AudioService.default.md)
-
-  ↳ [`default`](services_NotificationService.default.md)
-
 ## Table of contents
 
 ### Constructors

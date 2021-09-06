@@ -1,5 +1,3 @@
-export { PresentationState } from './PresentationState';
-
-export { default as VideoPresentation } from './VideoPresentation';
-
-export { default as FilePresentation } from './FilePresentation';
+export { default as FilePresentationService } from './FilePresentationService';
+export { default as VideoPresentationService } from './VideoPresentationService';
+export * from './models';

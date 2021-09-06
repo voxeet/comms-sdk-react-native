@@ -18,16 +18,16 @@ const implementation = new IAPISDKImpl();
 
 const IAPISdk = {
   //services
-  audio: new AudioService(),
-  command: new CommandService(),
-  conference: new ConferenceService(),
-  filePresentation: new FilePresentationService(),
-  mediaDevice: new MediaDeviceService(),
-  notification: new NotificationService(),
-  recording: new RecordingService(),
-  screenShare: new ScreenShareService(),
-  session: new SessionService(),
-  videoPresentation: new VideoPresentationService(),
+  audio: AudioService,
+  command: CommandService,
+  conference: ConferenceService,
+  filePresentation: FilePresentationService,
+  mediaDevice: MediaDeviceService,
+  notification: NotificationService,
+  recording: RecordingService,
+  screenShare: ScreenShareService,
+  session: SessionService,
+  videoPresentation: VideoPresentationService,
 
   // specific implementation
   events: implementation.events,

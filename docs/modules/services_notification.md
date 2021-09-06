@@ -10,6 +10,7 @@
 - [ConferenceEndedNotification](services_notification.md#conferenceendednotification)
 - [ConferencePermission](services_notification.md#conferencepermission)
 - [InvitationReceivedNotification](services_notification.md#invitationreceivednotification)
+- [NotificationService](services_notification.md#notificationservice)
 - [ParticipantInvited](services_notification.md#participantinvited)
 - [ParticipantJoinedNotification](services_notification.md#participantjoinednotification)
 - [ParticipantLeftNotification](services_notification.md#participantleftnotification)
@@ -20,52 +21,58 @@
 
 ### ConferenceCreatedNotification
 
-Re-exports: [ConferenceCreatedNotification](../interfaces/services_notification_Subscriptions.ConferenceCreatedNotification.md)
+Re-exports: [ConferenceCreatedNotification](../interfaces/services_notification_models_Subscriptions.ConferenceCreatedNotification.md)
 
 ___
 
 ### ConferenceEndedNotification
 
-Re-exports: [ConferenceEndedNotification](../interfaces/services_notification_Subscriptions.ConferenceEndedNotification.md)
+Re-exports: [ConferenceEndedNotification](../interfaces/services_notification_models_Subscriptions.ConferenceEndedNotification.md)
 
 ___
 
 ### ConferencePermission
 
-Re-exports: [ConferencePermission](../enums/services_notification_ConferencePermission.ConferencePermission.md)
+Re-exports: [ConferencePermission](../enums/services_notification_models_ConferencePermission.ConferencePermission.md)
 
 ___
 
 ### InvitationReceivedNotification
 
-Re-exports: [InvitationReceivedNotification](../interfaces/services_notification_Subscriptions.InvitationReceivedNotification.md)
+Re-exports: [InvitationReceivedNotification](../interfaces/services_notification_models_Subscriptions.InvitationReceivedNotification.md)
+
+___
+
+### NotificationService
+
+Renames and exports: [default](services_notification_NotificationService.md#default)
 
 ___
 
 ### ParticipantInvited
 
-Renames and exports: [default](../interfaces/services_notification_ParticipantInvited.default.md)
+Renames and exports: [default](../interfaces/services_notification_models_ParticipantInvited.default.md)
 
 ___
 
 ### ParticipantJoinedNotification
 
-Re-exports: [ParticipantJoinedNotification](../interfaces/services_notification_Subscriptions.ParticipantJoinedNotification.md)
+Re-exports: [ParticipantJoinedNotification](../interfaces/services_notification_models_Subscriptions.ParticipantJoinedNotification.md)
 
 ___
 
 ### ParticipantLeftNotification
 
-Re-exports: [ParticipantLeftNotification](../interfaces/services_notification_Subscriptions.ParticipantLeftNotification.md)
+Re-exports: [ParticipantLeftNotification](../interfaces/services_notification_models_Subscriptions.ParticipantLeftNotification.md)
 
 ___
 
 ### Subscription
 
-Re-exports: [Subscription](../interfaces/services_notification_Subscriptions.Subscription.md)
+Re-exports: [Subscription](../interfaces/services_notification_models_Subscriptions.Subscription.md)
 
 ___
 
 ### SubscriptionMapping
 
-Re-exports: [SubscriptionMapping](../interfaces/services_notification_Subscriptions.SubscriptionMapping.md)
+Re-exports: [SubscriptionMapping](../interfaces/services_notification_models_Subscriptions.SubscriptionMapping.md)

@@ -1,1 +1,2 @@
-export { ComfortNoiseLevel } from './ComfortNoiseLevel';
+export { default as MediaDeviceService } from './MediaDeviceService';
+export * from './models';
