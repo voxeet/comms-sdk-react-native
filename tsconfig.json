@@ -1,28 +1,27 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es2015",
-    "module": "es2015",
-    "outDir": "dist",
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "jsx": "react-native",
-    "lib": ["dom", "es2015", "es2016"],
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@dolbyio/react-native-iapi-sdk": ["./src/index"]
+    },
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "esModuleInterop": true,
+    "importsNotUsedAsValues": "error",
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "lib": ["esnext"],
+    "module": "esnext",
     "moduleResolution": "node",
-    "noEmitHelpers": false,
-    "importHelpers": false,
-    "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
-  },
-  "files": [
-    "lib/index.ts"
-  ],
-  "exclude": [
-    "build",
-    "dist",
-    "node_modules"
-  ]
+    "noImplicitUseStrict": false,
+    "noStrictGenericChecks": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
+  }
 }
