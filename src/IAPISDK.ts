@@ -1,42 +1,52 @@
-import {
-  AudioService,
-  CommandService,
-  ConferenceService,
-  FilePresentationService,
-  MediaDeviceService,
-  NotificationService,
-  RecordingService,
-  ScreenShareService,
-  SessionService,
-  VideoPresentationService,
-} from './services';
+import { NativeModules } from 'react-native';
+const { DolbyioIAPISdk } = NativeModules;
+import type {
+  RefreshAccessTokenType,
+  RefreshAccessTokenInBackgroundType,
+} from './types';
+import NativeEvents from './utils/NativeEvents';
 
-import IAPISDKImpl, { TokenRefreshCallback } from './sdk/Implementation';
-export { RefreshCallback, TokenRefreshCallback } from './sdk/Implementation';
+class DolbyIoSDK {
+  refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
+    null;
 
-const implementation = new IAPISDKImpl();
+  public async initialize(
+    consumerKey: string,
+    consumerSecret: string
+  ): Promise<boolean> {
+    return DolbyioIAPISdk.initialize(consumerKey, consumerSecret);
+  }
 
-const IAPISdk = {
-  //services
-  audio: AudioService,
-  command: CommandService,
-  conference: ConferenceService,
-  filePresentation: FilePresentationService,
-  mediaDevice: MediaDeviceService,
-  notification: NotificationService,
-  recording: RecordingService,
-  screenShare: ScreenShareService,
-  session: SessionService,
-  videoPresentation: VideoPresentationService,
+  public async initializeToken(
+    accessToken: string | null,
+    refreshAccessToken: RefreshAccessTokenType
+  ): Promise<boolean> {
+    if (!this.refreshAccessTokenInBackground) {
+      this.refreshAccessTokenInBackground = async () => {
+        try {
+          const token = await refreshAccessToken();
+          if (token) {
+            DolbyioIAPISdk.onAccessTokenOk(token);
+          }
+        } catch (e) {
+          console.error('Error while refreshing token', e);
+          DolbyioIAPISdk.onAccessTokenKo('Token retrieval error');
+          throw new Error('Token retrieval error');
+        }
+      };
+      NativeEvents.addListener('refreshToken', () => {
+        this.refreshAccessTokenInBackground &&
+          this.refreshAccessTokenInBackground();
+      });
+    }
+    return DolbyioIAPISdk.initializeToken(accessToken);
+  }
+}
 
-  // specific implementation
-  events: implementation.events,
-  initialize: (consumerKey: string, consumerSecret: string): Promise<any> =>
-    implementation.initialize(consumerKey, consumerSecret),
-  initializeToken: (
-    accessToken: string | undefined,
-    refreshToken: TokenRefreshCallback
-  ) => implementation.initializeToken(accessToken, refreshToken),
-};
+export default new DolbyIoSDK();
 
-export default Object.freeze(IAPISdk);
+// TO BE EXPORTED
+// DolbyioIAPISdk.initialize
+// DolbyioIAPISdk.initializeToken
+// DolbyioIAPISdk.onAccessTokenOk
+// DolbyioIAPISdk.onAccessTokenKo
