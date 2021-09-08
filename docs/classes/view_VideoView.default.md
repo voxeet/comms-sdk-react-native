@@ -138,7 +138,7 @@ ___
 
 ### onEventUnregister
 
-• `Private` `Optional` **onEventUnregister**: [`UnregisterCallback`](../interfaces/types_UnregisterCallback.UnregisterCallback.md)
+• `Private` `Optional` **onEventUnregister**: [`UnregisterCallback`](../interfaces/sdk_models_UnregisterCallback.UnregisterCallback.md)
 
 ___
 
@@ -391,8 +391,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `participant` | [`default`](services_conference_Participant.default.md) |
-| `mediaStream` | [`default`](../interfaces/services_conference_MediaStream.default.md) |
+| `participant` | [`default`](services_conference_models_Participant.default.md) |
+| `mediaStream` | [`default`](../interfaces/services_conference_models_MediaStream.default.md) |
 
 #### Returns
 

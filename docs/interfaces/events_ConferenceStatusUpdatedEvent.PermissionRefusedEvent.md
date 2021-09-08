@@ -14,4 +14,4 @@
 
 ### permission
 
-• **permission**: [`PermissionRefusedType`](../enums/services_conference_PermissionRefusedType.PermissionRefusedType.md)
+• **permission**: [`PermissionRefusedType`](../enums/services_conference_models_PermissionRefusedType.PermissionRefusedType.md)

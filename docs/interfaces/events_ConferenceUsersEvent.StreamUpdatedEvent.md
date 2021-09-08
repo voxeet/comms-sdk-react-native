@@ -15,10 +15,10 @@
 
 ### mediaStream
 
-• **mediaStream**: [`default`](services_conference_MediaStream.default.md)
+• **mediaStream**: [`default`](services_conference_models_MediaStream.default.md)
 
 ___
 
 ### participant
 
-• **participant**: [`default`](../classes/services_conference_Participant.default.md)
+• **participant**: [`default`](../classes/services_conference_models_Participant.default.md)

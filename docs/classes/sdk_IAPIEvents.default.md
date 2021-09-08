@@ -24,7 +24,7 @@
 
 ### addListener
 
-▸ **addListener**<`K`\>(`type`, `listener`): [`UnregisterCallback`](../interfaces/types_UnregisterCallback.UnregisterCallback.md)
+▸ **addListener**<`K`\>(`type`, `listener`): [`UnregisterCallback`](../interfaces/sdk_models_UnregisterCallback.UnregisterCallback.md)
 
 #### Type parameters
 
@@ -41,4 +41,4 @@
 
 #### Returns
 
-[`UnregisterCallback`](../interfaces/types_UnregisterCallback.UnregisterCallback.md)
+[`UnregisterCallback`](../interfaces/sdk_models_UnregisterCallback.UnregisterCallback.md)

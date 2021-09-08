@@ -74,7 +74,6 @@
 - [StreamUpdatedEvent](index.md#streamupdatedevent)
 - [Subscription](index.md#subscription)
 - [SubscriptionMapping](index.md#subscriptionmapping)
-- [UnregisterCallback](index.md#unregistercallback)
 - [UserType](index.md#usertype)
 - [VideoPresentation](index.md#videopresentation)
 - [VideoPresentationPaused](index.md#videopresentationpaused)
@@ -95,13 +94,13 @@
 
 ### AudioProcessing
 
-Re-exports: [AudioProcessing](../enums/services_conference_AudioProcessing.AudioProcessing.md)
+Re-exports: [AudioProcessing](../enums/services_conference_models_AudioProcessing.AudioProcessing.md)
 
 ___
 
 ### AudioService
 
-Renames and exports: [default](../classes/services_AudioService.default.md)
+Renames and exports: [default](services_audio_AudioService.md#default)
 
 ___
 
@@ -119,31 +118,31 @@ ___
 
 ### Codec
 
-Re-exports: [Codec](../enums/services_conference_CreateConference.Codec.md)
+Re-exports: [Codec](../enums/services_conference_models_CreateConference.Codec.md)
 
 ___
 
 ### ComfortNoiseLevel
 
-Re-exports: [ComfortNoiseLevel](../enums/services_mediaDevice_ComfortNoiseLevel.ComfortNoiseLevel.md)
+Re-exports: [ComfortNoiseLevel](../enums/services_mediaDevice_models_ComfortNoiseLevel.ComfortNoiseLevel.md)
 
 ___
 
 ### CommandService
 
-Renames and exports: [default](../classes/services_CommandService.default.md)
+Renames and exports: [default](services_command_CommandService.md#default)
 
 ___
 
 ### Conference
 
-Re-exports: [Conference](../interfaces/services_conference_Conference.Conference.md)
+Re-exports: [Conference](../interfaces/services_conference_models_Conference.Conference.md)
 
 ___
 
 ### ConferenceCreatedNotification
 
-Re-exports: [ConferenceCreatedNotification](../interfaces/services_notification_Subscriptions.ConferenceCreatedNotification.md)
+Re-exports: [ConferenceCreatedNotification](../interfaces/services_notification_models_Subscriptions.ConferenceCreatedNotification.md)
 
 ___
 
@@ -161,13 +160,13 @@ ___
 
 ### ConferenceEndedNotification
 
-Re-exports: [ConferenceEndedNotification](../interfaces/services_notification_Subscriptions.ConferenceEndedNotification.md)
+Re-exports: [ConferenceEndedNotification](../interfaces/services_notification_models_Subscriptions.ConferenceEndedNotification.md)
 
 ___
 
 ### ConferenceParticipant
 
-Renames and exports: [default](../classes/services_conference_ConferenceParticipant.default.md)
+Renames and exports: [default](../classes/services_conference_models_ConferenceParticipant.default.md)
 
 ___
 
@@ -179,31 +178,31 @@ ___
 
 ### ConferenceParticipantStatus
 
-Re-exports: [ConferenceParticipantStatus](../enums/services_conference_ConferenceParticipantStatus.ConferenceParticipantStatus.md)
+Re-exports: [ConferenceParticipantStatus](../enums/services_conference_models_ConferenceParticipantStatus.ConferenceParticipantStatus.md)
 
 ___
 
 ### ConferencePermission
 
-Re-exports: [ConferencePermission](../enums/services_notification_ConferencePermission.ConferencePermission.md)
+Re-exports: [ConferencePermission](../enums/services_notification_models_ConferencePermission.ConferencePermission.md)
 
 ___
 
 ### ConferenceService
 
-Renames and exports: [default](../classes/services_ConferenceService.default.md)
+Renames and exports: [default](services_conference_ConferenceService.md#default)
 
 ___
 
 ### ConferenceStatus
 
-Re-exports: [ConferenceStatus](../enums/services_conference_ConferenceStatus.ConferenceStatus.md)
+Re-exports: [ConferenceStatus](../enums/services_conference_models_ConferenceStatus.ConferenceStatus.md)
 
 ___
 
 ### ConferenceStatusResult
 
-Re-exports: [ConferenceStatusResult](../interfaces/services_conference_ConferenceStatusResult.ConferenceStatusResult.md)
+Re-exports: [ConferenceStatusResult](../interfaces/services_conference_models_ConferenceStatusResult.ConferenceStatusResult.md)
 
 ___
 
@@ -215,37 +214,37 @@ ___
 
 ### ConferenceType
 
-Re-exports: [ConferenceType](../enums/services_conference_ConferenceType.ConferenceType.md)
+Re-exports: [ConferenceType](../enums/services_conference_models_ConferenceType.ConferenceType.md)
 
 ___
 
 ### ConnectionState
 
-Re-exports: [ConnectionState](../enums/services_audio_ConnectionState.ConnectionState.md)
+Re-exports: [ConnectionState](../enums/services_audio_models_ConnectionState.ConnectionState.md)
 
 ___
 
 ### CreateOptions
 
-Re-exports: [CreateOptions](../interfaces/services_conference_CreateConference.CreateOptions.md)
+Re-exports: [CreateOptions](../interfaces/services_conference_models_CreateConference.CreateOptions.md)
 
 ___
 
 ### CreateParameters
 
-Re-exports: [CreateParameters](../interfaces/services_conference_CreateConference.CreateParameters.md)
+Re-exports: [CreateParameters](../interfaces/services_conference_models_CreateConference.CreateParameters.md)
 
 ___
 
 ### DeviceType
 
-Re-exports: [DeviceType](../enums/services_audio_DeviceType.DeviceType.md)
+Re-exports: [DeviceType](../enums/services_audio_models_DeviceType.DeviceType.md)
 
 ___
 
 ### FilePresentation
 
-Renames and exports: [default](../interfaces/services_presentation_FilePresentation.default.md)
+Renames and exports: [default](../interfaces/services_presentation_models_FilePresentation.default.md)
 
 ___
 
@@ -257,7 +256,7 @@ ___
 
 ### FilePresentationService
 
-Renames and exports: [default](../classes/services_FilePresentationService.default.md)
+Renames and exports: [default](services_presentation_FilePresentationService.md#default)
 
 ___
 
@@ -293,61 +292,61 @@ ___
 
 ### InvitationReceivedNotification
 
-Re-exports: [InvitationReceivedNotification](../interfaces/services_notification_Subscriptions.InvitationReceivedNotification.md)
+Re-exports: [InvitationReceivedNotification](../interfaces/services_notification_models_Subscriptions.InvitationReceivedNotification.md)
 
 ___
 
 ### JoinOptions
 
-Re-exports: [JoinOptions](../interfaces/services_conference_JoinConference.JoinOptions.md)
+Re-exports: [JoinOptions](../interfaces/services_conference_models_JoinConference.JoinOptions.md)
 
 ___
 
 ### JoinUserInfo
 
-Re-exports: [JoinUserInfo](../interfaces/services_conference_JoinConference.JoinUserInfo.md)
+Re-exports: [JoinUserInfo](../interfaces/services_conference_models_JoinConference.JoinUserInfo.md)
 
 ___
 
 ### MediaDevice
 
-Renames and exports: [default](../interfaces/services_audio_MediaDevice.default.md)
+Renames and exports: [default](../interfaces/services_audio_models_MediaDevice.default.md)
 
 ___
 
 ### MediaDeviceService
 
-Renames and exports: [default](../classes/services_MediaDeviceService.default.md)
+Renames and exports: [default](services_mediaDevice_MediaDeviceService.md#default)
 
 ___
 
 ### MediaStream
 
-Renames and exports: [default](../interfaces/services_conference_MediaStream.default.md)
+Renames and exports: [default](../interfaces/services_conference_models_MediaStream.default.md)
 
 ___
 
 ### MediaStreamType
 
-Re-exports: [MediaStreamType](services_conference_MediaStream.md#mediastreamtype)
+Re-exports: [MediaStreamType](services_conference_models_MediaStream.md#mediastreamtype)
 
 ___
 
 ### Mode
 
-Re-exports: [Mode](../enums/services_conference_CreateConference.Mode.md)
+Re-exports: [Mode](../enums/services_conference_models_CreateConference.Mode.md)
 
 ___
 
 ### NotificationService
 
-Renames and exports: [default](../classes/services_NotificationService.default.md)
+Renames and exports: [default](services_notification_NotificationService.md#default)
 
 ___
 
 ### Participant
 
-Renames and exports: [default](../classes/services_conference_Participant.default.md)
+Renames and exports: [default](../classes/services_conference_models_Participant.default.md)
 
 ___
 
@@ -359,37 +358,37 @@ ___
 
 ### ParticipantInfo
 
-Re-exports: [ParticipantInfo](../interfaces/services_conference_ConferenceParticipant.ParticipantInfo.md)
+Re-exports: [ParticipantInfo](../interfaces/services_conference_models_ConferenceParticipant.ParticipantInfo.md)
 
 ___
 
 ### ParticipantInvited
 
-Renames and exports: [default](../interfaces/services_notification_ParticipantInvited.default.md)
+Renames and exports: [default](../interfaces/services_notification_models_ParticipantInvited.default.md)
 
 ___
 
 ### ParticipantJoinedNotification
 
-Re-exports: [ParticipantJoinedNotification](../interfaces/services_notification_Subscriptions.ParticipantJoinedNotification.md)
+Re-exports: [ParticipantJoinedNotification](../interfaces/services_notification_models_Subscriptions.ParticipantJoinedNotification.md)
 
 ___
 
 ### ParticipantLeftNotification
 
-Re-exports: [ParticipantLeftNotification](../interfaces/services_notification_Subscriptions.ParticipantLeftNotification.md)
+Re-exports: [ParticipantLeftNotification](../interfaces/services_notification_models_Subscriptions.ParticipantLeftNotification.md)
 
 ___
 
 ### ParticipantPermission
 
-Re-exports: [ParticipantPermission](../interfaces/services_conference_ParticipantPermission.ParticipantPermission.md)
+Re-exports: [ParticipantPermission](../interfaces/services_conference_models_ParticipantPermission.ParticipantPermission.md)
 
 ___
 
 ### ParticipantQuality
 
-Re-exports: [ParticipantQuality](../interfaces/services_conference_ParticipantQuality.ParticipantQuality.md)
+Re-exports: [ParticipantQuality](../interfaces/services_conference_models_ParticipantQuality.ParticipantQuality.md)
 
 ___
 
@@ -407,25 +406,25 @@ ___
 
 ### PermissionRefusedType
 
-Re-exports: [PermissionRefusedType](../enums/services_conference_PermissionRefusedType.PermissionRefusedType.md)
+Re-exports: [PermissionRefusedType](../enums/services_conference_models_PermissionRefusedType.PermissionRefusedType.md)
 
 ___
 
 ### Point
 
-Renames and exports: [default](../interfaces/types_Point.default.md)
+Re-exports: [Point](../interfaces/services_screenshare_models_Point.Point.md)
 
 ___
 
 ### PresentationState
 
-Re-exports: [PresentationState](../enums/services_presentation_PresentationState.PresentationState.md)
+Re-exports: [PresentationState](../enums/services_presentation_models_PresentationState.PresentationState.md)
 
 ___
 
 ### Quality
 
-Re-exports: [Quality](../enums/services_conference_ParticipantQuality.Quality.md)
+Re-exports: [Quality](../enums/services_conference_models_ParticipantQuality.Quality.md)
 
 ___
 
@@ -437,13 +436,13 @@ ___
 
 ### RTCPMode
 
-Re-exports: [RTCPMode](../enums/services_conference_CreateConference.RTCPMode.md)
+Re-exports: [RTCPMode](../enums/services_conference_models_CreateConference.RTCPMode.md)
 
 ___
 
 ### RecordingService
 
-Renames and exports: [default](../classes/services_RecordingService.default.md)
+Renames and exports: [default](services_recording_RecordingService.md#default)
 
 ___
 
@@ -455,19 +454,19 @@ ___
 
 ### ScreenInfo
 
-Renames and exports: [default](../interfaces/types_ScreenInfo.default.md)
+Re-exports: [ScreenInfo](../interfaces/services_screenshare_models_ScreenInfo.ScreenInfo.md)
 
 ___
 
 ### ScreenShareService
 
-Renames and exports: [default](../classes/services_ScreenShareService.default.md)
+Renames and exports: [default](services_screenshare_ScreenShareService.md#default)
 
 ___
 
 ### SessionService
 
-Renames and exports: [default](../classes/services_SessionService.default.md)
+Renames and exports: [default](services_session_SessionService.md#default)
 
 ___
 
@@ -491,31 +490,25 @@ ___
 
 ### Subscription
 
-Re-exports: [Subscription](../interfaces/services_notification_Subscriptions.Subscription.md)
+Re-exports: [Subscription](../interfaces/services_notification_models_Subscriptions.Subscription.md)
 
 ___
 
 ### SubscriptionMapping
 
-Re-exports: [SubscriptionMapping](../interfaces/services_notification_Subscriptions.SubscriptionMapping.md)
-
-___
-
-### UnregisterCallback
-
-Re-exports: [UnregisterCallback](../interfaces/types_UnregisterCallback.UnregisterCallback.md)
+Re-exports: [SubscriptionMapping](../interfaces/services_notification_models_Subscriptions.SubscriptionMapping.md)
 
 ___
 
 ### UserType
 
-Re-exports: [UserType](../enums/services_conference_JoinConference.UserType.md)
+Re-exports: [UserType](../enums/services_conference_models_JoinConference.UserType.md)
 
 ___
 
 ### VideoPresentation
 
-Renames and exports: [default](../interfaces/services_presentation_VideoPresentation.default.md)
+Renames and exports: [default](../interfaces/services_presentation_models_VideoPresentation.default.md)
 
 ___
 
@@ -539,7 +532,7 @@ ___
 
 ### VideoPresentationService
 
-Renames and exports: [default](../classes/services_VideoPresentationService.default.md)
+Renames and exports: [default](services_presentation_VideoPresentationService.md#default)
 
 ___
 
@@ -563,34 +556,34 @@ ___
 
 ### conferenceToMap
 
-Re-exports: [conferenceToMap](services_conference_Conference.md#conferencetomap)
+Re-exports: [conferenceToMap](services_conference_models_Conference.md#conferencetomap)
 
 ___
 
 ### fromConnectionState
 
-Re-exports: [fromConnectionState](services_audio_ConnectionState.md#fromconnectionstate)
+Re-exports: [fromConnectionState](services_audio_models_ConnectionState.md#fromconnectionstate)
 
 ___
 
 ### fromDeviceType
 
-Re-exports: [fromDeviceType](services_audio_DeviceType.md#fromdevicetype)
+Re-exports: [fromDeviceType](services_audio_models_DeviceType.md#fromdevicetype)
 
 ___
 
 ### toConferenceParticipantStatus
 
-Re-exports: [toConferenceParticipantStatus](services_conference_ConferenceParticipantStatus.md#toconferenceparticipantstatus)
+Re-exports: [toConferenceParticipantStatus](services_conference_models_ConferenceParticipantStatus.md#toconferenceparticipantstatus)
 
 ___
 
 ### toConnectionState
 
-Re-exports: [toConnectionState](services_audio_ConnectionState.md#toconnectionstate)
+Re-exports: [toConnectionState](services_audio_models_ConnectionState.md#toconnectionstate)
 
 ___
 
 ### toDeviceType
 
-Re-exports: [toDeviceType](services_audio_DeviceType.md#todevicetype)
+Re-exports: [toDeviceType](services_audio_models_DeviceType.md#todevicetype)
