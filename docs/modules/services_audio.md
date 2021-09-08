@@ -6,6 +6,7 @@
 
 ### References
 
+- [AudioService](services_audio.md#audioservice)
 - [ConnectionState](services_audio.md#connectionstate)
 - [DeviceType](services_audio.md#devicetype)
 - [MediaDevice](services_audio.md#mediadevice)
@@ -16,42 +17,48 @@
 
 ## References
 
+### AudioService
+
+Renames and exports: [default](services_audio_AudioService.md#default)
+
+___
+
 ### ConnectionState
 
-Re-exports: [ConnectionState](../enums/services_audio_ConnectionState.ConnectionState.md)
+Re-exports: [ConnectionState](../enums/services_audio_models_ConnectionState.ConnectionState.md)
 
 ___
 
 ### DeviceType
 
-Re-exports: [DeviceType](../enums/services_audio_DeviceType.DeviceType.md)
+Re-exports: [DeviceType](../enums/services_audio_models_DeviceType.DeviceType.md)
 
 ___
 
 ### MediaDevice
 
-Renames and exports: [default](../interfaces/services_audio_MediaDevice.default.md)
+Renames and exports: [default](../interfaces/services_audio_models_MediaDevice.default.md)
 
 ___
 
 ### fromConnectionState
 
-Re-exports: [fromConnectionState](services_audio_ConnectionState.md#fromconnectionstate)
+Re-exports: [fromConnectionState](services_audio_models_ConnectionState.md#fromconnectionstate)
 
 ___
 
 ### fromDeviceType
 
-Re-exports: [fromDeviceType](services_audio_DeviceType.md#fromdevicetype)
+Re-exports: [fromDeviceType](services_audio_models_DeviceType.md#fromdevicetype)
 
 ___
 
 ### toConnectionState
 
-Re-exports: [toConnectionState](services_audio_ConnectionState.md#toconnectionstate)
+Re-exports: [toConnectionState](services_audio_models_ConnectionState.md#toconnectionstate)
 
 ___
 
 ### toDeviceType
 
-Re-exports: [toDeviceType](services_audio_DeviceType.md#todevicetype)
+Re-exports: [toDeviceType](services_audio_models_DeviceType.md#todevicetype)

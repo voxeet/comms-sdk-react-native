@@ -14,4 +14,4 @@
 
 ### participant
 
-• **participant**: [`default`](../classes/services_conference_Participant.default.md)
+• **participant**: [`default`](../classes/services_conference_models_Participant.default.md)

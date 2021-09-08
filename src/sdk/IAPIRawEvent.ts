@@ -4,7 +4,7 @@ import {
   DeviceEventEmitter,
   Platform,
 } from 'react-native';
-import type { UnregisterCallback } from '../types';
+import type { UnregisterCallback } from 'src/sdk/models';
 
 const { RNDolbyioIAPISdk } = NativeModules;
 
