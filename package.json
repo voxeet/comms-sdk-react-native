@@ -32,7 +32,7 @@
     "pods": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
     "generate:licenses": "license-report --only=prod --package=package.json > licenses.json ; node ./scripts/licensesToMarkdown.js > LICENSES.md",
-    "generate:documentation": "rm -rf docs && typedoc --disableSources src/",
+    "generate:documentation": "rm -rf docs && typedoc --disableSources",
     "generate": "yarn generate:documentation && yarn generate:licenses",
     "append:documentation": "git add docs",
     "append:licenses": "rm licenses.json && git add ./LICENSES.md",

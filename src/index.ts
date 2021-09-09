@@ -1,3 +1,3 @@
 export { default } from './IAPISDK';
 
-export { default as Conference } from './conference';
+export { default as Conference } from './services/conference/ConferenceService';
