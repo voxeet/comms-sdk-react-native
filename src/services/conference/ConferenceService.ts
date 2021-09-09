@@ -1,6 +1,11 @@
+/**
+ * @category ConferenceService
+ * @module ConferenceService
+ */
+
 import { Alert } from 'react-native';
 
-class ConferenceService {
+export class ConferenceService {
   public join(): void {
     Alert.alert('Conference Joined');
   }

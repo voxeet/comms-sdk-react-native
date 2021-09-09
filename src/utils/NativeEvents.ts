@@ -6,16 +6,24 @@ import {
 } from 'react-native';
 const { RNDolbyioIAPISdk } = NativeModules;
 
+import type { UnregisterListener } from './types';
+import type { SDKEventMap } from '../types';
+import type { ConferenceServiceEventMap } from '../services/conference/types';
+
+interface NativeEventType extends SDKEventMap, ConferenceServiceEventMap {}
+
 const EventEmitter = Platform.select({
   ios: DeviceEventEmitter,
   android: new NativeEventEmitter(RNDolbyioIAPISdk),
 });
 
 export default class NativeEvents {
-  static addListener(type: string, listener: (...args: any[]) => void) {
+  public static addListener<K extends keyof NativeEventType>(
+    type: K,
+    listener: (event: NativeEventType[K]) => void
+  ): UnregisterListener {
     // @ts-ignore
     EventEmitter.addListener(type, listener);
-
     return () => {
       // @ts-ignore
       EventEmitter.removeListener(type, listener);
