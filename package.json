@@ -1,7 +1,7 @@
 {
   "name": "@dolbyio/react-native-iapi-sdk",
   "version": "0.1.0",
-  "description": "Dolby.io iAPI SDK crossplatform react-native implementation",
+  "description": "Dolby.io iAPI SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -32,7 +32,7 @@
     "pods": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
     "generate:licenses": "license-report --only=prod --package=package.json > licenses.json ; node ./scripts/licensesToMarkdown.js > LICENSES.md",
-    "generate:documentation": "rm -rf docs && typedoc --disableSources src/",
+    "generate:documentation": "rm -rf docs && typedoc --disableSources",
     "generate": "yarn generate:documentation && yarn generate:licenses",
     "append:documentation": "git add docs",
     "append:licenses": "rm licenses.json && git add ./LICENSES.md",

@@ -1,9 +1,3 @@
-export { default as IAPIEvents } from './sdk/IAPIEvents';
+export { default } from './IAPISDK';
 
-export { default as VideoView } from './view/VideoView';
-
-export { default as IAPISDK } from './IAPISDK';
-
-export * from './events';
-
-export * from './services';
+export { default as Conference } from './services/conference/ConferenceService';

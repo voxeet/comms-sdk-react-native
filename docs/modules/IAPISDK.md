@@ -1,32 +1,19 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / IAPISDK
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / IAPISDK
 
 # Module: IAPISDK
 
 ## Table of contents
 
-### References
+### Classes
 
-- [RefreshCallback](IAPISDK.md#refreshcallback)
-- [TokenRefreshCallback](IAPISDK.md#tokenrefreshcallback)
+- [IAPISDK](../classes/IAPISDK.IAPISDK-1.md)
 
 ### Properties
 
 - [default](IAPISDK.md#default)
 
-## References
-
-### RefreshCallback
-
-Re-exports: [RefreshCallback](../interfaces/sdk_Implementation.RefreshCallback.md)
-
-___
-
-### TokenRefreshCallback
-
-Re-exports: [TokenRefreshCallback](../interfaces/sdk_Implementation.TokenRefreshCallback.md)
-
 ## Properties
 
 ### default
 
-• **default**: `Readonly`<`Object`\>
+• **default**: [`IAPISDK`](../classes/IAPISDK.IAPISDK-1.md)
