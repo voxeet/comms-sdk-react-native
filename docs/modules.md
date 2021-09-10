@@ -1,22 +1,13 @@
-[@dolbyio/react-native-iapi-sdk](README.md) / Exports
+[@dolbyio/react-native-iapi-sdk](README.md) / Modules
 
 # @dolbyio/react-native-iapi-sdk
 
 ## Table of contents
 
-### Properties
+### ConferenceService Modules
 
-- [Conference](modules.md#conference)
-- [default](modules.md#default)
+- [ConferenceService](modules/ConferenceService.md)
 
-## Properties
+### Other Modules
 
-### Conference
-
-• **Conference**: `ConferenceService`
-
-___
-
-### default
-
-• **default**: `IAPISDK`
+- [IAPISDK](modules/IAPISDK.md)
