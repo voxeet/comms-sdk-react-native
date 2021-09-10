@@ -1,3 +1,8 @@
+/**
+ * @category ConferenceService
+ * @module ConferenceService
+ */
+
 import { Alert, NativeModules } from 'react-native';
 const { DolbyioIAPISdk } = NativeModules;
 import type {
@@ -7,7 +12,7 @@ import type {
   ConferenceMixingOptions,
 } from './types';
 
-class ConferenceService {
+export class ConferenceService {
   public join(): void {
     Alert.alert('Conference Joined');
   }
