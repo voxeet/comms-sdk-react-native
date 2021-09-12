@@ -1,6 +1,7 @@
 {
-  "entryPoints": ["./src/IAPISDK.ts", "./src/services/conference/ConferenceService.ts"],
-  "exclude": "./src/utils/**/*",
-  "categorizeByGroup": true,
-  "categoryOrder": ["IAPISDK", "ConferenceService"]
+  "entryPoints": [
+    "./src"
+
+  ],
+  "exclude": "./src/utils/**/*"
 }

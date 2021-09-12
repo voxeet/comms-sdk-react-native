@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / [IAPISDK](../modules/IAPISDK.md) / IAPISDK
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / [IAPISDK](../modules/IAPISDK.md) / IAPISDK
 
 # Class: IAPISDK
 
@@ -13,6 +13,8 @@
 ### Properties
 
 - [#refreshAccessTokenInBackground](IAPISDK.IAPISDK-1.md##refreshaccesstokeninbackground)
+- [conference](IAPISDK.IAPISDK-1.md#conference)
+- [session](IAPISDK.IAPISDK-1.md#session)
 
 ### Methods
 
@@ -29,7 +31,19 @@
 
 ### #refreshAccessTokenInBackground
 
-• `Private` `Optional` **#refreshAccessTokenInBackground**: ``null`` \| `RefreshAccessTokenInBackgroundType` = `null`
+• `Private` `Optional` **#refreshAccessTokenInBackground**: ``null`` \| [`RefreshAccessTokenInBackgroundType`](../modules/IAPISDK.md#refreshaccesstokeninbackgroundtype) = `null`
+
+___
+
+### conference
+
+• **conference**: [`ConferenceService`](ConferenceService.ConferenceService-1.md)
+
+___
+
+### session
+
+• **session**: [`SessionService`](SessionService.SessionService-1.md)
 
 ## Methods
 
@@ -86,7 +100,7 @@ Where (1) and (2) are two REST API endpoints available on Dolby.io servers and d
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `accessToken` | ``null`` \| `string` | The access token provided by the customer's backend.. |
-| `refreshAccessToken` | `RefreshAccessTokenType` | A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired. |
+| `refreshAccessToken` | [`RefreshAccessTokenType`](../modules/IAPISDK.md#refreshaccesstokentype) | A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired. |
 
 #### Returns
 
