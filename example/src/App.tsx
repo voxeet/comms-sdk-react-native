@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from 'react-native-dotenv';
-import IAPISDK from '@dolbyio/react-native-iapi-sdk';
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
 export interface Props {}
 
@@ -17,9 +17,9 @@ export interface State {}
 
 export default class App extends Component<Props, State> {
   componentDidMount() {
-    console.log(APP_ID, APP_SECRET);
-    IAPISDK.initialize(APP_ID, APP_SECRET)
-      .then(() => {
+    DolbyIoIAPI.initialize(APP_ID, APP_SECRET)
+      .then(async () => {
+        await DolbyIoIAPI.session.open({ name: 'John Doe' });
         Alert.alert('App initialized successfully');
       })
       .catch(() => {

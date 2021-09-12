@@ -33,7 +33,7 @@
     "bootstrap": "yarn example && yarn && yarn pods",
     "generate:licenses": "license-report --only=prod --package=package.json > licenses.json ; node ./scripts/licensesToMarkdown.js > LICENSES.md",
     "generate:documentation": "rm -rf docs && typedoc --disableSources",
-    "generate": "yarn generate:documentation && yarn generate:licenses",
+    "generate": "yarn generate:documentation",
     "append:documentation": "git add docs",
     "append:licenses": "rm licenses.json && git add ./LICENSES.md",
     "append": "yarn append:licenses && yarn append:documentation"
@@ -76,6 +76,7 @@
     "react-native-builder-bob": "^0.18.0",
     "release-it": "^14.2.2",
     "typedoc": "^0.21.9",
+    "typedoc-plugin-markdown": "^3.10.4",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
@@ -164,9 +165,5 @@
         }
       ]
     ]
-  },
-  "dependencies": {
-    "eventemitter2": "^6.4.4",
-    "typedoc-plugin-markdown": "^3.10.4"
   }
 }
