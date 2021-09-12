@@ -1,4 +1,4 @@
-@dolbyio/react-native-iapi-sdk / [Modules](modules.md)
+@dolbyio/react-native-iapi-sdk / [Exports](modules.md)
 
 # Dolby.io IAPI React Native SDK
 

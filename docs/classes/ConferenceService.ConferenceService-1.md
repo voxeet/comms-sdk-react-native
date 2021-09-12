@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / [ConferenceService](../modules/ConferenceService.md) / ConferenceService
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / [ConferenceService](../modules/ConferenceService.md) / ConferenceService
 
 # Class: ConferenceService
 

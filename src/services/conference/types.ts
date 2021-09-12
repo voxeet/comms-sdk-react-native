@@ -1,6 +1,7 @@
 /**
- * @ignore
- * */
+ * @category ConferenceService
+ * @module ConferenceService
+ */
 
 export enum ConferenceServiceEventNames {
   ParticipantAdded = 'ParticipantAdded',

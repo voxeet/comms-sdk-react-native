@@ -1,4 +1,7 @@
-/** @ignore */
+/**
+ * @category IAPISDK
+ * @module IAPISDK
+ */
 
 export type RefreshAccessTokenType = () => string;
 export type RefreshAccessTokenInBackgroundType = () => void;

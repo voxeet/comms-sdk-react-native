@@ -4,9 +4,11 @@ import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
 } from './types';
+import { SDKEventNames } from './types';
+import ConferenceService from './services/conference/ConferenceService';
+import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
-import { SDKEventNames } from './types';
 
 /**
  * @category IAPISDK
@@ -16,6 +18,9 @@ import { SDKEventNames } from './types';
 export class IAPISDK {
   #refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
+
+  conference = ConferenceService;
+  session = SessionService;
 
   // TODO: TO BE DEPRECATED
   /**

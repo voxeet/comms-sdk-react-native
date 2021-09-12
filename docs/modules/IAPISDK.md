@@ -1,19 +1,53 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / IAPISDK
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / IAPISDK
 
 # Module: IAPISDK
 
 ## Table of contents
 
-### Classes
+### Enumerations
 
-- [IAPISDK](../classes/IAPISDK.IAPISDK-1.md)
+- [SDKEventNames](../enums/IAPISDK.SDKEventNames.md)
 
-### Properties
+### Interfaces
 
-- [default](IAPISDK.md#default)
+- [SDKEventMap](../interfaces/IAPISDK.SDKEventMap.md)
 
-## Properties
+### Type aliases
 
-### default
+- [RefreshAccessTokenInBackgroundType](IAPISDK.md#refreshaccesstokeninbackgroundtype)
+- [RefreshAccessTokenType](IAPISDK.md#refreshaccesstokentype)
+- [TokenRefresh](IAPISDK.md#tokenrefresh)
 
-• **default**: [`IAPISDK`](../classes/IAPISDK.IAPISDK-1.md)
+## Type aliases
+
+### RefreshAccessTokenInBackgroundType
+
+Ƭ **RefreshAccessTokenInBackgroundType**: () => `void`
+
+#### Type declaration
+
+▸ (): `void`
+
+##### Returns
+
+`void`
+
+___
+
+### RefreshAccessTokenType
+
+Ƭ **RefreshAccessTokenType**: () => `string`
+
+#### Type declaration
+
+▸ (): `string`
+
+##### Returns
+
+`string`
+
+___
+
+### TokenRefresh
+
+Ƭ **TokenRefresh**: `Object`
