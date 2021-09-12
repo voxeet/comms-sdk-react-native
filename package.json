@@ -92,7 +92,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typescript && yarn generate && touch .hook_commit",
       "post-commit": " ( [ -e .hook_commit ] && rm .hook_commit && yarn append && git commit --amend -C HEAD --no-verify) "
     }
