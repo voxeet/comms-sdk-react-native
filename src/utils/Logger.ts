@@ -3,9 +3,9 @@ export default class Logger {
     console.log(`[INFO] DolbyIAPI SDK ${message}`);
   }
   static error(message: string) {
-    console.log(`[ERROR]] DolbyIAPI SDK ${message}`);
+    console.log(`[ERROR] DolbyIAPI SDK ${message}`);
   }
   static warning(message: string) {
-    console.log(`[WARNING]] DolbyIAPI SDK ${message}`);
+    console.log(`[WARNING] DolbyIAPI SDK ${message}`);
   }
 }
