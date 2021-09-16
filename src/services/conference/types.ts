@@ -1,5 +1,23 @@
 /** @ignore */
 
+export type ConferenceLeaveOptions = {
+  leaveRoom: boolean;
+};
+
+export enum UserType {
+  USER = 'user',
+  LISTENER = 'listener',
+}
+
+export type JoinUserInfo = {
+  type?: UserType;
+};
+
+export type ConferenceJoinOptions = {
+  user?: JoinUserInfo;
+  maxVideoForwarding?: number;
+};
+
 export type ParticipantPermissions = {
   participant: Participant;
   permissions: Array<ConferencePermission>;
