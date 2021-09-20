@@ -4,21 +4,20 @@
 
 ## Table of contents
 
-### ConferenceService Modules
+### Namespaces
 
-- [ConferenceService](modules/ConferenceService.md)
+- [%3Cinternal%3E](modules/_internal_.md)
 
-### IAPISDK Modules
+### Classes
 
-- [IAPISDK](modules/IAPISDK.md)
+- [DolbyIoIAPI](classes/DolbyIoIAPI.md)
 
-### Other Modules
+### Properties
 
-- [IAPISDK](modules/IAPISDK.md)
-- [index](modules/index.md)
-- [services/conference/types](modules/services_conference_types.md)
+- [default](modules.md#default)
 
-### SessionService Modules
+## Properties
 
-- [SessionService](modules/SessionService.md)
-- [SessionService](modules/SessionService.md)
+### default
+
+• **default**: [`DolbyIoIAPI`](classes/DolbyIoIAPI.md)
