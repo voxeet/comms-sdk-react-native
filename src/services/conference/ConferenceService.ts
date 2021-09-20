@@ -216,6 +216,46 @@ export class ConferenceService {
   ): Promise<any> {
     return DolbyioIAPISdk.updatePermissions(participantPermissions);
   }
+
+  /**
+   * Starts audio transmission between the local client and a conference.
+   * @param participant<Participant> The participant whose stream should be sent to the local participant.
+   * @returns {Promise<any>}
+   */
+
+  public async startAudio(participant?: Participant): Promise<any> {
+    return DolbyioIAPISdk.startAudio(participant);
+  }
+
+  /**
+   * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<any>}
+   */
+
+  public async startVideo(participant?: Participant): Promise<any> {
+    return DolbyioIAPISdk.startVideo(participant);
+  }
+
+  /**
+   * Stops audio transmission between the local client and a conference.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<any>}
+   */
+
+  public async stopAudio(participant?: Participant): Promise<any> {
+    return DolbyioIAPISdk.stopAudio(participant);
+  }
+
+  /**
+   * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<any>}
+   */
+
+  public async stopVideo(participant?: Participant): Promise<any> {
+    return DolbyioIAPISdk.stopVideo(participant);
+  }
 }
 
 export default new ConferenceService();
