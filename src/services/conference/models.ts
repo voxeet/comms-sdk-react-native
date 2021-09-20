@@ -1,3 +1,21 @@
+export interface ConferenceLeaveOptions {
+  leaveRoom: boolean;
+}
+
+export enum UserType {
+  USER = 'user',
+  LISTENER = 'listener',
+}
+
+export interface JoinUserInfo {
+  type?: UserType;
+}
+
+export interface ConferenceJoinOptions {
+  user?: JoinUserInfo;
+  maxVideoForwarding?: number;
+}
+
 export interface ParticipantPermissions {
   participant: Participant;
   permissions: Array<ConferencePermission>;
