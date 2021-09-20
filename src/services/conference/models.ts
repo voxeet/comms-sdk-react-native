@@ -1,54 +1,3 @@
-export interface ConferenceLeaveOptions {
-  leaveRoom: boolean;
-}
-
-export enum UserType {
-  USER = 'user',
-  LISTENER = 'listener',
-}
-
-export interface JoinUserInfo {
-  type?: UserType;
-}
-
-export interface ConferenceJoinOptions {
-  user?: JoinUserInfo;
-  maxVideoForwarding?: number;
-}
-
-export interface ParticipantPermissions {
-  participant: Participant;
-  permissions: Array<ConferencePermission>;
-}
-
-export enum ConferencePermission {
-  INVITE,
-  KICK,
-  UPDATE_PERMISSIONS,
-  JOIN,
-  SEND_AUDIO,
-  SEND_VIDEO,
-  SHARE_SCREEN,
-  SHARE_VIDEO,
-  SHARE_FILE,
-  SEND_MESSAGE,
-  RECORD,
-  STREAM,
-}
-
-export interface AudioProcessingOptions {
-  send?: AudioProcessingSenderOptions;
-}
-
-export interface AudioProcessingSenderOptions {
-  audioProcessing?: boolean;
-}
-
-export enum AudioProcessing {
-  VOCAL,
-  ENVIRONMENT,
-}
-
 export interface Conference {
   conferenceId?: string;
   conferenceAlias?: string;
@@ -122,33 +71,53 @@ export enum Codec {
   H264 = 'H264',
 }
 
-export enum ConferenceServiceEventNames {
-  ParticipantAdded = 'ParticipantAdded',
-  ParticipantUpdated = 'ParticipantUpdated',
-  ParticipantRemoved = 'ParticipantRemoved',
-  PermissionsUpdated = 'PermissionsUpdated',
-  ConferenceStatusUpdated = 'ConferenceStatusUpdated',
-  StreamAdded = 'StreamAdded',
-  StreamUpdated = 'StreamUpdated',
-  StreamRemoved = 'StreamRemoved',
+export interface ConferenceLeaveOptions {
+  leaveRoom: boolean;
 }
 
-export interface ParticipantAddedEventType {}
-export interface ParticipantUpdatedEventType {}
-export interface ParticipantRemovedEventType {}
-export interface PermissionsUpdatedEventType {}
-export interface ConferenceStatusUpdatedEventType {}
-export interface StreamAddedEventType {}
-export interface StreamUpdatedEventType {}
-export interface StreamRemovedEventType {}
+export enum UserType {
+  USER = 'user',
+  LISTENER = 'listener',
+}
 
-export interface ConferenceServiceEventMap {
-  [ConferenceServiceEventNames.ParticipantAdded]: ParticipantAddedEventType;
-  [ConferenceServiceEventNames.ParticipantUpdated]: ParticipantUpdatedEventType;
-  [ConferenceServiceEventNames.ParticipantRemoved]: ParticipantRemovedEventType;
-  [ConferenceServiceEventNames.PermissionsUpdated]: PermissionsUpdatedEventType;
-  [ConferenceServiceEventNames.ConferenceStatusUpdated]: ConferenceStatusUpdatedEventType;
-  [ConferenceServiceEventNames.StreamAdded]: StreamAddedEventType;
-  [ConferenceServiceEventNames.StreamUpdated]: StreamUpdatedEventType;
-  [ConferenceServiceEventNames.StreamRemoved]: StreamRemovedEventType;
+export interface JoinUserInfo {
+  type?: UserType;
+}
+
+export interface ConferenceJoinOptions {
+  user?: JoinUserInfo;
+  maxVideoForwarding?: number;
+}
+
+export interface ParticipantPermissions {
+  participant: Participant;
+  permissions: Array<ConferencePermission>;
+}
+
+export enum ConferencePermission {
+  INVITE,
+  KICK,
+  UPDATE_PERMISSIONS,
+  JOIN,
+  SEND_AUDIO,
+  SEND_VIDEO,
+  SHARE_SCREEN,
+  SHARE_VIDEO,
+  SHARE_FILE,
+  SEND_MESSAGE,
+  RECORD,
+  STREAM,
+}
+
+export interface AudioProcessingOptions {
+  send?: AudioProcessingSenderOptions;
+}
+
+export interface AudioProcessingSenderOptions {
+  audioProcessing?: boolean;
+}
+
+export enum AudioProcessing {
+  VOCAL,
+  ENVIRONMENT,
 }
