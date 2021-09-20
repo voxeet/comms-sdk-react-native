@@ -26,6 +26,8 @@
 - [isOutputMuted](_internal_.ConferenceService.md#isoutputmuted)
 - [isSpeaking](_internal_.ConferenceService.md#isspeaking)
 - [join](_internal_.ConferenceService.md#join)
+- [kick](_internal_.ConferenceService.md#kick)
+- [leave](_internal_.ConferenceService.md#leave)
 - [mute](_internal_.ConferenceService.md#mute)
 - [replay](_internal_.ConferenceService.md#replay)
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
@@ -282,11 +284,58 @@ ___
 
 ### join
 
-▸ **join**(): `void`
+▸ **join**(`conference`, `options?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
+
+Joins the conference.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
+| `options?` | [`ConferenceJoinOptions`](../interfaces/_internal_.ConferenceJoinOptions.md) |
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
+
+Promise with the Conference
+
+___
+
+### kick
+
+▸ **kick**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+
+Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`any`\>
+
+___
+
+### leave
+
+▸ **leave**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+
+Leaves the conference.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options?` | [`ConferenceLeaveOptions`](../interfaces/_internal_.ConferenceLeaveOptions.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 ___
 
