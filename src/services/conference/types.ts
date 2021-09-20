@@ -1,5 +1,33 @@
 /** @ignore */
 
+export type ParticipantPermissions = {
+  participant: Participant;
+  permissions: Array<ConferencePermission>;
+};
+
+export enum ConferencePermission {
+  INVITE,
+  KICK,
+  UPDATE_PERMISSIONS,
+  JOIN,
+  SEND_AUDIO,
+  SEND_VIDEO,
+  SHARE_SCREEN,
+  SHARE_VIDEO,
+  SHARE_FILE,
+  SEND_MESSAGE,
+  RECORD,
+  STREAM,
+}
+
+export type AudioProcessingOptions = {
+  send?: AudioProcessingSenderOptions;
+};
+
+export type AudioProcessingSenderOptions = {
+  audioProcessing?: boolean;
+};
+
 export enum AudioProcessing {
   VOCAL,
   ENVIRONMENT,

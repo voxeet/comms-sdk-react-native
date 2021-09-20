@@ -13,6 +13,8 @@ import type {
   Participant,
   AudioProcessing,
   ConferenceStatus,
+  AudioProcessingOptions,
+  ParticipantPermissions,
 } from './types';
 
 export class ConferenceService {
@@ -166,6 +168,53 @@ export class ConferenceService {
 
   public async isSpeaking(participant?: Participant): Promise<boolean> {
     return DolbyioIAPISdk.isSpeaking(participant);
+  }
+
+  /**
+   * Enables and disables audio processing for the conference participant.
+   * @param options<AudioProcessingOptions> The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
+   * @returns {Promise<any>}
+   */
+
+  public async setAudioProcessing(
+    options: AudioProcessingOptions
+  ): Promise<any> {
+    return DolbyioIAPISdk.setAudioProcessing(options);
+  }
+
+  /**
+   * Sets the maximum number of video streams that may be transmitted to the local participant.
+   * @returns {Promise<any>}
+   */
+
+  public async setMaxVideoForwarding(): Promise<any> {
+    return DolbyioIAPISdk.setMaxVideoForwarding();
+  }
+
+  /**
+   * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
+   * @param isMuted<boolean> A boolean, true indicates that the local participant is muted, false indicates that a participant is not muted
+   * @param participant<Participant> A remote participant
+   * @returns {Promise<boolean>} Informs if the mute state has changed.
+   */
+
+  public async mute(
+    isMuted: boolean,
+    participant?: Participant
+  ): Promise<boolean> {
+    return DolbyioIAPISdk.mute(participant, isMuted);
+  }
+
+  /**
+   * Updates the participant's conference permissions.
+   * @param participantPermissions<ParticipantPermissions[]> The set of participant's conference permissions.
+   * @returns {Promise<any>}
+   */
+
+  public async updatePermissions(
+    participantPermissions: Array<ParticipantPermissions>
+  ): Promise<any> {
+    return DolbyioIAPISdk.updatePermissions(participantPermissions);
   }
 }
 
