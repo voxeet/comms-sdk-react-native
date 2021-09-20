@@ -1,19 +1,16 @@
-import {
-  NativeModules,
-  NativeEventEmitter,
-  DeviceEventEmitter,
-  Platform,
-} from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 const { DolbyIoIAPIModule } = NativeModules;
 
 import type { UnregisterListener } from './types';
-import type { SDKEventMap } from '../models';
-import type { ConferenceServiceEventMap } from '../services/conference/models';
+import type { DolbyIoIAPIEventMap } from '../events';
+import type { ConferenceServiceEventMap } from '../services/conference/events';
 
-interface NativeEventType extends SDKEventMap, ConferenceServiceEventMap {}
+interface NativeEventType
+  extends DolbyIoIAPIEventMap,
+    ConferenceServiceEventMap {}
 
 const EventEmitter = Platform.select({
-  ios: DeviceEventEmitter,
+  ios: new NativeEventEmitter(DolbyIoIAPIModule),
   android: new NativeEventEmitter(DolbyIoIAPIModule),
 });
 

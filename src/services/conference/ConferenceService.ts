@@ -14,6 +14,8 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
+import { ConferenceServiceEventNames } from './events';
+import NativeEvents from '../../utils/NativeEvents';
 
 export class ConferenceService {
   /**
@@ -289,6 +291,20 @@ export class ConferenceService {
 
   public async leave(options?: ConferenceLeaveOptions): Promise<boolean> {
     return DolbyIoIAPIConferenceService.leave(options);
+  }
+
+  /**
+   * Add a handler for conference status changes
+   * @param handler<(data: any) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+  public onStatusChange(handler: (data: any) => void): () => void {
+    return NativeEvents.addListener(
+      ConferenceServiceEventNames.ConferenceStatusUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
   }
 }
 

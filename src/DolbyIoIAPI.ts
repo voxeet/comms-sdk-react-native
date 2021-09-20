@@ -4,7 +4,7 @@ import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
 } from './models';
-import { SDKEventNames } from './models';
+import { DolbyIoIAPIEventNames } from './events';
 import ConferenceService from './services/conference/ConferenceService';
 import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
@@ -17,7 +17,6 @@ export class DolbyIoIAPI {
   conference = ConferenceService;
   session = SessionService;
 
-  // TODO: TO BE DEPRECATED
   /**
    * Initializes the SDK using the customer key and secret.
    * @param consumerKey  The customer key.
@@ -77,7 +76,7 @@ export class DolbyIoIAPI {
           DolbyIoIAPIModule.onAccessTokenKo('Refreshing token failed');
         }
       };
-      NativeEvents.addListener(SDKEventNames.TokenRefresh, () => {
+      NativeEvents.addListener(DolbyIoIAPIEventNames.TokenRefresh, () => {
         this.#refreshAccessTokenInBackground &&
           this.#refreshAccessTokenInBackground();
       });
