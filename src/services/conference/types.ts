@@ -1,7 +1,9 @@
-/**
- * @category ConferenceService
- * @module ConferenceService
- */
+/** @ignore */
+
+export enum AudioProcessing {
+  VOCAL,
+  ENVIRONMENT,
+}
 
 export type Conference = {
   conferenceId?: string;
