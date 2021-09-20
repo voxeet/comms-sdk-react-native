@@ -1,10 +1,13 @@
-import { Alert, NativeModules } from 'react-native';
+import { NativeModules } from 'react-native';
 const { DolbyIoIAPIConferenceService } = NativeModules;
+
 import type {
   Conference,
   ConferenceCreateOptions,
   ConferenceReplayOptions,
   ConferenceMixingOptions,
+  ConferenceJoinOptions,
+  ConferenceLeaveOptions,
   Participant,
   AudioProcessing,
   ConferenceStatus,
@@ -13,10 +16,6 @@ import type {
 } from './models';
 
 export class ConferenceService {
-  public join(): void {
-    Alert.alert('Conference Joined');
-  }
-
   /**
    * Create a conference with ConferenceOptions
    * @param options<CreateOptions> The conference options
@@ -256,6 +255,40 @@ export class ConferenceService {
 
   public async stopVideo(participant?: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
+  }
+
+  /**
+   * Joins the conference.
+   * @param conference<Conference> The conference object.
+   * @param options<ConferenceJoinOptions> The additional options for the joining participant.
+   * @returns {Promise<Conference>} Promise with the Conference
+   */
+
+  public async join(
+    conference: Conference,
+    options?: ConferenceJoinOptions
+  ): Promise<Conference> {
+    return DolbyIoIAPIConferenceService.join(conference, options);
+  }
+
+  /**
+   * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
+   * @param participant<Participant> The participant who needs to be kicked from the conference.
+   * @returns {Promise<any>}
+   */
+
+  public async kick(participant: Participant): Promise<any> {
+    return DolbyIoIAPIConferenceService.kick(participant);
+  }
+
+  /**
+   * Leaves the conference.
+   * @param options<ConferenceJoinOptions> The additional options for the leaving participant.
+   * @returns {Promise<boolean>}
+   */
+
+  public async leave(options?: ConferenceLeaveOptions): Promise<boolean> {
+    return DolbyIoIAPIConferenceService.leave(options);
   }
 }
 
