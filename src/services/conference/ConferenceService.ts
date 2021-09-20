@@ -10,6 +10,9 @@ import type {
   ConferenceCreateOptions,
   ConferenceReplayOptions,
   ConferenceMixingOptions,
+  Participant,
+  AudioProcessing,
+  ConferenceStatus,
 } from './types';
 
 export class ConferenceService {
@@ -60,6 +63,109 @@ export class ConferenceService {
     mixingOptions?: ConferenceMixingOptions
   ): Promise<Conference> {
     return DolbyioIAPISdk.replay(conference, replayOptions, mixingOptions);
+  }
+
+  /**
+   * Gets the participant's audio level
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<number>} Promise with number
+   */
+  // TODO - AudioLevel type for Promise
+
+  public async getAudioLevel(participant?: Participant): Promise<number> {
+    return DolbyioIAPISdk.getAudioLevel(participant);
+  }
+
+  /**
+   * Gets the current audio processing state for a conference.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<AudioProcessing>} Promise with AudioProcessing
+   */
+
+  public async getAudioProcessing(
+    participant?: Participant
+  ): Promise<AudioProcessing> {
+    return DolbyioIAPISdk.getAudioProcessing(participant);
+  }
+
+  /**
+   * Provides standard WebRTC statistics for the application.
+   * @returns {Promise<any>} Promise with LocalStats
+   */
+  // TODO - LocalStats type for Promise
+
+  public async getLocalStats(): Promise<any> {
+    return DolbyioIAPISdk.getLocalStats();
+  }
+
+  /**
+   * Provides the number of video streams that are transmitted to the local user.
+   * @returns {Promise<number>} Promise with Number
+   */
+
+  public async getMaxVideoForwarding(): Promise<number> {
+    return DolbyioIAPISdk.getMaxVideoForwarding();
+  }
+
+  /**
+   * The participant's information.
+   * @param participantId<string> ID of Participant
+   * @returns {Promise<Participant>} Promise with Participant
+   */
+
+  public async getParticipant(participantId?: String): Promise<Participant> {
+    return DolbyioIAPISdk.getParticipant(participantId);
+  }
+
+  /**
+   * Gets a list of Conference participants
+   * @param conference<Conference> The conference object.
+   * @returns {Promise<Array<Participant>>} Promise with array of Participants
+   */
+
+  public async getParticipants(
+    conference?: Conference
+  ): Promise<Array<Participant>> {
+    return DolbyioIAPISdk.getParticipants(conference);
+  }
+
+  /**
+   * Provides the conference status.
+   * @param conference<Conference> The conference object.
+   * @returns {Promise<ConferenceStatus>} Promise with a ConferenceStatus
+   */
+
+  public async getStatus(conference?: Conference): Promise<ConferenceStatus> {
+    return DolbyioIAPISdk.getStatus(conference);
+  }
+
+  /**
+   * Informs whether the application plays the remote participants' audio to the local participant.
+   * @returns {Promise<boolean>} A boolean indicating whether the application plays the remote participants' audio to the local participant.
+   */
+
+  public async isOutputMuted(): Promise<boolean> {
+    return DolbyioIAPISdk.inOutputMuted();
+  }
+
+  /**
+   * Gets the current mute state of the participant.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<boolean>} Information if the local participant is muted.
+   */
+
+  public async isMuted(participant?: Participant): Promise<boolean> {
+    return DolbyioIAPISdk.isMuted(participant);
+  }
+
+  /**
+   * Gets the participant's current speaking status for an active talker indicator.
+   * @param participant<Participant> The Participant object.
+   * @returns {Promise<boolean>} A boolean indicating whether the current participant is speaking.
+   */
+
+  public async isSpeaking(participant?: Participant): Promise<boolean> {
+    return DolbyioIAPISdk.isSpeaking(participant);
   }
 }
 
