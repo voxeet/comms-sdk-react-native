@@ -1,10 +1,5 @@
-/**
- * @category ConferenceService
- * @module ConferenceService
- */
-
 import { Alert, NativeModules } from 'react-native';
-const { DolbyioIAPISdk } = NativeModules;
+const { DolbyIoIAPIConferenceService } = NativeModules;
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -15,7 +10,7 @@ import type {
   ConferenceStatus,
   AudioProcessingOptions,
   ParticipantPermissions,
-} from './types';
+} from './models';
 
 export class ConferenceService {
   public join(): void {
@@ -29,7 +24,7 @@ export class ConferenceService {
    */
 
   public async create(options: ConferenceCreateOptions): Promise<Conference> {
-    return DolbyioIAPISdk.create(options);
+    return DolbyIoIAPIConferenceService.create(options);
   }
 
   /**
@@ -39,7 +34,7 @@ export class ConferenceService {
    */
 
   public async fetch(conferenceId?: string): Promise<Conference> {
-    return DolbyioIAPISdk.fetch(conferenceId);
+    return DolbyIoIAPIConferenceService.fetch(conferenceId);
   }
 
   /**
@@ -48,7 +43,7 @@ export class ConferenceService {
    */
 
   public async current(): Promise<Conference> {
-    return DolbyioIAPISdk.current();
+    return DolbyIoIAPIConferenceService.current();
   }
 
   /**
@@ -64,7 +59,11 @@ export class ConferenceService {
     replayOptions?: ConferenceReplayOptions,
     mixingOptions?: ConferenceMixingOptions
   ): Promise<Conference> {
-    return DolbyioIAPISdk.replay(conference, replayOptions, mixingOptions);
+    return DolbyIoIAPIConferenceService.replay(
+      conference,
+      replayOptions,
+      mixingOptions
+    );
   }
 
   /**
@@ -75,7 +74,7 @@ export class ConferenceService {
   // TODO - AudioLevel type for Promise
 
   public async getAudioLevel(participant?: Participant): Promise<number> {
-    return DolbyioIAPISdk.getAudioLevel(participant);
+    return DolbyIoIAPIConferenceService.getAudioLevel(participant);
   }
 
   /**
@@ -87,7 +86,7 @@ export class ConferenceService {
   public async getAudioProcessing(
     participant?: Participant
   ): Promise<AudioProcessing> {
-    return DolbyioIAPISdk.getAudioProcessing(participant);
+    return DolbyIoIAPIConferenceService.getAudioProcessing(participant);
   }
 
   /**
@@ -97,7 +96,7 @@ export class ConferenceService {
   // TODO - LocalStats type for Promise
 
   public async getLocalStats(): Promise<any> {
-    return DolbyioIAPISdk.getLocalStats();
+    return DolbyIoIAPIConferenceService.getLocalStats();
   }
 
   /**
@@ -106,7 +105,7 @@ export class ConferenceService {
    */
 
   public async getMaxVideoForwarding(): Promise<number> {
-    return DolbyioIAPISdk.getMaxVideoForwarding();
+    return DolbyIoIAPIConferenceService.getMaxVideoForwarding();
   }
 
   /**
@@ -116,7 +115,7 @@ export class ConferenceService {
    */
 
   public async getParticipant(participantId?: String): Promise<Participant> {
-    return DolbyioIAPISdk.getParticipant(participantId);
+    return DolbyIoIAPIConferenceService.getParticipant(participantId);
   }
 
   /**
@@ -128,7 +127,7 @@ export class ConferenceService {
   public async getParticipants(
     conference?: Conference
   ): Promise<Array<Participant>> {
-    return DolbyioIAPISdk.getParticipants(conference);
+    return DolbyIoIAPIConferenceService.getParticipants(conference);
   }
 
   /**
@@ -138,7 +137,7 @@ export class ConferenceService {
    */
 
   public async getStatus(conference?: Conference): Promise<ConferenceStatus> {
-    return DolbyioIAPISdk.getStatus(conference);
+    return DolbyIoIAPIConferenceService.getStatus(conference);
   }
 
   /**
@@ -147,7 +146,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return DolbyioIAPISdk.inOutputMuted();
+    return DolbyIoIAPIConferenceService.inOutputMuted();
   }
 
   /**
@@ -157,7 +156,7 @@ export class ConferenceService {
    */
 
   public async isMuted(participant?: Participant): Promise<boolean> {
-    return DolbyioIAPISdk.isMuted(participant);
+    return DolbyIoIAPIConferenceService.isMuted(participant);
   }
 
   /**
@@ -167,7 +166,7 @@ export class ConferenceService {
    */
 
   public async isSpeaking(participant?: Participant): Promise<boolean> {
-    return DolbyioIAPISdk.isSpeaking(participant);
+    return DolbyIoIAPIConferenceService.isSpeaking(participant);
   }
 
   /**
@@ -179,7 +178,7 @@ export class ConferenceService {
   public async setAudioProcessing(
     options: AudioProcessingOptions
   ): Promise<any> {
-    return DolbyioIAPISdk.setAudioProcessing(options);
+    return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
 
   /**
@@ -188,7 +187,7 @@ export class ConferenceService {
    */
 
   public async setMaxVideoForwarding(): Promise<any> {
-    return DolbyioIAPISdk.setMaxVideoForwarding();
+    return DolbyIoIAPIConferenceService.setMaxVideoForwarding();
   }
 
   /**
@@ -202,7 +201,7 @@ export class ConferenceService {
     isMuted: boolean,
     participant?: Participant
   ): Promise<boolean> {
-    return DolbyioIAPISdk.mute(participant, isMuted);
+    return DolbyIoIAPIConferenceService.mute(participant, isMuted);
   }
 
   /**
@@ -214,7 +213,9 @@ export class ConferenceService {
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
   ): Promise<any> {
-    return DolbyioIAPISdk.updatePermissions(participantPermissions);
+    return DolbyIoIAPIConferenceService.updatePermissions(
+      participantPermissions
+    );
   }
 
   /**
@@ -224,7 +225,7 @@ export class ConferenceService {
    */
 
   public async startAudio(participant?: Participant): Promise<any> {
-    return DolbyioIAPISdk.startAudio(participant);
+    return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
   /**
@@ -234,7 +235,7 @@ export class ConferenceService {
    */
 
   public async startVideo(participant?: Participant): Promise<any> {
-    return DolbyioIAPISdk.startVideo(participant);
+    return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
   /**
@@ -244,7 +245,7 @@ export class ConferenceService {
    */
 
   public async stopAudio(participant?: Participant): Promise<any> {
-    return DolbyioIAPISdk.stopAudio(participant);
+    return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
   /**
@@ -254,7 +255,7 @@ export class ConferenceService {
    */
 
   public async stopVideo(participant?: Participant): Promise<any> {
-    return DolbyioIAPISdk.stopVideo(participant);
+    return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 }
 

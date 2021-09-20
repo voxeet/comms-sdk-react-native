@@ -1,6 +1,6 @@
 {
   "entryPoints": [
-    "./src"
+    "./src/DolbyIoIAPI.ts"
 
   ],
   "exclude": "./src/utils/**/*"
