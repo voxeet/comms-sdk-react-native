@@ -29,6 +29,7 @@
 - [kick](_internal_.ConferenceService.md#kick)
 - [leave](_internal_.ConferenceService.md#leave)
 - [mute](_internal_.ConferenceService.md#mute)
+- [onStatusChange](_internal_.ConferenceService.md#onstatuschange)
 - [replay](_internal_.ConferenceService.md#replay)
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](_internal_.ConferenceService.md#setmaxvideoforwarding)
@@ -357,6 +358,36 @@ Stops playing the specified remote participants' audio to the local participant 
 [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Informs if the mute state has changed.
+
+___
+
+### onStatusChange
+
+▸ **onStatusChange**(`handler`): () => `void`
+
+Add a handler for conference status changes
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: `any`) => `void` |
+
+#### Returns
+
+`fn`
+
+Function that removes handler
+
+▸ (): `void`
+
+Add a handler for conference status changes
+
+##### Returns
+
+`void`
+
+Function that removes handler
 
 ___
 
