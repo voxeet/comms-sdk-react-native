@@ -16,7 +16,7 @@ typedef void (^RefreshAccessTokenClosure)(NSString *);
     BOOL _hasListeners;
 }
 
-RCT_EXPORT_MODULE(DolbyioIAPISdk)
+RCT_EXPORT_MODULE(DolbyIoIAPIModule)
 
 - (void)setupSDK
 {
