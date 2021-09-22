@@ -19,7 +19,8 @@ export default class App extends Component<Props, State> {
   componentDidMount() {
     DolbyIoIAPI.initialize(APP_ID, APP_SECRET)
       .then(async () => {
-        await DolbyIoIAPI.session.open({ name: 'John Doe' });
+        // TODO not implemented on the bridge's side
+        // await DolbyIoIAPI.session.open({ name: 'John Doe' });
         Alert.alert('App initialized successfully');
       })
       .catch(() => {
