@@ -14,8 +14,6 @@ import com.voxeet.sdk.manifests.AbstractManifestComponentProvider;
 import com.voxeet.sdk.preferences.VoxeetPreferences;
 import com.voxeet.sdk.utils.VoxeetEnvironmentHolder;
 
-import io.dolby.sdk.reactnative.android.services.SystemServiceFactory;
-import io.dolby.sdk.reactnative.android.services.DolbyioIAPISystemService;
 import io.dolby.sdk.reactnative.utils.IAPILog;
 
 public final class RNDolbyioIAPISDKManifestComponent extends AbstractManifestComponentProvider {
@@ -46,8 +44,6 @@ public final class RNDolbyioIAPISDKManifestComponent extends AbstractManifestCom
         //force a default voxeet preferences manager
         //in sdk mode, no issues
         VoxeetPreferences.init(application, new VoxeetEnvironmentHolder(application));
-
-        SystemServiceFactory.registerSDKServiceClass(DolbyioIAPISystemService.class);
     }
 
     @Override

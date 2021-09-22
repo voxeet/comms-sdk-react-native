@@ -65,4 +65,11 @@ dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
 
     implementation "com.voxeet.sdk:sdk:3.2.3"
+
+    testImplementation("junit:junit:${JUNIT_VERSION}")
+    testImplementation("org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}")
+    testImplementation("org.powermock:powermock-module-junit4-rule:${POWERMOCK_VERSION}")
+    testImplementation("org.powermock:powermock-classloading-xstream:${POWERMOCK_VERSION}")
+    testImplementation("org.mockito:mockito-core:${MOCKITO_CORE_VERSION}")
+    testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
