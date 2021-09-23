@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {
-  KeyboardAvoidingView,
+  TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  Platform,
   Alert,
   Text,
 } from 'react-native';
@@ -16,29 +15,30 @@ export interface Props {}
 export interface State {}
 
 export default class App extends Component<Props, State> {
-  componentDidMount() {
+  state = {
+    activeConference: null,
+  };
+
+  initialize = async () => {
     DolbyIoIAPI.initialize(APP_ID, APP_SECRET)
       .then(async () => {
-        // TODO not implemented on the bridge's side
-        // await DolbyIoIAPI.session.open({ name: 'John Doe' });
+        await DolbyIoIAPI.session.open({ name: 'John Doe' });
         Alert.alert('App initialized successfully');
       })
       .catch(() => {
         Alert.alert('App not initialized');
       });
-  }
+  };
 
   render() {
     return (
-      <SafeAreaView>
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        >
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <Text>DOLBY IO IAPI TEST APP</Text>
-          </ScrollView>
-        </KeyboardAvoidingView>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Text>DOLBY IO IAPI TEST APP</Text>
+          <TouchableOpacity onPress={this.initialize}>
+            <Text>INITIALIZE</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </SafeAreaView>
     );
   }
