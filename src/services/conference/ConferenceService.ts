@@ -147,7 +147,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.inOutputMuted();
+    return DolbyIoIAPIConferenceService.isOutputMuted();
   }
 
   /**
@@ -202,7 +202,7 @@ export class ConferenceService {
     isMuted: boolean,
     participant?: Participant
   ): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.mute(participant, isMuted);
+    return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
 
   /**
