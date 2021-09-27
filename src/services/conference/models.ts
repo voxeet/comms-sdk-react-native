@@ -1,6 +1,6 @@
 export interface Conference {
-  conferenceId?: string;
-  conferenceAlias?: string;
+  id?: string;
+  alias?: string;
   isNew?: boolean;
   participants: Participant[];
   status: ConferenceStatus;
@@ -48,7 +48,7 @@ export interface ConferenceMixingOptions {
 }
 
 export interface Participant {
-  participantId: string;
+  id: string;
   conferenceStatus?: string;
   externalId?: string;
   name?: string;
@@ -80,13 +80,19 @@ export enum UserType {
   LISTENER = 'listener',
 }
 
-export interface JoinUserInfo {
-  type?: UserType;
+export interface ConferenceConstraints {
+  audio: boolean;
+  video: boolean;
 }
 
 export interface ConferenceJoinOptions {
-  user?: JoinUserInfo;
+  conferenceAccessToken?: string;
+  constraints?: ConferenceConstraints;
   maxVideoForwarding?: number;
+  mixing?: ConferenceMixingOptions;
+  preferRecvMono?: boolean;
+  preferSendMono?: boolean;
+  simulcast?: boolean;
 }
 
 export interface ParticipantPermissions {
