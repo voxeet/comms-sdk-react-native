@@ -11,21 +11,34 @@ export interface Conference {
   status: ConferenceStatus;
 }
 
-// TODO - need more docs?
 export enum ConferenceStatus {
+  /** Default status */
   DEFAULT = 'DEFAULT',
+  /** Informs that the conference is creating */
   CREATING = 'CREATING',
+  /** Informs that a new conference is created. */
   CREATED = 'CREATED',
+  /** Informs that the local participant is joining a conference. */
   JOINING = 'JOINING',
+  /** Informs that the local participant successfully joined a conference. */
   JOINED = 'JOINED',
   /** @deprecated */
   FIRST_PARTICIPANT = 'FIRST_PARTICIPANT',
   /** @deprecated */
   NO_MORE_PARTICIPANT = 'NO_MORE_PARTICIPANT',
+  /** Informs that the local participant is leaving a conference. */
   LEAVING = 'LEAVING',
+  /** Informs that the local participant successfully left a conference. */
   LEFT = 'LEFT',
+  /** Informs that an error occurred during a conference. */
   ERROR = 'ERROR',
+  /** Informs that the conference is destroyed. This status may be triggered by the following situations:
+
+  All conference participants left the conference
+  The time to live or the conference time limit elapsed
+  The conference creator used the Terminate REST API to terminate an ongoing conference */
   DESTROYED = 'DESTROYED',
+  /** Informs that a conference is ended. */
   ENDED = 'ENDED',
 }
 
