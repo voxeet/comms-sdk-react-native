@@ -306,6 +306,21 @@ export class ConferenceService {
       }
     );
   }
+
+  /**
+   * Add a handler for permissions changes
+   * @param handler<(data: any) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onPermissionsChange(handler: (data: any) => void): () => void {
+    return NativeEvents.addListener(
+      ConferenceServiceEventNames.PermissionsUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+  }
 }
 
 export default new ConferenceService();
