@@ -19,24 +19,28 @@ const { DolbyIoIAPIModule } = NativeModules;
 const mockAPP_ID = 'MOCKED_APP_ID';
 const mockAPP_SECRET = 'MOCKED_APP_SECRET';
 
-/** Main module - "initialize" method test */
+/** Main module tests */
 
-test('Main module - "initialize" method test', () => {
-  DolbyIoIAPI.initialize(mockAPP_ID, mockAPP_SECRET);
-  expect(DolbyIoIAPIModule.initialize).toHaveBeenCalledWith(
-    mockAPP_ID,
-    mockAPP_SECRET
-  );
-});
+describe('Main module', () => {
+  /** "initialize" method  */
 
-/** Main module - "initializeToken" method test */
-// TODO - toHaveBeenCalledWith(null, mockFunctions) - doesn't work
+  test('"initialize" method', () => {
+    DolbyIoIAPI.initialize(mockAPP_ID, mockAPP_SECRET);
+    expect(DolbyIoIAPIModule.initialize).toHaveBeenCalledWith(
+      mockAPP_ID,
+      mockAPP_SECRET
+    );
+  });
 
-const mockFunction: RefreshAccessTokenType = () => {
-  return 'string';
-};
+  /** "initializeToken" method */
+  // TODO - toHaveBeenCalledWith(null, mockFunctions) - doesn't work
 
-test('Main module - "initializeToken" method test', () => {
-  DolbyIoIAPI.initializeToken(null, mockFunction);
-  expect(DolbyIoIAPIModule.initializeToken).toHaveBeenCalled();
+  const mockFunction: RefreshAccessTokenType = () => {
+    return 'string';
+  };
+
+  test('"initializeToken" method', () => {
+    DolbyIoIAPI.initializeToken(null, mockFunction);
+    expect(DolbyIoIAPIModule.initializeToken).toHaveBeenCalled();
+  });
 });

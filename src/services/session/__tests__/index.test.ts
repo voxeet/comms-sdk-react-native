@@ -15,16 +15,20 @@ jest.mock('react-native', () => {
 import { NativeModules } from 'react-native';
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
-/** SessionService - "open" method test */
+/** SessionService tests */
 
-test('SessionService - "open" method test', () => {
-  SessionService.open({});
-  expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
-});
+describe('SessionService', () => {
+  /** "open" method */
 
-/** SessionService - "close" method test */
+  test('"open" method', () => {
+    SessionService.open({});
+    expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
+  });
 
-test('SessionService - "close" method test', () => {
-  SessionService.close();
-  expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+  /** "close" method */
+
+  test('"close" method', () => {
+    SessionService.close();
+    expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+  });
 });
