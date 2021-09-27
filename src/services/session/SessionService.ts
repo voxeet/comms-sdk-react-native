@@ -1,7 +1,7 @@
-import { NativeModules } from 'react-native';
-const { DolbyIoIAPISessionServiceModule } = NativeModules;
-
 import type { ParticipantInfo } from './models';
+import { NativeModules } from 'react-native';
+
+const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
 /**
  * The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
