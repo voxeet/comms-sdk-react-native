@@ -11,6 +11,8 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
@@ -31,6 +33,7 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
         mAwaitingTokenCallback = new ArrayList<>();
     }
 
+    @NotNull
     @Override
     public String getName() {
         return "DolbyIoIAPIModule";
