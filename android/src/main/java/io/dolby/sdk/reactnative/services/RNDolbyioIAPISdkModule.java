@@ -94,6 +94,7 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * Emits an access token to a callback.
      * <p>
      * Should be called along with {@link #initializeToken(String, Promise)} method.
+     * </p>
      *
      * @param accessToken access token
      * @param promise     returns null
@@ -118,7 +119,7 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * Emits an error to a callback.
      * <p>
      * Should be called along with {@link #initializeToken(String, Promise)} method.
-     *
+     * </p>
      * @param reason  reason of the refresh token failure
      * @param promise returns null
      */
