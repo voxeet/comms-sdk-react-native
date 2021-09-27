@@ -1,9 +1,9 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
-const { DolbyIoIAPIModule } = NativeModules;
-
-import type { UnregisterListener } from './types';
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
+import type { UnregisterListener } from './types';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+
+const { DolbyIoIAPIModule } = NativeModules;
 
 interface NativeEventType
   extends DolbyIoIAPIEventMap,

@@ -1,6 +1,6 @@
 export interface Conference {
-  conferenceId?: string;
-  conferenceAlias?: string;
+  id?: string;
+  alias?: string;
   isNew?: boolean;
   participants: Participant[];
   status: ConferenceStatus;
@@ -48,7 +48,7 @@ export interface ConferenceMixingOptions {
 }
 
 export interface Participant {
-  participantId: string;
+  id: string;
   conferenceStatus?: string;
   externalId?: string;
   name?: string;
