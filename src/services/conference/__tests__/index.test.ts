@@ -47,225 +47,233 @@ jest.mock('react-native', () => {
 import { NativeModules } from 'react-native';
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
-/** ConferenceService - "create" method test */
+/** ConferenceService tests */
 
-test('ConferenceService - "create" method test', () => {
-  ConferenceService.create({});
-  expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith({});
-});
+describe('ConferenceService', () => {
+  /** "create" method */
 
-/** ConferenceService - "fetch" method test */
-
-test('ConferenceService - "fetch" method test', () => {
-  ConferenceService.fetch();
-  expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
-});
-
-/** ConferenceService - "current" method test */
-
-test('ConferenceService - "current" method test', () => {
-  ConferenceService.current();
-  expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
-});
-
-/** ConferenceService - "replay" method test */
-
-const mockConference: Conference = {
-  participants: [{ participantId: '123' }],
-  status: ConferenceStatus.DEFAULT,
-};
-
-const mockConferenceReplayOptions: ConferenceReplayOptions = {
-  offset: 1,
-};
-
-const mockConferenceMixingOptions: ConferenceMixingOptions = {
-  enabled: true,
-};
-
-test('ConferenceService - "replay" method test', () => {
-  ConferenceService.replay(
-    mockConference,
-    mockConferenceReplayOptions,
-    mockConferenceMixingOptions
-  );
-  expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
-    mockConference,
-    mockConferenceReplayOptions,
-    mockConferenceMixingOptions
-  );
-});
-
-/** ConferenceService - "getAudioLevel" method test */
-
-test('ConferenceService - "getAudioLevel" method test', () => {
-  ConferenceService.getAudioLevel();
-  expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getAudioProcessing" method test */
-
-test('ConferenceService - "getAudioProcessing" method test', () => {
-  ConferenceService.getAudioProcessing();
-  expect(DolbyIoIAPIConferenceService.getAudioProcessing).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getLocalStats" method test */
-
-test('ConferenceService - "getLocalStats" method test', () => {
-  ConferenceService.getLocalStats();
-  expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getMaxVideoForwarding" method test */
-
-test('ConferenceService - "getMaxVideoForwarding" method test', () => {
-  ConferenceService.getMaxVideoForwarding();
-  expect(DolbyIoIAPIConferenceService.getMaxVideoForwarding).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getParticipant" method test */
-
-test('ConferenceService - "getParticipant" method test', () => {
-  ConferenceService.getParticipant();
-  expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getParticipants" method test */
-
-test('ConferenceService - "getParticipants" method test', () => {
-  ConferenceService.getParticipants();
-  expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalled();
-});
-
-/** ConferenceService - "getStatus" method test */
-
-test('ConferenceService - "getStatus" method test', () => {
-  ConferenceService.getStatus();
-  expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalled();
-});
-
-/** ConferenceService - "isOutputMuted" method test */
-
-test('ConferenceService - "isOutputMuted" method test', () => {
-  ConferenceService.isOutputMuted();
-  expect(DolbyIoIAPIConferenceService.isOutputMuted).toHaveBeenCalled();
-});
-
-/** ConferenceService - "isMuted" method test */
-
-test('ConferenceService - "isMuted" method test', () => {
-  ConferenceService.isMuted();
-  expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
-});
-
-/** ConferenceService - "isSpeaking" method test */
-
-test('ConferenceService - "isSpeaking" method test', () => {
-  ConferenceService.isSpeaking();
-  expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalled();
-});
-
-/** ConferenceService - "setAudioProcessing" method test */
-
-test('ConferenceService - "setAudioProcessing" method test', () => {
-  ConferenceService.setAudioProcessing({});
-  expect(DolbyIoIAPIConferenceService.setAudioProcessing).toHaveBeenCalledWith(
-    {}
-  );
-});
-
-/** ConferenceService - "setMaxVideoForwarding" method test */
-
-test('ConferenceService - "setMaxVideoForwarding" method test', () => {
-  ConferenceService.setMaxVideoForwarding();
-  expect(DolbyIoIAPIConferenceService.setMaxVideoForwarding).toHaveBeenCalled();
-});
-
-/** ConferenceService - "mute" method test */
-
-test('ConferenceService - "mute" method test', () => {
-  ConferenceService.mute(true, {
-    participantId: '123',
+  test('"create" method', () => {
+    ConferenceService.create({});
+    expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith({});
   });
-  expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(true, {
-    participantId: '123',
+
+  /** "fetch" method */
+
+  test('"fetch" method', () => {
+    ConferenceService.fetch();
+    expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
   });
-});
 
-/** ConferenceService - "updatePermissions" method test */
+  /** "current" method */
 
-const mockParticipantPermissions: ParticipantPermissions = {
-  participant: { participantId: '123' },
-  permissions: [
-    ConferencePermission.INVITE,
-    ConferencePermission.JOIN,
-    ConferencePermission.RECORD,
-  ],
-};
-
-test('ConferenceService - "updatePermissions" method test', () => {
-  ConferenceService.updatePermissions([mockParticipantPermissions]);
-  expect(DolbyIoIAPIConferenceService.updatePermissions).toHaveBeenCalledWith([
-    mockParticipantPermissions,
-  ]);
-});
-
-/** ConferenceService - "startAudio" method test */
-
-test('ConferenceService - "startAudio" method test', () => {
-  ConferenceService.startAudio();
-  expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalled();
-});
-
-/** ConferenceService - "startVideo" method test */
-
-test('ConferenceService - "startVideo" method test', () => {
-  ConferenceService.startVideo();
-  expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalled();
-});
-
-/** ConferenceService - "stopAudio" method test */
-
-test('ConferenceService - "stopAudio" method test', () => {
-  ConferenceService.stopAudio();
-  expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalled();
-});
-
-/** ConferenceService - "stopVideo" method test */
-
-test('ConferenceService - "stopVideo" method test', () => {
-  ConferenceService.stopVideo();
-  expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalled();
-});
-
-/** ConferenceService - "join" method test */
-
-const mockConference_2: Conference = {
-  participants: [{ participantId: '123' }],
-  status: ConferenceStatus.DEFAULT,
-};
-
-test('ConferenceService - "join" method test', () => {
-  ConferenceService.join(mockConference_2, {});
-  expect(DolbyIoIAPIConferenceService.join).toHaveBeenCalledWith(
-    mockConference_2,
-    {}
-  );
-});
-
-/** ConferenceService - "kick" method test */
-
-test('ConferenceService - "kick" method test', () => {
-  ConferenceService.kick({ participantId: '123' });
-  expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
-    participantId: '123',
+  test('"current" method', () => {
+    ConferenceService.current();
+    expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
   });
-});
 
-/** ConferenceService - "leave" method test */
+  /** "replay" method */
 
-test('ConferenceService - "leave" method test', () => {
-  ConferenceService.leave();
-  expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
+  const mockConference: Conference = {
+    participants: [{ participantId: '123' }],
+    status: ConferenceStatus.DEFAULT,
+  };
+
+  const mockConferenceReplayOptions: ConferenceReplayOptions = {
+    offset: 1,
+  };
+
+  const mockConferenceMixingOptions: ConferenceMixingOptions = {
+    enabled: true,
+  };
+
+  test('"replay" method', () => {
+    ConferenceService.replay(
+      mockConference,
+      mockConferenceReplayOptions,
+      mockConferenceMixingOptions
+    );
+    expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+      mockConference,
+      mockConferenceReplayOptions,
+      mockConferenceMixingOptions
+    );
+  });
+
+  /** "getAudioLevel" method */
+
+  test('"getAudioLevel" method', () => {
+    ConferenceService.getAudioLevel();
+    expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalled();
+  });
+
+  /** "getAudioProcessing" method */
+
+  test('"getAudioProcessing" method', () => {
+    ConferenceService.getAudioProcessing();
+    expect(DolbyIoIAPIConferenceService.getAudioProcessing).toHaveBeenCalled();
+  });
+
+  /** "getLocalStats" method */
+
+  test('"getLocalStats" method', () => {
+    ConferenceService.getLocalStats();
+    expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
+  });
+
+  /** "getMaxVideoForwarding" method */
+
+  test('"getMaxVideoForwarding" method', () => {
+    ConferenceService.getMaxVideoForwarding();
+    expect(
+      DolbyIoIAPIConferenceService.getMaxVideoForwarding
+    ).toHaveBeenCalled();
+  });
+
+  /** "getParticipant" method */
+
+  test('"getParticipant" method', () => {
+    ConferenceService.getParticipant();
+    expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
+  });
+
+  /** "getParticipants" method */
+
+  test('"getParticipants" method', () => {
+    ConferenceService.getParticipants();
+    expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalled();
+  });
+
+  /** "getStatus" method */
+
+  test('"getStatus" method', () => {
+    ConferenceService.getStatus();
+    expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalled();
+  });
+
+  /** "isOutputMuted" method */
+
+  test('"isOutputMuted" method', () => {
+    ConferenceService.isOutputMuted();
+    expect(DolbyIoIAPIConferenceService.isOutputMuted).toHaveBeenCalled();
+  });
+
+  /** "isMuted" method */
+
+  test('"isMuted" method', () => {
+    ConferenceService.isMuted();
+    expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
+  });
+
+  /** "isSpeaking" method */
+
+  test('"isSpeaking" method', () => {
+    ConferenceService.isSpeaking();
+    expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalled();
+  });
+
+  /** "setAudioProcessing" method */
+
+  test('"setAudioProcessing" method', () => {
+    ConferenceService.setAudioProcessing({});
+    expect(
+      DolbyIoIAPIConferenceService.setAudioProcessing
+    ).toHaveBeenCalledWith({});
+  });
+
+  /** "setMaxVideoForwarding" method */
+
+  test('"setMaxVideoForwarding" method', () => {
+    ConferenceService.setMaxVideoForwarding();
+    expect(
+      DolbyIoIAPIConferenceService.setMaxVideoForwarding
+    ).toHaveBeenCalled();
+  });
+
+  /** "mute" method */
+
+  test('"mute" method', () => {
+    ConferenceService.mute(true, {
+      participantId: '123',
+    });
+    expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(true, {
+      participantId: '123',
+    });
+  });
+
+  /** "updatePermissions" method */
+
+  const mockParticipantPermissions: ParticipantPermissions = {
+    participant: { participantId: '123' },
+    permissions: [
+      ConferencePermission.INVITE,
+      ConferencePermission.JOIN,
+      ConferencePermission.RECORD,
+    ],
+  };
+
+  test('"updatePermissions" method', () => {
+    ConferenceService.updatePermissions([mockParticipantPermissions]);
+    expect(DolbyIoIAPIConferenceService.updatePermissions).toHaveBeenCalledWith(
+      [mockParticipantPermissions]
+    );
+  });
+
+  /** "startAudio" method */
+
+  test('"startAudio" method', () => {
+    ConferenceService.startAudio();
+    expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalled();
+  });
+
+  /** "startVideo" method */
+
+  test('"startVideo" method', () => {
+    ConferenceService.startVideo();
+    expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalled();
+  });
+
+  /** "stopAudio" method */
+
+  test('"stopAudio" method', () => {
+    ConferenceService.stopAudio();
+    expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalled();
+  });
+
+  /** "stopVideo" method */
+
+  test('"stopVideo" method', () => {
+    ConferenceService.stopVideo();
+    expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalled();
+  });
+
+  /** "join" method */
+
+  const mockConference_2: Conference = {
+    participants: [{ participantId: '123' }],
+    status: ConferenceStatus.DEFAULT,
+  };
+
+  test('"join" method', () => {
+    ConferenceService.join(mockConference_2, {});
+    expect(DolbyIoIAPIConferenceService.join).toHaveBeenCalledWith(
+      mockConference_2,
+      {}
+    );
+  });
+
+  /** "kick" method */
+
+  test('"kick" method', () => {
+    ConferenceService.kick({ participantId: '123' });
+    expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
+      participantId: '123',
+    });
+  });
+
+  /** "leave" method */
+
+  test('"leave" method', () => {
+    ConferenceService.leave();
+    expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
+  });
 });
