@@ -8,23 +8,23 @@
 
 ### Properties
 
-- [conferenceAlias](_internal_.Conference.md#conferencealias)
-- [conferenceId](_internal_.Conference.md#conferenceid)
+- [alias](_internal_.Conference.md#alias)
+- [id](_internal_.Conference.md#id)
 - [isNew](_internal_.Conference.md#isnew)
 - [participants](_internal_.Conference.md#participants)
 - [status](_internal_.Conference.md#status)
 
 ## Properties
 
-### conferenceAlias
+### alias
 
-• `Optional` **conferenceAlias**: `string`
+• `Optional` **alias**: `string`
 
 ___
 
-### conferenceId
+### id
 
-• `Optional` **conferenceId**: `string`
+• `Optional` **id**: `string`
 
 ___
 

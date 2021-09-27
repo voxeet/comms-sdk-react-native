@@ -12,7 +12,6 @@
 - [ConferenceStatus](../enums/_internal_.ConferenceStatus.md)
 - [Mode](../enums/_internal_.Mode.md)
 - [RTCPMode](../enums/_internal_.RTCPMode.md)
-- [UserType](../enums/_internal_.UserType.md)
 
 ### Classes
 
@@ -29,6 +28,7 @@
 - [CollatorOptions](../interfaces/_internal_.CollatorOptions.md)
 - [ConcatArray](../interfaces/_internal_.ConcatArray.md)
 - [Conference](../interfaces/_internal_.Conference.md)
+- [ConferenceConstraints](../interfaces/_internal_.ConferenceConstraints.md)
 - [ConferenceCreateOptions](../interfaces/_internal_.ConferenceCreateOptions.md)
 - [ConferenceCreateParameters](../interfaces/_internal_.ConferenceCreateParameters.md)
 - [ConferenceJoinOptions](../interfaces/_internal_.ConferenceJoinOptions.md)
@@ -40,7 +40,6 @@
 - [Iterator](../interfaces/_internal_.Iterator.md)
 - [IteratorReturnResult](../interfaces/_internal_.IteratorReturnResult.md)
 - [IteratorYieldResult](../interfaces/_internal_.IteratorYieldResult.md)
-- [JoinUserInfo](../interfaces/_internal_.JoinUserInfo.md)
 - [Participant](../interfaces/_internal_.Participant.md)
 - [ParticipantInfo](../interfaces/_internal_.ParticipantInfo.md)
 - [ParticipantPermissions](../interfaces/_internal_.ParticipantPermissions.md)
