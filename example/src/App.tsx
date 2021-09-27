@@ -30,6 +30,32 @@ export default class App extends Component<Props, State> {
       });
   };
 
+  create = async () => {
+    const response = await DolbyIoIAPI.conference.create({});
+    Alert.alert(JSON.stringify(response));
+    this.setState({
+      activeConference: response,
+    });
+  };
+
+  fetch = async () => {
+    if (this.state.activeConference) {
+      const response = await DolbyIoIAPI.conference.fetch(
+        this.state.activeConference.id
+      );
+      Alert.alert(JSON.stringify(response));
+    }
+  };
+
+  join = async () => {
+    if (this.state.activeConference) {
+      const response = await DolbyIoIAPI.conference.join(
+        this.state.activeConference
+      );
+      Alert.alert(JSON.stringify(response));
+    }
+  };
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -37,6 +63,15 @@ export default class App extends Component<Props, State> {
           <Text>DOLBY IO IAPI TEST APP</Text>
           <TouchableOpacity onPress={this.initialize}>
             <Text>INITIALIZE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.create}>
+            <Text>CREATE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.fetch}>
+            <Text>FETCH</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.join}>
+            <Text>JOIN</Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
