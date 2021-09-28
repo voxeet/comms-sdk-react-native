@@ -21,7 +21,8 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-permissions": "^3.0.5",
     "react-native-reanimated": "^2.2.2",
-    "react-native-safe-area-context": "^3.3.2"
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-toast-message": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -29,7 +30,7 @@
     "@types/react-native-dotenv": "^0.2.0",
     "@types/react-native-permissions": "^2.0.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "metro-react-native-babel-preset": "^0.64.0",
+    "metro-react-native-babel-preset": "^0.66.2",
     "react-native-codegen": "^0.0.7"
   }
 }

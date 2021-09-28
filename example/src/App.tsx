@@ -1,5 +1,5 @@
 import Main from './Main';
-import DolbyIOProvider from './components/DolbyIOProvider';
+import DolbyIOProvider from '@components/DolbyIOProvider';
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';

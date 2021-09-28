@@ -1,8 +1,8 @@
-import { DolbyIOContext } from './components/DolbyIOProvider';
 import ConferenceScreen from './screens/ConferenceScreen';
 import InitializationScreen from './screens/InitializationScreen';
 import JoinScreen from './screens/JoinScreen';
 import LoginScreen from './screens/LoginScreen';
+import { DolbyIOContext } from '@components/DolbyIOProvider';
 import React, { useContext } from 'react';
 
 const Main = () => {

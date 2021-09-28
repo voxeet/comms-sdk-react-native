@@ -10,6 +10,12 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
           [pak.name]: path.join(__dirname, '..', pak.source),
+          '@assets': './src/assets',
+          '@components': './src/components',
+          '@constants': './src/constants',
+          '@screens': './src/screens',
+          '@ui': './src/ui',
+          '@utils': './src/utils',
         },
       },
     ],
