@@ -215,7 +215,7 @@ export class ConferenceService {
 
   /**
    * Informs whether the application plays the remote participants' audio to the local participant.
-   * @returns {Promise<boolean>} A boolean indicating whether the application plays the remote participants' audio to the local participant.
+   * @returns {Promise<null>} A boolean indicating whether the application plays the remote participants' audio to the local participant.
    */
 
   public async isOutputMuted(): Promise<boolean> {
@@ -245,21 +245,21 @@ export class ConferenceService {
   /**
    * Enables and disables audio processing for the conference participant.
    * @param options<AudioProcessingOptions> The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
   public async setAudioProcessing(
     options: AudioProcessingOptions
-  ): Promise<undefined> {
+  ): Promise<null> {
     return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async setMaxVideoForwarding(): Promise<undefined> {
+  public async setMaxVideoForwarding(): Promise<null> {
     return DolbyIoIAPIConferenceService.setMaxVideoForwarding();
   }
 
@@ -267,25 +267,25 @@ export class ConferenceService {
    * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
    * @param isMuted<boolean> A boolean, true indicates that the local participant is muted, false indicates that a participant is not muted
    * @param participant<Participant> A remote participant
-   * @returns {Promise<boolean>} Informs if the mute state has changed.
+   * @returns {Promise<null>} Informs if the mute state has changed.
    */
 
   public async mute(
     isMuted: boolean,
     participant?: Participant
-  ): Promise<undefined> {
+  ): Promise<null> {
     return DolbyIoIAPIConferenceService.mute(participant, isMuted);
   }
 
   /**
    * Updates the participant's conference permissions.
    * @param participantPermissions<ParticipantPermissions[]> The set of participant's conference permissions.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
-  ): Promise<undefined> {
+  ): Promise<null> {
     return DolbyIoIAPIConferenceService.updatePermissions(
       participantPermissions
     );
@@ -294,40 +294,40 @@ export class ConferenceService {
   /**
    * Starts audio transmission between the local client and a conference.
    * @param participant<Participant> The participant whose stream should be sent to the local participant.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async startAudio(participant?: Participant): Promise<undefined> {
+  public async startAudio(participant?: Participant): Promise<null> {
     return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
   /**
    * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async startVideo(participant?: Participant): Promise<undefined> {
+  public async startVideo(participant?: Participant): Promise<null> {
     return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
   /**
    * Stops audio transmission between the local client and a conference.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async stopAudio(participant?: Participant): Promise<undefined> {
+  public async stopAudio(participant?: Participant): Promise<null> {
     return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
   /**
    * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async stopVideo(participant?: Participant): Promise<undefined> {
+  public async stopVideo(participant?: Participant): Promise<null> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 
@@ -364,20 +364,20 @@ export class ConferenceService {
   /**
    * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
    * @param participant<Participant> The participant who needs to be kicked from the conference.
-   * @returns {Promise<any>}
+   * @returns {Promise<null>}
    */
 
-  public async kick(participant: Participant): Promise<undefined> {
+  public async kick(participant: Participant): Promise<null> {
     return DolbyIoIAPIConferenceService.kick(participant);
   }
 
   /**
    * Leaves the conference.
    * @param options<ConferenceJoinOptions> The additional options for the leaving participant.
-   * @returns {Promise<boolean>}
+   * @returns {Promise<null>}
    */
 
-  public async leave(options?: ConferenceLeaveOptions): Promise<undefined> {
+  public async leave(options?: ConferenceLeaveOptions): Promise<null> {
     return DolbyIoIAPIConferenceService.leave(options);
   }
 
