@@ -1,43 +1,43 @@
 #import "VTConferenceParameters+ReactModel.h"
 #import "NSObject+Utils.h"
 
-#define KEY_LIVE_RECORDING @"liveRecording"
-#define KEY_RTCP_MODE @"rtcpMode"
-#define KEY_STATS @"stats"
-#define KEY_TTL @"ttl"
-#define KEY_VIDEO_CODEC @"videoCodec"
-#define KEY_DOLBY_VOICE @"dolbyVoice"
+static NSString * const keyLiveRecording = @"liveRecording";
+static NSString * const keyRtcpMode = @"rtcpMode";
+static NSString * const keyStats = @"stats";
+static NSString * const keyTtl = @"ttl";
+static NSString * const keyVideoCodec = @"videoCodec";
+static NSString * const keyDolbyVoice = @"dolbyVoice";
 
 @implementation VTConferenceParameters (ReactModel)
 
-+ (instancetype)createConferenceParameters:(NSDictionary *)dictionary {
++ (instancetype _Nonnull)createWithDictionary:(NSDictionary * _Nonnull)dictionary {
     VTConferenceParameters *conferenceParams = [VTConferenceParameters new];
     [conferenceParams updateWithParams:dictionary];
     return conferenceParams;
 }
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        KEY_LIVE_RECORDING: @(self.liveRecording),
-        KEY_RTCP_MODE: self.rtcpMode ?: [NSNull null],
-        KEY_STATS: @(self.stats),
-        KEY_TTL: self.ttl ?: [NSNull null],
-        KEY_VIDEO_CODEC: self.videoCodec ?: [NSNull null],
-        KEY_DOLBY_VOICE: @(self.dolbyVoice),
+        keyLiveRecording: @(self.liveRecording),
+        keyRtcpMode: self.rtcpMode ?: [NSNull null],
+        keyStats: @(self.stats),
+        keyTtl: self.ttl ?: [NSNull null],
+        keyVideoCodec: self.videoCodec ?: [NSNull null],
+        keyDolbyVoice: @(self.dolbyVoice),
     };
 }
 
-- (void)updateWithParams:(NSDictionary *)params {
+- (void)updateWithParams:(NSDictionary * _Nullable)params {
     if(params == nil) {
         return;
     }
 
-    [self setValue:params[KEY_LIVE_RECORDING] forKey:KEY_LIVE_RECORDING type:[NSNumber class]];
-    [self setValue:params[KEY_RTCP_MODE] forKey:KEY_RTCP_MODE type:[NSString class]];
-    [self setValue:params[KEY_STATS] forKey:KEY_STATS type:[NSNumber class]];
-    [self setValue:params[KEY_TTL] forKey:KEY_TTL type:[NSNumber class]];
-    [self setValue:params[KEY_VIDEO_CODEC] forKey:KEY_VIDEO_CODEC type:[NSString class]];
-    [self setValue:params[KEY_DOLBY_VOICE] forKey:KEY_DOLBY_VOICE type:[NSNumber class]];
+    [self setValue:params[keyLiveRecording] forKey:keyLiveRecording type:[NSNumber class]];
+    [self setValue:params[keyRtcpMode] forKey:keyRtcpMode type:[NSString class]];
+    [self setValue:params[keyStats] forKey:keyStats type:[NSNumber class]];
+    [self setValue:params[keyTtl] forKey:keyTtl type:[NSNumber class]];
+    [self setValue:params[keyVideoCodec] forKey:keyVideoCodec type:[NSString class]];
+    [self setValue:params[keyDolbyVoice] forKey:keyDolbyVoice type:[NSNumber class]];
 }
 
 @end

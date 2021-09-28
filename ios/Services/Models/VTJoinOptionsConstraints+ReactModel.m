@@ -1,37 +1,37 @@
 #import "VTJoinOptionsConstraints+ReactModel.h"
 #import "NSDictionary+Utils.h"
 
-#define KEY_AUDIO @"audio"
-#define KEY_VIDEO @"video"
+static NSString * const keyAudio = @"audio";
+static NSString * const keyVideo = @"video";
 
 @implementation VTJoinOptionsConstraints (ReactModel)
 
-+ (instancetype)createJoinOptionsConstraints:(NSDictionary *)dictionary {
++ (instancetype _Nonnull)createWithDictionary:(NSDictionary * _Nonnull)dictionary {
     VTJoinOptionsConstraints *constraints = [VTJoinOptionsConstraints new];
     [constraints updateWithConstraints:dictionary];
     return constraints;
 }
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        KEY_AUDIO: @(self.audio),
-        KEY_VIDEO: @(self.video)
+        keyAudio: @(self.audio),
+        keyVideo: @(self.video)
     };
 }
 
-- (void)updateWithConstraints: (NSDictionary *)constrains {
+- (void)updateWithConstraints: (NSDictionary * _Nullable)constrains {
     if(constrains == nil) {
         return;
     }
     
-    if([constrains isNumberValueForKey:KEY_VIDEO]) {
-        self.video = [(NSNumber *)constrains[KEY_VIDEO] boolValue];
+    if([constrains isNumberValueForKey:keyVideo]) {
+        self.video = [(NSNumber *)constrains[keyVideo] boolValue];
     } else {
         self.video = VoxeetSDK.shared.conference.defaultVideo;
     }
     
-    if([constrains isNumberValueForKey:KEY_AUDIO]) {
-        self.audio = [(NSNumber *)constrains[KEY_AUDIO] boolValue];
+    if([constrains isNumberValueForKey:keyAudio]) {
+        self.audio = [(NSNumber *)constrains[keyAudio] boolValue];
     }
 }
 

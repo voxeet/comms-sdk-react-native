@@ -2,21 +2,29 @@
 #import "VTParticipantInfo+ReactModel.h"
 #import "MediaStream+ReactModel.h"
 
+static NSString * const keyId = @"id";
+static NSString * const keyInfo = @"info";
+static NSString * const keyType = @"type";
+static NSString * const keyStatus = @"status";
+static NSString * const keyStreams = @"streams";
+static NSString * const keyAudioReceivingFrom = @"audioReceivingFrom";
+static NSString * const keyAudioTransmitting = @"audioTransmitting";
+
 @implementation VTParticipant (ReactModel)
     
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        @"id": self.id ?: [NSNull null],
-        @"info": [self.info reactTranslation],
-        @"type": [self typeTranslation],
-        @"status": [self statusTranslation],
-        @"streams": [self streamsTranslation],
-        @"audioReceivingFrom": @(self.audioReceivingFrom),
-        @"audioTransmitting": @(self.audioTransmitting)
+        keyId: self.id ?: [NSNull null],
+        keyInfo: [self.info reactDescription],
+        keyType: [self typeDescription],
+        keyStatus: [self statusDescription],
+        keyStreams: [self streamsDescription],
+        keyAudioReceivingFrom: @(self.audioReceivingFrom),
+        keyAudioTransmitting: @(self.audioTransmitting)
     };
 }
 
-- (NSString *)statusTranslation {
+- (NSString *)statusDescription {
     switch (self.status) {
         case VTParticipantStatusReserved:
             return @"RESERVED";
@@ -39,7 +47,7 @@
     }
 }
 
-- (NSString *)typeTranslation {
+- (NSString *)typeDescription {
     switch (self.type) {
         case VTParticipantTypeNone:
             return @"NONE";
@@ -54,11 +62,11 @@
     }
 }
 
-- (NSArray<NSDictionary *> *)streamsTranslation {
+- (NSArray<NSDictionary *> *)streamsDescription {
     NSMutableArray<NSDictionary *> *output = [NSMutableArray array];
     
     for (MediaStream *stream in self.streams) {
-        [output addObject:[stream reactTranslation]];
+        [output addObject:[stream reactDescription]];
     }
     
     return output;
