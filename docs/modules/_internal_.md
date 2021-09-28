@@ -128,15 +128,15 @@ ___
 
 ### RefreshAccessTokenType
 
-Ƭ **RefreshAccessTokenType**: () => `string`
+Ƭ **RefreshAccessTokenType**: () => [`Promise`](_internal_.md#promise)<`string`\>
 
 #### Type declaration
 
-▸ (): `string`
+▸ (): [`Promise`](_internal_.md#promise)<`string`\>
 
 ##### Returns
 
-`string`
+[`Promise`](_internal_.md#promise)<`string`\>
 
 ## Variables
 

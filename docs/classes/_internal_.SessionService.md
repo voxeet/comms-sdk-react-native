@@ -27,19 +27,19 @@ The SessionService allows opening and closing sessions. Opening a session is man
 
 ### close
 
-▸ **close**(): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
+▸ **close**(): [`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 Closes the current session.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
+[`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 ___
 
 ### open
 
-▸ **open**(`participantInfo`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
+▸ **open**(`participantInfo`): [`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 Opens a new session.
 
@@ -51,4 +51,4 @@ Opens a new session.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
+[`Promise`](../modules/_internal_.md#promise)<``null``\>
