@@ -107,22 +107,26 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         joinOptions
       );
       console.log(joinedConference);
-      setConference(joinedConference);
+      setConference({
+        ...joinedConference,
+        participants: [{ id: '1', name: user && user.name }],
+      });
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
     }
   };
   const leave = async () => {
-    try {
-      const conferenceLeaveOptions = {
-        leaveRoom: true,
-      };
-
-      await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
-      setConference(undefined);
-    } catch (e: any) {
-      Alert.alert('Conference not left', e);
-    }
+    setConference(undefined);
+    // try {
+    //   const conferenceLeaveOptions = {
+    //     leaveRoom: true,
+    //   };
+    //
+    //   await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
+    //   setConference(undefined);
+    // } catch (e: any) {
+    //   Alert.alert('Conference not left', e);
+    // }
   };
 
   const contextValue = {
