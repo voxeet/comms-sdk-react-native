@@ -20,11 +20,15 @@
 
 • `Optional` **alias**: `string`
 
+The conference alias.
+
 ___
 
 ### id
 
 • `Optional` **id**: `string`
+
+The conference ID.
 
 ___
 
@@ -32,14 +36,20 @@ ___
 
 • `Optional` **isNew**: `boolean`
 
+Checks if the created conference is new.
+
 ___
 
 ### participants
 
 • **participants**: [`Participant`](_internal_.Participant.md)[]
 
+Gets information about conference participants.
+
 ___
 
 ### status
 
 • **status**: [`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)
+
+Provides the current conference status.

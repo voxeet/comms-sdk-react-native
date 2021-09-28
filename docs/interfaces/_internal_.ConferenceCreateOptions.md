@@ -17,8 +17,12 @@
 
 • `Optional` **alias**: `string`
 
+The conference alias.
+
 ___
 
 ### params
 
 • `Optional` **params**: [`ConferenceCreateParameters`](_internal_.ConferenceCreateParameters.md)
+
+The conference parameters.

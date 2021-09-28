@@ -20,11 +20,15 @@
 
 • `Optional` **avatarUrl**: `string`
 
+The URL of the participant's avatar.
+
 ___
 
 ### conferenceStatus
 
 • `Optional` **conferenceStatus**: `string`
+
+The current participant's status.
 
 ___
 
@@ -32,14 +36,20 @@ ___
 
 • `Optional` **externalId**: `string`
 
+The participant's external ID.
+
 ___
 
 ### id
 
 • **id**: `string`
 
+The participant's ID.
+
 ___
 
 ### name
 
 • `Optional` **name**: `string`
+
+The participant's name.

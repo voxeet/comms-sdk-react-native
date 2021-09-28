@@ -306,7 +306,7 @@ ___
 
 ### kick
 
-▸ **kick**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **kick**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
 
@@ -318,13 +318,13 @@ Allows the conference owner, or a participant with adequate permissions, to kick
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### leave
 
-▸ **leave**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **leave**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Leaves the conference.
 
@@ -336,13 +336,13 @@ Leaves the conference.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### mute
 
-▸ **mute**(`isMuted`, `participant?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **mute**(`isMuted`, `participant?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
 
@@ -355,7 +355,7 @@ Stops playing the specified remote participants' audio to the local participant 
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Informs if the mute state has changed.
 
@@ -415,7 +415,7 @@ ___
 
 ### setAudioProcessing
 
-▸ **setAudioProcessing**(`options`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **setAudioProcessing**(`options`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Enables and disables audio processing for the conference participant.
 
@@ -427,25 +427,25 @@ Enables and disables audio processing for the conference participant.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### setMaxVideoForwarding
 
-▸ **setMaxVideoForwarding**(): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **setMaxVideoForwarding**(): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Sets the maximum number of video streams that may be transmitted to the local participant.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### startAudio
 
-▸ **startAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **startAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Starts audio transmission between the local client and a conference.
 
@@ -457,13 +457,13 @@ Starts audio transmission between the local client and a conference.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### startVideo
 
-▸ **startVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **startVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
 
@@ -475,13 +475,13 @@ Notifies the server to either start sending the local participant's video stream
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### stopAudio
 
-▸ **stopAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **stopAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Stops audio transmission between the local client and a conference.
 
@@ -493,13 +493,13 @@ Stops audio transmission between the local client and a conference.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### stopVideo
 
-▸ **stopVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **stopVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
 
@@ -511,13 +511,13 @@ Notifies the server to either stop sending the local participant's video stream 
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 ___
 
 ### updatePermissions
 
-▸ **updatePermissions**(`participantPermissions`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **updatePermissions**(`participantPermissions`): [`Promise`](../modules/_internal_.md#promise)<`undefined`\>
 
 Updates the participant's conference permissions.
 
@@ -529,4 +529,4 @@ Updates the participant's conference permissions.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`undefined`\>

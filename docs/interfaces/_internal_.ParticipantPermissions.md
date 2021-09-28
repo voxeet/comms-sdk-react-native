@@ -17,8 +17,12 @@
 
 • **participant**: [`Participant`](_internal_.Participant.md)
 
+The invited participant.
+
 ___
 
 ### permissions
 
 • **permissions**: [`ConferencePermission`](../enums/_internal_.ConferencePermission.md)[]
+
+The participant's permissions.
