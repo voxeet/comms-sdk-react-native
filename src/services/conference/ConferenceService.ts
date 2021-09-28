@@ -14,7 +14,10 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
-import { ConferenceServiceEventNames } from './events';
+import {
+  ConferenceServiceEventNames,
+  PermissionsUpdatedEventType,
+} from './events';
 import NativeEvents from '../../utils/NativeEvents';
 
 export class ConferenceService {
@@ -313,7 +316,9 @@ export class ConferenceService {
    * @returns {() => void} Function that removes handler
    */
 
-  public onPermissionsChange(handler: (data: any) => void): () => void {
+  public onPermissionsChange(
+    handler: (data: PermissionsUpdatedEventType) => void
+  ): () => void {
     return NativeEvents.addListener(
       ConferenceServiceEventNames.PermissionsUpdated,
       (data) => {
