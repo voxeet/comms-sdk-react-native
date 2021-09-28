@@ -47,7 +47,7 @@ ___
 
 ### initialize
 
-▸ **initialize**(`consumerKey`, `consumerSecret`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **initialize**(`consumerKey`, `consumerSecret`): [`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 Initializes the SDK using the customer key and secret.
 
@@ -60,13 +60,13 @@ Initializes the SDK using the customer key and secret.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+[`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 ___
 
 ### initializeToken
 
-▸ **initializeToken**(`accessToken`, `refreshAccessToken`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **initializeToken**(`accessToken`, `refreshAccessToken`): [`Promise`](../modules/_internal_.md#promise)<``null``\>
 
 Initialize the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
 The following diagram presents the authentication flow:
@@ -102,4 +102,4 @@ Where (1) and (2) are two REST API endpoints available on Dolby.io servers and d
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+[`Promise`](../modules/_internal_.md#promise)<``null``\>
