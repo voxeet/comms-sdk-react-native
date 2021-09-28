@@ -13,9 +13,18 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
+
+import {
+  ConferenceServiceEventNames,
+  PermissionsUpdatedEventType,
+} from './events';
+
+import NativeEvents from '../../utils/NativeEvents';
+
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
+
 
 export class ConferenceService {
   /**
@@ -301,6 +310,23 @@ export class ConferenceService {
   public onStatusChange(handler: (data: any) => void): () => void {
     return NativeEvents.addListener(
       ConferenceServiceEventNames.ConferenceStatusUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+  }
+
+  /**
+   * Add a handler for permissions changes
+   * @param handler<(data: PermissionsUpdatedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onPermissionsChange(
+    handler: (data: PermissionsUpdatedEventType) => void
+  ): () => void {
+    return NativeEvents.addListener(
+      ConferenceServiceEventNames.PermissionsUpdated,
       (data) => {
         handler(data);
       }
