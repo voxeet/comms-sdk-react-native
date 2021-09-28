@@ -2,23 +2,23 @@
 #import "VTConferenceParameters+ReactModel.h"
 #import "NSObject+Utils.h"
 
-#define KEY_ALIAS @"alias"
-#define KEY_PARAMS @"params"
-#define KEY_PIN_CODE @"pinCode"
+static NSString * const keyAlias = @"alias";
+static NSString * const keyParams = @"params";
+static NSString * const keyPinCode = @"pinCode";
 
 @implementation VTConferenceOptions (ReactModel)
 
-+ (instancetype)createConferenceOptions:(NSDictionary *)dictionary {
++ (instancetype _Nonnull)createWithDictionary:(NSDictionary * _Nonnull)dictionary {
     VTConferenceOptions *conferenceOptions = [VTConferenceOptions new];
     [conferenceOptions updateWithOptions:dictionary];
     return conferenceOptions;
 }
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        KEY_ALIAS: self.alias ?: [NSNull null],
-        KEY_PARAMS: [self.params reactTranslation],
-        KEY_PIN_CODE: self.pinCode ?: [NSNull null]
+        keyAlias: self.alias ?: [NSNull null],
+        keyParams: [self.params reactDescription],
+        keyPinCode: self.pinCode ?: [NSNull null]
     };
 }
 
@@ -27,10 +27,10 @@
         return;
     }
 
-    [self setValue:options[KEY_ALIAS] forKey:KEY_ALIAS type:[NSString class]];
-    [self setValue:options[KEY_PIN_CODE] forKey:KEY_PIN_CODE type:[NSNumber class]];
+    [self setValue:options[keyAlias] forKey:keyAlias type:[NSString class]];
+    [self setValue:options[keyPinCode] forKey:keyPinCode type:[NSNumber class]];
     
-    [self.params updateWithParams:options[KEY_PARAMS]];
+    [self.params updateWithParams:options[keyParams]];
 }
 
 @end
