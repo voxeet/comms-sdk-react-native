@@ -1,17 +1,18 @@
-import { NativeModules } from 'react-native';
-const { DolbyIoIAPIModule } = NativeModules;
+import { DolbyIoIAPIEventNames } from './events';
 import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
 } from './models';
-import { DolbyIoIAPIEventNames } from './events';
 import ConferenceService from './services/conference/ConferenceService';
 import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
+import { NativeModules } from 'react-native';
+
+const { DolbyIoIAPIModule } = NativeModules;
 
 export class DolbyIoIAPI {
-  #refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
+  private refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
 
   conference = ConferenceService;
@@ -64,8 +65,8 @@ export class DolbyIoIAPI {
     accessToken: string | null,
     refreshAccessToken: RefreshAccessTokenType
   ): Promise<boolean> {
-    if (!this.#refreshAccessTokenInBackground) {
-      this.#refreshAccessTokenInBackground = async () => {
+    if (!this.refreshAccessTokenInBackground) {
+      this.refreshAccessTokenInBackground = async () => {
         try {
           const token = await refreshAccessToken();
           if (token) {
@@ -77,8 +78,8 @@ export class DolbyIoIAPI {
         }
       };
       NativeEvents.addListener(DolbyIoIAPIEventNames.TokenRefresh, () => {
-        this.#refreshAccessTokenInBackground &&
-          this.#refreshAccessTokenInBackground();
+        this.refreshAccessTokenInBackground &&
+          this.refreshAccessTokenInBackground();
       });
     }
     return DolbyIoIAPIModule.initializeToken(accessToken);

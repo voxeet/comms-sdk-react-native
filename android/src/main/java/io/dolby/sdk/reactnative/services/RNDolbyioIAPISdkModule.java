@@ -1,7 +1,7 @@
 
 package io.dolby.sdk.reactnative.services;
 
-import android.app.Application;
+import androidx.annotation.VisibleForTesting;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -11,85 +11,85 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import io.dolby.sdk.reactnative.events.EventsManager;
 import io.dolby.sdk.reactnative.utils.Lock;
 
 public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
 
-    private static final String ERROR_SDK_NOT_INITIALIZED = "ERROR_SDK_NOT_INITIALIZED";
-    private static final String ERROR_SDK_NOT_LOGGED_IN = "ERROR_SDK_NOT_LOGGED_IN";
-
     private final ReactApplicationContext reactContext;
-    private final EventsManager eventsManager;
-    private ReentrantLock lockAwaitingToken = new ReentrantLock();
-    private List<TokenCallback> mAwaitingTokenCallback;
+    private final ReentrantLock lockAwaitingToken = new ReentrantLock();
+
+    @VisibleForTesting
+    protected final List<TokenCallback> mAwaitingTokenCallback;
 
     public RNDolbyioIAPISdkModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
         mAwaitingTokenCallback = new ArrayList<>();
-
-        eventsManager = new EventsManager();
     }
 
+    @NotNull
     @Override
     public String getName() {
-        return "RNDolbyioIAPISdk";
+        return "DolbyIoIAPIModule";
     }
 
-
-    @ReactMethod
-    public void initializeToken(String accessToken, Promise promise) {
-        Application application = (Application) reactContext.getApplicationContext();
-
-        if (!VoxeetSDK.instance().isInitialized()) {
-            //refreshAccessTokenCallbackInstance = callback;
-
-            VoxeetSDK.setApplication(application);
-            VoxeetSDK.initialize(
-                    accessToken,
-                    (isRequired, callback) -> {
-                        Lock.lock(lockAwaitingToken);
-                        if (!mAwaitingTokenCallback.contains(callback)) {
-                            mAwaitingTokenCallback.add(callback);
-                        }
-                        Lock.unlock(lockAwaitingToken);
-                        postRefreshAccessToken();
-                    });
-
-            internalInitialize();
-        }
-        promise.resolve(true);
-    }
-
+    /**
+     * Initializes the Voxeet SDK. For security purposes, prefer using the
+     * {@link #initializeToken(String, Promise)} method.
+     * @param consumerKey consumer key
+     * @param consumerSecret consumer secret
+     * @param promise returns true
+     */
+    @Deprecated
     @ReactMethod
     public void initialize(String consumerKey, String consumerSecret, Promise promise) {
-        Application application = (Application) reactContext.getApplicationContext();
-
-        if (!VoxeetSDK.instance().isInitialized()) {
-            VoxeetSDK.setApplication(application);
-            VoxeetSDK.initialize(consumerKey, consumerSecret);
-
-            internalInitialize();
-        }
+        VoxeetSDK.initialize(consumerKey, consumerSecret);
+        VoxeetSDK.instance().register(this);
 
         promise.resolve(true);
     }
 
-    private void internalInitialize() {
-        Application application = (Application) reactContext.getApplicationContext();
-        VoxeetSDK.conference().ConferenceConfigurations.TelecomWaitingForParticipantTimeout = 30 * 1000; //30s
+    /**
+     * Initializes the SDK with an access token that is provided by the customer's backend
+     * communicating with the Voxeet servers. The access token allows securing the customer key and
+     * secret. Due to a limited period of validity for security reasons, the token needs to be
+     * refreshed. To refresh the token, the Android Voxeet SDK calls the callback that calls the
+     * customer's backend and returns a promise containing the refreshed access token. Then this
+     * method emitts a refreshToken event that can be handled by the React Native.
+     * @param accessToken the access token that is provided by the customer's backend
+     * @param promise returns true
+     */
+    @ReactMethod
+    public void initializeToken(String accessToken, Promise promise) {
+        VoxeetSDK.initialize(
+                accessToken,
+                (isRequired, callback) -> {
+                    Lock.lock(lockAwaitingToken);
+                    if (!mAwaitingTokenCallback.contains(callback)) {
+                        mAwaitingTokenCallback.add(callback);
+                    }
+                    Lock.unlock(lockAwaitingToken);
+                    postRefreshAccessToken();
+                });
 
         VoxeetSDK.instance().register(this);
-        eventsManager.init(VoxeetSDK.instance().getEventBus(),
-                reactContext);
-        eventsManager.register();
+
+        promise.resolve(true);
     }
 
+    /**
+     * Emits an access token to a callback.
+     *
+     * Should be called along with {@link #initializeToken(String, Promise)} method.
+     * @param accessToken access token
+     * @param promise returns true
+     */
     @ReactMethod
     public void onAccessTokenOk(final String accessToken,
                                 final Promise promise) {
@@ -106,6 +106,13 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
         promise.resolve(true);
     }
 
+    /**
+     * Emits an error to a callback.
+     *
+     * Should be called along with {@link #initializeToken(String, Promise)} method.
+     * @param reason reason of the refresh token failure
+     * @param promise returns true
+     */
     @ReactMethod
     public void onAccessTokenKo(final String reason,
                                 final Promise promise) {
@@ -130,5 +137,4 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("refreshToken", null);
     }
-
 }

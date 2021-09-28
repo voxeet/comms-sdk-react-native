@@ -1,8 +1,8 @@
 export interface Conference {
   /** The conference ID. */
-  conferenceId?: string;
+  id?: string;
   /** The conference alias. */
-  conferenceAlias?: string;
+  alias?: string;
   /** Checks if the created conference is new. */
   isNew?: boolean;
   /** Gets information about conference participants. */
@@ -81,7 +81,7 @@ export interface ConferenceMixingOptions {
 
 export interface Participant {
   /**  The participant's ID. */
-  participantId: string;
+  id: string;
   /** The current participant's status. */
   conferenceStatus?: string;
   /** The participant's external ID. */
