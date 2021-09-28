@@ -1,3 +1,5 @@
+import type { Participant } from './models';
+
 export enum ConferenceServiceEventNames {
   ParticipantAdded = 'ParticipantAdded',
   ParticipantUpdated = 'ParticipantUpdated',
@@ -9,9 +11,18 @@ export enum ConferenceServiceEventNames {
   StreamRemoved = 'StreamRemoved',
 }
 
-export interface ParticipantAddedEventType {}
-export interface ParticipantUpdatedEventType {}
-export interface ParticipantRemovedEventType {}
+export interface ParticipantAddedEventType {
+  participant: Participant;
+}
+
+export interface ParticipantUpdatedEventType {
+  participant: Participant;
+}
+
+export interface ParticipantRemovedEventType {
+  participant: Participant;
+}
+
 export interface PermissionsUpdatedEventType {}
 export interface ConferenceStatusUpdatedEventType {}
 export interface StreamAddedEventType {}

@@ -13,6 +13,11 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
+import type {
+  ParticipantAddedEventType,
+  ParticipantUpdatedEventType,
+  ParticipantRemovedEventType,
+} from './events';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
@@ -305,6 +310,46 @@ export class ConferenceService {
         handler(data);
       }
     );
+  }
+
+  /**
+   * Add a handler for participants changes
+   * @param handler<(data: ParticipantAddedEventType | ParticipantUpdatedEventType | ParticipantRemovedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onParticipantsChange(
+    handler: (
+      data:
+        | ParticipantAddedEventType
+        | ParticipantUpdatedEventType
+        | ParticipantRemovedEventType
+    ) => void
+  ): () => void {
+    const participantAddedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantAdded,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantUpdatedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantRemovedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantRemoved,
+      (data) => {
+        handler(data);
+      }
+    );
+
+    return () => {
+      participantAddedEventUnsubscribe();
+      participantUpdatedEventUnsubscribe();
+      participantRemovedEventUnsubscribe();
+    };
   }
 }
 
