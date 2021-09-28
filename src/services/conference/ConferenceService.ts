@@ -1,6 +1,5 @@
-import { NativeModules } from 'react-native';
-const { DolbyIoIAPIConferenceService } = NativeModules;
-
+import NativeEvents from '../../utils/NativeEvents';
+import { ConferenceServiceEventNames } from './events';
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -14,11 +13,18 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
+
 import {
   ConferenceServiceEventNames,
   PermissionsUpdatedEventType,
 } from './events';
+
 import NativeEvents from '../../utils/NativeEvents';
+
+import { NativeModules } from 'react-native';
+
+const { DolbyIoIAPIConferenceService } = NativeModules;
+
 
 export class ConferenceService {
   /**
@@ -150,7 +156,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.inOutputMuted();
+    return DolbyIoIAPIConferenceService.isOutputMuted();
   }
 
   /**
@@ -205,7 +211,7 @@ export class ConferenceService {
     isMuted: boolean,
     participant?: Participant
   ): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.mute(participant, isMuted);
+    return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
 
   /**
@@ -312,7 +318,7 @@ export class ConferenceService {
 
   /**
    * Add a handler for permissions changes
-   * @param handler<(data: any) => void> Handling function
+   * @param handler<(data: PermissionsUpdatedEventType) => void> Handling function
    * @returns {() => void} Function that removes handler
    */
 
