@@ -11,15 +11,17 @@ export class SessionService {
   /**
    * Opens a new session.
    * @param participantInfo  The customer key.
+   * @returns {Promise<null>}
    */
-  public async open(participantInfo: ParticipantInfo): Promise<undefined> {
+  public async open(participantInfo: ParticipantInfo): Promise<null> {
     return DolbyIoIAPISessionServiceModule.open(participantInfo);
   }
 
   /**
    * Closes the current session.
+   * @returns {Promise<null>}
    */
-  public async close(): Promise<undefined> {
+  public async close(): Promise<null> {
     return DolbyIoIAPISessionServiceModule.close();
   }
 }
