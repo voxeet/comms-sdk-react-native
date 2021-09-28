@@ -12,6 +12,8 @@ import type {
   ConferenceStatus,
   AudioProcessingOptions,
   ParticipantPermissions,
+  MaxVideoForwarding,
+  AudioLevel,
 } from './models';
 import { NativeModules } from 'react-native';
 
@@ -25,7 +27,20 @@ export class ConferenceService {
    */
 
   public async create(options: ConferenceCreateOptions): Promise<Conference> {
-    return DolbyIoIAPIConferenceService.create(options);
+    const conference = await DolbyIoIAPIConferenceService.create(options);
+    return {
+      id: conference.id,
+      alias: conference.alias,
+      isNew: conference.isNew,
+      participants: conference.participants.map((p: Participant) => ({
+        id: p.id,
+        conferenceStatus: p.conferenceStatus,
+        externalId: p.externalId,
+        name: p.name,
+        avatarUrl: p.avatarUrl,
+      })),
+      status: conference.status,
+    };
   }
 
   /**
@@ -35,7 +50,20 @@ export class ConferenceService {
    */
 
   public async fetch(conferenceId?: string): Promise<Conference> {
-    return DolbyIoIAPIConferenceService.fetch(conferenceId);
+    const conference = await DolbyIoIAPIConferenceService.fetch(conferenceId);
+    return {
+      id: conference.id,
+      alias: conference.alias,
+      isNew: conference.isNew,
+      participants: conference.participants.map((p: Participant) => ({
+        id: p.id,
+        conferenceStatus: p.conferenceStatus,
+        externalId: p.externalId,
+        name: p.name,
+        avatarUrl: p.avatarUrl,
+      })),
+      status: conference.status,
+    };
   }
 
   /**
@@ -44,7 +72,20 @@ export class ConferenceService {
    */
 
   public async current(): Promise<Conference> {
-    return DolbyIoIAPIConferenceService.current();
+    const conference = await DolbyIoIAPIConferenceService.current();
+    return {
+      id: conference.id,
+      alias: conference.alias,
+      isNew: conference.isNew,
+      participants: conference.participants.map((p: Participant) => ({
+        id: p.id,
+        conferenceStatus: p.conferenceStatus,
+        externalId: p.externalId,
+        name: p.name,
+        avatarUrl: p.avatarUrl,
+      })),
+      status: conference.status,
+    };
   }
 
   /**
@@ -60,11 +101,24 @@ export class ConferenceService {
     replayOptions?: ConferenceReplayOptions,
     mixingOptions?: ConferenceMixingOptions
   ): Promise<Conference> {
-    return DolbyIoIAPIConferenceService.replay(
+    const conferenceReplayed = await DolbyIoIAPIConferenceService.replay(
       conference,
       replayOptions,
       mixingOptions
     );
+    return {
+      id: conferenceReplayed.id,
+      alias: conferenceReplayed.alias,
+      isNew: conferenceReplayed.isNew,
+      participants: conferenceReplayed.participants.map((p: Participant) => ({
+        id: p.id,
+        conferenceStatus: p.conferenceStatus,
+        externalId: p.externalId,
+        name: p.name,
+        avatarUrl: p.avatarUrl,
+      })),
+      status: conferenceReplayed.status,
+    };
   }
 
   /**
@@ -74,7 +128,7 @@ export class ConferenceService {
    */
   // TODO - AudioLevel type for Promise
 
-  public async getAudioLevel(participant?: Participant): Promise<number> {
+  public async getAudioLevel(participant?: Participant): Promise<AudioLevel> {
     return DolbyIoIAPIConferenceService.getAudioLevel(participant);
   }
 
@@ -105,7 +159,7 @@ export class ConferenceService {
    * @returns {Promise<number>} Promise with Number
    */
 
-  public async getMaxVideoForwarding(): Promise<number> {
+  public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
     return DolbyIoIAPIConferenceService.getMaxVideoForwarding();
   }
 
@@ -116,7 +170,16 @@ export class ConferenceService {
    */
 
   public async getParticipant(participantId?: String): Promise<Participant> {
-    return DolbyIoIAPIConferenceService.getParticipant(participantId);
+    const participant = await DolbyIoIAPIConferenceService.getParticipant(
+      participantId
+    );
+    return {
+      id: participant.id,
+      conferenceStatus: participant.conferenceStatus,
+      externalId: participant.externalId,
+      name: participant.name,
+      avatarUrl: participant.avatarUrl,
+    };
   }
 
   /**
@@ -128,7 +191,16 @@ export class ConferenceService {
   public async getParticipants(
     conference?: Conference
   ): Promise<Array<Participant>> {
-    return DolbyIoIAPIConferenceService.getParticipants(conference);
+    const participants = await DolbyIoIAPIConferenceService.getParticipants(
+      conference
+    );
+    return participants.map((p: Participant) => ({
+      id: p.id,
+      conferenceStatus: p.conferenceStatus,
+      externalId: p.externalId,
+      name: p.name,
+      avatarUrl: p.avatarUrl,
+    }));
   }
 
   /**
@@ -178,7 +250,7 @@ export class ConferenceService {
 
   public async setAudioProcessing(
     options: AudioProcessingOptions
-  ): Promise<any> {
+  ): Promise<undefined> {
     return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
 
@@ -187,7 +259,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async setMaxVideoForwarding(): Promise<any> {
+  public async setMaxVideoForwarding(): Promise<undefined> {
     return DolbyIoIAPIConferenceService.setMaxVideoForwarding();
   }
 
@@ -201,7 +273,7 @@ export class ConferenceService {
   public async mute(
     isMuted: boolean,
     participant?: Participant
-  ): Promise<boolean> {
+  ): Promise<undefined> {
     return DolbyIoIAPIConferenceService.mute(participant, isMuted);
   }
 
@@ -213,7 +285,7 @@ export class ConferenceService {
 
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
-  ): Promise<any> {
+  ): Promise<undefined> {
     return DolbyIoIAPIConferenceService.updatePermissions(
       participantPermissions
     );
@@ -225,7 +297,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async startAudio(participant?: Participant): Promise<any> {
+  public async startAudio(participant?: Participant): Promise<undefined> {
     return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
@@ -235,7 +307,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async startVideo(participant?: Participant): Promise<any> {
+  public async startVideo(participant?: Participant): Promise<undefined> {
     return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
@@ -245,7 +317,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async stopAudio(participant?: Participant): Promise<any> {
+  public async stopAudio(participant?: Participant): Promise<undefined> {
     return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
@@ -255,7 +327,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async stopVideo(participant?: Participant): Promise<any> {
+  public async stopVideo(participant?: Participant): Promise<undefined> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 
@@ -270,7 +342,23 @@ export class ConferenceService {
     conference: Conference,
     options?: ConferenceJoinOptions
   ): Promise<Conference> {
-    return DolbyIoIAPIConferenceService.join(conference, options);
+    const conferenceJoined = await DolbyIoIAPIConferenceService.join(
+      conference,
+      options
+    );
+    return {
+      id: conferenceJoined.id,
+      alias: conferenceJoined.alias,
+      isNew: conferenceJoined.isNew,
+      participants: conferenceJoined.participants.map((p: Participant) => ({
+        id: p.id,
+        conferenceStatus: p.conferenceStatus,
+        externalId: p.externalId,
+        name: p.name,
+        avatarUrl: p.avatarUrl,
+      })),
+      status: conferenceJoined.status,
+    };
   }
 
   /**
@@ -279,7 +367,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async kick(participant: Participant): Promise<any> {
+  public async kick(participant: Participant): Promise<undefined> {
     return DolbyIoIAPIConferenceService.kick(participant);
   }
 
@@ -289,7 +377,7 @@ export class ConferenceService {
    * @returns {Promise<boolean>}
    */
 
-  public async leave(options?: ConferenceLeaveOptions): Promise<boolean> {
+  public async leave(options?: ConferenceLeaveOptions): Promise<undefined> {
     return DolbyIoIAPIConferenceService.leave(options);
   }
 

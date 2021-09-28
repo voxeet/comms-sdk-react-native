@@ -1,6 +1,6 @@
 import COLORS from '../../constants/colors.constants';
 import { SPACE_XXS, SPACE_XS, SPACE_M } from '../../constants/sizes.constants';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   wrapper: {
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   bottom: {
-    paddingBottom: 30,
+    paddingBottom: Platform.OS === 'ios' ? 30 : 70,
   },
   participantsList: {
     flexDirection: 'row',

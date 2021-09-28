@@ -67,7 +67,7 @@ const ConferenceScreen: FunctionComponent = () => {
           </Space>
         </View>
       </SafeAreaView>
-      <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[70, 500]}>
+      <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[65, 500]}>
         <Space mh="m" mb="s">
           <Text header size="s" color={COLORS.BLACK}>
             Actions

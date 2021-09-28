@@ -1,10 +1,10 @@
 import { Codec, RTCPMode } from '../../../../src/services/conference/models';
 import type { Conference } from '../../../../src/services/conference/models';
-import { APP_ID, APP_SECRET } from '../../constants/config.constants';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-import React, { useState, useEffect } from 'react';
+// @ts-ignore
+import { APP_ID, APP_SECRET } from '@env';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import Toast from 'react-native-toast-message';
 
 export type User = {
   name: string;
@@ -27,7 +27,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   leave: () => {},
 });
 
-let onStatusChangeRemover: () => void | undefined;
+// let onStatusChangeRemover: () => void | undefined;
 
 const DolbyIOProvider: React.FC = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -36,24 +36,24 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   );
   const [user, setUser] = useState<User | undefined>(undefined);
 
-  useEffect(() => {
-    if (conference) {
-      if (onStatusChangeRemover) {
-        onStatusChangeRemover();
-      }
-      onStatusChangeRemover = DolbyIoIAPI.conference.onStatusChange((event) => {
-        Toast.show({
-          type: 'info',
-          text1: 'Conference status changed',
-          text2: JSON.stringify(event),
-        });
-      });
-    } else {
-      if (onStatusChangeRemover) {
-        onStatusChangeRemover();
-      }
-    }
-  }, [conference]);
+  // useEffect(() => {
+  //   if (conference) {
+  //     if (onStatusChangeRemover) {
+  //       onStatusChangeRemover();
+  //     }
+  //     onStatusChangeRemover = DolbyIoIAPI.conference.onStatusChange((event) => {
+  //       Toast.show({
+  //         type: 'info',
+  //         text1: 'Conference status changed',
+  //         text2: JSON.stringify(event),
+  //       });
+  //     });
+  //   } else {
+  //     if (onStatusChangeRemover) {
+  //       onStatusChangeRemover();
+  //     }
+  //   }
+  // }, [conference]);
 
   const initialize = async () => {
     try {
@@ -106,10 +106,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         createdConference,
         joinOptions
       );
-
+      console.log(joinedConference);
       setConference(joinedConference);
     } catch (e: any) {
-      Alert.alert('Conference not joined', e);
+      Alert.alert('Conference not joined', e.toString());
     }
   };
   const leave = async () => {
