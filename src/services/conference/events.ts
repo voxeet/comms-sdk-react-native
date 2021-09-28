@@ -1,3 +1,5 @@
+import type { Participant, MediaStreamType } from './models';
+
 export enum ConferenceServiceEventNames {
   ParticipantAdded = 'ParticipantAdded',
   ParticipantUpdated = 'ParticipantUpdated',
@@ -14,9 +16,21 @@ export interface ParticipantUpdatedEventType {}
 export interface ParticipantRemovedEventType {}
 export interface PermissionsUpdatedEventType {}
 export interface ConferenceStatusUpdatedEventType {}
-export interface StreamAddedEventType {}
-export interface StreamUpdatedEventType {}
-export interface StreamRemovedEventType {}
+
+export interface StreamAddedEventType {
+  participant: Participant;
+  mediaStream: MediaStreamType;
+}
+
+export interface StreamUpdatedEventType {
+  participant: Participant;
+  mediaStream: MediaStreamType;
+}
+
+export interface StreamRemovedEventType {
+  participant: Participant;
+  mediaStream: MediaStreamType;
+}
 
 export interface ConferenceServiceEventMap {
   [ConferenceServiceEventNames.ParticipantAdded]: ParticipantAddedEventType;
