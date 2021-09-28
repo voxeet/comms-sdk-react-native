@@ -12,6 +12,10 @@ import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
 
 import org.jetbrains.annotations.NotNull;
+import org.webrtc.CodecDescriptorFactory;
+import org.webrtc.VideoCodecType;
+import org.webrtc.codecs.CodecDescriptor;
+import org.webrtc.codecs.CodecDescriptorHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +46,19 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
     /**
      * Initializes the Voxeet SDK. For security purposes, prefer using the
      * {@link #initializeToken(String, Promise)} method.
-     * @param consumerKey consumer key
+     *
+     * @param consumerKey    consumer key
      * @param consumerSecret consumer secret
-     * @param promise returns true
+     * @param promise        returns null
      */
     @Deprecated
     @ReactMethod
     public void initialize(String consumerKey, String consumerSecret, Promise promise) {
         VoxeetSDK.initialize(consumerKey, consumerSecret);
         VoxeetSDK.instance().register(this);
+        enableOnEmulator();
 
-        promise.resolve(true);
+        promise.resolve(null);
     }
 
     /**
@@ -62,8 +68,9 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * refreshed. To refresh the token, the Android Voxeet SDK calls the callback that calls the
      * customer's backend and returns a promise containing the refreshed access token. Then this
      * method emitts a refreshToken event that can be handled by the React Native.
+     *
      * @param accessToken the access token that is provided by the customer's backend
-     * @param promise returns true
+     * @param promise     returns null
      */
     @ReactMethod
     public void initializeToken(String accessToken, Promise promise) {
@@ -80,15 +87,17 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
 
         VoxeetSDK.instance().register(this);
 
-        promise.resolve(true);
+        promise.resolve(null);
     }
 
     /**
      * Emits an access token to a callback.
-     *
+     * <p>
      * Should be called along with {@link #initializeToken(String, Promise)} method.
+     * </p>
+     *
      * @param accessToken access token
-     * @param promise returns true
+     * @param promise     returns null
      */
     @ReactMethod
     public void onAccessTokenOk(final String accessToken,
@@ -103,15 +112,16 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
         }
         mAwaitingTokenCallback.clear();
         Lock.unlock(lockAwaitingToken);
-        promise.resolve(true);
+        promise.resolve(null);
     }
 
     /**
      * Emits an error to a callback.
-     *
+     * <p>
      * Should be called along with {@link #initializeToken(String, Promise)} method.
-     * @param reason reason of the refresh token failure
-     * @param promise returns true
+     * </p>
+     * @param reason  reason of the refresh token failure
+     * @param promise returns null
      */
     @ReactMethod
     public void onAccessTokenKo(final String reason,
@@ -130,11 +140,20 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
             Lock.unlock(lockAwaitingToken);
         }
         mAwaitingTokenCallback.clear();
-        promise.resolve(true);
+        promise.resolve(null);
     }
 
     private void postRefreshAccessToken() {
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("refreshToken", null);
+    }
+
+    private void enableOnEmulator() {
+        CodecDescriptorHolder encoders = CodecDescriptorFactory.getEncoders(VideoCodecType.H264);
+        if (encoders != null) {
+            encoders.register(new CodecDescriptor("OMX.google", 16, true));
+        }
+
+        CodecDescriptorFactory.getDecoders().register(new CodecDescriptor("OMX.google", 16, false));
     }
 }
