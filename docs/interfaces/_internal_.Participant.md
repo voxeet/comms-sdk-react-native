@@ -11,8 +11,8 @@
 - [avatarUrl](_internal_.Participant.md#avatarurl)
 - [conferenceStatus](_internal_.Participant.md#conferencestatus)
 - [externalId](_internal_.Participant.md#externalid)
+- [id](_internal_.Participant.md#id)
 - [name](_internal_.Participant.md#name)
-- [participantId](_internal_.Participant.md#participantid)
 
 ## Properties
 
@@ -34,12 +34,12 @@ ___
 
 ___
 
-### name
+### id
 
-• `Optional` **name**: `string`
+• **id**: `string`
 
 ___
 
-### participantId
+### name
 
-• **participantId**: `string`
+• `Optional` **name**: `string`

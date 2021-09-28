@@ -8,55 +8,41 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.voxeet.sdk.services.SessionService;
 
-import io.dolby.sdk.reactnative.models.ConferenceParticipantUtil;
-import io.dolby.sdk.reactnative.utils.RNUtils;
+import org.jetbrains.annotations.NotNull;
+
+import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 
 public class RNSessionServiceModule extends ReactContextBaseJavaModule {
 
-    private final ReactApplicationContext reactContext;
     private final SessionService sessionService;
+    private final ParticipantMapper participantMapper;
 
     public RNSessionServiceModule(
             SessionService sessionService,
-            ReactApplicationContext reactContext) {
+            ReactApplicationContext reactContext,
+            ParticipantMapper participantMapper
+    ) {
         super(reactContext);
 
         this.sessionService = sessionService;
-        this.reactContext = reactContext;
+        this.participantMapper = participantMapper;
     }
 
+    @NotNull
     @Override
     public String getName() {
-        return RNSessionServiceModule.class.getSimpleName();
+        return "DolbyIoIAPISessionServiceModule";
     }
 
-
+    /**
+     * Opens a session using information from the ParticipantInfo model.
+     * @param participantInfo ParticipantInfo which should contain at least one participant name
+     * @param promise returns true if session was opened successfully, false otherwise
+     */
     @ReactMethod
     public void open(ReadableMap participantInfo, Promise promise) {
-        sessionService.open(ConferenceParticipantUtil.toParticipantInfo(participantInfo))
-                .then(promise::resolve).error(promise::reject);
-    }
-
-    @ReactMethod
-    public void close(Promise promise) {
-        sessionService.close().then(promise::resolve).error(promise::reject);
-    }
-
-    @ReactMethod
-    public void isLocalParticipant(ReadableMap map, Promise promise) {
-        String participantId = RNUtils.getString(map, ConferenceParticipantUtil.PARTICIPANT_ID);
-
-        String local = sessionService.getParticipantId();
-        if (null == local) {
-            promise.resolve(false);
-            return;
-        }
-
-        promise.resolve(local.equals(participantId));
-    }
-
-    @ReactMethod
-    public void isSocketOpen(Promise promise) {
-        promise.resolve(sessionService.isSocketOpen());
+        sessionService.open(participantMapper.toParticipantInfo(participantInfo))
+                .then(promise::resolve)
+                .error(promise::reject);
     }
 }

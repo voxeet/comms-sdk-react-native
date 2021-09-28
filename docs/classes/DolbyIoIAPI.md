@@ -10,8 +10,8 @@
 
 ### Properties
 
-- [%23refreshAccessTokenInBackground](DolbyIoIAPI.md##refreshaccesstokeninbackground)
 - [conference](DolbyIoIAPI.md#conference)
+- [refreshAccessTokenInBackground](DolbyIoIAPI.md#refreshaccesstokeninbackground)
 - [session](DolbyIoIAPI.md#session)
 
 ### Methods
@@ -27,15 +27,15 @@
 
 ## Properties
 
-### #refreshAccessTokenInBackground
-
-• `Private` `Optional` **#refreshAccessTokenInBackground**: ``null`` \| [`RefreshAccessTokenInBackgroundType`](../modules/_internal_.md#refreshaccesstokeninbackgroundtype) = `null`
-
-___
-
 ### conference
 
 • **conference**: [`ConferenceService`](_internal_.ConferenceService.md)
+
+___
+
+### refreshAccessTokenInBackground
+
+• `Private` `Optional` **refreshAccessTokenInBackground**: ``null`` \| [`RefreshAccessTokenInBackgroundType`](../modules/_internal_.md#refreshaccesstokeninbackgroundtype) = `null`
 
 ___
 
