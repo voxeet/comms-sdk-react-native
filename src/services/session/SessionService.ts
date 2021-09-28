@@ -1,4 +1,4 @@
-import type { ParticipantInfo } from './models';
+import type { ParticipantInfo } from '../conference/models';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
@@ -12,14 +12,14 @@ export class SessionService {
    * Opens a new session.
    * @param participantInfo  The customer key.
    */
-  public open(participantInfo: ParticipantInfo): Promise<boolean> {
+  public async open(participantInfo: ParticipantInfo): Promise<undefined> {
     return DolbyIoIAPISessionServiceModule.open(participantInfo);
   }
 
   /**
    * Closes the current session.
    */
-  public async close(): Promise<boolean> {
+  public async close(): Promise<undefined> {
     return DolbyIoIAPISessionServiceModule.close();
   }
 }
