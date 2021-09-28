@@ -15,3 +15,5 @@
 ### send
 
 • `Optional` **send**: [`AudioProcessingSenderOptions`](_internal_.AudioProcessingSenderOptions.md)
+
+The AudioProcessingSenderOptions model allows enabling and disabling audio processing for the local participant who transmits an audio stream.
