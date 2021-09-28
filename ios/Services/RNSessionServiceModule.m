@@ -14,7 +14,7 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)userInfo
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     RCTLogInfo(@"open");
-    [VoxeetSDK.shared.session openWithInfo:[VTParticipantInfo createParticipantInfo:userInfo]
+    [VoxeetSDK.shared.session openWithInfo:[VTParticipantInfo createWithDictionary:userInfo]
                                 completion:^(NSError *error) {
         if (error != nil) {
             reject(@"connect_error", [error localizedDescription], nil);

@@ -1,7 +1,14 @@
+///
+/// Extension of VTParticipant class to support react model.
+///
 @import VoxeetSDK;
 
 @interface VTParticipant (ReactModel)
-
-- (NSDictionary *)reactTranslation;
+///
+/// Generates react model of the class.
+///
+/// \return NSDictionary
+///
+- (NSDictionary * _Nonnull)reactDescription;
 
 @end

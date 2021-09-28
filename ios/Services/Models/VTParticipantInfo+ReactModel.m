@@ -1,29 +1,28 @@
 #import "VTParticipantInfo+ReactModel.h"
 #import "NSObject+Utils.h"
 
-#define KEY_EXTERNAL_ID @"externalId"
-#define KEY_NAME @"name"
-#define KEY_AVATAR_URL @"avatarUrl"
+static NSString * const keyExternalId = @"externalId";
+static NSString * const keyName = @"name";
+static NSString * const keyAvatarUrl = @"avatarUrl";
 
 @implementation VTParticipantInfo (ReactModel)
 
-+ (instancetype)createParticipantInfo:(NSDictionary *)dictionary {
-    NSString *externalID = dictionary[KEY_EXTERNAL_ID];
-    NSString *name = dictionary[KEY_NAME];
-    NSString *avatarURL = dictionary[KEY_AVATAR_URL];
++ (instancetype _Nonnull)createWithDictionary:(NSDictionary * _Nonnull)dictionary {
+    NSString *externalID = dictionary[keyExternalId];
+    NSString *name = dictionary[keyName];
+    NSString *avatarURL = dictionary[keyAvatarUrl];
     
-    VTParticipantInfo *participantInfo = [[VTParticipantInfo alloc]
-                                          initWithExternalID:![externalID isEqual:[NSNull null]] ? externalID : nil
-                                          name:![name isEqual:[NSNull null]] ? name : nil
-                                          avatarURL: ![avatarURL isEqual:[NSNull null]] ? avatarURL : nil];
+    VTParticipantInfo *participantInfo = [[VTParticipantInfo alloc] initWithExternalID:![externalID isEqual:[NSNull null]] ? externalID : nil
+                                                                                  name:![name isEqual:[NSNull null]] ? name : nil
+                                                                             avatarURL: ![avatarURL isEqual:[NSNull null]] ? avatarURL : nil];
     return participantInfo;
 }
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        KEY_EXTERNAL_ID: self.externalID ?: [NSNull null],
-        KEY_NAME: self.name ?: [NSNull null],
-        KEY_AVATAR_URL: self.avatarURL ?: [NSNull null]
+        keyExternalId: self.externalID ?: [NSNull null],
+        keyName: self.name ?: [NSNull null],
+        keyAvatarUrl: self.avatarURL ?: [NSNull null]
     };
 }
 

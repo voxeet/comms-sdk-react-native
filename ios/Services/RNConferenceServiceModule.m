@@ -17,9 +17,9 @@ RCT_EXPORT_METHOD(create:(NSDictionary *)options
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     RCTLogInfo(@"create");
-    [VoxeetSDK.shared.conference createWithOptions:[VTConferenceOptions createConferenceOptions:options]
+    [VoxeetSDK.shared.conference createWithOptions:[VTConferenceOptions createWithDictionary:options]
                                            success:^(VTConference *conference) {
-        resolve([conference reactTranslation]);
+        resolve([conference reactDescription]);
     } fail:^(NSError *error) {
         reject(@"create_error", [error localizedDescription], nil);
     }];
@@ -35,7 +35,7 @@ RCT_EXPORT_METHOD(fetch:(NSString *)conferenceId
         if (conference == nil) {
             reject(@"fetch_error", @"Couldn't find the conference", nil);
         } else {
-            resolve([conference reactTranslation]);
+            resolve([conference reactDescription]);
         }
     }];
 }
@@ -58,9 +58,9 @@ RCT_EXPORT_METHOD(join:(NSDictionary *)conference
             reject(@"fetch_error", @"Couldn't find the conference", nil);
         }
         [VoxeetSDK.shared.conference joinWithConference:fetchedConference
-                                                options:[VTJoinOptions createJoinOptions:options]
+                                                options:[VTJoinOptions createWithDictionary:options]
                                                 success:^(VTConference *joinedConference) {
-            resolve([joinedConference reactTranslation]);
+            resolve([joinedConference reactDescription]);
         }
                                                    fail:^(NSError *error) {
             reject(@"join_error", [error localizedDescription], nil);
