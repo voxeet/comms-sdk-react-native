@@ -27,11 +27,15 @@
 
 • **CREATED** = `"CREATED"`
 
+Informs that a new conference is created.
+
 ___
 
 ### CREATING
 
 • **CREATING** = `"CREATING"`
+
+Informs that the conference is creating
 
 ___
 
@@ -39,11 +43,19 @@ ___
 
 • **DEFAULT** = `"DEFAULT"`
 
+Default status
+
 ___
 
 ### DESTROYED
 
 • **DESTROYED** = `"DESTROYED"`
+
+Informs that the conference is destroyed. This status may be triggered by the following situations:
+
+All conference participants left the conference
+The time to live or the conference time limit elapsed
+The conference creator used the Terminate REST API to terminate an ongoing conference
 
 ___
 
@@ -51,11 +63,15 @@ ___
 
 • **ENDED** = `"ENDED"`
 
+Informs that a conference is ended.
+
 ___
 
 ### ERROR
 
 • **ERROR** = `"ERROR"`
+
+Informs that an error occurred during a conference.
 
 ___
 
@@ -71,11 +87,15 @@ ___
 
 • **JOINED** = `"JOINED"`
 
+Informs that the local participant successfully joined a conference.
+
 ___
 
 ### JOINING
 
 • **JOINING** = `"JOINING"`
+
+Informs that the local participant is joining a conference.
 
 ___
 
@@ -83,11 +103,15 @@ ___
 
 • **LEAVING** = `"LEAVING"`
 
+Informs that the local participant is leaving a conference.
+
 ___
 
 ### LEFT
 
 • **LEFT** = `"LEFT"`
+
+Informs that the local participant successfully left a conference.
 
 ___
 
