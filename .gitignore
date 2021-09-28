@@ -65,3 +65,5 @@ licenses.json
 
 # .env file
 .env
+
+coverage

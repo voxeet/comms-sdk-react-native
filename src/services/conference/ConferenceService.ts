@@ -1,5 +1,8 @@
 import NativeEvents from '../../utils/NativeEvents';
-import { ConferenceServiceEventNames } from './events';
+import {
+  ConferenceServiceEventNames,
+  PermissionsUpdatedEventType,
+} from './events';
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -219,7 +222,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.inOutputMuted();
+    return DolbyIoIAPIConferenceService.isOutputMuted();
   }
 
   /**
@@ -274,7 +277,7 @@ export class ConferenceService {
     isMuted: boolean,
     participant?: Participant
   ): Promise<null> {
-    return DolbyIoIAPIConferenceService.mute(participant, isMuted);
+    return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
 
   /**
@@ -389,6 +392,23 @@ export class ConferenceService {
   public onStatusChange(handler: (data: any) => void): () => void {
     return NativeEvents.addListener(
       ConferenceServiceEventNames.ConferenceStatusUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+  }
+
+  /**
+   * Add a handler for permissions changes
+   * @param handler<(data: PermissionsUpdatedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onPermissionsChange(
+    handler: (data: PermissionsUpdatedEventType) => void
+  ): () => void {
+    return NativeEvents.addListener(
+      ConferenceServiceEventNames.PermissionsUpdated,
       (data) => {
         handler(data);
       }
