@@ -16,10 +16,15 @@ import java.util.HashMap;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
+/**
+ * Provides methods that map:
+ * <p>- {@link Conference} and {@link Conference}-related models to React Native models</p>
+ * <p>- React Native models to {@link Conference} model and {@link Conference}-related model</p>
+ */
 public class ConferenceMapper {
 
     public static String CONFERENCE_ID = "id";
-    public static String CONFERENCE_ALIAS = "conferenceAlias";
+    public static String CONFERENCE_ALIAS = "alias";
     public static String CONFERENCE_IS_NEW = "isNew";
     public static String CONFERENCE_STATUS = "status";
     public static String CONFERENCE_PARAMS = "params";
@@ -34,12 +39,14 @@ public class ConferenceMapper {
     public static String CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING = "liveRecording";
     public static String CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE = "dolbyVoice";
 
+    @NotNull
     private final ParticipantMapper participantMapper;
+    @NotNull
     private final RNCollectionExtractor rnCollectionExtractor;
 
     public ConferenceMapper(
-            ParticipantMapper participantMapper,
-            RNCollectionExtractor rnCollectionExtractor
+            @NotNull ParticipantMapper participantMapper,
+            @NotNull RNCollectionExtractor rnCollectionExtractor
     ) {
         this.participantMapper = participantMapper;
         this.rnCollectionExtractor = rnCollectionExtractor;
