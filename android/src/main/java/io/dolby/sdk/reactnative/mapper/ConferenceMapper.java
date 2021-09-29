@@ -8,11 +8,14 @@ import com.voxeet.sdk.json.ConferencePermission;
 import com.voxeet.sdk.json.internal.ParamsHolder;
 import com.voxeet.sdk.models.Conference;
 import com.voxeet.sdk.models.Participant;
+import com.voxeet.sdk.services.conference.information.ConferenceStatus;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
@@ -53,7 +56,7 @@ public class ConferenceMapper {
     }
 
     @Nullable
-    public String toConferenceId(ReadableMap conference) {
+    public String toConferenceId(@NotNull ReadableMap conference) {
         if (rnCollectionExtractor.hasKey(conference, CONFERENCE_ID)) {
             return rnCollectionExtractor.getString(conference, CONFERENCE_ID);
         } else return null;
@@ -120,16 +123,42 @@ public class ConferenceMapper {
         map.putString(CONFERENCE_ID, conference.getId());
         map.putString(CONFERENCE_ALIAS, conference.getAlias());
         map.putBoolean(CONFERENCE_IS_NEW, conference.isNew());
-        map.putString(CONFERENCE_STATUS, conference.getState().name());
-        map.putMap(CONFERENCE_PARAMS, toParams(conference));
-        map.putArray(CONFERENCE_PERMISSIONS, toPermissions(conference));
-        map.putArray(CONFERENCE_PARTICIPANTS, toParticipants(conference));
+        map.putString(CONFERENCE_STATUS, toString(conference.getState()));
+        map.putMap(CONFERENCE_PARAMS, toParamsMap(conference));
+        map.putArray(CONFERENCE_PERMISSIONS, toPermissionsArray(conference.getPermissions()));
+        map.putArray(CONFERENCE_PARTICIPANTS, toParticipantsArray(conference.getParticipants()));
 
         return map;
     }
 
     @NotNull
-    private ReadableMap toParams(Conference conference) {
+    private String toString(@NotNull ConferenceStatus status) {
+        switch (status) {
+            case CREATED:
+                return "Created";
+            case DESTROYED:
+                return "Destroyed";
+            case ENDED:
+                return "Ended";
+            case ERROR:
+                return "Error";
+            case JOINED:
+                return "Joined";
+            case LEFT:
+                return "Left";
+            case DEFAULT:
+            case CREATING:
+            case JOINING:
+            case FIRST_PARTICIPANT:
+            case NO_MORE_PARTICIPANT:
+            case LEAVING:
+            default:
+                return "Unknown";
+        }
+    }
+
+    @NotNull
+    private ReadableMap toParamsMap(@NotNull Conference conference) {
         HashMap<String, Object> metadata = conference.getMetadata();
 
         WritableMap map = new WritableNativeMap();
@@ -157,19 +186,55 @@ public class ConferenceMapper {
     }
 
     @NotNull
-    private WritableNativeArray toPermissions(@NotNull Conference conference) {
+    private WritableNativeArray toPermissionsArray(@NotNull Set<ConferencePermission> permissions) {
         WritableNativeArray permissionsArray = new WritableNativeArray();
-        for (ConferencePermission permission : conference.getPermissions()) {
-            permissionsArray.pushString(permission.name());
+        for (ConferencePermission permission : permissions) {
+            if (permission != null) {
+                permissionsArray.pushString(toString(permission));
+            }
         }
         return permissionsArray;
     }
 
     @NotNull
-    private WritableNativeArray toParticipants(@NotNull Conference conference) {
+    private String toString(@NotNull ConferencePermission permission) {
+        switch (permission) {
+            case INVITE:
+                return "Invite";
+            case JOIN:
+                return "Join";
+            case KICK:
+                return "Kick";
+            case RECORD:
+                return "Record";
+            case SEND_AUDIO:
+                return "SendAudio";
+            case SEND_MESSAGE:
+                return "SendMessage";
+            case SEND_VIDEO:
+                return "SendVideo";
+            case SHARE_FILE:
+                return "ShareFile";
+            case SHARE_SCREEN:
+                return "ShareScreen";
+            case SHARE_VIDEO:
+                return "ShareVideo";
+            case STREAM:
+                return "Stream";
+            case UPDATE_PERMISSIONS:
+                return "UpdatePermissions";
+            default:
+                return "Unknown";
+        }
+    }
+
+    @NotNull
+    private WritableNativeArray toParticipantsArray(@NotNull CopyOnWriteArrayList<Participant> participants) {
         WritableNativeArray participantsArray = new WritableNativeArray();
-        for (Participant participant : conference.getParticipants()) {
-            participantsArray.pushMap(participantMapper.toMap(participant));
+        for (Participant participant : participants) {
+            if (participant != null) {
+                participantsArray.pushMap(participantMapper.toMap(participant));
+            }
         }
         return participantsArray;
     }
