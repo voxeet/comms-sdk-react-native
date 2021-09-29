@@ -166,6 +166,7 @@
     ]
   },
   "dependencies": {
+    "babel-preset-expo": "^8.4.1",
     "typedoc-plugin-missing-exports": "^0.22.3"
   }
 }
