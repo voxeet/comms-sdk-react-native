@@ -1,5 +1,4 @@
-import NativeEvents from '../../utils/NativeEvents';
-import { ConferenceServiceEventNames } from './events';
+
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -13,14 +12,21 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
+
 import type {
-  StreamAddedEventType,
-  StreamUpdatedEventType,
-  StreamRemovedEventType,
+  ConferenceServiceEventNames,
+  PermissionsUpdatedEventType,
+  ParticipantAddedEventType,
+  ParticipantUpdatedEventType,
+  ParticipantRemovedEventType,
 } from './events';
+
+import NativeEvents from '../../utils/NativeEvents';
+
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
+
 
 export class ConferenceService {
   /**
@@ -152,7 +158,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.inOutputMuted();
+    return DolbyIoIAPIConferenceService.isOutputMuted();
   }
 
   /**
@@ -207,7 +213,7 @@ export class ConferenceService {
     isMuted: boolean,
     participant?: Participant
   ): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.mute(participant, isMuted);
+    return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
 
   /**
@@ -312,6 +318,65 @@ export class ConferenceService {
     );
   }
 
+
+  /**
+   * Add a handler for permissions changes
+   * @param handler<(data: any) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onPermissionsChange(
+    handler: (data: PermissionsUpdatedEventType) => void
+  ): () => void {
+    return NativeEvents.addListener(
+      ConferenceServiceEventNames.PermissionsUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+  }
+  
+  /**
+   * Add a handler for participants changes
+   * @param handler<(data: ParticipantAddedEventType | ParticipantUpdatedEventType | ParticipantRemovedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onParticipantsChange(
+    handler: (
+      data:
+        | ParticipantAddedEventType
+        | ParticipantUpdatedEventType
+        | ParticipantRemovedEventType
+    ) => void
+  ): () => void {
+    const participantAddedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantAdded,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantUpdatedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantRemovedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantRemoved,
+      (data) => {
+        handler(data);
+      }
+    );
+
+    return () => {
+      participantAddedEventUnsubscribe();
+      participantUpdatedEventUnsubscribe();
+      participantRemovedEventUnsubscribe();
+    };
+  }
+  
+  
   /**
    * Add a handler for streams changes
    * @param handler<(data: StreamAddedEventType | StreamUpdatedEventType | StreamRemovedEventType) => void> Handling function
