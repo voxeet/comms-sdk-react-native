@@ -14,9 +14,12 @@ import type {
   ParticipantPermissions,
 } from './models';
 
-import {
+import type {
   ConferenceServiceEventNames,
   PermissionsUpdatedEventType,
+  ParticipantAddedEventType,
+  ParticipantUpdatedEventType,
+  ParticipantRemovedEventType,
 } from './events';
 
 import NativeEvents from '../../utils/NativeEvents';
@@ -316,9 +319,10 @@ export class ConferenceService {
     );
   }
 
+
   /**
    * Add a handler for permissions changes
-   * @param handler<(data: PermissionsUpdatedEventType) => void> Handling function
+   * @param handler<(data: any) => void> Handling function
    * @returns {() => void} Function that removes handler
    */
 
@@ -331,6 +335,46 @@ export class ConferenceService {
         handler(data);
       }
     );
+  }
+  
+  /**
+   * Add a handler for participants changes
+   * @param handler<(data: ParticipantAddedEventType | ParticipantUpdatedEventType | ParticipantRemovedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onParticipantsChange(
+    handler: (
+      data:
+        | ParticipantAddedEventType
+        | ParticipantUpdatedEventType
+        | ParticipantRemovedEventType
+    ) => void
+  ): () => void {
+    const participantAddedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantAdded,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantUpdatedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantRemovedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantRemoved,
+      (data) => {
+        handler(data);
+      }
+    );
+
+    return () => {
+      participantAddedEventUnsubscribe();
+      participantUpdatedEventUnsubscribe();
+      participantRemovedEventUnsubscribe();
+    };
   }
 }
 
