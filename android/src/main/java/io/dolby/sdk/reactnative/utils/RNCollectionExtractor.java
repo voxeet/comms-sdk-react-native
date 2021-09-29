@@ -5,6 +5,10 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
 
+/**
+ * Provides methods that extract various data types (like {@link Integer} or {@link Boolean}
+ * from React Native models (like {@link ReadableMap}).
+ */
 public class RNCollectionExtractor {
 
     public int getInteger(@Nullable ReadableMap map, @NonNull String key) {
