@@ -1,4 +1,6 @@
-import type { Participant, MediaStreamType } from './models';
+
+import type { Participant, MediaStreamType, ConferencePermission } from './models';
+
 
 export enum ConferenceServiceEventNames {
   ParticipantAdded = 'ParticipantAdded',
@@ -11,10 +13,23 @@ export enum ConferenceServiceEventNames {
   StreamRemoved = 'StreamRemoved',
 }
 
-export interface ParticipantAddedEventType {}
-export interface ParticipantUpdatedEventType {}
-export interface ParticipantRemovedEventType {}
-export interface PermissionsUpdatedEventType {}
+
+export interface ParticipantAddedEventType {
+  participant: Participant;
+}
+
+export interface ParticipantUpdatedEventType {
+  participant: Participant;
+}
+
+export interface ParticipantRemovedEventType {
+  participant: Participant;
+}
+
+export interface PermissionsUpdatedEventType {
+  permissions: ConferencePermission[];
+}
+
 export interface ConferenceStatusUpdatedEventType {}
 
 export interface StreamAddedEventType {
