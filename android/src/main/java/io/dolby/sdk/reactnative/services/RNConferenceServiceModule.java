@@ -102,8 +102,7 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
         conferencePromise
                 .then(conference -> {
                     if (conference != null) {
-                        WritableMap value = conferenceMapper.toMap(conference);
-                        promise.resolve(value);
+                        promise.resolve(conferenceMapper.toMap(conference));
                     } else {
                         promise.reject(new Throwable("Couldn't find the conference"));
                     }
