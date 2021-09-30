@@ -27,11 +27,15 @@
 
 • **INVITE** = `0`
 
+Allows a participant to invite participants to a conference.
+
 ___
 
 ### JOIN
 
 • **JOIN** = `3`
+
+Allows a participant to join a conference.
 
 ___
 
@@ -39,11 +43,15 @@ ___
 
 • **KICK** = `1`
 
+Allows a participant to kick other participants from a conference
+
 ___
 
 ### RECORD
 
 • **RECORD** = `10`
+
+Allows a participant to record a conference.
 
 ___
 
@@ -51,11 +59,15 @@ ___
 
 • **SEND\_AUDIO** = `4`
 
+Allows a participant to send an audio stream during a conference.
+
 ___
 
 ### SEND\_MESSAGE
 
 • **SEND\_MESSAGE** = `9`
+
+Allows a participant to send a message to other participants during a conference.
 
 ___
 
@@ -63,11 +75,15 @@ ___
 
 • **SEND\_VIDEO** = `5`
 
+Allows a participant to send a video stream during a conference.
+
 ___
 
 ### SHARE\_FILE
 
 • **SHARE\_FILE** = `8`
+
+Allows a participant to share a file during a conference.
 
 ___
 
@@ -75,11 +91,15 @@ ___
 
 • **SHARE\_SCREEN** = `6`
 
+Allows a participant to share a screen during a conference.
+
 ___
 
 ### SHARE\_VIDEO
 
 • **SHARE\_VIDEO** = `7`
+
+Allows a participant to share a video during a conference.
 
 ___
 
@@ -87,8 +107,12 @@ ___
 
 • **STREAM** = `11`
 
+Allows a participant to stream a conference.
+
 ___
 
 ### UPDATE\_PERMISSIONS
 
 • **UPDATE\_PERMISSIONS** = `2`
+
+Allows a participant to update other participants' permissions.
