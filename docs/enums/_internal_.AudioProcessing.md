@@ -17,8 +17,12 @@
 
 • **ENVIRONMENT** = `1`
 
+Disables audio processing to transmit background sounds, such as music
+
 ___
 
 ### VOCAL
 
 • **VOCAL** = `0`
+
+Enables audio processing to offer a high-quality voice communication

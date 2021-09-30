@@ -15,3 +15,5 @@
 ### type
 
 • `Optional` **type**: [`UserType`](../enums/_internal_.UserType.md)
+
+The UserType model represents the types of conference participants.
