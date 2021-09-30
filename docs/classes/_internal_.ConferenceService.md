@@ -29,6 +29,7 @@
 - [kick](_internal_.ConferenceService.md#kick)
 - [leave](_internal_.ConferenceService.md#leave)
 - [mute](_internal_.ConferenceService.md#mute)
+- [onPermissionsChange](_internal_.ConferenceService.md#onpermissionschange)
 - [onStatusChange](_internal_.ConferenceService.md#onstatuschange)
 - [replay](_internal_.ConferenceService.md#replay)
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
@@ -358,6 +359,36 @@ Stops playing the specified remote participants' audio to the local participant 
 [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Informs if the mute state has changed.
+
+___
+
+### onPermissionsChange
+
+▸ **onPermissionsChange**(`handler`): () => `void`
+
+Add a handler for permissions changes
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/_internal_.PermissionsUpdatedEventType.md)) => `void` |
+
+#### Returns
+
+`fn`
+
+Function that removes handler
+
+▸ (): `void`
+
+Add a handler for permissions changes
+
+##### Returns
+
+`void`
+
+Function that removes handler
 
 ___
 

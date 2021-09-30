@@ -44,6 +44,7 @@
 - [Participant](../interfaces/_internal_.Participant.md)
 - [ParticipantInfo](../interfaces/_internal_.ParticipantInfo.md)
 - [ParticipantPermissions](../interfaces/_internal_.ParticipantPermissions.md)
+- [PermissionsUpdatedEventType](../interfaces/_internal_.PermissionsUpdatedEventType.md)
 - [Promise](../interfaces/_internal_.Promise.md)
 - [PromiseConstructor](../interfaces/_internal_.PromiseConstructor.md)
 - [PromiseFulfilledResult](../interfaces/_internal_.PromiseFulfilledResult.md)
