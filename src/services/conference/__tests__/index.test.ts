@@ -7,6 +7,7 @@ import {
   ParticipantPermissions,
   ConferencePermission,
 } from '../models';
+import { NativeModules } from 'react-native';
 
 /** Mocking function */
 
@@ -44,7 +45,6 @@ jest.mock('react-native', () => {
   return RN;
 });
 
-import { NativeModules } from 'react-native';
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
 /** ConferenceService tests */

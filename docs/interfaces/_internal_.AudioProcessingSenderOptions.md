@@ -15,3 +15,5 @@
 ### audioProcessing
 
 • `Optional` **audioProcessing**: `boolean`
+
+A boolean value that indicates whether the audio processing is enabled or disabled.

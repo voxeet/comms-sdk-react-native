@@ -15,3 +15,5 @@
 ### leaveRoom
 
 • **leaveRoom**: `boolean`
+
+A boolean indicating whether the SDK should close a session after leaving a conference or leave a session open.
