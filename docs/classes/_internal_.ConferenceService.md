@@ -29,8 +29,10 @@
 - [kick](_internal_.ConferenceService.md#kick)
 - [leave](_internal_.ConferenceService.md#leave)
 - [mute](_internal_.ConferenceService.md#mute)
+- [onParticipantsChange](_internal_.ConferenceService.md#onparticipantschange)
 - [onPermissionsChange](_internal_.ConferenceService.md#onpermissionschange)
 - [onStatusChange](_internal_.ConferenceService.md#onstatuschange)
+- [onStreamsChange](_internal_.ConferenceService.md#onstreamschange)
 - [replay](_internal_.ConferenceService.md#replay)
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](_internal_.ConferenceService.md#setmaxvideoforwarding)
@@ -362,6 +364,36 @@ Informs if the mute state has changed.
 
 ___
 
+### onParticipantsChange
+
+▸ **onParticipantsChange**(`handler`): () => `void`
+
+Add a handler for participants changes
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: [`ParticipantAddedEventType`](../interfaces/_internal_.ParticipantAddedEventType.md) \| [`ParticipantUpdatedEventType`](../interfaces/_internal_.ParticipantUpdatedEventType.md) \| [`ParticipantRemovedEventType`](../interfaces/_internal_.ParticipantRemovedEventType.md)) => `void` |
+
+#### Returns
+
+`fn`
+
+Function that removes handler
+
+▸ (): `void`
+
+Add a handler for participants changes
+
+##### Returns
+
+`void`
+
+Function that removes handler
+
+___
+
 ### onPermissionsChange
 
 ▸ **onPermissionsChange**(`handler`): () => `void`
@@ -413,6 +445,36 @@ Function that removes handler
 ▸ (): `void`
 
 Add a handler for conference status changes
+
+##### Returns
+
+`void`
+
+Function that removes handler
+
+___
+
+### onStreamsChange
+
+▸ **onStreamsChange**(`handler`): () => `void`
+
+Add a handler for streams changes
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: [`StreamAddedEventType`](../interfaces/_internal_.StreamAddedEventType.md) \| [`StreamUpdatedEventType`](../interfaces/_internal_.StreamUpdatedEventType.md) \| [`StreamRemovedEventType`](../interfaces/_internal_.StreamRemovedEventType.md)) => `void` |
+
+#### Returns
+
+`fn`
+
+Function that removes handler
+
+▸ (): `void`
+
+Add a handler for streams changes
 
 ##### Returns
 
