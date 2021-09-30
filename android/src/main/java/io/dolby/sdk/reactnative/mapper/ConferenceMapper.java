@@ -79,6 +79,10 @@ public class ConferenceMapper {
         if (rnCollectionExtractor.hasKey(conferenceOptions, CONFERENCE_OPTIONS_PARAMS)) {
             ReadableMap params = rnCollectionExtractor.getMap(conferenceOptions, CONFERENCE_OPTIONS_PARAMS);
 
+            if (params == null) {
+                return paramsHolder;
+            }
+
             if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC)) {
                 String videoCodec = rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC);
                 if (videoCodec != null) {
