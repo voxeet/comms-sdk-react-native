@@ -1,5 +1,8 @@
 import NativeEvents from '../../utils/NativeEvents';
-import { ConferenceServiceEventNames } from './events';
+import {
+  ConferenceServiceEventNames,
+  PermissionsUpdatedEventType,
+} from './events';
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -13,18 +16,9 @@ import type {
   AudioProcessingOptions,
   ParticipantPermissions,
 } from './models';
-
-import {
-  ConferenceServiceEventNames,
-  PermissionsUpdatedEventType,
-} from './events';
-
-import NativeEvents from '../../utils/NativeEvents';
-
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
-
 
 export class ConferenceService {
   /**
