@@ -74,7 +74,7 @@ describe('ConferenceService', () => {
   /** "replay" method */
 
   const mockConference: Conference = {
-    participants: [{ participantId: '123' }],
+    participants: [{ id: '123' }],
     status: ConferenceStatus.DEFAULT,
   };
 
@@ -193,17 +193,17 @@ describe('ConferenceService', () => {
 
   test('"mute" method', () => {
     ConferenceService.mute(true, {
-      participantId: '123',
+      id: '123',
     });
     expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(true, {
-      participantId: '123',
+      id: '123',
     });
   });
 
   /** "updatePermissions" method */
 
   const mockParticipantPermissions: ParticipantPermissions = {
-    participant: { participantId: '123' },
+    participant: { id: '123' },
     permissions: [
       ConferencePermission.INVITE,
       ConferencePermission.JOIN,
@@ -249,7 +249,7 @@ describe('ConferenceService', () => {
   /** "join" method */
 
   const mockConference_2: Conference = {
-    participants: [{ participantId: '123' }],
+    participants: [{ id: '123' }],
     status: ConferenceStatus.DEFAULT,
   };
 
@@ -264,9 +264,9 @@ describe('ConferenceService', () => {
   /** "kick" method */
 
   test('"kick" method', () => {
-    ConferenceService.kick({ participantId: '123' });
+    ConferenceService.kick({ id: '123' });
     expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
-      participantId: '123',
+      id: '123',
     });
   });
 
@@ -276,4 +276,9 @@ describe('ConferenceService', () => {
     ConferenceService.leave();
     expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
   });
+
+  // TODO "onStatusChange" method
+  // TODO "onPermissionsChange" method
+  // TODO "onParticipantsChange" method
+  // TODO "onStreamsChange" method
 });
