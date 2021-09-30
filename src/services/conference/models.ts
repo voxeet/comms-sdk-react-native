@@ -196,3 +196,5 @@ export enum MediaStreamType {
   /** The screen-share media stream. */
   ScreenShare = 'ScreenShare',
 }
+
+export type UnsubscribeFunction = () => void;
