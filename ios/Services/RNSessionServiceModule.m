@@ -9,19 +9,31 @@
 
 RCT_EXPORT_MODULE(DolbyIoIAPISessionServiceModule)
 
-RCT_EXPORT_METHOD(open:(NSDictionary *)userInfo
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(open:(NSDictionary * _Nonnull)userInfo
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
 {
-    RCTLogInfo(@"open");
     [VoxeetSDK.shared.session openWithInfo:[VTParticipantInfo createWithDictionary:userInfo]
                                 completion:^(NSError *error) {
         if (error != nil) {
-            reject(@"connect_error", [error localizedDescription], nil);
+            reject(@"error", [error localizedDescription], error);
         } else {
             resolve(nil);
         }
     }];
 }
+
+RCT_EXPORT_METHOD(close:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.session closeWithCompletion:^(NSError *error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
 
 @end
