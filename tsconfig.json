@@ -2,7 +2,13 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@dolbyio/react-native-iapi-sdk": ["./src/index"]
+      "@dolbyio/react-native-iapi-sdk": ["./src/index"],
+      "@assets/*": ["./example/src/assets/*"],
+      "@components/*": ["./example/src/components/*"],
+      "@constants/*": ["./example/src/constants/*"],
+      "@screens/*": ["./example/src/screens/*"],
+      "@ui/*": ["./example/src/ui/*"],
+      "@utils/*": ["./example/src/utils/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

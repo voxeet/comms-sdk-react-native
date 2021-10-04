@@ -10,19 +10,26 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
           [pak.name]: path.join(__dirname, '..', pak.source),
+          '@assets': './src/assets',
+          '@components': './src/components',
+          '@constants': './src/constants',
+          '@screens': './src/screens',
+          '@ui': './src/ui',
+          '@utils': './src/utils',
         },
       },
     ],
     [
-      "module:react-native-dotenv",
+      'module:react-native-dotenv',
       {
-        "moduleName": "react-native-dotenv",
-        "path": ".env",
-        "blacklist": null,
-        "whitelist": null,
-        "safe": false,
-        "allowUndefined": true
-      }
-    ]
+        moduleName: '@env',
+        path: '.env',
+        blacklist: null,
+        whitelist: null,
+        safe: false,
+        allowUndefined: true,
+      },
+    ],
+    'react-native-reanimated/plugin',
   ],
 };
