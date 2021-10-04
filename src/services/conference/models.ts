@@ -11,6 +11,36 @@ export interface Conference {
   status: ConferenceStatus;
 }
 
+export interface ConferenceCreateParameters {
+  /** The time to live that enables customizing the waiting time (in seconds) and terminating empty conferences.
+   The Voxeet service terminates conferences after the established time if no one has joined the new conference or the last participant has left it. The default value is 0 seconds. */
+  ttl?: number;
+  /** The bitrate adaptation mode for the video transmission. The rtcpMode triggers the server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
+  rtcpMode?: RTCPMode;
+  // TODO - doc
+  mode?: Mode;
+  /** The preferred video codec that is used during conferences, either H264 or VP8. By default, the value is set to H264. */
+  videoCodec?: Codec;
+  /** Turns the live recording on and off. */
+  liveRecording?: boolean;
+  /** Enable Dolby Voice */
+  dolbyVoice?: boolean;
+  /** Turns the simulcast on and off. */
+  simulcast?: boolean;
+}
+
+export interface ConferenceCreateOptions {
+  /** The conference alias. */
+  alias?: string;
+  /** The conference parameters. */
+  params?: ConferenceCreateParameters;
+}
+
+export interface ConferenceLeaveOptions {
+  /** A boolean indicating whether the SDK should close a session after leaving a conference or leave a session open. */
+  leaveRoom: boolean;
+}
+
 export enum ConferenceStatus {
   /** Default status */
   DEFAULT = 'DEFAULT',
@@ -42,29 +72,19 @@ export enum ConferenceStatus {
   ENDED = 'ENDED',
 }
 
-export interface ConferenceCreateParameters {
-  /** The time to live that enables customizing the waiting time (in seconds) and terminating empty conferences.
-  The Voxeet service terminates conferences after the established time if no one has joined the new conference or the last participant has left it. The default value is 0 seconds. */
-  ttl?: number;
-  /** The bitrate adaptation mode for the video transmission. The rtcpMode triggers the server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
-  rtcpMode?: RTCPMode;
-  // TODO - doc
-  mode?: Mode;
-  /** The preferred video codec that is used during conferences, either H264 or VP8. By default, the value is set to H264. */
-  videoCodec?: Codec;
-  /** Turns the live recording on and off. */
-  liveRecording?: boolean;
-  /** Enable Dolby Voice */
-  dolbyVoice?: boolean;
-  /** Turns the simulcast on and off. */
-  simulcast?: boolean;
+export interface ConferenceConstraints {
+  audio: boolean;
+  video: boolean;
 }
 
-export interface ConferenceCreateOptions {
-  /** The conference alias. */
-  alias?: string;
-  /** The conference parameters. */
-  params?: ConferenceCreateParameters;
+export interface ConferenceJoinOptions {
+  conferenceAccessToken?: string;
+  constraints?: ConferenceConstraints;
+  maxVideoForwarding?: number;
+  mixing?: ConferenceMixingOptions;
+  preferRecvMono?: boolean;
+  preferSendMono?: boolean;
+  simulcast?: boolean;
 }
 
 export interface ConferenceReplayOptions {
@@ -86,6 +106,13 @@ export interface Participant {
   conferenceStatus?: string;
   /** The participant's external ID. */
   externalId?: string;
+  /** The participant's name. */
+  name?: string;
+  /** The URL of the participant's avatar. */
+  avatarUrl?: string;
+}
+
+export interface ParticipantInfo {
   /** The participant's name. */
   name?: string;
   /** The URL of the participant's avatar. */
@@ -115,28 +142,11 @@ export enum Codec {
   H264 = 'H264',
 }
 
-export interface ConferenceLeaveOptions {
-  /** A boolean indicating whether the SDK should close a session after leaving a conference or leave a session open. */
-  leaveRoom: boolean;
-}
-
 export enum UserType {
   /** A participant who can send and receive the audio and video stream during the conference. */
   USER = 'user',
   /** A participant who cannot send the audio and video stream during the conference. */
   LISTENER = 'listener',
-}
-
-export interface JoinUserInfo {
-  /** The UserType model represents the types of conference participants. */
-  type?: UserType;
-}
-
-export interface ConferenceJoinOptions {
-  /** Information about the joining user */
-  user?: JoinUserInfo;
-  /** Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the VideoForwardingError. If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers. */
-  maxVideoForwarding?: number;
 }
 
 export interface ParticipantPermissions {
@@ -189,6 +199,9 @@ export enum AudioProcessing {
   /** Disables audio processing to transmit background sounds, such as music */
   ENVIRONMENT,
 }
+
+export type AudioLevel = number;
+export type MaxVideoForwarding = number;
 
 export enum MediaStreamType {
   /** The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera. */

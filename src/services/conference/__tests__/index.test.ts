@@ -9,42 +9,6 @@ import {
 } from '../models';
 import { NativeModules } from 'react-native';
 
-/** Mocking function */
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-  RN.NativeModules.DolbyIoIAPIConferenceService = {
-    create: jest.fn(),
-    fetch: jest.fn(),
-    current: jest.fn(),
-    replay: jest.fn(),
-    getAudioLevel: jest.fn(),
-    getAudioProcessing: jest.fn(),
-    getLocalStats: jest.fn(),
-    getMaxVideoForwarding: jest.fn(),
-    getParticipant: jest.fn(),
-    getParticipants: jest.fn(),
-    getStatus: jest.fn(),
-    isOutputMuted: jest.fn(),
-    isMuted: jest.fn(),
-    isSpeaking: jest.fn(),
-    setAudioProcessing: jest.fn(),
-    setMaxVideoForwarding: jest.fn(),
-    mute: jest.fn(),
-    updatePermissions: jest.fn(),
-    startAudio: jest.fn(),
-    startVideo: jest.fn(),
-    stopAudio: jest.fn(),
-    stopVideo: jest.fn(),
-    join: jest.fn(),
-    kick: jest.fn(),
-    leave: jest.fn(),
-  };
-  RN.NativeModules.DolbyIoIAPIModule = {};
-
-  return RN;
-});
-
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
 /** ConferenceService tests */
@@ -266,7 +230,7 @@ describe('ConferenceService', () => {
   test('"kick" method', () => {
     ConferenceService.kick({ id: '123' });
     expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
-      participantId: '123',
+      id: '123',
     });
   });
 
