@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "test-coverage": "jest --coverage=true",
+    "test:coverage": "jest --coverage=true",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint-fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",

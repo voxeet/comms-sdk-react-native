@@ -10,11 +10,15 @@ const { DolbyIoIAPISessionServiceModule } = NativeModules;
 export class SessionService {
   /**
    * Opens a new session.
-   * @param participantInfo  The customer key.
+   * @param participantInfo [participantInfo={}] The optional information about the local participant.
    * @returns {Promise<null>}
    */
-  public async open(participantInfo: ParticipantInfo): Promise<null> {
-    return DolbyIoIAPISessionServiceModule.open(participantInfo);
+  public async open(participantInfo: ParticipantInfo = {}): Promise<null> {
+    const { name, avatarUrl } = participantInfo;
+    return DolbyIoIAPISessionServiceModule.open({
+      name,
+      avatarUrl,
+    });
   }
 
   /**
