@@ -13,9 +13,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
+import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule;
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule;
+import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
 public class RNDolbyioIAPISdkPackage implements ReactPackage {
 
@@ -23,6 +26,7 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
         ParticipantMapper participantMapper = new ParticipantMapper();
+        RNCollectionExtractor rnCollectionExtractor = new RNCollectionExtractor();
 
         return Arrays.asList(
                 new RNDolbyioIAPISdkModule(reactContext),
@@ -30,6 +34,11 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         VoxeetSDK.session(),
                         reactContext,
                         participantMapper
+                ),
+                new RNConferenceServiceModule(
+                        VoxeetSDK.conference(),
+                        reactContext,
+                        new ConferenceMapper(participantMapper, rnCollectionExtractor)
                 )
         );
     }
