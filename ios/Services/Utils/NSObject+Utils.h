@@ -1,5 +1,5 @@
 @interface NSObject (Utils)
 
-- (void)setValue:(id)value forKey:(NSString *)key type:(Class)type;
+- (void)setValue:(id _Nullable)value forKey:(NSString * _Nonnull)key type:(Class _Nonnull)type;
 
 @end

@@ -2,24 +2,24 @@
 #import "VTJoinOptionsConstraints+ReactModel.h"
 #import "NSObject+Utils.h"
 
-#define KEY_CONSTRAINTS @"constraints"
-#define KEY_MAX_VIDEO_FORWARDING @"maxVideoForwarding"
-#define KEY_CONFERENCE_ACCESS_TOKEN @"conferenceAccessToken"
+static NSString * const keyConstraints = @"constraints";
+static NSString * const keyMaxVideoForwarding = @"maxVideoForwarding";
+static NSString * const keyConferenceAccessToken = @"conferenceAccessToken";
 
 @implementation VTJoinOptions (ReactModel)
 
-+ (instancetype)createJoinOptions:(NSDictionary *)dictionary
++ (instancetype _Nonnull)createWithDictionary:(NSDictionary * _Nonnull)dictionary
 {
     VTJoinOptions *joinOptions = [VTJoinOptions new];
     [joinOptions updateWithOptions:dictionary];
     return joinOptions;
 }
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        KEY_CONSTRAINTS: [self.constraints reactTranslation],
-        KEY_MAX_VIDEO_FORWARDING: self.maxVideoForwarding ?: [NSNull null],
-        KEY_CONFERENCE_ACCESS_TOKEN: self.conferenceAccessToken ?: [NSNull null]
+        keyConstraints: [self.constraints reactDescription],
+        keyMaxVideoForwarding: self.maxVideoForwarding ?: [NSNull null],
+        keyConferenceAccessToken: self.conferenceAccessToken ?: [NSNull null]
     };
 }
 
@@ -28,9 +28,9 @@
         return;
     }
 
-    [self setValue:options[KEY_MAX_VIDEO_FORWARDING] forKey:KEY_MAX_VIDEO_FORWARDING type:[NSNumber class]];
-    [self setValue:options[KEY_CONFERENCE_ACCESS_TOKEN] forKey:KEY_CONFERENCE_ACCESS_TOKEN type:[NSString class]];
-    [self setValue:[VTJoinOptionsConstraints createJoinOptionsConstraints:options[KEY_CONSTRAINTS]] forKey:KEY_CONSTRAINTS];
+    [self setValue:options[keyMaxVideoForwarding] forKey:keyMaxVideoForwarding type:[NSNumber class]];
+    [self setValue:options[keyConferenceAccessToken] forKey:keyConferenceAccessToken type:[NSString class]];
+    [self setValue:[VTJoinOptionsConstraints createWithDictionary:options[keyConstraints]] forKey:keyConstraints];
 }
 
 @end

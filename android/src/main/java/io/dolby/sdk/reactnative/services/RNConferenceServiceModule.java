@@ -21,13 +21,21 @@ import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
 
 public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
 
+    @NotNull
     private final ConferenceService conferenceService;
+    @NotNull
     private final ConferenceMapper conferenceMapper;
 
+    /**
+     * Creates a bridge wrapper for {@link ConferenceService}.
+     * @param conferenceService {@link ConferenceService} from Android SDK
+     * @param reactContext react context
+     * @param conferenceMapper mapper for a {@link Conference} and {@link Conference}-related models
+     */
     public RNConferenceServiceModule(
-            ConferenceService conferenceService,
-            ReactApplicationContext reactContext,
-            ConferenceMapper conferenceMapper
+            @NotNull ConferenceService conferenceService,
+            @NotNull ReactApplicationContext reactContext,
+            @NotNull ConferenceMapper conferenceMapper
     ) {
         super(reactContext);
 
@@ -94,8 +102,7 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
         conferencePromise
                 .then(conference -> {
                     if (conference != null) {
-                        WritableMap value = conferenceMapper.toMap(conference);
-                        promise.resolve(value);
+                        promise.resolve(conferenceMapper.toMap(conference));
                     } else {
                         promise.reject(new Throwable("Couldn't find the conference"));
                     }
