@@ -34,19 +34,21 @@ const { DolbyIoIAPIConferenceService } = NativeModules;
 
 export class ConferenceService {
   /**
-   * Create a conference with ConferenceOptions
+   * Create a conference with options
    * @param options<CreateOptions> The conference options
-   * @returns {Promise<Conference>} Promise with a Conference
+   * @returns {Promise<Conference>} Promise with a Conference object
    */
 
-  public async create(options: ConferenceCreateOptions): Promise<Conference> {
+  public async create(
+    options: ConferenceCreateOptions = {}
+  ): Promise<Conference> {
     return DolbyIoIAPIConferenceService.create(options);
   }
 
   /**
-   * Provides a Conference object that allows joining a conference. Without a param returns current Conference object.
+   * Provides a Conference object that allows joining a conference. Without a param it returns current Conference object.
    * @param conferenceId?<string> The conference ID.
-   * @returns {Promise<Conference>} Promise with a Conference
+   * @returns {Promise<Conference>} Promise with a Conference object
    */
 
   public async fetch(conferenceId?: string): Promise<Conference> {
@@ -54,8 +56,8 @@ export class ConferenceService {
   }
 
   /**
-   * Returns information about the current conference.
-   * @returns {Promise<Conference>} Promise with a Conference
+   * Provides information about the current conference.
+   * @returns {Promise<Conference>} Promise with a Conference object
    */
 
   public async current(): Promise<Conference> {
@@ -64,10 +66,10 @@ export class ConferenceService {
 
   /**
    * Replays a previously recorded conference.
-   * @param conference<Conference> The conference object.
+   * @param conference<Conference> The Conference.
    * @param replayOptions<ConferenceReplayOptions> The replay options.
-   * @param mixingOptions<ConferenceMixingOptions> The model that notifies the server that a participant who replays the conference is a special participant called Mixer.
-   * @returns {Promise<Conference>} Promise with a Conference
+   * @param mixingOptions<ConferenceMixingOptions> The object that notifies the server that a participant who replays the conference is a special participant called Mixer.
+   * @returns {Promise<Conference>} Promise with a Conference object
    */
 
   public async replay(
@@ -77,14 +79,17 @@ export class ConferenceService {
   ): Promise<Conference> {
     return DolbyIoIAPIConferenceService.replay(
       conference,
-      replayOptions,
+      {
+        offset: 0,
+        ...replayOptions,
+      },
       mixingOptions
     );
   }
 
   /**
    * Gets the participant's audio level
-   * @param participant<Participant> The Participant object.
+   * @param participant<Participant> The participant object.
    * @returns {Promise<number>} Promise with number
    */
   // TODO - AudioLevel type for Promise
@@ -95,8 +100,8 @@ export class ConferenceService {
 
   /**
    * Gets the current audio processing state for a conference.
-   * @param participant<Participant> The Participant object.
-   * @returns {Promise<AudioProcessing>} Promise with AudioProcessing
+   * @param participant<Participant> The participant object.
+   * @returns {Promise<AudioProcessing>} Promise with AudioProcessing object
    */
 
   public async getAudioProcessing(
@@ -135,8 +140,8 @@ export class ConferenceService {
   }
 
   /**
-   * Gets a list of Conference participants
-   * @param conference<Conference> The conference object.
+   * Gets a list of conference participants
+   * @param conference<Conference> The Conference object.
    * @returns {Promise<Array<Participant>>} Promise with array of Participants
    */
 
@@ -148,8 +153,8 @@ export class ConferenceService {
 
   /**
    * Provides the conference status.
-   * @param conference<Conference> The conference object.
-   * @returns {Promise<ConferenceStatus>} Promise with a ConferenceStatus
+   * @param conference<Conference> The Conference object.
+   * @returns {Promise<ConferenceStatus>} Promise with a ConferenceStatus string
    */
 
   public async getStatus(conference?: Conference): Promise<ConferenceStatus> {
@@ -276,7 +281,7 @@ export class ConferenceService {
 
   /**
    * Joins the conference.
-   * @param conference<Conference> The conference object.
+   * @param conference<Conference> The Conference object.
    * @param options<ConferenceJoinOptions> The additional options for the joining participant.
    * @returns {Promise<Conference>} Promise with the Conference
    */

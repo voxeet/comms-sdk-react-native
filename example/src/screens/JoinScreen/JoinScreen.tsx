@@ -1,4 +1,4 @@
-import { DolbyIOContext } from '../../components/DolbyIOProvider';
+import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '../../constants/colors.constants';
 import Button from '../../ui/Button';
 import Input from '../../ui/Input';
@@ -15,10 +15,18 @@ const chance = new Chance();
 
 const JoinScreen: FunctionComponent = () => {
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
-  const { createAndJoin } = useContext(DolbyIOContext);
+  const { createAndJoin, join, replay } = useContext(DolbyIOContext);
 
-  const join = () => {
+  const createConference = () => {
     createAndJoin(alias);
+  };
+
+  const joinConference = () => {
+    join(alias);
+  };
+
+  const replayConference = () => {
+    replay(alias);
   };
 
   return (
@@ -43,7 +51,13 @@ const JoinScreen: FunctionComponent = () => {
             <Input label="Conference alias" onChange={setAlias} value={alias} />
           </Space>
           <Space mt="m">
-            <Button text="Join" onPress={join} />
+            <Button text="Create a new conference" onPress={createConference} />
+          </Space>
+          <Space mt="m">
+            <Button text="Join existing conference" onPress={joinConference} />
+          </Space>
+          <Space mt="m">
+            <Button text="Replay conference" onPress={replayConference} />
           </Space>
         </Space>
       </SafeAreaView>
