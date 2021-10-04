@@ -240,4 +240,9 @@ describe('ConferenceService', () => {
     ConferenceService.leave();
     expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
   });
+
+  // TODO "onStatusChange" method
+  // TODO "onPermissionsChange" method
+  // TODO "onParticipantsChange" method
+  // TODO "onStreamsChange" method
 });
