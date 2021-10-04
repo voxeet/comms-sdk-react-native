@@ -4,39 +4,39 @@
 #import "NSObject+Utils.h"
 #import "NSDictionary+Utils.h"
 
-#define KEY_ID @"id"
-#define KEY_ALIAS @"alias"
-#define KEY_IS_NEW @"isNew"
-#define KEY_PARTICIPANTS @"participants"
-#define KEY_PARAMS @"params"
-#define KEY_STATUS @"status"
-#define KEY_PIN_CODE @"pinCode"
+static NSString * const keyId = @"id";
+static NSString * const keyAlias = @"alias";
+static NSString * const keyIsNew = @"isNew";
+static NSString * const keyParticipants = @"participants";
+static NSString * const keyParams = @"params";
+static NSString * const keyStatus = @"status";
+static NSString * const keyPinCode = @"pinCode";
 
 @implementation VTConference (ReactModel)
 
-- (NSDictionary *)reactTranslation {
+- (NSDictionary * _Nonnull)reactDescription {
     return @{
-        @"id": self.id,
-        @"alias": self.alias,
-        @"isNew": @(self.isNew),
-        @"participants": [self participantsTranslation],
-        @"params": [self.params reactTranslation],
-        @"status": [self statusTranslation],
-        @"pinCode": self.pinCode ?: [NSNull null]
+        keyId: self.id,
+        keyAlias: self.alias,
+        keyIsNew: @(self.isNew),
+        keyParticipants: [self participantsDescription],
+        keyParams: [self.params reactDescription],
+        keyStatus: [self statusDescription],
+        keyPinCode: self.pinCode ?: [NSNull null]
     };
 }
 
-- (NSArray<NSDictionary *> *)participantsTranslation {
+- (NSArray<NSDictionary *> *)participantsDescription {
     NSMutableArray<NSDictionary *> *output = [NSMutableArray array];
     
     for (VTParticipant *participant in self.participants) {
-        [output addObject:[participant reactTranslation]];
+        [output addObject:[participant reactDescription]];
     }
     
     return output;
 }
 
-- (NSString *)statusTranslation {
+- (NSString *)statusDescription {
     switch (self.status) {
         case VTConferenceStatusCreating:
             return @"CREATING";
