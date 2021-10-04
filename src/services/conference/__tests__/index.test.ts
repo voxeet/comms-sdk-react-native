@@ -266,7 +266,7 @@ describe('ConferenceService', () => {
   test('"kick" method', () => {
     ConferenceService.kick({ id: '123' });
     expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
-      participantId: '123',
+      id: '123',
     });
   });
 
