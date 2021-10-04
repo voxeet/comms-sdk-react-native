@@ -1,51 +1,37 @@
 package io.dolby.sdk.reactnative.utils;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+/**
+ * Provides methods that extract various data types (like {@link Integer} or {@link Boolean}
+ * from React Native models (like {@link ReadableMap}).
+ */
 public class RNCollectionExtractor {
 
-    public int getInteger(@Nullable ReadableMap map, @NonNull String key) {
-        try {
-            return map != null && map.hasKey(key) ? map.getInt(key) : 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
+    @Nullable
+    public Integer getInteger(@NotNull ReadableMap map, @NotNull String key) {
+        return map.hasKey(key) ? map.getInt(key) : null;
     }
 
-    public boolean getBoolean(@Nullable ReadableMap map, @NonNull String key) {
-        try {
-            return map != null && map.hasKey(key) && map.getBoolean(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+    public boolean getBoolean(@NotNull ReadableMap map, @NotNull String key) {
+        return map.hasKey(key) && map.getBoolean(key);
     }
 
     @Nullable
-    public ReadableMap getMap(@Nullable ReadableMap map, @NonNull String key) {
-        try {
-            return map != null && map.hasKey(key) ? map.getMap(key) : null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public ReadableMap getMap(@NotNull ReadableMap map, @NotNull String key) {
+        return map.hasKey(key) ? map.getMap(key) : null;
     }
 
     @Nullable
-    public String getString(@Nullable ReadableMap map, @NonNull String key) {
-        try {
-            if (map != null && map.hasKey(key)) return map.getString(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public String getString(@NotNull ReadableMap map, @NotNull String key) {
+        return (map.hasKey(key)) ? map.getString(key) : null;
     }
 
-    public boolean hasKey(@Nullable ReadableMap map, @NonNull String key) {
-        return map != null && map.hasKey(key);
+    public boolean hasKey(@NotNull ReadableMap map, @NotNull String key) {
+        return map.hasKey(key);
     }
 }

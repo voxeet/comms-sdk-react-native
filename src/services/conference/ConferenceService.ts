@@ -1,8 +1,14 @@
 import NativeEvents from '../../utils/NativeEvents';
-import {
-  ConferenceServiceEventNames,
+import type {
   PermissionsUpdatedEventType,
+  ParticipantAddedEventType,
+  ParticipantUpdatedEventType,
+  ParticipantRemovedEventType,
+  StreamAddedEventType,
+  StreamRemovedEventType,
+  StreamUpdatedEventType,
 } from './events';
+import { ConferenceServiceEventNames } from './events';
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -15,8 +21,6 @@ import type {
   ConferenceStatus,
   AudioProcessingOptions,
   ParticipantPermissions,
-  MaxVideoForwarding,
-  AudioLevel,
 } from './models';
 import { NativeModules } from 'react-native';
 
@@ -30,20 +34,7 @@ export class ConferenceService {
    */
 
   public async create(options: ConferenceCreateOptions): Promise<Conference> {
-    const conference = await DolbyIoIAPIConferenceService.create(options);
-    return {
-      id: conference.id,
-      alias: conference.alias,
-      isNew: conference.isNew,
-      participants: conference.participants.map((p: Participant) => ({
-        id: p.id,
-        conferenceStatus: p.conferenceStatus,
-        externalId: p.externalId,
-        name: p.name,
-        avatarUrl: p.avatarUrl,
-      })),
-      status: conference.status,
-    };
+    return DolbyIoIAPIConferenceService.create(options);
   }
 
   /**
@@ -53,20 +44,7 @@ export class ConferenceService {
    */
 
   public async fetch(conferenceId?: string): Promise<Conference> {
-    const conference = await DolbyIoIAPIConferenceService.fetch(conferenceId);
-    return {
-      id: conference.id,
-      alias: conference.alias,
-      isNew: conference.isNew,
-      participants: conference.participants.map((p: Participant) => ({
-        id: p.id,
-        conferenceStatus: p.conferenceStatus,
-        externalId: p.externalId,
-        name: p.name,
-        avatarUrl: p.avatarUrl,
-      })),
-      status: conference.status,
-    };
+    return DolbyIoIAPIConferenceService.fetch(conferenceId);
   }
 
   /**
@@ -75,20 +53,7 @@ export class ConferenceService {
    */
 
   public async current(): Promise<Conference> {
-    const conference = await DolbyIoIAPIConferenceService.current();
-    return {
-      id: conference.id,
-      alias: conference.alias,
-      isNew: conference.isNew,
-      participants: conference.participants.map((p: Participant) => ({
-        id: p.id,
-        conferenceStatus: p.conferenceStatus,
-        externalId: p.externalId,
-        name: p.name,
-        avatarUrl: p.avatarUrl,
-      })),
-      status: conference.status,
-    };
+    return DolbyIoIAPIConferenceService.current();
   }
 
   /**
@@ -104,24 +69,11 @@ export class ConferenceService {
     replayOptions?: ConferenceReplayOptions,
     mixingOptions?: ConferenceMixingOptions
   ): Promise<Conference> {
-    const conferenceReplayed = await DolbyIoIAPIConferenceService.replay(
+    return DolbyIoIAPIConferenceService.replay(
       conference,
       replayOptions,
       mixingOptions
     );
-    return {
-      id: conferenceReplayed.id,
-      alias: conferenceReplayed.alias,
-      isNew: conferenceReplayed.isNew,
-      participants: conferenceReplayed.participants.map((p: Participant) => ({
-        id: p.id,
-        conferenceStatus: p.conferenceStatus,
-        externalId: p.externalId,
-        name: p.name,
-        avatarUrl: p.avatarUrl,
-      })),
-      status: conferenceReplayed.status,
-    };
   }
 
   /**
@@ -131,7 +83,7 @@ export class ConferenceService {
    */
   // TODO - AudioLevel type for Promise
 
-  public async getAudioLevel(participant?: Participant): Promise<AudioLevel> {
+  public async getAudioLevel(participant?: Participant): Promise<number> {
     return DolbyIoIAPIConferenceService.getAudioLevel(participant);
   }
 
@@ -162,7 +114,7 @@ export class ConferenceService {
    * @returns {Promise<number>} Promise with Number
    */
 
-  public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
+  public async getMaxVideoForwarding(): Promise<number> {
     return DolbyIoIAPIConferenceService.getMaxVideoForwarding();
   }
 
@@ -173,16 +125,7 @@ export class ConferenceService {
    */
 
   public async getParticipant(participantId?: String): Promise<Participant> {
-    const participant = await DolbyIoIAPIConferenceService.getParticipant(
-      participantId
-    );
-    return {
-      id: participant.id,
-      conferenceStatus: participant.conferenceStatus,
-      externalId: participant.externalId,
-      name: participant.name,
-      avatarUrl: participant.avatarUrl,
-    };
+    return DolbyIoIAPIConferenceService.getParticipant(participantId);
   }
 
   /**
@@ -194,16 +137,7 @@ export class ConferenceService {
   public async getParticipants(
     conference?: Conference
   ): Promise<Array<Participant>> {
-    const participants = await DolbyIoIAPIConferenceService.getParticipants(
-      conference
-    );
-    return participants.map((p: Participant) => ({
-      id: p.id,
-      conferenceStatus: p.conferenceStatus,
-      externalId: p.externalId,
-      name: p.name,
-      avatarUrl: p.avatarUrl,
-    }));
+    return DolbyIoIAPIConferenceService.getParticipants(conference);
   }
 
   /**
@@ -218,7 +152,7 @@ export class ConferenceService {
 
   /**
    * Informs whether the application plays the remote participants' audio to the local participant.
-   * @returns {Promise<null>} A boolean indicating whether the application plays the remote participants' audio to the local participant.
+   * @returns {Promise<boolean>} A boolean indicating whether the application plays the remote participants' audio to the local participant.
    */
 
   public async isOutputMuted(): Promise<boolean> {
@@ -248,21 +182,21 @@ export class ConferenceService {
   /**
    * Enables and disables audio processing for the conference participant.
    * @param options<AudioProcessingOptions> The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
   public async setAudioProcessing(
     options: AudioProcessingOptions
-  ): Promise<null> {
+  ): Promise<any> {
     return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async setMaxVideoForwarding(): Promise<null> {
+  public async setMaxVideoForwarding(): Promise<any> {
     return DolbyIoIAPIConferenceService.setMaxVideoForwarding();
   }
 
@@ -270,25 +204,25 @@ export class ConferenceService {
    * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
    * @param isMuted<boolean> A boolean, true indicates that the local participant is muted, false indicates that a participant is not muted
    * @param participant<Participant> A remote participant
-   * @returns {Promise<null>} Informs if the mute state has changed.
+   * @returns {Promise<boolean>} Informs if the mute state has changed.
    */
 
   public async mute(
     isMuted: boolean,
     participant?: Participant
-  ): Promise<null> {
+  ): Promise<boolean> {
     return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
 
   /**
    * Updates the participant's conference permissions.
    * @param participantPermissions<ParticipantPermissions[]> The set of participant's conference permissions.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
-  ): Promise<null> {
+  ): Promise<any> {
     return DolbyIoIAPIConferenceService.updatePermissions(
       participantPermissions
     );
@@ -297,40 +231,40 @@ export class ConferenceService {
   /**
    * Starts audio transmission between the local client and a conference.
    * @param participant<Participant> The participant whose stream should be sent to the local participant.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async startAudio(participant?: Participant): Promise<null> {
+  public async startAudio(participant?: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
   /**
    * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async startVideo(participant?: Participant): Promise<null> {
+  public async startVideo(participant?: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
   /**
    * Stops audio transmission between the local client and a conference.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async stopAudio(participant?: Participant): Promise<null> {
+  public async stopAudio(participant?: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
   /**
    * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async stopVideo(participant?: Participant): Promise<null> {
+  public async stopVideo(participant?: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 
@@ -345,42 +279,26 @@ export class ConferenceService {
     conference: Conference,
     options?: ConferenceJoinOptions
   ): Promise<Conference> {
-    const conferenceJoined = await DolbyIoIAPIConferenceService.join(
-      conference,
-      options
-    );
-    return {
-      id: conferenceJoined.id,
-      alias: conferenceJoined.alias,
-      isNew: conferenceJoined.isNew,
-      participants: conferenceJoined.participants.map((p: Participant) => ({
-        id: p.id,
-        conferenceStatus: p.conferenceStatus,
-        externalId: p.externalId,
-        name: p.name,
-        avatarUrl: p.avatarUrl,
-      })),
-      status: conferenceJoined.status,
-    };
+    return DolbyIoIAPIConferenceService.join(conference, options);
   }
 
   /**
    * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
    * @param participant<Participant> The participant who needs to be kicked from the conference.
-   * @returns {Promise<null>}
+   * @returns {Promise<any>}
    */
 
-  public async kick(participant: Participant): Promise<null> {
+  public async kick(participant: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.kick(participant);
   }
 
   /**
    * Leaves the conference.
    * @param options<ConferenceJoinOptions> The additional options for the leaving participant.
-   * @returns {Promise<null>}
+   * @returns {Promise<boolean>}
    */
 
-  public async leave(options?: ConferenceLeaveOptions): Promise<null> {
+  public async leave(options?: ConferenceLeaveOptions): Promise<boolean> {
     return DolbyIoIAPIConferenceService.leave(options);
   }
 
@@ -400,7 +318,7 @@ export class ConferenceService {
 
   /**
    * Add a handler for permissions changes
-   * @param handler<(data: PermissionsUpdatedEventType) => void> Handling function
+   * @param handler<(data: any) => void> Handling function
    * @returns {() => void} Function that removes handler
    */
 
@@ -413,6 +331,86 @@ export class ConferenceService {
         handler(data);
       }
     );
+  }
+
+  /**
+   * Add a handler for participants changes
+   * @param handler<(data: ParticipantAddedEventType | ParticipantUpdatedEventType | ParticipantRemovedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onParticipantsChange(
+    handler: (
+      data:
+        | ParticipantAddedEventType
+        | ParticipantUpdatedEventType
+        | ParticipantRemovedEventType
+    ) => void
+  ): () => void {
+    const participantAddedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantAdded,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantUpdatedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+    const participantRemovedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantRemoved,
+      (data) => {
+        handler(data);
+      }
+    );
+
+    return () => {
+      participantAddedEventUnsubscribe();
+      participantUpdatedEventUnsubscribe();
+      participantRemovedEventUnsubscribe();
+    };
+  }
+
+  /**
+   * Add a handler for streams changes
+   * @param handler<(data: StreamAddedEventType | StreamUpdatedEventType | StreamRemovedEventType) => void> Handling function
+   * @returns {() => void} Function that removes handler
+   */
+
+  public onStreamsChange(
+    handler: (
+      data:
+        | StreamAddedEventType
+        | StreamUpdatedEventType
+        | StreamRemovedEventType
+    ) => void
+  ): () => void {
+    const streamAddedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.StreamAdded,
+      (data) => {
+        handler(data);
+      }
+    );
+    const streamUpdatedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.StreamUpdated,
+      (data) => {
+        handler(data);
+      }
+    );
+    const streamRemovedEventUnsubscribe = NativeEvents.addListener(
+      ConferenceServiceEventNames.StreamRemoved,
+      (data) => {
+        handler(data);
+      }
+    );
+
+    return () => {
+      streamAddedEventUnsubscribe();
+      streamUpdatedEventUnsubscribe();
+      streamRemovedEventUnsubscribe();
+    };
   }
 }
 
