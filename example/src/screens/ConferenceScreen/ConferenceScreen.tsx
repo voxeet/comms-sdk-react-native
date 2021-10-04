@@ -1,16 +1,17 @@
-import type { Participant } from '../../../../lib/typescript/services/conference/models';
-import { DolbyIOContext } from '../../components/DolbyIOProvider';
-import COLORS from '../../constants/colors.constants';
-import Button from '../../ui/Button';
-import Space from '../../ui/Space';
-import Text from '../../ui/Text';
+import type { Participant } from '../../../../src/services/conference/models';
+import { DolbyIOContext } from '@components/DolbyIOProvider';
+import COLORS from '@constants/colors.constants';
+import Button from '@ui/Button';
+import Space from '@ui/Space';
+import Text from '@ui/Text';
 import {
   startVideo,
   stopVideo,
   startAudio,
   stopAudio,
   getAudioLevel,
-} from '../../utils/conference.tester';
+  current,
+} from '@utils/conference.tester';
 import styles from './ConferenceScreen.style';
 import BottomSheet from '@gorhom/bottom-sheet';
 import React, { FunctionComponent, useContext, useRef } from 'react';
@@ -58,7 +59,7 @@ const ConferenceScreen: FunctionComponent = () => {
                 {participants.map((p: Participant) => (
                   <View style={styles.participant} key={p.id}>
                     <Text size="s" color={COLORS.BLACK}>
-                      {p.name}
+                      {p.info.name}
                     </Text>
                   </View>
                 ))}
@@ -78,6 +79,14 @@ const ConferenceScreen: FunctionComponent = () => {
             <Text size="m" color={COLORS.BLACK}>
               Conference Service
             </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Get current"
+              onPress={current}
+            />
           </Space>
           <Space mb="xs">
             <Text size="s" color={COLORS.BLACK}>

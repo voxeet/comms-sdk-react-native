@@ -1,6 +1,23 @@
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
+import type { Conference } from '../../../src/services/conference/models';
 
+export const current = async () => {
+  try {
+    const conf = await DolbyIoIAPI.conference.current();
+    Alert.alert('Current conference', JSON.stringify(conf));
+  } catch (e: any) {
+    console.log(e);
+    Alert.alert('Error');
+  }
+};
+export const replay = (conference: Conference) => {
+  try {
+    DolbyIoIAPI.conference.replay(conference);
+  } catch (e: any) {
+    Alert.alert('Error');
+  }
+};
 export const startVideo = () => {
   try {
     DolbyIoIAPI.conference.startVideo();

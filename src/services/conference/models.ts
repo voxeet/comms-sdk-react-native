@@ -3,9 +3,9 @@ export interface Conference {
   id?: string;
   /** The conference alias. */
   alias?: string;
-  /** Checks if the created conference is new. */
+  /** Provides information if the created conference is new one. */
   isNew?: boolean;
-  /** Gets information about conference participants. */
+  /** Provides array of conference participants. */
   participants: Participant[];
   /** Provides the current conference status. */
   status: ConferenceStatus;
@@ -17,16 +17,12 @@ export interface ConferenceCreateParameters {
   ttl?: number;
   /** The bitrate adaptation mode for the video transmission. The rtcpMode triggers the server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
   rtcpMode?: RTCPMode;
-  // TODO - doc
-  mode?: Mode;
   /** The preferred video codec that is used during conferences, either H264 or VP8. By default, the value is set to H264. */
   videoCodec?: Codec;
   /** Turns the live recording on and off. */
   liveRecording?: boolean;
   /** Enable Dolby Voice */
   dolbyVoice?: boolean;
-  /** Turns the simulcast on and off. */
-  simulcast?: boolean;
 }
 
 export interface ConferenceCreateOptions {
@@ -34,6 +30,8 @@ export interface ConferenceCreateOptions {
   alias?: string;
   /** The conference parameters. */
   params?: ConferenceCreateParameters;
+  /** The conference PIN code. */
+  pinCode?: number;
 }
 
 export interface ConferenceLeaveOptions {
@@ -102,14 +100,12 @@ export interface ConferenceMixingOptions {
 export interface Participant {
   /**  The participant's ID. */
   id: string;
-  /** The current participant's status. */
-  conferenceStatus?: string;
-  /** The participant's external ID. */
-  externalId?: string;
-  /** The participant's name. */
-  name?: string;
-  /** The URL of the participant's avatar. */
-  avatarUrl?: string;
+  /**  The participant's informations. */
+  info: ParticipantInfo;
+  /** The participant's status. */
+  status?: ParticipantStatus;
+  /** The participant's type. */
+  type?: ParticipantType;
 }
 
 export interface ParticipantInfo {
@@ -117,6 +113,34 @@ export interface ParticipantInfo {
   name?: string;
   /** The URL of the participant's avatar. */
   avatarUrl?: string;
+}
+
+export enum ParticipantStatus {
+  /** A participant successfully connected to a conference. */
+  CONNECTED = 'Connected',
+  /** A participant received the conference invitation and is connecting to a conference. */
+  CONNECTING = 'Connecting',
+  /** An invited participant declined the conference invitation.  */
+  DECLINE = 'Decline',
+  /** A peer connection failed, and the participant cannot connect to a conference. */
+  ERROR = 'Error',
+  /** A participant did not enable audio, video, or screen-share and, therefore, is not connected to any stream. */
+  INACTIVE = 'Inactive',
+  /** A participant was kicked from the conference. */
+  KICKED = 'Kicked',
+  /** A participant left the conference. */
+  LEFT = 'Left',
+  /** A participant is invited to a conference and waits for an invitation. */
+  RESERVED = 'Reserved',
+  /** A participant experiences a peer connection problem, which may result in the Error or Connected status. */
+  WARNING = 'Warning',
+}
+
+export enum ParticipantType {
+  /** A participant who cannot send the audio and video stream during the conference. */
+  LISTENER = 'listener',
+  /** A participant who can send and receive the audio and video stream during the conference. */
+  USER = 'user',
 }
 
 export enum RTCPMode {
