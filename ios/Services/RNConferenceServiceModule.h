@@ -127,4 +127,54 @@
 - (void)isSpeaking:(NSDictionary * _Nonnull)participant
            resolve:(RCTPromiseResolveBlock _Nonnull)resolve
           rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Enables and disables audio processing for the conference participant..
+///
+/// \param processingOptions participant object
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+-(void)setAudioProcessing:(NSDictionary * _Nonnull)processingOptions
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                 rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Sets the maximum number of video streams that may be transmitted to the local participant.
+///
+/// \param maxVideoForwarding The maximum number of video streams that may be transmitted to the local participant.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+-(void)setMaxVideoForwarding:(NSInteger)maxVideoForwarding
+                     resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                    rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Mutes or unmutes output (only compatible with Dolby Voice conferences).
+///
+/// \param isMuted <code>true</code> if user mutes output. Otherwise, <code>false</code>.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+-(void)muteOutput:(BOOL)isMuted
+          resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+         rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Mutes or unmutes the specified user.
+///
+/// \param participant the participant you want to mute.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+-(void)mute:(BOOL)isMuted
+participant:(NSDictionary * _Nonnull)participant
+    resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+   rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+
 @end
