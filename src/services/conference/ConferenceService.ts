@@ -17,12 +17,14 @@ import type {
   ConferenceMixingOptions,
   ConferenceJoinOptions,
   ConferenceLeaveOptions,
+  AudioLevel,
+  MaxVideoForwarding,
   Participant,
-  AudioProcessing,
   ConferenceStatus,
   AudioProcessingOptions,
   ParticipantPermissions,
   UnsubscribeFunction,
+  RTCStatsType,
 } from './models';
 import { NativeModules } from 'react-native';
 
@@ -86,33 +88,19 @@ export class ConferenceService {
   /**
    * Gets the participant's audio level
    * @param participant<Participant> The participant object.
-   * @returns {Promise<number>} Promise with number
+   * @returns {Promise<AudioLevel>} Promise with AudioLevel
    */
-  // TODO - AudioLevel type for Promise
 
-  public async getAudioLevel(participant?: Participant): Promise<number> {
+  public async getAudioLevel(participant: Participant): Promise<AudioLevel> {
     return DolbyIoIAPIConferenceService.getAudioLevel(participant);
   }
 
   /**
-   * Gets the current audio processing state for a conference.
-   * @param participant<Participant> The participant object.
-   * @returns {Promise<AudioProcessing>} Promise with AudioProcessing object
-   */
-
-  public async getAudioProcessing(
-    participant?: Participant
-  ): Promise<AudioProcessing> {
-    return DolbyIoIAPIConferenceService.getAudioProcessing(participant);
-  }
-
-  /**
    * Provides standard WebRTC statistics for the application.
-   * @returns {Promise<any>} Promise with LocalStats
+   * @returns {Promise<RTCStatsType>} Promise with LocalStats
    */
-  // TODO - LocalStats type for Promise
 
-  public async getLocalStats(): Promise<any> {
+  public async getLocalStats(): Promise<RTCStatsType[]> {
     return DolbyIoIAPIConferenceService.getLocalStats();
   }
 
@@ -142,7 +130,7 @@ export class ConferenceService {
    */
 
   public async getParticipants(
-    conference?: Conference
+    conference: Conference
   ): Promise<Array<Participant>> {
     return DolbyIoIAPIConferenceService.getParticipants(conference);
   }
@@ -153,7 +141,7 @@ export class ConferenceService {
    * @returns {Promise<ConferenceStatus>} Promise with a ConferenceStatus string
    */
 
-  public async getStatus(conference?: Conference): Promise<ConferenceStatus> {
+  public async getStatus(conference: Conference): Promise<ConferenceStatus> {
     return DolbyIoIAPIConferenceService.getStatus(conference);
   }
 
@@ -168,12 +156,11 @@ export class ConferenceService {
 
   /**
    * Gets the current mute state of the participant.
-   * @param participant<Participant> The Participant object.
    * @returns {Promise<boolean>} Information if the local participant is muted.
    */
 
-  public async isMuted(participant?: Participant): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.isMuted(participant);
+  public async isMuted(): Promise<boolean> {
+    return DolbyIoIAPIConferenceService.isMuted();
   }
 
   /**
@@ -182,7 +169,7 @@ export class ConferenceService {
    * @returns {Promise<boolean>} A boolean indicating whether the current participant is speaking.
    */
 
-  public async isSpeaking(participant?: Participant): Promise<boolean> {
+  public async isSpeaking(participant: Participant): Promise<boolean> {
     return DolbyIoIAPIConferenceService.isSpeaking(participant);
   }
 
@@ -200,11 +187,12 @@ export class ConferenceService {
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
+   * @param max<MaxVideoForwarding> Number of video streams.
    * @returns {Promise<any>}
    */
 
-  public async setMaxVideoForwarding(): Promise<any> {
-    return DolbyIoIAPIConferenceService.setMaxVideoForwarding();
+  public async setMaxVideoForwarding(max: MaxVideoForwarding): Promise<any> {
+    return DolbyIoIAPIConferenceService.setMaxVideoForwarding(max);
   }
 
   /**
@@ -216,7 +204,7 @@ export class ConferenceService {
 
   public async mute(
     isMuted: boolean,
-    participant?: Participant
+    participant: Participant
   ): Promise<boolean> {
     return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
@@ -241,7 +229,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async startAudio(participant?: Participant): Promise<any> {
+  public async startAudio(participant: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
@@ -251,7 +239,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async startVideo(participant?: Participant): Promise<any> {
+  public async startVideo(participant: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
@@ -261,7 +249,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async stopAudio(participant?: Participant): Promise<any> {
+  public async stopAudio(participant: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
@@ -271,7 +259,7 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async stopVideo(participant?: Participant): Promise<any> {
+  public async stopVideo(participant: Participant): Promise<any> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 
