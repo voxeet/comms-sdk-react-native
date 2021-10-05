@@ -1,11 +1,11 @@
-import { NativeModules } from 'react-native';
-const { DolbyIoIAPINotificationService } = NativeModules;
 import NativeEvents from '../../utils/NativeEvents';
+import type { Conference } from '../conference/models';
+import type { ParticipantInfo } from '../conference/models';
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
+import { NativeModules } from 'react-native';
 
-import type { Conference } from '../conference/models';
-import type { ParticipantInfo } from '../session/models';
+const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
   /**
