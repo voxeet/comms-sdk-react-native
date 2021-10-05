@@ -12,6 +12,11 @@ import {
   getAudioLevel,
   current,
 } from '@utils/conference.tester';
+import {
+  getCurrentRecording,
+  startRecording,
+  stopRecording,
+} from '@utils/recording.tester';
 import styles from './ConferenceScreen.style';
 import BottomSheet from '@gorhom/bottom-sheet';
 import React, { FunctionComponent, useContext, useRef } from 'react';
@@ -130,6 +135,31 @@ const ConferenceScreen: FunctionComponent = () => {
               color="dark"
               text="Stop video"
               onPress={stopVideo}
+            />
+          </Space>
+          <Space mb="xs">
+            <Text size="s" color={COLORS.BLACK}>
+              Recording
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Start recording"
+              onPress={startRecording}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Stop recording"
+              onPress={stopRecording}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Current recording"
+              onPress={getCurrentRecording}
             />
           </Space>
         </Space>
