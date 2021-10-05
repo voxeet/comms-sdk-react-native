@@ -17,6 +17,8 @@ export interface IDolbyIOProvider {
   initialize: () => void;
   openSession: (name: string) => void;
   createAndJoin: (alias: string) => void;
+  join: (alias: string) => void;
+  replay: (alias: string) => void;
   leave: () => void;
 }
 
@@ -24,6 +26,8 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
+  join: () => {},
+  replay: () => {},
   leave: () => {},
 });
 
@@ -106,15 +110,48 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         createdConference,
         joinOptions
       );
-      console.log(joinedConference);
-      setConference({
-        ...joinedConference,
-        participants: [{ id: '1', name: user && user.name }],
-      });
+      console.log(JSON.stringify(joinedConference));
+      setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
     }
   };
+
+  const join = async (alias: string) => {
+    try {
+      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
+
+      const joinOptions = {
+        constraints: {
+          audio: true,
+          video: false,
+        },
+        simulcast: false,
+      };
+      const joinedConference = await DolbyIoIAPI.conference.join(
+        fetchedConference,
+        joinOptions
+      );
+      console.log(joinedConference);
+      setConference(joinedConference);
+    } catch (e: any) {
+      Alert.alert('Conference not joined', e.toString());
+    }
+  };
+
+  const replay = async (alias: string) => {
+    try {
+      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
+      const replayedConference = await DolbyIoIAPI.conference.replay(
+        fetchedConference
+      );
+      console.log(replayedConference);
+      setConference(replayedConference);
+    } catch (e: any) {
+      Alert.alert('Conference not replayed', e.toString());
+    }
+  };
+
   const leave = async () => {
     setConference(undefined);
     // try {
@@ -136,6 +173,8 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     initialize,
     openSession,
     createAndJoin,
+    join,
+    replay,
     leave,
   };
 
