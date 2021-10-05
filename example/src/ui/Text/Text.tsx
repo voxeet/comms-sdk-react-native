@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Text } from 'react-native';
 
-import COLORS from '../../constants/colors.constants';
+import COLORS from '@constants/colors.constants';
 
 import styles from './Text.style';
 
