@@ -57,16 +57,12 @@ public class ConferenceMapper {
 
     @Nullable
     public String toConferenceId(@NotNull ReadableMap conference) {
-        if (rnCollectionExtractor.hasKey(conference, CONFERENCE_ID)) {
-            return rnCollectionExtractor.getString(conference, CONFERENCE_ID);
-        } else return null;
+        return rnCollectionExtractor.getString(conference, CONFERENCE_ID);
     }
 
     @Nullable
-    public String toConferenceAlias(@Nullable ReadableMap conferenceOptions) {
-        if (rnCollectionExtractor.hasKey(conferenceOptions, CONFERENCE_OPTIONS_ALIAS)) {
-            return rnCollectionExtractor.getString(conferenceOptions, CONFERENCE_OPTIONS_ALIAS);
-        } else return null;
+    public String toConferenceAlias(@NotNull ReadableMap conferenceOptions) {
+        return rnCollectionExtractor.getString(conferenceOptions, CONFERENCE_OPTIONS_ALIAS);
     }
 
     @NotNull
@@ -76,46 +72,43 @@ public class ConferenceMapper {
             return paramsHolder;
         }
 
-        if (rnCollectionExtractor.hasKey(conferenceOptions, CONFERENCE_OPTIONS_PARAMS)) {
-            ReadableMap params = rnCollectionExtractor.getMap(conferenceOptions, CONFERENCE_OPTIONS_PARAMS);
+        ReadableMap params = rnCollectionExtractor.getMap(conferenceOptions, CONFERENCE_OPTIONS_PARAMS);
+        if (params == null) {
+            return paramsHolder;
+        }
 
-            if (params == null) {
-                return paramsHolder;
+        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC)) {
+            String videoCodec = rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC);
+            if (videoCodec != null) {
+                paramsHolder.setVideoCodec(videoCodec);
             }
+        }
 
-            if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC)) {
-                String videoCodec = rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC);
-                if (videoCodec != null) {
-                    paramsHolder.setVideoCodec(videoCodec);
-                }
-            }
+        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_TTL)) {
+            paramsHolder.putValue(
+                    CONFERENCE_OPTIONS_PARAMS_TTL,
+                    rnCollectionExtractor.getInteger(params, CONFERENCE_OPTIONS_PARAMS_TTL)
+            );
+        }
 
-            if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_TTL)) {
-                paramsHolder.putValue(
-                        CONFERENCE_OPTIONS_PARAMS_TTL,
-                        rnCollectionExtractor.getInteger(params, CONFERENCE_OPTIONS_PARAMS_TTL)
-                );
-            }
+        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)) {
+            paramsHolder.putValue(
+                    CONFERENCE_OPTIONS_PARAMS_RTCP_MODE,
+                    rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)
+            );
+        }
 
-            if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)) {
-                paramsHolder.putValue(
-                        CONFERENCE_OPTIONS_PARAMS_RTCP_MODE,
-                        rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)
-                );
-            }
+        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)) {
+            paramsHolder.putValue(
+                    CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING,
+                    rnCollectionExtractor.getBoolean(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)
+            );
+        }
 
-            if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)) {
-                paramsHolder.putValue(
-                        CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING,
-                        rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)
-                );
-            }
-
-            if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)) {
-                paramsHolder.setDolbyVoice(
-                        rnCollectionExtractor.getBoolean(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)
-                );
-            }
+        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)) {
+            paramsHolder.setDolbyVoice(
+                    rnCollectionExtractor.getBoolean(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)
+            );
         }
         return paramsHolder;
     }
@@ -139,17 +132,17 @@ public class ConferenceMapper {
     private String toString(@NotNull ConferenceStatus status) {
         switch (status) {
             case CREATED:
-                return "Created";
+                return "CREATED";
             case DESTROYED:
-                return "Destroyed";
+                return "DESTROYED";
             case ENDED:
-                return "Ended";
+                return "ENDED";
             case ERROR:
-                return "Error";
+                return "ERROR";
             case JOINED:
-                return "Joined";
+                return "JOINED";
             case LEFT:
-                return "Left";
+                return "LEFT";
             case DEFAULT:
             case CREATING:
             case JOINING:
@@ -157,7 +150,7 @@ public class ConferenceMapper {
             case NO_MORE_PARTICIPANT:
             case LEAVING:
             default:
-                return "Unknown";
+                return "UNKNOWN";
         }
     }
 
@@ -204,31 +197,31 @@ public class ConferenceMapper {
     private String toString(@NotNull ConferencePermission permission) {
         switch (permission) {
             case INVITE:
-                return "Invite";
+                return "INVITE";
             case JOIN:
-                return "Join";
+                return "JOIN";
             case KICK:
-                return "Kick";
+                return "KICK";
             case RECORD:
-                return "Record";
+                return "RECORD";
             case SEND_AUDIO:
-                return "SendAudio";
+                return "SEND_AUDIO";
             case SEND_MESSAGE:
-                return "SendMessage";
+                return "SEND_MESSAGE";
             case SEND_VIDEO:
-                return "SendVideo";
+                return "SEND_VIDEO";
             case SHARE_FILE:
-                return "ShareFile";
+                return "SHARE_FILE";
             case SHARE_SCREEN:
-                return "ShareScreen";
+                return "SHARE_SCREEN";
             case SHARE_VIDEO:
-                return "ShareVideo";
+                return "SHARE_VIDEO";
             case STREAM:
-                return "Stream";
+                return "STREAM";
             case UPDATE_PERMISSIONS:
-                return "UpdatePermissions";
+                return "UPDATE_PERMISSIONS";
             default:
-                return "Unknown";
+                return "UNKNOWN";
         }
     }
 
