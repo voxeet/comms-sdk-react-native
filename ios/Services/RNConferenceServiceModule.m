@@ -30,10 +30,10 @@ RCT_EXPORT_METHOD(fetch:(NSString * _Nonnull)conferenceId
 {
     [VoxeetSDK.shared.conference fetchWithConferenceID:conferenceId
                                             completion:^(VTConference *conference) {
-        if (conference == nil) {
-            reject(@"error", @"Couldn't find the conference.", nil);
-        } else {
+        if (conference != nil) {
             resolve([conference reactDescription]);
+        } else {
+            reject(@"error", @"Couldn't find the conference.", nil);
         }
     }];
 }
@@ -71,7 +71,7 @@ RCT_EXPORT_METHOD(current:(RCTPromiseResolveBlock _Nonnull)resolve
                   rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
 {
     VTConference *conference = [VoxeetSDK.shared.conference current];
-    if(conference) {
+    if(conference != nil) {
         resolve([conference reactDescription]);
     } else {
         reject(@"error", @"Missing current conference.", nil);
@@ -120,10 +120,10 @@ RCT_EXPORT_METHOD(getParticipants:(NSDictionary * _Nonnull)conference
     }
     [VoxeetSDK.shared.conference fetchWithConferenceID:conferenceId
                                             completion:^(VTConference *conference) {
-        if (conference == nil) {
-            reject(@"error", @"Couldn't find the conference.", nil);
-        } else {
+        if (conference != nil) {
             resolve([[conference reactDescription] conferenceParticipants]);
+        } else {
+            reject(@"error", @"Couldn't find the conference.", nil);
         }
     }];
 }
@@ -141,10 +141,10 @@ RCT_EXPORT_METHOD(getStatus:(NSDictionary * _Nonnull)conference
     [VoxeetSDK.shared.conference fetchWithConferenceID:conferenceId
                                             completion:^(VTConference *conference) {
         NSString * _Nonnull status = [[conference reactDescription] conferenceStatus];
-        if (status == nil) {
-            reject(@"error", @"Couldn't find the conference status.", nil);
-        } else {
+        if (status != nil) {
             resolve(status);
+        } else {
+            reject(@"error", @"Couldn't find the conference status.", nil);
         }
     }];
 }
