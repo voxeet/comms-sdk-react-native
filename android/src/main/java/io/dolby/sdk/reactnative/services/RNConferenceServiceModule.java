@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableMap;
 import com.voxeet.sdk.json.internal.MetadataHolder;
 import com.voxeet.sdk.json.internal.ParamsHolder;
 import com.voxeet.sdk.models.Conference;
@@ -28,9 +27,10 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
 
     /**
      * Creates a bridge wrapper for {@link ConferenceService}.
+     *
      * @param conferenceService {@link ConferenceService} from Android SDK
-     * @param reactContext react context
-     * @param conferenceMapper mapper for a {@link Conference} and {@link Conference}-related models
+     * @param reactContext      react context
+     * @param conferenceMapper  mapper for a {@link Conference} and {@link Conference}-related models
      */
     public RNConferenceServiceModule(
             @NotNull ConferenceService conferenceService,
@@ -67,15 +67,7 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void create(@Nullable ReadableMap options, @NotNull final Promise promise) {
-        MetadataHolder metadataHolder = new MetadataHolder();
-        String conferenceAlias = conferenceMapper.toConferenceAlias(options);
-        ParamsHolder paramsHolder = conferenceMapper.toConferenceParamsHolder(options);
-
-        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
-                .setConferenceAlias(conferenceAlias)
-                .setMetadataHolder(metadataHolder)
-                .setParamsHolder(paramsHolder)
-                .build();
+        ConferenceCreateOptions conferenceCreateOptions = toConferenceCreateOptions(options);
 
         conferenceService.create(conferenceCreateOptions)
                 .then(conference -> {
@@ -133,5 +125,19 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
             throwable.printStackTrace();
             promise.reject(throwable);
         }
+    }
+
+    private ConferenceCreateOptions toConferenceCreateOptions(@Nullable ReadableMap options) {
+        MetadataHolder metadataHolder = new MetadataHolder();
+        ParamsHolder paramsHolder = conferenceMapper.toConferenceParamsHolder(options);
+
+        ConferenceCreateOptions.Builder conferenceCreateOptions = new ConferenceCreateOptions.Builder()
+                .setMetadataHolder(metadataHolder)
+                .setParamsHolder(paramsHolder);
+
+        if (options != null) {
+            conferenceCreateOptions.setConferenceAlias(conferenceMapper.toConferenceAlias(options));
+        }
+        return conferenceCreateOptions.build();
     }
 }
