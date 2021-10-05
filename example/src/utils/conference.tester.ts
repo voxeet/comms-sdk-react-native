@@ -1,6 +1,7 @@
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 import type { Conference } from '../../../src/services/conference/models';
+import { ConferenceStatus } from '../../../src/services/conference/models';
 
 export const current = async () => {
   try {
@@ -20,28 +21,28 @@ export const replay = (conference: Conference) => {
 };
 export const startVideo = () => {
   try {
-    DolbyIoIAPI.conference.startVideo();
+    DolbyIoIAPI.conference.startVideo({ id: '111', info: { name: 'John' } });
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
 export const stopVideo = () => {
   try {
-    DolbyIoIAPI.conference.stopVideo();
+    DolbyIoIAPI.conference.stopVideo({ id: '111', info: { name: 'John' } });
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
 export const startAudio = () => {
   try {
-    DolbyIoIAPI.conference.startAudio();
+    DolbyIoIAPI.conference.startAudio({ id: '111', info: { name: 'John' } });
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
 export const stopAudio = () => {
   try {
-    DolbyIoIAPI.conference.stopAudio();
+    DolbyIoIAPI.conference.stopAudio({ id: '111', info: { name: 'John' } });
   } catch (e: any) {
     Alert.alert('Error');
   }
@@ -49,25 +50,38 @@ export const stopAudio = () => {
 
 export const getAudioLevel = async () => {
   try {
-    const audioLevel = await DolbyIoIAPI.conference.getAudioLevel();
+    const audioLevel = await DolbyIoIAPI.conference.getAudioLevel({
+      id: '111',
+      info: { name: 'John' },
+    });
     Alert.alert('Audio level', JSON.stringify(audioLevel));
   } catch (e: any) {
     Alert.alert('Cant get audio level', e);
   }
 };
 
-export const getAudioProcessing = async () => {
-  try {
-    const audioProcessing = await DolbyIoIAPI.conference.getAudioProcessing();
-    Alert.alert('Audio processing', JSON.stringify(audioProcessing));
-  } catch (e: any) {
-    Alert.alert('Cant get audio processing', e);
-  }
-};
+// export const getAudioProcessing = async () => {
+//   try {
+//     const audioProcessing = await DolbyIoIAPI.conference.getAudioProcessing();
+//     Alert.alert('Audio processing', JSON.stringify(audioProcessing));
+//   } catch (e: any) {
+//     Alert.alert('Cant get audio processing', e);
+//   }
+// };
 
 export const getStatus = async () => {
   try {
-    const status = await DolbyIoIAPI.conference.getStatus();
+    const status = await DolbyIoIAPI.conference.getStatus({
+      participants: [
+        {
+          id: '123',
+          info: {
+            name: 'John Doe',
+          },
+        },
+      ],
+      status: ConferenceStatus.DEFAULT,
+    });
     Alert.alert('Status', JSON.stringify(status));
   } catch (e: any) {
     Alert.alert('Cant get status', e);

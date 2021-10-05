@@ -1,11 +1,14 @@
-import { NativeModules } from 'react-native';
-const { DolbyIoIAPINotificationService } = NativeModules;
 import NativeEvents from '../../utils/NativeEvents';
+import type {
+  ParticipantInfo,
+  Conference,
+  UnsubscribeFunction,
+} from '../conference/models';
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
+import { NativeModules } from 'react-native';
 
-import type { Conference } from '../conference/models';
-import type { ParticipantInfo } from '../session/models';
+const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
   /**
@@ -40,7 +43,7 @@ export class NotificationService {
 
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void
-  ): () => void {
+  ): UnsubscribeFunction {
     return NativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
       (data) => {
