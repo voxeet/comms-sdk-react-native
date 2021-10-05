@@ -1,6 +1,6 @@
+import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NativeModules } from 'react-native';
-import { Conference, ConferenceStatus } from '../../conference/models';
 
 /** Mocking function */
 
@@ -23,7 +23,7 @@ describe('NotificationService', () => {
   /** "invite" method */
 
   const mockConference: Conference = {
-    participants: [{ id: '123' }],
+    participants: [{ id: '123', info: { name: 'John' } }],
     status: ConferenceStatus.DEFAULT,
   };
 
