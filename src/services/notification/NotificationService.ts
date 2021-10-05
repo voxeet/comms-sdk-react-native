@@ -1,9 +1,11 @@
 import NativeEvents from '../../utils/NativeEvents';
+
 import type {
   ParticipantInfo,
   Conference,
   UnsubscribeFunction,
 } from '../conference/models';
+
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
 import { NativeModules } from 'react-native';
