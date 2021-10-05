@@ -1,4 +1,4 @@
-import { FONT_WEIGHTS, FONT_SIZES } from '../../constants/fonts.constants';
+import { FONT_WEIGHTS, FONT_SIZES } from '@constants/fonts.constants';
 
 export default {
   HEADER_L: {
