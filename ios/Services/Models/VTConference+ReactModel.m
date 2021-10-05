@@ -59,4 +59,48 @@ static NSString * const keyPinCode = @"pinCode";
     }
 }
 
+- (VTParticipant * _Nullable)findParticipant:(NSDictionary * _Nullable)participant {
+    if(participant == nil) {
+        return nil;
+    }
+    
+    for(VTParticipant *participantObject in self.participants) {
+        if([participant isEqualToDictionary:[participantObject reactDescription]]) {
+            return participantObject;
+        }
+    }
+    
+    return nil;
+}
+
+- (VTParticipant * _Nullable)findParticipantWithId:(NSString * _Nullable)participantId {
+    if(participantId == nil) {
+        return nil;
+    }
+    
+    for(VTParticipant *participant in self.participants) {
+        if([participant.id isEqualToString:participantId]) {
+            return participant;
+        }
+    }
+    
+    return nil;
+}
+
+@end
+
+@implementation NSDictionary (Conference)
+
+- (NSString * _Nullable)conferenceId {
+    return self[keyId];
+}
+
+- (NSString * _Nullable)conferenceStatus {
+    return self[keyStatus];
+}
+
+- (NSArray<NSDictionary *> * _Nullable)conferenceParticipants {
+    return self[keyParticipants];
+}
+
 @end
