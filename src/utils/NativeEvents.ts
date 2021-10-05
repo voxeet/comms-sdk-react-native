@@ -21,11 +21,9 @@ export default class NativeEvents {
     type: K,
     listener: (event: NativeEventType[K]) => void
   ): UnregisterListener {
-    // @ts-ignore
-    EventEmitter.addListener(type, listener);
+    EventEmitter?.addListener(type, listener);
     return () => {
-      // @ts-ignore
-      EventEmitter.removeListener(type, listener);
+      EventEmitter?.removeListener(type, listener);
     };
   }
 }
