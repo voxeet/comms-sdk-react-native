@@ -4,6 +4,7 @@
 #import "VTConferenceOptions+ReactModel.h"
 #import "VTConferenceParameters+ReactModel.h"
 #import "VTJoinOptions+ReactModel.h"
+#import "NSDictionary+AudioProcessingOptions.h"
 #import <React/RCTLog.h>
 
 @import VoxeetSDK;
@@ -165,6 +166,71 @@ RCT_EXPORT_METHOD(isSpeaking:(NSDictionary * _Nonnull)participant
     } else {
         reject(@"error", @"Couldn't find the participant.", nil);
     }
+}
+
+#pragma mark - Setters -
+
+RCT_EXPORT_METHOD(setAudioProcessing:(NSDictionary * _Nonnull)processingOptions
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    NSNumber *option = [processingOptions audioProcessing];
+    if(option != nil && [option isKindOfClass:[NSNumber class]]) {
+        [VoxeetSDK.shared.conference audioProcessingWithEnable:[option boolValue]];
+        resolve(nil);
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"invalid options: %@", [processingOptions description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(setMaxVideoForwarding:(NSInteger)maxVideoForwarding
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.conference videoForwardingWithMax:maxVideoForwarding
+                                           participants:nil
+                                             completion:^(NSError * _Nullable error) {
+        if(error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(muteOutput:(BOOL)isMuted
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.conference muteOutput:isMuted
+                                 completion:^(NSError *error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(mute:(BOOL)isMuted
+                  participant:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant *participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject == nil) {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+        return;
+    }
+    [VoxeetSDK.shared.conference muteWithParticipant:participantObject
+                                             isMuted:isMuted
+                                          completion:^(NSError *error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
 }
 
 @end
