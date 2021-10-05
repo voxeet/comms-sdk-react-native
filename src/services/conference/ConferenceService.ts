@@ -1,5 +1,15 @@
+import NativeEvents from '../../utils/NativeEvents';
 import { ConferenceServiceEventNames } from './events';
-
+import type {
+  PermissionsUpdatedEventType,
+  ParticipantAddedEventType,
+  ParticipantUpdatedEventType,
+  ParticipantRemovedEventType,
+  StreamAddedEventType,
+  StreamUpdatedEventType,
+  StreamRemovedEventType,
+  ConferenceStatusUpdatedEventType,
+} from './events';
 import type {
   Conference,
   ConferenceCreateOptions,
@@ -14,20 +24,6 @@ import type {
   ParticipantPermissions,
   UnsubscribeFunction,
 } from './models';
-
-import type {
-  PermissionsUpdatedEventType,
-  ParticipantAddedEventType,
-  ParticipantUpdatedEventType,
-  ParticipantRemovedEventType,
-  StreamAddedEventType,
-  StreamUpdatedEventType,
-  StreamRemovedEventType,
-  ConferenceStatusUpdatedEventType,
-} from './events';
-
-import NativeEvents from '../../utils/NativeEvents';
-
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
