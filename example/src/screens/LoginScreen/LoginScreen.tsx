@@ -1,9 +1,9 @@
-import { DolbyIOContext } from '../../components/DolbyIOProvider';
-import COLORS from '../../constants/colors.constants';
-import Button from '../../ui/Button';
-import Input from '../../ui/Input';
-import Space from '../../ui/Space';
-import Text from '../../ui/Text';
+import { DolbyIOContext } from '@components/DolbyIOProvider';
+import COLORS from '@constants/colors.constants';
+import Button from '@ui/Button';
+import Input from '@ui/Input';
+import Space from '@ui/Space';
+import Text from '@ui/Text';
 import styles from './LoginScreen.style';
 // @ts-ignore
 import Chance from 'chance';

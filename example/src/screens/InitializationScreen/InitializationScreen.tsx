@@ -2,13 +2,13 @@ import React, { FunctionComponent, useContext, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
-import Space from '../../ui/Space';
-import Text from '../../ui/Text';
+import Space from '@ui/Space';
+import Text from '@ui/Text';
 
-import COLORS from '../../constants/colors.constants';
+import COLORS from '@constants/colors.constants';
 
 import styles from './InitializationScreen.style';
-import { DolbyIOContext } from '../../components/DolbyIOProvider';
+import { DolbyIOContext } from '@components/DolbyIOProvider';
 
 const InitializationScreen: FunctionComponent = () => {
   const { initialize } = useContext(DolbyIOContext);

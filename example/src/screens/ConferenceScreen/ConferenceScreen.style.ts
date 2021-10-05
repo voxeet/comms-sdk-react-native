@@ -1,5 +1,5 @@
-import COLORS from '../../constants/colors.constants';
-import { SPACE_XXS, SPACE_XS, SPACE_M } from '../../constants/sizes.constants';
+import COLORS from '@constants/colors.constants';
+import { SPACE_XXS, SPACE_XS, SPACE_M } from '@constants/sizes.constants';
 import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
