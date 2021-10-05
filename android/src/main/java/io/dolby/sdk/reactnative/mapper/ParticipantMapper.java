@@ -141,9 +141,9 @@ public class ParticipantMapper {
     private String toString(@NotNull MediaStreamType mediaStreamType) {
         switch (mediaStreamType) {
             case Camera:
-                return "Camera";
+                return "CAMERA";
             case ScreenShare:
-                return "ScreenShare";
+                return "SCREEN_SHARE";
             case Custom1:
             case Custom2:
             case Custom3:
@@ -153,7 +153,7 @@ public class ParticipantMapper {
             case Custom7:
             case Custom8:
             default:
-                return "Unknown";
+                return "UNKNOWN";
         }
     }
 
