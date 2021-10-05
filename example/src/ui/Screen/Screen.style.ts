@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import COLORS from '../../constants/colors.constants';
+import COLORS from '@constants/colors.constants';
 
 export default StyleSheet.create({
   safeArea: {

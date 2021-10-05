@@ -14,19 +14,19 @@ const { DolbyIoIAPIConferenceService } = NativeModules;
 /** ConferenceService tests */
 
 describe('ConferenceService', () => {
-  /** "create" method */
+  describe('create()', () => {
+    it('should invoke exported method', () => {
+      const options = {
+        alias: 'Example conference',
+      };
+      ConferenceService.create(options);
+      expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith(options);
+    });
 
-  test('Create method calls exported create method', () => {
-    const options = {
-      alias: 'Example conference',
-    };
-    ConferenceService.create(options);
-    expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith(options);
-  });
-
-  test('Create method without params calls exported create method with empty object', () => {
-    ConferenceService.create();
-    expect(DolbyIoIAPIConferenceService.create).toHaveBeenLastCalledWith({});
+    it('should invoke exported method with empty object when invoked parameterless', () => {
+      ConferenceService.create();
+      expect(DolbyIoIAPIConferenceService.create).toHaveBeenLastCalledWith({});
+    });
   });
 
   /** "fetch" method */
@@ -277,6 +277,9 @@ describe('ConferenceService', () => {
     });
     expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
       id: '123',
+      info: {
+        name: 'John Doe',
+      },
     });
   });
 

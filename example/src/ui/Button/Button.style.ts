@@ -1,10 +1,10 @@
-import COLORS from '../../constants/colors.constants';
+import COLORS from '@constants/colors.constants';
 import {
   SPACE_XXS,
   SPACE_S,
   SPACE_XL,
   SPACE_L,
-} from '../../constants/sizes.constants';
+} from '@constants/sizes.constants';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({

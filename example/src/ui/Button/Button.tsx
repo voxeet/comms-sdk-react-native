@@ -1,4 +1,4 @@
-import COLORS from '../../constants/colors.constants';
+import COLORS from '@constants/colors.constants';
 import Text from '../Text';
 import styles from './Button.style';
 import React from 'react';
