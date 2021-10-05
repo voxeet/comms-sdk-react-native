@@ -2,7 +2,7 @@
 // fw for width 100%
 // fh for height 100%
 
-import { SPACES } from '../../constants/sizes.constants';
+import { SPACES } from '@constants/sizes.constants';
 
 const options = [
   ['m', 'margin'],

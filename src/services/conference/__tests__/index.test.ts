@@ -14,23 +14,31 @@ const { DolbyIoIAPIConferenceService } = NativeModules;
 /** ConferenceService tests */
 
 describe('ConferenceService', () => {
-  /** "create" method */
+  describe('create()', () => {
+    it('should invoke exported method', () => {
+      const options = {
+        alias: 'Example conference',
+      };
+      ConferenceService.create(options);
+      expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith(options);
+    });
 
-  test('"create" method', () => {
-    ConferenceService.create({});
-    expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith({});
+    it('should invoke exported method with empty object when invoked parameterless', () => {
+      ConferenceService.create();
+      expect(DolbyIoIAPIConferenceService.create).toHaveBeenLastCalledWith({});
+    });
   });
 
   /** "fetch" method */
 
-  test('"fetch" method', () => {
+  test('Fetch method calls exported fetch method', () => {
     ConferenceService.fetch();
     expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
   });
 
   /** "current" method */
 
-  test('"current" method', () => {
+  test('Current method calls exported current method', () => {
     ConferenceService.current();
     expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
   });
@@ -38,7 +46,7 @@ describe('ConferenceService', () => {
   /** "replay" method */
 
   const mockConference: Conference = {
-    participants: [{ id: '123' }],
+    participants: [{ id: '123', info: { name: 'John Doe' } }],
     status: ConferenceStatus.DEFAULT,
   };
 
@@ -50,7 +58,7 @@ describe('ConferenceService', () => {
     enabled: true,
   };
 
-  test('"replay" method', () => {
+  test('Replay method calls exported replay method', () => {
     ConferenceService.replay(
       mockConference,
       mockConferenceReplayOptions,
@@ -59,6 +67,21 @@ describe('ConferenceService', () => {
     expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
       mockConference,
       mockConferenceReplayOptions,
+      mockConferenceMixingOptions
+    );
+  });
+
+  test('Replay method without replay options calls exported replay method with replay offset param set to 0', () => {
+    ConferenceService.replay(
+      mockConference,
+      undefined,
+      mockConferenceMixingOptions
+    );
+    expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+      mockConference,
+      {
+        offset: 0,
+      },
       mockConferenceMixingOptions
     );
   });
@@ -156,18 +179,29 @@ describe('ConferenceService', () => {
   /** "mute" method */
 
   test('"mute" method', () => {
-    ConferenceService.mute(true, {
+    const participant = {
       id: '123',
-    });
-    expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(true, {
-      id: '123',
-    });
+      info: {
+        name: 'John Doe',
+      },
+    };
+
+    ConferenceService.mute(true, participant);
+    expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
+      true,
+      participant
+    );
   });
 
   /** "updatePermissions" method */
 
   const mockParticipantPermissions: ParticipantPermissions = {
-    participant: { id: '123' },
+    participant: {
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    },
     permissions: [
       ConferencePermission.INVITE,
       ConferencePermission.JOIN,
@@ -213,7 +247,14 @@ describe('ConferenceService', () => {
   /** "join" method */
 
   const mockConference_2: Conference = {
-    participants: [{ id: '123' }],
+    participants: [
+      {
+        id: '123',
+        info: {
+          name: 'John Doe',
+        },
+      },
+    ],
     status: ConferenceStatus.DEFAULT,
   };
 
@@ -228,9 +269,17 @@ describe('ConferenceService', () => {
   /** "kick" method */
 
   test('"kick" method', () => {
-    ConferenceService.kick({ id: '123' });
+    ConferenceService.kick({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
     expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
       id: '123',
+      info: {
+        name: 'John Doe',
+      },
     });
   });
 
