@@ -4,6 +4,7 @@ import type {
   RefreshAccessTokenInBackgroundType,
 } from './models';
 import ConferenceService from './services/conference/ConferenceService';
+import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
@@ -17,6 +18,7 @@ export class DolbyIoIAPI {
 
   conference = ConferenceService;
   session = SessionService;
+  recording = RecordingService;
 
   /**
    * Initializes the SDK using the customer key and secret.
@@ -28,6 +30,14 @@ export class DolbyIoIAPI {
     consumerKey: string,
     consumerSecret: string
   ): Promise<null> {
+    if (!consumerKey || !consumerSecret) {
+      Logger.error(
+        'The Consumer Key and/or Consumer Secret are missing during initialization.'
+      );
+      throw new Error(
+        'The Consumer Key and/or Consumer Secret are missing during initialization.'
+      );
+    }
     Logger.warning(
       'Initialize method is deprecated. For security reasons Dolby recommends the initializeToken method in production. Use initialize method for prototyping of the app only.'
     );
