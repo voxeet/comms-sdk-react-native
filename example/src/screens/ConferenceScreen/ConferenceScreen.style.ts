@@ -1,6 +1,7 @@
 import COLORS from '@constants/colors.constants';
 import { SPACE_XXS, SPACE_XS, SPACE_M } from '@constants/sizes.constants';
 import { StyleSheet, Platform } from 'react-native';
+import { FONT_WEIGHTS } from '@constants/fonts.constants';
 
 export default StyleSheet.create({
   wrapper: {
@@ -32,11 +33,27 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: SPACE_XXS,
     height: SPACE_M,
-    marginRight: SPACE_XS,
   },
   actionButtons: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   actionButton: {},
+  menuBackdrop: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    opacity: 1,
+  },
+  optionsContainerStyle: {
+    borderRadius: SPACE_M,
+    paddingVertical: SPACE_XS,
+  },
+  optionWrapper: {
+    paddingHorizontal: SPACE_M,
+    paddingVertical: SPACE_XXS,
+  },
+  optionText: {
+    fontSize: 16,
+    lineHeight: 20,
+    fontFamily: FONT_WEIGHTS.medium,
+  },
 });
