@@ -239,7 +239,7 @@ describe('ConferenceService', () => {
       },
     };
 
-    ConferenceService.mute(true, participant);
+    ConferenceService.mute(participant, true);
     expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
       true,
       participant
