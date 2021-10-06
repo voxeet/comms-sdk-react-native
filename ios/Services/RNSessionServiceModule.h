@@ -23,5 +23,14 @@
 ///
 - (void)close:(RCTPromiseResolveBlock _Nonnull)resolve
      rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Provides current session user.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)getParticipant:(RCTPromiseResolveBlock _Nonnull)resolve
+              rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 
 @end
