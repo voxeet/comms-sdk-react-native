@@ -1,34 +1,51 @@
 import DolbyIoIAPI from '../DolbyIoIAPI';
-import type { RefreshAccessTokenType } from '../models';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIModule } = NativeModules;
 
-const mockAPP_ID = 'gGzW67pd7xpNo6iIuAnHHQ==';
-const mockAPP_SECRET = 'FtXhRGoKop1dqsJL01RfPNdK4aoXQGs89hhiiAsvWlI=';
+describe('Main DolbyIoIAPI module', () => {
+  describe('initialize()', () => {
+    it('should invoke exported method', () => {
+      const APP_ID = 'IDIDID';
+      const APP_SECRET = 'SECRETSECRETSECRET';
 
-/** Main module tests */
+      DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
+      expect(DolbyIoIAPIModule.initialize).toHaveBeenCalledWith(
+        APP_ID,
+        APP_SECRET
+      );
+    });
 
-describe('Main module', () => {
-  /** "initialize" method  */
-
-  test('"initialize" method', () => {
-    DolbyIoIAPI.initialize(mockAPP_ID, mockAPP_SECRET);
-    expect(DolbyIoIAPIModule.initialize).toHaveBeenCalledWith(
-      mockAPP_ID,
-      mockAPP_SECRET
-    );
+    it('should throw Error when no secret or id passed ', () => {
+      expect(() => DolbyIoIAPI.initialize('', '')).rejects.toThrow(Error);
+    });
   });
 
-  /** "initializeToken" method */
-  // TODO - toHaveBeenCalledWith(null, mockFunctions) - doesn't work
+  describe('initializeToken()', () => {
+    it('should invoke exported method', () => {
+      DolbyIoIAPI.initializeToken(null, () => Promise.resolve('token'));
+      expect(DolbyIoIAPIModule.initializeToken).toHaveBeenCalled();
+    });
 
-  const mockFunction: RefreshAccessTokenType = async () => {
-    return 'string';
-  };
+    it('should invoke onAccessTokenOk when token refreshed', async () => {
+      const accessToken = 'dsfmkls78as';
+      const refreshAccessToken = () => Promise.resolve('newToken');
+      await DolbyIoIAPI.initializeToken(accessToken, refreshAccessToken);
+      // @ts-ignore
+      await DolbyIoIAPI.refreshAccessTokenInBackground();
+      expect(DolbyIoIAPIModule.onAccessTokenOk).toHaveBeenCalled();
+    });
 
-  test('"initializeToken" method', () => {
-    DolbyIoIAPI.initializeToken(null, mockFunction);
-    expect(DolbyIoIAPIModule.initializeToken).toHaveBeenCalled();
+    it('should invoke onAccessTokenKo when token refresh fails', async () => {
+      // @ts-ignore
+      DolbyIoIAPI.refreshAccessTokenInBackground = undefined;
+      const accessToken = 'dsfmkls78as';
+      const refreshAccessToken = () => Promise.reject();
+      await DolbyIoIAPI.initializeToken(accessToken, refreshAccessToken);
+
+      // @ts-ignore
+      await DolbyIoIAPI.refreshAccessTokenInBackground();
+      expect(DolbyIoIAPIModule.onAccessTokenKo).toHaveBeenCalled();
+    });
   });
 });
