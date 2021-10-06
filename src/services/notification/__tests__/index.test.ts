@@ -23,7 +23,14 @@ describe('NotificationService', () => {
   /** "invite" method */
 
   const mockConference: Conference = {
-    participants: [{ id: '123', info: { name: 'John' } }],
+    participants: [
+      {
+        id: '123',
+        info: {
+          name: 'John Doe',
+        },
+      },
+    ],
     status: ConferenceStatus.DEFAULT,
   };
 

@@ -1,6 +1,11 @@
 import NativeEvents from '../../utils/NativeEvents';
-import type { Conference } from '../conference/models';
-import type { ParticipantInfo } from '../conference/models';
+
+import type {
+  ParticipantInfo,
+  Conference,
+  UnsubscribeFunction,
+} from '../conference/models';
+
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
 import { NativeModules } from 'react-native';
@@ -40,7 +45,7 @@ export class NotificationService {
 
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void
-  ): () => void {
+  ): UnsubscribeFunction {
     return NativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
       (data) => {
