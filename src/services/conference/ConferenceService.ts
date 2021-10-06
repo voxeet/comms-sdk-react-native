@@ -214,8 +214,8 @@ export class ConferenceService {
    */
 
   public async mute(
-    isMuted: boolean,
-    participant: Participant
+    participant: Participant,
+    isMuted: boolean
   ): Promise<boolean> {
     return DolbyIoIAPIConferenceService.mute(isMuted, participant);
   }
