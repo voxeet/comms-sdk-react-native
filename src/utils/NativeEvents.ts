@@ -1,4 +1,5 @@
 import type { DolbyIoIAPIEventMap } from '../events';
+import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
 import type { UnregisterListener } from './types';
@@ -9,7 +10,8 @@ const { DolbyIoIAPIModule } = NativeModules;
 interface NativeEventType
   extends DolbyIoIAPIEventMap,
     ConferenceServiceEventMap,
-    NotificationServiceEventMap {}
+    NotificationServiceEventMap,
+    CommandServiceEventMap {}
 
 const EventEmitter = Platform.select({
   ios: new NativeEventEmitter(DolbyIoIAPIModule),
