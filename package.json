@@ -92,6 +92,9 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/utils"
+    ],
     "setupFilesAfterEnv": ["./src/setupTest.ts"]
   },
   "husky": {
