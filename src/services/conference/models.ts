@@ -235,3 +235,48 @@ export enum MediaStreamType {
 }
 
 export type UnsubscribeFunction = () => void;
+
+export enum RTCStatsType {
+  /** Statistics for a codec that is currently being used by RTP streams being sent or received by this RTCPeerConnection object. It is accessed by the RTCCodecStats. */
+  'codec',
+  /** Statistics for an inbound RTP stream that is currently received with this RTCPeerConnection object. It is accessed by the RTCInboundRtpStreamStats. */
+  'inbound-rtp',
+  /** Statistics for an outbound RTP stream that is currently sent with this RTCPeerConnection object. It is accessed by the RTCOutboundRtpStreamStats. */
+  'outbound-rtp',
+  /** Statistics for the remote endpoint's inbound RTP stream corresponding to an outbound stream that is currently sent with this RTCPeerConnection object. */
+  'remote-inbound-rtp',
+  /** Statistics for the remote endpoint's outbound RTP stream corresponding to an inbound stream that is currently received with this RTCPeerConnection object. */
+  'remote-outbound-rtp',
+  /** Statistics for the media produced by a MediaStreamTrack that is currently attached to an RTCRtpSender. */
+  'media-source',
+  /** Statistics for a contributing source (CSRC) that contributed to an inbound RTP stream. */
+  'csrc',
+  /** Statistics related to the RTCPeerConnection object. */
+  'peer-connection',
+  /** Statistics related to each RTCDataChannel id. */
+  'data-channel',
+  /** Contains statistics related to a specific MediaStream.  */
+  'stream',
+  /** Statistics related to a specific MediaStreamTrack's attachment to an RTCRtpSender and the corresponding media-level metrics.  */
+  'track',
+  /** Statistics related to a specific RTCRtpTransceiver. */
+  'transceiver',
+  /** Statistics related to a specific RTCRtpSender and the corresponding media-level metrics.  */
+  'sender',
+  /** Statistics related to a specific receiver and the corresponding media-level metrics. */
+  'receiver',
+  /** Transport statistics related to the RTCPeerConnection object. */
+  'transport',
+  /** SCTP transport statistics related to an RTCSctpTransport object.  */
+  'sctp-transport',
+  /** ICE candidate pair statistics related to the RTCIceTransport objects.  */
+  'candidate-pair',
+  /** ICE local candidate statistics related to the RTCIceTransport objects.  */
+  'local-candidate',
+  /** ICE remote candidate statistics related to the RTCIceTransport objects.  */
+  'remote-candidate',
+  /** Information about a certificate used by an RTCIceTransport. */
+  'certificate',
+  /** Information about the connection to an ICE server (e.g. STUN or TURN). */
+  'ice-server',
+}
