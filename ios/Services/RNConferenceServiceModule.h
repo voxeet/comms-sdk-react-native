@@ -41,6 +41,27 @@
      resolve:(RCTPromiseResolveBlock _Nonnull)resolve
     rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Kicks the participant from a conference.
+///
+/// \param participant Remote participant to kick.
+///
+/// \param resolve returns current conference object
+///
+/// \param reject returns error on failure
+///
+- (void)kick:(NSDictionary * _Nonnull)participant
+     resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+    rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Leaves the current conference.
+///
+/// \param resolve returns current conference object
+///
+/// \param reject returns error on failure
+///
+- (void)leave:(RCTPromiseResolveBlock _Nonnull)resolve
+     rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Returns information about the current conference.
 ///
 /// \param resolve returns current conference object
