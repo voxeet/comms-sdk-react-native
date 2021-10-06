@@ -89,15 +89,18 @@ describe('ConferenceService', () => {
   /** "getAudioLevel" method */
 
   test('"getAudioLevel" method', () => {
-    ConferenceService.getAudioLevel();
-    expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalled();
-  });
-
-  /** "getAudioProcessing" method */
-
-  test('"getAudioProcessing" method', () => {
-    ConferenceService.getAudioProcessing();
-    expect(DolbyIoIAPIConferenceService.getAudioProcessing).toHaveBeenCalled();
+    ConferenceService.getAudioLevel({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "getLocalStats" method */
@@ -126,15 +129,55 @@ describe('ConferenceService', () => {
   /** "getParticipants" method */
 
   test('"getParticipants" method', () => {
-    ConferenceService.getParticipants();
-    expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalled();
+    ConferenceService.getParticipants({
+      participants: [
+        {
+          id: '123',
+          info: {
+            name: 'John Doe',
+          },
+        },
+      ],
+      status: ConferenceStatus.DEFAULT,
+    });
+    expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalledWith({
+      participants: [
+        {
+          id: '123',
+          info: {
+            name: 'John Doe',
+          },
+        },
+      ],
+      status: ConferenceStatus.DEFAULT,
+    });
   });
 
   /** "getStatus" method */
 
   test('"getStatus" method', () => {
-    ConferenceService.getStatus();
-    expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalled();
+    ConferenceService.getStatus({
+      participants: [
+        {
+          id: '123',
+          info: {
+            name: 'John Doe',
+          },
+        },
+      ],
+      status: ConferenceStatus.DEFAULT,
+    });
+    expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalledWith({
+      participants: [
+        {
+          id: '123',
+          info: {
+            name: 'John Doe',
+          },
+        },
+      ],
+      status: ConferenceStatus.DEFAULT,
+    });
   });
 
   /** "isOutputMuted" method */
@@ -154,8 +197,18 @@ describe('ConferenceService', () => {
   /** "isSpeaking" method */
 
   test('"isSpeaking" method', () => {
-    ConferenceService.isSpeaking();
-    expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalled();
+    ConferenceService.isSpeaking({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "setAudioProcessing" method */
@@ -170,10 +223,10 @@ describe('ConferenceService', () => {
   /** "setMaxVideoForwarding" method */
 
   test('"setMaxVideoForwarding" method', () => {
-    ConferenceService.setMaxVideoForwarding();
+    ConferenceService.setMaxVideoForwarding(2);
     expect(
       DolbyIoIAPIConferenceService.setMaxVideoForwarding
-    ).toHaveBeenCalled();
+    ).toHaveBeenCalledWith(2);
   });
 
   /** "mute" method */
@@ -219,29 +272,69 @@ describe('ConferenceService', () => {
   /** "startAudio" method */
 
   test('"startAudio" method', () => {
-    ConferenceService.startAudio();
-    expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalled();
+    ConferenceService.startAudio({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "startVideo" method */
 
   test('"startVideo" method', () => {
-    ConferenceService.startVideo();
-    expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalled();
+    ConferenceService.startVideo({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "stopAudio" method */
 
   test('"stopAudio" method', () => {
-    ConferenceService.stopAudio();
-    expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalled();
+    ConferenceService.stopAudio({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "stopVideo" method */
 
   test('"stopVideo" method', () => {
-    ConferenceService.stopVideo();
-    expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalled();
+    ConferenceService.stopVideo({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
+    expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalledWith({
+      id: '123',
+      info: {
+        name: 'John Doe',
+      },
+    });
   });
 
   /** "join" method */
