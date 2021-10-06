@@ -1,6 +1,7 @@
 #import "RNSessionServiceModule.h"
 #import "RNConferenceServiceModule.h"
 #import "VTParticipantInfo+ReactModel.h"
+#import "VTParticipant+ReactModel.h"
 #import <React/RCTLog.h>
 
 @import VoxeetSDK;
@@ -35,5 +36,15 @@ RCT_EXPORT_METHOD(close:(RCTPromiseResolveBlock _Nonnull)resolve
     }];
 }
 
+RCT_EXPORT_METHOD(getParticipant:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participant = [VoxeetSDK.shared.session participant];
+    if (participant != nil) {
+        resolve([participant reactDescription]);
+    } else {
+        reject(@"error", @"No current session user.", nil);
+    }
+}
 
 @end
