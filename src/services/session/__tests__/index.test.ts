@@ -4,9 +4,9 @@ import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
-describe('ConferenceService', () => {
+describe('SessionService', () => {
   describe('open()', () => {
-    it('should invoke exported method', () => {
+    it('should invoke exported open method with correct arguments', () => {
       SessionService.open({ name: 'Jack' });
       expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({
         name: 'Jack',
@@ -17,19 +17,21 @@ describe('ConferenceService', () => {
       SessionService.open();
       expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
     });
-  });
 
-  describe('close()', () => {
-    it('should invoke exported method', () => {
-      SessionService.close();
-      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+    describe('close()', () => {
+      it('should invoke exported method', () => {
+        SessionService.close();
+        expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+      });
     });
-  });
 
-  describe('getsCurrentUser()', () => {
-    it('should invoke exported method', () => {
-      SessionService.getCurrentUser();
-      expect(DolbyIoIAPISessionServiceModule.getParticipant).toHaveBeenCalled();
+    describe('getsCurrentUser()', () => {
+      it('should invoke exported method', () => {
+        SessionService.getCurrentUser();
+        expect(
+          DolbyIoIAPISessionServiceModule.getParticipant
+        ).toHaveBeenCalled();
+      });
     });
   });
 });

@@ -19,7 +19,8 @@ export const stopRecording = async () => {
 
 export const getCurrentRecording = async () => {
   try {
-    await DolbyIoIAPI.recording.current();
+    const recording = await DolbyIoIAPI.recording.current();
+    Alert.alert('Current recording: ', JSON.stringify(recording, null, 2));
   } catch (e) {
     Alert.alert('Current recording Error');
   }
