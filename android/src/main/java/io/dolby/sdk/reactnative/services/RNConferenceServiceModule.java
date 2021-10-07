@@ -6,8 +6,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.voxeet.sdk.json.internal.MetadataHolder;
-import com.voxeet.sdk.json.internal.ParamsHolder;
 import com.voxeet.sdk.models.Conference;
 import com.voxeet.sdk.services.ConferenceService;
 import com.voxeet.sdk.services.builders.ConferenceCreateOptions;
@@ -16,6 +14,8 @@ import com.voxeet.sdk.services.builders.ConferenceJoinOptions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
+import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
 
 public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
@@ -24,23 +24,33 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
     private final ConferenceService conferenceService;
     @NotNull
     private final ConferenceMapper conferenceMapper;
+    @NotNull
+    private final ConferenceCreateOptionsMapper conferenceCreateOptionsMapper;
+    @NotNull
+    private final ConferenceJoinOptionsMapper conferenceJoinOptionsMapper;
 
     /**
      * Creates a bridge wrapper for {@link ConferenceService}.
      *
-     * @param conferenceService {@link ConferenceService} from Android SDK
-     * @param reactContext      react context
-     * @param conferenceMapper  mapper for a {@link Conference} and {@link Conference}-related models
+     * @param conferenceService             {@link ConferenceService} from Android SDK
+     * @param reactContext                  react context
+     * @param conferenceMapper              mapper for a {@link Conference} and {@link Conference}-related models
+     * @param conferenceCreateOptionsMapper mapper for a {@link ConferenceCreateOptions} model
+     * @param conferenceJoinOptionsMapper   mapper for a {@link ConferenceJoinOptions} model
      */
     public RNConferenceServiceModule(
             @NotNull ConferenceService conferenceService,
             @NotNull ReactApplicationContext reactContext,
-            @NotNull ConferenceMapper conferenceMapper
+            @NotNull ConferenceMapper conferenceMapper,
+            @NotNull ConferenceCreateOptionsMapper conferenceCreateOptionsMapper,
+            @NotNull ConferenceJoinOptionsMapper conferenceJoinOptionsMapper
     ) {
         super(reactContext);
 
         this.conferenceService = conferenceService;
         this.conferenceMapper = conferenceMapper;
+        this.conferenceCreateOptionsMapper = conferenceCreateOptionsMapper;
+        this.conferenceJoinOptionsMapper = conferenceJoinOptionsMapper;
     }
 
     @NotNull
@@ -67,9 +77,9 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void create(@Nullable ReadableMap options, @NotNull final Promise promise) {
-        ConferenceCreateOptions conferenceCreateOptions = toConferenceCreateOptions(options);
+        ConferenceCreateOptions createOptions = conferenceCreateOptionsMapper.toConferenceCreateOptions(options);
 
-        conferenceService.create(conferenceCreateOptions)
+        conferenceService.create(createOptions)
                 .then(conference -> {
                     promise.resolve(conferenceMapper.toMap(conference));
                 }).error(promise::reject);
@@ -101,43 +111,60 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
                 }).error(promise::reject);
     }
 
-    // TODO the final code will be provided in DEXA-42.
-    //  Now it's tmp code just to enable metadata content (like dolbyVoice) checking
-    //  Note: remember to manually grant permissions to CAMERA and MICROPHONE
+    // TODO Note: remember to manually grant permissions to CAMERA and MICROPHONE.
+    //  That mechanism will be added in DEXA-140.
+    /**
+     * <p>
+     * Joins the conference based on information from the {@code options}.
+     * </p>
+     * <p>
+     * <ul>
+     * The possible exception in the rejection:
+     * <li>ServerErrorException</li>
+     * <li>InConferenceException</li>
+     * <li>MediaEngineException</li>
+     * <li>ParticipantAddedErrorEventException</li>
+     * <li>IllegalArgumentException</li>
+     * </ul>
+     * </p>
+     *
+     * @param conference a conference to join
+     * @param options    the holder of the options to join
+     * @param promise    returns a joined conference
+     */
     @ReactMethod
     public void join(@NotNull ReadableMap conference, @Nullable ReadableMap options, Promise promise) {
         try {
-            String conferenceId = conferenceMapper.toConferenceId(conference);
+            ConferenceJoinOptions joinOptions = toConferenceJoinOptions(conference, options);
 
-            if (conferenceId == null) {
-                promise.reject(new IllegalArgumentException("Conference should contain conferenceId"));
-                return;
-            }
-
-            Conference foundConference = conferenceService.getConference(conferenceId);
-            ConferenceJoinOptions joinOptions = new ConferenceJoinOptions.Builder(foundConference)
-                    .build();
-
-            conferenceService.join(joinOptions).then(resultConference -> {
-                promise.resolve(conferenceMapper.toMap(resultConference));
-            }).error(promise::reject);
+            conferenceService.join(joinOptions)
+                    .then(resultConference -> {
+                        promise.resolve(conferenceMapper.toMap(resultConference));
+                    }).error(promise::reject);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             promise.reject(throwable);
         }
     }
 
-    private ConferenceCreateOptions toConferenceCreateOptions(@Nullable ReadableMap options) {
-        MetadataHolder metadataHolder = new MetadataHolder();
-        ParamsHolder paramsHolder = conferenceMapper.toConferenceParamsHolder(options);
-
-        ConferenceCreateOptions.Builder conferenceCreateOptions = new ConferenceCreateOptions.Builder()
-                .setMetadataHolder(metadataHolder)
-                .setParamsHolder(paramsHolder);
-
-        if (options != null) {
-            conferenceCreateOptions.setConferenceAlias(conferenceMapper.toConferenceAlias(options));
+    /**
+     * Creates a {@link ConferenceJoinOptions} based on provided {@code options} for a given
+     * {@code conference}. Throws {@link IllegalArgumentException} if conference id is invalid.
+     *
+     * @param conference a conference to join
+     * @param options    the holder of the options to join
+     * @return {@link ConferenceJoinOptions}
+     */
+    private ConferenceJoinOptions toConferenceJoinOptions(
+            @NotNull ReadableMap conference,
+            @Nullable ReadableMap options
+    ) {
+        String conferenceId = conferenceMapper.toConferenceId(conference);
+        if (conferenceId == null) {
+            throw new IllegalArgumentException("Conference should contain conferenceId");
         }
-        return conferenceCreateOptions.build();
+
+        Conference foundConference = conferenceService.getConference(conferenceId);
+        return conferenceJoinOptionsMapper.toConferenceJoinOptions(foundConference, options);
     }
 }
