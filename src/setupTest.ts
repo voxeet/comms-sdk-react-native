@@ -5,6 +5,8 @@ jest.mock('react-native', () => {
   RN.NativeModules.DolbyIoIAPIModule = {
     initialize: jest.fn(),
     initializeToken: jest.fn(),
+    onAccessTokenOk: jest.fn(),
+    onAccessTokenKo: jest.fn(),
     addListener: jest.fn(),
     removeListeners: jest.fn(),
   };
@@ -38,6 +40,16 @@ jest.mock('react-native', () => {
   RN.NativeModules.DolbyIoIAPISessionServiceModule = {
     open: jest.fn(),
     close: jest.fn(),
+    getParticipant: jest.fn(),
+  };
+  RN.NativeModules.DolbyIoIAPINotificationService = {
+    invite: jest.fn(),
+    decline: jest.fn(),
+  };
+  RN.NativeModules.DolbyIoIAPIRecordingServiceModule = {
+    current: jest.fn(),
+    start: jest.fn(),
+    stop: jest.fn(),
   };
   return RN;
 });

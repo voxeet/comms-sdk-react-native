@@ -12,3 +12,13 @@
 - (NSDictionary * _Nonnull)reactDescription;
 
 @end
+
+@interface NSDictionary (Participant)
+///
+/// Provides the participant's id
+///
+/// \return (optional)NSString
+///
+- (NSString * _Nullable)participantId;
+
+@end

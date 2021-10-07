@@ -41,6 +41,27 @@
      resolve:(RCTPromiseResolveBlock _Nonnull)resolve
     rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Kicks the participant from a conference.
+///
+/// \param participant Remote participant to kick.
+///
+/// \param resolve returns current conference object
+///
+/// \param reject returns error on failure
+///
+- (void)kick:(NSDictionary * _Nonnull)participant
+     resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+    rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Leaves the current conference.
+///
+/// \param resolve returns current conference object
+///
+/// \param reject returns error on failure
+///
+- (void)leave:(RCTPromiseResolveBlock _Nonnull)resolve
+     rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Returns information about the current conference.
 ///
 /// \param resolve returns current conference object
@@ -128,6 +149,15 @@
            resolve:(RCTPromiseResolveBlock _Nonnull)resolve
           rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Provides standard WebRTC statistics for the application.
+///
+/// \param resolve returns local stats on success
+///
+/// \param reject returns error on failure
+///
+- (void)getLocalStats:(RCTPromiseResolveBlock _Nonnull)resolve
+             rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Enables and disables audio processing for the conference participant..
 ///
 /// \param processingOptions participant object
@@ -176,5 +206,53 @@
 participant:(NSDictionary * _Nonnull)participant
     resolve:(RCTPromiseResolveBlock _Nonnull)resolve
    rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Starts audio transmission between the local client and a conference.
+///
+/// \param participant the participant you want to mute.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)startAudio:(NSDictionary * _Nonnull)participant
+           resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
+///
+/// \param participant the selected participant.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)startVideo:(NSDictionary * _Nonnull)participant
+           resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+           rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Stops audio transmission between the local client and a conference.
+///
+/// \param participant the selected participant.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)stopAudio:(NSDictionary * _Nonnull)participant
+          resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
+/// Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
+///
+/// \param participant the selected participant.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)stopVideo:(NSDictionary * _Nonnull)participant
+          resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 
 @end

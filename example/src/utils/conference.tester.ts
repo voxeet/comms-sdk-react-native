@@ -1,8 +1,8 @@
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 import type { Conference } from '../../../src/services/conference/models';
-import { ConferenceStatus } from '../../../src/services/conference/models';
 import type { Participant } from '../../../lib/typescript/services/conference/models';
+import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
   try {
@@ -20,41 +20,38 @@ export const replay = (conference: Conference) => {
     Alert.alert('Error');
   }
 };
-export const startVideo = () => {
+export const startVideo = (user: User) => {
   try {
-    DolbyIoIAPI.conference.startVideo({ id: '111', info: { name: 'John' } });
+    DolbyIoIAPI.conference.startVideo(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
-export const stopVideo = () => {
+export const stopVideo = (user: User) => {
   try {
-    DolbyIoIAPI.conference.stopVideo({ id: '111', info: { name: 'John' } });
+    DolbyIoIAPI.conference.stopVideo(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
-export const startAudio = () => {
+export const startAudio = (user: User) => {
   try {
-    DolbyIoIAPI.conference.startAudio({ id: '111', info: { name: 'John' } });
+    DolbyIoIAPI.conference.startAudio(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
-export const stopAudio = () => {
+export const stopAudio = (user: User) => {
   try {
-    DolbyIoIAPI.conference.stopAudio({ id: '111', info: { name: 'John' } });
+    DolbyIoIAPI.conference.stopAudio(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
 
-export const getAudioLevel = async () => {
+export const getAudioLevel = async (user: User) => {
   try {
-    const audioLevel = await DolbyIoIAPI.conference.getAudioLevel({
-      id: '111',
-      info: { name: 'John' },
-    });
+    const audioLevel = await DolbyIoIAPI.conference.getAudioLevel(user);
     Alert.alert('Audio level', JSON.stringify(audioLevel));
   } catch (e: any) {
     Alert.alert('Cant get audio level', e);
@@ -70,19 +67,9 @@ export const getAudioLevel = async () => {
 //   }
 // };
 
-export const getStatus = async () => {
+export const getStatus = async (conference: Conference) => {
   try {
-    const status = await DolbyIoIAPI.conference.getStatus({
-      participants: [
-        {
-          id: '123',
-          info: {
-            name: 'John Doe',
-          },
-        },
-      ],
-      status: ConferenceStatus.DEFAULT,
-    });
+    const status = await DolbyIoIAPI.conference.getStatus(conference);
     Alert.alert('Status', JSON.stringify(status));
   } catch (e: any) {
     Alert.alert('Cant get status', e);

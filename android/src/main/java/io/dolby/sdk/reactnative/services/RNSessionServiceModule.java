@@ -47,12 +47,12 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
     /**
      * Opens a session using information from the ParticipantInfo model.
      *
-     * @param participantInfo ParticipantInfo which should contain at least one participant name
-     * @param promise         returns true if session was opened successfully, false otherwise
+     * @param participantInfoMap ParticipantInfo which should contain at least one participant name
+     * @param promise            returns true if session was opened successfully, false otherwise
      */
     @ReactMethod
-    public void open(@NotNull ReadableMap participantInfo, Promise promise) {
-        sessionService.open(participantMapper.toParticipantInfo(participantInfo))
+    public void open(@NotNull ReadableMap participantInfoMap, Promise promise) {
+        sessionService.open(participantMapper.toParticipantInfo(participantInfoMap))
                 .then(promise::resolve)
                 .error(promise::reject);
     }
