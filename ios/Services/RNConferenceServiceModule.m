@@ -275,6 +275,17 @@ RCT_EXPORT_METHOD(isSpeaking:(NSDictionary * _Nonnull)participant
     }
 }
 
+RCT_EXPORT_METHOD(getLocalStats:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    NSDictionary *localStats = [VoxeetSDK.shared.conference localStats];
+    if(localStats != nil) {
+        resolve(localStats);
+    } else {
+        reject(@"error", @"Couldn't get any local stats.", nil);
+    }
+}
+
 #pragma mark - Setters -
 
 RCT_EXPORT_METHOD(setAudioProcessing:(NSDictionary * _Nonnull)processingOptions

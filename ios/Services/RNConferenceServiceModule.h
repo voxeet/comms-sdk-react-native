@@ -149,6 +149,15 @@
            resolve:(RCTPromiseResolveBlock _Nonnull)resolve
           rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Provides standard WebRTC statistics for the application.
+///
+/// \param resolve returns local stats on success
+///
+/// \param reject returns error on failure
+///
+- (void)getLocalStats:(RCTPromiseResolveBlock _Nonnull)resolve
+             rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Enables and disables audio processing for the conference participant..
 ///
 /// \param processingOptions participant object
