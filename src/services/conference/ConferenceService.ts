@@ -113,10 +113,10 @@ export class ConferenceService {
 
   /**
    * Provides the number of video streams that are transmitted to the local user.
-   * @returns {Promise<number>} Promise with Number
+   * @returns {Promise<MaxVideoForwarding>} Promise with MaxVideoForwarding
    */
 
-  public async getMaxVideoForwarding(): Promise<number> {
+  public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
     return DolbyIoIAPIConferenceService.getMaxVideoForwarding();
   }
 
@@ -191,7 +191,7 @@ export class ConferenceService {
    */
 
   public async setAudioProcessing(
-    options: AudioProcessingOptions
+    options: AudioProcessingOptions = {}
   ): Promise<any> {
     return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
@@ -202,7 +202,9 @@ export class ConferenceService {
    * @returns {Promise<any>}
    */
 
-  public async setMaxVideoForwarding(max: MaxVideoForwarding): Promise<any> {
+  public async setMaxVideoForwarding(
+    max: MaxVideoForwarding = 4
+  ): Promise<any> {
     return DolbyIoIAPIConferenceService.setMaxVideoForwarding(max);
   }
 
