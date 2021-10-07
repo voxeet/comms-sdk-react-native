@@ -66,6 +66,113 @@ RCT_EXPORT_METHOD(join:(NSDictionary * _Nonnull)conference
     }];
 }
 
+RCT_EXPORT_METHOD(kick:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference kickWithParticipant:participantObject
+                                              completion:^(NSError * _Nullable error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(leave:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.conference leaveWithCompletion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(startAudio:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference startAudioWithParticipant:participantObject
+                                                    completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(startVideo:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference startVideoWithParticipant:participantObject
+                                                    completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(stopAudio:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference stopAudioWithParticipant:participantObject
+                                                    completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(stopVideo:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference stopVideoWithParticipant:participantObject
+                                                    completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
 #pragma mark - Getters -
 
 RCT_EXPORT_METHOD(current:(RCTPromiseResolveBlock _Nonnull)resolve
@@ -165,6 +272,17 @@ RCT_EXPORT_METHOD(isSpeaking:(NSDictionary * _Nonnull)participant
         resolve(@([VoxeetSDK.shared.conference isSpeakingWithParticipant:participantObject]));
     } else {
         reject(@"error", @"Couldn't find the participant.", nil);
+    }
+}
+
+RCT_EXPORT_METHOD(getLocalStats:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    NSDictionary *localStats = [VoxeetSDK.shared.conference localStats];
+    if(localStats != nil) {
+        resolve(localStats);
+    } else {
+        reject(@"error", @"Couldn't get any local stats.", nil);
     }
 }
 

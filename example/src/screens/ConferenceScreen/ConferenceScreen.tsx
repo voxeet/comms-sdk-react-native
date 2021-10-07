@@ -1,9 +1,12 @@
 import type { Participant } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
+import BottomSheet from '@gorhom/bottom-sheet';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
+import { sendCommandMessage } from '@utils/command.tester';
 import {
   startVideo,
   stopVideo,
@@ -17,8 +20,6 @@ import {
   startRecording,
   stopRecording,
 } from '@utils/recording.tester';
-import styles from './ConferenceScreen.style';
-import BottomSheet from '@gorhom/bottom-sheet';
 import React, { FunctionComponent, useContext, useRef } from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -160,6 +161,21 @@ const ConferenceScreen: FunctionComponent = () => {
               color="dark"
               text="Current recording"
               onPress={getCurrentRecording}
+            />
+          </Space>
+          <Space mb="xs">
+            <Text size="s" color={COLORS.BLACK}>
+              Command
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Send message"
+              onPress={() =>
+                sendCommandMessage('message for command service send method')
+              }
             />
           </Space>
         </Space>

@@ -3,6 +3,7 @@ import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
 } from './models';
+import CommandService from './services/command/CommandService';
 import ConferenceService from './services/conference/ConferenceService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
@@ -19,6 +20,7 @@ export class DolbyIoIAPI {
   conference = ConferenceService;
   session = SessionService;
   recording = RecordingService;
+  command = CommandService;
 
   /**
    * Initializes the SDK using the customer key and secret.
