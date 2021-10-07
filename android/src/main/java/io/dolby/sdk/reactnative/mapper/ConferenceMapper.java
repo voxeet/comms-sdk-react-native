@@ -5,7 +5,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.voxeet.sdk.json.ConferencePermission;
-import com.voxeet.sdk.json.internal.ParamsHolder;
 import com.voxeet.sdk.models.Conference;
 import com.voxeet.sdk.models.Participant;
 import com.voxeet.sdk.services.conference.information.ConferenceStatus;
@@ -19,6 +18,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_DOLBY_VOICE;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_LIVE_RECORDING;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_RTCP_MODE;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_TTL;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_VIDEO_CODEC;
+
 /**
  * Provides methods that map:
  * <p>- {@link Conference} and {@link Conference}-related models to React Native models</p>
@@ -26,21 +31,13 @@ import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
  */
 public class ConferenceMapper {
 
-    public static String CONFERENCE_ID = "id";
-    public static String CONFERENCE_ALIAS = "alias";
-    public static String CONFERENCE_IS_NEW = "isNew";
-    public static String CONFERENCE_STATUS = "status";
-    public static String CONFERENCE_PARAMS = "params";
-    public static String CONFERENCE_PERMISSIONS = "permissions";
-    public static String CONFERENCE_PARTICIPANTS = "participants";
-
-    public static String CONFERENCE_OPTIONS_ALIAS = "alias";
-    public static String CONFERENCE_OPTIONS_PARAMS = "params";
-    public static String CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC = "videoCodec";
-    public static String CONFERENCE_OPTIONS_PARAMS_TTL = "ttl";
-    public static String CONFERENCE_OPTIONS_PARAMS_RTCP_MODE = "rtcpMode";
-    public static String CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING = "liveRecording";
-    public static String CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE = "dolbyVoice";
+    public static final String CONFERENCE_ID = "id";
+    public static final String CONFERENCE_ALIAS = "alias";
+    public static final String CONFERENCE_IS_NEW = "isNew";
+    public static final String CONFERENCE_STATUS = "status";
+    public static final String CONFERENCE_PARAMS = "params";
+    public static final String CONFERENCE_PERMISSIONS = "permissions";
+    public static final String CONFERENCE_PARTICIPANTS = "participants";
 
     @NotNull
     private final ParticipantMapper participantMapper;
@@ -58,59 +55,6 @@ public class ConferenceMapper {
     @Nullable
     public String toConferenceId(@NotNull ReadableMap conference) {
         return rnCollectionExtractor.getString(conference, CONFERENCE_ID);
-    }
-
-    @Nullable
-    public String toConferenceAlias(@NotNull ReadableMap conferenceOptions) {
-        return rnCollectionExtractor.getString(conferenceOptions, CONFERENCE_OPTIONS_ALIAS);
-    }
-
-    @NotNull
-    public ParamsHolder toConferenceParamsHolder(@Nullable ReadableMap conferenceOptions) {
-        ParamsHolder paramsHolder = new ParamsHolder();
-        if (conferenceOptions == null) {
-            return paramsHolder;
-        }
-
-        ReadableMap params = rnCollectionExtractor.getMap(conferenceOptions, CONFERENCE_OPTIONS_PARAMS);
-        if (params == null) {
-            return paramsHolder;
-        }
-
-        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC)) {
-            String videoCodec = rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC);
-            if (videoCodec != null) {
-                paramsHolder.setVideoCodec(videoCodec);
-            }
-        }
-
-        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_TTL)) {
-            paramsHolder.putValue(
-                    CONFERENCE_OPTIONS_PARAMS_TTL,
-                    rnCollectionExtractor.getInteger(params, CONFERENCE_OPTIONS_PARAMS_TTL)
-            );
-        }
-
-        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)) {
-            paramsHolder.putValue(
-                    CONFERENCE_OPTIONS_PARAMS_RTCP_MODE,
-                    rnCollectionExtractor.getString(params, CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)
-            );
-        }
-
-        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)) {
-            paramsHolder.putValue(
-                    CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING,
-                    rnCollectionExtractor.getBoolean(params, CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)
-            );
-        }
-
-        if (rnCollectionExtractor.hasKey(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)) {
-            paramsHolder.setDolbyVoice(
-                    rnCollectionExtractor.getBoolean(params, CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE)
-            );
-        }
-        return paramsHolder;
     }
 
     @NotNull
@@ -163,21 +107,21 @@ public class ConferenceMapper {
             return map;
         }
 
-        map.putBoolean(CONFERENCE_OPTIONS_PARAMS_DOLBY_VOICE, conference.isDolbyVoice());
-        if (metadata.containsKey(CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING)) {
-            map.putString(CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING, (String) metadata.get(CONFERENCE_OPTIONS_PARAMS_LIVE_RECORDING));
+        map.putBoolean(CONFERENCE_PARAMS_DOLBY_VOICE, conference.isDolbyVoice());
+        if (metadata.containsKey(CONFERENCE_PARAMS_LIVE_RECORDING)) {
+            map.putString(CONFERENCE_PARAMS_LIVE_RECORDING, (String) metadata.get(CONFERENCE_PARAMS_LIVE_RECORDING));
         }
-        if (metadata.containsKey(CONFERENCE_OPTIONS_PARAMS_RTCP_MODE)) {
-            map.putString(CONFERENCE_OPTIONS_PARAMS_RTCP_MODE, (String) metadata.get(CONFERENCE_OPTIONS_PARAMS_RTCP_MODE));
+        if (metadata.containsKey(CONFERENCE_PARAMS_RTCP_MODE)) {
+            map.putString(CONFERENCE_PARAMS_RTCP_MODE, (String) metadata.get(CONFERENCE_PARAMS_RTCP_MODE));
         }
-        if (metadata.containsKey(CONFERENCE_OPTIONS_PARAMS_TTL)) {
-            String ttl = (String) metadata.get(CONFERENCE_OPTIONS_PARAMS_TTL);
+        if (metadata.containsKey(CONFERENCE_PARAMS_TTL)) {
+            String ttl = (String) metadata.get(CONFERENCE_PARAMS_TTL);
             if (ttl != null && !ttl.isEmpty()) {
-                map.putInt(CONFERENCE_OPTIONS_PARAMS_TTL, Integer.parseInt(ttl));
+                map.putInt(CONFERENCE_PARAMS_TTL, Integer.parseInt(ttl));
             }
         }
-        if (metadata.containsKey(CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC)) {
-            map.putString(CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC, (String) metadata.get(CONFERENCE_OPTIONS_PARAMS_VIDEO_CODEC));
+        if (metadata.containsKey(CONFERENCE_PARAMS_VIDEO_CODEC)) {
+            map.putString(CONFERENCE_PARAMS_VIDEO_CODEC, (String) metadata.get(CONFERENCE_PARAMS_VIDEO_CODEC));
         }
         return map;
     }

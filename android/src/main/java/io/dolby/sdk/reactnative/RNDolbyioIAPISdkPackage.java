@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
+import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
@@ -38,7 +40,9 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                 new RNConferenceServiceModule(
                         VoxeetSDK.conference(),
                         reactContext,
-                        new ConferenceMapper(participantMapper, rnCollectionExtractor)
+                        new ConferenceMapper(participantMapper, rnCollectionExtractor),
+                        new ConferenceCreateOptionsMapper(rnCollectionExtractor),
+                        new ConferenceJoinOptionsMapper(rnCollectionExtractor)
                 )
         );
     }
