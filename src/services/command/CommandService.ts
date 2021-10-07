@@ -33,3 +33,5 @@ export class CommandService {
     );
   }
 }
+
+export default new CommandService();
