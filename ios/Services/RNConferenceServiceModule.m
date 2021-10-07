@@ -66,6 +66,37 @@ RCT_EXPORT_METHOD(join:(NSDictionary * _Nonnull)conference
     }];
 }
 
+RCT_EXPORT_METHOD(kick:(NSDictionary * _Nonnull)participant
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTParticipant* participantObject = [[VoxeetSDK.shared.conference current] findParticipant:participant];
+    if(participantObject != nil) {
+        [VoxeetSDK.shared.conference kickWithParticipant:participantObject
+                                              completion:^(NSError * _Nullable error) {
+            if (error != nil) {
+                reject(@"error", [error localizedDescription], error);
+            } else {
+                resolve(nil);
+            }
+        }];
+    } else {
+        reject(@"error", [NSString stringWithFormat:@"Couldn't find the participant: %@", [participant description]], nil);
+    }
+}
+
+RCT_EXPORT_METHOD(leave:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.conference leaveWithCompletion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
 #pragma mark - Getters -
 
 RCT_EXPORT_METHOD(current:(RCTPromiseResolveBlock _Nonnull)resolve
