@@ -12,32 +12,27 @@ import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
-// Test Participant object
-export const testParticipant: Participant = {
+const testParticipant: Participant = {
   id: '123',
   info: {
     name: 'John Doe',
   },
 };
 
-// Test Conference object
-export const testConference: Conference = {
+const testConference: Conference = {
   participants: [{ id: '123', info: { name: 'John Doe' } }],
   status: ConferenceStatus.DEFAULT,
 };
 
-// Test ConferenceReplayOptions object
-export const testConferenceReplayOptions: ConferenceReplayOptions = {
+const testConferenceReplayOptions: ConferenceReplayOptions = {
   offset: 1,
 };
 
-// Test ConferenceMixingOptions object
-export const testConferenceMixingOptions: ConferenceMixingOptions = {
+const testConferenceMixingOptions: ConferenceMixingOptions = {
   enabled: true,
 };
 
-// Test ParticipantPermissions object
-export const testParticipantPermissions: ParticipantPermissions = {
+const testParticipantPermissions: ParticipantPermissions = {
   participant: {
     id: '123',
     info: {
