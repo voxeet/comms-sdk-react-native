@@ -35,31 +35,31 @@ public class ConferenceJoinOptionsMapper {
      * {@code conference}.
      *
      * @param conference a conference to join
-     * @param options options to set (access token, constraints, max video forwarding)
+     * @param optionsMap options to set (access token, constraints, max video forwarding)
      * @return {@link ConferenceJoinOptions}
      */
     @NotNull
     public ConferenceJoinOptions toConferenceJoinOptions(
             @NotNull Conference conference,
-            @Nullable ReadableMap options
+            @Nullable ReadableMap optionsMap
     ) {
         ConferenceJoinOptions.Builder joinOptionsBuilder = new ConferenceJoinOptions.Builder(conference);
 
-        if (options == null) {
+        if (optionsMap == null) {
             return joinOptionsBuilder.build();
         }
 
-        String accessToken = toConferenceAccessToken(options);
+        String accessToken = toConferenceAccessToken(optionsMap);
         if (accessToken != null) {
             joinOptionsBuilder.setConferenceAccessToken(accessToken);
         }
 
-        Constraints constraints = toConstraints(options);
+        Constraints constraints = toConstraints(optionsMap);
         if (constraints != null) {
             joinOptionsBuilder.setConstraints(constraints);
         }
 
-        Integer maxVideoForwarding = toMaxVideoForwarding(options);
+        Integer maxVideoForwarding = toMaxVideoForwarding(optionsMap);
         if (maxVideoForwarding != null) {
             joinOptionsBuilder.setMaxVideoForwarding(maxVideoForwarding);
         }
@@ -68,23 +68,23 @@ public class ConferenceJoinOptionsMapper {
     }
 
     @Nullable
-    private String toConferenceAccessToken(@NotNull ReadableMap options) {
-        return rnCollectionExtractor.getString(options, CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN);
+    private String toConferenceAccessToken(@NotNull ReadableMap optionsMap) {
+        return rnCollectionExtractor.getString(optionsMap, CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN);
     }
 
     @Nullable
-    private Constraints toConstraints(@NotNull ReadableMap options) {
-        ReadableMap constraints = rnCollectionExtractor.getMap(options, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS);
-        if (constraints == null) {
+    private Constraints toConstraints(@NotNull ReadableMap optionsMap) {
+        ReadableMap constraintsMap = rnCollectionExtractor.getMap(optionsMap, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS);
+        if (constraintsMap == null) {
             return null;
         }
-        boolean hasAudio = rnCollectionExtractor.getBoolean(constraints, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_AUDIO);
-        boolean hasVideo = rnCollectionExtractor.getBoolean(constraints, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_VIDEO);
+        boolean hasAudio = rnCollectionExtractor.getBoolean(constraintsMap, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_AUDIO);
+        boolean hasVideo = rnCollectionExtractor.getBoolean(constraintsMap, CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_VIDEO);
         return new Constraints(hasAudio, hasVideo);
     }
 
     @Nullable
-    private Integer toMaxVideoForwarding(@NotNull ReadableMap options) {
-        return rnCollectionExtractor.getInteger(options, CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING);
+    private Integer toMaxVideoForwarding(@NotNull ReadableMap optionsMap) {
+        return rnCollectionExtractor.getInteger(optionsMap, CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING);
     }
 }
