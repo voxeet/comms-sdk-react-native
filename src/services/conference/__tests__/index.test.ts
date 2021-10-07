@@ -6,16 +6,49 @@ import {
   ConferenceMixingOptions,
   ParticipantPermissions,
   ConferencePermission,
+  Participant,
 } from '../models';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
-/** ConferenceService tests */
+const testParticipant: Participant = {
+  id: '123',
+  info: {
+    name: 'John Doe',
+  },
+};
+
+const testConference: Conference = {
+  participants: [{ id: '123', info: { name: 'John Doe' } }],
+  status: ConferenceStatus.DEFAULT,
+};
+
+const testConferenceReplayOptions: ConferenceReplayOptions = {
+  offset: 1,
+};
+
+const testConferenceMixingOptions: ConferenceMixingOptions = {
+  enabled: true,
+};
+
+const testParticipantPermissions: ParticipantPermissions = {
+  participant: {
+    id: '123',
+    info: {
+      name: 'John Doe',
+    },
+  },
+  permissions: [
+    ConferencePermission.INVITE,
+    ConferencePermission.JOIN,
+    ConferencePermission.RECORD,
+  ],
+};
 
 describe('ConferenceService', () => {
   describe('create()', () => {
-    it('should invoke exported method', () => {
+    it('should invoke exported create method with correct arguments', () => {
       const options = {
         alias: 'Example conference',
       };
@@ -23,364 +56,240 @@ describe('ConferenceService', () => {
       expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith(options);
     });
 
-    it('should invoke exported method with empty object when invoked parameterless', () => {
+    it('should invoke exported create method with empty object when invoked parameterless', () => {
       ConferenceService.create();
       expect(DolbyIoIAPIConferenceService.create).toHaveBeenLastCalledWith({});
     });
   });
 
-  /** "fetch" method */
-
-  test('Fetch method calls exported fetch method', () => {
-    ConferenceService.fetch();
-    expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
-  });
-
-  /** "current" method */
-
-  test('Current method calls exported current method', () => {
-    ConferenceService.current();
-    expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
-  });
-
-  /** "replay" method */
-
-  const mockConference: Conference = {
-    participants: [{ id: '123', info: { name: 'John Doe' } }],
-    status: ConferenceStatus.DEFAULT,
-  };
-
-  const mockConferenceReplayOptions: ConferenceReplayOptions = {
-    offset: 1,
-  };
-
-  const mockConferenceMixingOptions: ConferenceMixingOptions = {
-    enabled: true,
-  };
-
-  test('Replay method calls exported replay method', () => {
-    ConferenceService.replay(
-      mockConference,
-      mockConferenceReplayOptions,
-      mockConferenceMixingOptions
-    );
-    expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
-      mockConference,
-      mockConferenceReplayOptions,
-      mockConferenceMixingOptions
-    );
-  });
-
-  test('Replay method without replay options calls exported replay method with replay offset param set to 0', () => {
-    ConferenceService.replay(
-      mockConference,
-      undefined,
-      mockConferenceMixingOptions
-    );
-    expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
-      mockConference,
-      {
-        offset: 0,
-      },
-      mockConferenceMixingOptions
-    );
-  });
-
-  /** "getAudioLevel" method */
-
-  test('"getAudioLevel" method', () => {
-    ConferenceService.getAudioLevel({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('fetch()', () => {
+    it('should invoke exported fetch method', () => {
+      ConferenceService.fetch();
+      expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
     });
   });
 
-  /** "getLocalStats" method */
-
-  test('"getLocalStats" method', () => {
-    ConferenceService.getLocalStats();
-    expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
+  describe('current()', () => {
+    it('should invoke exported current method', () => {
+      ConferenceService.current();
+      expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
+    });
   });
 
-  /** "getMaxVideoForwarding" method */
+  describe('replay()', () => {
+    it('should invoke exported replay method with correct arguments', () => {
+      ConferenceService.replay(
+        testConference,
+        testConferenceReplayOptions,
+        testConferenceMixingOptions
+      );
+      expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+        testConference,
+        testConferenceReplayOptions,
+        testConferenceMixingOptions
+      );
+    });
 
-  test('"getMaxVideoForwarding" method', () => {
-    ConferenceService.getMaxVideoForwarding();
-    expect(
-      DolbyIoIAPIConferenceService.getMaxVideoForwarding
-    ).toHaveBeenCalled();
-  });
-
-  /** "getParticipant" method */
-
-  test('"getParticipant" method', () => {
-    ConferenceService.getParticipant();
-    expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
-  });
-
-  /** "getParticipants" method */
-
-  test('"getParticipants" method', () => {
-    ConferenceService.getParticipants({
-      participants: [
+    it('without replay options should invoke exported replay method with replay offset param set to 0', () => {
+      ConferenceService.replay(
+        testConference,
+        undefined,
+        testConferenceMixingOptions
+      );
+      expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+        testConference,
         {
-          id: '123',
-          info: {
-            name: 'John Doe',
-          },
+          offset: 0,
         },
-      ],
-      status: ConferenceStatus.DEFAULT,
-    });
-    expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalledWith({
-      participants: [
-        {
-          id: '123',
-          info: {
-            name: 'John Doe',
-          },
-        },
-      ],
-      status: ConferenceStatus.DEFAULT,
+        testConferenceMixingOptions
+      );
     });
   });
 
-  /** "getStatus" method */
-
-  test('"getStatus" method', () => {
-    ConferenceService.getStatus({
-      participants: [
-        {
-          id: '123',
-          info: {
-            name: 'John Doe',
-          },
-        },
-      ],
-      status: ConferenceStatus.DEFAULT,
-    });
-    expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalledWith({
-      participants: [
-        {
-          id: '123',
-          info: {
-            name: 'John Doe',
-          },
-        },
-      ],
-      status: ConferenceStatus.DEFAULT,
+  describe('getAudioLevel()', () => {
+    it('should invoke exported getAudioLevel method with correct arguments', () => {
+      ConferenceService.getAudioLevel(testParticipant);
+      expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalledWith(
+        testParticipant
+      );
     });
   });
 
-  /** "isOutputMuted" method */
-
-  test('"isOutputMuted" method', () => {
-    ConferenceService.isOutputMuted();
-    expect(DolbyIoIAPIConferenceService.isOutputMuted).toHaveBeenCalled();
-  });
-
-  /** "isMuted" method */
-
-  test('"isMuted" method', () => {
-    ConferenceService.isMuted();
-    expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
-  });
-
-  /** "isSpeaking" method */
-
-  test('"isSpeaking" method', () => {
-    ConferenceService.isSpeaking({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('getLocalStats()', () => {
+    it('should invoke exported getLocalStats method', () => {
+      ConferenceService.getLocalStats();
+      expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
     });
   });
 
-  /** "setAudioProcessing" method */
-
-  test('"setAudioProcessing" method', () => {
-    ConferenceService.setAudioProcessing({});
-    expect(
-      DolbyIoIAPIConferenceService.setAudioProcessing
-    ).toHaveBeenCalledWith({});
-  });
-
-  /** "setMaxVideoForwarding" method */
-
-  test('"setMaxVideoForwarding" method', () => {
-    ConferenceService.setMaxVideoForwarding(2);
-    expect(
-      DolbyIoIAPIConferenceService.setMaxVideoForwarding
-    ).toHaveBeenCalledWith(2);
-  });
-
-  /** "mute" method */
-
-  test('"mute" method', () => {
-    const participant = {
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    };
-
-    ConferenceService.mute(true, participant);
-    expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
-      true,
-      participant
-    );
-  });
-
-  /** "updatePermissions" method */
-
-  const mockParticipantPermissions: ParticipantPermissions = {
-    participant: {
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    },
-    permissions: [
-      ConferencePermission.INVITE,
-      ConferencePermission.JOIN,
-      ConferencePermission.RECORD,
-    ],
-  };
-
-  test('"updatePermissions" method', () => {
-    ConferenceService.updatePermissions([mockParticipantPermissions]);
-    expect(DolbyIoIAPIConferenceService.updatePermissions).toHaveBeenCalledWith(
-      [mockParticipantPermissions]
-    );
-  });
-
-  /** "startAudio" method */
-
-  test('"startAudio" method', () => {
-    ConferenceService.startAudio({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('getMaxVideoForwarding()', () => {
+    it('should invoke exported getMaxVideoForwarding method', () => {
+      ConferenceService.getMaxVideoForwarding();
+      expect(
+        DolbyIoIAPIConferenceService.getMaxVideoForwarding
+      ).toHaveBeenCalled();
     });
   });
 
-  /** "startVideo" method */
-
-  test('"startVideo" method', () => {
-    ConferenceService.startVideo({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('getParticipant()', () => {
+    it('should invoke exported getParticipant method', () => {
+      ConferenceService.getParticipant();
+      expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
     });
   });
 
-  /** "stopAudio" method */
-
-  test('"stopAudio" method', () => {
-    ConferenceService.stopAudio({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('getParticipants', () => {
+    it('should invoke exported getParticipants method with correct arguments', () => {
+      ConferenceService.getParticipants(testConference);
+      expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalledWith(
+        testConference
+      );
     });
   });
 
-  /** "stopVideo" method */
-
-  test('"stopVideo" method', () => {
-    ConferenceService.stopVideo({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('getStatus()', () => {
+    it('should invoke exported getStatus method with correct arguments', () => {
+      ConferenceService.getStatus(testConference);
+      expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalledWith(
+        testConference
+      );
     });
   });
 
-  /** "join" method */
-
-  const mockConference_2: Conference = {
-    participants: [
-      {
-        id: '123',
-        info: {
-          name: 'John Doe',
-        },
-      },
-    ],
-    status: ConferenceStatus.DEFAULT,
-  };
-
-  test('"join" method', () => {
-    ConferenceService.join(mockConference_2, {});
-    expect(DolbyIoIAPIConferenceService.join).toHaveBeenCalledWith(
-      mockConference_2,
-      {}
-    );
-  });
-
-  /** "kick" method */
-
-  test('"kick" method', () => {
-    ConferenceService.kick({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
-    });
-    expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith({
-      id: '123',
-      info: {
-        name: 'John Doe',
-      },
+  describe('isOutputMuted()', () => {
+    it('should invoke exported isOutputMuted method', () => {
+      ConferenceService.isOutputMuted();
+      expect(DolbyIoIAPIConferenceService.isOutputMuted).toHaveBeenCalled();
     });
   });
 
-  /** "leave" method */
+  describe('isMuted()', () => {
+    it('should invoke exported isMuted method', () => {
+      ConferenceService.isMuted();
+      expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
+    });
+  });
 
-  test('"leave" method', () => {
-    ConferenceService.leave();
-    expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
+  describe('isSpeaking()', () => {
+    it('should invoke exported isSpeaking method with correct arguments', () => {
+      ConferenceService.isSpeaking(testParticipant);
+      expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('setAudioProcessing()', () => {
+    it('should invoke exported setAudioProcessing method with correct arguments', () => {
+      ConferenceService.setAudioProcessing({});
+      expect(
+        DolbyIoIAPIConferenceService.setAudioProcessing
+      ).toHaveBeenCalledWith({});
+    });
+
+    it('should invoke exported setAudioProcessing method with empty object when invoked parameterless', () => {
+      ConferenceService.setAudioProcessing();
+      expect(
+        DolbyIoIAPIConferenceService.setAudioProcessing
+      ).toHaveBeenCalledWith({});
+    });
+  });
+
+  describe('setMaxVideoForwarding()', () => {
+    it('should invoke exported setMaxVideoForwarding method with correct arguments', () => {
+      ConferenceService.setMaxVideoForwarding(2);
+      expect(
+        DolbyIoIAPIConferenceService.setMaxVideoForwarding
+      ).toHaveBeenCalledWith(2);
+    });
+
+    it('should invoke exported setMaxVideoForwarding method with 4 int when parameterless', () => {
+      ConferenceService.setMaxVideoForwarding();
+      expect(
+        DolbyIoIAPIConferenceService.setMaxVideoForwarding
+      ).toHaveBeenCalledWith(4);
+    });
+  });
+
+  describe('mute()', () => {
+    it('should invoke exported mute method with correct arguments', () => {
+      ConferenceService.mute(true, testParticipant);
+      expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
+        true,
+        testParticipant
+      );
+    });
+  });
+
+  describe('updatePermissions()', () => {
+    it('should invoke exported updatePermissions method with correct arguments', () => {
+      ConferenceService.updatePermissions([testParticipantPermissions]);
+      expect(
+        DolbyIoIAPIConferenceService.updatePermissions
+      ).toHaveBeenCalledWith([testParticipantPermissions]);
+    });
+  });
+
+  describe('startAudio()', () => {
+    it('should invoke exported startAudio method with correct arguments', () => {
+      ConferenceService.startAudio(testParticipant);
+      expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('startVideo()', () => {
+    it('should invoke exported startVideo method with correct arguments', () => {
+      ConferenceService.startVideo(testParticipant);
+      expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('stopAudio()', () => {
+    it('should invoke exported stopAudio method with correct arguments', () => {
+      ConferenceService.stopAudio(testParticipant);
+      expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('stopVideo()', () => {
+    it('should invoke exported stopVideo method with correct arguments', () => {
+      ConferenceService.stopVideo(testParticipant);
+      expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('join()', () => {
+    it('should invoke exported join method with correct arguments', () => {
+      ConferenceService.join(testConference, {});
+      expect(DolbyIoIAPIConferenceService.join).toHaveBeenCalledWith(
+        testConference,
+        {}
+      );
+    });
+  });
+
+  describe('kick()', () => {
+    it('should invoke exported kick method with correct arguments', () => {
+      ConferenceService.kick(testParticipant);
+      expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith(
+        testParticipant
+      );
+    });
+  });
+
+  describe('leave()', () => {
+    it('should invoke exported leave method', () => {
+      ConferenceService.leave();
+      expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
+    });
   });
 
   // TODO "onStatusChange" method
