@@ -3,23 +3,29 @@ import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
-/** SessionService tests */
-
 describe('SessionService', () => {
-  test('Open method calls exported open method', () => {
-    SessionService.open({ name: 'Jack' });
-    expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({
-      name: 'Jack',
+  // open()
+
+  describe('open()', () => {
+    it('should invoke exported open method with correct arguments', () => {
+      SessionService.open({ name: 'Jack' });
+      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({
+        name: 'Jack',
+      });
+    });
+
+    it('should invoke exported open method with empty object when invoked parameterless', () => {
+      SessionService.open();
+      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
     });
   });
 
-  test('Open method without param calls exported open method with empty object', () => {
-    SessionService.open();
-    expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
-  });
+  // close()
 
-  test('Close method calls exported close method', () => {
-    SessionService.close();
-    expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+  describe('close()', () => {
+    it('should invoke exported close method', () => {
+      SessionService.close();
+      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+    });
   });
 });
