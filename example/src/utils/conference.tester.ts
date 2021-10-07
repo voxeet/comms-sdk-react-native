@@ -1,6 +1,7 @@
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 import type { Conference } from '../../../src/services/conference/models';
+import type { Participant } from '../../../lib/typescript/services/conference/models';
 import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
@@ -91,5 +92,21 @@ export const getMaxVideoForwarding = async () => {
     Alert.alert('Max video forwarding', JSON.stringify(maxVideoForwarding));
   } catch (e: any) {
     Alert.alert('Cant get max video forwarding', e);
+  }
+};
+
+export const kick = async (participant: Participant) => {
+  try {
+    await DolbyIoIAPI.conference.kick(participant);
+  } catch (e: any) {
+    Alert.alert('Error', e.toString());
+  }
+};
+
+export const mute = async (participant: Participant, isMuted: boolean) => {
+  try {
+    await DolbyIoIAPI.conference.mute(participant, isMuted);
+  } catch (e: any) {
+    Alert.alert('Error', e.toString());
   }
 };
