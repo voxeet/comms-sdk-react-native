@@ -1,8 +1,13 @@
-import { testConference } from '../../conference/__tests__/index.test';
+import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPINotificationService } = NativeModules;
+
+const testConference: Conference = {
+  participants: [{ id: '123', info: { name: 'John Doe' } }],
+  status: ConferenceStatus.DEFAULT,
+};
 
 describe('NotificationService', () => {
   describe('invite()', () => {
