@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
@@ -53,8 +53,8 @@ public class ConferenceMapper {
     }
 
     @Nullable
-    public String toConferenceId(@NotNull ReadableMap conference) {
-        return rnCollectionExtractor.getString(conference, CONFERENCE_ID);
+    public String toConferenceId(@NotNull ReadableMap conferenceMap) {
+        return rnCollectionExtractor.getString(conferenceMap, CONFERENCE_ID);
     }
 
     @NotNull
@@ -170,7 +170,7 @@ public class ConferenceMapper {
     }
 
     @NotNull
-    private WritableNativeArray toParticipantsArray(@NotNull CopyOnWriteArrayList<Participant> participants) {
+    private WritableNativeArray toParticipantsArray(@NotNull List<Participant> participants) {
         WritableNativeArray participantsArray = new WritableNativeArray();
         for (Participant participant : participants) {
             if (participant != null) {
