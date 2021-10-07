@@ -17,6 +17,7 @@ import {
   startRecording,
   stopRecording,
 } from '@utils/recording.tester';
+import { sendCommandMessage } from '@utils/command.tester';
 import ParticipantAvatar from './ParticipantAvatar';
 import styles from './ConferenceScreen.style';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -47,7 +48,7 @@ const ConferenceScreen: FunctionComponent = () => {
           <View style={styles.top}>
             <Space mh="m" mv="m">
               <Space mb="s" style={styles.topBar}>
-                <Text size="xs">Logged as: {user.name}</Text>
+                <Text size="xs">Logged as: {user.info.name}</Text>
                 <TouchableOpacity style={styles.leaveButton} onPress={leave}>
                   <Text color={COLORS.WHITE}>LEAVE</Text>
                 </TouchableOpacity>
@@ -106,19 +107,19 @@ const ConferenceScreen: FunctionComponent = () => {
                 size="small"
                 color="dark"
                 text="Get audio level"
-                onPress={getAudioLevel}
+                onPress={() => getAudioLevel(user)}
               />
               <Button
                 size="small"
                 color="dark"
                 text="Start audio"
-                onPress={startAudio}
+                onPress={() => startAudio(user)}
               />
               <Button
                 size="small"
                 color="dark"
                 text="Stop audio"
-                onPress={stopAudio}
+                onPress={() => stopAudio(user)}
               />
             </Space>
             <Space mb="xs">
@@ -131,13 +132,13 @@ const ConferenceScreen: FunctionComponent = () => {
                 size="small"
                 color="dark"
                 text="Start video"
-                onPress={startVideo}
+                onPress={() => startVideo(user)}
               />
               <Button
                 size="small"
                 color="dark"
                 text="Stop video"
-                onPress={stopVideo}
+                onPress={() => stopVideo(user)}
               />
             </Space>
             <Space mb="xs">
@@ -165,6 +166,21 @@ const ConferenceScreen: FunctionComponent = () => {
                 onPress={getCurrentRecording}
               />
             </Space>
+          </Space>
+          <Space mb="xs">
+            <Text size="s" color={COLORS.BLACK}>
+              Command
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Send message"
+              onPress={() =>
+                sendCommandMessage('message for command service send method')
+              }
+            />
           </Space>
         </BottomSheet>
       </LinearGradient>

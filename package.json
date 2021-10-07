@@ -26,7 +26,7 @@
     "test:coverage": "jest --coverage=true",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
-    "lint-fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
@@ -91,6 +91,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/utils"
     ],
     "setupFilesAfterEnv": ["./src/setupTest.ts"]
   },
