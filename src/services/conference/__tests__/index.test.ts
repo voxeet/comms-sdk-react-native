@@ -1,13 +1,14 @@
 import ConferenceService from '../ConferenceService';
 import type { Conference } from '../models';
 import {
-  ConferenceStatus,
-  ConferenceReplayOptions,
   ConferenceMixingOptions,
-  ParticipantPermissions,
   ConferencePermission,
+  ConferenceReplayOptions,
+  ConferenceStatus,
+  ParticipantPermissions,
   Participant,
 } from '../models';
+import { transformToConference, transformToParticipant } from '../transformers';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
@@ -296,4 +297,61 @@ describe('ConferenceService', () => {
   // TODO "onPermissionsChange" method
   // TODO "onParticipantsChange" method
   // TODO "onStreamsChange" method
+});
+
+describe('ConferenceService - transformers', () => {
+  describe('transformToConference()', () => {
+    it('should return Conference object', () => {
+      expect(
+        transformToConference({
+          participants: [
+            {
+              info: {
+                name: 'Jack',
+              },
+              id: '111',
+            },
+          ],
+          alias: 'Conference',
+          id: '111',
+          status: ConferenceStatus.DEFAULT,
+        })
+      ).toStrictEqual({
+        participants: [
+          {
+            info: {
+              name: 'Jack',
+            },
+            id: '111',
+            status: undefined,
+            type: undefined,
+          },
+        ],
+        alias: 'Conference',
+        id: '111',
+        isNew: undefined,
+        status: ConferenceStatus.DEFAULT,
+      });
+    });
+  });
+
+  describe('transformToParticipant()', () => {
+    it('should return Participant object', () => {
+      expect(
+        transformToParticipant({
+          info: {
+            name: 'Jack',
+          },
+          id: '111',
+        })
+      ).toStrictEqual({
+        info: {
+          name: 'Jack',
+        },
+        id: '111',
+        status: undefined,
+        type: undefined,
+      });
+    });
+  });
 });

@@ -1,4 +1,5 @@
 import SessionService from '../SessionService';
+import { transformToUser } from '../transformers';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
@@ -12,16 +13,45 @@ describe('SessionService', () => {
       });
     });
 
-    it('should invoke exported open method with empty object when invoked parameterless', () => {
+    it('should invoke exported method with empty object when no param passed', () => {
       SessionService.open();
       expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
     });
-  });
 
-  describe('close()', () => {
-    it('should invoke exported close method', () => {
-      SessionService.close();
-      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+    describe('close()', () => {
+      it('should invoke exported method', () => {
+        SessionService.close();
+        expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
+      });
+    });
+
+    describe('getsCurrentUser()', () => {
+      it('should invoke exported method', () => {
+        SessionService.getCurrentUser();
+        expect(
+          DolbyIoIAPISessionServiceModule.getParticipant
+        ).toHaveBeenCalled();
+      });
+    });
+  });
+});
+
+describe('SessionService - transformers', () => {
+  describe('transformToUser()', () => {
+    it('should return User object', () => {
+      expect(
+        transformToUser({
+          info: {
+            name: 'Jack',
+          },
+          id: '111',
+        })
+      ).toStrictEqual({
+        info: {
+          name: 'Jack',
+        },
+        id: '111',
+      });
     });
   });
 });
