@@ -27,8 +27,8 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
     @NotNull
     @Override
     public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
-        ParticipantMapper participantMapper = new ParticipantMapper();
         RNCollectionExtractor rnCollectionExtractor = new RNCollectionExtractor();
+        ParticipantMapper participantMapper = new ParticipantMapper(rnCollectionExtractor);
 
         return Arrays.asList(
                 new RNDolbyioIAPISdkModule(reactContext),
@@ -42,7 +42,8 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         reactContext,
                         new ConferenceMapper(participantMapper, rnCollectionExtractor),
                         new ConferenceCreateOptionsMapper(rnCollectionExtractor),
-                        new ConferenceJoinOptionsMapper(rnCollectionExtractor)
+                        new ConferenceJoinOptionsMapper(rnCollectionExtractor),
+                        participantMapper
                 )
         );
     }
