@@ -1,14 +1,11 @@
 import { Codec, RTCPMode } from '../../../../src/services/conference/models';
 import type { Conference } from '../../../../src/services/conference/models';
+import type { User } from '../../../../src/services/session/models';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from '@env';
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-
-export type User = {
-  name: string;
-};
 
 export interface IDolbyIOProvider {
   user?: User;
@@ -72,9 +69,8 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const openSession = async (name: string) => {
     try {
       await DolbyIoIAPI.session.open({ name });
-      setUser({
-        name,
-      });
+      const currentUser = await DolbyIoIAPI.session.getCurrentUser();
+      setUser(currentUser);
       Alert.alert(`Session opened as ${name}`);
     } catch (e: any) {
       setUser(undefined);
