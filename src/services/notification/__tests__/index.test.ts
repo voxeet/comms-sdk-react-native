@@ -5,8 +5,6 @@ import { NativeModules } from 'react-native';
 const { DolbyIoIAPINotificationService } = NativeModules;
 
 describe('NotificationService', () => {
-  // invite()
-
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
       NotificationService.invite(testConference, [{}]);
@@ -16,8 +14,6 @@ describe('NotificationService', () => {
       );
     });
   });
-
-  // decline()
 
   describe('decline()', () => {
     it('should invoke exported decline method with correct arguments', () => {
