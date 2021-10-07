@@ -2,53 +2,31 @@ import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NativeModules } from 'react-native';
 
-/** Mocking function */
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-  RN.NativeModules.DolbyIoIAPINotificationService = {
-    invite: jest.fn(),
-    decline: jest.fn(),
-  };
-  RN.NativeModules.DolbyIoIAPIModule = {};
-
-  return RN;
-});
-
 const { DolbyIoIAPINotificationService } = NativeModules;
 
-/** NotificationService tests */
+const testConference: Conference = {
+  participants: [{ id: '123', info: { name: 'John Doe' } }],
+  status: ConferenceStatus.DEFAULT,
+};
 
 describe('NotificationService', () => {
-  /** "invite" method */
-
-  const mockConference: Conference = {
-    participants: [
-      {
-        id: '123',
-        info: {
-          name: 'John Doe',
-        },
-      },
-    ],
-    status: ConferenceStatus.DEFAULT,
-  };
-
-  test('"invite" method', () => {
-    NotificationService.invite(mockConference, [{}]);
-    expect(DolbyIoIAPINotificationService.invite).toHaveBeenCalledWith(
-      mockConference,
-      [{}]
-    );
+  describe('invite()', () => {
+    it('should invoke exported invite method with correct arguments', () => {
+      NotificationService.invite(testConference, [{}]);
+      expect(DolbyIoIAPINotificationService.invite).toHaveBeenCalledWith(
+        testConference,
+        [{}]
+      );
+    });
   });
 
-  /** "decline" method */
-
-  test('"decline" method', () => {
-    NotificationService.decline(mockConference);
-    expect(DolbyIoIAPINotificationService.decline).toHaveBeenCalledWith(
-      mockConference
-    );
+  describe('decline()', () => {
+    it('should invoke exported decline method with correct arguments', () => {
+      NotificationService.decline(testConference);
+      expect(DolbyIoIAPINotificationService.decline).toHaveBeenCalledWith(
+        testConference
+      );
+    });
   });
 
   // TODO "onInvitationReceived" method

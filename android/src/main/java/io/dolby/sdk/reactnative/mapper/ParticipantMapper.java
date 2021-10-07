@@ -1,7 +1,5 @@
 package io.dolby.sdk.reactnative.mapper;
 
-import androidx.annotation.NonNull;
-
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
@@ -17,8 +15,11 @@ import com.voxeet.sdk.models.v1.ConferenceParticipantStatus;
 import com.voxeet.sdk.models.v2.ParticipantType;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
 
 /**
  * Provides methods that map:
@@ -41,17 +42,31 @@ public class ParticipantMapper {
     public final static String PARTICIPANT_STREAMS_VIDEO_TRACKS = "videoTracks";
     public final static String PARTICIPANT_TYPE = "type";
 
-    @NonNull
-    public ParticipantInfo toParticipantInfo(@NotNull ReadableMap map) {
+    @NotNull
+    private final RNCollectionExtractor rnCollectionExtractor;
+
+    public ParticipantMapper(
+            @NotNull RNCollectionExtractor rnCollectionExtractor
+    ) {
+        this.rnCollectionExtractor = rnCollectionExtractor;
+    }
+
+    @NotNull
+    public ParticipantInfo toParticipantInfo(@NotNull ReadableMap participantInfoMap) {
         return new ParticipantInfo(
-                map.getString(PARTICIPANT_INFO_NAME),
-                map.getString(PARTICIPANT_INFO_EXTERNAL_ID),
-                map.getString(PARTICIPANT_INFO_AVATAR_URL)
+                rnCollectionExtractor.getString(participantInfoMap, PARTICIPANT_INFO_NAME),
+                rnCollectionExtractor.getString(participantInfoMap, PARTICIPANT_INFO_EXTERNAL_ID),
+                rnCollectionExtractor.getString(participantInfoMap, PARTICIPANT_INFO_AVATAR_URL)
         );
     }
 
-    @NonNull
-    public WritableMap toMap(@NonNull Participant participant) {
+    @Nullable
+    public String toParticipantId(@NotNull ReadableMap participantMap) {
+        return rnCollectionExtractor.getString(participantMap, PARTICIPANT_ID);
+    }
+
+    @NotNull
+    public WritableMap toMap(@NotNull Participant participant) {
         WritableMap map = new WritableNativeMap();
 
         if (participant.getId() != null) {
