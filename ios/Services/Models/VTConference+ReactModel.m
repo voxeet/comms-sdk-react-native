@@ -1,6 +1,7 @@
 #import "VTConference+ReactModel.h"
 #import "VTParticipant+ReactModel.h"
 #import "VTConferenceParameters+ReactModel.h"
+#import "VTParticipant+ReactModel.h"
 #import "NSObject+Utils.h"
 #import "NSDictionary+Utils.h"
 
@@ -59,20 +60,6 @@ static NSString * const keyPinCode = @"pinCode";
     }
 }
 
-- (VTParticipant * _Nullable)findParticipant:(NSDictionary * _Nullable)participant {
-    if(participant == nil) {
-        return nil;
-    }
-    
-    for(VTParticipant *participantObject in self.participants) {
-        if([participant isEqualToDictionary:[participantObject reactDescription]]) {
-            return participantObject;
-        }
-    }
-    
-    return nil;
-}
-
 - (VTParticipant * _Nullable)findParticipantWithId:(NSString * _Nullable)participantId {
     if(participantId == nil) {
         return nil;
@@ -85,6 +72,10 @@ static NSString * const keyPinCode = @"pinCode";
     }
     
     return nil;
+}
+
+- (VTParticipant * _Nullable)findParticipant:(NSDictionary * _Nullable)participant {
+    return [self findParticipantWithId:[participant participantId]];
 }
 
 @end

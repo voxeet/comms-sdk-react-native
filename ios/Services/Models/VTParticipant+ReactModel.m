@@ -73,3 +73,11 @@ static NSString * const keyAudioTransmitting = @"audioTransmitting";
 }
 
 @end
+
+@implementation NSDictionary (Participant)
+
+- (NSString * _Nullable)participantId {
+    return self[keyId];
+}
+
+@end
