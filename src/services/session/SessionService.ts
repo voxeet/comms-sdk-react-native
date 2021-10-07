@@ -1,4 +1,6 @@
 import type { ParticipantInfo } from '../conference/models';
+import type { User } from './models';
+import { transformToUser } from './transformers';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
@@ -27,6 +29,16 @@ export class SessionService {
    */
   public async close(): Promise<null> {
     return DolbyIoIAPISessionServiceModule.close();
+  }
+
+  /**
+   * Gets object of local user
+   * @returns {Promise<User>}
+   */
+  public async getCurrentUser(): Promise<User> {
+    return transformToUser(
+      await DolbyIoIAPISessionServiceModule.getParticipant()
+    );
   }
 }
 
