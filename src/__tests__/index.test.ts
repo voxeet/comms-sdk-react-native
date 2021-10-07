@@ -7,11 +7,7 @@ const { DolbyIoIAPIModule } = NativeModules;
 const mockAPP_ID = 'MOCKED_APP_ID';
 const mockAPP_SECRET = 'MOCKED_APP_SECRET';
 
-/** Main module tests */
-
 describe('Main module', () => {
-  /** "initialize" method  */
-
   test('"initialize" method', () => {
     DolbyIoIAPI.initialize(mockAPP_ID, mockAPP_SECRET);
     expect(DolbyIoIAPIModule.initialize).toHaveBeenCalledWith(
@@ -20,7 +16,6 @@ describe('Main module', () => {
     );
   });
 
-  /** "initializeToken" method */
   // TODO - toHaveBeenCalledWith(null, mockFunctions) - doesn't work
 
   const mockFunction: RefreshAccessTokenType = async () => {
