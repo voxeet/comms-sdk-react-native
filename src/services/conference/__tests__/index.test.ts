@@ -52,8 +52,6 @@ export const testParticipantPermissions: ParticipantPermissions = {
 };
 
 describe('ConferenceService', () => {
-  // create()
-
   describe('create()', () => {
     it('should invoke exported create method with correct arguments', () => {
       const options = {
@@ -69,8 +67,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // fetch()
-
   describe('fetch()', () => {
     it('should invoke exported fetch method', () => {
       ConferenceService.fetch();
@@ -78,16 +74,12 @@ describe('ConferenceService', () => {
     });
   });
 
-  // current()
-
   describe('current()', () => {
     it('should invoke exported current method', () => {
       ConferenceService.current();
       expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
     });
   });
-
-  // replay()
 
   describe('replay()', () => {
     it('should invoke exported replay method with correct arguments', () => {
@@ -119,8 +111,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // getAudioLevel()
-
   describe('getAudioLevel()', () => {
     it('should invoke exported getAudioLevel method with correct arguments', () => {
       ConferenceService.getAudioLevel(testParticipant);
@@ -130,16 +120,12 @@ describe('ConferenceService', () => {
     });
   });
 
-  // getLocalStats()
-
   describe('getLocalStats()', () => {
     it('should invoke exported getLocalStats method', () => {
       ConferenceService.getLocalStats();
       expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
     });
   });
-
-  // getMaxVideoForwarding()
 
   describe('getMaxVideoForwarding()', () => {
     it('should invoke exported getMaxVideoForwarding method', () => {
@@ -150,16 +136,12 @@ describe('ConferenceService', () => {
     });
   });
 
-  // getParticipant()
-
   describe('getParticipant()', () => {
     it('should invoke exported getParticipant method', () => {
       ConferenceService.getParticipant();
       expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
     });
   });
-
-  // getParticipants()
 
   describe('getParticipants', () => {
     it('should invoke exported getParticipants method with correct arguments', () => {
@@ -170,8 +152,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // getStatus
-
   describe('getStatus()', () => {
     it('should invoke exported getStatus method with correct arguments', () => {
       ConferenceService.getStatus(testConference);
@@ -181,8 +161,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // isOutputMuted()
-
   describe('isOutputMuted()', () => {
     it('should invoke exported isOutputMuted method', () => {
       ConferenceService.isOutputMuted();
@@ -190,16 +168,12 @@ describe('ConferenceService', () => {
     });
   });
 
-  // isMuted()
-
   describe('isMuted()', () => {
     it('should invoke exported isMuted method', () => {
       ConferenceService.isMuted();
       expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
     });
   });
-
-  // isSpeaking()
 
   describe('isSpeaking()', () => {
     it('should invoke exported isSpeaking method with correct arguments', () => {
@@ -209,8 +183,6 @@ describe('ConferenceService', () => {
       );
     });
   });
-
-  // setAudioProcessing()
 
   describe('setAudioProcessing()', () => {
     it('should invoke exported setAudioProcessing method with correct arguments', () => {
@@ -228,8 +200,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // setMaxVideoForwarding()
-
   describe('setMaxVideoForwarding()', () => {
     it('should invoke exported setMaxVideoForwarding method with correct arguments', () => {
       ConferenceService.setMaxVideoForwarding(2);
@@ -246,8 +216,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // mute()
-
   describe('mute()', () => {
     it('should invoke exported mute method with correct arguments', () => {
       ConferenceService.mute(true, testParticipant);
@@ -258,8 +226,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // updatePermissions()
-
   describe('updatePermissions()', () => {
     it('should invoke exported updatePermissions method with correct arguments', () => {
       ConferenceService.updatePermissions([testParticipantPermissions]);
@@ -268,8 +234,6 @@ describe('ConferenceService', () => {
       ).toHaveBeenCalledWith([testParticipantPermissions]);
     });
   });
-
-  // startAudio()
 
   describe('startAudio()', () => {
     it('should invoke exported startAudio method with correct arguments', () => {
@@ -280,8 +244,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // startVideo()
-
   describe('startVideo()', () => {
     it('should invoke exported startVideo method with correct arguments', () => {
       ConferenceService.startVideo(testParticipant);
@@ -290,8 +252,6 @@ describe('ConferenceService', () => {
       );
     });
   });
-
-  // stopAudio()
 
   describe('stopAudio()', () => {
     it('should invoke exported stopAudio method with correct arguments', () => {
@@ -302,8 +262,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // stopVideo()
-
   describe('stopVideo()', () => {
     it('should invoke exported stopVideo method with correct arguments', () => {
       ConferenceService.stopVideo(testParticipant);
@@ -312,8 +270,6 @@ describe('ConferenceService', () => {
       );
     });
   });
-
-  // join()
 
   describe('join()', () => {
     it('should invoke exported join method with correct arguments', () => {
@@ -325,8 +281,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  // kick()
-
   describe('kick()', () => {
     it('should invoke exported kick method with correct arguments', () => {
       ConferenceService.kick(testParticipant);
@@ -335,8 +289,6 @@ describe('ConferenceService', () => {
       );
     });
   });
-
-  // leave()
 
   describe('leave()', () => {
     it('should invoke exported leave method', () => {

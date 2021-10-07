@@ -4,8 +4,6 @@ import { NativeModules } from 'react-native';
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
 describe('SessionService', () => {
-  // open()
-
   describe('open()', () => {
     it('should invoke exported open method with correct arguments', () => {
       SessionService.open({ name: 'Jack' });
@@ -19,8 +17,6 @@ describe('SessionService', () => {
       expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
     });
   });
-
-  // close()
 
   describe('close()', () => {
     it('should invoke exported close method', () => {
