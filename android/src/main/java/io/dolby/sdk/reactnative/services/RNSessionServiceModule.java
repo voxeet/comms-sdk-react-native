@@ -58,6 +58,19 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
     }
 
     /**
+     * Logs out from the current session.
+     * Logging out cancels all logging processes and leaves the conference.
+     *
+     * @param promise returns true if logout succeeded, false otherwise
+     */
+    @ReactMethod
+    public void close(Promise promise) {
+        sessionService.close()
+                .then(promise::resolve)
+                .error(promise::reject);
+    }
+
+    /**
      * Gets a corresponding currently logged in participants' representation. It is not an object
      * related to any conference.
      *
