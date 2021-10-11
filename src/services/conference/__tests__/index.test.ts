@@ -134,7 +134,7 @@ describe('ConferenceService', () => {
 
   describe('getParticipant()', () => {
     it('should invoke exported getParticipant method', () => {
-      ConferenceService.getParticipant();
+      ConferenceService.getParticipant('123');
       expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
     });
   });
