@@ -18,6 +18,14 @@ static NSString * const keyAvatarUrl = @"avatarUrl";
     return participantInfo;
 }
 
++ (NSArray<VTParticipantInfo *> * _Nonnull)generateWithArray:(NSArray<NSDictionary *> * _Nonnull)array {
+    NSMutableArray *result = [NSMutableArray new];
+    for(NSDictionary *dictionary in array) {
+        [result addObject:[self createWithDictionary:dictionary]];
+    }
+    return result;
+}
+
 - (NSDictionary * _Nonnull)reactDescription {
     return @{
         keyExternalId: self.externalID ?: [NSNull null],
