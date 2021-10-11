@@ -15,6 +15,14 @@ import {
   stopAudio,
   getAudioLevel,
   current,
+  getParticipant,
+  getParticipants,
+  isOutputMuted,
+  isMuted,
+  isSpeaking,
+  setAudioProcessing,
+  setMaxVideoForwarding,
+  updatePermissions,
 } from '@utils/conference.tester';
 import { invite, decline } from '@utils/notification.tester';
 import {
@@ -97,6 +105,54 @@ const ConferenceScreen: FunctionComponent = () => {
                   color="dark"
                   text="Get current"
                   onPress={current}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get Participant"
+                  onPress={() => getParticipant('123')}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get Participants"
+                  onPress={() => getParticipants(conference)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check output muted"
+                  onPress={isOutputMuted}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check is muted"
+                  onPress={isMuted}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check is speaking"
+                  onPress={() => isSpeaking(participants[0])}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Set Audio Processing"
+                  onPress={setAudioProcessing}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Set Max Video Forwarding"
+                  onPress={setMaxVideoForwarding}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Update Permissions"
+                  onPress={() => updatePermissions([])}
                 />
               </Space>
               <Space mb="xs">
