@@ -1,8 +1,8 @@
+import type { Participant } from '../../../lib/typescript/services/conference/models';
+import type { Conference } from '../../../src/services/conference/models';
+import type { User } from '../../../src/services/session/models';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
-import type { Conference } from '../../../src/services/conference/models';
-import type { Participant } from '../../../lib/typescript/services/conference/models';
-import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
   try {
