@@ -1,7 +1,7 @@
 import COLORS from '@constants/colors.constants';
+import { FONT_WEIGHTS } from '@constants/fonts.constants';
 import { SPACE_XXS, SPACE_XS, SPACE_M } from '@constants/sizes.constants';
 import { StyleSheet, Platform } from 'react-native';
-import { FONT_WEIGHTS } from '@constants/fonts.constants';
 
 export default StyleSheet.create({
   wrapper: {
