@@ -1,19 +1,21 @@
 package io.dolby.sdk.reactnative.mapper;
 
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.voxeet.sdk.json.ConferencePermission;
 import com.voxeet.sdk.models.Conference;
-import com.voxeet.sdk.models.Participant;
 import com.voxeet.sdk.services.conference.information.ConferenceStatus;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
@@ -60,6 +62,7 @@ public class ConferenceMapper {
     @NotNull
     public WritableMap toMap(@NotNull Conference conference) {
         WritableMap map = new WritableNativeMap();
+        WritableArray participantsArray = participantMapper.toParticipantsArray(conference.getParticipants());
 
         map.putString(CONFERENCE_ID, conference.getId());
         map.putString(CONFERENCE_ALIAS, conference.getAlias());
@@ -67,13 +70,13 @@ public class ConferenceMapper {
         map.putString(CONFERENCE_STATUS, toString(conference.getState()));
         map.putMap(CONFERENCE_PARAMS, toParamsMap(conference));
         map.putArray(CONFERENCE_PERMISSIONS, toPermissionsArray(conference.getPermissions()));
-        map.putArray(CONFERENCE_PARTICIPANTS, toParticipantsArray(conference.getParticipants()));
+        map.putArray(CONFERENCE_PARTICIPANTS, participantsArray);
 
         return map;
     }
 
     @NotNull
-    private String toString(@NotNull ConferenceStatus status) {
+    public String toString(@NotNull ConferenceStatus status) {
         switch (status) {
             case CREATED:
                 return "CREATED";
@@ -96,6 +99,15 @@ public class ConferenceMapper {
             default:
                 return "UNKNOWN";
         }
+    }
+
+    @NotNull
+    public ReadableMap toMap(@NotNull Map<String, JSONArray> localStats) {
+        WritableMap map = new WritableNativeMap();
+        for (Entry<String, JSONArray> entry : localStats.entrySet()) {
+            map.putString(entry.getKey(), entry.getValue().toString());
+        }
+        return map;
     }
 
     @NotNull
@@ -167,16 +179,5 @@ public class ConferenceMapper {
             default:
                 return "UNKNOWN";
         }
-    }
-
-    @NotNull
-    private WritableNativeArray toParticipantsArray(@NotNull List<Participant> participants) {
-        WritableNativeArray participantsArray = new WritableNativeArray();
-        for (Participant participant : participants) {
-            if (participant != null) {
-                participantsArray.pushMap(participantMapper.toMap(participant));
-            }
-        }
-        return participantsArray;
     }
 }
