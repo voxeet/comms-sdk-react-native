@@ -17,6 +17,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
+import io.dolby.sdk.reactnative.mapper.RecordingMapper;
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule;
@@ -52,8 +53,10 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         reactContext
                 ),
                 new RNRecordingServiceModule(
+                        VoxeetSDK.conference(),
                         VoxeetSDK.recording(),
-                        reactContext
+                        reactContext,
+                        new RecordingMapper()
                 )
         );
     }
