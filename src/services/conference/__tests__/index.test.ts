@@ -1,3 +1,4 @@
+import NativeEvents from '../../../utils/NativeEvents';
 import ConferenceService from '../ConferenceService';
 import type { Conference } from '../models';
 import {
@@ -12,6 +13,8 @@ import { transformToConference, transformToParticipant } from '../transformers';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
+
+NativeEvents.addListener = jest.fn();
 
 const testParticipant: Participant = {
   id: '123',
@@ -293,10 +296,33 @@ describe('ConferenceService', () => {
     });
   });
 
-  // TODO "onStatusChange" method
-  // TODO "onPermissionsChange" method
-  // TODO "onParticipantsChange" method
-  // TODO "onStreamsChange" method
+  describe('onStatusChange()', () => {
+    it('should invoke NativeEvents.addListener', () => {
+      ConferenceService.onStatusChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalled();
+    });
+  });
+
+  describe('onPermissionsChange()', () => {
+    it('should invoke NativeEvents.addListener', () => {
+      ConferenceService.onPermissionsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalled();
+    });
+  });
+
+  describe('onParticipantsChange()', () => {
+    it('should invoke NativeEvents.addListener', () => {
+      ConferenceService.onParticipantsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalled();
+    });
+  });
+
+  describe('onStreamsChange()', () => {
+    it('should invoke NativeEvents.addListener', () => {
+      ConferenceService.onStreamsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalled();
+    });
+  });
 });
 
 describe('ConferenceService - transformers', () => {
