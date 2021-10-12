@@ -8,18 +8,13 @@
   "react-native": "src/index",
   "source": "src/index",
   "files": [
-    "src",
     "lib",
     "android",
     "ios",
-    "cpp",
+    "src",
     "dolbyio_react-native-iapi-sdk.podspec",
-    "!lib/typescript/example",
     "!android/build",
-    "!ios/build",
-    "!**/__tests__",
-    "!**/__fixtures__",
-    "!**/__mocks__"
+    "!ios/build"
   ],
   "scripts": {
     "test": "jest",
@@ -95,7 +90,9 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/utils"
     ],
-    "setupFilesAfterEnv": ["./src/setupTest.ts"]
+    "setupFilesAfterEnv": [
+      "./src/setupTest.ts"
+    ]
   },
   "husky": {
     "hooks": {
