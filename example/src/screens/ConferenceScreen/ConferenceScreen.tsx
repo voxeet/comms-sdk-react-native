@@ -110,7 +110,7 @@ const ConferenceScreen: FunctionComponent = () => {
                   size="small"
                   color="dark"
                   text="Get Participant"
-                  onPress={() => getParticipant('123')}
+                  onPress={() => getParticipant(participants[0].id)}
                 />
                 <Button
                   size="small"
