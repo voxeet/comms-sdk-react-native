@@ -13,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 
+/**
+ * The RNSessionServiceModule allows an application to register participants' information in the Voxeet service.
+ * The application needs to open a session before it can interact with the service further.
+ * The application may open {@link #open(ReadableMap, Promise)} and close {@link #close(Promise)} sessions multiple times.
+ */
 public class RNSessionServiceModule extends ReactContextBaseJavaModule {
 
     @NotNull
@@ -51,7 +56,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
      * @param promise            returns true if session was opened successfully, false otherwise
      */
     @ReactMethod
-    public void open(@NotNull ReadableMap participantInfoMap, Promise promise) {
+    public void open(@NotNull ReadableMap participantInfoMap, @NotNull Promise promise) {
         sessionService.open(participantMapper.toParticipantInfo(participantInfoMap))
                 .then(promise::resolve)
                 .error(promise::reject);
@@ -64,7 +69,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
      * @param promise returns true if logout succeeded, false otherwise
      */
     @ReactMethod
-    public void close(Promise promise) {
+    public void close(@NotNull Promise promise) {
         sessionService.close()
                 .then(promise::resolve)
                 .error(promise::reject);
@@ -77,7 +82,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
      * @param promise returns a new instance aggregating the ID and participantInfo
      */
     @ReactMethod
-    public void getParticipant(Promise promise) {
+    public void getParticipant(@NotNull Promise promise) {
         Participant participant = sessionService.getParticipant();
         if (participant != null) {
             promise.resolve(participantMapper.toMap(participant));
