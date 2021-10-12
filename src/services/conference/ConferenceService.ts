@@ -126,7 +126,7 @@ export class ConferenceService {
    * @returns {Promise<Participant>} Promise with Participant
    */
 
-  public async getParticipant(participantId?: String): Promise<Participant> {
+  public async getParticipant(participantId: String): Promise<Participant> {
     return transformToParticipant(
       await DolbyIoIAPIConferenceService.getParticipant(participantId)
     );
