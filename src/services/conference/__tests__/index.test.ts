@@ -1,4 +1,6 @@
+import NativeEvents from '../../../utils/NativeEvents';
 import ConferenceService from '../ConferenceService';
+import { ConferenceServiceEventNames } from '../events';
 import type { Conference } from '../models';
 import {
   ConferenceMixingOptions,
@@ -12,6 +14,8 @@ import { transformToConference, transformToParticipant } from '../transformers';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
+
+NativeEvents.addListener = jest.fn();
 
 const testParticipant: Participant = {
   id: '123',
@@ -134,7 +138,7 @@ describe('ConferenceService', () => {
 
   describe('getParticipant()', () => {
     it('should invoke exported getParticipant method', () => {
-      ConferenceService.getParticipant();
+      ConferenceService.getParticipant('123');
       expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
     });
   });
@@ -293,10 +297,77 @@ describe('ConferenceService', () => {
     });
   });
 
-  // TODO "onStatusChange" method
-  // TODO "onPermissionsChange" method
-  // TODO "onParticipantsChange" method
-  // TODO "onStreamsChange" method
+  describe('onStatusChange()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceStatusUpdated event', () => {
+      ConferenceService.onStatusChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.ConferenceStatusUpdated,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onPermissionsChange()', () => {
+    it('should invoke NativeEvents.addListener with PermissionsUpdated event', () => {
+      ConferenceService.onPermissionsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.PermissionsUpdated,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onParticipantsChange()', () => {
+    it('should invoke NativeEvents.addListener with ParticipantAdded event', () => {
+      ConferenceService.onParticipantsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.ParticipantAdded,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with ParticipantUpdated event', () => {
+      ConferenceService.onParticipantsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.ParticipantUpdated,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with ParticipantRemoved event', () => {
+      ConferenceService.onParticipantsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.ParticipantRemoved,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onStreamsChange()', () => {
+    it('should invoke NativeEvents.addListener with StreamAdded event', () => {
+      ConferenceService.onStreamsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.StreamAdded,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with StreamUpdated event', () => {
+      ConferenceService.onStreamsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.StreamUpdated,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with StreamRemoved event', () => {
+      ConferenceService.onStreamsChange(() => {});
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        ConferenceServiceEventNames.StreamRemoved,
+        expect.any(Function)
+      );
+    });
+  });
 });
 
 describe('ConferenceService - transformers', () => {

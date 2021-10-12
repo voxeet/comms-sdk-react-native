@@ -1,8 +1,11 @@
+import type { Participant } from '../../../lib/typescript/services/conference/models';
+import type {
+  Conference,
+  ParticipantPermissions,
+} from '../../../src/services/conference/models';
+import type { User } from '../../../src/services/session/models';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
-import type { Conference } from '../../../src/services/conference/models';
-import type { Participant } from '../../../lib/typescript/services/conference/models';
-import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
   try {
@@ -108,5 +111,79 @@ export const mute = async (participant: Participant, isMuted: boolean) => {
     await DolbyIoIAPI.conference.mute(participant, isMuted);
   } catch (e: any) {
     Alert.alert('Error', e.toString());
+  }
+};
+
+export const getParticipant = async (participantId: string) => {
+  try {
+    const participant: Participant =
+      await DolbyIoIAPI.conference.getParticipant(participantId);
+    Alert.alert('Participant:', participant.toString());
+  } catch (e: any) {
+    Alert.alert('getParticipant error', e.toString());
+  }
+};
+
+export const getParticipants = async (conference: Conference) => {
+  try {
+    const participants = await DolbyIoIAPI.conference.getParticipants(
+      conference
+    );
+    Alert.alert('Participants:', participants.toString());
+  } catch (e: any) {
+    Alert.alert('getParticipants error', e.toString());
+  }
+};
+
+export const isOutputMuted = async () => {
+  try {
+    const outputMuted = await DolbyIoIAPI.conference.isOutputMuted();
+    Alert.alert('Output:', outputMuted.toString());
+  } catch (e: any) {
+    Alert.alert('isOutputMuted error', e.toString());
+  }
+};
+
+export const isMuted = async () => {
+  try {
+    const muted = await DolbyIoIAPI.conference.isMuted();
+    Alert.alert('muted:', muted.toString());
+  } catch (e: any) {
+    Alert.alert('isMuted error', e.toString());
+  }
+};
+
+export const isSpeaking = async (participant: Participant) => {
+  try {
+    const speaking = await DolbyIoIAPI.conference.isSpeaking(participant);
+    Alert.alert('speaking:', speaking.toString());
+  } catch (e: any) {
+    Alert.alert('isSpeaking error', e.toString());
+  }
+};
+
+export const setAudioProcessing = async () => {
+  try {
+    await DolbyIoIAPI.conference.setAudioProcessing();
+  } catch (e: any) {
+    Alert.alert('setAudioProcessing error', e.toString());
+  }
+};
+
+export const setMaxVideoForwarding = async () => {
+  try {
+    await DolbyIoIAPI.conference.setMaxVideoForwarding();
+  } catch (e: any) {
+    Alert.alert('setMaxVideoForwarding error', e.toString());
+  }
+};
+
+export const updatePermissions = async (
+  participantPermissions: ParticipantPermissions[]
+) => {
+  try {
+    await DolbyIoIAPI.conference.updatePermissions(participantPermissions);
+  } catch (e: any) {
+    Alert.alert('updatePermissions error', e.toString());
   }
 };

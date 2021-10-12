@@ -5,6 +5,7 @@ import type {
 } from './models';
 import CommandService from './services/command/CommandService';
 import ConferenceService from './services/conference/ConferenceService';
+import NotificationService from './services/notification/NotificationService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
@@ -21,6 +22,7 @@ export class DolbyIoIAPI {
   session = SessionService;
   recording = RecordingService;
   command = CommandService;
+  notification = NotificationService;
 
   /**
    * Initializes the SDK using the customer key and secret.
