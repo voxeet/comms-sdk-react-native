@@ -10,6 +10,10 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.sdk.authent.token.TokenCallback;
+import com.voxeet.sdk.models.Conference;
+import com.voxeet.sdk.services.ConferenceService;
+import com.voxeet.sdk.services.builders.ConferenceCreateOptions;
+import com.voxeet.sdk.services.builders.ConferenceJoinOptions;
 
 import org.jetbrains.annotations.NotNull;
 import org.webrtc.CodecDescriptorFactory;
@@ -23,6 +27,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import io.dolby.sdk.reactnative.utils.Lock;
 
+/**
+ * <p>
+ * {@link RNDolbyioIAPISdkModule} is a bridge wrapper for {@link VoxeetSDK} that is the main object
+ * which provides methods interacting with the Voxeet service. The SDK is asynchronous and uses promise at its core.
+ * </p>
+ * <p>
+ * The application initializes the Voxeet SDK through the {@link #initializeToken(String, Promise)} method.
+ * </p>
+ */
 public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
@@ -31,7 +44,12 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
     @VisibleForTesting
     protected final List<TokenCallback> mAwaitingTokenCallback;
 
-    public RNDolbyioIAPISdkModule(ReactApplicationContext reactContext) {
+    /**
+     * Creates a bridge wrapper for {@link VoxeetSDK}.
+     *
+     * @param reactContext react context
+     */
+    public RNDolbyioIAPISdkModule(@NotNull ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
         mAwaitingTokenCallback = new ArrayList<>();
@@ -53,7 +71,11 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      */
     @Deprecated
     @ReactMethod
-    public void initialize(String consumerKey, String consumerSecret, Promise promise) {
+    public void initialize(
+            @NotNull String consumerKey,
+            @NotNull String consumerSecret,
+            @NotNull Promise promise
+    ) {
         VoxeetSDK.initialize(consumerKey, consumerSecret);
         VoxeetSDK.instance().register(this);
         enableOnEmulator();
@@ -73,7 +95,7 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * @param promise     returns null
      */
     @ReactMethod
-    public void initializeToken(String accessToken, Promise promise) {
+    public void initializeToken(@NotNull String accessToken, @NotNull Promise promise) {
         VoxeetSDK.initialize(
                 accessToken,
                 (isRequired, callback) -> {
@@ -100,8 +122,10 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * @param promise     returns null
      */
     @ReactMethod
-    public void onAccessTokenOk(final String accessToken,
-                                final Promise promise) {
+    public void onAccessTokenOk(
+            @NotNull final String accessToken,
+            @NotNull final Promise promise
+    ) {
         Lock.lock(lockAwaitingToken);
         for (TokenCallback callback : mAwaitingTokenCallback) {
             try {
@@ -120,12 +144,15 @@ public class RNDolbyioIAPISdkModule extends ReactContextBaseJavaModule {
      * <p>
      * Should be called along with {@link #initializeToken(String, Promise)} method.
      * </p>
+     *
      * @param reason  reason of the refresh token failure
      * @param promise returns null
      */
     @ReactMethod
-    public void onAccessTokenKo(final String reason,
-                                final Promise promise) {
+    public void onAccessTokenKo(
+            @NotNull final String reason,
+            @NotNull final Promise promise
+    ) {
         try {
             throw new Exception("refreshToken failed with reason := " + reason);
         } catch (Exception e) {
