@@ -1,6 +1,7 @@
 import NativeEvents from '../../../utils/NativeEvents';
 import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
+import { NotificationServiceEventNames } from '../events';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPINotificationService } = NativeModules;
@@ -33,9 +34,12 @@ describe('NotificationService', () => {
   });
 
   describe('onInvitationReceived()', () => {
-    it('should invoke NativeEvents.addListener', () => {
+    it('should invoke NativeEvents.addListener with InvitationReceived event', () => {
       NotificationService.onInvitationReceived(() => {});
-      expect(NativeEvents.addListener).toHaveBeenCalled();
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        NotificationServiceEventNames.InvitationReceived,
+        expect.any(Function)
+      );
     });
   });
 });

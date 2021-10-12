@@ -1,5 +1,6 @@
 import NativeEvents from '../../../utils/NativeEvents';
 import CommandService from '../CommandService';
+import { CommandServiceEventNames } from '../events';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
@@ -17,9 +18,12 @@ describe('CommandService', () => {
   });
 
   describe('onMessageReceived()', () => {
-    it('should invoke NativeEvents.addListener', () => {
+    it('should invoke NativeEvents.addListener with MessageReceived event', () => {
       CommandService.onMessageReceived(() => {});
-      expect(NativeEvents.addListener).toHaveBeenCalled();
+      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+        CommandServiceEventNames.MessageReceived,
+        expect.any(Function)
+      );
     });
   });
 });
