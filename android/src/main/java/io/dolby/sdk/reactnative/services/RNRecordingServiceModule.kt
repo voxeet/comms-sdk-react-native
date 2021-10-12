@@ -1,11 +1,11 @@
 package io.dolby.sdk.reactnative.services
 
-import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.voxeet.promise.solve.ThenVoid
 import com.voxeet.sdk.services.RecordingService
+import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.ReactPromise
 
 /**
  * The RNRecordingServiceModule allows an application to record conferences by using the [start] and [stop] methods that turn the recording on and off.
@@ -29,10 +29,8 @@ class RNRecordingServiceModule(
      * @param promise returns true if start recording request succeed, false otherwise
      */
     @ReactMethod
-    fun start(promise: Promise) {
-        recordingService.start()
-                .then(ThenVoid { value: Boolean? -> promise.resolve(value) })
-                .error { throwable: Throwable? -> promise.reject(throwable) }
+    fun start(promise: ReactPromise) {
+        recordingService.start().forward(promise)
     }
 
     /**
@@ -41,9 +39,7 @@ class RNRecordingServiceModule(
      * @param promise returns true if stop recording request succeed, false otherwise
      */
     @ReactMethod
-    fun stop(promise: Promise) {
-        recordingService.stop()
-                .then(ThenVoid { value: Boolean? -> promise.resolve(value) })
-                .error { throwable: Throwable? -> promise.reject(throwable) }
+    fun stop(promise: ReactPromise) {
+        recordingService.stop().forward(promise)
     }
 }
