@@ -30,4 +30,8 @@ object Promises {
     fun <T> VoxeetPromise<T>.forward(promise: ReactPromise) {
         then(promise::resolve).error(promise::reject)
     }
+
+    fun Any?.forwardOptionalValue(promise: ReactPromise, errorMessage: () -> String) {
+        this?.let(promise::resolve) ?: promise.reject(Exception(errorMessage()))
+    }
 }
