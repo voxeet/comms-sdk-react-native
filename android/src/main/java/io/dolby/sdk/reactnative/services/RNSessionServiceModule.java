@@ -87,7 +87,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
         if (participant != null) {
             promise.resolve(participantMapper.toMap(participant));
         } else {
-            promise.reject(new Throwable("No current user's session"));
+            promise.reject(new Exception("No current user's session"));
         }
     }
 }
