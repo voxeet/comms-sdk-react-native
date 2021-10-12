@@ -62,6 +62,24 @@
 - (void)leave:(RCTPromiseResolveBlock _Nonnull)resolve
      rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Replays the conference.
+///
+/// \param conference conference object
+///
+/// \param replayOptions The replay options.
+///
+/// \param mixingOptions The object that notifies the server that a participant who replays the conference is a special participant called Mixer.
+///
+/// \param resolve returns current conference object
+///
+/// \param reject returns error on failure
+///
+- (void)replay:(NSDictionary * _Nonnull)conference
+ replayOptions:(NSDictionary * _Nullable)replayOptions
+ mixingOptions:(NSDictionary * _Nullable)mixingOptions
+       resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+      rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Updates the participant's conference permissions.
 ///
 /// \param participantPermissions The updated participant's permissions.
