@@ -1,9 +1,13 @@
 import type { Participant } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
+import ParticipantAvatar from './ParticipantAvatar';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
+import BottomSheet from '@gorhom/bottom-sheet';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
+import { sendCommandMessage } from '@utils/command.tester';
 import {
   startVideo,
   stopVideo,
@@ -11,21 +15,26 @@ import {
   stopAudio,
   getAudioLevel,
   current,
+  getParticipant,
+  getParticipants,
+  isOutputMuted,
+  isMuted,
+  isSpeaking,
+  setAudioProcessing,
+  setMaxVideoForwarding,
+  updatePermissions,
 } from '@utils/conference.tester';
+import { invite, decline } from '@utils/notification.tester';
 import {
   getCurrentRecording,
   startRecording,
   stopRecording,
 } from '@utils/recording.tester';
-import { sendCommandMessage } from '@utils/command.tester';
-import ParticipantAvatar from './ParticipantAvatar';
-import styles from './ConferenceScreen.style';
-import BottomSheet from '@gorhom/bottom-sheet';
 import React, { FunctionComponent, useContext, useRef } from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { MenuProvider } from 'react-native-popup-menu';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ConferenceScreen: FunctionComponent = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -78,110 +87,183 @@ const ConferenceScreen: FunctionComponent = () => {
           </View>
         </SafeAreaView>
         <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[65, 500]}>
-          <Space mh="m" mb="s">
-            <Text header size="s" color={COLORS.BLACK}>
-              Actions
-            </Text>
-          </Space>
-          <Space mh="m" mb="m">
-            <Space mb="xs">
-              <Text size="m" color={COLORS.BLACK}>
-                Conference Service
+          <ScrollView>
+            <Space mh="m" mb="s">
+              <Text header size="s" color={COLORS.BLACK}>
+                Actions
               </Text>
             </Space>
-            <Space mb="s" style={styles.actionButtons}>
-              <Button
-                size="small"
-                color="dark"
-                text="Get current"
-                onPress={current}
-              />
+            <Space mh="m" mb="m">
+              <Space mb="xs">
+                <Text size="m" color={COLORS.BLACK}>
+                  Conference Service
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get current"
+                  onPress={current}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get Participant"
+                  onPress={() => getParticipant(participants[0].id)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get Participants"
+                  onPress={() => getParticipants(conference)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check output muted"
+                  onPress={isOutputMuted}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check is muted"
+                  onPress={isMuted}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Check is speaking"
+                  onPress={() => isSpeaking(participants[0])}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Set Audio Processing"
+                  onPress={setAudioProcessing}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Set Max Video Forwarding"
+                  onPress={setMaxVideoForwarding}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Update Permissions"
+                  onPress={() => updatePermissions([])}
+                />
+              </Space>
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  Audio
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get audio level"
+                  onPress={() => getAudioLevel(user)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Start audio"
+                  onPress={() => startAudio(user)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Stop audio"
+                  onPress={() => stopAudio(user)}
+                />
+              </Space>
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  Video
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Start video"
+                  onPress={() => startVideo(user)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Stop video"
+                  onPress={() => stopVideo(user)}
+                />
+              </Space>
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  Recording
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Start recording"
+                  onPress={startRecording}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Stop recording"
+                  onPress={stopRecording}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Current recording"
+                  onPress={getCurrentRecording}
+                />
+              </Space>
+
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  Notification
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Invite"
+                  onPress={() => invite(conference, participants)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Decline"
+                  onPress={() => decline(conference)}
+                />
+              </Space>
+
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  Command
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Send message"
+                  onPress={() =>
+                    sendCommandMessage(
+                      'message for command service send method'
+                    )
+                  }
+                />
+              </Space>
             </Space>
-            <Space mb="xs">
-              <Text size="s" color={COLORS.BLACK}>
-                Audio
-              </Text>
-            </Space>
-            <Space mb="s" style={styles.actionButtons}>
-              <Button
-                size="small"
-                color="dark"
-                text="Get audio level"
-                onPress={() => getAudioLevel(user)}
-              />
-              <Button
-                size="small"
-                color="dark"
-                text="Start audio"
-                onPress={() => startAudio(user)}
-              />
-              <Button
-                size="small"
-                color="dark"
-                text="Stop audio"
-                onPress={() => stopAudio(user)}
-              />
-            </Space>
-            <Space mb="xs">
-              <Text size="s" color={COLORS.BLACK}>
-                Video
-              </Text>
-            </Space>
-            <Space mb="s" style={styles.actionButtons}>
-              <Button
-                size="small"
-                color="dark"
-                text="Start video"
-                onPress={() => startVideo(user)}
-              />
-              <Button
-                size="small"
-                color="dark"
-                text="Stop video"
-                onPress={() => stopVideo(user)}
-              />
-            </Space>
-            <Space mb="xs">
-              <Text size="s" color={COLORS.BLACK}>
-                Recording
-              </Text>
-            </Space>
-            <Space mb="s" style={styles.actionButtons}>
-              <Button
-                size="small"
-                color="dark"
-                text="Start recording"
-                onPress={startRecording}
-              />
-              <Button
-                size="small"
-                color="dark"
-                text="Stop recording"
-                onPress={stopRecording}
-              />
-              <Button
-                size="small"
-                color="dark"
-                text="Current recording"
-                onPress={getCurrentRecording}
-              />
-            </Space>
-          </Space>
-          <Space mb="xs">
-            <Text size="s" color={COLORS.BLACK}>
-              Command
-            </Text>
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
-            <Button
-              size="small"
-              color="dark"
-              text="Send message"
-              onPress={() =>
-                sendCommandMessage('message for command service send method')
-              }
-            />
-          </Space>
+          </ScrollView>
         </BottomSheet>
       </LinearGradient>
     </MenuProvider>
