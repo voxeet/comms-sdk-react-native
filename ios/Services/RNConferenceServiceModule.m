@@ -5,6 +5,7 @@
 #import "VTConferenceParameters+ReactModel.h"
 #import "VTJoinOptions+ReactModel.h"
 #import "NSDictionary+AudioProcessingOptions.h"
+#import "VTParticipantPermissions+ReactModel.h"
 #import <React/RCTLog.h>
 
 @import VoxeetSDK;
@@ -89,6 +90,21 @@ RCT_EXPORT_METHOD(leave:(RCTPromiseResolveBlock _Nonnull)resolve
                   rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
 {
     [VoxeetSDK.shared.conference leaveWithCompletion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            reject(@"error", [error localizedDescription], error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(updatePermissions:(NSArray<NSDictionary *> * _Nonnull)participantPermissions
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    [VoxeetSDK.shared.conference updatePermissionsWithParticipantPermissions:[VTParticipantPermissions permissionsWithArray:participantPermissions
+                                                                                                                 conference:[VoxeetSDK.shared.conference current]]
+                                                                  completion:^(NSError *error) {
         if (error != nil) {
             reject(@"error", [error localizedDescription], error);
         } else {

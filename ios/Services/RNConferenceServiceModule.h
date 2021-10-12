@@ -62,6 +62,18 @@
 - (void)leave:(RCTPromiseResolveBlock _Nonnull)resolve
      rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
+/// Updates the participant's conference permissions.
+///
+/// \param participantPermissions The updated participant's permissions.
+///
+/// \param resolve returns on success
+///
+/// \param reject returns error on failure
+///
+- (void)updatePermissions:(NSArray<NSDictionary *> * _Nonnull)participantPermissions
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                 rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+///
 /// Returns information about the current conference.
 ///
 /// \param resolve returns current conference object
@@ -229,7 +241,7 @@ participant:(NSDictionary * _Nonnull)participant
 ///
 - (void)startVideo:(NSDictionary * _Nonnull)participant
            resolve:(RCTPromiseResolveBlock _Nonnull)resolve
-           rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
 /// Stops audio transmission between the local client and a conference.
 ///
@@ -241,7 +253,7 @@ participant:(NSDictionary * _Nonnull)participant
 ///
 - (void)stopAudio:(NSDictionary * _Nonnull)participant
           resolve:(RCTPromiseResolveBlock _Nonnull)resolve
-          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+         rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 ///
 /// Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
 ///
@@ -253,6 +265,6 @@ participant:(NSDictionary * _Nonnull)participant
 ///
 - (void)stopVideo:(NSDictionary * _Nonnull)participant
           resolve:(RCTPromiseResolveBlock _Nonnull)resolve
-          rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
+         rejecter:(RCTPromiseRejectBlock _Nonnull)reject;
 
 @end
