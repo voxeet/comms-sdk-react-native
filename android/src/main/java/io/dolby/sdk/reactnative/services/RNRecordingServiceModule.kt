@@ -6,8 +6,9 @@ import com.facebook.react.bridge.ReactMethod
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.RecordingService
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
+import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
-import io.dolby.sdk.reactnative.utils.Promises.forwardOptionalValue
+import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
 
 /**
@@ -56,8 +57,9 @@ class RNRecordingServiceModule(
      * @param promise return current recording information if recording is started, null otherwise
      */
     @ReactMethod
-    fun current(promise: ReactPromise) = with(recordingMapper) {
-        conferenceService.conference?.recordingInformation?.toMap()
-                .forwardOptionalValue(promise) { "Can't get current recording information" }
+    fun current(promise: ReactPromise) {
+        Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
+                .thenValue(recordingMapper::toMap)
+                .forward(promise)
     }
 }
