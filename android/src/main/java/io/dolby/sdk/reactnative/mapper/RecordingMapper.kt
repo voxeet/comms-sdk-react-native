@@ -15,7 +15,7 @@ class RecordingMapper {
         private const val RECORDING_START_TIMESTAMP = "startTimestamp"
     }
 
-    fun RecordingInformation.toMap(): ReadableMap? {
+    fun toMap(recordingInformation: RecordingInformation): ReadableMap? = with(recordingInformation) {
         return if (recordingParticipant != null && startRecordTimestamp != null) {
             WritableNativeMap().apply {
                 putString(PARTICIPANT_ID, recordingParticipant)
