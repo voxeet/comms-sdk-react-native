@@ -20,6 +20,7 @@ import com.voxeet.sdk.models.v2.ParticipantType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
@@ -61,6 +62,15 @@ public class ParticipantMapper {
                 rnCollectionExtractor.getString(participantInfoMap, PARTICIPANT_INFO_EXTERNAL_ID),
                 rnCollectionExtractor.getString(participantInfoMap, PARTICIPANT_INFO_AVATAR_URL)
         );
+    }
+
+    @NotNull
+    public List<ParticipantInfo> toParticipantInfoList(@NotNull ReadableArray participantInfoArray) {
+        ArrayList<ParticipantInfo> list = new ArrayList<>();
+        for (int i = 0; i < participantInfoArray.size(); i++) {
+            list.add(toParticipantInfo(participantInfoArray.getMap(i)));
+        }
+        return list;
     }
 
     @Nullable
