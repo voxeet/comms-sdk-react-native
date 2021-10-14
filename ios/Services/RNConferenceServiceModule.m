@@ -6,6 +6,7 @@
 #import "VTJoinOptions+ReactModel.h"
 #import "NSDictionary+AudioProcessingOptions.h"
 #import "VTParticipantPermissions+ReactModel.h"
+#import "VTReplayOptions+ReactModel.h"
 #import <React/RCTLog.h>
 
 @import VoxeetSDK;
@@ -96,6 +97,36 @@ RCT_EXPORT_METHOD(leave:(RCTPromiseResolveBlock _Nonnull)resolve
             resolve(nil);
         }
     }];
+}
+
+RCT_EXPORT_METHOD(replay:(NSDictionary * _Nonnull)conference
+                  replayOptions:(NSDictionary * _Nullable)replayOptions
+                  mixingOptions:(NSDictionary * _Nullable)mixingOptions
+                  resolve:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject)
+{
+    VTReplayOptions *options = replayOptions != nil ? [VTReplayOptions createWithDictionary:replayOptions] : nil;
+    NSString *conferenceId = [conference conferenceId];
+    if(conferenceId != nil) {
+        [VoxeetSDK.shared.conference fetchWithConferenceID:conferenceId
+                                                completion:^(VTConference *conference) {
+            if (conference != nil) {
+                [VoxeetSDK.shared.conference replayWithConference:conference
+                                                          options:options
+                                                       completion:^(NSError *error) {
+                    if (error != nil) {
+                        reject(@"error", [error localizedDescription], error);
+                    } else {
+                        resolve(nil);
+                    }
+                }];
+            } else {
+                reject(@"error", [NSString stringWithFormat:@"Couldn't find the conference with id: %@.", conferenceId], nil);
+            }
+        }];
+    } else {
+        reject(@"error", @"Conference should contain conferenceId.", nil);
+    }
 }
 
 RCT_EXPORT_METHOD(updatePermissions:(NSArray<NSDictionary *> * _Nonnull)participantPermissions
