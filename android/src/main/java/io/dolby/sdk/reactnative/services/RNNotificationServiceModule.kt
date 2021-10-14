@@ -5,12 +5,12 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.voxeet.sdk.json.ParticipantInvited
 import com.voxeet.sdk.models.Conference
-import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.NotificationService
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
-import io.dolby.sdk.reactnative.mapper.ParticipantMapper
+import io.dolby.sdk.reactnative.mapper.InvitationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
@@ -21,6 +21,9 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * The [RNNotificationServiceModule] allows inviting participants to a conference.
  *
  * The application calls the [invite] method to invite specific participants to a conference.
+ * For each invited user application can specify permissions, which allow conference participants to perform a specific set of actions within a protected conference.
+ * If permissions are not specified, the platform assigns the default permissions, which include Join, SendAudio, SendVideo, ShareScreen, ShareVideo, ShareFile, SendMessage, Record, and Stream.
+ *
  * Participants who do not wish to participate at a conference can [decline] the conference invitation.
  *
  * @constructor
@@ -29,13 +32,13 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param conferenceService   [ConferenceService] from Android SDK
  * @param notificationService [NotificationService] from Android SDK
  * @param conferenceMapper    [ConferenceMapper] mapper for a [Conference] and [Conference]-related models
- * @param participantMapper   [ParticipantMapper] mapper for a [Participant] and [Participant]-related models
+ * @param invitationMapper    [InvitationMapper] mapper for a [ParticipantInvited] model
  */
 class RNNotificationServiceModule(
         private val conferenceService: ConferenceService,
         private val notificationService: NotificationService,
         private val conferenceMapper: ConferenceMapper,
-        private val participantMapper: ParticipantMapper,
+        private val invitationMapper: InvitationMapper,
         reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
 
@@ -46,18 +49,22 @@ class RNNotificationServiceModule(
      *
      * The ParticipantInfo model included in the invitation has to include externalId.
      *
-     * @param conferenceMap        a conference to invite
-     * @param participantInfoArray information about the invited users
-     * @param promise              returns null
+     * In the case of inviting participants to a conference that is not protected, inviters can invite participants to any conference.
+     * In the case of inviting participants to a protected conference, inviters can invite participants only to the current conference.
+     *
+     * Participants who have permission to invite additional participants to a conference can also send invitations.
+     * In the invitation, inviters can only grant permissions that the inviters have.
+     *
+     * @param conferenceMap       a conference to invite
+     * @param invitedParticipants information about the invited users
+     * @param promise             returns null
      */
     @ReactMethod
-    fun invite(conferenceMap: ReadableMap, participantInfoArray: ReadableArray, promise: ReactPromise) {
+    fun invite(conferenceMap: ReadableMap, invitedParticipants: ReadableArray, promise: ReactPromise) {
         Promises.promise(conferenceMapper.toConferenceId(conferenceMap)) { "Conference should contain conferenceId" }
                 .thenValue(conferenceService::getConference)
-                .thenValue { conference ->
-                    conference to participantMapper.toParticipantInfoList(participantInfoArray)
-                }
-                .thenPromise { (conference, participants) -> notificationService.invite(conference, participants) }
+                .thenValue { conference -> conference to invitationMapper.decode(invitedParticipants) }
+                .thenPromise { (conference, participants) -> notificationService.inviteWithPermissions(conference, participants) }
                 .forward(promise, ignoreReturnType = true)
     }
 

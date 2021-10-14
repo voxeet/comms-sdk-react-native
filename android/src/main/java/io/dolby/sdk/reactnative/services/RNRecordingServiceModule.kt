@@ -59,7 +59,7 @@ class RNRecordingServiceModule(
     @ReactMethod
     fun current(promise: ReactPromise) {
         Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
-                .thenValue(recordingMapper::toMap)
+                .thenValue(recordingMapper::encode)
                 .forward(promise)
     }
 }

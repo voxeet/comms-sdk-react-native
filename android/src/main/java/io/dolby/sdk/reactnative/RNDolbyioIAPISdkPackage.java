@@ -16,6 +16,8 @@ import java.util.List;
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
+import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper;
+import io.dolby.sdk.reactnative.mapper.InvitationMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 import io.dolby.sdk.reactnative.mapper.RecordingMapper;
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
@@ -33,7 +35,8 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
         RNCollectionExtractor rnCollectionExtractor = new RNCollectionExtractor();
         ParticipantMapper participantMapper = new ParticipantMapper(rnCollectionExtractor);
-        ConferenceMapper conferenceMapper = new ConferenceMapper(participantMapper, rnCollectionExtractor);
+        ConferencePermissionMapper conferencePermissionMapper = new ConferencePermissionMapper();
+        ConferenceMapper conferenceMapper = new ConferenceMapper(participantMapper, conferencePermissionMapper, rnCollectionExtractor);
 
         return Arrays.asList(
                 new RNDolbyioIAPISdkModule(reactContext),
@@ -65,7 +68,7 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         VoxeetSDK.conference(),
                         VoxeetSDK.notification(),
                         conferenceMapper,
-                        participantMapper,
+                        new InvitationMapper(conferencePermissionMapper, participantMapper),
                         reactContext
                 )
         );
