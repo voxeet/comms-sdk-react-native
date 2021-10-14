@@ -54,5 +54,11 @@ jest.mock('react-native', () => {
   RN.NativeModules.DolbyIoIAPICommandServiceModule = {
     send: jest.fn(),
   };
+  RN.NativeModules.DolbyIoIAPIFilePresentationService = {
+    stop: jest.fn(),
+    start: jest.fn(),
+    getThumbnail: jest.fn(),
+    setPage: jest.fn(),
+  };
   return RN;
 });

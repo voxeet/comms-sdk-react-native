@@ -24,6 +24,12 @@ import {
   setMaxVideoForwarding,
   updatePermissions,
 } from '@utils/conference.tester';
+import {
+  stop,
+  start,
+  getThumbnail,
+  setPage,
+} from '@utils/filePresentation.tester';
 import { invite, decline } from '@utils/notification.tester';
 import {
   getCurrentRecording,
@@ -45,6 +51,12 @@ const ConferenceScreen: FunctionComponent = () => {
   if (!conference || !user) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
+
+  // Temporary converted file
+  const testFileConverted = {
+    id: '102030',
+    imageCount: 3,
+  };
 
   return (
     <MenuProvider
@@ -224,7 +236,6 @@ const ConferenceScreen: FunctionComponent = () => {
                   onPress={getCurrentRecording}
                 />
               </Space>
-
               <Space mb="xs">
                 <Text size="s" color={COLORS.BLACK}>
                   Notification
@@ -244,7 +255,6 @@ const ConferenceScreen: FunctionComponent = () => {
                   onPress={() => decline(conference)}
                 />
               </Space>
-
               <Space mb="xs">
                 <Text size="s" color={COLORS.BLACK}>
                   Command
@@ -260,6 +270,33 @@ const ConferenceScreen: FunctionComponent = () => {
                       'message for command service send method'
                     )
                   }
+                />
+              </Space>
+
+              <Space mb="xs">
+                <Text size="s" color={COLORS.BLACK}>
+                  File presentation
+                </Text>
+              </Space>
+              <Space mb="s" style={styles.actionButtons}>
+                <Button size="small" color="dark" text="Stop" onPress={stop} />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Start"
+                  onPress={() => start(testFileConverted)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get thumbnail"
+                  onPress={() => getThumbnail(1)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Set page"
+                  onPress={() => setPage(2)}
                 />
               </Space>
             </Space>
