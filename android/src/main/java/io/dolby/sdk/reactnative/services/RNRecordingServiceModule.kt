@@ -18,8 +18,8 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * Creates a bridge wrapper for [RecordingService].
  *
  * @param conferenceService [ConferenceService] form Android SDK
- * @param recordingService [RecordingService] from Android SDK
- * @param reactContext     react context
+ * @param recordingService  [RecordingService] from Android SDK
+ * @param reactContext      react context
  */
 class RNRecordingServiceModule(
         private val conferenceService: ConferenceService,
@@ -54,7 +54,7 @@ class RNRecordingServiceModule(
      * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the Recording object,
      * such as the ID of the participant who started the recording or the timestamp that informs when the recording was started.
      *
-     * @param promise return current recording information if recording is started, null otherwise
+     * @param promise return current recording information if recording is started, rejects otherwise
      */
     @ReactMethod
     fun current(promise: ReactPromise) {
