@@ -1,11 +1,16 @@
 package io.dolby.sdk.reactnative.mapper;
 
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_DOLBY_VOICE;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_LIVE_RECORDING;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_RTCP_MODE;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_TTL;
+import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_VIDEO_CODEC;
+
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.voxeet.sdk.json.ConferencePermission;
 import com.voxeet.sdk.models.Conference;
 import com.voxeet.sdk.services.conference.information.ConferenceStatus;
 
@@ -16,15 +21,8 @@ import org.json.JSONArray;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
-
-import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_DOLBY_VOICE;
-import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_LIVE_RECORDING;
-import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_RTCP_MODE;
-import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_TTL;
-import static io.dolby.sdk.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_VIDEO_CODEC;
 
 /**
  * Provides methods that map:
@@ -44,13 +42,17 @@ public class ConferenceMapper {
     @NotNull
     private final ParticipantMapper participantMapper;
     @NotNull
+    private final ConferencePermissionMapper permissionMapper;
+    @NotNull
     private final RNCollectionExtractor rnCollectionExtractor;
 
     public ConferenceMapper(
             @NotNull ParticipantMapper participantMapper,
+            @NotNull ConferencePermissionMapper permissionMapper,
             @NotNull RNCollectionExtractor rnCollectionExtractor
     ) {
         this.participantMapper = participantMapper;
+        this.permissionMapper = permissionMapper;
         this.rnCollectionExtractor = rnCollectionExtractor;
     }
 
@@ -63,13 +65,14 @@ public class ConferenceMapper {
     public WritableMap toMap(@NotNull Conference conference) {
         WritableMap map = new WritableNativeMap();
         WritableArray participantsArray = participantMapper.toParticipantsArray(conference.getParticipants());
+        ReadableArray permissionsArray = permissionMapper.encode(conference.getPermissions());
 
         map.putString(CONFERENCE_ID, conference.getId());
         map.putString(CONFERENCE_ALIAS, conference.getAlias());
         map.putBoolean(CONFERENCE_IS_NEW, conference.isNew());
         map.putString(CONFERENCE_STATUS, toString(conference.getState()));
         map.putMap(CONFERENCE_PARAMS, toParamsMap(conference));
-        map.putArray(CONFERENCE_PERMISSIONS, toPermissionsArray(conference.getPermissions()));
+        map.putArray(CONFERENCE_PERMISSIONS, permissionsArray);
         map.putArray(CONFERENCE_PARTICIPANTS, participantsArray);
 
         return map;
@@ -136,48 +139,5 @@ public class ConferenceMapper {
             map.putString(CONFERENCE_PARAMS_VIDEO_CODEC, (String) metadata.get(CONFERENCE_PARAMS_VIDEO_CODEC));
         }
         return map;
-    }
-
-    @NotNull
-    private WritableNativeArray toPermissionsArray(@NotNull Set<ConferencePermission> permissions) {
-        WritableNativeArray permissionsArray = new WritableNativeArray();
-        for (ConferencePermission permission : permissions) {
-            if (permission != null) {
-                permissionsArray.pushString(toString(permission));
-            }
-        }
-        return permissionsArray;
-    }
-
-    @NotNull
-    private String toString(@NotNull ConferencePermission permission) {
-        switch (permission) {
-            case INVITE:
-                return "INVITE";
-            case JOIN:
-                return "JOIN";
-            case KICK:
-                return "KICK";
-            case RECORD:
-                return "RECORD";
-            case SEND_AUDIO:
-                return "SEND_AUDIO";
-            case SEND_MESSAGE:
-                return "SEND_MESSAGE";
-            case SEND_VIDEO:
-                return "SEND_VIDEO";
-            case SHARE_FILE:
-                return "SHARE_FILE";
-            case SHARE_SCREEN:
-                return "SHARE_SCREEN";
-            case SHARE_VIDEO:
-                return "SHARE_VIDEO";
-            case STREAM:
-                return "STREAM";
-            case UPDATE_PERMISSIONS:
-                return "UPDATE_PERMISSIONS";
-            default:
-                return "UNKNOWN";
-        }
     }
 }
