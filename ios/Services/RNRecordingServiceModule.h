@@ -1,6 +1,8 @@
 #import <React/RCTBridgeModule.h>
 
-@interface RNRecordingServiceModule : NSObject <RCTBridgeModule>
+@import VoxeetSDK;
+
+@interface RNRecordingServiceModule : NSObject <RCTBridgeModule, VTRecordingDelegate>
 ///
 /// Starts recording a conference.
 ///
