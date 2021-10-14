@@ -79,7 +79,7 @@ const ConferenceScreen: FunctionComponent = () => {
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <Space mh="m" style={styles.participantsList}>
                   {participants.map((p: Participant) => (
-                    <ParticipantAvatar {...p} />
+                    <ParticipantAvatar key={p.id} {...p} />
                   ))}
                 </Space>
               </ScrollView>

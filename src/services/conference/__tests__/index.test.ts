@@ -202,17 +202,17 @@ describe('ConferenceService', () => {
 
   describe('setMaxVideoForwarding()', () => {
     it('should invoke exported setMaxVideoForwarding method with correct arguments', () => {
-      ConferenceService.setMaxVideoForwarding(2);
+      ConferenceService.setMaxVideoForwarding(2, []);
       expect(
         DolbyIoIAPIConferenceService.setMaxVideoForwarding
-      ).toHaveBeenCalledWith(2);
+      ).toHaveBeenCalledWith(2, []);
     });
 
     it('should invoke exported setMaxVideoForwarding method with 4 int when parameterless', () => {
       ConferenceService.setMaxVideoForwarding();
       expect(
         DolbyIoIAPIConferenceService.setMaxVideoForwarding
-      ).toHaveBeenCalledWith(4);
+      ).toHaveBeenCalledWith(4, []);
     });
   });
 

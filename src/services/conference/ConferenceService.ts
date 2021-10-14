@@ -141,9 +141,10 @@ export class ConferenceService {
   public async getParticipants(
     conference: Conference
   ): Promise<Array<Participant>> {
-    return DolbyIoIAPIConferenceService.getParticipants(conference).map(
-      transformToParticipant
+    const participants = await DolbyIoIAPIConferenceService.getParticipants(
+      conference
     );
+    return participants.map(transformToParticipant);
   }
 
   /**
@@ -198,14 +199,19 @@ export class ConferenceService {
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
-   * @param max<MaxVideoForwarding> Number of video streams.
+   * @param max<MaxVideoForwarding> The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 4 for mobile browsers with 4 as default value.
+   * @param prioritizedParticipants<Participant[]> The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
    * @returns {Promise<any>}
    */
 
   public async setMaxVideoForwarding(
-    max: MaxVideoForwarding = 4
+    max: MaxVideoForwarding = 4,
+    prioritizedParticipants: Participant[] = []
   ): Promise<any> {
-    return DolbyIoIAPIConferenceService.setMaxVideoForwarding(max);
+    return DolbyIoIAPIConferenceService.setMaxVideoForwarding(
+      max,
+      prioritizedParticipants
+    );
   }
 
   /**

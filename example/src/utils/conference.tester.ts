@@ -118,7 +118,7 @@ export const getParticipant = async (participantId: string) => {
   try {
     const participant: Participant =
       await DolbyIoIAPI.conference.getParticipant(participantId);
-    Alert.alert('Participant:', participant.toString());
+    Alert.alert('Participant:', JSON.stringify(participant));
   } catch (e: any) {
     Alert.alert('getParticipant error', e.toString());
   }
@@ -129,7 +129,7 @@ export const getParticipants = async (conference: Conference) => {
     const participants = await DolbyIoIAPI.conference.getParticipants(
       conference
     );
-    Alert.alert('Participants:', participants.toString());
+    Alert.alert('Participants:', JSON.stringify(participants));
   } catch (e: any) {
     Alert.alert('getParticipants error', e.toString());
   }
