@@ -1,4 +1,8 @@
-import type { Participant } from '../../../../src/services/conference/models';
+import type {
+  Participant,
+  Conference,
+} from '../../../../src/services/conference/models';
+import { ConferencePermission } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 import ParticipantAvatar from './ParticipantAvatar';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
@@ -25,19 +29,24 @@ import {
   updatePermissions,
 } from '@utils/conference.tester';
 import {
+  invite,
+  decline,
+  inviteRandomParticipant,
+} from '@utils/notification.tester';
+import {
   stop,
   start,
   getThumbnail,
   setPage,
 } from '@utils/filePresentation.tester';
-import { invite, decline } from '@utils/notification.tester';
 import {
   getCurrentRecording,
   startRecording,
   stopRecording,
 } from '@utils/recording.tester';
 import React, { FunctionComponent, useContext, useRef } from 'react';
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -45,8 +54,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const ConferenceScreen: FunctionComponent = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { user, conference, leave } = useContext(DolbyIOContext);
-  // @ts-ignore
-  const { participants } = conference;
+  const { participants } = conference as Conference;
 
   if (!conference || !user) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -92,7 +100,7 @@ const ConferenceScreen: FunctionComponent = () => {
             </Space>
           </View>
         </SafeAreaView>
-        <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[65, 500]}>
+        <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[100, 500]}>
           <ScrollView>
             <Space mh="m" mb="s">
               <Text header size="s" color={COLORS.BLACK}>
@@ -157,8 +165,21 @@ const ConferenceScreen: FunctionComponent = () => {
                 <Button
                   size="small"
                   color="dark"
-                  text="Update Permissions"
+                  text="Update Permissions nodata"
                   onPress={() => updatePermissions([])}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Update Permissions random data"
+                  onPress={() =>
+                    updatePermissions([
+                      {
+                        participant: participants[0],
+                        permissions: [ConferencePermission.KICK],
+                      },
+                    ])
+                  }
                 />
               </Space>
               <Space mb="xs">
@@ -240,7 +261,13 @@ const ConferenceScreen: FunctionComponent = () => {
                   size="small"
                   color="dark"
                   text="Invite"
-                  onPress={() => invite(conference, participants)}
+                  onPress={() => invite(conference, [])}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Invite with permissions"
+                  onPress={() => inviteRandomParticipant(conference)}
                 />
                 <Button
                   size="small"

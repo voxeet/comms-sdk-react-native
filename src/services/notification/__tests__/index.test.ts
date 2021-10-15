@@ -16,10 +16,10 @@ const testConference: Conference = {
 describe('NotificationService', () => {
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
-      NotificationService.invite(testConference, [{}]);
+      NotificationService.invite(testConference, [{ info: {} }]);
       expect(DolbyIoIAPINotificationService.invite).toHaveBeenCalledWith(
         testConference,
-        [{}]
+        [{ info: {} }]
       );
     });
   });
