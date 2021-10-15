@@ -16,11 +16,14 @@ import java.util.List;
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper;
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper;
+import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper;
+import io.dolby.sdk.reactnative.mapper.InvitationMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 import io.dolby.sdk.reactnative.mapper.RecordingMapper;
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule;
+import io.dolby.sdk.reactnative.services.RNNotificationServiceModule;
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule;
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule;
 import io.dolby.sdk.reactnative.utils.RNCollectionExtractor;
@@ -32,6 +35,8 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
         RNCollectionExtractor rnCollectionExtractor = new RNCollectionExtractor();
         ParticipantMapper participantMapper = new ParticipantMapper(rnCollectionExtractor);
+        ConferencePermissionMapper conferencePermissionMapper = new ConferencePermissionMapper();
+        ConferenceMapper conferenceMapper = new ConferenceMapper(participantMapper, conferencePermissionMapper, rnCollectionExtractor);
 
         return Arrays.asList(
                 new RNDolbyioIAPISdkModule(reactContext),
@@ -43,7 +48,7 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                 new RNConferenceServiceModule(
                         VoxeetSDK.conference(),
                         reactContext,
-                        new ConferenceMapper(participantMapper, rnCollectionExtractor),
+                        conferenceMapper,
                         new ConferenceCreateOptionsMapper(rnCollectionExtractor),
                         new ConferenceJoinOptionsMapper(rnCollectionExtractor),
                         participantMapper
@@ -58,6 +63,13 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         VoxeetSDK.recording(),
                         reactContext,
                         new RecordingMapper()
+                ),
+                new RNNotificationServiceModule(
+                        VoxeetSDK.conference(),
+                        VoxeetSDK.notification(),
+                        conferenceMapper,
+                        new InvitationMapper(conferencePermissionMapper, participantMapper),
+                        reactContext
                 )
         );
     }
