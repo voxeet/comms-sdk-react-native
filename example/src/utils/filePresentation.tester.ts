@@ -5,13 +5,13 @@ import type {
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 
-// ! Temporary converted file
+// TODO Temporary converted file
 const testFileConverted = {
   id: '102030',
   imageCount: 3,
 };
 
-// ! Temporary file before conversions
+// TODO Temporary file before conversions
 const testFile = {
   url: '../assets/dolbyIo.jpg',
 };
@@ -26,7 +26,7 @@ export const stop = async () => {
   }
 };
 
-// ! Includes temporary converted file
+// TODO Includes temporary converted file
 export const start = async (file: FileConverted = testFileConverted) => {
   try {
     await DolbyIoIAPI.filePresentation.start(file);
@@ -57,7 +57,7 @@ export const setPage = async (page: number) => {
   }
 };
 
-// ! Includes temporary file
+// TODO Includes temporary file
 export const convert = async (file: File = testFile) => {
   try {
     const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
