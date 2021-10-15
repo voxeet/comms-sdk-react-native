@@ -1,7 +1,5 @@
 package io.dolby.sdk.reactnative.mapper;
 
-import androidx.annotation.NonNull;
-
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
@@ -96,7 +94,7 @@ public class ParticipantMapper {
         return map;
     }
 
-    @NonNull
+    @NotNull
     public WritableArray toParticipantsArray(@NotNull List<Participant> participants) {
         WritableNativeArray participantsArray = new WritableNativeArray();
         for (Participant participant : participants) {
