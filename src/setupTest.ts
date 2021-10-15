@@ -59,6 +59,9 @@ jest.mock('react-native', () => {
     start: jest.fn(),
     getThumbnail: jest.fn(),
     setPage: jest.fn(),
+    convert: jest.fn(),
+    getCurrent: jest.fn(),
+    getImage: jest.fn(),
   };
   return RN;
 });
