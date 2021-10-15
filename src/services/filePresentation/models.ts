@@ -1,6 +1,6 @@
 import type { Participant } from '../conference/models';
 
-// ! Temporary File type
+// TODO Temporary File type
 export interface File {
   /** Path to test .jpg */
   url: string;
