@@ -22,44 +22,44 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param reactContext      react context
  */
 class RNRecordingServiceModule(
-        private val conferenceService: ConferenceService,
-        private val recordingService: RecordingService,
-        reactContext: ReactApplicationContext,
-        private val recordingMapper: RecordingMapper
+    private val conferenceService: ConferenceService,
+    private val recordingService: RecordingService,
+    reactContext: ReactApplicationContext,
+    private val recordingMapper: RecordingMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String = "DolbyIoIAPIRecordingServiceModule"
+  override fun getName(): String = "DolbyIoIAPIRecordingServiceModule"
 
-    /**
-     * Starts recording a conference.
-     *
-     * @param promise returns true if start recording request succeed, false otherwise
-     */
-    @ReactMethod
-    fun start(promise: ReactPromise) {
-        recordingService.start().forward(promise)
-    }
+  /**
+   * Starts recording a conference.
+   *
+   * @param promise returns true if start recording request succeed, false otherwise
+   */
+  @ReactMethod
+  fun start(promise: ReactPromise) {
+    recordingService.start().forward(promise)
+  }
 
-    /**
-     * Stops recording a conference.
-     *
-     * @param promise returns true if stop recording request succeed, false otherwise
-     */
-    @ReactMethod
-    fun stop(promise: ReactPromise) {
-        recordingService.stop().forward(promise)
-    }
+  /**
+   * Stops recording a conference.
+   *
+   * @param promise returns true if stop recording request succeed, false otherwise
+   */
+  @ReactMethod
+  fun stop(promise: ReactPromise) {
+    recordingService.stop().forward(promise)
+  }
 
-    /**
-     * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the Recording object,
-     * such as the ID of the participant who started the recording or the timestamp that informs when the recording was started.
-     *
-     * @param promise return current recording information if recording is started, rejects otherwise
-     */
-    @ReactMethod
-    fun current(promise: ReactPromise) {
-        Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
-                .thenValue(recordingMapper::encode)
-                .forward(promise)
-    }
+  /**
+   * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the Recording object,
+   * such as the ID of the participant who started the recording or the timestamp that informs when the recording was started.
+   *
+   * @param promise return current recording information if recording is started, rejects otherwise
+   */
+  @ReactMethod
+  fun current(promise: ReactPromise) {
+    Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
+        .thenValue(recordingMapper::encode)
+        .forward(promise)
+  }
 }

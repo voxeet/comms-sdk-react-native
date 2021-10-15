@@ -21,50 +21,50 @@ import com.voxeet.sdk.json.ConferencePermission.UPDATE_PERMISSIONS
  */
 class ConferencePermissionMapper {
 
-    fun decode(permissionsArray: ReadableArray): Set<ConferencePermission> {
-        return permissionsArray.toArrayList()
-                .filterIsInstance<String>()
-                .mapNotNull(::fromString)
-                .toSet()
-    }
+  fun decode(permissionsArray: ReadableArray): Set<ConferencePermission> {
+    return permissionsArray.toArrayList()
+        .filterIsInstance<String>()
+        .mapNotNull(::fromString)
+        .toSet()
+  }
 
-    fun encode(permissions: Set<ConferencePermission>): ReadableArray {
-        return permissions.map(::toString)
-                .let(Arguments::fromList)
-    }
+  fun encode(permissions: Set<ConferencePermission>): ReadableArray {
+    return permissions.map(::toString)
+        .let(Arguments::fromList)
+  }
 
-    private fun toString(permission: ConferencePermission): String {
-        return when (permission) {
-            INVITE -> "INVITE"
-            JOIN -> "JOIN"
-            KICK -> "KICK"
-            RECORD -> "RECORD"
-            SEND_AUDIO -> "SEND_AUDIO"
-            SEND_MESSAGE -> "SEND_MESSAGE"
-            SEND_VIDEO -> "SEND_VIDEO"
-            SHARE_FILE -> "SHARE_FILE"
-            SHARE_SCREEN -> "SHARE_SCREEN"
-            SHARE_VIDEO -> "SHARE_VIDEO"
-            STREAM -> "STREAM"
-            UPDATE_PERMISSIONS -> "UPDATE_PERMISSIONS"
-        }
+  private fun toString(permission: ConferencePermission): String {
+    return when (permission) {
+      INVITE -> "INVITE"
+      JOIN -> "JOIN"
+      KICK -> "KICK"
+      RECORD -> "RECORD"
+      SEND_AUDIO -> "SEND_AUDIO"
+      SEND_MESSAGE -> "SEND_MESSAGE"
+      SEND_VIDEO -> "SEND_VIDEO"
+      SHARE_FILE -> "SHARE_FILE"
+      SHARE_SCREEN -> "SHARE_SCREEN"
+      SHARE_VIDEO -> "SHARE_VIDEO"
+      STREAM -> "STREAM"
+      UPDATE_PERMISSIONS -> "UPDATE_PERMISSIONS"
     }
+  }
 
-    private fun fromString(permission: String): ConferencePermission? {
-        return when (permission) {
-            "INVITE" -> INVITE
-            "JOIN" -> JOIN
-            "KICK" -> KICK
-            "RECORD" -> RECORD
-            "SEND_AUDIO" -> SEND_AUDIO
-            "SEND_MESSAGE" -> SEND_MESSAGE
-            "SEND_VIDEO" -> SEND_VIDEO
-            "SHARE_FILE" -> SHARE_FILE
-            "SHARE_SCREEN" -> SHARE_SCREEN
-            "SHARE_VIDEO" -> SHARE_VIDEO
-            "STREAM" -> STREAM
-            "UPDATE_PERMISSIONS" -> UPDATE_PERMISSIONS
-            else -> null
-        }
+  private fun fromString(permission: String): ConferencePermission? {
+    return when (permission) {
+      "INVITE" -> INVITE
+      "JOIN" -> JOIN
+      "KICK" -> KICK
+      "RECORD" -> RECORD
+      "SEND_AUDIO" -> SEND_AUDIO
+      "SEND_MESSAGE" -> SEND_MESSAGE
+      "SEND_VIDEO" -> SEND_VIDEO
+      "SHARE_FILE" -> SHARE_FILE
+      "SHARE_SCREEN" -> SHARE_SCREEN
+      "SHARE_VIDEO" -> SHARE_VIDEO
+      "STREAM" -> STREAM
+      "UPDATE_PERMISSIONS" -> UPDATE_PERMISSIONS
+      else -> null
     }
+  }
 }
