@@ -52,12 +52,6 @@ const ConferenceScreen: FunctionComponent = () => {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
 
-  // Temporary converted file
-  const testFileConverted = {
-    id: '102030',
-    imageCount: 3,
-  };
-
   return (
     <MenuProvider
       customStyles={{
@@ -284,7 +278,7 @@ const ConferenceScreen: FunctionComponent = () => {
                   size="small"
                   color="dark"
                   text="Start"
-                  onPress={() => start(testFileConverted)}
+                  onPress={start}
                 />
                 <Button
                   size="small"
