@@ -15,7 +15,7 @@ export class CommandService {
    * Sends a message, in the form of a basic stream, to all conference participants.
    * @param message<string> Message to send
    */
-  public async send(message: string): Promise<any> {
+  public async send(message: string): Promise<void> {
     return DolbyIoIAPICommandServiceModule.send(message);
   }
 
