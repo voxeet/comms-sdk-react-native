@@ -29,16 +29,19 @@ import {
   updatePermissions,
 } from '@utils/conference.tester';
 import {
-  invite,
-  decline,
-  inviteRandomParticipant,
-} from '@utils/notification.tester';
-import {
   stop,
   start,
   getThumbnail,
   setPage,
+  convert,
+  getCurrent,
+  getImage,
 } from '@utils/filePresentation.tester';
+import {
+  invite,
+  decline,
+  inviteRandomParticipant,
+} from '@utils/notification.tester';
 import {
   getCurrentRecording,
   startRecording,
@@ -318,6 +321,24 @@ const ConferenceScreen: FunctionComponent = () => {
                   color="dark"
                   text="Set page"
                   onPress={() => setPage(2)}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Convert"
+                  onPress={convert}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get current"
+                  onPress={getCurrent}
+                />
+                <Button
+                  size="small"
+                  color="dark"
+                  text="Get image"
+                  onPress={() => getImage(2)}
                 />
               </Space>
             </Space>
