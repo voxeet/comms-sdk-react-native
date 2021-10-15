@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 
+import java.util.Collections;
 import java.util.Map;
 
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper;
@@ -53,9 +54,9 @@ import io.dolby.sdk.reactnative.utils.Promises;
  *
  * <li>During a conference, the application can:
  * <ul>
- * TODO DEXA-39 link to setMaxVideoForwarding
- * <li>Customize the number of the received video streams and prioritize the selected participants' video streams.</li>
- * <li>Mute the local or remote participant</li> TODO DEXA-39 link to mute
+ * <li>Customize the number of the received video streams and prioritize the selected participants'
+ * video streams ({@link #setMaxVideoForwarding(int, Promise)}).</li>
+ * <li>{@link #mute(ReadableMap, boolean, Promise)} the local or remote participant</li>
  * <li>Check if the local participant {@link #isMuted(Promise)}</li>
  * <li>Check which participant {@link #isSpeaking(ReadableMap, Promise)}</li>
  * <li>Check the audio level of a specific participant ({@link #getAudioLevel(ReadableMap, Promise)})</li>
@@ -387,6 +388,83 @@ public class RNConferenceServiceModule extends ReactContextBaseJavaModule {
         Promises.promise(conferenceService::localStats)
                 .then((ThenValue<Map<String, JSONArray>, ReadableMap>) conferenceMapper::toMap)
                 .then(promise::resolve)
+                .error(promise::reject);
+    }
+
+    /**
+     * <p>Stops playing the specified remote participants' audio to the local participant. The mute
+     * method does not notify the server to stop audio stream transmission.</p>
+     *
+     * <p>Note: This API is not supported when the client connects to a Dolby Voice conference.
+     * If you wish to mute remote participants in Dolby Voice conferences, we recommend using the
+     * stopAudio API. This API allows the conference participants to stop receiving the specific
+     * audio streams from the server.</p>
+     *
+     * @param participantMap a remote participant to mute
+     * @param isMuted        true indicates that the local participant is muted, false indicates that
+     *                       a participant is not muted
+     * @param promise        returns a boolean indicating if the mute state has changed
+     */
+    @ReactMethod
+    public void mute(@NotNull ReadableMap participantMap, boolean isMuted, @NotNull Promise promise) {
+        Promises.promise(() -> toParticipant(participantMap))
+                .then((ThenValue<Participant, Boolean>) participant ->
+                        conferenceService.mute(participant, isMuted)
+                )
+                .then(value -> {
+                    promise.resolve(null);
+                })
+                .error(promise::reject);
+    }
+
+    /**
+     * <p>Controls playing remote participants' audio to the local participant.</p>
+     *
+     * <p>Note: This API is only supported when the client connects to a Dolby Voice conference.</p>
+     *
+     * @param isMuted true indicates that remote participants are muted, false indicates that remote
+     *                participants are not muted
+     * @param promise returns a boolean indicating whether remote participants are muted.
+     */
+    @ReactMethod
+    public void muteOutput(boolean isMuted, @NotNull Promise promise) {
+        conferenceService.muteOutput(isMuted);
+        promise.resolve(null);
+    }
+
+    /**
+     * Enables and disables audio processing for the local participant.
+     *
+     * @param audioProcessingMap the audio processing mode
+     * @param promise            returns null
+     */
+    @ReactMethod
+    public void setAudioProcessing(@NotNull ReadableMap audioProcessingMap, @NotNull Promise promise) {
+        Promises.promise(() -> conferenceMapper.toAudioProcessing(audioProcessingMap))
+                .then(conferenceService::setAudioProcessing)
+                .then(value -> {
+                    promise.resolve(null);
+                })
+                .error(promise::reject);
+    }
+
+    /**
+     * Sets the maximum number of video streams that may be transmitted to the local participant.
+     * For more information, see the
+     * <a href="https://docs.dolby.io/communications-apis/docs/guides-video-forwarding">Video Forwarding</a> article.
+     *
+     * @param max     The maximum number of video streams that may be transmitted to the local
+     *                participant. The valid values are between 0 and 4. The default value is 4.
+     *                In the case of providing a value smaller than 0 or greater than 4, SDK triggers
+     *                the {@link IllegalStateException} error.
+     * @param promise returns null
+     */
+    @ReactMethod
+    public void setMaxVideoForwarding(int max, @NotNull Promise promise) {
+        conferenceService.videoForwarding(max, Collections.emptyList())
+                .then(value -> {
+                    promise.resolve(null);
+                })
                 .error(promise::reject);
     }
 

@@ -12,6 +12,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.voxeet.sdk.models.Conference;
+import com.voxeet.sdk.services.conference.AudioProcessing;
 import com.voxeet.sdk.services.conference.information.ConferenceStatus;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +40,9 @@ public class ConferenceMapper {
     public static final String CONFERENCE_PERMISSIONS = "permissions";
     public static final String CONFERENCE_PARTICIPANTS = "participants";
 
+    public static final String SEND = "send";
+    public static final String AUDIO_PROCESSING = "audioProcessing";
+
     @NotNull
     private final ParticipantMapper participantMapper;
     @NotNull
@@ -59,6 +63,17 @@ public class ConferenceMapper {
     @Nullable
     public String toConferenceId(@NotNull ReadableMap conferenceMap) {
         return rnCollectionExtractor.getString(conferenceMap, CONFERENCE_ID);
+    }
+
+    @NotNull
+    public AudioProcessing toAudioProcessing(@NotNull ReadableMap optionsMap) {
+        ReadableMap send = rnCollectionExtractor.getMap(optionsMap, SEND);
+        if (send == null) {
+            return AudioProcessing.ENVIRONMENT;
+        }
+
+        boolean isAudioProcessing = rnCollectionExtractor.getBoolean(send, AUDIO_PROCESSING);
+        return isAudioProcessing ? AudioProcessing.VOICE : AudioProcessing.ENVIRONMENT;
     }
 
     @NotNull
