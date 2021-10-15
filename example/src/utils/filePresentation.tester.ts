@@ -2,6 +2,12 @@ import type { FileConverted } from '../../../src/services/filePresentation/model
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 
+// ! Temporary converted file
+const testFileConverted = {
+  id: '102030',
+  imageCount: 3,
+};
+
 export const stop = async () => {
   try {
     await DolbyIoIAPI.filePresentation.stop();
@@ -12,7 +18,8 @@ export const stop = async () => {
   }
 };
 
-export const start = async (file: FileConverted) => {
+// ! Includes temporary converted file
+export const start = async (file: FileConverted = testFileConverted) => {
   try {
     await DolbyIoIAPI.filePresentation.start(file);
     Alert.alert('File presentation started');
