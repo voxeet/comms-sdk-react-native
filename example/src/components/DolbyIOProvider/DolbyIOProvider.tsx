@@ -94,6 +94,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       const createdConference = await DolbyIoIAPI.conference.create(
         conferenceOptions
       );
+      console.log(
+        JSON.stringify(createdConference, null, 2),
+        'created conference'
+      );
 
       const joinOptions = {
         constraints: {
@@ -106,7 +110,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         createdConference,
         joinOptions
       );
-      console.log(JSON.stringify(joinedConference));
+      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
@@ -128,7 +132,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         fetchedConference,
         joinOptions
       );
-      console.log(joinedConference);
+      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
@@ -141,7 +145,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       const replayedConference = await DolbyIoIAPI.conference.replay(
         fetchedConference
       );
-      console.log(replayedConference);
+      console.log(JSON.stringify(replayedConference, null, 2));
       setConference(replayedConference);
     } catch (e: any) {
       Alert.alert('Conference not replayed', e.toString());

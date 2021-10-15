@@ -188,12 +188,12 @@ export class ConferenceService {
   /**
    * Enables and disables audio processing for the conference participant.
    * @param options<AudioProcessingOptions> The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
   public async setAudioProcessing(
     options: AudioProcessingOptions = {}
-  ): Promise<any> {
+  ): Promise<void> {
     return DolbyIoIAPIConferenceService.setAudioProcessing(options);
   }
 
@@ -231,12 +231,12 @@ export class ConferenceService {
   /**
    * Updates the participant's conference permissions.
    * @param participantPermissions<ParticipantPermissions[]> The set of participant's conference permissions.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
-  ): Promise<any> {
+  ): Promise<void> {
     return DolbyIoIAPIConferenceService.updatePermissions(
       participantPermissions
     );
@@ -245,40 +245,40 @@ export class ConferenceService {
   /**
    * Starts audio transmission between the local client and a conference.
    * @param participant<Participant> The participant whose stream should be sent to the local participant.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
-  public async startAudio(participant: Participant): Promise<any> {
+  public async startAudio(participant: Participant): Promise<void> {
     return DolbyIoIAPIConferenceService.startAudio(participant);
   }
 
   /**
    * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
-  public async startVideo(participant: Participant): Promise<any> {
+  public async startVideo(participant: Participant): Promise<void> {
     return DolbyIoIAPIConferenceService.startVideo(participant);
   }
 
   /**
    * Stops audio transmission between the local client and a conference.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
-  public async stopAudio(participant: Participant): Promise<any> {
+  public async stopAudio(participant: Participant): Promise<void> {
     return DolbyIoIAPIConferenceService.stopAudio(participant);
   }
 
   /**
    * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
    * @param participant<Participant> The Participant object.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
-  public async stopVideo(participant: Participant): Promise<any> {
+  public async stopVideo(participant: Participant): Promise<void> {
     return DolbyIoIAPIConferenceService.stopVideo(participant);
   }
 
@@ -301,10 +301,10 @@ export class ConferenceService {
   /**
    * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
    * @param participant<Participant> The participant who needs to be kicked from the conference.
-   * @returns {Promise<any>}
+   * @returns {Promise<void>}
    */
 
-  public async kick(participant: Participant): Promise<any> {
+  public async kick(participant: Participant): Promise<void> {
     return DolbyIoIAPIConferenceService.kick(participant);
   }
 
