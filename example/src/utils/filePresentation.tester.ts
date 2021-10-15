@@ -1,11 +1,19 @@
-import type { FileConverted } from '../../../src/services/filePresentation/models';
+import type {
+  FileConverted,
+  File,
+} from '../../../src/services/filePresentation/models';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
 
-// ! Temporary converted file
+// TODO Temporary converted file
 const testFileConverted = {
   id: '102030',
   imageCount: 3,
+};
+
+// TODO Temporary file before conversions
+const testFile = {
+  url: '../assets/dolbyIo.jpg',
 };
 
 export const stop = async () => {
@@ -18,7 +26,7 @@ export const stop = async () => {
   }
 };
 
-// ! Includes temporary converted file
+// TODO Includes temporary converted file
 export const start = async (file: FileConverted = testFileConverted) => {
   try {
     await DolbyIoIAPI.filePresentation.start(file);
@@ -46,5 +54,36 @@ export const setPage = async (page: number) => {
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Set page error', msg);
+  }
+};
+
+// TODO Includes temporary file
+export const convert = async (file: File = testFile) => {
+  try {
+    const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
+    Alert.alert('Conversion done', convertedFile.toString());
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('Convert error', msg);
+  }
+};
+
+export const getCurrent = async () => {
+  try {
+    const currentFile = await DolbyIoIAPI.filePresentation.getCurrent();
+    Alert.alert('Get current done:', currentFile.toString());
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('Get current error', msg);
+  }
+};
+
+export const getImage = async (page: number) => {
+  try {
+    const image = await DolbyIoIAPI.filePresentation.getImage(page);
+    Alert.alert('Get image done:', image.toString());
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('Get image error', msg);
   }
 };

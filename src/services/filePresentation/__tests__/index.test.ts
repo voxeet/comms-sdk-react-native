@@ -8,6 +8,10 @@ const testFileConverted = {
   imageCount: 3,
 };
 
+const testFile = {
+  url: '../../../../example/src/assets/dolbyIo.jpg',
+};
+
 describe('FilePresentationService', () => {
   describe('stop()', () => {
     it('should invoke exported method', () => {
@@ -38,6 +42,31 @@ describe('FilePresentationService', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.setPage(2);
       expect(DolbyIoIAPIFilePresentationService.setPage).toHaveBeenCalledWith(
+        2
+      );
+    });
+  });
+
+  describe('convert()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      FilePresentationService.convert(testFile);
+      expect(DolbyIoIAPIFilePresentationService.convert).toHaveBeenCalledWith(
+        testFile
+      );
+    });
+  });
+
+  describe('getCurrent()', () => {
+    it('should invoke exported method', () => {
+      FilePresentationService.getCurrent();
+      expect(DolbyIoIAPIFilePresentationService.getCurrent).toHaveBeenCalled();
+    });
+  });
+
+  describe('getImage()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      FilePresentationService.getImage(2);
+      expect(DolbyIoIAPIFilePresentationService.getImage).toHaveBeenCalledWith(
         2
       );
     });
