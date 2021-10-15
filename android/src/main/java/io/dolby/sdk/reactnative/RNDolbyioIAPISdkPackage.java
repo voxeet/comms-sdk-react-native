@@ -46,8 +46,8 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
                         participantMapper
                 ),
                 new RNConferenceServiceModule(
-                        VoxeetSDK.conference(),
                         reactContext,
+                        VoxeetSDK.conference(),
                         conferenceMapper,
                         new ConferenceCreateOptionsMapper(rnCollectionExtractor),
                         new ConferenceJoinOptionsMapper(rnCollectionExtractor),

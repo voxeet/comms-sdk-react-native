@@ -10,17 +10,17 @@ import com.voxeet.sdk.models.Conference.RecordingInformation
  */
 class RecordingMapper {
 
-    companion object {
-        private const val PARTICIPANT_ID = "participantId"
-        private const val RECORDING_START_TIMESTAMP = "startTimestamp"
-    }
+  companion object {
+    private const val PARTICIPANT_ID = "participantId"
+    private const val RECORDING_START_TIMESTAMP = "startTimestamp"
+  }
 
-    fun encode(recordingInformation: RecordingInformation): ReadableMap? = with(recordingInformation) {
-        return if (recordingParticipant != null && startRecordTimestamp != null) {
-            WritableNativeMap().apply {
-                putString(PARTICIPANT_ID, recordingParticipant)
-                putDouble(RECORDING_START_TIMESTAMP, startRecordTimestamp.time.toDouble())
-            }
-        } else null
-    }
+  fun encode(recordingInformation: RecordingInformation): ReadableMap? = with(recordingInformation) {
+    return if (recordingParticipant != null && startRecordTimestamp != null) {
+      WritableNativeMap().apply {
+        putString(PARTICIPANT_ID, recordingParticipant)
+        putDouble(RECORDING_START_TIMESTAMP, startRecordTimestamp.time.toDouble())
+      }
+    } else null
+  }
 }
