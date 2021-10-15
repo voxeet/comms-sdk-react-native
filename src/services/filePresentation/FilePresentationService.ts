@@ -1,4 +1,4 @@
-import type { FileConverted } from './models';
+import type { FileConverted, File, FilePresentation } from './models';
 import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
@@ -41,6 +41,32 @@ export class FilePresentationService {
 
   public async setPage(page: number): Promise<void> {
     return DolbyIoIAPIFilePresentationService.setPage(page);
+  }
+
+  /**
+   * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the Recording object, such as the ID of the participant who started the recording or the timestamp that informs when the recording was started.
+   * @param file<File> 	The file that the presenter wants to share during the conference.
+   * @returns {Promise<FileConverted>} Promise with the FileConverted object.
+   */
+  public async convert(file: File): Promise<FileConverted> {
+    return DolbyIoIAPIFilePresentationService.convert(file);
+  }
+
+  /**
+   * Gets current file presentation.
+   * @returns {Promise<FilePresentation>} Promise with the FilePresentation object
+   */
+  public async getCurrent(): Promise<FilePresentation> {
+    return DolbyIoIAPIFilePresentationService.getCurrent();
+  }
+
+  /**
+   * Downloads and displays locally the presented file by retrieving URLs of the individual images.
+   * @param page<number> The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to 0.
+   * @returns {Promise<string>}
+   */
+  public async getImage(page: number): Promise<string> {
+    return DolbyIoIAPIFilePresentationService.getImage(page);
   }
 }
 
