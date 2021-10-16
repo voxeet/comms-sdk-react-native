@@ -425,7 +425,7 @@ class RNConferenceServiceModule(
     /**
      * The events which are supported in this module
      */
-    private val eventSet: Set<String> = setOf(
+    override val eventSet: Set<String> = setOf(
             EVENT_PARTICIPANT_ADDED,
             EVENT_PARTICIPANT_UPDATED
     )
@@ -435,7 +435,6 @@ class RNConferenceServiceModule(
      */
     @ReactMethod
     override fun addListener(eventName: String) {
-        if (!eventSet.contains(eventName)) return
         super.addListener(eventName)
     }
 
