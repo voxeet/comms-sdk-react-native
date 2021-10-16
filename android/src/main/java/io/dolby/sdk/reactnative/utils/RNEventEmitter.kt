@@ -17,6 +17,11 @@ interface RNEventEmitter {
     var listenerCount: Int
 
     /**
+     * The events that are supported
+     */
+    val eventSet: Set<String>
+
+    /**
      * Default implementation of emitting event, nothing will be sent if no listener is registered
      * @param eventName the name of the event
      * @param data the event data
@@ -33,6 +38,7 @@ interface RNEventEmitter {
      * @param eventName the name of event
      */
     fun addListener(eventName: String) {
+        if (!eventSet.contains(eventName)) return
         if (listenerCount == 0) {
             VoxeetSDK.instance().register(this)
         }
