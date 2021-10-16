@@ -44,6 +44,7 @@ interface RNEventEmitter {
      * @param count how many listeners are removed
      */
     fun removeListeners(count: Int) {
+        if (listenerCount == 0) return
         listenerCount -= 1;
         if (listenerCount == 0) {
             VoxeetSDK.instance().unregister(this)
