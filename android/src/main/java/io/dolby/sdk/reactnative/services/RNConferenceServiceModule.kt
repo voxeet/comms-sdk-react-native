@@ -402,7 +402,7 @@ class RNConferenceServiceModule(
     }
 
     /**
-     * The event names
+     * The event names and payload keys
      */
     companion object {
         const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
@@ -410,19 +410,32 @@ class RNConferenceServiceModule(
         const val EVENT_PARTICIPANT_KEY = "participant"
     }
 
+    /**
+     * Constants of this module for JS to check
+     */
     override fun getConstants(): MutableMap<String, Any> {
         return mutableMapOf(
                 "EVENT_CONFERENCE_PARTICIPANT_ADDED" to EVENT_PARTICIPANT_ADDED,
-                "EVENT_CONFERENCE_PARTICIPANT_UPDATED" to EVENT_PARTICIPANT_UPDATED
+                "EVENT_CONFERENCE_PARTICIPANT_UPDATED" to EVENT_PARTICIPANT_UPDATED,
+                "EVENT_CONFERENCE_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY
         )
     }
 
+
+    /**
+     * The events which are supported in this module
+     */
+    private val eventSet: Set<String> = setOf(
+            EVENT_PARTICIPANT_ADDED,
+            EVENT_PARTICIPANT_UPDATED
+    )
 
     /**
      * Every emitter module must implement this method in place, otherwise JS cannot receive event
      */
     @ReactMethod
     override fun addListener(eventName: String) {
+        if (!eventSet.contains(eventName)) return
         super.addListener(eventName)
     }
 
