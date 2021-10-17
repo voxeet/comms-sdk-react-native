@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.voxeet.VoxeetSDK
+import kotlin.math.max
 
 /**
  * Any module needs to send events to JS must implement this interface
@@ -17,9 +18,11 @@ interface RNEventEmitter {
     var listenerCount: Int
 
     /**
-     * The events that are supported
+     * The supported events map
+     *  key: event constants for JS
+     *  vale: event name
      */
-    val eventSet: Set<String>
+    val eventMap: Map<String, String>
 
     /**
      * Default implementation of emitting event, nothing will be sent if no listener is registered
@@ -38,7 +41,6 @@ interface RNEventEmitter {
      * @param eventName the name of event
      */
     fun addListener(eventName: String) {
-        if (!eventSet.contains(eventName)) return
         if (listenerCount == 0) {
             VoxeetSDK.instance().register(this)
         }
@@ -47,14 +49,13 @@ interface RNEventEmitter {
 
     /**
      * Invoked when remove listeners from JS side
-     * @param count how many listeners are removed
+     * @param count how many listeners are removed, always greater than 0
      */
     fun removeListeners(count: Int) {
-        if (listenerCount == 0) return
-        listenerCount -= 1;
-        if (listenerCount == 0) {
+        if (hasListener() && listenerCount <= count) {
             VoxeetSDK.instance().unregister(this)
         }
+        listenerCount = max(listenerCount - count, 0)
     }
 
     fun hasListener(): Boolean = listenerCount > 0
