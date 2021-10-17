@@ -1,9 +1,10 @@
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
 import type { UnregisterListener } from './types';
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 const { DolbyIoIAPIModule } = NativeModules;
 

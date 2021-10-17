@@ -1,6 +1,7 @@
+import { NativeModules } from 'react-native';
+
 import SessionService from '../SessionService';
 import { transformToUser } from '../transformers';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 

@@ -1,3 +1,5 @@
+import { NativeModules } from 'react-native';
+
 import { DolbyIoIAPIEventNames } from './events';
 import type {
   RefreshAccessTokenType,
@@ -11,7 +13,6 @@ import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIModule } = NativeModules;
 

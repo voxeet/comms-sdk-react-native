@@ -1,5 +1,6 @@
-import FilePresentationService from '../FilePresentationService';
 import { NativeModules } from 'react-native';
+
+import FilePresentationService from '../FilePresentationService';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 

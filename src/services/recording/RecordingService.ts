@@ -1,5 +1,6 @@
-import type { Recording } from './models';
 import { NativeModules } from 'react-native';
+
+import type { Recording } from './models';
 
 const { DolbyIoIAPIRecordingServiceModule } = NativeModules;
 

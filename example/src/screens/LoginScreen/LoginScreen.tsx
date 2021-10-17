@@ -1,15 +1,17 @@
+// @ts-ignore
+import Chance from 'chance';
+import React, { FunctionComponent, useState, useContext } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
+
 import styles from './LoginScreen.style';
-// @ts-ignore
-import Chance from 'chance';
-import React, { FunctionComponent, useState, useContext } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const chance = new Chance();
 
@@ -33,7 +35,7 @@ const LoginScreen: FunctionComponent = () => {
               IAPI SDK for React Native
             </Text>
             <Text color={COLORS.WHITE} size="xs" header>
-              EXAMPLE APP
+              TEST APP
             </Text>
           </Space>
           <Text color={COLORS.WHITE} header size="s">

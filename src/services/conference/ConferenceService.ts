@@ -1,4 +1,7 @@
+import { NativeModules } from 'react-native';
+
 import NativeEvents from '../../utils/NativeEvents';
+import SessionService from '../session/SessionService';
 import { ConferenceServiceEventNames } from './events';
 import type {
   PermissionsUpdatedEventType,
@@ -27,7 +30,6 @@ import type {
   RTCStatsType,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
@@ -314,8 +316,14 @@ export class ConferenceService {
    * @returns {Promise<boolean>}
    */
 
-  public async leave(options?: ConferenceLeaveOptions): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.leave(options);
+  public async leave(options?: ConferenceLeaveOptions): Promise<void> {
+    await DolbyIoIAPIConferenceService.leave();
+    if (options && options.leaveRoom) {
+      await SessionService.close();
+      return;
+    } else {
+      return;
+    }
   }
 
   /**
