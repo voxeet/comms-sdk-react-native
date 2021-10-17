@@ -1,8 +1,9 @@
+import { NativeModules } from 'react-native';
+
 import NativeEvents from '../../../utils/NativeEvents';
 import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NotificationServiceEventNames } from '../events';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPINotificationService } = NativeModules;
 

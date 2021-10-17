@@ -1,5 +1,6 @@
-import type { FileConverted, File, FilePresentation } from './models';
 import { NativeModules } from 'react-native';
+
+import type { FileConverted, File, FilePresentation } from './models';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 

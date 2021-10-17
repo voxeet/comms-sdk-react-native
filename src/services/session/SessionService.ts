@@ -1,7 +1,8 @@
+import { NativeModules } from 'react-native';
+
 import type { ParticipantInfo } from '../conference/models';
 import type { User } from './models';
 import { transformToUser } from './transformers';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 

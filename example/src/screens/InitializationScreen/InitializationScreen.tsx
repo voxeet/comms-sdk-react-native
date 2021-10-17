@@ -1,14 +1,13 @@
 import React, { FunctionComponent, useContext, useEffect } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { DolbyIOContext } from '@components/DolbyIOProvider';
+import COLORS from '@constants/colors.constants';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 
-import COLORS from '@constants/colors.constants';
-
 import styles from './InitializationScreen.style';
-import { DolbyIOContext } from '@components/DolbyIOProvider';
 
 const InitializationScreen: FunctionComponent = () => {
   const { initialize } = useContext(DolbyIOContext);
@@ -29,7 +28,7 @@ const InitializationScreen: FunctionComponent = () => {
               IAPI SDK for React Native
             </Text>
             <Text color={COLORS.WHITE} size="xs" header>
-              EXAMPLE APP
+              TEST APP
             </Text>
           </Space>
           <Text color={COLORS.WHITE} header size="s">

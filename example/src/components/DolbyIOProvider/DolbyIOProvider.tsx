@@ -1,11 +1,13 @@
-import { Codec, RTCPMode } from '../../../../src/services/conference/models';
-import type { Conference } from '../../../../src/services/conference/models';
-import type { User } from '../../../../src/services/session/models';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
+
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from '@env';
-import React, { useState } from 'react';
-import { Alert } from 'react-native';
+
+import { Codec, RTCPMode } from '../../../../src/services/conference/models';
+import type { Conference } from '../../../../src/services/conference/models';
+import type { User } from '../../../../src/services/session/models';
 
 export interface IDolbyIOProvider {
   user?: User;
@@ -57,6 +59,12 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   // }, [conference]);
 
   const initialize = async () => {
+    try {
+      if (await DolbyIoIAPI.conference.current()) {
+        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+      }
+    } catch (e) {}
+
     try {
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
@@ -153,17 +161,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   };
 
   const leave = async () => {
-    setConference(undefined);
-    // try {
-    //   const conferenceLeaveOptions = {
-    //     leaveRoom: true,
-    //   };
-    //
-    //   await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
-    //   setConference(undefined);
-    // } catch (e: any) {
-    //   Alert.alert('Conference not left', e);
-    // }
+    try {
+      const conferenceLeaveOptions = {
+        leaveRoom: true,
+      };
+
+      await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
+      setConference(undefined);
+      setUser(undefined);
+    } catch (e: any) {
+      Alert.alert('Conference not left', e);
+    }
   };
 
   const contextValue = {
