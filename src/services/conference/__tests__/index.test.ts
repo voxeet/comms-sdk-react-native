@@ -1,3 +1,5 @@
+import { NativeModules } from 'react-native';
+
 import NativeEvents from '../../../utils/NativeEvents';
 import ConferenceService from '../ConferenceService';
 import { ConferenceServiceEventNames } from '../events';
@@ -11,7 +13,6 @@ import {
   Participant,
 } from '../models';
 import { transformToConference, transformToParticipant } from '../transformers';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
 

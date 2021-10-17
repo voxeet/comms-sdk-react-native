@@ -1,5 +1,6 @@
-import DolbyIoIAPI from '../DolbyIoIAPI';
 import { NativeModules } from 'react-native';
+
+import DolbyIoIAPI from '../DolbyIoIAPI';
 
 const { DolbyIoIAPIModule } = NativeModules;
 

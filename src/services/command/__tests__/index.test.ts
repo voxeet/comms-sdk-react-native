@@ -1,7 +1,8 @@
+import { NativeModules } from 'react-native';
+
 import NativeEvents from '../../../utils/NativeEvents';
 import CommandService from '../CommandService';
 import { CommandServiceEventNames } from '../events';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
 
