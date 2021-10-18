@@ -14,12 +14,14 @@ import io.dolby.sdk.reactnative.mapper.InvitationMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
+import io.dolby.sdk.reactnative.mapper.SystemPermissionsMapper
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
+import io.dolby.sdk.reactnative.services.RNSystemPermissionsModule
 
 class RNDolbyioIAPISdkPackage : ReactPackage {
 
@@ -66,6 +68,10 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         conferenceMapper = conferenceMapper,
         invitationMapper = InvitationMapper(conferencePermissionMapper, participantMapper),
         reactContext = reactContext
+      ),
+      RNSystemPermissionsModule(
+        reactContext,
+        SystemPermissionsMapper()
       )
     )
   }
