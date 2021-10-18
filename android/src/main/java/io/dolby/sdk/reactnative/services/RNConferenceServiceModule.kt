@@ -224,7 +224,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getParticipant(participantId: String, promise: ReactPromise) {
     Promises.promise({ conferenceService.findParticipantById(participantId) }) { "Couldn't get the participant" }
-      .thenValue(participantMapper::toMap)
+      .thenValue(participantMapper::toNative)
       .forward(promise)
   }
 
@@ -237,7 +237,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getParticipants(conferenceMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toConference(conferenceMap) }) { "Couldn't get the conference" }
-      .thenValue { conference -> participantMapper.toParticipantsArray(conference.participants) }
+      .thenValue { conference -> participantMapper.toNative(conference.participants) }
       .forward(promise)
   }
 
@@ -386,7 +386,7 @@ class RNConferenceServiceModule(
   @Throws(Exception::class)
   private fun toParticipant(participantMap: ReadableMap): Participant {
     val participantId =
-      participantMapper.toParticipantId(participantMap) ?: throw IllegalArgumentException("Conference should contain participantId")
+      participantMapper.participantIdFromNative(participantMap) ?: throw IllegalArgumentException("Conference should contain participantId")
     return conferenceService.findParticipantById(participantId) ?: throw Exception("Couldn't find the participant")
   }
 
