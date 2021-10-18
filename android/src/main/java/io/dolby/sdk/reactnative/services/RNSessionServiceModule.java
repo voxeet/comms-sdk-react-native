@@ -57,7 +57,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void open(@NotNull ReadableMap participantInfoMap, @NotNull Promise promise) {
-        sessionService.open(participantMapper.toParticipantInfo(participantInfoMap))
+        sessionService.open(participantMapper.infoFromNative(participantInfoMap))
                 .then(promise::resolve)
                 .error(promise::reject);
     }
@@ -85,7 +85,7 @@ public class RNSessionServiceModule extends ReactContextBaseJavaModule {
     public void getParticipant(@NotNull Promise promise) {
         Participant participant = sessionService.getParticipant();
         if (participant != null) {
-            promise.resolve(participantMapper.toMap(participant));
+            promise.resolve(participantMapper.toNative(participant));
         } else {
             promise.reject(new Exception("No current user's session"));
         }
