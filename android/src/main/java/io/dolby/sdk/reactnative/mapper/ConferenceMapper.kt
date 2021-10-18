@@ -2,7 +2,6 @@ package io.dolby.sdk.reactnative.mapper
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.WritableMap
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.services.conference.AudioProcessing
 import com.voxeet.sdk.services.conference.information.ConferenceStatus
@@ -36,9 +35,9 @@ class ConferenceMapper(
       ?: AudioProcessing.ENVIRONMENT
   }
 
-  fun toNative(conference: Conference): WritableMap {
+  fun toNative(conference: Conference): ReadableMap {
     val map = Arguments.createMap()
-    val participantsArray = participantMapper.toParticipantsArray(conference.participants)
+    val participantsArray = participantMapper.toNative(conference.participants)
     val permissionsArray = permissionMapper.toNative(conference.permissions)
     map.putString(CONFERENCE_ID, conference.id)
     map.putString(CONFERENCE_ALIAS, conference.alias)
