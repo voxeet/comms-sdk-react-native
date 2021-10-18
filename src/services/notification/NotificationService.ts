@@ -12,6 +12,8 @@ import type { InvitationReceivedEventType } from './events';
 const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
+  _nativeEvents = new NativeEvents(DolbyIoIAPINotificationService);
+
   /**
    * Notifies conference participants about a conference invitation.
    * @param conference<Conference> The conference object.
@@ -42,7 +44,7 @@ export class NotificationService {
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void
   ): UnsubscribeFunction {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
       (data) => {
         handler(data);

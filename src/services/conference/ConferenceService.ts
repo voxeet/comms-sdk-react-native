@@ -34,6 +34,9 @@ import { transformToConference, transformToParticipant } from './transformers';
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
 export class ConferenceService {
+  _nativeModule = DolbyIoIAPIConferenceService;
+  _nativeEvents = new NativeEvents(DolbyIoIAPIConferenceService);
+
   /**
    * Create a conference with options
    * @param options<CreateOptions> The conference options
@@ -43,9 +46,7 @@ export class ConferenceService {
   public async create(
     options: ConferenceCreateOptions = {}
   ): Promise<Conference> {
-    return transformToConference(
-      await DolbyIoIAPIConferenceService.create(options)
-    );
+    return transformToConference(await this._nativeModule.create(options));
   }
 
   /**
@@ -55,9 +56,7 @@ export class ConferenceService {
    */
 
   public async fetch(conferenceId?: string): Promise<Conference> {
-    return transformToConference(
-      await DolbyIoIAPIConferenceService.fetch(conferenceId)
-    );
+    return transformToConference(await this._nativeModule.fetch(conferenceId));
   }
 
   /**
@@ -66,7 +65,7 @@ export class ConferenceService {
    */
 
   public async current(): Promise<Conference> {
-    return transformToConference(await DolbyIoIAPIConferenceService.current());
+    return transformToConference(await this._nativeModule.current());
   }
 
   /**
@@ -83,7 +82,7 @@ export class ConferenceService {
     mixingOptions?: ConferenceMixingOptions
   ): Promise<Conference> {
     return transformToConference(
-      await DolbyIoIAPIConferenceService.replay(
+      await this._nativeModule.replay(
         conference,
         {
           offset: 0,
@@ -101,7 +100,7 @@ export class ConferenceService {
    */
 
   public async getAudioLevel(participant: Participant): Promise<AudioLevel> {
-    return DolbyIoIAPIConferenceService.getAudioLevel(participant);
+    return this._nativeModule.getAudioLevel(participant);
   }
 
   /**
@@ -110,7 +109,7 @@ export class ConferenceService {
    */
 
   public async getLocalStats(): Promise<RTCStatsType[]> {
-    return DolbyIoIAPIConferenceService.getLocalStats();
+    return this._nativeModule.getLocalStats();
   }
 
   /**
@@ -119,7 +118,7 @@ export class ConferenceService {
    */
 
   public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
-    return DolbyIoIAPIConferenceService.getMaxVideoForwarding();
+    return this._nativeModule.getMaxVideoForwarding();
   }
 
   /**
@@ -130,7 +129,7 @@ export class ConferenceService {
 
   public async getParticipant(participantId: String): Promise<Participant> {
     return transformToParticipant(
-      await DolbyIoIAPIConferenceService.getParticipant(participantId)
+      await this._nativeModule.getParticipant(participantId)
     );
   }
 
@@ -143,9 +142,7 @@ export class ConferenceService {
   public async getParticipants(
     conference: Conference
   ): Promise<Array<Participant>> {
-    const participants = await DolbyIoIAPIConferenceService.getParticipants(
-      conference
-    );
+    const participants = await this._nativeModule.getParticipants(conference);
     return participants.map(transformToParticipant);
   }
 
@@ -156,7 +153,7 @@ export class ConferenceService {
    */
 
   public async getStatus(conference: Conference): Promise<ConferenceStatus> {
-    return DolbyIoIAPIConferenceService.getStatus(conference);
+    return this._nativeModule.getStatus(conference);
   }
 
   /**
@@ -165,7 +162,7 @@ export class ConferenceService {
    */
 
   public async isOutputMuted(): Promise<boolean> {
-    return !!(await DolbyIoIAPIConferenceService.isOutputMuted());
+    return !!(await this._nativeModule.isOutputMuted());
   }
 
   /**
@@ -174,7 +171,7 @@ export class ConferenceService {
    */
 
   public async isMuted(): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.isMuted();
+    return this._nativeModule.isMuted();
   }
 
   /**
@@ -184,7 +181,7 @@ export class ConferenceService {
    */
 
   public async isSpeaking(participant: Participant): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.isSpeaking(participant);
+    return this._nativeModule.isSpeaking(participant);
   }
 
   /**
@@ -196,7 +193,7 @@ export class ConferenceService {
   public async setAudioProcessing(
     options: AudioProcessingOptions = {}
   ): Promise<void> {
-    return DolbyIoIAPIConferenceService.setAudioProcessing(options);
+    return this._nativeModule.setAudioProcessing(options);
   }
 
   /**
@@ -210,7 +207,7 @@ export class ConferenceService {
     max: MaxVideoForwarding = 4,
     prioritizedParticipants: Participant[] = []
   ): Promise<any> {
-    return DolbyIoIAPIConferenceService.setMaxVideoForwarding(
+    return this._nativeModule.setMaxVideoForwarding(
       max,
       prioritizedParticipants
     );
@@ -227,7 +224,7 @@ export class ConferenceService {
     participant: Participant,
     isMuted: boolean
   ): Promise<boolean> {
-    return DolbyIoIAPIConferenceService.mute(isMuted, participant);
+    return this._nativeModule.mute(isMuted, participant);
   }
 
   /**
@@ -239,9 +236,7 @@ export class ConferenceService {
   public async updatePermissions(
     participantPermissions: Array<ParticipantPermissions>
   ): Promise<void> {
-    return DolbyIoIAPIConferenceService.updatePermissions(
-      participantPermissions
-    );
+    return this._nativeModule.updatePermissions(participantPermissions);
   }
 
   /**
@@ -251,7 +246,7 @@ export class ConferenceService {
    */
 
   public async startAudio(participant: Participant): Promise<void> {
-    return DolbyIoIAPIConferenceService.startAudio(participant);
+    return this._nativeModule.startAudio(participant);
   }
 
   /**
@@ -261,7 +256,7 @@ export class ConferenceService {
    */
 
   public async startVideo(participant: Participant): Promise<void> {
-    return DolbyIoIAPIConferenceService.startVideo(participant);
+    return this._nativeModule.startVideo(participant);
   }
 
   /**
@@ -271,7 +266,7 @@ export class ConferenceService {
    */
 
   public async stopAudio(participant: Participant): Promise<void> {
-    return DolbyIoIAPIConferenceService.stopAudio(participant);
+    return this._nativeModule.stopAudio(participant);
   }
 
   /**
@@ -281,7 +276,7 @@ export class ConferenceService {
    */
 
   public async stopVideo(participant: Participant): Promise<void> {
-    return DolbyIoIAPIConferenceService.stopVideo(participant);
+    return this._nativeModule.stopVideo(participant);
   }
 
   /**
@@ -296,7 +291,7 @@ export class ConferenceService {
     options?: ConferenceJoinOptions
   ): Promise<Conference> {
     return transformToConference(
-      await DolbyIoIAPIConferenceService.join(conference, options)
+      await this._nativeModule.join(conference, options)
     );
   }
 
@@ -307,7 +302,7 @@ export class ConferenceService {
    */
 
   public async kick(participant: Participant): Promise<void> {
-    return DolbyIoIAPIConferenceService.kick(participant);
+    return this._nativeModule.kick(participant);
   }
 
   /**
@@ -317,7 +312,7 @@ export class ConferenceService {
    */
 
   public async leave(options?: ConferenceLeaveOptions): Promise<void> {
-    await DolbyIoIAPIConferenceService.leave();
+    await this._nativeModule.leave();
     if (options && options.leaveRoom) {
       await SessionService.close();
       return;
@@ -334,7 +329,7 @@ export class ConferenceService {
   public onStatusChange(
     handler: (data: ConferenceStatusUpdatedEventType) => void
   ): UnsubscribeFunction {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       ConferenceServiceEventNames.ConferenceStatusUpdated,
       (data) => {
         handler(data);
@@ -351,7 +346,7 @@ export class ConferenceService {
   public onPermissionsChange(
     handler: (data: PermissionsUpdatedEventType) => void
   ): UnsubscribeFunction {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       ConferenceServiceEventNames.PermissionsUpdated,
       (data) => {
         handler(data);
@@ -373,19 +368,19 @@ export class ConferenceService {
         | ParticipantRemovedEventType
     ) => void
   ): UnsubscribeFunction {
-    const participantAddedEventUnsubscribe = NativeEvents.addListener(
+    const participantAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantAdded,
       (data) => {
         handler(data);
       }
     );
-    const participantUpdatedEventUnsubscribe = NativeEvents.addListener(
+    const participantUpdatedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantUpdated,
       (data) => {
         handler(data);
       }
     );
-    const participantRemovedEventUnsubscribe = NativeEvents.addListener(
+    const participantRemovedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantRemoved,
       (data) => {
         handler(data);
@@ -413,19 +408,19 @@ export class ConferenceService {
         | StreamRemovedEventType
     ) => void
   ): UnsubscribeFunction {
-    const streamAddedEventUnsubscribe = NativeEvents.addListener(
+    const streamAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamAdded,
       (data) => {
         handler(data);
       }
     );
-    const streamUpdatedEventUnsubscribe = NativeEvents.addListener(
+    const streamUpdatedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamUpdated,
       (data) => {
         handler(data);
       }
     );
-    const streamRemovedEventUnsubscribe = NativeEvents.addListener(
+    const streamRemovedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamRemoved,
       (data) => {
         handler(data);

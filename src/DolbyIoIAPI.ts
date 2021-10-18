@@ -17,6 +17,7 @@ import NativeEvents from './utils/NativeEvents';
 const { DolbyIoIAPIModule } = NativeModules;
 
 export class DolbyIoIAPI {
+  private _nativeEvents = new NativeEvents(DolbyIoIAPIModule);
   private refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
 
@@ -96,7 +97,7 @@ export class DolbyIoIAPI {
           DolbyIoIAPIModule.onAccessTokenKo('Refreshing token failed');
         }
       };
-      NativeEvents.addListener(DolbyIoIAPIEventNames.TokenRefresh, () => {
+      this._nativeEvents.addListener(DolbyIoIAPIEventNames.TokenRefresh, () => {
         this.refreshAccessTokenInBackground &&
           this.refreshAccessTokenInBackground();
       });
