@@ -1,13 +1,10 @@
 import { NativeModules } from 'react-native';
 
-import NativeEvents from '../../../utils/NativeEvents';
 import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NotificationServiceEventNames } from '../events';
 
 const { DolbyIoIAPINotificationService } = NativeModules;
-
-NativeEvents.addListener = jest.fn();
 
 const testConference: Conference = {
   participants: [{ id: '123', info: { name: 'John Doe' } }],
@@ -36,8 +33,11 @@ describe('NotificationService', () => {
 
   describe('onInvitationReceived()', () => {
     it('should invoke NativeEvents.addListener with InvitationReceived event', () => {
+      NotificationService._nativeEvents.addListener = jest.fn();
       NotificationService.onInvitationReceived(() => {});
-      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
         NotificationServiceEventNames.InvitationReceived,
         expect.any(Function)
       );
