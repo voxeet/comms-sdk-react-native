@@ -14,9 +14,7 @@ import com.voxeet.sdk.models.v1.ConferenceParticipantStatus
 import com.voxeet.sdk.models.v2.ParticipantType
 
 /**
- * Provides methods that map:
- * - [Participant] and [Participant]-related models to React Native models
- * - React Native model to [Participant] model and [Participant]-related models
+ * Provides methods that map [Participant] and [Participant]-related models to React Native models and vice versa
  */
 class ParticipantMapper {
 

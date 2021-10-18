@@ -14,9 +14,7 @@ import io.dolby.sdk.reactnative.utils.RnCollections.getOptionalBoolean
 import org.json.JSONArray
 
 /**
- * Provides methods that map:
- * - [Conference] and [Conference]-related models to React Native models
- * - React Native models to [Conference] model and [Conference]-related model
+ * Provides methods that map [Conference] and [Conference]-related models to React Native models and vice versa
  */
 class ConferenceMapper(
   private val participantMapper: ParticipantMapper,
