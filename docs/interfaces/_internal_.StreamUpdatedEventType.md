@@ -17,8 +17,12 @@
 
 • **mediaStream**: [`MediaStreamType`](../enums/_internal_.MediaStreamType.md)
 
+The media stream.
+
 ___
 
 ### participant
 
 • **participant**: [`Participant`](_internal_.Participant.md)
+
+The conference participant.

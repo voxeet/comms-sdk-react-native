@@ -34,7 +34,9 @@ import { transformToConference, transformToParticipant } from './transformers';
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
 export class ConferenceService {
+  /** @internal */
   _nativeModule = DolbyIoIAPIConferenceService;
+  /** @internal */
   _nativeEvents = new NativeEvents(DolbyIoIAPIConferenceService);
 
   /**

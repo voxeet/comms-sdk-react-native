@@ -12,6 +12,7 @@ The Command service allows the application to send text messages or notification
 The service also emits an received event to inform the application about received messages.
  */
 export class CommandService {
+  /** @internal */
   _nativeEvents = new NativeEvents(DolbyIoIAPICommandServiceModule);
 
   /**
