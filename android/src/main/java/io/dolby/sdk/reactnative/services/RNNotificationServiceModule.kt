@@ -61,7 +61,7 @@ class RNNotificationServiceModule(
      */
     @ReactMethod
     fun invite(conferenceMap: ReadableMap, invitedParticipants: ReadableArray, promise: ReactPromise) {
-        Promises.promise(conferenceMapper.toConferenceId(conferenceMap)) { "Conference should contain conferenceId" }
+        Promises.promise(conferenceMapper.conferenceIdFromNative(conferenceMap)) { "Conference should contain conferenceId" }
                 .thenValue(conferenceService::getConference)
                 .thenValue { conference -> conference to invitationMapper.decode(invitedParticipants) }
                 .thenPromise { (conference, participants) -> notificationService.inviteWithPermissions(conference, participants) }
@@ -76,7 +76,7 @@ class RNNotificationServiceModule(
      */
     @ReactMethod
     fun decline(conferenceMap: ReadableMap, promise: ReactPromise) {
-        Promises.promise(conferenceMapper.toConferenceId(conferenceMap)) { "Conference should contain conferenceId" }
+        Promises.promise(conferenceMapper.conferenceIdFromNative(conferenceMap)) { "Conference should contain conferenceId" }
                 .thenValue(conferenceService::getConference)
                 .thenPromise(notificationService::decline)
                 .forward(promise)

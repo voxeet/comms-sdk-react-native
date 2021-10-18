@@ -37,7 +37,7 @@ public class RNDolbyioIAPISdkPackage implements ReactPackage {
         RNCollectionExtractor rnCollectionExtractor = new RNCollectionExtractor();
         ParticipantMapper participantMapper = new ParticipantMapper(rnCollectionExtractor);
         ConferencePermissionMapper conferencePermissionMapper = new ConferencePermissionMapper();
-        ConferenceMapper conferenceMapper = new ConferenceMapper(participantMapper, conferencePermissionMapper, rnCollectionExtractor);
+        ConferenceMapper conferenceMapper = new ConferenceMapper(participantMapper, conferencePermissionMapper);
 
         return Arrays.asList(
                 new RNDolbyioIAPISdkModule(reactContext),
