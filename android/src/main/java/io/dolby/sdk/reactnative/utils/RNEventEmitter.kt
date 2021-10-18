@@ -12,51 +12,51 @@ import kotlin.math.max
  */
 interface RNEventEmitter {
 
-    /**
-     * Record the count of listeners
-     */
-    var listenerCount: Int
+  /**
+   * Record the count of listeners
+   */
+  var listenerCount: Int
 
-    /**
-     * The supported events map
-     *  key: event constants for JS
-     *  vale: event name
-     */
-    val eventMap: Map<String, String>
+  /**
+   * The supported events map
+   *  key: event constants for JS
+   *  vale: event name
+   */
+  val eventMap: Map<String, String>
 
-    /**
-     * Default implementation of emitting event, nothing will be sent if no listener is registered
-     * @param eventName the name of the event
-     * @param data the event data
-     */
-    fun send(context: ReactApplicationContext, eventName: String, data: WritableMap) {
-        if (hasListener()) {
-            context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                    .emit(eventName, data)
-        }
+  /**
+   * Default implementation of emitting event, nothing will be sent if no listener is registered
+   * @param eventName the name of the event
+   * @param data the event data
+   */
+  fun send(context: ReactApplicationContext, eventName: String, data: WritableMap) {
+    if (hasListener()) {
+      context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+        .emit(eventName, data)
     }
+  }
 
-    /**
-     * Invoked when adding listener from JS side
-     * @param eventName the name of event
-     */
-    fun addListener(eventName: String) {
-        if (listenerCount == 0) {
-            VoxeetSDK.instance().register(this)
-        }
-        listenerCount += 1;
+  /**
+   * Invoked when adding listener from JS side
+   * @param eventName the name of event
+   */
+  fun addListener(eventName: String) {
+    if (listenerCount == 0) {
+      VoxeetSDK.instance().register(this)
     }
+    listenerCount += 1;
+  }
 
-    /**
-     * Invoked when remove listeners from JS side
-     * @param count how many listeners are removed, always greater than 0
-     */
-    fun removeListeners(count: Int) {
-        if (hasListener() && listenerCount <= count) {
-            VoxeetSDK.instance().unregister(this)
-        }
-        listenerCount = max(listenerCount - count, 0)
+  /**
+   * Invoked when remove listeners from JS side
+   * @param count how many listeners are removed, always greater than 0
+   */
+  fun removeListeners(count: Int) {
+    if (hasListener() && listenerCount <= count) {
+      VoxeetSDK.instance().unregister(this)
     }
+    listenerCount = max(listenerCount - count, 0)
+  }
 
-    fun hasListener(): Boolean = listenerCount > 0
+  fun hasListener(): Boolean = listenerCount > 0
 }
