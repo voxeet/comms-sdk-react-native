@@ -1,10 +1,11 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
-
+/* eslint-disable prettier/prettier */
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
+import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
 import type { UnregisterListener } from './types';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 const { DolbyIoIAPIModule } = NativeModules;
 
@@ -12,6 +13,7 @@ interface NativeEventType
   extends DolbyIoIAPIEventMap,
     ConferenceServiceEventMap,
     NotificationServiceEventMap,
+    FilePresentationServiceEventMap,
     CommandServiceEventMap {}
 
 const EventEmitter = Platform.select({
