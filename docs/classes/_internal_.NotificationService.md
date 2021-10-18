@@ -10,10 +10,6 @@
 
 - [constructor](_internal_.NotificationService.md#constructor)
 
-### Properties
-
-- [_nativeEvents](_internal_.NotificationService.md#_nativeevents)
-
 ### Methods
 
 - [decline](_internal_.NotificationService.md#decline)
@@ -25,12 +21,6 @@
 ### constructor
 
 • **new NotificationService**()
-
-## Properties
-
-### \_nativeEvents
-
-• **\_nativeEvents**: `default`
 
 ## Methods
 
