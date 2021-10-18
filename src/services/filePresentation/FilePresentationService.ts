@@ -5,13 +5,16 @@ import type { FileConverted, File, FilePresentation } from './models';
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 
 export class FilePresentationService {
+  /** @internal */
+  _nativeModule = DolbyIoIAPIFilePresentationService;
+
   /**
    * Stops the file presentation.
    * @returns {Promise<void>}
    */
 
   public async stop(): Promise<void> {
-    return DolbyIoIAPIFilePresentationService.stop();
+    return this._nativeModule.stop();
   }
 
   /**
@@ -21,7 +24,7 @@ export class FilePresentationService {
    */
 
   public async start(file: FileConverted): Promise<void> {
-    return DolbyIoIAPIFilePresentationService.start(file);
+    return this._nativeModule.start(file);
   }
 
   /**
@@ -31,7 +34,7 @@ export class FilePresentationService {
    */
 
   public async getThumbnail(page: number): Promise<string> {
-    return DolbyIoIAPIFilePresentationService.getThumbnail(page);
+    return this._nativeModule.getThumbnail(page);
   }
 
   /**
@@ -41,7 +44,7 @@ export class FilePresentationService {
    */
 
   public async setPage(page: number): Promise<void> {
-    return DolbyIoIAPIFilePresentationService.setPage(page);
+    return this._nativeModule.setPage(page);
   }
 
   /**
@@ -50,7 +53,7 @@ export class FilePresentationService {
    * @returns {Promise<FileConverted>} Promise with the FileConverted object.
    */
   public async convert(file: File): Promise<FileConverted> {
-    return DolbyIoIAPIFilePresentationService.convert(file);
+    return this._nativeModule.convert(file);
   }
 
   /**
@@ -58,7 +61,7 @@ export class FilePresentationService {
    * @returns {Promise<FilePresentation>} Promise with the FilePresentation object
    */
   public async getCurrent(): Promise<FilePresentation> {
-    return DolbyIoIAPIFilePresentationService.getCurrent();
+    return this._nativeModule.getCurrent();
   }
 
   /**
@@ -67,7 +70,7 @@ export class FilePresentationService {
    * @returns {Promise<string>}
    */
   public async getImage(page: number): Promise<string> {
-    return DolbyIoIAPIFilePresentationService.getImage(page);
+    return this._nativeModule.getImage(page);
   }
 }
 

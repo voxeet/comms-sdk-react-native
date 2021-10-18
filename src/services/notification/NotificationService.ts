@@ -13,6 +13,8 @@ const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
   /** @internal */
+  _nativeModule = DolbyIoIAPINotificationService;
+  /** @internal */
   _nativeEvents = new NativeEvents(DolbyIoIAPINotificationService);
 
   /**
@@ -25,7 +27,7 @@ export class NotificationService {
     conference: Conference,
     participants: ParticipantInvited[]
   ): Promise<void> {
-    return DolbyIoIAPINotificationService.invite(conference, participants);
+    return this._nativeModule.invite(conference, participants);
   }
 
   /**
@@ -34,7 +36,7 @@ export class NotificationService {
    * @returns {Promise<void>}
    */
   public async decline(conference: Conference): Promise<void> {
-    return DolbyIoIAPINotificationService.decline(conference);
+    return this._nativeModule.decline(conference);
   }
 
   /**

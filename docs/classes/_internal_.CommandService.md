@@ -10,10 +10,6 @@
 
 - [constructor](_internal_.CommandService.md#constructor)
 
-### Properties
-
-- [_nativeEvents](_internal_.CommandService.md#_nativeevents)
-
 ### Methods
 
 - [onMessageReceived](_internal_.CommandService.md#onmessagereceived)
@@ -24,12 +20,6 @@
 ### constructor
 
 • **new CommandService**()
-
-## Properties
-
-### \_nativeEvents
-
-• **\_nativeEvents**: `default`
 
 ## Methods
 

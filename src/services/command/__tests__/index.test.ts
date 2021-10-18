@@ -27,3 +27,12 @@ describe('CommandService', () => {
     });
   });
 });
+
+jest.mock('./utils/NativeEvents', () => {
+  const originalModule = jest.requireActual('../utils/NativeEvents');
+
+  return {
+    ...originalModule,
+    addListener: jest.fn(),
+  };
+});
