@@ -1,5 +1,6 @@
 package io.dolby.sdk.reactnative.mapper
 
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableNativeMap
 import com.voxeet.sdk.models.Conference.RecordingInformation
@@ -15,9 +16,9 @@ class RecordingMapper {
     private const val RECORDING_START_TIMESTAMP = "startTimestamp"
   }
 
-  fun encode(recordingInformation: RecordingInformation): ReadableMap? = with(recordingInformation) {
+  fun toNative(recordingInformation: RecordingInformation): ReadableMap? = with(recordingInformation) {
     return if (recordingParticipant != null && startRecordTimestamp != null) {
-      WritableNativeMap().apply {
+      Arguments.createMap().apply {
         putString(PARTICIPANT_ID, recordingParticipant)
         putDouble(RECORDING_START_TIMESTAMP, startRecordTimestamp.time.toDouble())
       }
