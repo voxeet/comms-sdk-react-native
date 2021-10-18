@@ -98,7 +98,7 @@ class RNConferenceServiceModule(
   fun create(optionsMap: ReadableMap?, promise: ReactPromise) {
     Promises.promise(conferenceCreateOptionsMapper.fromNative(optionsMap))
       .thenPromise(conferenceService::create)
-      .thenValue(conferenceMapper::toMap)
+      .thenValue(conferenceMapper::toNative)
       .forward(promise)
   }
 
@@ -115,7 +115,7 @@ class RNConferenceServiceModule(
 
     conferencePromise
       .rejectIfNull { "Couldn't get the conference" }
-      .thenValue(conferenceMapper::toMap)
+      .thenValue(conferenceMapper::toNative)
       .forward(promise)
 
   }
@@ -144,7 +144,7 @@ class RNConferenceServiceModule(
       )
     }) { "Couldn't get the conference join options" }
       .thenPromise(conferenceService::join)
-      .thenValue(conferenceMapper::toMap)
+      .thenValue(conferenceMapper::toNative)
       .forward(promise)
   }
 
@@ -181,7 +181,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun current(promise: ReactPromise) {
     Promises.promise(conferenceService.conference) { "Missing current conference" }
-      .thenValue(conferenceMapper::toMap)
+      .thenValue(conferenceMapper::toNative)
       .forward(promise)
   }
 
@@ -250,7 +250,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getStatus(conferenceMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toConference(conferenceMap) }) { "Couldn't get the conference" }
-      .thenValue { conference -> conferenceMapper.toString(conference.state) }
+      .thenValue { conference -> conferenceMapper.toNativeConferenceStatus(conference.state) }
       .forward(promise)
   }
 
@@ -290,7 +290,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getLocalStats(promise: ReactPromise) {
     Promises.promise(conferenceService.localStats()) { "Couldn't get local stats" }
-      .thenValue(conferenceMapper::toMap)
+      .thenValue(conferenceMapper::toNativeLocalStats)
       .forward(promise)
   }
 
@@ -338,7 +338,7 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun setAudioProcessing(audioProcessingMap: ReadableMap, promise: ReactPromise) {
-    Promises.promise(conferenceMapper.toAudioProcessing(audioProcessingMap))
+    Promises.promise(conferenceMapper.fromNative(audioProcessingMap))
       .thenValue(conferenceService::setAudioProcessing)
       .forward(promise, ignoreReturnType = true)
   }
@@ -399,7 +399,7 @@ class RNConferenceServiceModule(
    */
   private fun toConference(conferenceMap: ReadableMap): Conference {
     val conferenceId =
-      conferenceMapper.toConferenceId(conferenceMap) ?: throw IllegalArgumentException("Conference should contain conferenceId")
+      conferenceMapper.conferenceIdFromNative(conferenceMap) ?: throw IllegalArgumentException("Conference should contain conferenceId")
     return conferenceService.getConference(conferenceId)
   }
 
