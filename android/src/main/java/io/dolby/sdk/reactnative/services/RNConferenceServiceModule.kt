@@ -95,8 +95,8 @@ class RNConferenceServiceModule(
    * @param promise    returns a created conference
    */
   @ReactMethod
-  fun create(optionsMap: ReadableMap, promise: ReactPromise) {
-    Promises.promise(conferenceCreateOptionsMapper.toConferenceCreateOptions(optionsMap))
+  fun create(optionsMap: ReadableMap?, promise: ReactPromise) {
+    Promises.promise(conferenceCreateOptionsMapper.fromNative(optionsMap))
       .thenPromise(conferenceService::create)
       .thenValue(conferenceMapper::toMap)
       .forward(promise)
