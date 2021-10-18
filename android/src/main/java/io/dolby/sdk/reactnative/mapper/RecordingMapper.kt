@@ -2,12 +2,10 @@ package io.dolby.sdk.reactnative.mapper
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.WritableNativeMap
 import com.voxeet.sdk.models.Conference.RecordingInformation
 
 /**
- * Provides methods that map:
- * <p>- [RecordingInformation] to React Native models</p>
+ * Provides methods that map [RecordingInformation] to React Native models
  */
 class RecordingMapper {
 
