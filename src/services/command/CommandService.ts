@@ -13,6 +13,8 @@ The service also emits an received event to inform the application about receive
  */
 export class CommandService {
   /** @internal */
+  _nativeModule = DolbyIoIAPICommandServiceModule;
+  /** @internal */
   _nativeEvents = new NativeEvents(DolbyIoIAPICommandServiceModule);
 
   /**
@@ -20,7 +22,7 @@ export class CommandService {
    * @param message<string> Message to send
    */
   public async send(message: string): Promise<void> {
-    return DolbyIoIAPICommandServiceModule.send(message);
+    return this._nativeModule.send(message);
   }
 
   /**
