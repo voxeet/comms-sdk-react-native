@@ -12,6 +12,7 @@ import type { InvitationReceivedEventType } from './events';
 const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
+  /** @internal */
   _nativeEvents = new NativeEvents(DolbyIoIAPINotificationService);
 
   /**
