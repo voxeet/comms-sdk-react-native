@@ -21,14 +21,14 @@ import com.voxeet.sdk.json.ConferencePermission.UPDATE_PERMISSIONS
  */
 class ConferencePermissionMapper {
 
-  fun decode(permissionsArray: ReadableArray): Set<ConferencePermission> {
+  fun fromNative(permissionsArray: ReadableArray): Set<ConferencePermission> {
     return permissionsArray.toArrayList()
         .filterIsInstance<String>()
         .mapNotNull(::fromString)
         .toSet()
   }
 
-  fun encode(permissions: Set<ConferencePermission>): ReadableArray {
+  fun toNative(permissions: Set<ConferencePermission>): ReadableArray {
     return permissions.map(::toString)
         .let(Arguments::fromList)
   }
