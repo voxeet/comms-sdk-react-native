@@ -8,6 +8,7 @@ import com.voxeet.sdk.services.RecordingService
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
 
@@ -59,7 +60,8 @@ class RNRecordingServiceModule(
   @ReactMethod
   fun current(promise: ReactPromise) {
     Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
-        .thenValue(recordingMapper::toNative)
-        .forward(promise)
+      .thenValue(recordingMapper::toNative)
+      .rejectIfNull()
+      .forward(promise)
   }
 }
