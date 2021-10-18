@@ -19,7 +19,7 @@ class InvitationMapper(
         .filterIsInstance<ReadableMap>()
         .mapNotNull { map ->
           val info = map.getMap(PARTICIPANT_INFO)?.let(participantMapper::toParticipantInfo)
-          val permissions = map.getArray(PARTICIPANT_PERMISSIONS)?.let(permissionMapper::decode)
+          val permissions = map.getArray(PARTICIPANT_PERMISSIONS)?.let(permissionMapper::fromNative)
           info?.let(::ParticipantInvited)?.apply { setPermissions(permissions) }
         }
   }

@@ -39,7 +39,7 @@ class ConferenceMapper(
   fun toNative(conference: Conference): WritableMap {
     val map = Arguments.createMap()
     val participantsArray = participantMapper.toParticipantsArray(conference.participants)
-    val permissionsArray = permissionMapper.encode(conference.permissions)
+    val permissionsArray = permissionMapper.toNative(conference.permissions)
     map.putString(CONFERENCE_ID, conference.id)
     map.putString(CONFERENCE_ALIAS, conference.alias)
     map.putBoolean(CONFERENCE_IS_NEW, conference.isNew)
