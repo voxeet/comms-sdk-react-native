@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 /**
- *
+ * [SystemPermissions] wrapper for handling android runtime permission
  */
 class SystemPermissions(
   private val activity: Activity
@@ -24,7 +24,12 @@ class SystemPermissions(
     get() = getSharedPreferences("permissions", Context.MODE_PRIVATE)
 
   /**
+   * Request runtime permissions
    *
+   * Before performing request method check is there is no permanently denied permission and is there need to display request rationale.
+   *
+   * @param permissions       permissions to request
+   * @param rationaleProvider [RationaleProvider] to provide rationals
    */
   fun request(permissions: Array<String>, rationaleProvider: RationaleProvider) {
     permissions.firstOrNull(::isPermanentlyDeclined)
@@ -46,7 +51,13 @@ class SystemPermissions(
   }
 
   /**
+   * Handle runtime permissions request result
    *
+   * Method check if "Don't ask me again" option was checked to remember permanently denied permission in application preferences
+   *
+   * @param requestCode  identifier of performed request
+   * @param permissions  permissions specified in request
+   * @param grantResults grant result [PERMISSION_DENIED] or [PERMISSION_DENIED] for each permissions specified in request
    */
   fun onRequestResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
     if (requestCode != REQUEST_CODE) return
@@ -75,7 +86,6 @@ class SystemPermissions(
         dialog.dismiss()
       }
       .show()
-
   }
 
   private fun showPermanentlyDeniedRationale(rationale: Rationale) {

@@ -4,7 +4,7 @@ import com.facebook.react.bridge.ReadableMap
 import io.dolby.sdk.reactnative.android.permissions.Rationale
 
 /**
- *
+ * Provides a method that maps React Native model to [Rationale] model.
  */
 class SystemPermissionsMapper {
 
