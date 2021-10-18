@@ -1,7 +1,9 @@
 package io.dolby.sdk.reactnative.android.permissions
 
 /**
+ * [RationaleInformationHolder] is [Rationale] configuration holding class
  *
+ * Provides possibility to customize rationale information displayed to user
  */
 object RationaleInformationHolder : RationaleProvider {
 
