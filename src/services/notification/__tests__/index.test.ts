@@ -12,6 +12,8 @@ const testConference: Conference = {
 };
 
 describe('NotificationService', () => {
+  NotificationService._nativeEvents.addListener = jest.fn();
+
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
       NotificationService.invite(testConference, [{ info: {} }]);
@@ -33,7 +35,6 @@ describe('NotificationService', () => {
 
   describe('onInvitationReceived()', () => {
     it('should invoke NativeEvents.addListener with InvitationReceived event', () => {
-      NotificationService._nativeEvents.addListener = jest.fn();
       NotificationService.onInvitationReceived(() => {});
       expect(
         NotificationService._nativeEvents.addListener
