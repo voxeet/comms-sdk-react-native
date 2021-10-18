@@ -373,7 +373,7 @@ class RNConferenceServiceModule(
     optionsMap: ReadableMap?
   ): ConferenceJoinOptions {
     val conference = toConference(conferenceMap)
-    return conferenceJoinOptionsMapper.toConferenceJoinOptions(conference, optionsMap)
+    return conferenceJoinOptionsMapper.fromNative(conference, optionsMap)
   }
 
   /**
