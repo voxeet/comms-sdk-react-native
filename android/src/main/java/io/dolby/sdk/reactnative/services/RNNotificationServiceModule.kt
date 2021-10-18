@@ -63,7 +63,7 @@ class RNNotificationServiceModule(
     fun invite(conferenceMap: ReadableMap, invitedParticipants: ReadableArray, promise: ReactPromise) {
         Promises.promise(conferenceMapper.conferenceIdFromNative(conferenceMap)) { "Conference should contain conferenceId" }
                 .thenValue(conferenceService::getConference)
-                .thenValue { conference -> conference to invitationMapper.decode(invitedParticipants) }
+                .thenValue { conference -> conference to invitationMapper.fromNative(invitedParticipants) }
                 .thenPromise { (conference, participants) -> notificationService.inviteWithPermissions(conference, participants) }
                 .forward(promise, ignoreReturnType = true)
     }
