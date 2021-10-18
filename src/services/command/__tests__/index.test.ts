@@ -1,12 +1,9 @@
 import { NativeModules } from 'react-native';
 
-import NativeEvents from '../../../utils/NativeEvents';
 import CommandService from '../CommandService';
 import { CommandServiceEventNames } from '../events';
 
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
-
-NativeEvents.addListener = jest.fn();
 
 describe('CommandService', () => {
   describe('send()', () => {
@@ -20,8 +17,10 @@ describe('CommandService', () => {
 
   describe('onMessageReceived()', () => {
     it('should invoke NativeEvents.addListener with MessageReceived event', () => {
+      CommandService._nativeEvents.addListener = jest.fn();
+
       CommandService.onMessageReceived(() => {});
-      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+      expect(CommandService._nativeEvents.addListener).toHaveBeenCalledWith(
         CommandServiceEventNames.MessageReceived,
         expect.any(Function)
       );
