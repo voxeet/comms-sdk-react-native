@@ -1,18 +1,16 @@
 package io.dolby.sdk.reactnative.services
 
-import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.promise.Promise
-import com.voxeet.sdk.events.v2.ParticipantAddedEvent
-import com.voxeet.sdk.events.v2.ParticipantUpdatedEvent
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.builders.ConferenceCreateOptions
 import com.voxeet.sdk.services.builders.ConferenceJoinOptions
 import com.voxeet.sdk.services.conference.information.ConferenceStatus
+import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
@@ -22,9 +20,7 @@ import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
-import io.dolby.sdk.reactnative.utils.RNEventEmitter
 import io.dolby.sdk.reactnative.utils.ReactPromise
-import org.greenrobot.eventbus.Subscribe
 
 /**
  * The [RNConferenceServiceModule] allows the application to manage the conference life cycle
