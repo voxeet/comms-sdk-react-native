@@ -1,4 +1,4 @@
-package io.dolby.sdk.reactnative.utils
+package io.dolby.sdk.reactnative.eventemitters
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableMap

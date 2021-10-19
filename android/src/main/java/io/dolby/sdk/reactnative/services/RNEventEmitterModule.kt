@@ -2,7 +2,7 @@ package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
-import io.dolby.sdk.reactnative.utils.RNEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import kotlin.math.max
 
 /**

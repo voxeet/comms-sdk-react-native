@@ -1,11 +1,10 @@
-package io.dolby.sdk.reactnative.services
+package io.dolby.sdk.reactnative.eventemitters
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.voxeet.sdk.events.v2.ParticipantAddedEvent
 import com.voxeet.sdk.events.v2.ParticipantUpdatedEvent
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
-import io.dolby.sdk.reactnative.utils.RNEventEmitter
 import org.greenrobot.eventbus.Subscribe
 
 /**
@@ -13,15 +12,6 @@ import org.greenrobot.eventbus.Subscribe
  * @param participantMapper map participant to react JS data
  */
 class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper) : RNEventEmitter {
-
-  /**
-   * The event names and payload keys
-   */
-  companion object {
-    const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
-    const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
-    const val EVENT_PARTICIPANT_KEY = "participant"
-  }
 
   override var context: ReactApplicationContext? = null
 
@@ -53,5 +43,14 @@ class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper)
     val data = Arguments.createMap()
     data.putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
     send(EVENT_PARTICIPANT_UPDATED, data)
+  }
+
+  /**
+   * The event names and payload keys, make sure they are unique in the application scope
+   */
+  companion object {
+    const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
+    const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
+    const val EVENT_PARTICIPANT_KEY = "participant"
   }
 }
