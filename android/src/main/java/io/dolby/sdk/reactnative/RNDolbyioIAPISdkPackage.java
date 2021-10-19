@@ -21,7 +21,7 @@ import io.dolby.sdk.reactnative.mapper.InvitationMapper;
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper;
 import io.dolby.sdk.reactnative.mapper.RecordingMapper;
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule;
-import io.dolby.sdk.reactnative.services.RNConferenceEventEmitter;
+import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter;
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule;
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule;
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule;
