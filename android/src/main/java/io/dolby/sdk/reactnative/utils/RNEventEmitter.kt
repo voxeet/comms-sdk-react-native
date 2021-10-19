@@ -4,18 +4,16 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.voxeet.VoxeetSDK
-import kotlin.math.max
 
 /**
- * Any module needs to send events to JS must implement this interface
- * @see [Sending Events to JavaScript](https://reactnative.dev/docs/native-modules-android#sending-events-to-javascript)
+ * A component that handles native event and forward it to JS must implement this interface
  */
 interface RNEventEmitter {
 
   /**
-   * Record the count of listeners
+   * The react application context which will be used for sending event to JS
    */
-  var listenerCount: Int
+  var context: ReactApplicationContext?
 
   /**
    * The supported events map
@@ -29,34 +27,22 @@ interface RNEventEmitter {
    * @param eventName the name of the event
    * @param data the event data
    */
-  fun send(context: ReactApplicationContext, eventName: String, data: WritableMap) {
-    if (hasListener()) {
-      context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-        .emit(eventName, data)
-    }
+  fun send(eventName: String, data: WritableMap) =
+    context?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)?.emit(eventName, data)
+
+  /**
+   * Register the event emitter for native events
+   */
+  fun register(context: ReactApplicationContext) {
+    this.context = context
+    VoxeetSDK.instance().register(this)
   }
 
   /**
-   * Invoked when adding listener from JS side
-   * @param eventName the name of event
+   * Unregister the event emitter, and it won't receive any native events
    */
-  fun addListener(eventName: String) {
-    if (listenerCount == 0) {
-      VoxeetSDK.instance().register(this)
-    }
-    listenerCount += 1;
+  fun unregister() {
+    this.context = null
+    VoxeetSDK.instance().unregister(this)
   }
-
-  /**
-   * Invoked when remove listeners from JS side
-   * @param count how many listeners are removed, always greater than 0
-   */
-  fun removeListeners(count: Int) {
-    if (hasListener() && listenerCount <= count) {
-      VoxeetSDK.instance().unregister(this)
-    }
-    listenerCount = max(listenerCount - count, 0)
-  }
-
-  fun hasListener(): Boolean = listenerCount > 0
 }
