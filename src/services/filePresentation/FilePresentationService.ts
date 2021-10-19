@@ -88,7 +88,7 @@ export class FilePresentationService {
     handler: (data: FileConvertedEventType) => void
   ): UnsubscribeFunction {
     return NativeEvents.addListener(
-      FilePresentationServiceEventNames.FileConverted,
+      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED,
       (data) => {
         handler(data);
       }
@@ -110,19 +110,19 @@ export class FilePresentationService {
     ) => void
   ): UnsubscribeFunction {
     const filePresentationStartedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.FilePresentationStarted,
+      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
       (data) => {
         handler(data);
       }
     );
     const filePresentationStoppedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.FilePresentationStopped,
+      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
       (data) => {
         handler(data);
       }
     );
     const filePresentationUpdatedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.FilePresentationUpdated,
+      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
       (data) => {
         handler(data);
       }
