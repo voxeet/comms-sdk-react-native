@@ -23,10 +23,10 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param reactContext      react context
  */
 class RNRecordingServiceModule(
-    private val conferenceService: ConferenceService,
-    private val recordingService: RecordingService,
-    reactContext: ReactApplicationContext,
-    private val recordingMapper: RecordingMapper
+  private val conferenceService: ConferenceService,
+  private val recordingService: RecordingService,
+  reactContext: ReactApplicationContext,
+  private val recordingMapper: RecordingMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String = "DolbyIoIAPIRecordingServiceModule"
@@ -60,7 +60,7 @@ class RNRecordingServiceModule(
   @ReactMethod
   fun current(promise: ReactPromise) {
     Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
-      .thenValue(recordingMapper::toNative)
+      .thenValue(recordingMapper::toRN)
       .rejectIfNull()
       .forward(promise)
   }

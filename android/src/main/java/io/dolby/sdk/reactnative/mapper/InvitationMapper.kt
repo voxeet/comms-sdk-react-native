@@ -12,18 +12,17 @@ class InvitationMapper(
   private val participantMapper: ParticipantMapper
 ) {
 
+  fun fromRN(invitedParticipantsRN: ReadableArray): List<ParticipantInvited> =
+    invitedParticipantsRN.toArrayList()
+      .filterIsInstance<ReadableMap>()
+      .mapNotNull { map ->
+        val info = map.getMap(PARTICIPANT_INFO)?.let(participantMapper::infoFromRN)
+        val permissions = map.getArray(PARTICIPANT_PERMISSIONS)?.let(permissionMapper::fromRN)
+        info?.let(::ParticipantInvited)?.apply { setPermissions(permissions) }
+      }
+
   private companion object {
     private const val PARTICIPANT_INFO = "info"
     private const val PARTICIPANT_PERMISSIONS = "permissions"
-  }
-
-  fun fromNative(invitedParticipantsArray: ReadableArray): List<ParticipantInvited> {
-    return invitedParticipantsArray.toArrayList()
-      .filterIsInstance<ReadableMap>()
-      .mapNotNull { map ->
-        val info = map.getMap(PARTICIPANT_INFO)?.let(participantMapper::infoFromNative)
-        val permissions = map.getArray(PARTICIPANT_PERMISSIONS)?.let(permissionMapper::fromNative)
-        info?.let(::ParticipantInvited)?.apply { setPermissions(permissions) }
-      }
   }
 }
