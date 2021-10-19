@@ -18,66 +18,58 @@ import com.voxeet.sdk.models.v2.ParticipantType
  */
 class ParticipantMapper {
 
-  fun participantIdFromNative(participantMap: ReadableMap): String? {
-    return participantMap.getString(PARTICIPANT_ID)
-  }
+  fun participantIdFromRN(participantRN: ReadableMap): String? =
+    participantRN.getString(PARTICIPANT_ID)
 
-  fun infoFromNative(participantInfoMap: ReadableMap): ParticipantInfo {
-    return ParticipantInfo(
-      participantInfoMap.getString(PARTICIPANT_INFO_NAME),
-      participantInfoMap.getString(PARTICIPANT_INFO_EXTERNAL_ID),
-      participantInfoMap.getString(PARTICIPANT_INFO_AVATAR_URL)
-    )
-  }
+  fun infoFromRN(participantInfoRN: ReadableMap) = ParticipantInfo(
+    participantInfoRN.getString(PARTICIPANT_INFO_NAME),
+    participantInfoRN.getString(PARTICIPANT_INFO_EXTERNAL_ID),
+    participantInfoRN.getString(PARTICIPANT_INFO_AVATAR_URL)
+  )
 
-  fun toNativeInfo(participantInfo: ParticipantInfo): ReadableMap {
-    val map = Arguments.createMap()
-    participantInfo.name?.let { map.putString(PARTICIPANT_INFO_NAME, it) }
-    participantInfo.externalId?.let { map.putString(PARTICIPANT_INFO_EXTERNAL_ID, it) }
-    participantInfo.avatarUrl?.let { map.putString(PARTICIPANT_INFO_AVATAR_URL, it) }
-    return map
-  }
-
-  fun toNative(participant: Participant): ReadableMap {
-    val map = Arguments.createMap()
-    participant.id?.let { map.putString(PARTICIPANT_ID, participant.id) }
-    map.putBoolean(PARTICIPANT_AUDIO_TRANSMITTING, participant.audioTransmitting())
-    map.putString(PARTICIPANT_STATUS, toNativeParticipantStatus(participant.status))
-    participant.info?.let { map.putMap(PARTICIPANT_INFO, toNativeInfo(it)) }
-    map.putArray(PARTICIPANT_STREAMS, toNativeMediaStreams(participant.streams()))
-    map.putString(PARTICIPANT_TYPE, toNativeParticipantType(participant.participantType()))
-    return map
-  }
-
-  fun toNative(participants: List<Participant?>): ReadableArray {
-    val participantsArray = Arguments.createArray()
-    participants
-      .filterNotNull()
-      .map(::toNative)
-      .forEach(participantsArray::pushMap)
-    return participantsArray
-  }
-
-  private fun toNativeParticipantType(participantType: ParticipantType): String {
-    return when (participantType) {
-      ParticipantType.USER -> "USER"
-      ParticipantType.LISTENER -> "LISTENER"
-      ParticipantType.SPEAKER,
-      ParticipantType.PSTN,
-      ParticipantType.MIXER,
-      ParticipantType.NONE,
-      ParticipantType.DVC,
-      ParticipantType.ROBOT,
-      ParticipantType.ROBOT_SPEAKER,
-      ParticipantType.ROBOT_LISTENER,
-      ParticipantType.ROBOT_PSTN,
-      ParticipantType.ROBOT_MIXER,
-      ParticipantType.ROBOT_NONE -> "UNKNOWN"
+  fun toRNInfo(participantInfo: ParticipantInfo): ReadableMap =
+    Arguments.createMap().apply {
+      participantInfo.name?.let { putString(PARTICIPANT_INFO_NAME, it) }
+      participantInfo.externalId?.let { putString(PARTICIPANT_INFO_EXTERNAL_ID, it) }
+      participantInfo.avatarUrl?.let { putString(PARTICIPANT_INFO_AVATAR_URL, it) }
     }
+
+  fun toRN(participant: Participant): ReadableMap =
+    Arguments.createMap().apply {
+      participant.id?.let { putString(PARTICIPANT_ID, participant.id) }
+      putBoolean(PARTICIPANT_AUDIO_TRANSMITTING, participant.audioTransmitting())
+      putString(PARTICIPANT_STATUS, toRNParticipantStatus(participant.status))
+      participant.info?.let { putMap(PARTICIPANT_INFO, toRNInfo(it)) }
+      putArray(PARTICIPANT_STREAMS, toRNMediaStreams(participant.streams()))
+      putString(PARTICIPANT_TYPE, toRNParticipantType(participant.participantType()))
+    }
+
+  fun toRN(participants: List<Participant?>): ReadableArray =
+    Arguments.createArray().apply {
+      participants
+        .filterNotNull()
+        .map(::toRN)
+        .forEach(::pushMap)
+    }
+
+  private fun toRNParticipantType(participantType: ParticipantType) = when (participantType) {
+    ParticipantType.USER -> "USER"
+    ParticipantType.LISTENER -> "LISTENER"
+    ParticipantType.SPEAKER,
+    ParticipantType.PSTN,
+    ParticipantType.MIXER,
+    ParticipantType.NONE,
+    ParticipantType.DVC,
+    ParticipantType.ROBOT,
+    ParticipantType.ROBOT_SPEAKER,
+    ParticipantType.ROBOT_LISTENER,
+    ParticipantType.ROBOT_PSTN,
+    ParticipantType.ROBOT_MIXER,
+    ParticipantType.ROBOT_NONE -> "UNKNOWN"
   }
 
-  private fun toNativeParticipantStatus(participantStatus: ConferenceParticipantStatus): String {
-    return when (participantStatus) {
+  private fun toRNParticipantStatus(participantStatus: ConferenceParticipantStatus): String =
+    when (participantStatus) {
       ConferenceParticipantStatus.CONNECTING -> "CONNECTING"
       ConferenceParticipantStatus.DECLINE -> "DECLINE"
       ConferenceParticipantStatus.ERROR -> "ERROR"
@@ -86,73 +78,64 @@ class ParticipantMapper {
       ConferenceParticipantStatus.LEFT -> "LEFT"
       ConferenceParticipantStatus.RESERVED -> "RESERVED"
       ConferenceParticipantStatus.WARNING -> "WARNING"
-      ConferenceParticipantStatus.IN_PROGRESS, ConferenceParticipantStatus.ON_AIR, ConferenceParticipantStatus.LATER, ConferenceParticipantStatus.MISSED, ConferenceParticipantStatus.UNKNOWN -> "UNKNOWN"
+      ConferenceParticipantStatus.IN_PROGRESS,
+      ConferenceParticipantStatus.ON_AIR,
+      ConferenceParticipantStatus.LATER,
+      ConferenceParticipantStatus.MISSED,
+      ConferenceParticipantStatus.UNKNOWN -> "UNKNOWN"
     }
-  }
 
-  private fun toNativeMedialStream(stream: MediaStream): ReadableMap {
-    val map = Arguments.createMap()
-    map.putString(PARTICIPANT_STREAMS_ID, stream.peerId())
-    map.putString(PARTICIPANT_STREAMS_TYPE, toNativeMediaStreamType(stream.type))
-    map.putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toNativeAudioTracks(stream.audioTracks()))
-    map.putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toNativeVideoTracks(stream.videoTracks()))
-    return map
-  }
+  private fun toRNMedialStream(stream: MediaStream): ReadableMap =
+    Arguments.createMap().apply {
+      putString(PARTICIPANT_STREAMS_ID, stream.peerId())
+      putString(PARTICIPANT_STREAMS_TYPE, toRNMediaStreamType(stream.type))
+      putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toRNAudioTracks(stream.audioTracks()))
+      putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toRNVideoTracks(stream.videoTracks()))
+    }
 
-  private fun toNativeMediaStreams(streams: List<MediaStream>): ReadableArray {
-    val streamsArray = Arguments.createArray()
-    streams
-      .map(::toNativeMedialStream)
-      .forEach(streamsArray::pushMap)
-    return streamsArray
-  }
+  private fun toRNMediaStreams(streams: List<MediaStream>): ReadableArray =
+    Arguments.createArray().apply {
+      streams
+        .map(::toRNMedialStream)
+        .forEach(::pushMap)
+    }
 
-  private fun toNativeMediaStreamType(mediaStreamType: MediaStreamType): String {
-    return when (mediaStreamType) {
+  private fun toRNMediaStreamType(mediaStreamType: MediaStreamType): String =
+    when (mediaStreamType) {
       MediaStreamType.Camera -> "CAMERA"
       MediaStreamType.ScreenShare -> "SCREEN_SHARE"
-      MediaStreamType.Custom1,
-      MediaStreamType.Custom2,
-      MediaStreamType.Custom3,
-      MediaStreamType.Custom4,
-      MediaStreamType.Custom5,
-      MediaStreamType.Custom6,
-      MediaStreamType.Custom7,
-      MediaStreamType.Custom8 -> "UNKNOWN"
+      else -> "UNKNOWN"
     }
-  }
 
-  private fun toNativeAudioTracks(audioTracks: List<AudioTrack?>): ReadableArray {
-    val streamsArray = WritableNativeArray()
-    audioTracks
-      .filterNotNull()
-      .map(AudioTrack::id)
-      .forEach(streamsArray::pushString)
-    return streamsArray
-  }
+  private fun toRNAudioTracks(audioTracks: List<AudioTrack?>): ReadableArray =
+    WritableNativeArray().apply {
+      audioTracks
+        .filterNotNull()
+        .map(AudioTrack::id)
+        .forEach(::pushString)
+    }
 
-  private fun toNativeVideoTracks(videoTracks: List<VideoTrack?>): ReadableArray {
-    val streamsArray = Arguments.createArray()
-    videoTracks
-      .filterNotNull()
-      .map(VideoTrack::id)
-      .forEach(streamsArray::pushString)
-    return streamsArray
-  }
+  private fun toRNVideoTracks(videoTracks: List<VideoTrack?>): ReadableArray =
+    Arguments.createArray().apply {
+      videoTracks
+        .filterNotNull()
+        .map(VideoTrack::id)
+        .forEach(::pushString)
+    }
 
   companion object {
-    const val PARTICIPANT_ID = "id"
-    const val PARTICIPANT_AUDIO_TRANSMITTING = "audioTransmitting"
-    const val PARTICIPANT_INFO = "info"
-    const val PARTICIPANT_INFO_NAME = "name"
-    const val PARTICIPANT_INFO_EXTERNAL_ID = "externalId"
-    const val PARTICIPANT_INFO_AVATAR_URL = "avatarUrl"
-    const val PARTICIPANT_STATUS = "status"
-    const val PARTICIPANT_STREAMS = "streams"
-    const val PARTICIPANT_STREAMS_ID = "id"
-    const val PARTICIPANT_STREAMS_TYPE = "type"
-    const val PARTICIPANT_STREAMS_AUDIO_TRACKS = "audioTracks"
-    const val PARTICIPANT_STREAMS_VIDEO_TRACKS = "videoTracks"
-    const val PARTICIPANT_TYPE = "type"
+    private const val PARTICIPANT_ID = "id"
+    private const val PARTICIPANT_AUDIO_TRANSMITTING = "audioTransmitting"
+    private const val PARTICIPANT_INFO = "info"
+    private const val PARTICIPANT_INFO_NAME = "name"
+    private const val PARTICIPANT_INFO_EXTERNAL_ID = "externalId"
+    private const val PARTICIPANT_INFO_AVATAR_URL = "avatarUrl"
+    private const val PARTICIPANT_STATUS = "status"
+    private const val PARTICIPANT_STREAMS = "streams"
+    private const val PARTICIPANT_STREAMS_ID = "id"
+    private const val PARTICIPANT_STREAMS_TYPE = "type"
+    private const val PARTICIPANT_STREAMS_AUDIO_TRACKS = "audioTracks"
+    private const val PARTICIPANT_STREAMS_VIDEO_TRACKS = "videoTracks"
+    private const val PARTICIPANT_TYPE = "type"
   }
 }
