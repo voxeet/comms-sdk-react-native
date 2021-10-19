@@ -15,3 +15,5 @@
 ### participant
 
 • **participant**: [`Participant`](_internal_.Participant.md)
+
+The conference participant.
