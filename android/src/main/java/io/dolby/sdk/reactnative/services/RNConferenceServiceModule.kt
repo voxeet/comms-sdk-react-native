@@ -22,7 +22,7 @@ import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
-import io.dolby.sdk.reactnative.utils.RNEventEmitterModule
+import io.dolby.sdk.reactnative.utils.RNEventEmitter
 import io.dolby.sdk.reactnative.utils.ReactPromise
 import org.greenrobot.eventbus.Subscribe
 
@@ -81,8 +81,9 @@ class RNConferenceServiceModule(
   private val conferenceMapper: ConferenceMapper,
   private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
   private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
-  private val participantMapper: ParticipantMapper
-) : RNEventEmitterModule(reactContext) {
+  private val participantMapper: ParticipantMapper,
+  private val eventEmitter: RNEventEmitter
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName() = "DolbyIoIAPIConferenceService"
 
@@ -407,32 +408,6 @@ class RNConferenceServiceModule(
   }
 
   /**
-   * The event names and payload keys
-   */
-  companion object {
-    const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
-    const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
-    const val EVENT_PARTICIPANT_KEY = "participant"
-  }
-
-  /**
-   * Constants of this module for JS to check
-   */
-  override fun getConstants(): MutableMap<String, Any> {
-    return eventMap.toMutableMap()
-  }
-
-
-  /**
-   * The events which are supported in this module
-   */
-  override val eventMap: Map<String, String> = mapOf(
-    "EVENT_CONFERENCE_PARTICIPANT_ADDED" to EVENT_PARTICIPANT_ADDED,
-    "EVENT_CONFERENCE_PARTICIPANT_UPDATED" to EVENT_PARTICIPANT_UPDATED,
-    "EVENT_CONFERENCE_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY
-  )
-
-  /**
    * Every emitter module must implement this method in place, otherwise JS cannot receive event
    */
   @ReactMethod
@@ -448,23 +423,4 @@ class RNConferenceServiceModule(
     super.removeListeners(count)
   }
 
-  /**
-   * New participant add event
-   */
-  @Subscribe
-  fun on(event: ParticipantAddedEvent) {
-    val data = Arguments.createMap()
-    data.putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
-    send(reactContext, EVENT_PARTICIPANT_ADDED, data)
-  }
-
-  /**
-   * Existing participant update event
-   */
-  @Subscribe
-  fun on(event: ParticipantUpdatedEvent) {
-    val data = Arguments.createMap()
-    data.putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
-    send(reactContext, EVENT_PARTICIPANT_UPDATED, data)
-  }
 }
