@@ -10,7 +10,11 @@
 
 ### Properties
 
+- [_nativeEvents](DolbyIoIAPI.md#_nativeevents)
+- [command](DolbyIoIAPI.md#command)
 - [conference](DolbyIoIAPI.md#conference)
+- [filePresentation](DolbyIoIAPI.md#filepresentation)
+- [notification](DolbyIoIAPI.md#notification)
 - [recording](DolbyIoIAPI.md#recording)
 - [refreshAccessTokenInBackground](DolbyIoIAPI.md#refreshaccesstokeninbackground)
 - [session](DolbyIoIAPI.md#session)
@@ -28,9 +32,33 @@
 
 ## Properties
 
+### \_nativeEvents
+
+• `Private` **\_nativeEvents**: `default`
+
+___
+
+### command
+
+• **command**: [`CommandService`](_internal_.CommandService.md)
+
+___
+
 ### conference
 
 • **conference**: [`ConferenceService`](_internal_.ConferenceService.md)
+
+___
+
+### filePresentation
+
+• **filePresentation**: [`FilePresentationService`](_internal_.FilePresentationService.md)
+
+___
+
+### notification
+
+• **notification**: [`NotificationService`](_internal_.NotificationService.md)
 
 ___
 
