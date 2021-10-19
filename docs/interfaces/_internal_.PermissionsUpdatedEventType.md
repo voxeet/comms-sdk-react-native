@@ -15,3 +15,5 @@
 ### permissions
 
 • **permissions**: [`ConferencePermission`](../enums/_internal_.ConferencePermission.md)[]
+
+The updated conference permissions.

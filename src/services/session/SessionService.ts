@@ -11,6 +11,9 @@ const { DolbyIoIAPISessionServiceModule } = NativeModules;
  */
 
 export class SessionService {
+  /** @internal */
+  _nativeModule = DolbyIoIAPISessionServiceModule;
+
   /**
    * Opens a new session.
    * @param participantInfo [participantInfo={}] The optional information about the local participant.
@@ -18,7 +21,7 @@ export class SessionService {
    */
   public async open(participantInfo: ParticipantInfo = {}): Promise<null> {
     const { name, avatarUrl } = participantInfo;
-    return DolbyIoIAPISessionServiceModule.open({
+    return this._nativeModule.open({
       name,
       avatarUrl,
     });
@@ -29,7 +32,7 @@ export class SessionService {
    * @returns {Promise<null>}
    */
   public async close(): Promise<null> {
-    return DolbyIoIAPISessionServiceModule.close();
+    return this._nativeModule.close();
   }
 
   /**
@@ -37,9 +40,7 @@ export class SessionService {
    * @returns {Promise<User>}
    */
   public async getCurrentUser(): Promise<User> {
-    return transformToUser(
-      await DolbyIoIAPISessionServiceModule.getParticipant()
-    );
+    return transformToUser(await this._nativeModule.getParticipant());
   }
 }
 

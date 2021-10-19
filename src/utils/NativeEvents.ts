@@ -2,33 +2,27 @@
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
-import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
 import type { UnregisterListener } from './types';
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
-
-const { DolbyIoIAPIModule } = NativeModules;
+import { NativeEventEmitter } from 'react-native';
 
 interface NativeEventType
   extends DolbyIoIAPIEventMap,
     ConferenceServiceEventMap,
     NotificationServiceEventMap,
-    FilePresentationServiceEventMap,
     CommandServiceEventMap {}
 
-const EventEmitter = Platform.select({
-  ios: new NativeEventEmitter(DolbyIoIAPIModule),
-  android: new NativeEventEmitter(DolbyIoIAPIModule),
-});
-
 export default class NativeEvents {
-  public static addListener<K extends keyof NativeEventType>(
+  private _nativeEventEmitter: any = undefined;
+
+  constructor(module: any) {
+    this._nativeEventEmitter = new NativeEventEmitter(module);
+  }
+
+  public addListener<K extends keyof NativeEventType>(
     type: K,
     listener: (event: NativeEventType[K]) => void
   ): UnregisterListener {
-    EventEmitter?.addListener(type, listener);
-    return () => {
-      EventEmitter?.removeListener(type, listener);
-    };
+    return this?._nativeEventEmitter?.addListener(type, listener);
   }
 }

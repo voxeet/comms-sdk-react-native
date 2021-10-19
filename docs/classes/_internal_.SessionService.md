@@ -15,6 +15,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 ### Methods
 
 - [close](_internal_.SessionService.md#close)
+- [getCurrentUser](_internal_.SessionService.md#getcurrentuser)
 - [open](_internal_.SessionService.md#open)
 
 ## Constructors
@@ -34,6 +35,18 @@ Closes the current session.
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<``null``\>
+
+___
+
+### getCurrentUser
+
+▸ **getCurrentUser**(): [`Promise`](../modules/_internal_.md#promise)<[`User`](../interfaces/_internal_.User.md)\>
+
+Gets object of local user
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<[`User`](../interfaces/_internal_.User.md)\>
 
 ___
 
