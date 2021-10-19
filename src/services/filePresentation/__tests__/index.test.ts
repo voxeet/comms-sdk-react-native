@@ -81,7 +81,7 @@ describe('FilePresentationService', () => {
     it('should invoke NativeEvents.addListener with FileConverted event', () => {
       FilePresentationService.onFileConverted(() => {});
       expect(NativeEvents.addListener).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.FileConverted,
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED,
         expect.any(Function)
       );
     });
@@ -91,21 +91,21 @@ describe('FilePresentationService', () => {
     it('should invoke NativeEvents.addListener with FilePresentationStarted event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(NativeEvents.addListener).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.FilePresentationStarted,
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
         expect.any(Function)
       );
     });
     it('should invoke NativeEvents.addListener with FilePresentationStopped event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(NativeEvents.addListener).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.FilePresentationStopped,
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
         expect.any(Function)
       );
     });
     it('should invoke NativeEvents.addListener with FilePresentationUpdated event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(NativeEvents.addListener).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.FilePresentationUpdated,
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
         expect.any(Function)
       );
     });

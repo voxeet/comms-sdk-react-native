@@ -5,13 +5,13 @@ import type {
 
 export enum FilePresentationServiceEventNames {
   /** Emitted when the file is converted. */
-  FileConverted = 'FileConverted',
+  EVENT_FILE_PRESENTATION_FILE_CONVERTED = 'EVENT_FILE_PRESENTATION_FILE_CONVERTED',
   /** Emitted when the presenter started the file presentation. */
-  FilePresentationStarted = 'FilePresentationStarted',
+  EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED = 'EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED',
   /** Emitted when the presenter ended the file presentation. */
-  FilePresentationStopped = 'FilePresentationStopped',
+  EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED = 'EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED',
   /** Emitted when the presenter changed the displayed page of the shared file.  */
-  FilePresentationUpdated = 'FilePresentationUpdated',
+  EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED = 'EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED',
 }
 
 export interface FileConvertedEventType {
@@ -32,8 +32,8 @@ export interface FilePresentationUpdatedEventType {
 }
 
 export interface FilePresentationServiceEventMap {
-  [FilePresentationServiceEventNames.FileConverted]: FileConvertedEventType;
-  [FilePresentationServiceEventNames.FilePresentationStarted]: FilePresentationStartedEventType;
-  [FilePresentationServiceEventNames.FilePresentationStopped]: FilePresentationStoppedEventType;
-  [FilePresentationServiceEventNames.FilePresentationUpdated]: FilePresentationUpdatedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED]: FileConvertedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED]: FilePresentationStartedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED]: FilePresentationStoppedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED]: FilePresentationUpdatedEventType;
 }
