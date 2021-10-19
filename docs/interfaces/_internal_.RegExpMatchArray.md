@@ -104,7 +104,7 @@ Iterator
 
 #### Inherited from
 
-Array.\_\_@iterator@24
+Array.\_\_@iterator@271
 
 ___
 
@@ -131,7 +131,7 @@ when they will be absent when used in a 'with' statement.
 
 #### Inherited from
 
-Array.\_\_@unscopables@26
+Array.\_\_@unscopables@273
 
 ___
 

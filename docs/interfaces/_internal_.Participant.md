@@ -8,37 +8,12 @@
 
 ### Properties
 
-- [avatarUrl](_internal_.Participant.md#avatarurl)
-- [conferenceStatus](_internal_.Participant.md#conferencestatus)
-- [externalId](_internal_.Participant.md#externalid)
 - [id](_internal_.Participant.md#id)
-- [name](_internal_.Participant.md#name)
+- [info](_internal_.Participant.md#info)
+- [status](_internal_.Participant.md#status)
+- [type](_internal_.Participant.md#type)
 
 ## Properties
-
-### avatarUrl
-
-• `Optional` **avatarUrl**: `string`
-
-The URL of the participant's avatar.
-
-___
-
-### conferenceStatus
-
-• `Optional` **conferenceStatus**: `string`
-
-The current participant's status.
-
-___
-
-### externalId
-
-• `Optional` **externalId**: `string`
-
-The participant's external ID.
-
-___
 
 ### id
 
@@ -48,8 +23,24 @@ The participant's ID.
 
 ___
 
-### name
+### info
 
-• `Optional` **name**: `string`
+• **info**: [`ParticipantInfo`](_internal_.ParticipantInfo.md)
 
-The participant's name.
+The participant's informations.
+
+___
+
+### status
+
+• `Optional` **status**: [`ParticipantStatus`](../enums/_internal_.ParticipantStatus.md)
+
+The participant's status.
+
+___
+
+### type
+
+• `Optional` **type**: [`ParticipantType`](../enums/_internal_.ParticipantType.md)
+
+The participant's type.

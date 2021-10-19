@@ -6,17 +6,21 @@
 
 ### Enumerations
 
-- [AudioProcessing](../enums/_internal_.AudioProcessing.md)
 - [Codec](../enums/_internal_.Codec.md)
 - [ConferencePermission](../enums/_internal_.ConferencePermission.md)
 - [ConferenceStatus](../enums/_internal_.ConferenceStatus.md)
 - [MediaStreamType](../enums/_internal_.MediaStreamType.md)
-- [Mode](../enums/_internal_.Mode.md)
+- [ParticipantStatus](../enums/_internal_.ParticipantStatus.md)
+- [ParticipantType](../enums/_internal_.ParticipantType.md)
 - [RTCPMode](../enums/_internal_.RTCPMode.md)
+- [RTCStatsType](../enums/_internal_.RTCStatsType.md)
 
 ### Classes
 
+- [CommandService](../classes/_internal_.CommandService.md)
 - [ConferenceService](../classes/_internal_.ConferenceService.md)
+- [FilePresentationService](../classes/_internal_.FilePresentationService.md)
+- [NotificationService](../classes/_internal_.NotificationService.md)
 - [RecordingService](../classes/_internal_.RecordingService.md)
 - [SessionService](../classes/_internal_.SessionService.md)
 
@@ -38,14 +42,20 @@
 - [ConferenceMixingOptions](../interfaces/_internal_.ConferenceMixingOptions.md)
 - [ConferenceReplayOptions](../interfaces/_internal_.ConferenceReplayOptions.md)
 - [ConferenceStatusUpdatedEventType](../interfaces/_internal_.ConferenceStatusUpdatedEventType.md)
+- [File](../interfaces/_internal_.File.md)
+- [FileConverted](../interfaces/_internal_.FileConverted.md)
+- [FilePresentation](../interfaces/_internal_.FilePresentation.md)
+- [InvitationReceivedEventType](../interfaces/_internal_.InvitationReceivedEventType.md)
 - [Iterable](../interfaces/_internal_.Iterable.md)
 - [IterableIterator](../interfaces/_internal_.IterableIterator.md)
 - [Iterator](../interfaces/_internal_.Iterator.md)
 - [IteratorReturnResult](../interfaces/_internal_.IteratorReturnResult.md)
 - [IteratorYieldResult](../interfaces/_internal_.IteratorYieldResult.md)
+- [MessageReceivedEventType](../interfaces/_internal_.MessageReceivedEventType.md)
 - [Participant](../interfaces/_internal_.Participant.md)
 - [ParticipantAddedEventType](../interfaces/_internal_.ParticipantAddedEventType.md)
 - [ParticipantInfo](../interfaces/_internal_.ParticipantInfo.md)
+- [ParticipantInvited](../interfaces/_internal_.ParticipantInvited.md)
 - [ParticipantPermissions](../interfaces/_internal_.ParticipantPermissions.md)
 - [ParticipantRemovedEventType](../interfaces/_internal_.ParticipantRemovedEventType.md)
 - [ParticipantUpdatedEventType](../interfaces/_internal_.ParticipantUpdatedEventType.md)
@@ -67,6 +77,7 @@
 - [StreamUpdatedEventType](../interfaces/_internal_.StreamUpdatedEventType.md)
 - [String](../interfaces/_internal_.String.md)
 - [StringConstructor](../interfaces/_internal_.StringConstructor.md)
+- [User](../interfaces/_internal_.User.md)
 
 ### Type aliases
 

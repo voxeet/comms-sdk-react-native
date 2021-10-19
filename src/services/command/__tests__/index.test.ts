@@ -1,14 +1,13 @@
 import { NativeModules } from 'react-native';
 
-import NativeEvents from '../../../utils/NativeEvents';
 import CommandService from '../CommandService';
 import { CommandServiceEventNames } from '../events';
 
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
 
-NativeEvents.addListener = jest.fn();
-
 describe('CommandService', () => {
+  CommandService._nativeEvents.addListener = jest.fn();
+
   describe('send()', () => {
     it('should invoke exported send method with correct arguments', () => {
       CommandService.send('some message');
@@ -21,10 +20,19 @@ describe('CommandService', () => {
   describe('onMessageReceived()', () => {
     it('should invoke NativeEvents.addListener with MessageReceived event', () => {
       CommandService.onMessageReceived(() => {});
-      expect(NativeEvents.addListener).toHaveBeenCalledWith(
+      expect(CommandService._nativeEvents.addListener).toHaveBeenCalledWith(
         CommandServiceEventNames.MessageReceived,
         expect.any(Function)
       );
     });
   });
+});
+
+jest.mock('./utils/NativeEvents', () => {
+  const originalModule = jest.requireActual('../utils/NativeEvents');
+
+  return {
+    ...originalModule,
+    addListener: jest.fn(),
+  };
 });

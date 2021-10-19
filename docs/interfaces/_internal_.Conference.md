@@ -36,7 +36,7 @@ ___
 
 • `Optional` **isNew**: `boolean`
 
-Checks if the created conference is new.
+Provides information if the created conference is new one.
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • **participants**: [`Participant`](_internal_.Participant.md)[]
 
-Gets information about conference participants.
+Provides array of conference participants.
 
 ___
 

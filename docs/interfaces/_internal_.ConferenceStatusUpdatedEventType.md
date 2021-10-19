@@ -15,3 +15,5 @@
 ### status
 
 • **status**: [`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)
+
+The new status.
