@@ -43,11 +43,13 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  *      * [join] a conference
  *      * [replay] a conference
  *
- *  4. The application can start and stop sending the local participant's audio streams to the conference. TODO DEXA-37 link to start/stopAudio
- * The application can also start and stop sending the remote participants' audio streams to the local participant. TODO DEXA-37 link to start/stopVideo
+ *  4. The application can [startAudio] and [stopAudio] sending audio transmission between:
+ *      * local participant's and a conference.
+ *      * remote participant’s from the conference and the local participant.
  *
- *  5. The application can start and stop sending the local participant's video streams to the conference.
- * The application can also start and stop sending the remote participants' video streams to the local participant.
+ *  5. The application can [startVideo] and [stopVideo] sending video transmission between:
+ *      * local participant's and a conference.
+ *      * remote participant’s from the conference and the local participant.
  *
  *  6. During a conference, the application can:
  *      * Customize the number of the received video streams and prioritize the selected participants'
@@ -407,6 +409,88 @@ class RNConferenceServiceModule(
     Promises.promise(participantMapper.participantIdsFromRN(participantsRN))
       .thenValue { participantId -> participantId.mapNotNull(conferenceService::findParticipantById) }
       .thenValue { conferenceService.videoForwarding(max, it) }
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Starts audio transmission between the local client and a conference.
+   * The startAudio method impacts only the audio streams that the local participant sends and receives;
+   * the method does not impact the audio transmission between remote participants and a conference and does not allow the local
+   * participant to force sending remote participants’ streams to the conference or to the local participant.
+   *
+   * Depending on the specified participant in the participant parameter, the startAudio method starts the proper audio transmission:
+   * - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
+   * - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client.
+   *   This allows the local participant to unmute remote participants who are locally muted through the stopAudio method.
+   *
+   * @param participantMap The selected participant.
+   *                       If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object.
+   *                       If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects.
+   * @param promise        returns null
+   */
+  @ReactMethod
+  fun startAudio(participantMap: ReadableMap, promise: ReactPromise) {
+    Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
+      .thenPromise(conferenceService::startAudio)
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Stops audio transmission between the local client and a conference.
+   * The stopAudio method impacts only the audio streams that the local participant sends and receives;
+   * the method does not impact the audio transmission between remote participants and a conference and does not allow the local
+   * participant to stop sending remote participants’ streams to the conference.
+   *
+   * Depending on the specified participant in the participant parameter, the stopAudio method stops the proper audio transmission:
+   * - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
+   * - When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client.
+   *   This allows the local participant to locally mute remote participants.
+   *
+   * Leaving a conference resets the stopAudio settings.
+   * Participants who rejoin a conference need to provide the desired stopAudio parameters and call the stopAudio method once again.
+   *
+   * The stopAudio method requires up to a few seconds to become effective.
+   *
+   * @param participantMap The selected participant.
+   *                       If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object.
+   *                       If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects.
+   * @param promise        returns null
+   */
+  @ReactMethod
+  fun stopAudio(participantMap: ReadableMap, promise: ReactPromise) {
+    Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
+      .thenPromise(conferenceService::stopAudio)
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream
+   * to the local participant.
+   *
+   * The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream,
+   * the local participant cannot change it using the startVideo method.
+   *
+   * @param participantMap  The participant who will receive the video stream, either remote or local.
+   * @param promise         returns null
+   */
+  @ReactMethod
+  fun startVideo(participantMap: ReadableMap, promise: ReactPromise) {
+    Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
+      .thenPromise(conferenceService::startVideo)
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream
+   * to the local participant.
+   *
+   * @param participantMap The participant who will stop receiving the video stream.
+   * @param promise        return null
+   */
+  @ReactMethod
+  fun stopVideo(participantMap: ReadableMap, promise: ReactPromise) {
+    Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
+      .thenPromise(conferenceService::stopVideo)
       .forward(promise, ignoreReturnType = true)
   }
 
