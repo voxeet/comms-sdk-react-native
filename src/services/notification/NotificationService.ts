@@ -12,6 +12,11 @@ import type { InvitationReceivedEventType } from './events';
 const { DolbyIoIAPINotificationService } = NativeModules;
 
 export class NotificationService {
+  /** @internal */
+  _nativeModule = DolbyIoIAPINotificationService;
+  /** @internal */
+  _nativeEvents = new NativeEvents(DolbyIoIAPINotificationService);
+
   /**
    * Notifies conference participants about a conference invitation.
    * @param conference<Conference> The conference object.
@@ -22,7 +27,7 @@ export class NotificationService {
     conference: Conference,
     participants: ParticipantInvited[]
   ): Promise<void> {
-    return DolbyIoIAPINotificationService.invite(conference, participants);
+    return this._nativeModule.invite(conference, participants);
   }
 
   /**
@@ -31,7 +36,7 @@ export class NotificationService {
    * @returns {Promise<void>}
    */
   public async decline(conference: Conference): Promise<void> {
-    return DolbyIoIAPINotificationService.decline(conference);
+    return this._nativeModule.decline(conference);
   }
 
   /**
@@ -42,7 +47,7 @@ export class NotificationService {
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void
   ): UnsubscribeFunction {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
       (data) => {
         handler(data);

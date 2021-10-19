@@ -10,6 +10,7 @@
 
 - [alias](_internal_.ConferenceCreateOptions.md#alias)
 - [params](_internal_.ConferenceCreateOptions.md#params)
+- [pinCode](_internal_.ConferenceCreateOptions.md#pincode)
 
 ## Properties
 
@@ -26,3 +27,11 @@ ___
 • `Optional` **params**: [`ConferenceCreateParameters`](_internal_.ConferenceCreateParameters.md)
 
 The conference parameters.
+
+___
+
+### pinCode
+
+• `Optional` **pinCode**: `number`
+
+The conference PIN code.
