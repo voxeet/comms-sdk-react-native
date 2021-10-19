@@ -12,12 +12,17 @@ The Command service allows the application to send text messages or notification
 The service also emits an received event to inform the application about received messages.
  */
 export class CommandService {
+  /** @internal */
+  _nativeModule = DolbyIoIAPICommandServiceModule;
+  /** @internal */
+  _nativeEvents = new NativeEvents(DolbyIoIAPICommandServiceModule);
+
   /**
    * Sends a message, in the form of a basic stream, to all conference participants.
    * @param message<string> Message to send
    */
   public async send(message: string): Promise<void> {
-    return DolbyIoIAPICommandServiceModule.send(message);
+    return this._nativeModule.send(message);
   }
 
   /**
@@ -28,7 +33,7 @@ export class CommandService {
   public onMessageReceived(
     handler: (data: MessageReceivedEventType) => void
   ): () => void {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       CommandServiceEventNames.MessageReceived,
       (data) => handler(data)
     );

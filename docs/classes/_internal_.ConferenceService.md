@@ -16,7 +16,6 @@
 - [current](_internal_.ConferenceService.md#current)
 - [fetch](_internal_.ConferenceService.md#fetch)
 - [getAudioLevel](_internal_.ConferenceService.md#getaudiolevel)
-- [getAudioProcessing](_internal_.ConferenceService.md#getaudioprocessing)
 - [getLocalStats](_internal_.ConferenceService.md#getlocalstats)
 - [getMaxVideoForwarding](_internal_.ConferenceService.md#getmaxvideoforwarding)
 - [getParticipant](_internal_.ConferenceService.md#getparticipant)
@@ -52,9 +51,9 @@
 
 ### create
 
-▸ **create**(`options`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
+▸ **create**(`options?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Create a conference with ConferenceOptions
+Create a conference with options
 
 #### Parameters
 
@@ -66,7 +65,7 @@ Create a conference with ConferenceOptions
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Promise with a Conference
+Promise with a Conference object
 
 ___
 
@@ -74,13 +73,13 @@ ___
 
 ▸ **current**(): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Returns information about the current conference.
+Provides information about the current conference.
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Promise with a Conference
+Promise with a Conference object
 
 ___
 
@@ -88,7 +87,7 @@ ___
 
 ▸ **fetch**(`conferenceId?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Provides a Conference object that allows joining a conference. Without a param returns current Conference object.
+Provides a Conference object that allows joining a conference. Without a param it returns current Conference object.
 
 #### Parameters
 
@@ -100,13 +99,13 @@ Provides a Conference object that allows joining a conference. Without a param r
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Promise with a Conference
+Promise with a Conference object
 
 ___
 
 ### getAudioLevel
 
-▸ **getAudioLevel**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`number`\>
+▸ **getAudioLevel**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`number`\>
 
 Gets the participant's audio level
 
@@ -114,45 +113,25 @@ Gets the participant's audio level
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<`number`\>
 
-Promise with number
-
-___
-
-### getAudioProcessing
-
-▸ **getAudioProcessing**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<[`AudioProcessing`](../enums/_internal_.AudioProcessing.md)\>
-
-Gets the current audio processing state for a conference.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
-
-#### Returns
-
-[`Promise`](../modules/_internal_.md#promise)<[`AudioProcessing`](../enums/_internal_.AudioProcessing.md)\>
-
-Promise with AudioProcessing
+Promise with AudioLevel
 
 ___
 
 ### getLocalStats
 
-▸ **getLocalStats**(): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **getLocalStats**(): [`Promise`](../modules/_internal_.md#promise)<[`RTCStatsType`](../enums/_internal_.RTCStatsType.md)[]\>
 
 Provides standard WebRTC statistics for the application.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<[`RTCStatsType`](../enums/_internal_.RTCStatsType.md)[]\>
 
 Promise with LocalStats
 
@@ -168,13 +147,13 @@ Provides the number of video streams that are transmitted to the local user.
 
 [`Promise`](../modules/_internal_.md#promise)<`number`\>
 
-Promise with Number
+Promise with MaxVideoForwarding
 
 ___
 
 ### getParticipant
 
-▸ **getParticipant**(`participantId?`): [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)\>
+▸ **getParticipant**(`participantId`): [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)\>
 
 The participant's information.
 
@@ -182,7 +161,7 @@ The participant's information.
 
 | Name | Type |
 | :------ | :------ |
-| `participantId?` | [`String`](../modules/_internal_.md#string) |
+| `participantId` | [`String`](../modules/_internal_.md#string) |
 
 #### Returns
 
@@ -194,15 +173,15 @@ ___
 
 ### getParticipants
 
-▸ **getParticipants**(`conference?`): [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)[]\>
+▸ **getParticipants**(`conference`): [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)[]\>
 
-Gets a list of Conference participants
+Gets a list of conference participants
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `conference?` | [`Conference`](../interfaces/_internal_.Conference.md) |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
 
 #### Returns
 
@@ -214,7 +193,7 @@ ___
 
 ### getStatus
 
-▸ **getStatus**(`conference?`): [`Promise`](../modules/_internal_.md#promise)<[`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)\>
+▸ **getStatus**(`conference`): [`Promise`](../modules/_internal_.md#promise)<[`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)\>
 
 Provides the conference status.
 
@@ -222,27 +201,21 @@ Provides the conference status.
 
 | Name | Type |
 | :------ | :------ |
-| `conference?` | [`Conference`](../interfaces/_internal_.Conference.md) |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)\>
 
-Promise with a ConferenceStatus
+Promise with a ConferenceStatus string
 
 ___
 
 ### isMuted
 
-▸ **isMuted**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **isMuted**(): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Gets the current mute state of the participant.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
@@ -268,7 +241,7 @@ ___
 
 ### isSpeaking
 
-▸ **isSpeaking**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **isSpeaking**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Gets the participant's current speaking status for an active talker indicator.
 
@@ -276,7 +249,7 @@ Gets the participant's current speaking status for an active talker indicator.
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
@@ -309,7 +282,7 @@ ___
 
 ### kick
 
-▸ **kick**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **kick**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
 
@@ -321,13 +294,13 @@ Allows the conference owner, or a participant with adequate permissions, to kick
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### leave
 
-▸ **leave**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **leave**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Leaves the conference.
 
@@ -339,13 +312,13 @@ Leaves the conference.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### mute
 
-▸ **mute**(`isMuted`, `participant?`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
+▸ **mute**(`participant`, `isMuted`): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
 
@@ -353,8 +326,8 @@ Stops playing the specified remote participants' audio to the local participant 
 
 | Name | Type |
 | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 | `isMuted` | `boolean` |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
@@ -462,13 +435,13 @@ Replays a previously recorded conference.
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Promise with a Conference
+Promise with a Conference object
 
 ___
 
 ### setAudioProcessing
 
-▸ **setAudioProcessing**(`options`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **setAudioProcessing**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Enables and disables audio processing for the conference participant.
 
@@ -480,15 +453,22 @@ Enables and disables audio processing for the conference participant.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### setMaxVideoForwarding
 
-▸ **setMaxVideoForwarding**(): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **setMaxVideoForwarding**(`max?`, `prioritizedParticipants?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
 
 Sets the maximum number of video streams that may be transmitted to the local participant.
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `max` | `number` | `4` |
+| `prioritizedParticipants` | [`Participant`](../interfaces/_internal_.Participant.md)[] | `[]` |
 
 #### Returns
 
@@ -498,7 +478,7 @@ ___
 
 ### startAudio
 
-▸ **startAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **startAudio**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Starts audio transmission between the local client and a conference.
 
@@ -506,17 +486,17 @@ Starts audio transmission between the local client and a conference.
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### startVideo
 
-▸ **startVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **startVideo**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
 
@@ -524,17 +504,17 @@ Notifies the server to either start sending the local participant's video stream
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### stopAudio
 
-▸ **stopAudio**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **stopAudio**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Stops audio transmission between the local client and a conference.
 
@@ -542,17 +522,17 @@ Stops audio transmission between the local client and a conference.
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### stopVideo
 
-▸ **stopVideo**(`participant?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **stopVideo**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
 
@@ -560,17 +540,17 @@ Notifies the server to either stop sending the local participant's video stream 
 
 | Name | Type |
 | :------ | :------ |
-| `participant?` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
 ### updatePermissions
 
-▸ **updatePermissions**(`participantPermissions`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **updatePermissions**(`participantPermissions`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Updates the participant's conference permissions.
 
@@ -582,4 +562,4 @@ Updates the participant's conference permissions.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
