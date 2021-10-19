@@ -17,6 +17,9 @@ export class FilePresentationService {
   /** @internal */
   _nativeModule = DolbyIoIAPIFilePresentationService;
 
+  /** @internal */
+  _nativeEvents = new NativeEvents(DolbyIoIAPIFilePresentationService);
+
   /**
    * Stops the file presentation.
    * @returns {Promise<void>}
@@ -90,7 +93,7 @@ export class FilePresentationService {
   public onFileConverted(
     handler: (data: FileConvertedEventType) => void
   ): UnsubscribeFunction {
-    return NativeEvents.addListener(
+    return this._nativeEvents.addListener(
       FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED,
       (data) => {
         handler(data);
@@ -112,24 +115,27 @@ export class FilePresentationService {
         | FilePresentationUpdatedEventType
     ) => void
   ): UnsubscribeFunction {
-    const filePresentationStartedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
-      (data) => {
-        handler(data);
-      }
-    );
-    const filePresentationStoppedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
-      (data) => {
-        handler(data);
-      }
-    );
-    const filePresentationUpdatedEventUnsubscribe = NativeEvents.addListener(
-      FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
-      (data) => {
-        handler(data);
-      }
-    );
+    const filePresentationStartedEventUnsubscribe =
+      this._nativeEvents.addListener(
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
+        (data) => {
+          handler(data);
+        }
+      );
+    const filePresentationStoppedEventUnsubscribe =
+      this._nativeEvents.addListener(
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
+        (data) => {
+          handler(data);
+        }
+      );
+    const filePresentationUpdatedEventUnsubscribe =
+      this._nativeEvents.addListener(
+        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
+        (data) => {
+          handler(data);
+        }
+      );
 
     return () => {
       filePresentationStartedEventUnsubscribe();
