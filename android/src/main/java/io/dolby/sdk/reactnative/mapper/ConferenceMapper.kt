@@ -21,58 +21,47 @@ class ConferenceMapper(
   private val permissionMapper: ConferencePermissionMapper
 ) {
 
-  fun conferenceIdFromNative(conferenceMap: ReadableMap): String? {
-    return conferenceMap.getString(CONFERENCE_ID)
-  }
+  fun conferenceIdFromRN(conferenceRN: ReadableMap): String? = conferenceRN.getString(CONFERENCE_ID)
 
-  fun fromNative(optionsMap: ReadableMap): AudioProcessing {
-    return optionsMap.getMap(SEND)
+  fun fromRN(optionsRN: ReadableMap): AudioProcessing =
+    optionsRN.getMap(SEND)
       ?.getOptionalBoolean(AUDIO_PROCESSING)
       ?.takeIf { isAudioProcessing -> isAudioProcessing }
       ?.let { AudioProcessing.VOICE }
       ?: AudioProcessing.ENVIRONMENT
-  }
 
-  fun toNative(conference: Conference): ReadableMap {
-    val map = Arguments.createMap()
-    val participantsArray = participantMapper.toNative(conference.participants)
-    val permissionsArray = permissionMapper.toNative(conference.permissions)
-    map.putString(CONFERENCE_ID, conference.id)
-    map.putString(CONFERENCE_ALIAS, conference.alias)
-    map.putBoolean(CONFERENCE_IS_NEW, conference.isNew)
-    map.putString(CONFERENCE_STATUS, toNativeConferenceStatus(conference.state))
-    map.putMap(CONFERENCE_PARAMS, toNativeConferenceParams(conference))
-    map.putArray(CONFERENCE_PERMISSIONS, permissionsArray)
-    map.putArray(CONFERENCE_PARTICIPANTS, participantsArray)
-    return map
-  }
-
-  fun toNativeConferenceStatus(status: ConferenceStatus): String {
-    return when (status) {
-      ConferenceStatus.CREATED -> "CREATED"
-      ConferenceStatus.DESTROYED -> "DESTROYED"
-      ConferenceStatus.ENDED -> "ENDED"
-      ConferenceStatus.ERROR -> "ERROR"
-      ConferenceStatus.JOINED -> "JOINED"
-      ConferenceStatus.LEFT -> "LEFT"
-      ConferenceStatus.DEFAULT,
-      ConferenceStatus.CREATING,
-      ConferenceStatus.JOINING,
-      ConferenceStatus.FIRST_PARTICIPANT,
-      ConferenceStatus.NO_MORE_PARTICIPANT,
-      ConferenceStatus.LEAVING -> "UNKNOWN"
+  fun toRN(conference: Conference): ReadableMap =
+    Arguments.createMap().apply {
+      putString(CONFERENCE_ID, conference.id)
+      putString(CONFERENCE_ALIAS, conference.alias)
+      putBoolean(CONFERENCE_IS_NEW, conference.isNew)
+      putString(CONFERENCE_STATUS, toRNConferenceStatus(conference.state))
+      putMap(CONFERENCE_PARAMS, toRNConferenceParams(conference))
+      putArray(CONFERENCE_PERMISSIONS, permissionMapper.toRN(conference.permissions))
+      putArray(CONFERENCE_PARTICIPANTS, participantMapper.toRN(conference.participants))
     }
+
+  fun toRNConferenceStatus(status: ConferenceStatus): String = when (status) {
+    ConferenceStatus.CREATED -> "CREATED"
+    ConferenceStatus.DESTROYED -> "DESTROYED"
+    ConferenceStatus.ENDED -> "ENDED"
+    ConferenceStatus.ERROR -> "ERROR"
+    ConferenceStatus.JOINED -> "JOINED"
+    ConferenceStatus.LEFT -> "LEFT"
+    ConferenceStatus.DEFAULT,
+    ConferenceStatus.CREATING,
+    ConferenceStatus.JOINING,
+    ConferenceStatus.FIRST_PARTICIPANT,
+    ConferenceStatus.NO_MORE_PARTICIPANT,
+    ConferenceStatus.LEAVING -> "UNKNOWN"
   }
 
-  fun toNativeLocalStats(localStats: Map<String, JSONArray>): ReadableMap {
-    val map = Arguments.createMap()
-    localStats.forEach { (key, value) ->
-      map.putString(key, value.toString())
+  fun toRNLocalStats(localStats: Map<String, JSONArray>): ReadableMap =
+    Arguments.createMap().apply {
+      localStats.forEach { (key, value) -> putString(key, value.toString()) }
     }
-    return map
-  }
 
-  private fun toNativeConferenceParams(conference: Conference): ReadableMap {
+  private fun toRNConferenceParams(conference: Conference): ReadableMap {
     val map = Arguments.createMap()
     val metadata = conference.metadata ?: return map
 
@@ -91,14 +80,14 @@ class ConferenceMapper(
   }
 
   companion object {
-    const val CONFERENCE_ID = "id"
-    const val CONFERENCE_ALIAS = "alias"
-    const val CONFERENCE_IS_NEW = "isNew"
-    const val CONFERENCE_STATUS = "status"
-    const val CONFERENCE_PARAMS = "params"
-    const val CONFERENCE_PERMISSIONS = "permissions"
-    const val CONFERENCE_PARTICIPANTS = "participants"
-    const val SEND = "send"
-    const val AUDIO_PROCESSING = "audioProcessing"
+    private const val CONFERENCE_ID = "id"
+    private const val CONFERENCE_ALIAS = "alias"
+    private const val CONFERENCE_IS_NEW = "isNew"
+    private const val CONFERENCE_STATUS = "status"
+    private const val CONFERENCE_PARAMS = "params"
+    private const val CONFERENCE_PERMISSIONS = "permissions"
+    private const val CONFERENCE_PARTICIPANTS = "participants"
+    private const val SEND = "send"
+    private const val AUDIO_PROCESSING = "audioProcessing"
   }
 }

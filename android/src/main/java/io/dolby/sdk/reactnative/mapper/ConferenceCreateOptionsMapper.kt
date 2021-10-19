@@ -19,18 +19,14 @@ class ConferenceCreateOptionsMapper {
   /**
    * Creates a [ConferenceCreateOptions] based on provided `options`.
    *
-   * @param optionsMap options to set (conference alias, params)
+   * @param  optionsRN options to set (conference alias, params)
    * @return [ConferenceCreateOptions]
    */
-  fun fromNative(optionsMap: ReadableMap?): ConferenceCreateOptions {
-    val metadataHolder = MetadataHolder()
-    val paramsHolder = optionsMap.getConferenceParamsHolder()
-    return ConferenceCreateOptions.Builder()
-      .setMetadataHolder(metadataHolder)
-      .setParamsHolder(paramsHolder)
-      .setConferenceAlias(optionsMap?.getString(CONFERENCE_CREATE_OPTIONS_ALIAS))
-      .build()
-  }
+  fun fromRN(optionsRN: ReadableMap?) = ConferenceCreateOptions.Builder()
+    .setMetadataHolder(MetadataHolder())
+    .setParamsHolder(optionsRN.getConferenceParamsHolder())
+    .setConferenceAlias(optionsRN?.getString(CONFERENCE_CREATE_OPTIONS_ALIAS))
+    .build()
 
   private fun ReadableMap?.getConferenceParamsHolder(): ParamsHolder {
     val paramsHolder = ParamsHolder()
@@ -52,7 +48,7 @@ class ConferenceCreateOptionsMapper {
   }
 
   companion object {
-    const val CONFERENCE_CREATE_OPTIONS_ALIAS = "alias"
-    const val CONFERENCE_CREATE_OPTIONS_PARAMS = "params"
+    private const val CONFERENCE_CREATE_OPTIONS_ALIAS = "alias"
+    private const val CONFERENCE_CREATE_OPTIONS_PARAMS = "params"
   }
 }
