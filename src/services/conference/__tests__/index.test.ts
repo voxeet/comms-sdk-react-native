@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+import { NativeModules } from 'react-native';
+
 import ConferenceService from '../ConferenceService';
 import { ConferenceServiceEventNames } from '../events';
 import type { Conference } from '../models';
@@ -11,7 +12,6 @@ import {
   Participant,
 } from '../models';
 import { transformToConference, transformToParticipant } from '../transformers';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIConferenceService } = NativeModules;
 
@@ -297,72 +297,72 @@ describe('ConferenceService', () => {
   });
 
   describe('onStatusChange()', () => {
-    it('should invoke NativeEvents.addListener with ConferenceStatusUpdated event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_STATUS_UPDATED event', () => {
       ConferenceService.onStatusChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ConferenceStatusUpdated,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_STATUS_UPDATED,
         expect.any(Function)
       );
     });
   });
 
   describe('onPermissionsChange()', () => {
-    it('should invoke NativeEvents.addListener with PermissionsUpdated event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_PERMISSIONS_UPDATED event', () => {
       ConferenceService.onPermissionsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.PermissionsUpdated,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_PERMISSIONS_UPDATED,
         expect.any(Function)
       );
     });
   });
 
   describe('onParticipantsChange()', () => {
-    it('should invoke NativeEvents.addListener with ParticipantAdded event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_PARTICIPANT_ADDED event', () => {
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ParticipantAdded,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_PARTICIPANT_ADDED,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with ParticipantUpdated event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_PARTICIPANT_UPDATED event', () => {
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ParticipantUpdated,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_PARTICIPANT_UPDATED,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with ParticipantRemoved event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_PARTICIPANT_REMOVED event', () => {
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ParticipantRemoved,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_PARTICIPANT_REMOVED,
         expect.any(Function)
       );
     });
   });
 
   describe('onStreamsChange()', () => {
-    it('should invoke NativeEvents.addListener with StreamAdded event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_STREAM_ADDED event', () => {
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.StreamAdded,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_STREAM_ADDED,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with StreamUpdated event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_STREAM_UPDATED event', () => {
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.StreamUpdated,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_STREAM_UPDATED,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with StreamRemoved event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_CONFERENCE_STREAM_REMOVED event', () => {
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.StreamRemoved,
+        ConferenceServiceEventNames.EVENT_CONFERENCE_STREAM_REMOVED,
         expect.any(Function)
       );
     });
