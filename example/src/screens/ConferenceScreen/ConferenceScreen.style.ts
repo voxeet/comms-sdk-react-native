@@ -1,6 +1,5 @@
 import COLORS from '@constants/colors.constants';
-import { FONT_WEIGHTS } from '@constants/fonts.constants';
-import { SPACE_XXS, SPACE_XS, SPACE_M } from '@constants/sizes.constants';
+import { SPACE_XXS, SPACE_M } from '@constants/sizes.constants';
 import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
@@ -34,6 +33,15 @@ export default StyleSheet.create({
     borderRadius: SPACE_XXS,
     height: SPACE_M,
   },
+  buttonText: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.WHITE,
+    paddingHorizontal: 10,
+    borderRadius: SPACE_XXS,
+    height: SPACE_M,
+  },
   actionButtons: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -42,18 +50,5 @@ export default StyleSheet.create({
   menuBackdrop: {
     backgroundColor: 'rgba(0,0,0,0.5)',
     opacity: 1,
-  },
-  optionsContainerStyle: {
-    borderRadius: SPACE_M,
-    paddingVertical: SPACE_XS,
-  },
-  optionWrapper: {
-    paddingHorizontal: SPACE_M,
-    paddingVertical: SPACE_XXS,
-  },
-  optionText: {
-    fontSize: 16,
-    lineHeight: 20,
-    fontFamily: FONT_WEIGHTS.medium,
   },
 });
