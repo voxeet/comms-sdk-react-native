@@ -2,10 +2,12 @@ package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.promise.Promise
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.models.Participant
+import com.voxeet.sdk.models.ParticipantPermissions
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.builders.ConferenceCreateOptions
 import com.voxeet.sdk.services.builders.ConferenceJoinOptions
@@ -15,6 +17,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
+import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
@@ -56,7 +59,7 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  *      ([getParticipants]).
  *      * Check the standard WebRTC statistics for the application ([getLocalStats]).
  *      * [kick] a participant from a conference.
- *      * Update the participant's permissions. TODO DEXA-39 link to update permissions
+ *      * Update the participant's permissions ([updatePermissions]).
  *
  *  7. The application calls the [leave] method to leave a conference.
  *
@@ -70,15 +73,19 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param conferenceMapper              mapper for a [Conference] and [Conference]-related models
  * @param conferenceCreateOptionsMapper mapper for a [ConferenceCreateOptions] model
  * @param conferenceJoinOptionsMapper   mapper for a [ConferenceJoinOptions] model
+ * @param participantMapper             mapper for a [Participant] and [Participant]-related models
+ * @param participantPermissionMapper   mapper for a [ParticipantPermissions] model
+ * @param eventEmitter                  an emitter for the conference module events
  */
 class RNConferenceServiceModule(
-  private val reactContext: ReactApplicationContext,
-  private val conferenceService: ConferenceService,
-  private val conferenceMapper: ConferenceMapper,
-  private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
-  private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
-  private val participantMapper: ParticipantMapper,
-  private val eventEmitter: RNEventEmitter
+    private val reactContext: ReactApplicationContext,
+    private val conferenceService: ConferenceService,
+    private val conferenceMapper: ConferenceMapper,
+    private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
+    private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
+    private val participantMapper: ParticipantMapper,
+    private val participantPermissionMapper: ParticipantPermissionMapper,
+    private val eventEmitter: RNEventEmitter
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName() = "DolbyIoIAPIConferenceService"
@@ -95,11 +102,11 @@ class RNConferenceServiceModule(
    * @param promise   returns a created conference
    */
   @ReactMethod
-  fun create(optionsRN: ReadableMap?, promise: ReactPromise) {
+  fun create(optionsRN: ReadableMap, promise: ReactPromise) {
     Promises.promise(conferenceCreateOptionsMapper.fromRN(optionsRN))
-      .thenPromise(conferenceService::create)
-      .thenValue(conferenceMapper::toRN)
-      .forward(promise)
+        .thenPromise(conferenceService::create)
+        .thenValue(conferenceMapper::toRN)
+        .forward(promise)
   }
 
   /**
@@ -111,12 +118,14 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun fetch(conferenceId: String?, promise: ReactPromise) {
-    val conferencePromise = conferenceId?.let(conferenceService::fetchConference) ?: Promise.resolve(conferenceService.conference)
+    val conferencePromise = conferenceId
+        ?.let(conferenceService::fetchConference)
+        ?: Promise.resolve(conferenceService.conference)
 
     conferencePromise
-      .rejectIfNull { "Couldn't get the conference" }
-      .thenValue(conferenceMapper::toRN)
-      .forward(promise)
+        .rejectIfNull { "Couldn't get the conference" }
+        .thenValue(conferenceMapper::toRN)
+        .forward(promise)
 
   }
   // TODO Note: remember to manually grant permissions to CAMERA and MICROPHONE.
@@ -139,13 +148,13 @@ class RNConferenceServiceModule(
   fun join(conferenceRN: ReadableMap, optionsRN: ReadableMap?, promise: ReactPromise) {
     Promises.promise({
       toConferenceJoinOptions(
-        conferenceRN,
-        optionsRN
+          conferenceRN,
+          optionsRN
       )
     }) { "Couldn't get the conference join options" }
-      .thenPromise(conferenceService::join)
-      .thenValue(conferenceMapper::toRN)
-      .forward(promise)
+        .thenPromise(conferenceService::join)
+        .thenValue(conferenceMapper::toRN)
+        .forward(promise)
   }
 
   /**
@@ -159,8 +168,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun kick(participantRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get participant" }
-      .thenPromise(conferenceService::kick)
-      .forward(promise)
+        .thenPromise(conferenceService::kick)
+        .forward(promise)
   }
 
   /**
@@ -181,8 +190,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun current(promise: ReactPromise) {
     Promises.promise(conferenceService.conference) { "Missing current conference" }
-      .thenValue(conferenceMapper::toRN)
-      .forward(promise)
+        .thenValue(conferenceMapper::toRN)
+        .forward(promise)
   }
 
   /**
@@ -199,8 +208,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getAudioLevel(participantRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get participant" }
-      .thenValue(conferenceService::audioLevel)
-      .forward(promise)
+        .thenValue(conferenceService::audioLevel)
+        .forward(promise)
   }
 
   /**
@@ -211,7 +220,7 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getMaxVideoForwarding(promise: ReactPromise) {
     Promises.promise(conferenceService.maxVideoForwarding) { "Couldn't get max video forwarding" }
-      .forward(promise)
+        .forward(promise)
   }
 
   /**
@@ -224,8 +233,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getParticipant(participantId: String, promise: ReactPromise) {
     Promises.promise({ conferenceService.findParticipantById(participantId) }) { "Couldn't get the participant" }
-      .thenValue(participantMapper::toRN)
-      .forward(promise)
+        .thenValue(participantMapper::toRN)
+        .forward(promise)
   }
 
   /**
@@ -237,8 +246,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getParticipants(conferenceRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toConference(conferenceRN) }) { "Couldn't get the conference" }
-      .thenValue { conference -> participantMapper.toRN(conference.participants) }
-      .forward(promise)
+        .thenValue { conference -> participantMapper.toRN(conference.participants) }
+        .forward(promise)
   }
 
   /**
@@ -250,8 +259,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getStatus(conferenceRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toConference(conferenceRN) }) { "Couldn't get the conference" }
-      .thenValue { conference -> conferenceMapper.toRNConferenceStatus(conference.state) }
-      .forward(promise)
+        .thenValue { conference -> conferenceMapper.toRNConferenceStatus(conference.state) }
+        .forward(promise)
   }
 
   /**
@@ -277,8 +286,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun isSpeaking(participantRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get the participant" }
-      .thenValue(conferenceService::isSpeaking)
-      .forward(promise)
+        .thenValue(conferenceService::isSpeaking)
+        .forward(promise)
   }
 
   /**
@@ -290,8 +299,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun getLocalStats(promise: ReactPromise) {
     Promises.promise(conferenceService.localStats()) { "Couldn't get local stats" }
-      .thenValue(conferenceMapper::toRNLocalStats)
-      .forward(promise)
+        .thenValue(conferenceMapper::toRNLocalStats)
+        .forward(promise)
   }
 
   /**
@@ -311,8 +320,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun mute(participantRN: ReadableMap, isMuted: Boolean, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get participant" }
-      .thenValue { participant -> conferenceService.mute(participant, isMuted) }
-      .forward(promise, ignoreReturnType = true)
+        .thenValue { participant -> conferenceService.mute(participant, isMuted) }
+        .forward(promise, ignoreReturnType = true)
   }
 
   /**
@@ -339,8 +348,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun setAudioProcessing(audioProcessingRN: ReadableMap, promise: ReactPromise) {
     Promises.promise(conferenceMapper.fromRN(audioProcessingRN))
-      .thenValue(conferenceService::setAudioProcessing)
-      .forward(promise, ignoreReturnType = true)
+        .thenValue(conferenceService::setAudioProcessing)
+        .forward(promise, ignoreReturnType = true)
   }
 
   /**
@@ -357,7 +366,33 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun setMaxVideoForwarding(max: Int, promise: ReactPromise) {
     conferenceService.videoForwarding(max, emptyList())
-      .forward(promise, ignoreReturnType = true)
+        .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Updates the participant's conference permissions. If a participant does not have permission to
+   * perform a specific action, this action is not available for this participant during a conference,
+   * and the participant receives InsufficientPermissionsError. If a participant started a specific
+   * action and then lost permission to perform this action, the SDK stops the blocked action.
+   * For example, if a participant started sharing a screen and received the updated permissions that
+   * do not allow him to share a screen, the SDK stops the screen sharing session and the participant
+   *
+   * @param participantPermissionsRN the updated participant's permissions
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun updatePermissions(participantPermissionsRN: ReadableArray, promise: ReactPromise) {
+    Promises.promise({
+      participantPermissionMapper.fromRN(participantPermissionsRN)
+          .map { (participantId, conferencePermissions) ->
+            participantPermissionMapper.toParticipantPermissions(
+                participant = participantId?.let(conferenceService::findParticipantById),
+                conferencePermissions = conferencePermissions
+            )
+          }
+    }) { "Couldn't get the participant permissions" }
+        .thenPromise(conferenceService::updatePermissions)
+        .forward(promise, ignoreReturnType = true)
   }
 
   /**
@@ -369,8 +404,8 @@ class RNConferenceServiceModule(
    * @return [ConferenceJoinOptions]
    */
   private fun toConferenceJoinOptions(
-    conferenceRN: ReadableMap,
-    optionsRN: ReadableMap?
+      conferenceRN: ReadableMap,
+      optionsRN: ReadableMap?
   ): ConferenceJoinOptions {
     val conference = toConference(conferenceRN)
     return conferenceJoinOptionsMapper.fromRN(conference, optionsRN)
@@ -385,10 +420,10 @@ class RNConferenceServiceModule(
    */
   @Throws(Exception::class)
   private fun toParticipant(participantRN: ReadableMap): Participant {
-    val participantId =
-      participantMapper.participantIdFromRN(participantRN)
+    val participantId = participantMapper.participantIdFromRN(participantRN)
         ?: throw IllegalArgumentException("Conference should contain participantId")
-    return conferenceService.findParticipantById(participantId) ?: throw Exception("Couldn't find the participant")
+    return conferenceService.findParticipantById(participantId)
+        ?: throw Exception("Couldn't find the participant")
   }
 
   /**
@@ -399,8 +434,8 @@ class RNConferenceServiceModule(
    * @return [Conference]
    */
   private fun toConference(conferenceRN: ReadableMap): Conference {
-    val conferenceId =
-      conferenceMapper.conferenceIdFromRN(conferenceRN) ?: throw IllegalArgumentException("Conference should contain conferenceId")
+    val conferenceId = conferenceMapper.conferenceIdFromRN(conferenceRN)
+        ?: throw IllegalArgumentException("Conference should contain conferenceId")
     return conferenceService.getConference(conferenceId)
   }
 
