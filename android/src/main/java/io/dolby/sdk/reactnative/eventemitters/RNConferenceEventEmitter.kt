@@ -12,11 +12,14 @@ import org.greenrobot.eventbus.Subscribe
 /**
  * The conference event emitter
  * @param participantMapper map participant to react JS data
+ * @param conferenceMapper map conference to react JS data
+ * @param context          react application context for sending event
  */
 class RNConferenceEventEmitter(
   private val participantMapper: ParticipantMapper,
-  private val conferenceMapper: ConferenceMapper
-) : RNEventEmitter() {
+  private val conferenceMapper: ConferenceMapper,
+  context: ReactApplicationContext
+) : RNEventEmitter(context) {
 
   /**
    * The supported events for JS

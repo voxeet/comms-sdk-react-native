@@ -38,7 +38,7 @@ abstract class RNEventEmitterModule(
    */
   open fun addListener(eventName: String) {
     if (listenerCount == 0) {
-      eventEmitter.register(reactContext)
+      eventEmitter.registerNativeEventBus()
     }
     listenerCount += 1
   }
@@ -49,7 +49,7 @@ abstract class RNEventEmitterModule(
    */
   open fun removeListeners(count: Int) {
     if (hasListener() && listenerCount <= count) {
-      eventEmitter.unregister()
+      eventEmitter.unregisterNativeEventBus()
     }
     listenerCount = max(listenerCount - count, 0)
   }
