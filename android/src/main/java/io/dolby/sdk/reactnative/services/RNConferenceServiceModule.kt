@@ -361,12 +361,22 @@ class RNConferenceServiceModule(
    * participant. The valid values are between 0 and 4. The default value is 4.
    * In the case of providing a value smaller than 0 or greater than 4, SDK triggers
    * the [IllegalStateException] error.
+   * @param participants The list of participants' objects. Allows prioritizing specific participant's
+   * video streams and display their videos even when these participants do not talk.
+   * For example, in the case of virtual classes, this option allows participants to pin the teacher's
+   * video and see the teacher, even when the teacher is not the active speaker.
    * @param promise returns null
    */
   @ReactMethod
-  fun setMaxVideoForwarding(max: Int, promise: ReactPromise) {
-    conferenceService.videoForwarding(max, emptyList())
-        .forward(promise, ignoreReturnType = true)
+  fun setMaxVideoForwarding(
+    max: Int,
+    participantsRN: ReadableArray,
+    promise: ReactPromise
+  ) {
+    Promises.promise(participantMapper.participantIdsFromRN(participantsRN))
+      .thenValue { participantId -> participantId.mapNotNull(conferenceService::findParticipantById) }
+      .thenValue { conferenceService.videoForwarding(max, it) }
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**
