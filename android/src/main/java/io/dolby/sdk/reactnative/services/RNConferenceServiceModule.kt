@@ -78,7 +78,7 @@ class RNConferenceServiceModule(
   private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
   private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
   private val participantMapper: ParticipantMapper,
-  private val eventEmitter: RNEventEmitter
+  eventEmitter: RNEventEmitter
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName() = "DolbyIoIAPIConferenceService"
