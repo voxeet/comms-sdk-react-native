@@ -50,6 +50,7 @@ const testParticipantPermissions: ParticipantPermissions = {
 };
 
 describe('ConferenceService', () => {
+  ConferenceService._nativeEvents.addListener = jest.fn();
   describe('create()', () => {
     it('should invoke exported create method with correct arguments', () => {
       const options = {
@@ -296,11 +297,10 @@ describe('ConferenceService', () => {
   });
 
   describe('onStatusChange()', () => {
-    ConferenceService._nativeEvents.addListener = jest.fn();
-    it('should invoke NativeEvents.addListener with ConferenceStatusUpdated event', () => {
+    it('should invoke NativeEvents.addListener with StatusUpdated event', () => {
       ConferenceService.onStatusChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ConferenceStatusUpdated,
+        ConferenceServiceEventNames.StatusUpdated,
         expect.any(Function)
       );
     });
@@ -308,7 +308,6 @@ describe('ConferenceService', () => {
 
   describe('onPermissionsChange()', () => {
     it('should invoke NativeEvents.addListener with PermissionsUpdated event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onPermissionsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.PermissionsUpdated,
@@ -319,7 +318,6 @@ describe('ConferenceService', () => {
 
   describe('onParticipantsChange()', () => {
     it('should invoke NativeEvents.addListener with ParticipantAdded event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantAdded,
@@ -328,7 +326,6 @@ describe('ConferenceService', () => {
     });
 
     it('should invoke NativeEvents.addListener with ParticipantUpdated event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantUpdated,
@@ -337,7 +334,6 @@ describe('ConferenceService', () => {
     });
 
     it('should invoke NativeEvents.addListener with ParticipantRemoved event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantRemoved,
@@ -348,7 +344,6 @@ describe('ConferenceService', () => {
 
   describe('onStreamsChange()', () => {
     it('should invoke NativeEvents.addListener with StreamAdded event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamAdded,
@@ -357,7 +352,6 @@ describe('ConferenceService', () => {
     });
 
     it('should invoke NativeEvents.addListener with StreamUpdated event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamUpdated,
@@ -366,7 +360,6 @@ describe('ConferenceService', () => {
     });
 
     it('should invoke NativeEvents.addListener with StreamRemoved event', () => {
-      ConferenceService._nativeEvents.addListener = jest.fn();
       ConferenceService.onStreamsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamRemoved,

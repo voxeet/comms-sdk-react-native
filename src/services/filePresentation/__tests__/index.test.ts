@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native';
 
 import FilePresentationService from '../FilePresentationService';
+import { FilePresentationServiceEventNames } from '../events';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 
@@ -14,6 +15,8 @@ const testFile = {
 };
 
 describe('FilePresentationService', () => {
+  FilePresentationService._nativeEvents.addListener = jest.fn();
+
   describe('stop()', () => {
     it('should invoke exported method', () => {
       FilePresentationService.stop();
@@ -69,6 +72,50 @@ describe('FilePresentationService', () => {
       FilePresentationService.getImage(2);
       expect(DolbyIoIAPIFilePresentationService.getImage).toHaveBeenCalledWith(
         2
+      );
+    });
+  });
+
+  describe('onFileConverted()', () => {
+    it('should invoke NativeEvents.addListener with FileConverted event', () => {
+      FilePresentationService.onFileConverted(() => {});
+      expect(
+        FilePresentationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        FilePresentationServiceEventNames.FileConverted,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onFilePresentationChange()', () => {
+    it('should invoke NativeEvents.addListener with FilePresentationStarted event', () => {
+      FilePresentationService.onFilePresentationChange(() => {});
+      expect(
+        FilePresentationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        FilePresentationServiceEventNames.FilePresentationStarted,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with FilePresentationStopped event', () => {
+      FilePresentationService.onFilePresentationChange(() => {});
+      expect(
+        FilePresentationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        FilePresentationServiceEventNames.FilePresentationStopped,
+        expect.any(Function)
+      );
+    });
+
+    it('should invoke NativeEvents.addListener with FilePresentationUpdated event', () => {
+      FilePresentationService.onFilePresentationChange(() => {});
+      expect(
+        FilePresentationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        FilePresentationServiceEventNames.FilePresentationUpdated,
+        expect.any(Function)
       );
     });
   });
