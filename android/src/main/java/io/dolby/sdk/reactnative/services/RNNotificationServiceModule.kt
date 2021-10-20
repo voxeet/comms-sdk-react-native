@@ -35,50 +35,50 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param invitationMapper    [InvitationMapper] mapper for a [ParticipantInvited] model
  */
 class RNNotificationServiceModule(
-        private val conferenceService: ConferenceService,
-        private val notificationService: NotificationService,
-        private val conferenceMapper: ConferenceMapper,
-        private val invitationMapper: InvitationMapper,
-        reactContext: ReactApplicationContext
+  private val conferenceService: ConferenceService,
+  private val notificationService: NotificationService,
+  private val conferenceMapper: ConferenceMapper,
+  private val invitationMapper: InvitationMapper,
+  reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String = "DolbyIoIAPINotificationService"
+  override fun getName(): String = "DolbyIoIAPINotificationService"
 
-    /**
-     * Notifies conference participants about a conference invitation.
-     *
-     * The ParticipantInfo model included in the invitation has to include externalId.
-     *
-     * In the case of inviting participants to a conference that is not protected, inviters can invite participants to any conference.
-     * In the case of inviting participants to a protected conference, inviters can invite participants only to the current conference.
-     *
-     * Participants who have permission to invite additional participants to a conference can also send invitations.
-     * In the invitation, inviters can only grant permissions that the inviters have.
-     *
-     * @param conferenceMap       a conference to invite
-     * @param invitedParticipants information about the invited users
-     * @param promise             returns null
-     */
-    @ReactMethod
-    fun invite(conferenceMap: ReadableMap, invitedParticipants: ReadableArray, promise: ReactPromise) {
-        Promises.promise(conferenceMapper.toConferenceId(conferenceMap)) { "Conference should contain conferenceId" }
-                .thenValue(conferenceService::getConference)
-                .thenValue { conference -> conference to invitationMapper.decode(invitedParticipants) }
-                .thenPromise { (conference, participants) -> notificationService.inviteWithPermissions(conference, participants) }
-                .forward(promise, ignoreReturnType = true)
-    }
+  /**
+   * Notifies conference participants about a conference invitation.
+   *
+   * The ParticipantInfo model included in the invitation has to include externalId.
+   *
+   * In the case of inviting participants to a conference that is not protected, inviters can invite participants to any conference.
+   * In the case of inviting participants to a protected conference, inviters can invite participants only to the current conference.
+   *
+   * Participants who have permission to invite additional participants to a conference can also send invitations.
+   * In the invitation, inviters can only grant permissions that the inviters have.
+   *
+   * @param conferenceRN          a conference to invite
+   * @param invitedParticipantsRN information about the invited users
+   * @param promise               returns null
+   */
+  @ReactMethod
+  fun invite(conferenceRN: ReadableMap, invitedParticipantsRN: ReadableArray, promise: ReactPromise) {
+    Promises.promise(conferenceMapper.conferenceIdFromRN(conferenceRN)) { "Conference should contain conferenceId" }
+      .thenValue(conferenceService::getConference)
+      .thenValue { conference -> conference to invitationMapper.fromRN(invitedParticipantsRN) }
+      .thenPromise { (conference, participants) -> notificationService.inviteWithPermissions(conference, participants) }
+      .forward(promise, ignoreReturnType = true)
+  }
 
-    /**
-     * Declines the conference invitation.
-     *
-     * @param conferenceMap a conference to decline
-     * @param promise       returns true if decline request succeed, false otherwise
-     */
-    @ReactMethod
-    fun decline(conferenceMap: ReadableMap, promise: ReactPromise) {
-        Promises.promise(conferenceMapper.toConferenceId(conferenceMap)) { "Conference should contain conferenceId" }
-                .thenValue(conferenceService::getConference)
-                .thenPromise(notificationService::decline)
-                .forward(promise)
-    }
+  /**
+   * Declines the conference invitation.
+   *
+   * @param conferenceRN a conference to decline
+   * @param promise      returns true if decline request succeed, false otherwise
+   */
+  @ReactMethod
+  fun decline(conferenceRN: ReadableMap, promise: ReactPromise) {
+    Promises.promise(conferenceMapper.conferenceIdFromRN(conferenceRN)) { "Conference should contain conferenceId" }
+      .thenValue(conferenceService::getConference)
+      .thenPromise(notificationService::decline)
+      .forward(promise)
+  }
 }
