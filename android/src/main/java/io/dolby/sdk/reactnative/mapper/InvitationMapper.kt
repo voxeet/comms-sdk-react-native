@@ -1,7 +1,6 @@
 package io.dolby.sdk.reactnative.mapper
 
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.json.ParticipantInvited
 
 /**
@@ -13,8 +12,8 @@ class InvitationMapper(
 ) {
 
   fun fromRN(invitedParticipantsRN: ReadableArray): List<ParticipantInvited> =
-    invitedParticipantsRN.toArrayList()
-      .filterIsInstance<ReadableMap>()
+    (0 until invitedParticipantsRN.size())
+      .map(invitedParticipantsRN::getMap)
       .mapNotNull { map ->
         val info = map.getMap(PARTICIPANT_INFO)?.let(participantMapper::infoFromRN)
         val permissions = map.getArray(PARTICIPANT_PERMISSIONS)?.let(permissionMapper::fromRN)
