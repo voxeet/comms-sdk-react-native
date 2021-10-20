@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useContext, useRef } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
-
+import type { Conference } from '../../../../src/services/conference/models';
+import { ConferencePermission } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -45,14 +44,14 @@ import {
   stopRecording,
 } from '@utils/recording.tester';
 import { getCurrentUser } from '@utils/session.tester';
+import React, { useContext, useRef } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 
-import type { Conference } from '../../../../src/services/conference/models';
-import { ConferencePermission } from '../../../../src/services/conference/models';
-import styles from './ConferenceScreen.style';
-
-const ConferenceScreenBottomSheet: FunctionComponent = () => {
+const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const { user, conference } = useContext(DolbyIOContext);
+  const { user, conference, setIsRecordingConference } =
+    useContext(DolbyIOContext);
   const { participants } = conference as Conference;
 
   if (!conference || !user) {
@@ -277,13 +276,19 @@ const ConferenceScreenBottomSheet: FunctionComponent = () => {
               size="small"
               color="dark"
               text="Start recording"
-              onPress={startRecording}
+              onPress={async () => {
+                await startRecording();
+                setIsRecordingConference(true);
+              }}
             />
             <Button
               size="small"
               color="dark"
               text="Stop recording"
-              onPress={stopRecording}
+              onPress={async () => {
+                await stopRecording();
+                setIsRecordingConference(false);
+              }}
             />
             <Button
               size="small"

@@ -12,22 +12,29 @@ import type { User } from '../../../../src/services/session/models';
 export interface IDolbyIOProvider {
   user?: User;
   conference?: Conference;
+  lastConference?: Conference;
   isInitialized?: Boolean;
+  isRecordingConference: Boolean;
   initialize: () => void;
   openSession: (name: string) => void;
-  createAndJoin: (alias: string) => void;
+  createAndJoin: (alias: string, liveRecording: boolean) => void;
   join: (alias: string) => void;
-  replay: (alias: string) => void;
-  leave: () => void;
+  replay: () => void;
+  leave: (leaveRoom: boolean) => void;
+  setIsRecordingConference: (isRecording: boolean) => void;
+  updateConferenceParticipants: () => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
+  isRecordingConference: false,
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
   join: () => {},
   replay: () => {},
   leave: () => {},
+  setIsRecordingConference: () => {},
+  updateConferenceParticipants: () => {},
 });
 
 // let onStatusChangeRemover: () => void | undefined;
@@ -37,8 +44,12 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [conference, setConference] = useState<Conference | undefined>(
     undefined
   );
+  const [lastConference, setLastConference] = useState<Conference | undefined>(
+    undefined
+  );
+  const [isRecordingConference, setIsRecordingConference] =
+    useState<boolean>(false);
   const [user, setUser] = useState<User | undefined>(undefined);
-
   // useEffect(() => {
   //   if (conference) {
   //     if (onStatusChangeRemover) {
@@ -52,19 +63,30 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   //       });
   //     });
   //   } else {
-  //     if (onStatusChangeRemover) {
-  //       onStatusChangeRemover();
-  //     }
+  //      if (onStatusChangeRemover) {
+  //        onStatusChangeRemover();
+  //      }
   //   }
   // }, [conference]);
 
-  const initialize = async () => {
+  // TODO remove when onParticipantsChange will be ready and change implementation
+  const updateConferenceParticipants = async () => {
     try {
-      if (await DolbyIoIAPI.conference.current()) {
-        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
-      }
-    } catch (e) {}
+      const updatedConference = await DolbyIoIAPI.conference.current();
+      setConference((conference) => {
+        if (!conference) return undefined;
+        return {
+          ...conference,
+          participants: updatedConference.participants,
+        };
+      });
+    } catch (e: any) {
+      setConference(undefined);
+      Alert.alert('Conference update participants failed', e.toString());
+    }
+  };
 
+  const initialize = async () => {
     try {
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
@@ -85,10 +107,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       Alert.alert('Session not opened', e.toString());
     }
   };
-  const createAndJoin = async (alias: string) => {
+  const createAndJoin = async (alias: string, liveRecording: boolean) => {
     try {
       const conferenceParams = {
-        liveRecording: false,
+        liveRecording: liveRecording,
         rtcpMode: RTCPMode.AVERAGE,
         ttl: 0,
         videoCodec: Codec.H264,
@@ -101,10 +123,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
       const createdConference = await DolbyIoIAPI.conference.create(
         conferenceOptions
-      );
-      console.log(
-        JSON.stringify(createdConference, null, 2),
-        'created conference'
       );
 
       const joinOptions = {
@@ -147,28 +165,30 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
 
-  const replay = async (alias: string) => {
+  const replay = async () => {
     try {
-      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
+      console.log(JSON.stringify(lastConference, null, 2), 'LAST CONFERENCE');
       const replayedConference = await DolbyIoIAPI.conference.replay(
-        fetchedConference
+        lastConference as Conference
       );
       console.log(JSON.stringify(replayedConference, null, 2));
-      setConference(replayedConference);
     } catch (e: any) {
       Alert.alert('Conference not replayed', e.toString());
     }
   };
 
-  const leave = async () => {
+  const leave = async (leaveRoom: boolean) => {
     try {
       const conferenceLeaveOptions = {
-        leaveRoom: true,
+        leaveRoom,
       };
 
+      setLastConference(conference);
       await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
       setConference(undefined);
-      setUser(undefined);
+      if (leaveRoom) {
+        setUser(undefined);
+      }
     } catch (e: any) {
       Alert.alert('Conference not left', e);
     }
@@ -178,12 +198,15 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     user,
     conference,
     isInitialized,
+    isRecordingConference,
+    setIsRecordingConference,
     initialize,
     openSession,
     createAndJoin,
     join,
     replay,
     leave,
+    updateConferenceParticipants,
   };
 
   return (

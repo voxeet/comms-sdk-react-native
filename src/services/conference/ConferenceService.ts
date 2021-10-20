@@ -309,10 +309,9 @@ export class ConferenceService {
 
   /**
    * Leaves the conference.
-   * @param options<ConferenceJoinOptions> The additional options for the leaving participant.
+   * @param options<ConferenceLeaveOptions> The additional options for the leaving participant.
    * @returns {Promise<boolean>}
    */
-
   public async leave(options?: ConferenceLeaveOptions): Promise<void> {
     await this._nativeModule.leave();
     if (options && options.leaveRoom) {
