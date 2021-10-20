@@ -21,6 +21,11 @@ class ParticipantMapper {
   fun participantIdFromRN(participantRN: ReadableMap): String? =
     participantRN.getString(PARTICIPANT_ID)
 
+  fun participantIdsFromRN(participantsRN: ReadableArray): List<String> =
+    (0 until participantsRN.size())
+      .map(participantsRN::getMap)
+      .mapNotNull { participantIdFromRN(it) }
+
   fun infoFromRN(participantInfoRN: ReadableMap) = ParticipantInfo(
     participantInfoRN.getString(PARTICIPANT_INFO_NAME),
     participantInfoRN.getString(PARTICIPANT_INFO_EXTERNAL_ID),
