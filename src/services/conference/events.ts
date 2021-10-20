@@ -7,34 +7,24 @@ import type {
 
 export enum ConferenceServiceEventNames {
   /** Emitted when a new participant is invited to a conference or joins a conference. */
-  ParticipantAdded = 'ParticipantAdded',
+  ParticipantAdded = 'EVENT_CONFERENCE_PARTICIPANT_ADDED',
   /** Emitted when a participant changes ConferenceParticipantStatus. */
-  ParticipantUpdated = 'ParticipantUpdated',
+  ParticipantUpdated = 'EVENT_CONFERENCE_PARTICIPANT_UPDATED',
   /** Emitted when a participant leaves a conference. */
-  ParticipantRemoved = 'ParticipantRemoved',
+  ParticipantRemoved = 'EVENT_CONFERENCE_PARTICIPANT_REMOVED',
   /** Emitted when the local participant's permissions are updated. */
-  PermissionsUpdated = 'PermissionsUpdated',
+  PermissionsUpdated = 'EVENT_CONFERENCE_PERMISSIONS_UPDATED',
   /** Emitted when ta conference changes status. */
-  ConferenceStatusUpdated = 'ConferenceStatusUpdated',
+  StatusUpdated = 'EVENT_CONFERENCE_STATUS_UPDATED',
   /** Emitted when the SDK adds a new stream to a conference participant. */
-  StreamAdded = 'StreamAdded',
+  StreamAdded = 'EVENT_CONFERENCE_STREAM_ADDED',
   /** Emitted when a conference participant who is connected to the audio and video stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone.  */
-  StreamUpdated = 'StreamUpdated',
+  StreamUpdated = 'EVENT_CONFERENCE_STREAM_UPDATED',
   /** Emitted when the SDK removes a stream from a conference participant.  */
-  StreamRemoved = 'StreamRemoved',
+  StreamRemoved = 'EVENT_CONFERENCE_STREAM_REMOVED',
 }
 
-export interface ParticipantAddedEventType {
-  /** The conference participant. */
-  participant: Participant;
-}
-
-export interface ParticipantUpdatedEventType {
-  /** The conference participant. */
-  participant: Participant;
-}
-
-export interface ParticipantRemovedEventType {
+export interface ParticipantChangedEventType {
   /** The conference participant. */
   participant: Participant;
 }
@@ -49,21 +39,7 @@ export interface ConferenceStatusUpdatedEventType {
   status: ConferenceStatus;
 }
 
-export interface StreamAddedEventType {
-  /** The conference participant. */
-  participant: Participant;
-  /** The media stream. */
-  mediaStream: MediaStreamType;
-}
-
-export interface StreamUpdatedEventType {
-  /** The conference participant. */
-  participant: Participant;
-  /** The media stream. */
-  mediaStream: MediaStreamType;
-}
-
-export interface StreamRemovedEventType {
+export interface StreamChangedEventType {
   /** The conference participant. */
   participant: Participant;
   /** The media stream. */
@@ -71,12 +47,12 @@ export interface StreamRemovedEventType {
 }
 
 export interface ConferenceServiceEventMap {
-  [ConferenceServiceEventNames.ParticipantAdded]: ParticipantAddedEventType;
-  [ConferenceServiceEventNames.ParticipantUpdated]: ParticipantUpdatedEventType;
-  [ConferenceServiceEventNames.ParticipantRemoved]: ParticipantRemovedEventType;
+  [ConferenceServiceEventNames.ParticipantAdded]: ParticipantChangedEventType;
+  [ConferenceServiceEventNames.ParticipantUpdated]: ParticipantChangedEventType;
+  [ConferenceServiceEventNames.ParticipantRemoved]: ParticipantChangedEventType;
   [ConferenceServiceEventNames.PermissionsUpdated]: PermissionsUpdatedEventType;
-  [ConferenceServiceEventNames.ConferenceStatusUpdated]: ConferenceStatusUpdatedEventType;
-  [ConferenceServiceEventNames.StreamAdded]: StreamAddedEventType;
-  [ConferenceServiceEventNames.StreamUpdated]: StreamUpdatedEventType;
-  [ConferenceServiceEventNames.StreamRemoved]: StreamRemovedEventType;
+  [ConferenceServiceEventNames.StatusUpdated]: ConferenceStatusUpdatedEventType;
+  [ConferenceServiceEventNames.StreamAdded]: StreamChangedEventType;
+  [ConferenceServiceEventNames.StreamUpdated]: StreamChangedEventType;
+  [ConferenceServiceEventNames.StreamRemoved]: StreamChangedEventType;
 }
