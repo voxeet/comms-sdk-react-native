@@ -48,7 +48,7 @@ class RNConferenceEventEmitter(
   @Subscribe
   fun on(event: ParticipantAddedEvent) {
     val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
     }
     send(EVENT_PARTICIPANT_ADDED, data)
   }
@@ -59,7 +59,7 @@ class RNConferenceEventEmitter(
   @Subscribe
   fun on(event: ParticipantUpdatedEvent) {
     val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
     }
     send(EVENT_PARTICIPANT_UPDATED, data)
   }
@@ -70,7 +70,7 @@ class RNConferenceEventEmitter(
   @Subscribe
   fun on(event: ConferenceStatusUpdatedEvent) {
     val data = Arguments.createMap().apply {
-      putString(EVENT_STATUS_KEY, conferenceMapper.toString(event.state))
+      putString(EVENT_STATUS_KEY, conferenceMapper.toRNConferenceStatus(event.state))
     }
     send(EVENT_STATUS_UPDATE, data)
   }

@@ -1,9 +1,11 @@
+import { Alert } from 'react-native';
+
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+
 import type {
   FileConverted,
   File,
 } from '../../../src/services/filePresentation/models';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-import { Alert } from 'react-native';
 
 // TODO Temporary converted file
 const testFileConverted = {

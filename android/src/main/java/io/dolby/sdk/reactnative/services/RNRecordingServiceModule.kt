@@ -8,6 +8,7 @@ import com.voxeet.sdk.services.RecordingService
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
 
@@ -22,10 +23,10 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param reactContext      react context
  */
 class RNRecordingServiceModule(
-    private val conferenceService: ConferenceService,
-    private val recordingService: RecordingService,
-    reactContext: ReactApplicationContext,
-    private val recordingMapper: RecordingMapper
+  private val conferenceService: ConferenceService,
+  private val recordingService: RecordingService,
+  reactContext: ReactApplicationContext,
+  private val recordingMapper: RecordingMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String = "DolbyIoIAPIRecordingServiceModule"
@@ -59,7 +60,8 @@ class RNRecordingServiceModule(
   @ReactMethod
   fun current(promise: ReactPromise) {
     Promises.promise(conferenceService.conference?.recordingInformation) { "Can't get current recording information" }
-        .thenValue(recordingMapper::encode)
-        .forward(promise)
+      .thenValue(recordingMapper::toRN)
+      .rejectIfNull()
+      .forward(promise)
   }
 }

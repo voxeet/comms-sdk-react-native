@@ -5,12 +5,8 @@ import SessionService from '../session/SessionService';
 import { ConferenceServiceEventNames } from './events';
 import type {
   PermissionsUpdatedEventType,
-  ParticipantAddedEventType,
-  ParticipantUpdatedEventType,
-  ParticipantRemovedEventType,
-  StreamAddedEventType,
-  StreamUpdatedEventType,
-  StreamRemovedEventType,
+  ParticipantChangedEventType,
+  StreamChangedEventType,
   ConferenceStatusUpdatedEventType,
 } from './events';
 import type {
@@ -331,7 +327,7 @@ export class ConferenceService {
     handler: (data: ConferenceStatusUpdatedEventType) => void
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
-      ConferenceServiceEventNames.ConferenceStatusUpdated,
+      ConferenceServiceEventNames.StatusUpdated,
       (data) => {
         handler(data);
       }
@@ -357,35 +353,33 @@ export class ConferenceService {
 
   /**
    * Add a handler for participants changes
-   * @param handler<(data: ParticipantAddedEventType | ParticipantUpdatedEventType | ParticipantRemovedEventType) => void> Handling function
+   * @param handler<(data: ParticipantChangedEventType, types?:
+   *    | ConferenceServiceEventNames.ParticipantAdded
+   *    | ConferenceServiceEventNames.ParticipantUpdated
+   *    | ConferenceServiceEventNames.ParticipantRemoved) => void> Handling function
    * @returns {UnsubscribeFunction} Function that removes handler
    */
 
   public onParticipantsChange(
     handler: (
-      data:
-        | ParticipantAddedEventType
-        | ParticipantUpdatedEventType
-        | ParticipantRemovedEventType
+      data: ParticipantChangedEventType,
+      type?:
+        | ConferenceServiceEventNames.ParticipantAdded
+        | ConferenceServiceEventNames.ParticipantUpdated
+        | ConferenceServiceEventNames.ParticipantRemoved
     ) => void
   ): UnsubscribeFunction {
     const participantAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantAdded,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
     const participantUpdatedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantUpdated,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
     const participantRemovedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantRemoved,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
 
     return () => {
@@ -397,35 +391,33 @@ export class ConferenceService {
 
   /**
    * Add a handler for streams changes
-   * @param handler<(data: StreamAddedEventType | StreamUpdatedEventType | StreamRemovedEventType) => void> Handling function
+   * @param handler<(data: StreamChangedEventType type?:
+   *    | ConferenceServiceEventNames.StreamAdded
+   *    | ConferenceServiceEventNames.StreamUpdated
+   *    | ConferenceServiceEventNames.StreamRemoved) => void> Handling function
    * @returns {UnsubscribeFunction} Function that removes handler
    */
 
   public onStreamsChange(
     handler: (
-      data:
-        | StreamAddedEventType
-        | StreamUpdatedEventType
-        | StreamRemovedEventType
+      data: StreamChangedEventType,
+      type?:
+        | ConferenceServiceEventNames.StreamAdded
+        | ConferenceServiceEventNames.StreamUpdated
+        | ConferenceServiceEventNames.StreamRemoved
     ) => void
   ): UnsubscribeFunction {
     const streamAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamAdded,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
     const streamUpdatedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamUpdated,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
     const streamRemovedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.StreamRemoved,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
 
     return () => {
