@@ -16,24 +16,17 @@ export enum FilePresentationServiceEventNames {
 
 export interface FileConvertedEventType {
   /** The object containing properties specific to the event. */
-  e: FileConvertedType;
+  fileConverted: FileConvertedType;
 }
-export interface FilePresentationStartedEventType {
+
+export interface FilePresentationChangedEventType {
   /** The object containing properties specific to the event. */
-  e: FilePresentation;
-}
-export interface FilePresentationStoppedEventType {
-  /** The object containing properties specific to the event. */
-  e: FilePresentation;
-}
-export interface FilePresentationUpdatedEventType {
-  /** The object containing properties specific to the event. */
-  e: FilePresentation;
+  filePresentation: FilePresentation;
 }
 
 export interface FilePresentationServiceEventMap {
   [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED]: FileConvertedEventType;
-  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED]: FilePresentationStartedEventType;
-  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED]: FilePresentationStoppedEventType;
-  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED]: FilePresentationUpdatedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED]: FilePresentationChangedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED]: FilePresentationChangedEventType;
+  [FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED]: FilePresentationChangedEventType;
 }

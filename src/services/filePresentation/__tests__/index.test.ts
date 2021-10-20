@@ -1,7 +1,7 @@
-/* eslint-disable prettier/prettier */
+import { NativeModules } from 'react-native';
+
 import FilePresentationService from '../FilePresentationService';
 import { FilePresentationServiceEventNames } from '../events';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 
@@ -77,7 +77,7 @@ describe('FilePresentationService', () => {
   });
 
   describe('onFileConverted()', () => {
-    it('should invoke NativeEvents.addListener with FileConverted event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_CONVERTED event', () => {
       FilePresentationService.onFileConverted(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
@@ -89,7 +89,7 @@ describe('FilePresentationService', () => {
   });
 
   describe('onFilePresentationChange()', () => {
-    it('should invoke NativeEvents.addListener with FilePresentationStarted event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
@@ -99,7 +99,7 @@ describe('FilePresentationService', () => {
       );
     });
 
-    it('should invoke NativeEvents.addListener with FilePresentationStopped event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
@@ -109,7 +109,7 @@ describe('FilePresentationService', () => {
       );
     });
 
-    it('should invoke NativeEvents.addListener with FilePresentationUpdated event', () => {
+    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener

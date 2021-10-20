@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
+import { NativeEventEmitter } from 'react-native';
+
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
 import type { UnregisterListener } from './types';
-import { NativeEventEmitter } from 'react-native';
 
 interface NativeEventType
   extends DolbyIoIAPIEventMap,
@@ -23,7 +24,7 @@ export default class NativeEvents {
 
   public addListener<K extends keyof NativeEventType>(
     type: K,
-    listener: (event: NativeEventType[K]) => void
+    listener: (event: NativeEventType[K], type?: K) => void
   ): UnregisterListener {
     return this?._nativeEventEmitter?.addListener(type, listener);
   }

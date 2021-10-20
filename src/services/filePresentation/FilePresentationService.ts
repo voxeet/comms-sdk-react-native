@@ -1,15 +1,13 @@
-/* eslint-disable prettier/prettier */
+import { NativeModules } from 'react-native';
+
 import NativeEvents from '../../utils/NativeEvents';
 import type { UnsubscribeFunction } from '../conference/models';
 import {
   FileConvertedEventType,
+  FilePresentationChangedEventType,
   FilePresentationServiceEventNames,
-  FilePresentationStartedEventType,
-  FilePresentationStoppedEventType,
-  FilePresentationUpdatedEventType,
 } from './events';
 import type { FileConverted, File, FilePresentation } from './models';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 
@@ -103,38 +101,36 @@ export class FilePresentationService {
 
   /**
    * Add a handler for file presentation changes
-   * @param handler<(data: FilePresentationStartedEventType | FilePresentationStoppedEventType | FilePresentationUpdatedEventType) => void> Handling function
+   * @param handler<(data: FilePresentationChangedEventType, type?:
+   *  | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED
+   *  | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED
+   *  | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED) => void> Handling function
    * @returns {UnsubscribeFunction} Function that removes handler
    */
 
   public onFilePresentationChange(
     handler: (
-      data:
-        | FilePresentationStartedEventType
-        | FilePresentationStoppedEventType
-        | FilePresentationUpdatedEventType
+      data: FilePresentationChangedEventType,
+      type?:
+        | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED
+        | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED
+        | FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED
     ) => void
   ): UnsubscribeFunction {
     const filePresentationStartedEventUnsubscribe =
       this._nativeEvents.addListener(
         FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
-        (data) => {
-          handler(data);
-        }
+        handler
       );
     const filePresentationStoppedEventUnsubscribe =
       this._nativeEvents.addListener(
         FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
-        (data) => {
-          handler(data);
-        }
+        handler
       );
     const filePresentationUpdatedEventUnsubscribe =
       this._nativeEvents.addListener(
         FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
-        (data) => {
-          handler(data);
-        }
+        handler
       );
 
     return () => {
