@@ -1,7 +1,7 @@
-/* eslint-disable prettier/prettier */
+import { NativeModules } from 'react-native';
+
 import CommandService from '../CommandService';
 import { CommandServiceEventNames } from '../events';
-import { NativeModules } from 'react-native';
 
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
 

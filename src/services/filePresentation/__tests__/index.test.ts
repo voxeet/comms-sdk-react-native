@@ -77,44 +77,44 @@ describe('FilePresentationService', () => {
   });
 
   describe('onFileConverted()', () => {
-    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_CONVERTED event', () => {
+    it('should invoke NativeEvents.addListener with FileConverted event', () => {
       FilePresentationService.onFileConverted(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_CONVERTED,
+        FilePresentationServiceEventNames.FileConverted,
         expect.any(Function)
       );
     });
   });
 
   describe('onFilePresentationChange()', () => {
-    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED event', () => {
+    it('should invoke NativeEvents.addListener with FilePresentationStarted event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STARTED,
+        FilePresentationServiceEventNames.FilePresentationStarted,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED event', () => {
+    it('should invoke NativeEvents.addListener with FilePresentationStopped event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_STOPPED,
+        FilePresentationServiceEventNames.FilePresentationStopped,
         expect.any(Function)
       );
     });
 
-    it('should invoke NativeEvents.addListener with EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED event', () => {
+    it('should invoke NativeEvents.addListener with FilePresentationUpdated event', () => {
       FilePresentationService.onFilePresentationChange(() => {});
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
-        FilePresentationServiceEventNames.EVENT_FILE_PRESENTATION_FILE_PRESENTATION_UPDATED,
+        FilePresentationServiceEventNames.FilePresentationUpdated,
         expect.any(Function)
       );
     });
