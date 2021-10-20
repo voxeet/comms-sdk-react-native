@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -17,10 +16,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application>
-
-        <service android:name=".android.services.DolbyioIAPISystemService"
-            android:enabled="true"
-            android:exported="false" />
 
         <provider
             android:name=".android.RNDolbyioIAPISDKManifestComponent"

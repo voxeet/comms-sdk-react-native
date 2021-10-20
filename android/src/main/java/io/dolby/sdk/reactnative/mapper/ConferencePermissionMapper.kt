@@ -21,17 +21,17 @@ import com.voxeet.sdk.json.ConferencePermission.UPDATE_PERMISSIONS
  */
 class ConferencePermissionMapper {
 
-  fun decode(permissionsArray: ReadableArray): Set<ConferencePermission> {
-    return permissionsArray.toArrayList()
-        .filterIsInstance<String>()
-        .mapNotNull(::fromString)
-        .toSet()
-  }
+  fun fromRN(permissionsRN: ReadableArray): Set<ConferencePermission> =
+    permissionsRN
+      .toArrayList()
+      .filterIsInstance<String>()
+      .mapNotNull(::fromString)
+      .toSet()
 
-  fun encode(permissions: Set<ConferencePermission>): ReadableArray {
-    return permissions.map(::toString)
-        .let(Arguments::fromList)
-  }
+  fun toRN(permissions: Set<ConferencePermission>): ReadableArray =
+    permissions
+      .map(::toString)
+      .let(Arguments::fromList)
 
   private fun toString(permission: ConferencePermission): String {
     return when (permission) {
