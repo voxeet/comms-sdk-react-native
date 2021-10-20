@@ -2,8 +2,10 @@ package io.dolby.sdk.reactnative.eventemitters
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
+import com.voxeet.sdk.events.sdk.ConferenceStatusUpdatedEvent
 import com.voxeet.sdk.events.v2.ParticipantAddedEvent
 import com.voxeet.sdk.events.v2.ParticipantUpdatedEvent
+import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import org.greenrobot.eventbus.Subscribe
 
@@ -11,18 +13,30 @@ import org.greenrobot.eventbus.Subscribe
  * The conference event emitter
  * @param participantMapper map participant to react JS data
  */
-class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper) : RNEventEmitter {
-
-  override var context: ReactApplicationContext? = null
+class RNConferenceEventEmitter(
+  private val participantMapper: ParticipantMapper,
+  private val conferenceMapper: ConferenceMapper
+) : RNEventEmitter() {
 
   /**
    * The supported events for JS
    */
   override val eventMap: Map<String, String>
     get() = mapOf(
+      /**
+       * Participant events
+       */
       "EVENT_CONFERENCE_PARTICIPANT_ADDED" to EVENT_PARTICIPANT_ADDED,
       "EVENT_CONFERENCE_PARTICIPANT_UPDATED" to EVENT_PARTICIPANT_UPDATED,
-      "EVENT_CONFERENCE_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY
+      // JS could get Participant object by this key
+      "EVENT_CONFERENCE_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY,
+
+      /**
+       * Conference status event
+       */
+      "EVENT_CONFERENCE_STATUS_UPDATE" to EVENT_STATUS_UPDATE,
+      // JS could get ConferenceStatus object by this key
+      "EVENT_CONFERENCE_STATUS_KEY" to EVENT_STATUS_KEY
     )
 
   /**
@@ -30,8 +44,9 @@ class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper)
    */
   @Subscribe
   fun on(event: ParticipantAddedEvent) {
-    val data = Arguments.createMap()
-    data.putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+    val data = Arguments.createMap().apply {
+      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+    }
     send(EVENT_PARTICIPANT_ADDED, data)
   }
 
@@ -40,9 +55,21 @@ class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper)
    */
   @Subscribe
   fun on(event: ParticipantUpdatedEvent) {
-    val data = Arguments.createMap()
-    data.putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+    val data = Arguments.createMap().apply {
+      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toMap(event.participant))
+    }
     send(EVENT_PARTICIPANT_UPDATED, data)
+  }
+
+  /**
+   * Current conference status update event
+   */
+  @Subscribe
+  fun on(event: ConferenceStatusUpdatedEvent) {
+    val data = Arguments.createMap().apply {
+      putString(EVENT_STATUS_KEY, conferenceMapper.toString(event.state))
+    }
+    send(EVENT_STATUS_UPDATE, data)
   }
 
   /**
@@ -52,5 +79,7 @@ class RNConferenceEventEmitter(private val participantMapper: ParticipantMapper)
     const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
     const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
     const val EVENT_PARTICIPANT_KEY = "participant"
+    const val EVENT_STATUS_UPDATE = "conferenceStatusUpdated"
+    const val EVENT_STATUS_KEY = "conferenceStatus"
   }
 }
