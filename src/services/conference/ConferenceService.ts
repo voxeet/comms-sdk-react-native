@@ -355,6 +355,7 @@ export class ConferenceService {
    * Add a handler for participants changes
    * @param handler<(data: ParticipantChangedEventType, types?:
    *    | ConferenceServiceEventNames.ParticipantAdded
+   *    | ConferenceServiceEventNames.ParticipantJoined
    *    | ConferenceServiceEventNames.ParticipantUpdated
    *    | ConferenceServiceEventNames.ParticipantRemoved) => void> Handling function
    * @returns {UnsubscribeFunction} Function that removes handler
@@ -365,12 +366,17 @@ export class ConferenceService {
       data: ParticipantChangedEventType,
       type?:
         | ConferenceServiceEventNames.ParticipantAdded
+        | ConferenceServiceEventNames.ParticipantJoined
         | ConferenceServiceEventNames.ParticipantUpdated
         | ConferenceServiceEventNames.ParticipantRemoved
     ) => void
   ): UnsubscribeFunction {
     const participantAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantAdded,
+      handler
+    );
+    const participantJoinedEventUnsubscribe = this._nativeEvents.addListener(
+      ConferenceServiceEventNames.ParticipantJoined,
       handler
     );
     const participantUpdatedEventUnsubscribe = this._nativeEvents.addListener(
@@ -384,6 +390,7 @@ export class ConferenceService {
 
     return () => {
       participantAddedEventUnsubscribe();
+      participantJoinedEventUnsubscribe();
       participantUpdatedEventUnsubscribe();
       participantRemovedEventUnsubscribe();
     };

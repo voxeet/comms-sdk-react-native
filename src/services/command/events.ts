@@ -2,7 +2,7 @@ import type { Participant } from '../conference/models';
 
 export enum CommandServiceEventNames {
   /** Emitted when a participant receives a message  */
-  MessageReceived = 'received',
+  MessageReceived = 'EVENT_COMMAND_MESSAGE_RECEIVED',
 }
 
 export interface MessageReceivedEventType {
