@@ -6,21 +6,19 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.voxeet.VoxeetSDK
 
 /**
- * A component that handles native event and forward it to JS must implement this interface
+ * An abstract class that handles native event and forward it to JS
+ * @param context The react application context which will be used for sending event to JS
  */
-interface RNEventEmitter {
-
-  /**
-   * The react application context which will be used for sending event to JS
-   */
-  var context: ReactApplicationContext?
+abstract class RNEventEmitter(
+  private var context: ReactApplicationContext
+) {
 
   /**
    * The supported events map
    *  key: event constants for JS
    *  vale: event name
    */
-  val eventMap: Map<String, String>
+  abstract val eventMap: Map<String, String>
 
   /**
    * Default implementation of emitting event, nothing will be sent if no listener is registered
@@ -28,21 +26,19 @@ interface RNEventEmitter {
    * @param data the event data
    */
   fun send(eventName: String, data: WritableMap) =
-    context?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)?.emit(eventName, data)
+    context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)?.emit(eventName, data)
 
   /**
    * Register the event emitter for native events
    */
-  fun register(context: ReactApplicationContext) {
-    this.context = context
+  fun registerNativeEventBus() {
     VoxeetSDK.instance().register(this)
   }
 
   /**
    * Unregister the event emitter, and it won't receive any native events
    */
-  fun unregister() {
-    this.context = null
+  fun unregisterNativeEventBus() {
     VoxeetSDK.instance().unregister(this)
   }
 }
