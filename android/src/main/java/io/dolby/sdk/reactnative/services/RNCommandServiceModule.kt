@@ -8,7 +8,8 @@ import com.voxeet.sdk.services.CommandService
 import com.voxeet.sdk.services.ConferenceService
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
-import io.dolby.sdk.reactnative.utils.Promises.thenValue
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
+import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 
 /**
  * The [RNCommandServiceModule] allows the application to send [send] text messages to all other participants of
@@ -34,12 +35,13 @@ class RNCommandServiceModule(
    * base64).
    *
    * @param message content of the message (any possible string)
-   * @param promise returns true if message was send, false otherwise
+   * @param promise returns null
    */
   @ReactMethod
   fun send(message: String, promise: Promise) {
     Promises.promise(conferenceService.conferenceId) { "Couldn't find the conference" }
-      .thenValue { conferenceId -> commandService.send(conferenceId, message) }
+      .thenPromise { conferenceId -> commandService.send(conferenceId, message) }
+      .rejectIfNull { "Send message operation failed" }
       .forward(promise)
   }
 }
