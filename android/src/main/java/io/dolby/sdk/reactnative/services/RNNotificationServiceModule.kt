@@ -13,6 +13,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.InvitationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfFalse
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
@@ -72,13 +73,14 @@ class RNNotificationServiceModule(
    * Declines the conference invitation.
    *
    * @param conferenceRN a conference to decline
-   * @param promise      returns true if decline request succeed, false otherwise
+   * @param promise      returns null
    */
   @ReactMethod
   fun decline(conferenceRN: ReadableMap, promise: ReactPromise) {
     Promises.promise(conferenceMapper.conferenceIdFromRN(conferenceRN)) { "Conference should contain conferenceId" }
       .thenValue(conferenceService::getConference)
       .thenPromise(notificationService::decline)
+      .rejectIfFalse { "Decline invitation operation failed" }
       .forward(promise)
   }
 }
