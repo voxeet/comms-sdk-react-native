@@ -41,7 +41,7 @@ export class NotificationService {
 
   /**
    * Add a handler for invitation received
-   * @param handler<(data: InvitationReceivedEventType) => void> Handling function
+   * @param handler {(data: InvitationReceivedEventType) => void} Handling function
    * @returns {() => void} Function that removes handler
    */
   public onInvitationReceived(

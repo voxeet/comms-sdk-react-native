@@ -63,5 +63,14 @@ jest.mock('react-native', () => {
     getCurrent: jest.fn(),
     getImage: jest.fn(),
   };
+  RN.NativeModules.DolbyIoIAPIVideoPresentationService = {
+    pause: jest.fn(),
+    play: jest.fn(),
+    seek: jest.fn(),
+    start: jest.fn(),
+    stop: jest.fn(),
+    current: jest.fn(),
+    state: jest.fn(),
+  };
   return RN;
 });
