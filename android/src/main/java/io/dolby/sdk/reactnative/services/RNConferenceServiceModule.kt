@@ -4,7 +4,11 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.voxeet.android.media.errors.MediaEngineException
 import com.voxeet.promise.Promise
+import com.voxeet.sdk.events.promises.InConferenceException
+import com.voxeet.sdk.events.promises.ParticipantAddedErrorEventException
+import com.voxeet.sdk.events.promises.ServerErrorException
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.models.ParticipantPermissions
@@ -37,7 +41,7 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  *
  *  3. The application can choose to either:
  *      * [join] a conference
- *      * Replay a conference TODO DEXA-42 link to replay
+ *      * [replay] a conference
  *
  *  4. The application can start and stop sending the local participant's audio streams to the conference. TODO DEXA-37 link to start/stopAudio
  * The application can also start and stop sending the remote participants' audio streams to the local participant. TODO DEXA-37 link to start/stopVideo
@@ -66,7 +70,7 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * **The application can interact with the service through these events:**
  * TODO DEXA-73, DEXA-75 and more: add javadoc about events
  *
- * Creates a bridge wrapper for [ConferenceService].
+ * @constructor Creates a bridge wrapper for [ConferenceService].
  *
  * @param conferenceService             [ConferenceService] from Android SDK
  * @param reactContext                  react context
@@ -134,11 +138,11 @@ class RNConferenceServiceModule(
    * Joins the conference based on information from the `optionsRN`.
    *
    * The possible exception in the rejection:
-   *  * ServerErrorException
-   *  * InConferenceException
-   *  * MediaEngineException
-   *  * ParticipantAddedErrorEventException
-   *  * IllegalArgumentException
+   *  * [ServerErrorException]
+   *  * [InConferenceException]
+   *  * [MediaEngineException]
+   *  * [ParticipantAddedErrorEventException]
+   *  * [IllegalArgumentException]
    *
    * @param conferenceRN a conference to join
    * @param optionsRN    the holder of the options to join
@@ -155,6 +159,34 @@ class RNConferenceServiceModule(
       .thenPromise(conferenceService::join)
       .thenValue(conferenceMapper::toRN)
       .forward(promise)
+  }
+
+  /**
+   * Replays the previously recorded conference. For more information, see the
+   * [Recording mechanism](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms)
+   * article.
+   *
+   * Possible rejection causes:
+   *  * [ServerErrorException]
+   *  * [InConferenceException]
+   *  * [MediaEngineException]
+   *  * [ParticipantAddedErrorEventException]
+   *  * [IllegalArgumentException]
+   *
+   *  @param conferenceRN a conference to replay
+   *  @param replayOptionsRN contains the offset to start with
+   *  @param promise returns null
+   */
+  @ReactMethod
+  fun replay(
+    conferenceRN: ReadableMap,
+    replayOptionsRN: ReadableMap?,
+    promise: ReactPromise
+  ) {
+    Promises.promise({ toConference(conferenceRN) }) { "Couldn't get the conference" }
+      .thenValue { it to (replayOptionsRN?.let(conferenceMapper::replayOffsetFromRN) ?: 0) }
+      .thenPromise { (conference, offset) -> conferenceService.replay(conference, offset.toLong()) }
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**
