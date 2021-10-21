@@ -34,7 +34,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         conferenceCreateOptionsMapper = ConferenceCreateOptionsMapper(),
         conferenceJoinOptionsMapper = ConferenceJoinOptionsMapper(),
         participantMapper = participantMapper,
-        eventEmitter = RNConferenceEventEmitter(participantMapper),
+        eventEmitter = RNConferenceEventEmitter(participantMapper, conferenceMapper, reactContext),
         participantPermissionMapper = participantPermissionMapper
       ),
       RNCommandServiceModule(
