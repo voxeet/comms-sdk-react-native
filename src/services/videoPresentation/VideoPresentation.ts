@@ -12,7 +12,7 @@ class VideoPresentationService {
   /** @internal */
   _nativeModule = DolbyIoIAPIVideoPresentationService;
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPIVideoPresentationService);
+  _nativeEvents = new NativeEvents(DolbyIoIAPIVideoPresentationService || {});
 
   /**
    * Pauses the video presentation.

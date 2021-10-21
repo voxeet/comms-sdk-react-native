@@ -16,7 +16,7 @@ export class FilePresentationService {
   _nativeModule = DolbyIoIAPIFilePresentationService;
 
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPIFilePresentationService);
+  _nativeEvents = new NativeEvents(DolbyIoIAPIFilePresentationService || {});
 
   /**
    * Stops the file presentation.
