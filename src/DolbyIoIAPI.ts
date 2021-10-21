@@ -11,6 +11,7 @@ import FilePresentationService from './services/filePresentation/FilePresentatio
 import NotificationService from './services/notification/NotificationService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
+import VideoPresentationService from './services/videoPresentation/VideoPresentation';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
 
@@ -27,6 +28,7 @@ export class DolbyIoIAPI {
   command = CommandService;
   notification = NotificationService;
   filePresentation = FilePresentationService;
+  videoPresentation = VideoPresentationService;
 
   /**
    * Initializes the SDK using the customer key and secret.

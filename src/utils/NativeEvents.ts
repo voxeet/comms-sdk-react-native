@@ -5,6 +5,7 @@ import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
+import type { VideoPresentationEventMap } from '../services/videoPresentation/events';
 import type { UnregisterListener } from './types';
 
 interface NativeEventType
@@ -12,7 +13,8 @@ interface NativeEventType
     ConferenceServiceEventMap,
     NotificationServiceEventMap,
     FilePresentationServiceEventMap,
-    CommandServiceEventMap {}
+    CommandServiceEventMap,
+    VideoPresentationEventMap {}
 
 export default class NativeEvents {
   private _nativeEventEmitter: any = undefined;
