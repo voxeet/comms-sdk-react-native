@@ -31,7 +31,8 @@ project.xcworkspace
 
 # Android/IJ
 #
-.idea
+**/.idea/*
+!**/.idea/codeStyles/
 .gradle
 local.properties
 android.iml
