@@ -27,8 +27,8 @@ object Promises {
    */
   @JvmStatic
   fun <T> promise(
-      callable: () -> T?,
-      nullErrorMessage: () -> String = { "Required value is null" }
+    callable: () -> T?,
+    nullErrorMessage: () -> String = { "Required value is null" }
   ): VoxeetPromise<T> {
     return VoxeetPromise { solver ->
       try {
@@ -52,7 +52,7 @@ object Promises {
   @JvmStatic
   fun <T> promise(value: T?, nullErrorMessage: () -> String = { "Required value is null" }): VoxeetPromise<T> {
     return value?.let { VoxeetPromise.resolve(value) }
-        ?: VoxeetPromise.reject(Exception(nullErrorMessage()))
+      ?: VoxeetPromise.reject(Exception(nullErrorMessage()))
   }
 
   /**
@@ -66,7 +66,7 @@ object Promises {
    * @param nullErrorMessage error message provider in case of null value
    */
   fun <T> VoxeetPromise<T?>.rejectIfNull(nullErrorMessage: () -> String = { "Required value is null" }): PromiseInOut<T?, T> =
-      thenValue { requireNotNull(it, nullErrorMessage) }
+    thenValue { requireNotNull(it, nullErrorMessage) }
 
   /**
    * Throws [IllegalArgumentException] if emitted value is null
@@ -79,7 +79,7 @@ object Promises {
    * @param nullErrorMessage error message provider in case of null value
    */
   fun <T, R> PromiseInOut<T, R?>.rejectIfNull(nullErrorMessage: () -> String = { "Required value is null" }): PromiseInOut<R?, R> =
-      thenValue { requireNotNull(it, nullErrorMessage) }
+    thenValue { requireNotNull(it, nullErrorMessage) }
 
   /**
    * Util method to simplify building promises chain mapping
@@ -136,12 +136,12 @@ object Promises {
    * @param ignoreReturnType flag if [ReactPromise] returns null
    */
   fun <T> VoxeetPromise<T>.forward(promise: ReactPromise, ignoreReturnType: Boolean = false) =
-      then(ThenVoid { result ->
-        if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
-      }).error {
-        Log.d(TAG, "Dispatch error", it)
-        promise.reject(it)
-      }
+    then(ThenVoid { result ->
+      if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
+    }).error {
+      Log.d(TAG, "Dispatch error", it)
+      promise.reject(it)
+    }
 
   /**
    * Util method to simplify forwarding [PromiseInOut] to [ReactPromise]
@@ -150,11 +150,11 @@ object Promises {
    * @param ignoreReturnType flag if [ReactPromise] returns null
    */
   fun <T, R> PromiseInOut<T, R>.forward(promise: ReactPromise, ignoreReturnType: Boolean = false) =
-      then<Void>(ThenVoid { result ->
-        if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
-      }).error {
-        Log.d(TAG, "Dispatch error", it)
-        promise.reject(it)
-      }
+    then<Void>(ThenVoid { result ->
+      if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
+    }).error {
+      Log.d(TAG, "Dispatch error", it)
+      promise.reject(it)
+    }
 
 }
