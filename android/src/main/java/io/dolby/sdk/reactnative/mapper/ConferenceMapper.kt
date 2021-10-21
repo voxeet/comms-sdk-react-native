@@ -30,6 +30,9 @@ class ConferenceMapper(
       ?.let { AudioProcessing.VOICE }
       ?: AudioProcessing.ENVIRONMENT
 
+  fun replayOffsetFromRN(optionsRN: ReadableMap) =
+    optionsRN.getDouble(REPLAY_OPTIONS_OFFSET)
+
   fun toRN(conference: Conference): ReadableMap =
     Arguments.createMap().apply {
       putString(CONFERENCE_ID, conference.id)
@@ -89,5 +92,6 @@ class ConferenceMapper(
     private const val CONFERENCE_PARTICIPANTS = "participants"
     private const val SEND = "send"
     private const val AUDIO_PROCESSING = "audioProcessing"
+    private const val REPLAY_OPTIONS_OFFSET = "offset"
   }
 }
