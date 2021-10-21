@@ -1,13 +1,15 @@
 package io.dolby.sdk.reactnative.services
 
-import com.facebook.react.bridge.*
-import com.voxeet.promise.solve.ThenVoid
+import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.services.SessionService
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
-import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 
 /**

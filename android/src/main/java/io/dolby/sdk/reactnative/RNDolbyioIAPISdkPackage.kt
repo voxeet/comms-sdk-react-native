@@ -6,8 +6,20 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
 import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
-import io.dolby.sdk.reactnative.mapper.*
-import io.dolby.sdk.reactnative.services.*
+import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
+import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
+import io.dolby.sdk.reactnative.mapper.ConferenceMapper
+import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper
+import io.dolby.sdk.reactnative.mapper.InvitationMapper
+import io.dolby.sdk.reactnative.mapper.ParticipantMapper
+import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
+import io.dolby.sdk.reactnative.mapper.RecordingMapper
+import io.dolby.sdk.reactnative.services.RNCommandServiceModule
+import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
+import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
+import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
+import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
+import io.dolby.sdk.reactnative.services.RNSessionServiceModule
 
 class RNDolbyioIAPISdkPackage : ReactPackage {
 

@@ -9,7 +9,6 @@ import com.voxeet.android.media.utils.MediaEngineEnvironmentHelper
 import com.voxeet.sdk.manifests.AbstractManifestComponentProvider
 import com.voxeet.sdk.preferences.VoxeetPreferences
 import com.voxeet.sdk.utils.VoxeetEnvironmentHolder
-import io.dolby.sdk.reactnative.android.RNDolbyioIAPISDKManifestComponent
 import io.dolby.sdk.reactnative.utils.IAPILog.log
 
 class RNDolbyioIAPISDKManifestComponent : AbstractManifestComponentProvider() {
