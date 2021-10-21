@@ -24,6 +24,7 @@ import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfFalse
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
@@ -202,6 +203,7 @@ class RNConferenceServiceModule(
   fun kick(participantRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::kick)
+      .rejectIfFalse { "Kick participant operation failed" }
       .forward(promise)
   }
 
@@ -212,7 +214,9 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun leave(promise: ReactPromise) {
-    conferenceService.leave().forward(promise, ignoreReturnType = true)
+    conferenceService.leave()
+      .rejectIfFalse { "Leave conference operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -348,13 +352,14 @@ class RNConferenceServiceModule(
    * @param participantRN a remote participant to mute
    * @param isMuted       true indicates that the local participant is muted, false indicates that
    * a participant is not muted
-   * @param promise       returns a boolean indicating if the mute state has changed
+   * @param promise       returns null
    */
   @ReactMethod
   fun mute(participantRN: ReadableMap, isMuted: Boolean, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantRN) }) { "Couldn't get participant" }
       .thenValue { participant -> conferenceService.mute(participant, isMuted) }
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Mute participant operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -364,12 +369,13 @@ class RNConferenceServiceModule(
    *
    * @param isMuted true indicates that remote participants are muted, false indicates that remote
    * participants are not muted
-   * @param promise returns a boolean indicating whether remote participants are muted.
+   * @param promise returns null
    */
   @ReactMethod
   fun muteOutput(isMuted: Boolean, promise: ReactPromise) {
-    conferenceService.muteOutput(isMuted)
-    promise.resolve(null)
+    Promises.promise(conferenceService.muteOutput(isMuted))
+      .rejectIfFalse { "Mute output operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -382,7 +388,8 @@ class RNConferenceServiceModule(
   fun setAudioProcessing(audioProcessingRN: ReadableMap, promise: ReactPromise) {
     Promises.promise(conferenceMapper.fromRN(audioProcessingRN))
       .thenValue(conferenceService::setAudioProcessing)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Set audio processing for the local participant operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -390,7 +397,7 @@ class RNConferenceServiceModule(
    * For more information, see the
    * [Video Forwarding](https://docs.dolby.io/communications-apis/docs/guides-video-forwarding) article.
    *
-   * @param max     The maximum number of video streams that may be transmitted to the local
+   * @param max             The maximum number of video streams that may be transmitted to the local
    * participant. The valid values are between 0 and 4. The default value is 4.
    * In the case of providing a value smaller than 0 or greater than 4, SDK triggers
    * the [IllegalStateException] error.
@@ -398,18 +405,15 @@ class RNConferenceServiceModule(
    * video streams and display their videos even when these participants do not talk.
    * For example, in the case of virtual classes, this option allows participants to pin the teacher's
    * video and see the teacher, even when the teacher is not the active speaker.
-   * @param promise returns null
+   * @param promise         returns null
    */
   @ReactMethod
-  fun setMaxVideoForwarding(
-    max: Int,
-    participantsRN: ReadableArray,
-    promise: ReactPromise
-  ) {
+  fun setMaxVideoForwarding(max: Int, participantsRN: ReadableArray, promise: ReactPromise) {
     Promises.promise(participantMapper.participantIdsFromRN(participantsRN))
       .thenValue { participantId -> participantId.mapNotNull(conferenceService::findParticipantById) }
-      .thenValue { conferenceService.videoForwarding(max, it) }
-      .forward(promise, ignoreReturnType = true)
+      .thenPromise { conferenceService.videoForwarding(max, it) }
+      .rejectIfFalse { "Set maximum number of video streams for local participant operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -432,7 +436,8 @@ class RNConferenceServiceModule(
   fun startAudio(participantMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::startAudio)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Start audio operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -460,7 +465,8 @@ class RNConferenceServiceModule(
   fun stopAudio(participantMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::stopAudio)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Stop audio operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -477,7 +483,8 @@ class RNConferenceServiceModule(
   fun startVideo(participantMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::startVideo)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Start video operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -491,7 +498,8 @@ class RNConferenceServiceModule(
   fun stopVideo(participantMap: ReadableMap, promise: ReactPromise) {
     Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::stopVideo)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Stop video operation failed" }
+      .forward(promise)
   }
 
   /**
@@ -517,7 +525,8 @@ class RNConferenceServiceModule(
         }
     }) { "Couldn't get the participant permissions" }
       .thenPromise(conferenceService::updatePermissions)
-      .forward(promise, ignoreReturnType = true)
+      .rejectIfFalse { "Update participant permissions operation failed" }
+      .forward(promise)
   }
 
   /**

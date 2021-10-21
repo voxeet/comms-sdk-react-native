@@ -82,6 +82,43 @@ object Promises {
     thenValue { requireNotNull(it, nullErrorMessage) }
 
   /**
+   * Throws [IllegalArgumentException] if emitted value is false
+   *
+   * ```
+   * promiseThatEmitBoolean
+   *  .rejectIfFalse()
+   * ```
+   *
+   * @param lazyMessage error message provider in case of false value
+   */
+  fun VoxeetPromise<Boolean>.rejectIfFalse(
+    lazyMessage: () -> String = { "Returned promise value is false" }
+  ): PromiseInOut<Boolean, Any?> =
+    thenValue {
+      require(it, lazyMessage)
+      null
+    }
+
+  /**
+   * Throws [IllegalArgumentException] if emitted value is false
+   *
+   * ```
+   * promiseThatEmitBoolean
+   *  .rejectIfFalse()
+   * ```
+   *
+   * @param lazyMessage error message provider in case of false value
+   */
+  fun <T> PromiseInOut<T, Boolean>.rejectIfFalse(
+    lazyMessage: () -> String = { "Returned promise value is false" }
+  ): PromiseInOut<Boolean, Any?> {
+    return thenValue {
+      require(it, lazyMessage)
+      null
+    }
+  }
+
+  /**
    * Util method to simplify building promises chain mapping
    *
    * ```
