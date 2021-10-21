@@ -2,7 +2,7 @@ import type { Participant } from '../conference/models';
 
 export enum NotificationServiceEventNames {
   /** Emitted when the application user received an invitation.  */
-  InvitationReceived = 'InvitationReceived',
+  InvitationReceived = 'EVENT_NOTIFICATION_INVITATION_RECEIVED',
 }
 
 export interface InvitationReceivedEventType {

@@ -2,15 +2,15 @@ import type { Participant } from '../conference/models';
 
 export enum VideoPresentationEventNames {
   /** Emitted when a video presentation is paused. */
-  paused = 'paused',
+  paused = 'EVENT_VIDEOPRESENTATION_PAUSED',
   /** Emitted when a video presentation is resumed. */
-  played = 'played',
+  played = 'EVENT_VIDEOPRESENTATION_PLAYED',
   /** Emitted when a video presentation is sought. */
-  sought = 'sought',
+  sought = 'EVENT_VIDEOPRESENTATION_SOUGHT',
   /** Emitted when a video presentation is started. */
-  started = 'started',
+  started = 'EVENT_VIDEOPRESENTATION_STARTED',
   /** Emitted when a video presentation is stopped. */
-  stopped = 'stopped',
+  stopped = 'EVENT_VIDEOPRESENTATION_STOPPED',
 }
 
 export interface VideoPresentationEventType {
