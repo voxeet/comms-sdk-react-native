@@ -8,7 +8,7 @@ import type { VideoPresentation, VideoPresentationState } from './models';
 
 const { DolbyIoIAPIVideoPresentationService } = NativeModules;
 
-class VideoPresentationService {
+export class VideoPresentationService {
   /** @internal */
   _nativeModule = DolbyIoIAPIVideoPresentationService;
   /** @internal */
