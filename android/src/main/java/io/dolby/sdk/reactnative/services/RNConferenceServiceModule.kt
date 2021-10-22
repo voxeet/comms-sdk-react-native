@@ -132,8 +132,7 @@ class RNConferenceServiceModule(
       .forward(promise)
 
   }
-  // TODO Note: remember to manually grant permissions to CAMERA and MICROPHONE.
-  //  That mechanism will be added in DEXA-140.
+
   /**
    * Joins the conference based on information from the `optionsRN`.
    *
