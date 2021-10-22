@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.voxeet.sdk.services.CommandService
 import com.voxeet.sdk.services.ConferenceService
+import io.dolby.sdk.reactnative.eventemitters.RNCommandEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
@@ -17,15 +19,17 @@ import io.dolby.sdk.reactnative.utils.Promises.thenValue
  * @constructor
  * Creates a bridge wrapper for [CommandService].
  *
+ * @param reactContext      react context
  * @param conferenceService [ConferenceService] from Android SDK
  * @param commandService    [CommandService] from Android SDK
- * @param reactContext      react context
+ * @param eventEmitter      an emitter for the command module events
  */
 class RNCommandServiceModule(
   reactContext: ReactApplicationContext,
+  eventEmitter: RNCommandEventEmitter,
   private val conferenceService: ConferenceService,
   private val commandService: CommandService
-) : ReactContextBaseJavaModule(reactContext) {
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "DolbyIoIAPICommandServiceModule"
 
@@ -42,4 +46,21 @@ class RNCommandServiceModule(
       .thenValue { conferenceId -> commandService.send(conferenceId, message) }
       .forward(promise)
   }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) {
+    super.addListener(eventName)
+  }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) {
+    super.removeListeners(count)
+  }
+
 }
