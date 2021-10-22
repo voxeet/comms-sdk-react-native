@@ -184,6 +184,7 @@ class RNConferenceServiceModule(
     Promises.promise({ toConference(conferenceRN) }) { "Couldn't get the conference" }
       .thenValue { it to (replayOptionsRN?.let(conferenceMapper::replayOffsetFromRN) ?: 0) }
       .thenPromise { (conference, offset) -> conferenceService.replay(conference, offset.toLong()) }
+      .thenValue(conferenceMapper::toRN)
       .forward(promise, ignoreReturnType = true)
   }
 
