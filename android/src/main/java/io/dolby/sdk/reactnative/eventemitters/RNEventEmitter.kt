@@ -25,7 +25,7 @@ abstract class RNEventEmitter(
    * @param eventName the name of the event
    * @param data the event data
    */
-  fun send(eventName: String, data: WritableMap) =
+  fun send(eventName: String, data: WritableMap?) =
     context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)?.emit(eventName, data)
 
   /**
