@@ -3,11 +3,10 @@ package io.dolby.sdk.reactnative.services
 import androidx.annotation.VisibleForTesting
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.voxeet.VoxeetSDK
 import com.voxeet.sdk.authent.token.TokenCallback
+import io.dolby.sdk.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.reactnative.utils.lockCatching
 import io.dolby.sdk.reactnative.utils.unlockCatching
 import org.webrtc.CodecDescriptorFactory
@@ -25,10 +24,12 @@ import java.util.concurrent.locks.ReentrantLock
  * Creates a bridge wrapper for [VoxeetSDK].
  *
  * @param reactContext react context
+ * @param eventEmitter an emitter for the sdk module events
  */
 class RNDolbyioIAPISdkModule(
-  private val reactContext: ReactApplicationContext
-) : ReactContextBaseJavaModule(reactContext) {
+  private val reactContext: ReactApplicationContext,
+  private val eventEmitter: RNSdkEventEmitter
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   @VisibleForTesting
   val awaitingTokenCallbacks: MutableList<TokenCallback> = mutableListOf()
@@ -77,7 +78,7 @@ class RNDolbyioIAPISdkModule(
         awaitingTokenCallbacks.add(callback)
       }
       lockAwaitingToken.unlockCatching()
-      postRefreshAccessToken()
+      eventEmitter.onTokenRefreshNeeded()
     }
     VoxeetSDK.instance().register(this)
     promise.resolve(null)
@@ -142,11 +143,6 @@ class RNDolbyioIAPISdkModule(
     awaitingTokenCallbacks.clear()
     promise.resolve(null)
   }
-
-  private fun postRefreshAccessToken() =
-    reactContext
-      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      .emit("refreshToken", null)
 
   private fun enableOnEmulator() {
     CodecDescriptorFactory
