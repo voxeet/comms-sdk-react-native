@@ -3,9 +3,11 @@ package io.dolby.sdk.reactnative.eventemitters
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.voxeet.sdk.events.sdk.ConferenceStatusUpdatedEvent
+import com.voxeet.sdk.events.sdk.PermissionsUpdatedEvent
 import com.voxeet.sdk.events.v2.ParticipantAddedEvent
 import com.voxeet.sdk.events.v2.ParticipantUpdatedEvent
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
+import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import org.greenrobot.eventbus.Subscribe
 
@@ -13,19 +15,21 @@ import org.greenrobot.eventbus.Subscribe
  * The conference event emitter
  * @param participantMapper map participant to react JS data
  * @param conferenceMapper map conference to react JS data
- * @param context          react application context for sending event
+ * @param reactContext          react application context for sending event
  */
 class RNConferenceEventEmitter(
+  reactContext: ReactApplicationContext,
   private val participantMapper: ParticipantMapper,
   private val conferenceMapper: ConferenceMapper,
-  context: ReactApplicationContext
-) : RNEventEmitter(context) {
+  private val permissionsMapper: ConferencePermissionMapper
+) : RNEventEmitter(reactContext) {
 
   /**
    * The supported events for JS
    */
   override val eventMap: Map<String, String>
     get() = mapOf(
+      "EVENT_CONFERENCE_PERMISSIONS_UPDATED" to EVENT_PERMISSIONS_UPDATED,
       /**
        * Participant events
        */
@@ -76,13 +80,27 @@ class RNConferenceEventEmitter(
   }
 
   /**
+   * Emitted when the local participant's permissions are updated.
+   */
+  @Subscribe
+  fun on(event: PermissionsUpdatedEvent) {
+    Arguments.createMap().apply {
+      putArray(EVENT_PERMISSIONS_KEY, permissionsMapper.toRN(event.permissions))
+    }.also {
+      send(EVENT_PERMISSIONS_UPDATED, it)
+    }
+  }
+
+  /**
    * The event names and payload keys, make sure they are unique in the application scope
    */
   companion object {
+    const val EVENT_PERMISSIONS_UPDATED = "PermissionsUpdated"
     const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
     const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
     const val EVENT_PARTICIPANT_KEY = "participant"
     const val EVENT_STATUS_UPDATE = "conferenceStatusUpdated"
     const val EVENT_STATUS_KEY = "conferenceStatus"
+    const val EVENT_PERMISSIONS_KEY = "permissions"
   }
 }
