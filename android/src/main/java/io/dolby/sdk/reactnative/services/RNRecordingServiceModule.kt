@@ -8,6 +8,7 @@ import com.voxeet.sdk.services.RecordingService
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfFalse
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
@@ -34,21 +35,25 @@ class RNRecordingServiceModule(
   /**
    * Starts recording a conference.
    *
-   * @param promise returns true if start recording request succeed, false otherwise
+   * @param promise returns null
    */
   @ReactMethod
   fun start(promise: ReactPromise) {
-    recordingService.start().forward(promise)
+    recordingService.start()
+      .rejectIfFalse { "Start recording operation failed" }
+      .forward(promise)
   }
 
   /**
    * Stops recording a conference.
    *
-   * @param promise returns true if stop recording request succeed, false otherwise
+   * @param promise returns null
    */
   @ReactMethod
   fun stop(promise: ReactPromise) {
-    recordingService.stop().forward(promise)
+    recordingService.stop()
+      .rejectIfFalse { "Stop recording operation failed" }
+      .forward(promise)
   }
 
   /**

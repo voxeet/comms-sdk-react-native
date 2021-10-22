@@ -10,6 +10,8 @@ import com.voxeet.sdk.services.SessionService
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfFalse
+import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 
 /**
@@ -36,13 +38,13 @@ class RNSessionServiceModule(
    * Opens a session using information from the ParticipantInfo model.
    *
    * @param participantInfoRN ParticipantInfo which should contain at least one participant name
-   * @param promise           returns true if session was opened successfully, false otherwise
+   * @param promise           returns null
    */
   @ReactMethod
   fun open(participantInfoRN: ReadableMap, promise: Promise) {
-    Promises
-      .promise(participantMapper.infoFromRN(participantInfoRN), { "Couldn't get participant info" })
-      .thenValue(sessionService::open)
+    Promises.promise(participantMapper.infoFromRN(participantInfoRN)) { "Couldn't get participant info" }
+      .thenPromise(sessionService::open)
+      .rejectIfFalse { "Open session operation failed" }
       .forward(promise)
   }
 
@@ -50,12 +52,13 @@ class RNSessionServiceModule(
    * Logs out from the current session.
    * Logging out cancels all logging processes and leaves the conference.
    *
-   * @param promise returns true if logout succeeded, false otherwise
+   * @param promise returns null
    */
   @ReactMethod
   fun close(promise: Promise) {
     sessionService
       .close()
+      .rejectIfFalse { "Close session operation failed" }
       .forward(promise)
   }
 
