@@ -13,7 +13,6 @@ import type {
   Conference,
   ConferenceCreateOptions,
   ConferenceReplayOptions,
-  ConferenceMixingOptions,
   ConferenceJoinOptions,
   ConferenceLeaveOptions,
   AudioLevel,
@@ -70,24 +69,18 @@ export class ConferenceService {
    * Replays a previously recorded conference.
    * @param conference<Conference> The Conference.
    * @param replayOptions<ConferenceReplayOptions> The replay options.
-   * @param mixingOptions<ConferenceMixingOptions> The object that notifies the server that a participant who replays the conference is a special participant called Mixer.
    * @returns {Promise<Conference>} Promise with a Conference object
    */
 
   public async replay(
     conference: Conference,
-    replayOptions?: ConferenceReplayOptions,
-    mixingOptions?: ConferenceMixingOptions
+    replayOptions?: ConferenceReplayOptions
   ): Promise<Conference> {
     return transformToConference(
-      await this._nativeModule.replay(
-        conference,
-        {
-          offset: 0,
-          ...replayOptions,
-        },
-        mixingOptions
-      )
+      await this._nativeModule.replay(conference, {
+        offset: 0,
+        ...replayOptions,
+      })
     );
   }
 

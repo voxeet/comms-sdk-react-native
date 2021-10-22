@@ -1,11 +1,13 @@
-import styles from './JoinScreen.style';
+import React, { FunctionComponent, useContext } from 'react';
+import { View } from 'react-native';
+
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Text from '@ui/Text';
-import React, { FunctionComponent, useContext } from 'react';
-import { View } from 'react-native';
+
+import styles from './JoinScreen.style';
 
 type CreateConferenceButtonProps = {
   conferenceAlias: string;
