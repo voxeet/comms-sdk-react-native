@@ -28,7 +28,7 @@
     "pods": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
     "license": "yarn license-checker --production --start ./ --out ./LICENSES.csv",
-    "license:example": "yarn license-checker --production --start ./example --out ./example/LICENSES.csv",
+    "license:testapp": "yarn license-checker --production --start ./example --out ./example/LICENSES.csv",
     "generate:documentation": "rm -rf docs && typedoc --disableSources --excludeInternal",
     "generate": "yarn generate:documentation",
     "append:documentation": "git add docs",
