@@ -4,7 +4,6 @@ import ConferenceService from '../ConferenceService';
 import { ConferenceServiceEventNames } from '../events';
 import type { Conference } from '../models';
 import {
-  ConferenceMixingOptions,
   ConferencePermission,
   ConferenceReplayOptions,
   ConferenceStatus,
@@ -29,10 +28,6 @@ const testConference: Conference = {
 
 const testConferenceReplayOptions: ConferenceReplayOptions = {
   offset: 1,
-};
-
-const testConferenceMixingOptions: ConferenceMixingOptions = {
-  enabled: true,
 };
 
 const testParticipantPermissions: ParticipantPermissions = {
@@ -82,30 +77,20 @@ describe('ConferenceService', () => {
 
   describe('replay()', () => {
     it('should invoke exported replay method with correct arguments', () => {
-      ConferenceService.replay(
-        testConference,
-        testConferenceReplayOptions,
-        testConferenceMixingOptions
-      );
+      ConferenceService.replay(testConference, testConferenceReplayOptions);
       expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
         testConference,
-        testConferenceReplayOptions,
-        testConferenceMixingOptions
+        testConferenceReplayOptions
       );
     });
 
     it('without replay options should invoke exported replay method with replay offset param set to 0', () => {
-      ConferenceService.replay(
-        testConference,
-        undefined,
-        testConferenceMixingOptions
-      );
+      ConferenceService.replay(testConference, undefined);
       expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
         testConference,
         {
           offset: 0,
-        },
-        testConferenceMixingOptions
+        }
       );
     });
   });
