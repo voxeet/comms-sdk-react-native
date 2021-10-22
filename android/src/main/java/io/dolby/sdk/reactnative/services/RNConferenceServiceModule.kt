@@ -130,7 +130,6 @@ class RNConferenceServiceModule(
       .rejectIfNull { "Couldn't get the conference" }
       .thenValue(conferenceMapper::toRN)
       .forward(promise)
-
   }
 
   /**
