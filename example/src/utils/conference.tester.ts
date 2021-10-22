@@ -1,11 +1,13 @@
+import { Alert } from 'react-native';
+
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+
 import type { Participant } from '../../../lib/typescript/services/conference/models';
 import type {
   Conference,
   ParticipantPermissions,
 } from '../../../src/services/conference/models';
 import type { User } from '../../../src/services/session/models';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-import { Alert } from 'react-native';
 
 export const current = async () => {
   try {
@@ -186,5 +188,25 @@ export const updatePermissions = async (
     await DolbyIoIAPI.conference.updatePermissions(participantPermissions);
   } catch (e: any) {
     Alert.alert('updatePermissions error', e.toString());
+  }
+};
+
+export const startScreenShare = async () => {
+  try {
+    await DolbyIoIAPI.conference.startScreenShare();
+    Alert.alert('Screen sharing started');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('Start screen sharing error', msg);
+  }
+};
+
+export const stopScreenShare = async () => {
+  try {
+    await DolbyIoIAPI.conference.stopScreenShare();
+    Alert.alert('Screen sharing stopped');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('Stop screen sharing error', msg);
   }
 };
