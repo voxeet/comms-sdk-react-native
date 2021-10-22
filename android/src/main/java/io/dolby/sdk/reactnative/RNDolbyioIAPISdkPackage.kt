@@ -33,6 +33,12 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       participantMapper = participantMapper,
       conferencePermissionMapper = conferencePermissionMapper
     )
+    val conferenceEventEmitter = RNConferenceEventEmitter(
+      reactContext = reactContext,
+      participantMapper = participantMapper,
+      conferenceMapper = conferenceMapper,
+      permissionsMapper = conferencePermissionMapper
+    )
 
     return listOf(
       RNDolbyioIAPISdkModule(reactContext),
@@ -48,7 +54,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         conferenceCreateOptionsMapper = ConferenceCreateOptionsMapper(),
         conferenceJoinOptionsMapper = ConferenceJoinOptionsMapper(),
         participantMapper = participantMapper,
-        eventEmitter = RNConferenceEventEmitter(participantMapper, conferenceMapper, reactContext),
+        eventEmitter = conferenceEventEmitter,
         participantPermissionMapper = participantPermissionMapper
       ),
       RNCommandServiceModule(
