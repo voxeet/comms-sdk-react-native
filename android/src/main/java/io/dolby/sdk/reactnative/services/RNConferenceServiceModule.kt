@@ -185,7 +185,7 @@ class RNConferenceServiceModule(
       .thenValue { it to (replayOptionsRN?.let(conferenceMapper::replayOffsetFromRN) ?: 0) }
       .thenPromise { (conference, offset) -> conferenceService.replay(conference, offset.toLong()) }
       .thenValue(conferenceMapper::toRN)
-      .forward(promise, ignoreReturnType = true)
+      .forward(promise)
   }
 
   /**
