@@ -36,6 +36,8 @@ jest.mock('react-native', () => {
     join: jest.fn(),
     kick: jest.fn(),
     leave: jest.fn(),
+    startScreenShare: jest.fn(),
+    stopScreenShare: jest.fn(),
   };
   RN.NativeModules.DolbyIoIAPISessionServiceModule = {
     open: jest.fn(),

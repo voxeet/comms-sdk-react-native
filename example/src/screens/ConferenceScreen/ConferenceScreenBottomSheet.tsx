@@ -1,6 +1,7 @@
-import type { Conference } from '../../../../src/services/conference/models';
-import { ConferencePermission } from '../../../../src/services/conference/models';
-import styles from './ConferenceScreen.style';
+import React, { useContext, useRef } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -23,6 +24,8 @@ import {
   setAudioProcessing,
   setMaxVideoForwarding,
   updatePermissions,
+  startScreenShare,
+  stopScreenShare,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -44,9 +47,10 @@ import {
   stopRecording,
 } from '@utils/recording.tester';
 import { getCurrentUser } from '@utils/session.tester';
-import React, { useContext, useRef } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
+
+import type { Conference } from '../../../../src/services/conference/models';
+import { ConferencePermission } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -120,6 +124,18 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Set Max Video Forwarding"
               onPress={setMaxVideoForwarding}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Start screen share"
+              onPress={startScreenShare}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Stop screen share"
+              onPress={stopScreenShare}
             />
             <Button
               size="small"
