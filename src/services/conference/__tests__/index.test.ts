@@ -360,6 +360,20 @@ describe('ConferenceService', () => {
       );
     });
   });
+
+  describe('startScreenShare()', () => {
+    it('should invoke exported startScreenShare method', () => {
+      ConferenceService.startScreenShare();
+      expect(DolbyIoIAPIConferenceService.startScreenShare).toHaveBeenCalled();
+    });
+  });
+
+  describe('stopScreenShare()', () => {
+    it('should invoke exported stopScreenShare method', () => {
+      ConferenceService.stopScreenShare();
+      expect(DolbyIoIAPIConferenceService.stopScreenShare).toHaveBeenCalled();
+    });
+  });
 });
 
 describe('ConferenceService - transformers', () => {
