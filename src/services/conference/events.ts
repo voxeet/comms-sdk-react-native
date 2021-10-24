@@ -8,6 +8,8 @@ import type {
 export enum ConferenceServiceEventNames {
   /** Emitted when a new participant is invited to a conference or joins a conference. */
   ParticipantAdded = 'EVENT_CONFERENCE_PARTICIPANT_ADDED',
+  /** Emitted when a new participant joined the conference  */
+  ParticipantJoined = 'EVENT_CONFERENCE_PARTICIPANT_JOINED',
   /** Emitted when a participant changes ConferenceParticipantStatus. */
   ParticipantUpdated = 'EVENT_CONFERENCE_PARTICIPANT_UPDATED',
   /** Emitted when a participant leaves a conference. */
@@ -48,6 +50,7 @@ export interface StreamChangedEventType {
 
 export interface ConferenceServiceEventMap {
   [ConferenceServiceEventNames.ParticipantAdded]: ParticipantChangedEventType;
+  [ConferenceServiceEventNames.ParticipantJoined]: ParticipantChangedEventType;
   [ConferenceServiceEventNames.ParticipantUpdated]: ParticipantChangedEventType;
   [ConferenceServiceEventNames.ParticipantRemoved]: ParticipantChangedEventType;
   [ConferenceServiceEventNames.PermissionsUpdated]: PermissionsUpdatedEventType;
