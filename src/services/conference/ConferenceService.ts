@@ -426,6 +426,22 @@ export class ConferenceService {
       streamRemovedEventUnsubscribe();
     };
   }
+
+  /**
+   * 	Starts a screen sharing session.
+   * @returns {Promise<void>}
+   */
+  public async startScreenShare(): Promise<void> {
+    return this._nativeModule.startScreenShare();
+  }
+
+  /**
+   * Stops a screen sharing session.
+   * @returns {Promise<void>}
+   */
+  public async stopScreenShare(): Promise<void> {
+    return this._nativeModule.stopScreenShare();
+  }
 }
 
 export default new ConferenceService();
