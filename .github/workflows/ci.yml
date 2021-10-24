@@ -98,7 +98,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-example-pods-
       - run: yarn install
-      - uses: EndBug/add-and-commit@v7a
+      - uses: EndBug/add-and-commit
         with:
           add: 'docs'
           author_name: Dolby.io
