@@ -18,7 +18,7 @@ jobs:
             ${{ runner.os }}-pods-
       - uses: actions/cache@v2
         with:
-          path: |
+          path:
             example/ios/Pods
           key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
@@ -42,7 +42,7 @@ jobs:
               ${{ runner.os }}-pods-
         - uses: actions/cache@v2
           with:
-            path: |
+            path:
               example/ios/Pods
             key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
             restore-keys: |
