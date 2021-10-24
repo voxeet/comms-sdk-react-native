@@ -32,22 +32,22 @@ jobs:
       - uses: actions/setup-node@v2
       with:
         node-version: '14'
-        - uses: c-hive/gha-yarn-cache@v2
-        - uses: actions/cache@v2
-          with:
-            path:
-              ios/Pods
-            key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-pods-
-        - uses: actions/cache@v2
-          with:
-            path:
-              example/ios/Pods
-            key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-example-pods-
-        - run: yarn install
+      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/cache@v2
+        with:
+          path:
+            ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - uses: actions/cache@v2
+        with:
+          path:
+            example/ios/Pods
+          key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-example-pods-
+      - run: yarn install
       - run: yarn lint
   test:
     runs-on: macos-11
