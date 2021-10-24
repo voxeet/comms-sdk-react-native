@@ -3,7 +3,6 @@ on: [pull_request]
 jobs:
   documentation:
     runs-on: macos-11
-    needs: install
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
