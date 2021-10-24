@@ -16,6 +16,8 @@
 - [getCurrent](_internal_.FilePresentationService.md#getcurrent)
 - [getImage](_internal_.FilePresentationService.md#getimage)
 - [getThumbnail](_internal_.FilePresentationService.md#getthumbnail)
+- [onFileConverted](_internal_.FilePresentationService.md#onfileconverted)
+- [onFilePresentationChange](_internal_.FilePresentationService.md#onfilepresentationchange)
 - [setPage](_internal_.FilePresentationService.md#setpage)
 - [start](_internal_.FilePresentationService.md#start)
 - [stop](_internal_.FilePresentationService.md#stop)
@@ -95,6 +97,46 @@ Provides the thumbnail's URL that refers to a specific page of the presented fil
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<`string`\>
+
+___
+
+### onFileConverted
+
+▸ **onFileConverted**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
+
+Add a handler for file converted
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: [`FileConvertedEventType`](../interfaces/_internal_.FileConvertedEventType.md)) => `void` |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
+
+Function that removes handler
+
+___
+
+### onFilePresentationChange
+
+▸ **onFilePresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
+
+Add a handler for file presentation changes
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `handler` | (`data`: [`FilePresentationChangedEventType`](../interfaces/_internal_.FilePresentationChangedEventType.md), `type?`: [`FilePresentationStarted`](../modules/_internal_.md#filepresentationstarted) \| [`FilePresentationStopped`](../modules/_internal_.md#filepresentationstopped) \| [`FilePresentationUpdated`](../modules/_internal_.md#filepresentationupdated)) => `void` |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
+
+Function that removes handler
 
 ___
 
