@@ -9,7 +9,15 @@ jobs:
         with:
           node-version: '14'
       - uses: c-hive/gha-yarn-cache@v2
-      - run: yarn
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ios/Pods
+            example/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - run: yarn install
   lint:
     runs-on: macos-11
     needs: install
@@ -19,7 +27,10 @@ jobs:
         with:
           node-version: '14'
       - uses: c-hive/gha-yarn-cache@v2
-      - run: yarn
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+      - run: yarn install
       - run: yarn lint
   test:
     runs-on: macos-11
