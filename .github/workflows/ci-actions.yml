@@ -57,7 +57,22 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: yarn
+      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/cache@v2
+        with:
+          path:
+            ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - uses: actions/cache@v2
+        with:
+          path:
+            example/ios/Pods
+          key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-example-pods-
+      - run: yarn install
       - run: yarn test
   documentation:
     runs-on: macos-11
@@ -67,5 +82,25 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: yarn
-      - run: yarn documentation
+      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/cache@v2
+        with:
+          path:
+            ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - uses: actions/cache@v2
+        with:
+          path:
+            example/ios/Pods
+          key: ${{ runner.os }}-example-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-example-pods-
+      - run: yarn install
+      - uses: EndBug/add-and-commit@v7a
+        with:
+          add: 'docs'
+          author_name: Dolby.io
+          author_email: hello@dolby.io
+          message: 'Documentation update'
