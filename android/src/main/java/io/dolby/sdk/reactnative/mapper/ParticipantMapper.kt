@@ -10,6 +10,7 @@ import com.voxeet.android.media.stream.MediaStreamType
 import com.voxeet.android.media.stream.VideoTrack
 import com.voxeet.sdk.json.ParticipantInfo
 import com.voxeet.sdk.models.Participant
+import com.voxeet.sdk.models.ParticipantNotification
 import com.voxeet.sdk.models.v1.ConferenceParticipantStatus
 import com.voxeet.sdk.models.v2.ParticipantType
 
@@ -41,12 +42,19 @@ class ParticipantMapper {
 
   fun toRN(participant: Participant): ReadableMap =
     Arguments.createMap().apply {
-      participant.id?.let { putString(PARTICIPANT_ID, participant.id) }
+      participant.id?.let { putString(PARTICIPANT_ID, it) }
       putBoolean(PARTICIPANT_AUDIO_TRANSMITTING, participant.audioTransmitting())
       putString(PARTICIPANT_STATUS, toRNParticipantStatus(participant.status))
       participant.info?.let { putMap(PARTICIPANT_INFO, toRNInfo(it)) }
       putArray(PARTICIPANT_STREAMS, toRNMediaStreams(participant.streams()))
       putString(PARTICIPANT_TYPE, toRNParticipantType(participant.participantType()))
+    }
+
+  fun toRN(participantNotification: ParticipantNotification): ReadableMap =
+    Arguments.createMap().apply {
+      participantNotification.id?.let { putString(PARTICIPANT_ID, it) }
+      putString(PARTICIPANT_STATUS, toRNParticipantStatus(participantNotification.status))
+      participantNotification.info?.let { putMap(PARTICIPANT_INFO, toRNInfo(it)) }
     }
 
   fun toRN(participants: List<Participant?>): ReadableArray =
