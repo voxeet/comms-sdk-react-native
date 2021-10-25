@@ -1,8 +1,29 @@
 import Foundation
 import VoxeetSDK
 
+// MARK: - Supported Events
+private enum EventKeys: String, CaseIterable {
+	case messageReceived = "EVENT_COMMAND_MESSAGE_RECEIVED"
+}
+
 @objc(RNCommandServiceModule)
-public class CommandServiceModule: NSObject {
+public class CommandServiceModule: ReactEmitter {
+
+	// MARK: - Events Setup
+	@objc(supportedEvents)
+	override public func supportedEvents() -> [String] {
+		return EventKeys.allCases.mapToStrings()
+	}
+
+	public override func startObserving() {
+		super.startObserving()
+		VoxeetSDK.shared.command.delegate = self;
+	}
+
+	public override func stopObserving() {
+		super.stopObserving()
+		VoxeetSDK.shared.command.delegate = nil;
+	}
 
 	/// Sends a message to all conference participants.
 	/// - Parameters:
@@ -22,5 +43,18 @@ public class CommandServiceModule: NSObject {
 			}
 			error.send(with: reject)
 		}
+	}
+}
+
+extension CommandServiceModule: VTCommandDelegate {
+
+	public func received(participant: VTParticipant, message: String) {
+		send(
+			event: EventKeys.messageReceived,
+			body: MessageModel(
+				participant: participant,
+				message: message
+			).toReactModel()
+		)
 	}
 }
