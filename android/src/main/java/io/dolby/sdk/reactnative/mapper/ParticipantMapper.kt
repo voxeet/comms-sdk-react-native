@@ -57,6 +57,14 @@ class ParticipantMapper {
         .forEach(::pushMap)
     }
 
+  fun toRNMediaStream(stream: MediaStream): ReadableMap =
+    Arguments.createMap().apply {
+      putString(PARTICIPANT_STREAMS_ID, stream.peerId())
+      putString(PARTICIPANT_STREAMS_TYPE, toRNMediaStreamType(stream.type))
+      putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toRNAudioTracks(stream.audioTracks()))
+      putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toRNVideoTracks(stream.videoTracks()))
+    }
+
   private fun toRNParticipantType(participantType: ParticipantType) = when (participantType) {
     ParticipantType.USER -> "USER"
     ParticipantType.LISTENER -> "LISTENER"
@@ -90,18 +98,10 @@ class ParticipantMapper {
       ConferenceParticipantStatus.UNKNOWN -> "UNKNOWN"
     }
 
-  private fun toRNMedialStream(stream: MediaStream): ReadableMap =
-    Arguments.createMap().apply {
-      putString(PARTICIPANT_STREAMS_ID, stream.peerId())
-      putString(PARTICIPANT_STREAMS_TYPE, toRNMediaStreamType(stream.type))
-      putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toRNAudioTracks(stream.audioTracks()))
-      putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toRNVideoTracks(stream.videoTracks()))
-    }
-
   private fun toRNMediaStreams(streams: List<MediaStream>): ReadableArray =
     Arguments.createArray().apply {
       streams
-        .map(::toRNMedialStream)
+        .map(::toRNMediaStream)
         .forEach(::pushMap)
     }
 
