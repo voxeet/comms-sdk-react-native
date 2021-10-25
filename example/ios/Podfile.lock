@@ -437,7 +437,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  dolbyio_react-native-iapi-sdk: 106decda4b11d406a53bbe1c85f682fd712e1751
+  dolbyio_react-native-iapi-sdk: 10a2381ef6d08302c292eb50a97243b7521a217e
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 55f5afbbb8f5021a000c3d9289820d17cbc541b3
   FBReactNativeSpec: c2d85d69490fc5666bc4123dff3b9b72db06a987
