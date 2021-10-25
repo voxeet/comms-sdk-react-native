@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
 import io.dolby.sdk.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
@@ -45,9 +46,10 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       participantMapper = participantMapper,
       reactContext = reactContext
     )
+    val sdkEventEmitter = RNSdkEventEmitter(reactContext)
 
     return listOf(
-      RNDolbyioIAPISdkModule(reactContext),
+      RNDolbyioIAPISdkModule(reactContext, sdkEventEmitter),
       RNSessionServiceModule(
         reactContext = reactContext,
         sessionService = VoxeetSDK.session(),
