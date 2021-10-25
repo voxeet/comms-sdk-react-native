@@ -69,9 +69,9 @@ Add a handler for invitation received
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/_internal_.InvitationReceivedEventType.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/_internal_.InvitationReceivedEventType.md)) => `void` | Handling function |
 
 #### Returns
 
