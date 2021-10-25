@@ -36,8 +36,10 @@
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](_internal_.ConferenceService.md#setmaxvideoforwarding)
 - [startAudio](_internal_.ConferenceService.md#startaudio)
+- [startScreenShare](_internal_.ConferenceService.md#startscreenshare)
 - [startVideo](_internal_.ConferenceService.md#startvideo)
 - [stopAudio](_internal_.ConferenceService.md#stopaudio)
+- [stopScreenShare](_internal_.ConferenceService.md#stopscreenshare)
 - [stopVideo](_internal_.ConferenceService.md#stopvideo)
 - [updatePermissions](_internal_.ConferenceService.md#updatepermissions)
 
@@ -347,7 +349,7 @@ Add a handler for participants changes
 
 | Name | Type |
 | :------ | :------ |
-| `handler` | (`data`: [`ParticipantAddedEventType`](../interfaces/_internal_.ParticipantAddedEventType.md) \| [`ParticipantUpdatedEventType`](../interfaces/_internal_.ParticipantUpdatedEventType.md) \| [`ParticipantRemovedEventType`](../interfaces/_internal_.ParticipantRemovedEventType.md)) => `void` |
+| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/_internal_.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/_internal_.md#participantadded) \| [`ParticipantJoined`](../modules/_internal_.md#participantjoined) \| [`ParticipantUpdated`](../modules/_internal_.md#participantupdated) \| [`ParticipantRemoved`](../modules/_internal_.md#participantremoved)) => `void` |
 
 #### Returns
 
@@ -407,7 +409,7 @@ Add a handler for streams changes
 
 | Name | Type |
 | :------ | :------ |
-| `handler` | (`data`: [`StreamAddedEventType`](../interfaces/_internal_.StreamAddedEventType.md) \| [`StreamUpdatedEventType`](../interfaces/_internal_.StreamUpdatedEventType.md) \| [`StreamRemovedEventType`](../interfaces/_internal_.StreamRemovedEventType.md)) => `void` |
+| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/_internal_.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/_internal_.md#streamadded) \| [`StreamUpdated`](../modules/_internal_.md#streamupdated) \| [`StreamRemoved`](../modules/_internal_.md#streamremoved)) => `void` |
 
 #### Returns
 
@@ -419,7 +421,7 @@ ___
 
 ### replay
 
-▸ **replay**(`conference`, `replayOptions?`, `mixingOptions?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
+▸ **replay**(`conference`, `replayOptions?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
 Replays a previously recorded conference.
 
@@ -429,7 +431,6 @@ Replays a previously recorded conference.
 | :------ | :------ |
 | `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
 | `replayOptions?` | [`ConferenceReplayOptions`](../interfaces/_internal_.ConferenceReplayOptions.md) |
-| `mixingOptions?` | [`ConferenceMixingOptions`](../interfaces/_internal_.ConferenceMixingOptions.md) |
 
 #### Returns
 
@@ -494,6 +495,18 @@ Starts audio transmission between the local client and a conference.
 
 ___
 
+### startScreenShare
+
+▸ **startScreenShare**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+	Starts a screen sharing session.
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+___
+
 ### startVideo
 
 ▸ **startVideo**(`participant`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
@@ -523,6 +536,18 @@ Stops audio transmission between the local client and a conference.
 | Name | Type |
 | :------ | :------ |
 | `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+___
+
+### stopScreenShare
+
+▸ **stopScreenShare**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+Stops a screen sharing session.
 
 #### Returns
 
