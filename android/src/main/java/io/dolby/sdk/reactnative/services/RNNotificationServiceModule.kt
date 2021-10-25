@@ -1,7 +1,6 @@
 package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -9,6 +8,7 @@ import com.voxeet.sdk.json.ParticipantInvited
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.NotificationService
+import io.dolby.sdk.reactnative.eventemitters.RNNotificationEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.InvitationMapper
 import io.dolby.sdk.reactnative.utils.Promises
@@ -27,21 +27,23 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  *
  * Participants who do not wish to participate at a conference can [decline] the conference invitation.
  *
- * @constructor
- * Creates a bridge wrapper for [NotificationService].
+ * @constructor Creates a bridge wrapper for [NotificationService].
  *
+ * @param reactContext        react context
+ * @param eventEmitter        an emitter for the notification module events
  * @param conferenceService   [ConferenceService] from Android SDK
  * @param notificationService [NotificationService] from Android SDK
  * @param conferenceMapper    [ConferenceMapper] mapper for a [Conference] and [Conference]-related models
  * @param invitationMapper    [InvitationMapper] mapper for a [ParticipantInvited] model
  */
-class RNNotificationServiceModule(
+class RNNotificationServiceModule constructor(
+  reactContext: ReactApplicationContext,
+  eventEmitter: RNNotificationEventEmitter,
   private val conferenceService: ConferenceService,
   private val notificationService: NotificationService,
   private val conferenceMapper: ConferenceMapper,
-  private val invitationMapper: InvitationMapper,
-  reactContext: ReactApplicationContext
-) : ReactContextBaseJavaModule(reactContext) {
+  private val invitationMapper: InvitationMapper
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "DolbyIoIAPINotificationService"
 
@@ -83,4 +85,18 @@ class RNNotificationServiceModule(
       .rejectIfFalse { "Decline invitation operation failed" }
       .forward(promise)
   }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) = super.addListener(eventName)
+
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) = super.removeListeners(count)
+
 }
