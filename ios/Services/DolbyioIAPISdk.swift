@@ -1,9 +1,21 @@
 import Foundation
 import VoxeetSDK
 
+// MARK: - Supported Events
+private enum EventKeys: String, CaseIterable {
+	case refreshToken = "refreshToken"
+}
+
 @objc(RNDolbyioIAPISdk)
-public class DolbyIoIAPIModule: NSObject {
+public class DolbyIoIAPIModule: ReactEmitter {
+
 	private var refreshToken: ((String?) -> Void)?
+
+	// MARK: - Events Setup
+	@objc(supportedEvents)
+	override public func supportedEvents() -> [String] {
+		return EventKeys.allCases.mapToStrings()
+	}
 
 	/// Initializes the Voxeet SDK using the customer key and secret.
 	/// - Parameters:
@@ -38,6 +50,7 @@ public class DolbyIoIAPIModule: NSObject {
 		setupSDK()
 		VoxeetSDK.shared.initialize(accessToken: accessToken) { [weak self] closure, _ in
 			self?.refreshToken = closure
+			self?.send(event: EventKeys.refreshToken, body: NSNull())
 		}
 		resolve(NSNull())
 	}
