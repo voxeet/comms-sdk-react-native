@@ -92,6 +92,7 @@ extension NotificationServiceModule: VTNotificationDelegate {
 		)
 	}
 
+	public func activeParticipants(notification: VTActiveParticipantsNotification) {}
 	public func conferenceStatus(notification: VTConferenceStatusNotification) {}
 	public func conferenceCreated(notification: VTConferenceCreatedNotification) {}
 	public func conferenceEnded(notification: VTConferenceEndedNotification) {}

@@ -13,7 +13,7 @@ target 'DolbyioSdkExample' do
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
 
-  pod 'VoxeetSDK', :podspec => 'https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.3/VoxeetSDK.podspec'
+  pod 'VoxeetSDK', :podspec => 'https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.5/VoxeetSDK.podspec'
   
   pod 'dolbyio_react-native-iapi-sdk', :path => '../..'
 
