@@ -27,7 +27,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --onlyDirectDependencies",
+    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies",
     "license:testapp": "yarn npm-license-crawler --production --start ./example --json ./example/LICENSES.json --onlyDirectDependencies",
     "generate:documentation": "rm -rf docs && typedoc --disableSources --excludeInternal",
     "generate": "yarn generate:documentation",
