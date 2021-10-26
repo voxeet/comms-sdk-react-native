@@ -52,10 +52,25 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
-    const unsubscribeFn = DolbyIoIAPI.command.onMessageReceived((data) => {
-      console.log('COMMAND MESSAGE DATA: \n', JSON.stringify(data, null, 2));
-    });
-    return () => unsubscribeFn();
+    const unsubscribeCommandMessageFn = DolbyIoIAPI.command.onMessageReceived(
+      (data) => {
+        console.log(
+          'COMMAND ON MESSAGE RECEIVED EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      }
+    );
+    const unsubscribeParticipantChangeFn =
+      DolbyIoIAPI.conference.onParticipantsChange((data) => {
+        console.log(
+          'PARTICIPANT CHANGE EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      });
+    return () => {
+      unsubscribeCommandMessageFn();
+      unsubscribeParticipantChangeFn();
+    };
   }, []);
 
   // useEffect(() => {
