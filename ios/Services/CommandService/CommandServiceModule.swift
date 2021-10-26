@@ -51,7 +51,7 @@ extension CommandServiceModule: VTCommandDelegate {
 	public func received(participant: VTParticipant, message: String) {
 		send(
 			event: EventKeys.messageReceived,
-			body: MessageModel(
+			body: MessageDTO(
 				participant: participant,
 				message: message
 			).toReactModel()

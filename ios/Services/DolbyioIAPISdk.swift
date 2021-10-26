@@ -3,7 +3,7 @@ import VoxeetSDK
 
 // MARK: - Supported Events
 private enum EventKeys: String, CaseIterable {
-	case refreshToken = "refreshToken"
+	case refreshToken = "TokenRefresh"
 }
 
 @objc(RNDolbyioIAPISdk)
