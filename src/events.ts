@@ -1,5 +1,5 @@
 export enum DolbyIoIAPIEventNames {
-  TokenRefresh = 'TokenRefresh',
+  TokenRefresh = 'EVENT_SDK_TOKEN_REFRESH',
 }
 
 export interface TokenRefresh {}
