@@ -1,8 +1,30 @@
 import Foundation
 import VoxeetSDK
 
+// MARK: - Supported Events
+private enum EventKeys: String, CaseIterable {
+	/// Emitted when the application user received an invitation.
+	case invitationReceived = "EVENT_NOTIFICATION_INVITATION_RECEIVED"
+}
+
 @objc(RNNotificationServiceModule)
-public class NotificationServiceModule: NSObject {
+public class NotificationServiceModule: ReactEmitter {
+
+	// MARK: - Events Setup
+	@objc(supportedEvents)
+	override public func supportedEvents() -> [String] {
+		return EventKeys.allCases.mapToStrings()
+	}
+
+	public override func startObserving() {
+		super.startObserving()
+		VoxeetSDK.shared.notification.delegate = self;
+	}
+
+	public override func stopObserving() {
+		super.stopObserving()
+		VoxeetSDK.shared.notification.delegate = nil;
+	}
 
 	/// Notifies conference participants about a conference invitation.
 	/// - Parameters:
@@ -59,4 +81,20 @@ public class NotificationServiceModule: NSObject {
 			}
 		}
 	}
+}
+
+extension NotificationServiceModule: VTNotificationDelegate {
+
+	public func invitationReceived(notification: VTInvitationReceivedNotification) {
+		send(
+			event: EventKeys.invitationReceived,
+			body: notification.toReactModel()
+		)
+	}
+
+	public func conferenceStatus(notification: VTConferenceStatusNotification) {}
+	public func conferenceCreated(notification: VTConferenceCreatedNotification) {}
+	public func conferenceEnded(notification: VTConferenceEndedNotification) {}
+	public func participantJoined(notification: VTParticipantJoinedNotification) {}
+	public func participantLeft(notification: VTParticipantLeftNotification) {}
 }
