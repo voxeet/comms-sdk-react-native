@@ -13,9 +13,11 @@ import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.models.ParticipantPermissions
 import com.voxeet.sdk.services.ConferenceService
+import com.voxeet.sdk.services.ScreenShareService
 import com.voxeet.sdk.services.builders.ConferenceCreateOptions
 import com.voxeet.sdk.services.builders.ConferenceJoinOptions
 import com.voxeet.sdk.services.conference.information.ConferenceStatus
+import io.dolby.sdk.reactnative.android.permissions.ScreenSharePermissions
 import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
@@ -75,8 +77,9 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  *
  * @constructor Creates a bridge wrapper for [ConferenceService].
  *
- * @param conferenceService             [ConferenceService] from Android SDK
  * @param reactContext                  react context
+ * @param conferenceService             [ConferenceService] from Android SDK
+ * @param screenShareService            [ScreenShareService] from Android SDK
  * @param conferenceMapper              mapper for a [Conference] and [Conference]-related models
  * @param conferenceCreateOptionsMapper mapper for a [ConferenceCreateOptions] model
  * @param conferenceJoinOptionsMapper   mapper for a [ConferenceJoinOptions] model
@@ -87,6 +90,7 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
 class RNConferenceServiceModule(
   private val reactContext: ReactApplicationContext,
   private val conferenceService: ConferenceService,
+  private val screenShareService: ScreenShareService,
   private val conferenceMapper: ConferenceMapper,
   private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
   private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
@@ -499,6 +503,34 @@ class RNConferenceServiceModule(
     Promises.promise({ toParticipant(participantMap) }) { "Couldn't get participant" }
       .thenPromise(conferenceService::stopVideo)
       .rejectIfFalse { "Stop video operation failed" }
+      .forward(promise)
+  }
+
+  /**
+   * Requests screen sharing permission and starts screen sharing session.
+   * If permission is denied promise is rejected.
+   *
+   * @param promise        return null
+   */
+  @ReactMethod
+  fun startScreenShare(promise: ReactPromise) {
+    screenShareService.sendRequestStartScreenShare()
+    ScreenSharePermissions
+      .await()
+      .rejectIfFalse { "Could not start screen share" }
+      .forward(promise)
+  }
+
+  /**
+   * Stops a screen-sharing session
+   *
+   * @param promise        return null
+   */
+  @ReactMethod
+  fun stopScreenShare(promise: ReactPromise) {
+    screenShareService
+      .stopScreenShare()
+      .rejectIfFalse { "Could not stop screen share" }
       .forward(promise)
   }
 
