@@ -31,10 +31,21 @@ export class VideoPresentationService {
     return this._nativeModule.play();
   }
 
+  /**
+   * Returns information about the current video presentation. Use this accessor
+   * if you wish to receive information that is available in the VideoPresentation
+   * object, such as information about the participant who shares the video or the
+   * URL of the presented video file.
+   * @returns {VideoPresentation | null}
+   */
   public current(): VideoPresentation | null {
     return this._nativeModule.current();
   }
 
+  /**
+   * Provides the current state of the video presentation.
+   * @returns VideoPresentationState
+   */
   public state(): VideoPresentationState {
     return this._nativeModule.state();
   }
@@ -49,7 +60,7 @@ export class VideoPresentationService {
   }
 
   /**
-   * Pauses the video presentation.
+   * Starts the video presentation.
    * @param url<number>
    * @returns void
    */
