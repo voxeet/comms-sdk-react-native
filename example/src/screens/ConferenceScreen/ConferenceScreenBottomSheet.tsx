@@ -47,6 +47,15 @@ import {
   stopRecording,
 } from '@utils/recording.tester';
 import { getCurrentUser } from '@utils/session.tester';
+import {
+  pauseVideoPresentation,
+  startVideoPresentation,
+  playVideoPresentation,
+  stopVideoPresentation,
+  seekVideoPresentation,
+  currentVideoPresentation,
+  stateOfVideoPresentation,
+} from '@utils/videoPresentation.tester';
 
 import type { Conference } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
@@ -324,6 +333,71 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Get Current User"
               onPress={getCurrentUser}
+            />
+          </Space>
+          <Space mb="xs">
+            <Text size="m" color={COLORS.BLACK}>
+              Video presentation Service
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Start video presentation"
+              onPress={() =>
+                startVideoPresentation(
+                  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                )
+              }
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Pause video presentation"
+              onPress={pauseVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Play video presentation"
+              onPress={playVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Stop video presentation"
+              onPress={stopVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Seek video presentation"
+              onPress={seekVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Current video presentation"
+              onPress={currentVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Current video presentation state"
+              onPress={stateOfVideoPresentation}
             />
           </Space>
         </Space>
