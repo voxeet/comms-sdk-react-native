@@ -2,7 +2,7 @@ import Foundation
 import VoxeetSDK
 
 /// The Message  model emitted when a participant receives a message.
-internal struct MessageModel {
+internal struct MessageDTO {
 	/// The participant who sent the message.
 	let participant: VTParticipant
 	/// The received message.
@@ -10,7 +10,7 @@ internal struct MessageModel {
 }
 
 // MARK: - ReactModelMappable
-extension MessageModel: ReactModelMappable {
+extension MessageDTO: ReactModelMappable {
 	func toReactModel() -> ReactModelType {
 		return [
 			Keys.message: message,

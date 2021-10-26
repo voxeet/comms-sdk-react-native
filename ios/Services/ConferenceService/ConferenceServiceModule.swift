@@ -1,13 +1,47 @@
 import Foundation
 import VoxeetSDK
 
+// MARK: - Supported Events
+private enum EventKeys: String, CaseIterable {
+	/// Emitted when a new participant is invited to a conference or joins a conference.
+	case participantAdded = "EVENT_CONFERENCE_PARTICIPANT_ADDED"
+	/// Emitted when a participant changes VTConferenceStatus.
+	case participantUpdated = "EVENT_CONFERENCE_PARTICIPANT_UPDATED"
+	/// Emitted when the local participant"s permissions are updated.
+	case permissionsUpdated = "EVENT_CONFERENCE_PERMISSIONS_UPDATED"
+	/// Emitted when ta conference changes status.
+	case statusUpdated = "EVENT_CONFERENCE_STATUS_UPDATED"
+	/// Emitted when the SDK adds a new stream to a conference participant.
+	case streamAdded = "EVENT_CONFERENCE_STREAM_ADDED"
+	/// Emitted when a conference participant who is connected to the audio and video stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone.
+	case streamUpdated = "EVENT_CONFERENCE_STREAM_UPDATED"
+	/// Emitted when the SDK removes a stream from a conference participant.
+	case streamRemoved = "EVENT_CONFERENCE_STREAM_REMOVED"
+}
+
 @objc(RNConferenceServiceModule)
-public class ConferenceServiceModule: NSObject {
-	
+public class ConferenceServiceModule: ReactEmitter {
 	var current: VTConference? {
 		VoxeetSDK.shared.conference.current
 	}
-	
+
+	// MARK: - Events Setup
+	@objc(supportedEvents)
+	override public func supportedEvents() -> [String] {
+		return EventKeys.allCases.mapToStrings()
+	}
+
+	public override func startObserving() {
+		super.startObserving()
+		VoxeetSDK.shared.conference.delegate = self;
+	}
+
+	public override func stopObserving() {
+		super.stopObserving()
+		VoxeetSDK.shared.conference.delegate = nil;
+	}
+
+	// MARK: - Methods
 	/// Creates a conference.
 	/// - Parameters:
 	///   - options: conference options
@@ -507,5 +541,73 @@ public class ConferenceServiceModule: NSObject {
 				}
 				error.send(with: reject)
 			}
+	}
+}
+
+extension ConferenceServiceModule: VTConferenceDelegate {
+	public func statusUpdated(status: VTConferenceStatus) {
+		send(
+			event: EventKeys.statusUpdated,
+			body: StatusDTO(
+				status: status
+			).toReactModel()
+		)
+	}
+
+	public func permissionsUpdated(permissions: [Int]) {
+		send(
+			event: EventKeys.permissionsUpdated,
+			body: PermissionsDTO(
+				permissions: permissions.compactMap { VTConferencePermission(rawValue: $0) }
+			).toReactModel()
+		)
+	}
+
+	public func participantAdded(participant: VTParticipant) {
+		send(
+			event: EventKeys.participantAdded,
+			body: ParticipantDTO(
+				participant: participant
+			).toReactModel()
+		)
+	}
+
+	public func participantUpdated(participant: VTParticipant) {
+		send(
+			event: EventKeys.participantUpdated,
+			body: ParticipantDTO(
+				participant: participant
+			).toReactModel()
+		)
+	}
+
+	public func streamAdded(participant: VTParticipant, stream: MediaStream) {
+		send(
+			event: EventKeys.streamAdded,
+			body: StreamDTO(
+				participant: participant,
+				stream: stream
+			).toReactModel()
+		)
+	}
+
+	public func streamUpdated(participant: VTParticipant, stream: MediaStream) {
+		send(
+			event: EventKeys.streamUpdated,
+			body: StreamDTO(
+				participant: participant,
+				stream: stream
+			).toReactModel()
+		)
+	}
+
+	public func streamRemoved(participant: VTParticipant, stream: MediaStream) {
+		send(
+			event: EventKeys.streamRemoved,
+			body: StreamDTO(
+				participant: participant,
+				stream: stream
+			).toReactModel()
+		)
 	}
 }
