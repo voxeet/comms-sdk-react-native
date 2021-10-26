@@ -1,0 +1,86 @@
+{
+    "@gorhom/bottom-sheet@4.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/gorhom/react-native-bottom-sheet",
+        "licenseUrl": "https://github.com/gorhom/react-native-bottom-sheet/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "chance@1.1.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chancejs/chancejs",
+        "licenseUrl": "https://github.com/chancejs/chancejs/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "os@0.1.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/DiegoRBaquero/node-os",
+        "licenseUrl": "https://github.com/DiegoRBaquero/node-os",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "path@0.12.7": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jinder/path",
+        "licenseUrl": "https://github.com/jinder/path/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-dotenv@3.2.0": {
+        "licenses": "MIT",
+        "repository": "github:goatandsheep/react-native-dotenv",
+        "licenseUrl": "github:goatandsheep/react-native-dotenv",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-gesture-handler@1.10.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-gesture-handler",
+        "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-linear-gradient@2.5.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-linear-gradient",
+        "licenseUrl": "https://github.com/react-native-community/react-native-linear-gradient/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-permissions@3.0.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/zoontek/react-native-permissions",
+        "licenseUrl": "https://github.com/zoontek/react-native-permissions/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-popup-menu@0.15.11": {
+        "licenses": "ISC",
+        "repository": "https://github.com:instea/react-native-popup-menu",
+        "licenseUrl": "https://github.com:instea/react-native-popup-menu/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-reanimated@2.2.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-reanimated",
+        "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-safe-area-context@3.3.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
+        "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native-toast-message@1.6.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/calintamas/react-native-toast-message",
+        "licenseUrl": "https://github.com/calintamas/react-native-toast-message/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react-native@0.65.0": {
+        "licenses": "MIT",
+        "repository": "github:facebook/react-native",
+        "licenseUrl": "github:facebook/react-native",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "react@16.13.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    }
+}
