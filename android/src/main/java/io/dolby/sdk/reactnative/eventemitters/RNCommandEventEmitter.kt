@@ -19,14 +19,6 @@ class RNCommandEventEmitter(
   private val participantMapper: ParticipantMapper
 ) : RNEventEmitter(reactContext) {
 
-  /**
-   * The supported events for JS
-   */
-  override val eventMap: Map<String, String>
-    get() = mapOf(
-      "EVENT_COMMAND_MESSAGE_RECEIVED" to EVENT_MESSAGE_RECEIVED
-    )
-
   @Subscribe
   fun on(event: MessageReceived) {
     val participant = conferenceService.findParticipantById(event.participantId)
@@ -35,14 +27,20 @@ class RNCommandEventEmitter(
         participant?.let { putMap(KEY_PARTICIPANT, participantMapper.toRN(participant)) }
         putString(KEY_MESSAGE, event.message)
       }
-      .also { send(EVENT_MESSAGE_RECEIVED, it) }
+      .also { send(CommandEvent.MessageReceived.withData(it)) }
   }
 
   /**
-   * The event names and payload keys, make sure they are unique in the application scope
+   * Command events
+   */
+  private object CommandEvent {
+    object MessageReceived : RNEvent("EVENT_COMMAND_MESSAGE_RECEIVED")
+  }
+
+  /**
+   * The event payload keys
    */
   companion object {
-    private const val EVENT_MESSAGE_RECEIVED = "MessageReceived"
     private const val KEY_PARTICIPANT = "participant"
     private const val KEY_MESSAGE = "message"
   }
