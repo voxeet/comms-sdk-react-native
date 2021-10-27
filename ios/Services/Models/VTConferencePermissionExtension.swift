@@ -6,34 +6,87 @@ extension VTConferencePermission: ReactModelValueMappable {
 
 	typealias ReactModelValueType = String?
 
+	static func fromReactModel(value: ReactModelValueType) -> VTConferencePermission? {
+		guard let value = value else { return nil }
+		return ConferencePermission(rawValue: value)?.mapToVTConferencePermission()
+	}
+
 	func toReactModelValue() -> ReactModelValueType {
+		return mapToConferencePermission()?.rawValue
+	}
+
+	private func mapToConferencePermission() -> ConferencePermission? {
 		switch self {
 		case .invite:
-			return "INVITE"
+			return .invite
 		case .kick:
-			return "KICK"
+			return .kick
 		case .updatePermissions:
-			return "UPDATE_PERMISSIONS"
+			return .updatePermissions
 		case .join:
-			return "JOIN"
+			return .join
 		case .sendAudio:
-			return "SEND_AUDIO"
+			return .sendAudio
 		case .sendVideo:
-			return "SEND_VIDEO"
+			return .sendVideo
 		case .shareScreen:
-			return "SHARE_SCREEN"
+			return .shareScreen
 		case .shareVideo:
-			return "SHARE_VIDEO"
+			return .shareVideo
 		case .shareFile:
-			return "SHARE_FILE"
+			return .shareFile
 		case .sendMessage:
-			return "SEND_MESSAGE"
+			return .sendMessage
 		case .record:
-			return "RECORD"
+			return .record
 		case .stream:
-			return "STREAM"
+			return .stream
 		@unknown default:
-			return "UNKNOWN"
+			return nil
+		}
+	}
+
+	private enum ConferencePermission: String {
+		case invite = "INVITE"
+		case kick = "KICK"
+		case updatePermissions = "UPDATE_PERMISSIONS"
+		case join = "JOIN"
+		case sendAudio = "SEND_AUDIO"
+		case sendVideo = "SEND_VIDEO"
+		case shareScreen = "SHARE_SCREEN"
+		case shareVideo = "SHARE_VIDEO"
+		case shareFile = "SHARE_FILE"
+		case sendMessage = "SEND_MESSAGE"
+		case record = "RECORD"
+		case stream = "STREAM"
+
+		func mapToVTConferencePermission() -> VTConferencePermission {
+			switch self {
+			case .invite:
+				return .invite
+			case .kick:
+				return .kick
+			case .updatePermissions:
+				return .updatePermissions
+			case .join:
+				return .join
+			case .sendAudio:
+				return .sendAudio
+			case .sendVideo:
+				return .sendVideo
+			case .shareScreen:
+				return .shareScreen
+			case .shareVideo:
+				return .shareVideo
+			case .shareFile:
+				return .shareFile
+			case .sendMessage:
+				return .sendMessage
+			case .record:
+				return .record
+			case .stream:
+				return .stream
+			}
 		}
 	}
 }

@@ -46,7 +46,7 @@ public class NotificationServiceModule: ReactEmitter {
 		VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { conference in
 			VoxeetSDK.shared.notification.invite(
 				conference: conference,
-				participantInfos: participants.map { VTParticipantInfo.create(with: $0) }) { error in
+				participantsInvited: participants.map { VTParticipantInvited.create(with: $0) }) { error in
 					guard let error = error else {
 						resolve(NSNull())
 						return
