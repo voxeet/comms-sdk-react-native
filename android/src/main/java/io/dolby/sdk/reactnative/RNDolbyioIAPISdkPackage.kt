@@ -25,6 +25,7 @@ import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
 import io.dolby.sdk.reactnative.services.RNSystemPermissionsModule
+import io.dolby.sdk.reactnative.services.RNVideoPresentationServiceModule
 
 class RNDolbyioIAPISdkPackage : ReactPackage {
 
@@ -96,9 +97,13 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         conferenceMapper = conferenceMapper,
         invitationMapper = InvitationMapper(conferencePermissionMapper, participantMapper)
       ),
+      RNVideoPresentationServiceModule(
+        reactContext = reactContext,
+        videoPresentationService = VoxeetSDK.videoPresentation()
+      ),
       RNSystemPermissionsModule(
-        reactContext,
-        SystemPermissionsMapper()
+        reactContext = reactContext,
+        systemPermissionsMapper = SystemPermissionsMapper()
       )
     )
   }
