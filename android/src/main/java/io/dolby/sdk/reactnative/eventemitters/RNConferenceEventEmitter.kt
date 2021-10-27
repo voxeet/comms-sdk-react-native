@@ -29,48 +29,14 @@ class RNConferenceEventEmitter(
 ) : RNEventEmitter(reactContext) {
 
   /**
-   * The supported events for JS
-   */
-  override val eventMap: Map<String, String>
-    get() = mapOf(
-      "EVENT_CONFERENCE_PERMISSIONS_UPDATED" to EVENT_PERMISSIONS_UPDATED,
-      /**
-       * Participant events
-       */
-      "EVENT_CONFERENCE_PARTICIPANT_ADDED" to EVENT_PARTICIPANT_ADDED,
-      "EVENT_CONFERENCE_PARTICIPANT_UPDATED" to EVENT_PARTICIPANT_UPDATED,
-
-      /**
-       * Conference status event
-       */
-      "EVENT_CONFERENCE_STATUS_UPDATE" to EVENT_STATUS_UPDATE,
-
-      /**
-       * Steam events
-       */
-      "EVENT_CONFERENCE_STREAM_ADDED" to EVENT_STREAM_ADDED,
-      "EVENT_CONFERENCE_STREAM_REMOVED" to EVENT_STREAM_REMOVED,
-      "EVENT_CONFERENCE_STREAM_UPDATED" to EVENT_STREAM_UPDATED,
-
-      // JS could get Participant object by this key
-      "EVENT_CONFERENCE_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY,
-      // JS could get ConferenceStatus object by this key
-      "EVENT_CONFERENCE_STATUS_KEY" to EVENT_STATUS_KEY,
-      // JS could get ConferencePermission array by this key
-      "EVENT_PERMISSIONS_KEY" to EVENT_PERMISSIONS_KEY,
-      // JS could get MediaStream object by this key
-      "EVENT_MEDIA_STREAM_KEY" to EVENT_MEDIA_STREAM_KEY
-    )
-
-  /**
    * New participant add event
    */
   @Subscribe
   fun on(event: ParticipantAddedEvent) {
-    val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
-    }
-    send(EVENT_PARTICIPANT_ADDED, data)
+    Arguments
+      .createMap()
+      .apply { putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant)) }
+      .also { send(ConferenceEvent.ParticipantAdded.withData(it)) }
   }
 
   /**
@@ -78,10 +44,10 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: ParticipantUpdatedEvent) {
-    val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
-    }
-    send(EVENT_PARTICIPANT_UPDATED, data)
+    Arguments
+      .createMap()
+      .apply { putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant)) }
+      .also { send(ConferenceEvent.ParticipantUpdated.withData(it)) }
   }
 
   /**
@@ -89,10 +55,10 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: ConferenceStatusUpdatedEvent) {
-    val data = Arguments.createMap().apply {
-      putString(EVENT_STATUS_KEY, conferenceMapper.toRNConferenceStatus(event.state))
-    }
-    send(EVENT_STATUS_UPDATE, data)
+    Arguments
+      .createMap()
+      .apply { putString(KEY_CONFERENCE_STATUS, conferenceMapper.toRNConferenceStatus(event.state)) }
+      .also { send(ConferenceEvent.StatusUpdated.withData(it)) }
   }
 
   /**
@@ -100,11 +66,10 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: PermissionsUpdatedEvent) {
-    Arguments.createMap().apply {
-      putArray(EVENT_PERMISSIONS_KEY, permissionsMapper.toRN(event.permissions))
-    }.also {
-      send(EVENT_PERMISSIONS_UPDATED, it)
-    }
+    Arguments
+      .createMap()
+      .apply { putArray(KEY_PERMISSIONS, permissionsMapper.toRN(event.permissions)) }
+      .also { send(ConferenceEvent.PermissionsUpdated.withData(it)) }
   }
 
   /**
@@ -128,11 +93,13 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: StreamAddedEvent) {
-    val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
-      putMap(EVENT_MEDIA_STREAM_KEY, participantMapper.toRNMediaStream(event.mediaStream))
-    }
-    send(EVENT_STREAM_ADDED, data)
+    Arguments
+      .createMap()
+      .apply {
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant))
+        putMap(KEY_MEDIA_STREAM, participantMapper.toRNMediaStream(event.mediaStream))
+      }
+      .also { send(ConferenceEvent.StreamAdded.withData(it)) }
   }
 
   /**
@@ -148,14 +115,16 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: StreamRemovedEvent) {
-    val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
-      // TODO mediaStream should be not null. Android SDK will update the annotation and then we'll remove the nullability check here
-      event.mediaStream?.let {
-        putMap(EVENT_MEDIA_STREAM_KEY, participantMapper.toRNMediaStream(it))
+    Arguments
+      .createMap()
+      .apply {
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant))
+        // TODO mediaStream should be not null. Android SDK will update the annotation and then we'll remove the nullability check here
+        event.mediaStream?.let {
+          putMap(KEY_MEDIA_STREAM, participantMapper.toRNMediaStream(it))
+        }
       }
-    }
-    send(EVENT_STREAM_REMOVED, data)
+      .also { send(ConferenceEvent.StreamRemoved.withData(it)) }
   }
 
   /**
@@ -171,28 +140,35 @@ class RNConferenceEventEmitter(
    */
   @Subscribe
   fun on(event: StreamUpdatedEvent) {
-    val data = Arguments.createMap().apply {
-      putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(event.participant))
-      putMap(EVENT_MEDIA_STREAM_KEY, participantMapper.toRNMediaStream(event.mediaStream))
-    }
-    send(EVENT_STREAM_UPDATED, data)
+    Arguments
+      .createMap()
+      .apply {
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant))
+        putMap(KEY_MEDIA_STREAM, participantMapper.toRNMediaStream(event.mediaStream))
+      }
+      .also { send(ConferenceEvent.StreamUpdated.withData(it)) }
   }
 
   /**
-   * The event names and payload keys, make sure they are unique in the application scope
+   * Conference events
+   */
+  private object ConferenceEvent {
+    object PermissionsUpdated : RNEvent("EVENT_CONFERENCE_PERMISSIONS_UPDATED")
+    object ParticipantAdded : RNEvent("EVENT_CONFERENCE_PARTICIPANT_ADDED")
+    object ParticipantUpdated : RNEvent("EVENT_CONFERENCE_PARTICIPANT_UPDATED")
+    object StatusUpdated : RNEvent("EVENT_CONFERENCE_STATUS_UPDATED")
+    object StreamAdded : RNEvent("EVENT_CONFERENCE_STREAM_ADDED")
+    object StreamRemoved : RNEvent("EVENT_CONFERENCE_STREAM_REMOVED")
+    object StreamUpdated : RNEvent("EVENT_CONFERENCE_STREAM_UPDATED")
+  }
+
+  /**
+   * The event payload keys
    */
   companion object {
-    const val EVENT_PERMISSIONS_UPDATED = "PermissionsUpdated"
-    const val EVENT_PARTICIPANT_ADDED = "ParticipantAdded"
-    const val EVENT_PARTICIPANT_UPDATED = "ParticipantUpdated"
-    const val EVENT_STATUS_UPDATE = "conferenceStatusUpdated"
-    const val EVENT_STREAM_ADDED = "StreamAdded"
-    const val EVENT_STREAM_REMOVED = "StreamRemoved"
-    const val EVENT_STREAM_UPDATED = "StreamUpdated"
-
-    const val EVENT_PARTICIPANT_KEY = "participant"
-    const val EVENT_STATUS_KEY = "conferenceStatus"
-    const val EVENT_PERMISSIONS_KEY = "permissions"
-    const val EVENT_MEDIA_STREAM_KEY = "mediaStream"
+    private const val KEY_PARTICIPANT = "participant"
+    private const val KEY_CONFERENCE_STATUS = "conferenceStatus"
+    private const val KEY_PERMISSIONS = "permissions"
+    private const val KEY_MEDIA_STREAM = "mediaStream"
   }
 }
