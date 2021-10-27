@@ -10,14 +10,7 @@ import styles from './ToastConfig.style';
 const ToastConfig = {
   my_custom_type: ({ text1, text2, props }: any) => (
     <Space mv={'xs'} mt={'xxs'} style={styles.container}>
-      <ReactNativeText
-        style={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
-        }}
-        onPress={() => Toast.hide()}
-      >
+      <ReactNativeText style={styles.exitIcon} onPress={() => Toast.hide()}>
         ❌
       </ReactNativeText>
       <Space pv="xs" ph="xs" pr="l">

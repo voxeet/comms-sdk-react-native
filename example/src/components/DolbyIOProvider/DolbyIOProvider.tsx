@@ -63,7 +63,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     const unsubscribeCommandMessageFn = DolbyIoIAPI.command.onMessageReceived(
       (data) => {
         console.log(
-          'MESSAGE RECEIVED EVENT DATA: \n',
+          'COMMAND ON MESSAGE RECEIVED EVENT DATA: \n',
           JSON.stringify(data, null, 2)
         );
       }
