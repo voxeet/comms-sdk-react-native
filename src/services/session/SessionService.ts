@@ -20,10 +20,11 @@ export class SessionService {
    * @returns {Promise<null>}
    */
   public async open(participantInfo: ParticipantInfo = {}): Promise<null> {
-    const { name, avatarUrl } = participantInfo;
+    const { name, avatarUrl, externalId } = participantInfo;
     return this._nativeModule.open({
       name,
       avatarUrl,
+      externalId,
     });
   }
 

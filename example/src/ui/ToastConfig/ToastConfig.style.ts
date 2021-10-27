@@ -21,4 +21,9 @@ export default StyleSheet.create({
     display: 'flex',
     width: '85%',
   },
+  exitIcon: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
 });
