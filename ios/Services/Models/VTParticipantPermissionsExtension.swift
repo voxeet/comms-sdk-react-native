@@ -14,7 +14,7 @@ internal extension VTParticipantPermissions {
 	) -> [VTParticipantPermissions] {
 
 		return participantPermissionsDictionary.compactMap { permissionDictionary in
-			let participantDictionary:[String: Any]?  = permissionDictionary.value(for: Keys.participant)
+			let participantDictionary: [String: Any]? = permissionDictionary.value(for: Keys.participant)
 			guard let participantId = participantDictionary?.identifier,
 				  let participant = conference.participants.first(where: { $0.id == participantId }),
 				  let permissionList: [NSNumber] = permissionDictionary.value(for: Keys.permissions)
