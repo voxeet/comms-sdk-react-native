@@ -22,21 +22,6 @@ class RNNotificationEventEmitter(
 ) : RNEventEmitter(reactContext) {
 
   /**
-   * The supported events for JS
-   */
-  override val eventMap: Map<String, String>
-    get() = mapOf(
-      /**
-       * Invitation event
-       */
-      "EVENT_NOTIFICATION_INVITATION_RECEIVED" to EVENT_NOTIFICATION_INVITATION_RECEIVED,
-      "EVENT_CONFERENCE_ALIAS_KEY" to EVENT_CONFERENCE_ALIAS_KEY,
-      "EVENT_CONFERENCE_ID_KEY" to EVENT_CONFERENCE_ID_KEY,
-      // JS could get Participant object by this key
-      "EVENT_PARTICIPANT_KEY" to EVENT_PARTICIPANT_KEY
-    )
-
-  /**
    * Emitted when the application user received an invitation.
    */
   @Subscribe(threadMode = MAIN)
@@ -46,17 +31,26 @@ class RNNotificationEventEmitter(
 
     Arguments.createMap()
       .apply {
-        putString(EVENT_CONFERENCE_ALIAS_KEY, conference.alias)
-        putString(EVENT_CONFERENCE_ID_KEY, conference.id)
-        putMap(EVENT_PARTICIPANT_KEY, participantMapper.toRN(invitation.inviter))
+        putString(KEY_CONFERENCE_ALIAS, conference.alias)
+        putString(KEY_CONFERENCE_ID, conference.id)
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(invitation.inviter))
       }
-      .also { send(EVENT_NOTIFICATION_INVITATION_RECEIVED, it) }
+      .also { send(NotificationEvent.InvitationReceived.withData(it)) }
   }
 
+  /**
+   * Notification events
+   */
+  private object NotificationEvent {
+    object InvitationReceived : RNEvent("EVENT_NOTIFICATION_INVITATION_RECEIVED")
+  }
+
+  /**
+   * The event payload keys
+   */
   companion object {
-    private const val EVENT_NOTIFICATION_INVITATION_RECEIVED = "EVENT_NOTIFICATION_INVITATION_RECEIVED"
-    private const val EVENT_CONFERENCE_ALIAS_KEY = "conferenceAlias"
-    private const val EVENT_CONFERENCE_ID_KEY = "conferenceId"
-    private const val EVENT_PARTICIPANT_KEY = "participant"
+    private const val KEY_CONFERENCE_ALIAS = "conferenceAlias"
+    private const val KEY_CONFERENCE_ID = "conferenceId"
+    private const val KEY_PARTICIPANT = "participant"
   }
 }

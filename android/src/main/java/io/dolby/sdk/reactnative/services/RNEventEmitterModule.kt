@@ -27,12 +27,6 @@ abstract class RNEventEmitterModule(
   private fun hasListener(): Boolean = listenerCount > 0
 
   /**
-   * Expose events names in this function, subclass could add other constants after invoke it
-   * @return Events names and values
-   */
-  override fun getConstants(): MutableMap<String, Any> = eventEmitter.eventMap.toMutableMap()
-
-  /**
    * Every emitter module must implement this method in place, and add @ReactMethod annotation
    * otherwise JS cannot receive event
    */
