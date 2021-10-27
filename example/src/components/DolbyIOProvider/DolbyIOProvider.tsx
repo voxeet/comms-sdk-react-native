@@ -75,13 +75,9 @@ const DolbyIOProvider: React.FC = ({ children }) => {
           JSON.stringify(data, null, 2)
         );
       });
-
     const unsubscribeInvitationReceivedFn =
       DolbyIoIAPI.notification.onInvitationReceived((data) => {
-        console.log(
-          'INVITATION RECEIVED EVENT DATA: \n',
-          JSON.stringify(data, null, 2)
-        );
+        console.log(data);
       });
     return () => {
       unsubscribeConferenceChangeFn();
@@ -94,6 +90,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const updateConferenceParticipants = async () => {
     try {
       const updatedConference = await DolbyIoIAPI.conference.current();
+      console.log(updatedConference.participants);
       setConference((conference) => {
         if (!conference) return undefined;
         return {
