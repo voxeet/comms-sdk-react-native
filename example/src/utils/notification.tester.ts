@@ -18,6 +18,17 @@ const randomInvitedParticipant = ({
   permissions: includePermissions ? [ConferencePermission.INVITE] : [],
 });
 
+export const invite = async (
+  conference: Conference,
+  participants: ParticipantInvited[]
+) => {
+  try {
+    await DolbyIoIAPI.notification.invite(conference, participants);
+  } catch (e: any) {
+    Alert.alert('Invite error', e.toString());
+  }
+};
+
 export const inviteRandomParticipant = async (conference: Conference) => {
   try {
     await DolbyIoIAPI.notification.invite(conference, [
