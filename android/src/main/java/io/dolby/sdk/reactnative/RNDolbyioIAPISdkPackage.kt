@@ -14,6 +14,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper
 import io.dolby.sdk.reactnative.mapper.InvitationMapper
+import io.dolby.sdk.reactnative.mapper.MediaMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
@@ -21,6 +22,7 @@ import io.dolby.sdk.reactnative.mapper.SystemPermissionsMapper
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
+import io.dolby.sdk.reactnative.services.RNMediaServiceModule
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
@@ -104,6 +106,11 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       RNSystemPermissionsModule(
         reactContext = reactContext,
         systemPermissionsMapper = SystemPermissionsMapper()
+      ),
+      RNMediaServiceModule(
+        reactContext = reactContext,
+        mediaDeviceService = VoxeetSDK.mediaDevice(),
+        mediaMapper = MediaMapper()
       )
     )
   }

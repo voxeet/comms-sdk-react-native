@@ -31,7 +31,7 @@ class RNSystemPermissionsModule(
    */
   @ReactMethod
   fun setPermissionRequestRationale(permission: String, rationaleMap: ReadableMap, promise: ReactPromise) {
-    Promises.promise({ systemPermissionsMapper.fromNative(rationaleMap) })
+    Promises.promise({ systemPermissionsMapper.fromRN(rationaleMap) })
       .thenValue { RationaleInformationHolder.setRequestRationale(permission, it) }
       .forward(promise, ignoreReturnType = true)
   }
@@ -45,7 +45,7 @@ class RNSystemPermissionsModule(
    */
   @ReactMethod
   fun setPermissionPermanentlyDeniedRationale(permission: String, rationaleMap: ReadableMap, promise: ReactPromise) {
-    Promises.promise({ systemPermissionsMapper.fromNative(rationaleMap) })
+    Promises.promise({ systemPermissionsMapper.fromRN(rationaleMap) })
       .thenValue { RationaleInformationHolder.setPermanentlyDeniedRationale(permission, it) }
       .forward(promise, ignoreReturnType = true)
   }
