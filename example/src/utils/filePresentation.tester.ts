@@ -13,11 +13,6 @@ const testFileConverted = {
   imageCount: 3,
 };
 
-// TODO Temporary file before conversions
-const testFile = {
-  url: '../assets/dolbyIo.jpg',
-};
-
 export const stop = async () => {
   try {
     await DolbyIoIAPI.filePresentation.stop();
@@ -59,8 +54,7 @@ export const setPage = async (page: number) => {
   }
 };
 
-// TODO Includes temporary file
-export const convert = async (file: File = testFile) => {
+export const convert = async (file: File) => {
   try {
     const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
     Alert.alert('Conversion done', convertedFile.toString());
