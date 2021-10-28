@@ -542,6 +542,45 @@ public class ConferenceServiceModule: ReactEmitter {
 				error.send(with: reject)
 			}
 	}
+
+	/// Starts a screen-sharing session.
+	/// - Parameters:
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(startScreenShare:rejecter:)
+	public func startScreenShare(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		VoxeetSDK.shared.conference.startScreenShare { error in
+			guard let error = error else {
+				resolve(NSNull())
+				return
+			}
+			error.send(with: reject)
+		}
+	}
+
+	/// Stops a screen-sharing session.
+	/// - Parameters:
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(stopScreenShare:rejecter:)
+	public func stopScreenShare(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		// Switching to the main thread, the stopScreenShare function calls UIKit functions
+		DispatchQueue.main.async {
+			VoxeetSDK.shared.conference.stopScreenShare { error in
+				guard let error = error else {
+					resolve(NSNull())
+					return
+				}
+				error.send(with: reject)
+			}
+		}
+	}
 }
 
 extension ConferenceServiceModule: VTConferenceDelegate {
