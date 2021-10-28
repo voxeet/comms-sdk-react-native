@@ -2,6 +2,7 @@ package io.dolby.sdk.reactnative.utils
 
 import android.util.Log
 import com.voxeet.promise.PromiseInOut
+import com.voxeet.promise.solve.PromiseLikeGeneric
 import com.voxeet.promise.solve.ThenPromise
 import com.voxeet.promise.solve.ThenValue
 import com.voxeet.promise.solve.ThenVoid
@@ -167,6 +168,38 @@ object Promises {
   fun <T, R, K> PromiseInOut<T, R>.thenPromise(thenPromise: ThenPromise<R, K>): PromiseInOut<R, K> = then(thenPromise)
 
   /**
+   * Util method to allow building nested promises chain
+   * ```
+   * Promises.promise(Obj)
+   *  .thenNestedPromise { obj -> FurtherPromise(obj).thenValue { ... } }
+   * ``
+   */
+  fun <T, R, K> VoxeetPromise<T>.thenNestedPromise(thenPromise: ThenNestedPromise<T, R, K>): PromiseInOut<T, K> =
+    then { result, solver ->
+      try {
+        solver.resolve(thenPromise.call(result))
+      } catch (e: Exception) {
+        solver.reject(e)
+      }
+    }
+
+  /**
+   * Util method to allow building nested promises chain
+   * ```
+   * Promises.promise(Obj)
+   *  .thenNestedPromise { obj -> FurtherPromise(obj).thenValue { ... } }
+   * ``
+   */
+  fun <T, R, K, L> PromiseInOut<T, R>.thenNestedPromise(thenPromise: ThenNestedPromise<R, K, L>): PromiseInOut<R, L> =
+    then { result, solver ->
+      try {
+        solver.resolve(thenPromise.call(result))
+      } catch (e: Exception) {
+        solver.reject(e)
+      }
+    }
+
+  /**
    * Util method to simplify forwarding [VoxeetPromise] to [ReactPromise]
    *
    * @param promise          [ReactPromise] to forward
@@ -194,4 +227,5 @@ object Promises {
       promise.reject(it)
     }
 
+  fun interface ThenNestedPromise<T, R, K> : PromiseLikeGeneric<T, PromiseInOut<R, K>>
 }

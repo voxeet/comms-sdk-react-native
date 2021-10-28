@@ -13,6 +13,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper
+import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.mapper.InvitationMapper
 import io.dolby.sdk.reactnative.mapper.MediaMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
@@ -23,6 +24,7 @@ import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
+import io.dolby.sdk.reactnative.services.RNFilePresentationServiceModule
 import io.dolby.sdk.reactnative.services.RNMediaServiceModule
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
@@ -109,6 +111,12 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         reactContext = reactContext,
         videoPresentationService = VoxeetSDK.videoPresentation(),
         videoPresentationMapper = videoParticipantMapper
+      ),
+      RNFilePresentationServiceModule(
+        reactContext = reactContext,
+        sessionService = VoxeetSDK.session(),
+        filePresentationService = VoxeetSDK.filePresentation(),
+        filePresentationMapper = FilePresentationMapper(reactContext)
       ),
       RNSystemPermissionsModule(
         reactContext = reactContext,
