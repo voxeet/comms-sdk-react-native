@@ -4,8 +4,13 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.voxeet.VoxeetSDK
+import com.voxeet.sdk.services.presentation.video.VideoPresentation
 import com.voxeet.sdk.services.VideoPresentationService
+import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
+import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.thenValue
 
 /**
  * The [RNVideoPresentationServiceModule] allows an application to share a hosted video file with conference participants and
@@ -44,10 +49,12 @@ import io.dolby.sdk.reactnative.utils.Promises.forward
  *
  * @param reactContext react context
  * @param videoPresentationService [VideoPresentationService] from Android SDK
+ * @param videoPresentationMapper mapper for a [VideoPresentation] model
  */
 class RNVideoPresentationServiceModule(
   reactContext: ReactApplicationContext,
   private val videoPresentationService: VideoPresentationService,
+  private val videoPresentationMapper: VideoPresentationMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String = "DolbyIoIAPIVideoPresentationService"
@@ -73,5 +80,51 @@ class RNVideoPresentationServiceModule(
   fun stop(promise: Promise) {
     videoPresentationService.stop()
       .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Pauses a video presentation.
+   *
+   * @param timestamp the timestamp of the paused video
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun pause(timestamp: Double, promise: Promise) {
+    videoPresentationService.pause(timestamp.toLong())
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Resumes a video presentation.
+   *
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun play(promise: Promise) {
+    videoPresentationService.play()
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Informs other conference participants about the current video position (timestamp).
+   *
+   * @param timestamp the new timestamp
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun seek(timestamp: Double, promise: Promise) {
+    videoPresentationService.seek(timestamp.toLong())
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  // TODO tmp solution to make pause, play, seek work (test app uses it in those methods).
+  //  Replace `VoxeetSDK.session().participant` by the real video presentation owner + add docs in DEXA-236.
+  @ReactMethod
+  fun current(promise: Promise) {
+    Promises.promise(videoPresentationService.currentPresentation)
+      .thenValue { videoPresentation ->
+        VoxeetSDK.session().participant?.let { videoPresentationMapper.toRN(videoPresentation, it) }
+      }
+      .forward(promise)
   }
 }
