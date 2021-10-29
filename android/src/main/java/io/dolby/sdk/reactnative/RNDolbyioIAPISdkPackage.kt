@@ -5,6 +5,7 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
+import io.dolby.sdk.filePresentation
 import io.dolby.sdk.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNNotificationEventEmitter
@@ -115,7 +116,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       RNFilePresentationServiceModule(
         reactContext = reactContext,
         sessionService = VoxeetSDK.session(),
-        filePresentationService = VoxeetSDK.filePresentation(),
+        filePresentationService = VoxeetSDK.instance().filePresentation(),
         filePresentationMapper = FilePresentationMapper(reactContext)
       ),
       RNSystemPermissionsModule(
