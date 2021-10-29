@@ -1,12 +1,12 @@
 package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
 import io.dolby.sdk.FilePresentationService
+import io.dolby.sdk.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
@@ -14,6 +14,7 @@ import io.dolby.sdk.reactnative.utils.Promises.thenNestedPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
+import io.dolby.sdk.reactnative.utils.RnCollections.copy
 import java.io.File
 
 /**
@@ -43,10 +44,11 @@ import java.io.File
  */
 class RNFilePresentationServiceModule(
   reactContext: ReactApplicationContext,
+  private val eventEmitter: RNFilePresentationEventEmitter,
   private val sessionService: SessionService,
   private val filePresentationService: FilePresentationService,
   private val filePresentationMapper: FilePresentationMapper
-) : ReactContextBaseJavaModule(reactContext) {
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "DolbyIoIAPIFilePresentationService"
 
@@ -75,7 +77,9 @@ class RNFilePresentationServiceModule(
       }
       .thenValue { (file, filePresentation) ->
         val ownerId = requireNotNull(sessionService.participantId)
-        filePresentationMapper.toRN(ownerId, file.name, filePresentation)
+        val fileConvertedRN = filePresentationMapper.toRNFileConverted(ownerId, file.name, filePresentation)
+        eventEmitter.onFileConverted(fileConvertedRN.copy())
+        fileConvertedRN
       }
       .forward(promise)
   }
@@ -88,9 +92,21 @@ class RNFilePresentationServiceModule(
    */
   @ReactMethod
   fun start(fileConvertedRN: ReadableMap, promise: ReactPromise) {
-    Promises.promise({ filePresentationMapper.fromRN(fileConvertedRN) })
+    Promises.promise({ filePresentationMapper.fileConvertedFromRN(fileConvertedRN) })
       .thenPromise(filePresentationService::start)
       .forward(promise, ignoreReturnType = true)
   }
 
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) = super.addListener(eventName)
+
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) = super.removeListeners(count)
 }
