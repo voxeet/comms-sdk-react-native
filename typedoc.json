@@ -3,5 +3,8 @@
     "./src/DolbyIoIAPI.ts"
 
   ],
-  "exclude": "./src/utils/**/*"
+  "exclude": [
+    "./src/utils/**/*",
+    "./example/**/*"
+  ]
 }

@@ -25,15 +25,13 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "cd example/ios && arch -x86_64 pod install",
+    "pods": "cd example/ios && pod install",
+    "pods:x86_64": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
+    "documentation": "rm -rf docs && typedoc --disableSources --excludeInternal",
+    "documentation:append": "git add docs",
     "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies",
-    "license:testapp": "yarn npm-license-crawler --production --start ./example --json ./example/LICENSES.json --onlyDirectDependencies",
-    "generate:documentation": "rm -rf docs && typedoc --disableSources --excludeInternal",
-    "generate": "yarn generate:documentation",
-    "append:documentation": "git add docs",
-    "append:licenses": "rm licenses.json && git add ./LICENSES.md",
-    "append": "yarn append:licenses && yarn append:documentation"
+    "license:testapp": "yarn npm-license-crawler --production --start ./example --json ./example/LICENSES.json --onlyDirectDependencies"
   },
   "keywords": [
     "react-native",
