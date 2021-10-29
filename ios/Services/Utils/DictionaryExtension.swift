@@ -11,11 +11,6 @@ internal extension Dictionary where Key == String, Value == Any {
 		self["participant"] as? [String:Any]
 	}
 
-	/// Provides the permissions for permission object
-	var permissions: [NSNumber]? {
-		self["permissions"] as? [NSNumber]
-	}
-
 	/// Provides the audioProcessing for send object
 	var audioProcessing: NSNumber? {
 		self.send?["audioProcessing"] as? NSNumber

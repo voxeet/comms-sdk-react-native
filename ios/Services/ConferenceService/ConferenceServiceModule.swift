@@ -191,16 +191,11 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		let permissions: [VTParticipantPermissions] = participantPermissions.compactMap {
-			guard let participant = $0.participant,
-				  let permissions = $0.permissions,
-				  let conferenceParticipant = current?.findParticipant(with: participant.identifier) else {
-					  return nil
-				  }
-			let conferencePermissions = permissions.compactMap { VTConferencePermission(rawValue: $0.intValue) }
-			return VTParticipantPermissions(participant: conferenceParticipant,
-											permissions: conferencePermissions)
+		guard let conference = current else {
+			ModuleError.noCurrentConference.send(with: reject)
+			return
 		}
+		let permissions = VTParticipantPermissions.permissions(with: participantPermissions, conference: conference)
 		VoxeetSDK.shared.conference.updatePermissions(participantPermissions: permissions) { error in
 			guard let error = error else {
 				resolve(NSNull())
