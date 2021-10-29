@@ -139,7 +139,9 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         reactContext = reactContext,
         eventEmitter = filePresentationEventEmitter,
         sessionService = VoxeetSDK.session(),
+        conferenceService = VoxeetSDK.conference(),
         filePresentationService = VoxeetSDK.instance().filePresentation(),
+        filePresentationHolder = filePresentationHolder,
         filePresentationMapper = filePresentationMapper
       ),
       RNSystemPermissionsModule(
