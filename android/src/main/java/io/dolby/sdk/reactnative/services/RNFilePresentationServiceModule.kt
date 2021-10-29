@@ -3,11 +3,13 @@ package io.dolby.sdk.reactnative.services
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
 import io.dolby.sdk.FilePresentationService
 import io.dolby.sdk.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
+import io.dolby.sdk.reactnative.state.FilePresentationHolder
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenNestedPromise
@@ -40,13 +42,16 @@ import java.io.File
  * @param reactContext            react context
  * @param sessionService          [SessionService] from Android SDK
  * @param filePresentationService [FilePresentationService] from Android SDK
+ * @param filePresentationHolder  started [FilePresentation] data storage
  * @param filePresentationMapper  mapper for [FilePresentation] model and [File] creation
  */
 class RNFilePresentationServiceModule(
   reactContext: ReactApplicationContext,
   private val eventEmitter: RNFilePresentationEventEmitter,
   private val sessionService: SessionService,
+  private val conferenceService: ConferenceService,
   private val filePresentationService: FilePresentationService,
+  private val filePresentationHolder: FilePresentationHolder,
   private val filePresentationMapper: FilePresentationMapper
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
@@ -95,6 +100,21 @@ class RNFilePresentationServiceModule(
     Promises.promise({ filePresentationMapper.fileConvertedFromRN(fileConvertedRN) })
       .thenPromise(filePresentationService::start)
       .forward(promise, ignoreReturnType = true)
+  }
+
+  @ReactMethod
+  fun getCurrent(promise: ReactPromise) {
+    Promises.promise({ conferenceService.conference }) { "Missing current conference" }
+      .thenValue { conference ->
+        val noStartedPresentationError = lazyOf(Exception("No started file presentation for current conference"))
+        val ownerId = filePresentationHolder.getOwnerId(conference.id) ?: throw noStartedPresentationError.value
+        val presentation = filePresentationHolder.getPresentation(conference.id) ?: throw noStartedPresentationError.value
+        val noPresentationOwnerError = lazyOf(Exception("Unable to find file presentation owner by id =  $ownerId"))
+        val owner = conference.findParticipantById(ownerId) ?: throw noPresentationOwnerError.value
+        owner to presentation
+      }
+      .thenValue { (owner, presentation) -> filePresentationMapper.toRN(owner, presentation) }
+      .forward(promise)
   }
 
   /**
