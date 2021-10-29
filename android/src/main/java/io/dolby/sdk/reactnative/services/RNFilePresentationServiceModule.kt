@@ -4,9 +4,9 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
-import com.voxeet.sdk.services.FilePresentationService
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
+import io.dolby.sdk.FilePresentationService
 import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
