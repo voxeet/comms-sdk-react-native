@@ -11,6 +11,7 @@ import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenNestedPromise
+import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
 import java.io.File
@@ -21,7 +22,7 @@ import java.io.File
  *
  * **The file presentation workflow:**
  * 1. The presenter calls the [convert] method to upload and convert a file.
- * 2. The presenter calls the start method to start presenting the file.
+ * 2. The presenter calls the [start] method to start presenting the file.
  * 3. The presenter and the viewers receive the started event that informs that the file presentation starts.
  * Receiving the started event should trigger calling the image method to download the converted file and display the proper page of the file
  * by retrieving the individual images.
@@ -78,4 +79,18 @@ class RNFilePresentationServiceModule(
       }
       .forward(promise)
   }
+
+  /**
+   * Starts a file presentation. The Dolby.io Communications APIs allow presenting only the converted files.
+   *
+   * @param fileConvertedRN previously converted file information
+   * @param promise return null
+   */
+  @ReactMethod
+  fun start(fileConvertedRN: ReadableMap, promise: ReactPromise) {
+    Promises.promise({ filePresentationMapper.fromRN(fileConvertedRN) })
+      .thenPromise(filePresentationService::start)
+      .forward(promise, ignoreReturnType = true)
+  }
+
 }
