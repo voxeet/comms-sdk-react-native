@@ -1,4 +1,5 @@
 import React, { useContext, useRef } from 'react';
+import DocumentPicker from 'react-native-document-picker'
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -60,12 +61,43 @@ import {
 import type { Conference } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
+import { Alert } from 'react-native';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { user, conference, setIsRecordingConference } =
     useContext(DolbyIOContext);
   const { participants } = conference as Conference;
+
+  const convertFile = async () => {
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [
+          DocumentPicker.types.pdf,
+          DocumentPicker.types.doc,
+          DocumentPicker.types.docx,
+          DocumentPicker.types.ppt,
+          DocumentPicker.types.pptx
+        ]
+      });
+      //Printing the log realted to the choosen file
+      console.log('file result : ' + JSON.stringify(res));
+      console.log('file uri : ' + res.uri)
+
+      // Pass uri to convert method
+      convert({ url: res.uri })
+    } catch (err) {
+      //Handling any exception (If any)
+      if (DocumentPicker.isCancel(err)) {
+        //If user canceled the document selection
+        Alert.alert('Canceled file picker');
+      } else {
+        //For Unknown Error
+        Alert.alert('Unknown Error: ' + JSON.stringify(err));
+        throw err;
+      }
+    }
+  };
 
   if (!conference || !user) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -251,7 +283,7 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Convert"
-              onPress={convert}
+              onPress={convertFile}
             />
             <Button
               size="small"
