@@ -17,10 +17,13 @@ internal extension VTParticipantPermissions {
 			let participantDictionary: [String: Any]? = permissionDictionary.value(for: Keys.participant)
 			guard let participantId = participantDictionary?.identifier,
 				  let participant = conference.participants.first(where: { $0.id == participantId }),
-				  let permissionList: [NSNumber] = permissionDictionary.value(for: Keys.permissions)
+				  let permissionList: [String] = permissionDictionary.value(for: Keys.permissions)
 			else { return nil }
-
-			return VTParticipantPermissions(participant: participant, permissions: permissionList.map { $0.intValue })
+			return VTParticipantPermissions(
+				participant: participant,
+				permissions: permissionList.compactMap {
+					VTConferencePermission.fromReactModel(value: $0)
+				})
 		}
 	}
 }
