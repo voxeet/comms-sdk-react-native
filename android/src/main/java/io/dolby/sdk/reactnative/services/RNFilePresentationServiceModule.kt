@@ -102,6 +102,14 @@ class RNFilePresentationServiceModule(
       .forward(promise, ignoreReturnType = true)
   }
 
+  /**
+   * Returns information about the current file presentation.
+   *
+   * Use this accessor if you wish to receive information that is available in the [FilePresentation] object, such as
+   * the file ID, the number of images in the presentation, information about the file owner, or the current position in the presentation.
+   *
+   * @param promise returns current file presentation
+   */
   @ReactMethod
   fun getCurrent(promise: ReactPromise) {
     Promises.promise({ conferenceService.conference }) { "Missing current conference" }
