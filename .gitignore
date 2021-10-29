@@ -62,7 +62,6 @@ lib/
 
 # generated for licenses
 .hook_commit
-licenses.json
 
 # .env file
 .env

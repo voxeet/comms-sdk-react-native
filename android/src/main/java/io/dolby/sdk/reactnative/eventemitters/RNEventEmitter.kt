@@ -14,19 +14,13 @@ abstract class RNEventEmitter(
 ) {
 
   /**
-   * The supported events map
-   *  key: event constants for JS
-   *  vale: event name
-   */
-  abstract val eventMap: Map<String, String>
-
-  /**
    * Default implementation of emitting event, nothing will be sent if no listener is registered
-   * @param eventName the name of the event
-   * @param data the event data
+   * @param eventRN
    */
-  fun send(eventName: String, data: WritableMap?) =
-    context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)?.emit(eventName, data)
+  fun send(eventRN: RNEvent) =
+    context
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+      ?.emit(eventRN.name, eventRN.data)
 
   /**
    * Register the event emitter for native events

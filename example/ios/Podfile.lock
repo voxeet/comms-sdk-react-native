@@ -312,7 +312,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - VoxeetSDK (3.3.0-beta.3)
+  - VoxeetSDK (3.3.0-beta.5)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -352,7 +352,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - VoxeetSDK (from `https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.3/VoxeetSDK.podspec`)
+  - VoxeetSDK (from `https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.5/VoxeetSDK.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -430,14 +430,14 @@ EXTERNAL SOURCES:
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   VoxeetSDK:
-    :podspec: https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.3/VoxeetSDK.podspec
+    :podspec: https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.5/VoxeetSDK.podspec
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  dolbyio_react-native-iapi-sdk: 106decda4b11d406a53bbe1c85f682fd712e1751
+  dolbyio_react-native-iapi-sdk: 10a2381ef6d08302c292eb50a97243b7521a217e
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 55f5afbbb8f5021a000c3d9289820d17cbc541b3
   FBReactNativeSpec: c2d85d69490fc5666bc4123dff3b9b72db06a987
@@ -471,9 +471,9 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNPermissions: 7043bacbf928eae25808275cfe73799b8f618911
   RNReanimated: ad24db8af24e3fe1b5c462785bc3db8d5baae2ee
-  VoxeetSDK: bfb7b09e93c7aacd13d3bbbdd19ade9e88e2ad6e
+  VoxeetSDK: a9fb7e90d4b3afcc79502b652e3079b3e6fac7dc
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
 
-PODFILE CHECKSUM: 3c6c9bff3835c2f89f656971dd02f40314e4cabd
+PODFILE CHECKSUM: 28014ae0feb9be100e77e4cb0fe9212f00d13275
 
 COCOAPODS: 1.11.2

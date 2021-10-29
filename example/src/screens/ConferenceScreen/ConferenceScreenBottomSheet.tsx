@@ -1,4 +1,5 @@
 import React, { useContext, useRef } from 'react';
+import DocumentPicker from 'react-native-document-picker'
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -47,16 +48,56 @@ import {
   stopRecording,
 } from '@utils/recording.tester';
 import { getCurrentUser } from '@utils/session.tester';
+import {
+  pauseVideoPresentation,
+  startVideoPresentation,
+  playVideoPresentation,
+  stopVideoPresentation,
+  seekVideoPresentation,
+  currentVideoPresentation,
+  stateOfVideoPresentation,
+} from '@utils/videoPresentation.tester';
 
 import type { Conference } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
+import { Alert } from 'react-native';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { user, conference, setIsRecordingConference } =
     useContext(DolbyIOContext);
   const { participants } = conference as Conference;
+
+  const convertFile = async () => {
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [
+          DocumentPicker.types.pdf,
+          DocumentPicker.types.doc,
+          DocumentPicker.types.docx,
+          DocumentPicker.types.ppt,
+          DocumentPicker.types.pptx
+        ]
+      });
+      //Printing the log realted to the choosen file
+      console.log('file result : ' + JSON.stringify(res));
+      console.log('file uri : ' + res.uri)
+
+      // Pass uri to convert method
+      convert({ url: res.uri })
+    } catch (err) {
+      //Handling any exception (If any)
+      if (DocumentPicker.isCancel(err)) {
+        //If user canceled the document selection
+        Alert.alert('Canceled file picker');
+      } else {
+        //For Unknown Error
+        Alert.alert('Unknown Error: ' + JSON.stringify(err));
+        throw err;
+      }
+    }
+  };
 
   if (!conference || !user) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -242,7 +283,7 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Convert"
-              onPress={convert}
+              onPress={convertFile}
             />
             <Button
               size="small"
@@ -324,6 +365,71 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Get Current User"
               onPress={getCurrentUser}
+            />
+          </Space>
+          <Space mb="xs">
+            <Text size="m" color={COLORS.BLACK}>
+              Video presentation Service
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Start video presentation"
+              onPress={() =>
+                startVideoPresentation(
+                  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                )
+              }
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Pause video presentation"
+              onPress={pauseVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Play video presentation"
+              onPress={playVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Stop video presentation"
+              onPress={stopVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Seek video presentation"
+              onPress={seekVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Current video presentation"
+              onPress={currentVideoPresentation}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Current video presentation state"
+              onPress={stateOfVideoPresentation}
             />
           </Space>
         </Space>

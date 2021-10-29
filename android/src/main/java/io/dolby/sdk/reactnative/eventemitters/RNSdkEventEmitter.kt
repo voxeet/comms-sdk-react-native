@@ -11,21 +11,17 @@ class RNSdkEventEmitter(
 ) : RNEventEmitter(reactContext) {
 
   /**
-   * The supported events for JS
+   * Refresh token needed event.
+   * Called when there is need to refresh token.
    */
-  override val eventMap: Map<String, String>
-    get() = mapOf(
-      "EVENT_SDK_TOKEN_REFRESH" to EVENT_TOKEN_REFRESH
-    )
-
   fun onTokenRefreshNeeded() {
-    send(EVENT_TOKEN_REFRESH, null)
+    send(SdkEvent.TokenRefresh)
   }
 
   /**
-   * The event names and payload keys, make sure they are unique in the application scope
+   * SDK events
    */
-  companion object {
-    private const val EVENT_TOKEN_REFRESH = "TokenRefresh"
+  private object SdkEvent {
+    object TokenRefresh : RNEvent("EVENT_SDK_TOKEN_REFRESH")
   }
 }

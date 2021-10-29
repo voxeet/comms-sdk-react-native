@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
@@ -50,6 +50,29 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [isRecordingConference, setIsRecordingConference] =
     useState<boolean>(false);
   const [user, setUser] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    const unsubscribeCommandMessageFn = DolbyIoIAPI.command.onMessageReceived(
+      (data) => {
+        console.log(
+          'COMMAND ON MESSAGE RECEIVED EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      }
+    );
+    const unsubscribeParticipantChangeFn =
+      DolbyIoIAPI.conference.onParticipantsChange((data) => {
+        console.log(
+          'PARTICIPANT CHANGE EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      });
+    return () => {
+      unsubscribeCommandMessageFn();
+      unsubscribeParticipantChangeFn();
+    };
+  }, []);
+
   // useEffect(() => {
   //   if (conference) {
   //     if (onStatusChangeRemover) {

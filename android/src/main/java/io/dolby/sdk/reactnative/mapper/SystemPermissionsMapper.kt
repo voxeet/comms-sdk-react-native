@@ -15,12 +15,10 @@ class SystemPermissionsMapper {
     private const val RATIONALE_NEGATIVE_BUTTON = "negativeButton"
   }
 
-  fun fromNative(rationaleMap: ReadableMap): Rationale {
-    return Rationale(
-      title = requireNotNull(rationaleMap.getString(RATIONALE_TITLE)),
-      message = requireNotNull(rationaleMap.getString(RATIONALE_MESSAGE)),
-      positiveButton = requireNotNull(rationaleMap.getString(RATIONALE_POSITIVE_BUTTON)),
-      negativeButton = rationaleMap.getString(RATIONALE_NEGATIVE_BUTTON)
-    )
-  }
+  fun fromRN(rationaleMap: ReadableMap): Rationale = Rationale(
+    title = requireNotNull(rationaleMap.getString(RATIONALE_TITLE)),
+    message = requireNotNull(rationaleMap.getString(RATIONALE_MESSAGE)),
+    positiveButton = requireNotNull(rationaleMap.getString(RATIONALE_POSITIVE_BUTTON)),
+    negativeButton = rationaleMap.getString(RATIONALE_NEGATIVE_BUTTON)
+  )
 }
