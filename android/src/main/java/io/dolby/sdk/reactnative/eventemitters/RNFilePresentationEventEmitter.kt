@@ -16,6 +16,13 @@ import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.state.FilePresentationHolder
 import org.greenrobot.eventbus.Subscribe
 
+/**
+ * The file presentation event emitter
+ * @param reactContext react application context for sending event
+ * @param conferenceService [ConferenceService] from Android SDK
+ * @param filePresentationHolder started file presentation data store
+ * @param filePresentationMapper mapper for [FilePresentation] model
+ */
 class RNFilePresentationEventEmitter(
   reactContext: ReactApplicationContext,
   private val conferenceService: ConferenceService,
@@ -23,6 +30,9 @@ class RNFilePresentationEventEmitter(
   private val filePresentationMapper: FilePresentationMapper
 ) : RNEventEmitter(reactContext) {
 
+  /**
+   * Emitted when the presenter started the file presentation.
+   */
   @Subscribe
   fun on(event: FilePresentationStarted) {
     val presentation = FilePresentation(event.fileId, "").apply {
@@ -40,6 +50,9 @@ class RNFilePresentationEventEmitter(
       ?.let { sendFilePresentationChanged(PresentationStarted, it, presentation) }
   }
 
+  /**
+   * Emitted when the presenter ended the file presentation.
+   */
   @Subscribe
   fun on(event: FilePresentationStopped) {
     val presentation = filePresentationHolder.onStopped(event.conferenceId) ?: return
@@ -48,6 +61,10 @@ class RNFilePresentationEventEmitter(
       ?.let { sendFilePresentationChanged(PresentationStopped, it, presentation) }
   }
 
+  /**
+   * Emitted when the presenter changed the displayed page of the shared file.
+   * The event includes updated [FilePresentation] information.
+   */
   @Subscribe
   fun on(event: FilePresentationUpdated) {
     val presentation = filePresentationHolder.onSeek(event.conferenceId, event.position) ?: return
@@ -56,6 +73,9 @@ class RNFilePresentationEventEmitter(
       ?.let { sendFilePresentationChanged(PresentationUpdated, it, presentation) }
   }
 
+  /**
+   * Emitted when the file is converted.
+   */
   fun onFileConverted(data: ReadableMap) {
     Arguments.createMap()
       .apply { putMap(KEY_FILE_CONVERTED, data) }
