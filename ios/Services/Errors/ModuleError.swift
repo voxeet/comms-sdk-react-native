@@ -8,6 +8,7 @@ internal enum ModuleError: Error {
 	case noConferenceId
 	case noConferenceStatus
 	case noLocalStats
+	case noUrlProvided
 	case invalidOptions(String)
 	case noConference(String)
 	case noParticipant(String)
@@ -30,6 +31,8 @@ internal extension ModuleError {
 			return "Missing conference status."
 		case .noLocalStats:
 			return "Couldn't get any local stats."
+		case .noUrlProvided:
+			return "No url provided"
 		case let .invalidOptions(options):
 			return "invalid options: \(options)"
 		case let .noConference(id):
