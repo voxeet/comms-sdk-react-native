@@ -7,32 +7,48 @@ import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
 import io.dolby.sdk.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNNotificationEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ConferencePermissionMapper
+import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.mapper.InvitationMapper
+import io.dolby.sdk.reactnative.mapper.MediaMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
 import io.dolby.sdk.reactnative.mapper.SystemPermissionsMapper
+import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
+import io.dolby.sdk.reactnative.services.RNFilePresentationServiceModule
+import io.dolby.sdk.reactnative.services.RNMediaServiceModule
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
 import io.dolby.sdk.reactnative.services.RNSystemPermissionsModule
+import io.dolby.sdk.reactnative.services.RNVideoPresentationServiceModule
 
 class RNDolbyioIAPISdkPackage : ReactPackage {
 
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
     val participantMapper = ParticipantMapper()
     val conferencePermissionMapper = ConferencePermissionMapper()
-    val conferenceMapper = ConferenceMapper(participantMapper, conferencePermissionMapper)
+    val conferenceMapper = ConferenceMapper(
+      participantMapper = participantMapper,
+      permissionMapper = conferencePermissionMapper
+    )
     val participantPermissionMapper = ParticipantPermissionMapper(
       participantMapper = participantMapper,
       conferencePermissionMapper = conferencePermissionMapper
+    )
+    val videoParticipantMapper = VideoPresentationMapper(participantMapper = participantMapper)
+
+    val sdkEventEmitter = RNSdkEventEmitter(
+      reactContext = reactContext
     )
     val conferenceEventEmitter = RNConferenceEventEmitter(
       reactContext = reactContext,
@@ -45,9 +61,16 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       participantMapper = participantMapper,
       reactContext = reactContext
     )
-
+    val notificationEventEmitter = RNNotificationEventEmitter(
+      reactContext = reactContext,
+      conferenceService = VoxeetSDK.conference(),
+      participantMapper = participantMapper
+    )
     return listOf(
-      RNDolbyioIAPISdkModule(reactContext),
+      RNDolbyioIAPISdkModule(
+        reactContext = reactContext,
+        eventEmitter = sdkEventEmitter
+      ),
       RNSessionServiceModule(
         reactContext = reactContext,
         sessionService = VoxeetSDK.session(),
@@ -55,6 +78,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       ),
       RNConferenceServiceModule(
         reactContext = reactContext,
+        screenShareService = VoxeetSDK.screenShare(),
         conferenceService = VoxeetSDK.conference(),
         conferenceMapper = conferenceMapper,
         conferenceCreateOptionsMapper = ConferenceCreateOptionsMapper(),
@@ -76,15 +100,32 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         recordingMapper = RecordingMapper()
       ),
       RNNotificationServiceModule(
+        reactContext = reactContext,
+        eventEmitter = notificationEventEmitter,
         conferenceService = VoxeetSDK.conference(),
         notificationService = VoxeetSDK.notification(),
         conferenceMapper = conferenceMapper,
-        invitationMapper = InvitationMapper(conferencePermissionMapper, participantMapper),
-        reactContext = reactContext
+        invitationMapper = InvitationMapper(conferencePermissionMapper, participantMapper)
+      ),
+      RNVideoPresentationServiceModule(
+        reactContext = reactContext,
+        videoPresentationService = VoxeetSDK.videoPresentation(),
+        videoPresentationMapper = videoParticipantMapper
+      ),
+      RNFilePresentationServiceModule(
+        reactContext = reactContext,
+        sessionService = VoxeetSDK.session(),
+        filePresentationService = VoxeetSDK.filePresentation(),
+        filePresentationMapper = FilePresentationMapper(reactContext)
       ),
       RNSystemPermissionsModule(
-        reactContext,
-        SystemPermissionsMapper()
+        reactContext = reactContext,
+        systemPermissionsMapper = SystemPermissionsMapper()
+      ),
+      RNMediaServiceModule(
+        reactContext = reactContext,
+        mediaDeviceService = VoxeetSDK.mediaDevice(),
+        mediaMapper = MediaMapper()
       )
     )
   }

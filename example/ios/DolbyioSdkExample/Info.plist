@@ -37,8 +37,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This application will use camera to capture videos</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This application will use microphone to capture audios</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Avenir LT Std 45 Book.otf</string>
@@ -47,6 +51,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>fetch</string>
 		<string>voip</string>
 	</array>
