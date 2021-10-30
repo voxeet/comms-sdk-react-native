@@ -11,6 +11,10 @@ import type { Participant } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 
+const enumToArray = (enumValue: any): string[] => {
+  return Object.keys(enumValue).map((i) => enumValue[i]);
+};
+
 type UpdatePermissionsModalProps = {
   participant: Participant;
   open: boolean;
@@ -21,46 +25,56 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
   ({ participant, open, closeModal }) => {
     const [userPermissions, setUserPermissions] = useState<string[]>([]);
 
-    const enumToArray = (enumValue: any): string[] => {
-      return Object.keys(enumValue).map((i) => enumValue[i]);
-    };
-
     // Creates array from ConferencePermissions enum
     const permissions = enumToArray(ConferencePermission);
 
     // Convert permission name to display in modal name
-    const convertPermissionName = (permission: string): string => {
-      switch (permission) {
-        case 'INVITE':
-          return 'Invite participants';
-        case 'KICK':
-          return 'Kick participants';
-        case 'UPDATE_PERMISSIONS':
-          return 'Update participants permissions';
-        case 'JOIN':
-          return 'Join a conference';
-        case 'SEND_AUDIO':
-          return 'Send audio stream';
-        case 'SEND_VIDEO':
-          return 'Send video stream';
-        case 'SHARE_SCREEN':
-          return 'Share a screen';
-        case 'SHARE_VIDEO':
-          return 'Share a video';
-        case 'SHARE_FILE':
-          return 'Share a file';
-        case 'SEND_MESSAGE':
-          return 'Send a message';
-        case 'RECORD':
-          return 'Record a conference';
-        case 'STREAM':
-          return 'Stream a conference';
-        default:
-          console.log(
-            `${permission} doesn't have case in name conversion method. `
-          );
-          return permission;
+    const permissionNamingMap = new Map([
+      ['INVITE', 'Invite participants'],
+      ['KICK', 'Kick participants'],
+      ['UPDATE_PERMISSIONS', 'Update participants permissions'],
+      ['JOIN', 'Join a conference'],
+      ['SEND_AUDIO', 'Send audio stream'],
+      ['SEND_VIDEO', 'Send video stream'],
+      ['SHARE_SCREEN', 'Share a screen'],
+      ['SHARE_VIDEO', 'Share a video'],
+      ['SHARE_FILE', 'Share a file'],
+      ['SEND_MESSAGE', 'Send a message'],
+      ['RECORD', 'Record a conference'],
+      ['STREAM', 'Stream a conference'],
+    ]);
+
+    // Change userPermissions array, during changes in checkboxes
+    const updateUserPermissionsArray = (permission: string) => {
+      if (userPermissions.includes(permission)) {
+        setUserPermissions(
+          userPermissions.filter(
+            (userPermission) => userPermission !== permission
+          )
+        );
+      } else {
+        setUserPermissions([...userPermissions, permission]);
       }
+    };
+
+    // Submit permissions
+    const submitPermissions = async () => {
+      closeModal();
+      await updatePermissions([
+        {
+          participant,
+          permissions: userPermissions.map((userPermission) => {
+            return userPermission as ConferencePermission;
+          }),
+        },
+      ]);
+      setUserPermissions([]);
+    };
+
+    // Close modal without submit
+    const closeModalWithoutSubmit = () => {
+      setUserPermissions([]);
+      closeModal();
     };
 
     useEffect(() => {
@@ -95,24 +109,12 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
                         style={styles.modalCheckbox}
                         disabled={false}
                         value={false}
-                        onValueChange={() => {
-                          if (userPermissions.includes(permission)) {
-                            setUserPermissions(
-                              userPermissions.filter(
-                                (userPermission) =>
-                                  userPermission !== permission
-                              )
-                            );
-                          } else {
-                            setUserPermissions([
-                              ...userPermissions,
-                              permission,
-                            ]);
-                          }
-                        }}
+                        onValueChange={() =>
+                          updateUserPermissionsArray(permission)
+                        }
                       />
                       <Text color="black">
-                        {convertPermissionName(permission)}
+                        {permissionNamingMap.get(permission)}
                       </Text>
                     </Space>
                   );
@@ -124,27 +126,13 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
                 text="Close"
                 size="small"
                 color="dark"
-                onPress={() => {
-                  setUserPermissions([]);
-                  closeModal();
-                }}
+                onPress={closeModalWithoutSubmit}
               />
               <Button
                 text="Update"
                 size="small"
                 color="dark"
-                onPress={async () => {
-                  closeModal();
-                  await updatePermissions([
-                    {
-                      participant,
-                      permissions: userPermissions.map((userPermission) => {
-                        return userPermission as ConferencePermission;
-                      }),
-                    },
-                  ]);
-                  setUserPermissions([]);
-                }}
+                onPress={submitPermissions}
               />
             </Space>
           </Space>

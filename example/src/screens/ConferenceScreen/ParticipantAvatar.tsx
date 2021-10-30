@@ -13,7 +13,7 @@ import styles from './ConferenceScreen.style';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
-  const [permissionsModalOpen, setPermissionsModalOpen] = useState(false);
+  const [permissionsModalActive, setPermissionsModalActive] = useState(false);
 
   const options: Options = [
     {
@@ -40,7 +40,7 @@ const ParticipantAvatar = (participant: Participant) => {
     {
       text: 'update permissions',
       value: 'update permissions',
-      onSelect: () => setPermissionsModalOpen(!permissionsModalOpen),
+      onSelect: () => setPermissionsModalActive(!permissionsModalActive),
     },
   ];
 
@@ -56,8 +56,8 @@ const ParticipantAvatar = (participant: Participant) => {
 
       <UpdatePermissionsModal
         participant={participant}
-        open={permissionsModalOpen}
-        closeModal={() => setPermissionsModalOpen(false)}
+        open={permissionsModalActive}
+        closeModal={() => setPermissionsModalActive(false)}
       />
     </Space>
   );
