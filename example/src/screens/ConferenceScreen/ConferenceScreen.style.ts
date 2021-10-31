@@ -1,6 +1,8 @@
+import { StyleSheet, Platform } from 'react-native';
+
+import SHADOWS from '@constants/boxshadow.constants';
 import COLORS from '@constants/colors.constants';
 import { SPACE_XXS, SPACE_M } from '@constants/sizes.constants';
-import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   wrapper: {
@@ -50,5 +52,47 @@ export default StyleSheet.create({
   menuBackdrop: {
     backgroundColor: 'rgba(0,0,0,0.5)',
     opacity: 1,
+  },
+
+  modalBackground: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  modalContainer: {
+    backgroundColor: COLORS.WHITE,
+    borderRadius: SPACE_XXS,
+    width: '90%',
+    height: '50%',
+    shadowOffset: SHADOWS.m.shadowOffset,
+    shadowOpacity: SHADOWS.m.shadowOpacity,
+    shadowRadius: SHADOWS.m.shadowRadius,
+    elevation: SHADOWS.m.elevation,
+    flexDirection: 'column',
+  },
+
+  modalTitleSection: {
+    flex: 1,
+  },
+
+  modalSelectSection: {
+    flex: 8,
+  },
+
+  modalButtonSection: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  modalCheckboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  modalCheckbox: {
+    marginRight: 20,
   },
 });
