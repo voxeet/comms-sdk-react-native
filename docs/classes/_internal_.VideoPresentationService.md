@@ -34,6 +34,11 @@
 
 ▸ **current**(): ``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)
 
+Returns information about the current video presentation. Use this accessor
+if you wish to receive information that is available in the VideoPresentation
+object, such as information about the participant who shares the video or the
+URL of the presented video file.
+
 #### Returns
 
 ``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)
@@ -138,7 +143,7 @@ ___
 
 ▸ **start**(`url`): `void`
 
-Pauses the video presentation.
+Starts the video presentation.
 
 #### Parameters
 
@@ -158,9 +163,13 @@ ___
 
 ▸ **state**(): [`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)
 
+Provides the current state of the video presentation.
+
 #### Returns
 
 [`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)
+
+VideoPresentationState
 
 ___
 
