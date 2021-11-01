@@ -74,5 +74,12 @@ jest.mock('react-native', () => {
     current: jest.fn(),
     state: jest.fn(),
   };
+  RN.NativeModules.DolbyIoIAPIMediaDeviceService = {
+    isFrontCamera: jest.fn(),
+    getComfortNoiseLevel: jest.fn(),
+    setComfortNoiseLevel: jest.fn(),
+    switchCamera: jest.fn(),
+    switchSpeaker: jest.fn(),
+  };
   return RN;
 });

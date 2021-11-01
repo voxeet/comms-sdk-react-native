@@ -14,6 +14,7 @@
 - [command](DolbyIoIAPI.md#command)
 - [conference](DolbyIoIAPI.md#conference)
 - [filePresentation](DolbyIoIAPI.md#filepresentation)
+- [mediaDevice](DolbyIoIAPI.md#mediadevice)
 - [notification](DolbyIoIAPI.md#notification)
 - [recording](DolbyIoIAPI.md#recording)
 - [refreshAccessTokenInBackground](DolbyIoIAPI.md#refreshaccesstokeninbackground)
@@ -54,6 +55,12 @@ ___
 ### filePresentation
 
 • **filePresentation**: [`FilePresentationService`](_internal_.FilePresentationService.md)
+
+___
+
+### mediaDevice
+
+• **mediaDevice**: [`MediaDeviceService`](_internal_.MediaDeviceService.md)
 
 ___
 
