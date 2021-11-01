@@ -7,6 +7,7 @@
 ### Enumerations
 
 - [Codec](../enums/_internal_.Codec.md)
+- [ComfortNoiseLevel](../enums/_internal_.ComfortNoiseLevel.md)
 - [ConferencePermission](../enums/_internal_.ConferencePermission.md)
 - [ConferenceStatus](../enums/_internal_.ConferenceStatus.md)
 - [MediaStreamType](../enums/_internal_.MediaStreamType.md)
@@ -38,6 +39,7 @@
 - [CommandService](../classes/_internal_.CommandService.md)
 - [ConferenceService](../classes/_internal_.ConferenceService.md)
 - [FilePresentationService](../classes/_internal_.FilePresentationService.md)
+- [MediaDeviceService](../classes/_internal_.MediaDeviceService.md)
 - [NotificationService](../classes/_internal_.NotificationService.md)
 - [RecordingService](../classes/_internal_.RecordingService.md)
 - [SessionService](../classes/_internal_.SessionService.md)
