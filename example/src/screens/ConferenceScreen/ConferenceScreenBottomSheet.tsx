@@ -1,7 +1,9 @@
 import React, { useContext, useRef } from 'react';
-import DocumentPicker from 'react-native-document-picker'
+import { Alert } from 'react-native';
+import DocumentPicker from 'react-native-document-picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
+import type { FileConverted } from 'src/services/filePresentation/models';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
@@ -38,6 +40,13 @@ import {
   getImage,
 } from '@utils/filePresentation.tester';
 import {
+  getComfortNoiseLevel,
+  isFrontCamera,
+  setComfortNoiseLevel,
+  switchCamera,
+  switchSpeaker,
+} from '@utils/mediaDevice.tester';
+import {
   invite,
   decline,
   inviteRandomParticipant,
@@ -60,16 +69,15 @@ import {
 
 import type { Conference } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
+import { ComfortNoiseLevel } from '../../../../src/services/mediaDevice/models';
 import styles from './ConferenceScreen.style';
-import { Alert } from 'react-native';
-import type { FileConverted } from 'src/services/filePresentation/models';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { user, conference, setIsRecordingConference } =
     useContext(DolbyIOContext);
   const { participants } = conference as Conference;
-  var convertedFile : FileConverted | null = null;
+  var convertedFile: FileConverted | null = null;
 
   const convertFile = async () => {
     try {
@@ -79,15 +87,15 @@ const ConferenceScreenBottomSheet = () => {
           DocumentPicker.types.doc,
           DocumentPicker.types.docx,
           DocumentPicker.types.ppt,
-          DocumentPicker.types.pptx
-        ]
+          DocumentPicker.types.pptx,
+        ],
       });
       //Printing the log realted to the choosen file
       console.log('file result : ' + JSON.stringify(res));
-      console.log('file uri : ' + res.uri)
+      console.log('file uri : ' + res.uri);
 
       // Pass uri to convert method
-      convertedFile = await convert({ url: res.uri })
+      convertedFile = await convert({ url: res.uri });
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
@@ -268,7 +276,12 @@ const ConferenceScreenBottomSheet = () => {
           </Space>
           <Space mb="s" style={styles.actionButtons}>
             <Button size="small" color="dark" text="Stop" onPress={stop} />
-            <Button size="small" color="dark" text="Start" onPress={() => start(convertedFile)} />
+            <Button
+              size="small"
+              color="dark"
+              text="Start"
+              onPress={() => start(convertedFile)}
+            />
             <Button
               size="small"
               color="dark"
@@ -432,6 +445,51 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Current video presentation state"
               onPress={stateOfVideoPresentation}
+            />
+          </Space>
+          <Space mb="xs">
+            <Text size="m" color={COLORS.BLACK}>
+              Media Device Service
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="isFrontCamera"
+              onPress={isFrontCamera}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="getComfortNoiseLevel"
+              onPress={getComfortNoiseLevel}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="setComfortNoiseLevel"
+              onPress={() => setComfortNoiseLevel(ComfortNoiseLevel.Default)}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="switchCamera"
+              onPress={switchCamera}
+            />
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="switchSpeaker"
+              onPress={switchSpeaker}
             />
           </Space>
         </Space>
