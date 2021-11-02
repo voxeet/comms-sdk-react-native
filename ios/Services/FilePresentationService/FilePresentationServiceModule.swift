@@ -4,11 +4,14 @@ import VoxeetSDK
 // MARK: - Supported Events
 private enum EventKeys: String, CaseIterable {
 	/// Emitted when the file is converted.
-	case FileConverted = "EVENT_FILEPRESENTATION_FILE_CONVERTED"
+	case fileConverted = "EVENT_FILEPRESENTATION_FILE_CONVERTED"
 }
 
 @objc(RNFilePresentationServiceModule)
 public class FilePresentationServiceModule: ReactEmitter {
+	var current: VTFilePresentation? {
+		VoxeetSDK.shared.filePresentation.current
+	}
 
 	// MARK: - Events Setup
 	@objc(supportedEvents)
@@ -27,6 +30,23 @@ public class FilePresentationServiceModule: ReactEmitter {
 	}
 
 	// MARK: - Methods
+	/// Gets current file presentation.
+	/// - Parameters:
+	///   - resolve: returns FilePresentation object on success
+	///   - reject: returns error on failure
+	@objc(resolver:rejecter:)
+	public func getCurrent(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		guard let filePresentation = current else {
+			ModuleError.noCurrentFilePresentation.send(with: reject)
+			return
+		}
+		resolve(filePresentation.toReactModel())
+
+	}
+
 	/// Converts the user-provided file into multiple pages, as images, that can be shared during the file presentation.
 	/// - Parameters:
 	///   - file: file model with url to convert
@@ -54,7 +74,7 @@ extension FilePresentationServiceModule: VTFilePresentationDelegate {
 
 	public func converted(fileConverted: VTFileConverted) {
 		send(
-			event: EventKeys.FileConverted,
+			event: EventKeys.fileConverted,
 			body: FileConvertedDTO(
 				fileConverted: fileConverted
 			).toReactModel()
