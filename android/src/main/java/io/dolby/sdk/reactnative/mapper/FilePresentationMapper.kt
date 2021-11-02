@@ -6,7 +6,9 @@ import android.util.Log
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
+import com.voxeet.sdk.models.v1.FilePresentationConverted
 import com.voxeet.sdk.services.presentation.file.FilePresentation
+import io.dolby.sdk.reactnative.utils.RnCollections.getOptionalDouble
 import java.io.File
 import java.io.FileOutputStream
 
@@ -36,6 +38,15 @@ class FilePresentationMapper(
     putString(FILE_URL, filePresentation.url)
     putInt(FILE_IMAGE_COUNT, filePresentation.nbPage)
     putDouble(FILE_SIZE, 0.0)
+  }
+
+  fun fromRN(
+    fileConvertedRN: ReadableMap
+  ): FilePresentationConverted = FilePresentationConverted().apply {
+    fileId = fileConvertedRN.getString(FILE_ID)
+    name = fileConvertedRN.getString(FILE_NAME)
+    nbImageConverted = fileConvertedRN.getInt(FILE_IMAGE_COUNT)
+    size = fileConvertedRN.getOptionalDouble(FILE_SIZE)?.toLong() ?: 0
   }
 
   private fun createFile(uri: Uri): File {

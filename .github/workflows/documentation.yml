@@ -1,5 +1,9 @@
 name: ci-actions
-on: [pull_request]
+on:
+  push:
+    branches:
+      - develop
+      - master
 jobs:
   documentation:
     runs-on: macos-11
