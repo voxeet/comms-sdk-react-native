@@ -10,6 +10,7 @@ import io.dolby.sdk.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNNotificationEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNSdkEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNVideoPresentationEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
@@ -67,6 +68,12 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       conferenceService = VoxeetSDK.conference(),
       participantMapper = participantMapper
     )
+    val videoPresentationEventEmitter = RNVideoPresentationEventEmitter(
+      reactContext = reactContext,
+      conferenceService = VoxeetSDK.conference(),
+      videoPresentationService = VoxeetSDK.videoPresentation(),
+      participantMapper = participantMapper
+    )
     return listOf(
       RNDolbyioIAPISdkModule(
         reactContext = reactContext,
@@ -110,6 +117,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
       ),
       RNVideoPresentationServiceModule(
         reactContext = reactContext,
+        eventEmitter = videoPresentationEventEmitter,
         videoPresentationService = VoxeetSDK.videoPresentation(),
         videoPresentationMapper = videoParticipantMapper
       ),
