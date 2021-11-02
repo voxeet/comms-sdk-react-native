@@ -7,12 +7,6 @@ import type {
   File,
 } from '../../../src/services/filePresentation/models';
 
-// TODO Temporary converted file
-const testFileConverted = {
-  id: '102030',
-  imageCount: 3,
-};
-
 export const stop = async () => {
   try {
     await DolbyIoIAPI.filePresentation.stop();
@@ -24,8 +18,9 @@ export const stop = async () => {
 };
 
 // TODO Includes temporary converted file
-export const start = async (file: FileConverted = testFileConverted) => {
+export const start = async (file: FileConverted | null) => {
   try {
+    if (file == null) return
     await DolbyIoIAPI.filePresentation.start(file);
     Alert.alert('File presentation started');
   } catch (e) {
@@ -54,13 +49,15 @@ export const setPage = async (page: number) => {
   }
 };
 
-export const convert = async (file: File) => {
+export const convert = async (file: File): Promise<FileConverted | null> => {
   try {
     const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
     Alert.alert('Conversion done', convertedFile.toString());
+    return convertedFile
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Convert error', msg);
+    return null
   }
 };
 
