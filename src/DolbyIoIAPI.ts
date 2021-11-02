@@ -8,6 +8,7 @@ import type {
 import CommandService from './services/command/CommandService';
 import ConferenceService from './services/conference/ConferenceService';
 import FilePresentationService from './services/filePresentation/FilePresentationService';
+import MediaDeviceService from './services/mediaDevice/MediaDeviceService';
 import NotificationService from './services/notification/NotificationService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
@@ -29,6 +30,7 @@ export class DolbyIoIAPI {
   notification = NotificationService;
   filePresentation = FilePresentationService;
   videoPresentation = VideoPresentationService;
+  mediaDevice = MediaDeviceService;
 
   /**
    * Initializes the SDK using the customer key and secret.
