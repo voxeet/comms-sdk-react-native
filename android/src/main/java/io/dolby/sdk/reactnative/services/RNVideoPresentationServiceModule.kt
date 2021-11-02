@@ -2,11 +2,16 @@ package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.voxeet.VoxeetSDK
-import com.voxeet.sdk.services.presentation.video.VideoPresentation
+import com.voxeet.sdk.json.VideoPresentationPaused
+import com.voxeet.sdk.json.VideoPresentationPlay
+import com.voxeet.sdk.json.VideoPresentationSeek
+import com.voxeet.sdk.json.VideoPresentationStarted
+import com.voxeet.sdk.json.VideoPresentationStopped
 import com.voxeet.sdk.services.VideoPresentationService
+import com.voxeet.sdk.services.presentation.video.VideoPresentation
+import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
@@ -48,14 +53,16 @@ import io.dolby.sdk.reactnative.utils.Promises.thenValue
  * Creates a bridge wrapper for [VideoPresentationService].
  *
  * @param reactContext react context
+ * @param eventEmitter an emitter for the video presentation module events
  * @param videoPresentationService [VideoPresentationService] from Android SDK
  * @param videoPresentationMapper mapper for a [VideoPresentation] model
  */
 class RNVideoPresentationServiceModule(
   reactContext: ReactApplicationContext,
+  eventEmitter: RNEventEmitter,
   private val videoPresentationService: VideoPresentationService,
   private val videoPresentationMapper: VideoPresentationMapper
-) : ReactContextBaseJavaModule(reactContext) {
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "DolbyIoIAPIVideoPresentationService"
 
@@ -126,5 +133,21 @@ class RNVideoPresentationServiceModule(
         VoxeetSDK.session().participant?.let { videoPresentationMapper.toRN(videoPresentation, it) }
       }
       .forward(promise)
+  }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) {
+    super.addListener(eventName)
+  }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) {
+    super.removeListeners(count)
   }
 }
