@@ -10,4 +10,7 @@ object RnCollections {
   fun ReadableMap.getOptionalBoolean(key: String): Boolean? =
     if (hasKey(key)) getBoolean(key) else null
 
+  fun ReadableMap.getOptionalDouble(key: String): Double? =
+    if (hasKey(key)) getDouble(key) else null
+
 }
