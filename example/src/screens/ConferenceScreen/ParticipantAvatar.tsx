@@ -1,15 +1,20 @@
-import type { Participant } from '../../../../src/services/conference/models';
-import styles from './ConferenceScreen.style';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { mute, kick } from '@utils/conference.tester';
-import React from 'react';
-import { View } from 'react-native';
+
+import type { Participant } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
+import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
+  const [permissionsModalActive, setPermissionsModalActive] = useState(false);
+
   const options: Options = [
     {
       text: 'kick',
@@ -32,6 +37,11 @@ const ParticipantAvatar = (participant: Participant) => {
         await mute(participant, false);
       },
     },
+    {
+      text: 'update permissions',
+      value: 'update permissions',
+      onSelect: () => setPermissionsModalActive(!permissionsModalActive),
+    },
   ];
 
   return (
@@ -43,6 +53,12 @@ const ParticipantAvatar = (participant: Participant) => {
           </Text>
         </View>
       </MenuOptionsButton>
+
+      <UpdatePermissionsModal
+        participant={participant}
+        open={permissionsModalActive}
+        closeModal={() => setPermissionsModalActive(false)}
+      />
     </Space>
   );
 };
