@@ -12,6 +12,7 @@ import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.reactnative.state.FilePresentationHolder
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenNestedPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
@@ -27,17 +28,17 @@ import java.io.File
  * 1. The presenter calls the [convert] method to upload and convert a file.
  * 2. The presenter calls the [start] method to start presenting the file.
  * 3. The presenter and the viewers receive the started event that informs that the file presentation starts.
- * Receiving the started event should trigger calling the image method to download the converted file and display the proper page of the file
+ * Receiving the started event should trigger calling the [getImage] method to download the converted file and display the proper page of the file
  * by retrieving the individual images.
- * 4. The application is responsible for coordinating the page flip between the local and the presented files. The presenter calls the update method to inform the service to send the updated page number to the participants.
+ * 4. The application is responsible for coordinating the page flip between the local and the presented files. The presenter calls the [setPage] method to inform the service to send the updated page number to the participants.
  * 5. The presenter and viewers receive the updated event with the current page number.
  * Receiving the updated event should trigger calling the image method to display the proper page of the file by retrieving the individual images.
- * 6. The presenter may call the thumbnail method to obtain thumbnail images of the file
+ * 6. The presenter may call the [getThumbnail] method to obtain thumbnail images of the file
  * and implement a carousel control for the presenting user to flip pages locally.
- * 7. The presenter calls the stop method to end the file presentation.
+ * 7. The presenter calls the [stop] method to end the file presentation.
  * 8. The presenter and the viewers receive the stopped event to inform about the end of the file presentation.
  *
- * The current accessor allows the participants to receive information about the current state of the file presentation.
+ * The [getCurrent] accessor allows the participants to receive information about the current state of the file presentation.
  *
  * @param reactContext            react context
  * @param sessionService          [SessionService] from Android SDK
@@ -103,6 +104,18 @@ class RNFilePresentationServiceModule(
   }
 
   /**
+   * Stops the file presentation.
+   *
+   * @param promise return null
+   */
+  @ReactMethod
+  fun stop(promise: ReactPromise) {
+    getCurrentFileId()
+      .thenPromise(filePresentationService::stop)
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
    * Returns information about the current file presentation.
    *
    * Use this accessor if you wish to receive information that is available in the [FilePresentation] object, such as
@@ -126,15 +139,61 @@ class RNFilePresentationServiceModule(
   }
 
   /**
+   * Provides the image's URL that refers to a specific page of the presented file.
+   *
+   * @param page The number of the presented page. Files that do not have any pages, for example jpg images,
+   * require setting the value of the page parameter to 0.
+   * @param promise returns URL of the individual page image
+   */
+  @ReactMethod
+  fun getImage(page: Int, promise: ReactPromise) {
+    getCurrentFileId()
+      .thenValue { filePresentationService.getImage(it, page) }
+      .forward(promise)
+  }
+
+  /**
+   * Provides the thumbnail's URL that refers to a specific page of the presented file.
+   *
+   * @param page The number of the presented page. Files that do not include any pages, for example jpg images,
+   * require setting the value of this parameter to 0.
+   * @param promise returns URL of the individual page thumbnail
+   */
+  @ReactMethod
+  fun getThumbnail(page: Int, promise: ReactPromise) {
+    getCurrentFileId()
+      .thenValue { filePresentationService.getThumbnail(it, page) }
+      .forward(promise)
+  }
+
+  /**
+   * Informs the service to send the updated page number to the conference participants.
+   *
+   * @param page The page number that corresponds to the page that should be presented.
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun setPage(page: Int, promise: ReactPromise) {
+    getCurrentFileId()
+      .thenPromise { filePresentationService.update(it, page) }
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
    * Every emitter module must implement this method in place, otherwise JS cannot receive event
    */
   @ReactMethod
   override fun addListener(eventName: String) = super.addListener(eventName)
-
 
   /**
    * Every emitter module must implement this method in place, otherwise JS cannot receive event
    */
   @ReactMethod
   override fun removeListeners(count: Int) = super.removeListeners(count)
+
+  private fun getCurrentFileId() = Promises
+    .promise(conferenceService::getConferenceId) { "Missing current conference" }
+    .thenValue(filePresentationHolder::getPresentation)
+    .rejectIfNull { "No started file presentation" }
+    .thenValue { it.key }
 }
