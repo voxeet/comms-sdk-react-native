@@ -1,4 +1,10 @@
-import styles from './JoinScreen.style';
+// @ts-ignore
+import Chance from 'chance';
+import React, { FunctionComponent, useState, useContext } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import { MenuProvider } from 'react-native-popup-menu';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import CreateConferenceButton from '@screens/JoinScreen/CreateConferenceButton';
@@ -6,12 +12,8 @@ import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-// @ts-ignore
-import Chance from 'chance';
-import React, { FunctionComponent, useState, useContext } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { MenuProvider } from 'react-native-popup-menu';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
+import styles from './JoinScreen.style';
 
 const chance = new Chance();
 

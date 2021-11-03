@@ -16,7 +16,7 @@ export interface IDolbyIOProvider {
   isInitialized?: Boolean;
   isRecordingConference: Boolean;
   initialize: () => void;
-  openSession: (name: string) => void;
+  openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean) => void;
   join: (alias: string) => void;
   replay: () => void;
@@ -52,10 +52,18 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
+    const unsubscribeConferenceChangeFn = DolbyIoIAPI.conference.onStatusChange(
+      (data) => {
+        console.log(
+          'CONFERENCE STATUS CHANGE EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      }
+    );
     const unsubscribeCommandMessageFn = DolbyIoIAPI.command.onMessageReceived(
       (data) => {
         console.log(
-          'COMMAND ON MESSAGE RECEIVED EVENT DATA: \n',
+          'MESSAGE RECEIVED EVENT DATA: \n',
           JSON.stringify(data, null, 2)
         );
       }
@@ -67,32 +75,22 @@ const DolbyIOProvider: React.FC = ({ children }) => {
           JSON.stringify(data, null, 2)
         );
       });
+
+    const unsubscribeInvitationReceivedFn =
+      DolbyIoIAPI.notification.onInvitationReceived((data) => {
+        console.log(
+          'INVITATION RECEIVED EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      });
     return () => {
+      unsubscribeConferenceChangeFn();
       unsubscribeCommandMessageFn();
       unsubscribeParticipantChangeFn();
+      unsubscribeInvitationReceivedFn();
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (conference) {
-  //     if (onStatusChangeRemover) {
-  //       onStatusChangeRemover();
-  //     }
-  //     onStatusChangeRemover = DolbyIoIAPI.conference.onStatusChange((event) => {
-  //       Toast.show({
-  //         type: 'info',
-  //         text1: 'Conference status changed',
-  //         text2: JSON.stringify(event),
-  //       });
-  //     });
-  //   } else {
-  //      if (onStatusChangeRemover) {
-  //        onStatusChangeRemover();
-  //      }
-  //   }
-  // }, [conference]);
-
-  // TODO remove when onParticipantsChange will be ready and change implementation
   const updateConferenceParticipants = async () => {
     try {
       const updatedConference = await DolbyIoIAPI.conference.current();
@@ -119,9 +117,9 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       Alert.alert('App not initialized', e);
     }
   };
-  const openSession = async (name: string) => {
+  const openSession = async (name: string, externalId?: string) => {
     try {
-      await DolbyIoIAPI.session.open({ name });
+      await DolbyIoIAPI.session.open({ name, externalId });
       const currentUser = await DolbyIoIAPI.session.getCurrentUser();
       setUser(currentUser);
       Alert.alert(`Session opened as ${name}`);

@@ -46,11 +46,7 @@ import {
   switchCamera,
   switchSpeaker,
 } from '@utils/mediaDevice.tester';
-import {
-  invite,
-  decline,
-  inviteRandomParticipant,
-} from '@utils/notification.tester';
+import { decline, inviteRandomParticipant } from '@utils/notification.tester';
 import {
   getCurrentRecording,
   startRecording,
@@ -323,12 +319,6 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Invite"
-              onPress={() => invite(conference, [])}
-            />
-            <Button
-              size="small"
-              color="dark"
-              text="Invite with permissions"
               onPress={() => inviteRandomParticipant(conference)}
             />
             <Button
@@ -398,48 +388,36 @@ const ConferenceScreenBottomSheet = () => {
                 )
               }
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Pause video presentation"
               onPress={pauseVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Play video presentation"
               onPress={playVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Stop video presentation"
               onPress={stopVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Seek video presentation"
               onPress={seekVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Current video presentation"
               onPress={currentVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
@@ -459,32 +437,24 @@ const ConferenceScreenBottomSheet = () => {
               text="isFrontCamera"
               onPress={isFrontCamera}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="getComfortNoiseLevel"
               onPress={getComfortNoiseLevel}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="setComfortNoiseLevel"
               onPress={() => setComfortNoiseLevel(ComfortNoiseLevel.Default)}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="switchCamera"
               onPress={switchCamera}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
