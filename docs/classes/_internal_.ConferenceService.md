@@ -349,7 +349,7 @@ Add a handler for participants changes
 
 | Name | Type |
 | :------ | :------ |
-| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/_internal_.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/_internal_.md#participantadded) \| [`ParticipantJoined`](../modules/_internal_.md#participantjoined) \| [`ParticipantUpdated`](../modules/_internal_.md#participantupdated) \| [`ParticipantRemoved`](../modules/_internal_.md#participantremoved)) => `void` |
+| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/_internal_.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/_internal_.md#participantadded) \| [`ParticipantUpdated`](../modules/_internal_.md#participantupdated)) => `void` |
 
 #### Returns
 
