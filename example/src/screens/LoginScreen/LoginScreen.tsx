@@ -17,10 +17,11 @@ const chance = new Chance();
 
 const LoginScreen: FunctionComponent = () => {
   const [name, setName] = useState(`${chance.first()} ${chance.last()}`);
+  const [externalId, setExternalId] = useState('');
   const { openSession } = useContext(DolbyIOContext);
 
   const login = () => {
-    openSession(name);
+    openSession(name, externalId);
   };
 
   return (
@@ -43,6 +44,13 @@ const LoginScreen: FunctionComponent = () => {
           </Text>
           <Space mt="m">
             <Input label="Your name" onChange={setName} value={name} />
+          </Space>
+          <Space mt="m">
+            <Input
+              label="External ID (optional)"
+              onChange={setExternalId}
+              value={externalId}
+            />
           </Space>
           <Space mt="m">
             <Button text="Log in" onPress={login} />

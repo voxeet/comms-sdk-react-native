@@ -1,5 +1,3 @@
-import styles from './MenuOptionsButton.style';
-import Space from '@ui/Space';
 import React, { FunctionComponent, ReactElement } from 'react';
 import {
   Menu,
@@ -7,6 +5,10 @@ import {
   MenuOptions,
   MenuOption,
 } from 'react-native-popup-menu';
+
+import Space from '@ui/Space';
+
+import styles from './MenuOptionsButton.style';
 
 export type Options = Array<{
   text: string;
@@ -16,17 +18,19 @@ export type Options = Array<{
 
 type MenuOptionsButtonProps = {
   options: Options;
+  longPress?: boolean;
   children: ReactElement;
 };
 
 export const MenuOptionsButton: FunctionComponent<MenuOptionsButtonProps> = ({
   options,
+  longPress = false,
   children,
 }) => {
   return (
-    <Space mr="xs">
+    <Space>
       <Menu>
-        <MenuTrigger triggerOnLongPress>{children}</MenuTrigger>
+        <MenuTrigger triggerOnLongPress={longPress}>{children}</MenuTrigger>
         <MenuOptions
           optionsContainerStyle={styles.optionsContainerStyle}
           customStyles={{
