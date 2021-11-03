@@ -1,9 +1,10 @@
-import Main from './Main';
-import DolbyIOProvider from '@components/DolbyIOProvider';
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Toast from 'react-native-toast-message';
+
+import DolbyIOProvider from '@components/DolbyIOProvider';
+
+import Main from './Main';
 
 export interface Props {}
 
@@ -19,7 +20,6 @@ export default class App extends Component<Props, State> {
         >
           <DolbyIOProvider>
             <Main />
-            <Toast ref={(ref) => Toast.setRef(ref)} />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
