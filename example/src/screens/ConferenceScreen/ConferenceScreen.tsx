@@ -1,3 +1,19 @@
+import React, { FunctionComponent, useContext, useRef } from 'react';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
+import { MenuProvider } from 'react-native-popup-menu';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { DolbyIOContext } from '@components/DolbyIOProvider';
+import COLORS from '@constants/colors.constants';
+import { VideoView } from '@dolbyio/react-native-iapi-sdk';
+import LeaveConferenceButton from '@screens/ConferenceScreen/LeaveConferenceButton';
+import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
+import Button from '@ui/Button';
+import Space from '@ui/Space';
+import Text from '@ui/Text';
+
 import type {
   Participant,
   Conference,
@@ -5,19 +21,6 @@ import type {
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import ParticipantAvatar from './ParticipantAvatar';
-import { DolbyIOContext } from '@components/DolbyIOProvider';
-import COLORS from '@constants/colors.constants';
-import LeaveConferenceButton from '@screens/ConferenceScreen/LeaveConferenceButton';
-import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
-import Button from '@ui/Button';
-import Space from '@ui/Space';
-import Text from '@ui/Text';
-import React, { FunctionComponent, useContext } from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
-import { MenuProvider } from 'react-native-popup-menu';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ConferenceScreen: FunctionComponent = () => {
   const {
@@ -27,6 +30,8 @@ const ConferenceScreen: FunctionComponent = () => {
     updateConferenceParticipants,
   } = useContext(DolbyIOContext);
   const { participants } = conference as Conference;
+
+  const videoView = useRef(null);
 
   if (!conference || !user) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -54,7 +59,9 @@ const ConferenceScreen: FunctionComponent = () => {
               ) : null}
             </Space>
           </View>
-          <View style={styles.center} />
+          <View style={styles.center}>
+            <VideoView ref={videoView} />
+          </View>
           <View style={styles.bottom}>
             <Space mh="m" mt="m" mb="xs">
               <Button
