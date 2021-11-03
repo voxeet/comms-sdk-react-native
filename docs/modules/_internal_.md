@@ -23,8 +23,6 @@
 - [FilePresentationStopped](_internal_.md#filepresentationstopped)
 - [FilePresentationUpdated](_internal_.md#filepresentationupdated)
 - [ParticipantAdded](_internal_.md#participantadded)
-- [ParticipantJoined](_internal_.md#participantjoined)
-- [ParticipantRemoved](_internal_.md#participantremoved)
 - [ParticipantUpdated](_internal_.md#participantupdated)
 - [StreamAdded](_internal_.md#streamadded)
 - [StreamRemoved](_internal_.md#streamremoved)
@@ -147,22 +145,6 @@ ___
 • **ParticipantAdded**: `Object` = `"EVENT_CONFERENCE_PARTICIPANT_ADDED"`
 
 Emitted when a new participant is invited to a conference or joins a conference.
-
-___
-
-### ParticipantJoined
-
-• **ParticipantJoined**: `Object` = `"EVENT_CONFERENCE_PARTICIPANT_JOINED"`
-
-Emitted when a new participant joined the conference
-
-___
-
-### ParticipantRemoved
-
-• **ParticipantRemoved**: `Object` = `"EVENT_CONFERENCE_PARTICIPANT_REMOVED"`
-
-Emitted when a participant leaves a conference.
 
 ___
 
