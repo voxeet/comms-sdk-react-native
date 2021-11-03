@@ -547,12 +547,18 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		VoxeetSDK.shared.conference.startScreenShare { error in
-			guard let error = error else {
-				resolve(NSNull())
-				return
+		// Switching to the main thread, the startScreenShare function calls UIKit functions
+		DispatchQueue.main.async {
+			VoxeetSDK.shared.conference.startScreenShare(broadcast: true) { error in
+				guard let error = error,
+							error.code != NativeSdkErrorCodes.broadcastPickerDisplayed.rawValue
+				else {
+					resolve(NSNull())
+					return
+				}
+
+				error.send(with: reject)
 			}
-			error.send(with: reject)
 		}
 	}
 
