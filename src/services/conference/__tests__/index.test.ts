@@ -310,26 +310,10 @@ describe('ConferenceService', () => {
       );
     });
 
-    it('should invoke NativeEvents.addListener with ParticipantJoined event', () => {
-      ConferenceService.onParticipantsChange(() => {});
-      expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ParticipantJoined,
-        expect.any(Function)
-      );
-    });
-
     it('should invoke NativeEvents.addListener with ParticipantUpdated event', () => {
       ConferenceService.onParticipantsChange(() => {});
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantUpdated,
-        expect.any(Function)
-      );
-    });
-
-    it('should invoke NativeEvents.addListener with ParticipantRemoved event', () => {
-      ConferenceService.onParticipantsChange(() => {});
-      expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
-        ConferenceServiceEventNames.ParticipantRemoved,
         expect.any(Function)
       );
     });
