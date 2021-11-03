@@ -359,33 +359,21 @@ export class ConferenceService {
       data: ParticipantChangedEventType,
       type?:
         | ConferenceServiceEventNames.ParticipantAdded
-        | ConferenceServiceEventNames.ParticipantJoined
         | ConferenceServiceEventNames.ParticipantUpdated
-        | ConferenceServiceEventNames.ParticipantRemoved
     ) => void
   ): UnsubscribeFunction {
     const participantAddedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantAdded,
       handler
     );
-    const participantJoinedEventUnsubscribe = this._nativeEvents.addListener(
-      ConferenceServiceEventNames.ParticipantJoined,
-      handler
-    );
     const participantUpdatedEventUnsubscribe = this._nativeEvents.addListener(
       ConferenceServiceEventNames.ParticipantUpdated,
-      handler
-    );
-    const participantRemovedEventUnsubscribe = this._nativeEvents.addListener(
-      ConferenceServiceEventNames.ParticipantRemoved,
       handler
     );
 
     return () => {
       participantAddedEventUnsubscribe();
-      participantJoinedEventUnsubscribe();
       participantUpdatedEventUnsubscribe();
-      participantRemovedEventUnsubscribe();
     };
   }
 
