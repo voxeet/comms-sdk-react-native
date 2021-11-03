@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "VoxeetScreenShareKit",
+        "repositoryURL": "https://github.com/voxeet/voxeet-screensharekit-ios",
+        "state": {
+          "branch": null,
+          "revision": "3c9c811494a62295b471af37ed2c4c4c21d9ec7b",
+          "version": "1.0.9"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

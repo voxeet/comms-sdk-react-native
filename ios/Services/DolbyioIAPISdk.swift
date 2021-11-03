@@ -30,8 +30,8 @@ public class DolbyIoIAPIModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		setupSDK()
 		VoxeetSDK.shared.initialize(consumerKey: consumerKey, consumerSecret: consumerSecret)
+		setupSDK()
 		resolve(NSNull())
 	}
 
@@ -47,11 +47,11 @@ public class DolbyIoIAPIModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		setupSDK()
 		VoxeetSDK.shared.initialize(accessToken: accessToken) { [weak self] closure, _ in
 			self?.refreshToken = closure
 			self?.send(event: EventKeys.refreshToken, body: NSNull())
 		}
+		setupSDK()
 		resolve(NSNull())
 	}
 
@@ -88,5 +88,25 @@ public class DolbyIoIAPIModule: ReactEmitter {
 	private func setupSDK() {
 		VoxeetSDK.shared.notification.push.type = .callKit
 		VoxeetSDK.shared.telemetry.platform = .reactNative
+
+		if let appGroup = Bundle.appGroup {
+			VoxeetSDK.shared.appGroup = appGroup
+		}
+
+		if let preferredExtension = Bundle.preferredExtension {
+			VoxeetSDK.shared.preferredExtension = preferredExtension
+		}
+	}
+}
+
+private extension Bundle {
+	/// Returns the App Group name from main Info.plist file
+	static var appGroup: String? {
+		return Bundle.main.object(forInfoDictionaryKey: "DolbyioSdkAppGroupKey") as? String
+	}
+
+	/// Returns the Broadcast Extension Bundle Identifier from main Info.plist file
+	static var preferredExtension: String? {
+		return Bundle.main.object(forInfoDictionaryKey: "DolbyioSdkPreferredExtensionKey") as? String
 	}
 }
