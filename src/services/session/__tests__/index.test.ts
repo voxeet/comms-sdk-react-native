@@ -18,21 +18,26 @@ describe('SessionService', () => {
       SessionService.open();
       expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalledWith({});
     });
+  });
 
-    describe('close()', () => {
-      it('should invoke exported method', () => {
-        SessionService.close();
-        expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
-      });
+  describe('close()', () => {
+    it('should invoke exported method', () => {
+      SessionService.close();
+      expect(DolbyIoIAPISessionServiceModule.open).toHaveBeenCalled();
     });
+  });
 
-    describe('getsCurrentUser()', () => {
-      it('should invoke exported method', () => {
-        SessionService.getCurrentUser();
-        expect(
-          DolbyIoIAPISessionServiceModule.getParticipant
-        ).toHaveBeenCalled();
-      });
+  describe('isOpen()', () => {
+    it('should invoke exported method', () => {
+      SessionService.isOpen();
+      expect(DolbyIoIAPISessionServiceModule.isOpen).toHaveBeenCalled();
+    });
+  });
+
+  describe('getsCurrentUser()', () => {
+    it('should invoke exported method', () => {
+      SessionService.getCurrentUser();
+      expect(DolbyIoIAPISessionServiceModule.getParticipant).toHaveBeenCalled();
     });
   });
 });

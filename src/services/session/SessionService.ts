@@ -36,6 +36,14 @@ export class SessionService {
   }
 
   /**
+   * Checks whether there is an open session that connects SDK with backend.
+   * @returns {Promise<Boolean>}
+   */
+  public async isOpen(): Promise<Boolean> {
+    return this._nativeModule.isOpen();
+  }
+
+  /**
    * Gets object of local user
    * @returns {Promise<User>}
    */
