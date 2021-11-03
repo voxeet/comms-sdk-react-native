@@ -80,7 +80,6 @@ class RNFilePresentationEventEmitter(
     Arguments.createMap()
       .apply { putMap(KEY_FILE_CONVERTED, data) }
       .also { send(FilePresentationEvent.FileConverted.withData(it)) }
-
   }
 
   private fun sendFilePresentationChanged(event: RNEvent, owner: Participant, presentation: FilePresentation) {
