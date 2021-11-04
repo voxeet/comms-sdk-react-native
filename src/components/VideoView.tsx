@@ -111,6 +111,7 @@ export default class VideoView extends PureComponent<Props, State> {
     participant: Participant,
     mediaStream: MediaStream
   ): Promise<boolean> => {
+    console.log(participant.id, mediaStream.id);
     const res = !!(await this._dispatchCommand(
       // @ts-ignore
       UIManager.DIOVideoView.Commands.attach,
