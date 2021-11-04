@@ -1,11 +1,17 @@
 // @ts-ignore
 import Chance from 'chance';
-import React, { FunctionComponent, useState, useContext } from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
@@ -17,11 +23,24 @@ const chance = new Chance();
 
 const LoginScreen: FunctionComponent = () => {
   const [name, setName] = useState(`${chance.first()} ${chance.last()}`);
+  const [externalId, setExternalId] = useState('');
   const { openSession } = useContext(DolbyIOContext);
 
   const login = () => {
-    openSession(name);
+    openSession(name, externalId);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+      } catch (e) {
+        try {
+          await DolbyIoIAPI.session.close();
+        } catch (e2) {}
+      }
+    })();
+  }, []);
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
@@ -43,6 +62,13 @@ const LoginScreen: FunctionComponent = () => {
           </Text>
           <Space mt="m">
             <Input label="Your name" onChange={setName} value={name} />
+          </Space>
+          <Space mt="m">
+            <Input
+              label="External ID (optional)"
+              onChange={setExternalId}
+              value={externalId}
+            />
           </Space>
           <Space mt="m">
             <Button text="Log in" onPress={login} />
