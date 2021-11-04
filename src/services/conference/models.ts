@@ -106,6 +106,8 @@ export interface Participant {
   status?: ParticipantStatus;
   /** The participant's type. */
   type?: ParticipantType;
+  /** The participant streams */
+  streams?: MediaStream[];
 }
 
 export interface ParticipantInfo {

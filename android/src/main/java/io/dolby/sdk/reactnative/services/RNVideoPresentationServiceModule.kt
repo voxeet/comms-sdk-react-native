@@ -3,16 +3,17 @@ package io.dolby.sdk.reactnative.services
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
-import com.voxeet.VoxeetSDK
 import com.voxeet.sdk.json.VideoPresentationPaused
 import com.voxeet.sdk.json.VideoPresentationPlay
 import com.voxeet.sdk.json.VideoPresentationSeek
 import com.voxeet.sdk.json.VideoPresentationStarted
 import com.voxeet.sdk.json.VideoPresentationStopped
+import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.VideoPresentationService
 import com.voxeet.sdk.services.presentation.video.VideoPresentation
 import io.dolby.sdk.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
+import io.dolby.sdk.reactnative.state.VideoPresentationHolder
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
@@ -55,12 +56,16 @@ import io.dolby.sdk.reactnative.utils.Promises.thenValue
  * @param reactContext react context
  * @param eventEmitter an emitter for the video presentation module events
  * @param videoPresentationService [VideoPresentationService] from Android SDK
+ * @param conferenceService [ConferenceService] from Android SDK
+ * @param videoPresentationHolder started video presentation data store
  * @param videoPresentationMapper mapper for a [VideoPresentation] model
  */
 class RNVideoPresentationServiceModule(
   reactContext: ReactApplicationContext,
   eventEmitter: RNEventEmitter,
   private val videoPresentationService: VideoPresentationService,
+  private val conferenceService: ConferenceService,
+  private val videoPresentationHolder: VideoPresentationHolder,
   private val videoPresentationMapper: VideoPresentationMapper
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
@@ -124,14 +129,24 @@ class RNVideoPresentationServiceModule(
       .forward(promise, ignoreReturnType = true)
   }
 
-  // TODO tmp solution to make pause, play, seek work (test app uses it in those methods).
-  //  Replace `VoxeetSDK.session().participant` by the real video presentation owner + add docs in DEXA-236.
+  /**
+   * Provides information about a specific video presentation, such as the owner, URL and timestamp.
+   *
+   * @return returns the current video presentation. Rejection can indicate that a specified video presentation does not exist
+   * at the moment.
+   */
   @ReactMethod
   fun current(promise: Promise) {
-    Promises.promise(videoPresentationService.currentPresentation)
+    Promises.promise(videoPresentationService.currentPresentation) { "Couldn't get the current video presentation" }
       .thenValue { videoPresentation ->
-        VoxeetSDK.session().participant?.let { videoPresentationMapper.toRN(videoPresentation, it) }
+        conferenceService.conference?.let { videoPresentation to it } ?: throw Exception("Couldn't get the conference")
       }
+      .thenValue { (videoPresentation, conference) ->
+        val owner = videoPresentationHolder.getOwner(conference.id)
+          ?: throw Exception("No started video presentation for current conference")
+        owner to videoPresentation
+      }
+      .thenValue { (owner, videoPresentation) -> videoPresentationMapper.toRN(videoPresentation, owner) }
       .forward(promise)
   }
 

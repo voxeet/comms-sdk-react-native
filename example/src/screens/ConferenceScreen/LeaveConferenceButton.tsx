@@ -1,11 +1,13 @@
-import styles from './ConferenceScreen.style';
+import React, { useContext } from 'react';
+import { View } from 'react-native';
+
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Text from '@ui/Text';
-import React, { useContext } from 'react';
-import { View } from 'react-native';
+
+import styles from './ConferenceScreen.style';
 
 const LeaveConferenceButton = () => {
   const { leave } = useContext(DolbyIOContext);

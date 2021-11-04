@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import type { FileConverted } from 'src/services/filePresentation/models';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
+import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
 import BottomSheet from '@gorhom/bottom-sheet';
 import Button from '@ui/Button';
@@ -46,15 +47,10 @@ import {
   switchCamera,
   switchSpeaker,
 } from '@utils/mediaDevice.tester';
+import { decline, inviteRandomParticipant } from '@utils/notification.tester';
 import {
-  invite,
-  decline,
-  inviteRandomParticipant,
-} from '@utils/notification.tester';
-import {
-  getCurrentRecording,
-  startRecording,
-  stopRecording,
+  getCurrentRecording, // startRecording,
+  // stopRecording,
 } from '@utils/recording.tester';
 import { getCurrentUser } from '@utils/session.tester';
 import {
@@ -74,8 +70,8 @@ import styles from './ConferenceScreen.style';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const { user, conference, setIsRecordingConference } =
-    useContext(DolbyIOContext);
+  const { me, conference } = useContext(DolbyIOContext);
+  const { startRecord, stopRecord } = useContext(RecordingContext);
   const { participants } = conference as Conference;
   var convertedFile: FileConverted | null = null;
 
@@ -109,7 +105,7 @@ const ConferenceScreenBottomSheet = () => {
     }
   };
 
-  if (!conference || !user) {
+  if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
 
@@ -218,19 +214,19 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Get audio level"
-              onPress={() => getAudioLevel(user)}
+              onPress={() => getAudioLevel(me)}
             />
             <Button
               size="small"
               color="dark"
               text="Start audio"
-              onPress={() => startAudio(user)}
+              onPress={() => startAudio(me)}
             />
             <Button
               size="small"
               color="dark"
               text="Stop audio"
-              onPress={() => stopAudio(user)}
+              onPress={() => stopAudio(me)}
             />
           </Space>
           <Space mb="xs">
@@ -243,13 +239,13 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Start video"
-              onPress={() => startVideo(user)}
+              onPress={() => startVideo(me)}
             />
             <Button
               size="small"
               color="dark"
               text="Stop video"
-              onPress={() => stopVideo(user)}
+              onPress={() => stopVideo(me)}
             />
           </Space>
 
@@ -323,12 +319,6 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Invite"
-              onPress={() => invite(conference, [])}
-            />
-            <Button
-              size="small"
-              color="dark"
-              text="Invite with permissions"
               onPress={() => inviteRandomParticipant(conference)}
             />
             <Button
@@ -348,19 +338,13 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Start recording"
-              onPress={async () => {
-                await startRecording();
-                setIsRecordingConference(true);
-              }}
+              onPress={startRecord}
             />
             <Button
               size="small"
               color="dark"
               text="Stop recording"
-              onPress={async () => {
-                await stopRecording();
-                setIsRecordingConference(false);
-              }}
+              onPress={stopRecord}
             />
             <Button
               size="small"
@@ -398,48 +382,36 @@ const ConferenceScreenBottomSheet = () => {
                 )
               }
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Pause video presentation"
               onPress={pauseVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Play video presentation"
               onPress={playVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Stop video presentation"
               onPress={stopVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Seek video presentation"
               onPress={seekVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="Current video presentation"
               onPress={currentVideoPresentation}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
@@ -459,32 +431,24 @@ const ConferenceScreenBottomSheet = () => {
               text="isFrontCamera"
               onPress={isFrontCamera}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="getComfortNoiseLevel"
               onPress={getComfortNoiseLevel}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="setComfortNoiseLevel"
               onPress={() => setComfortNoiseLevel(ComfortNoiseLevel.Default)}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
               text="switchCamera"
               onPress={switchCamera}
             />
-          </Space>
-          <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
