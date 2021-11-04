@@ -75,4 +75,16 @@ class RNSessionServiceModule(
       .thenValue(participantMapper::toRN)
       .forward(promise)
   }
+
+  /**
+   * Checks whether there is an open session that connects SDK with backend.
+   *
+   * @param promise returns boolean - Information if a session is open.
+   */
+  @ReactMethod
+  fun isOpen(promise: Promise) {
+    Promises
+      .promise(sessionService.isSocketOpen)
+      .forward(promise)
+  }
 }
