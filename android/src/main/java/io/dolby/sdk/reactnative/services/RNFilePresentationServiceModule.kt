@@ -1,19 +1,22 @@
 package io.dolby.sdk.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
 import io.dolby.sdk.FilePresentationService
+import io.dolby.sdk.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.reactnative.mapper.FilePresentationMapper
+import io.dolby.sdk.reactnative.state.FilePresentationHolder
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.thenNestedPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenPromise
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
+import io.dolby.sdk.reactnative.utils.RnCollections.copy
 import java.io.File
 
 /**
@@ -39,14 +42,18 @@ import java.io.File
  * @param reactContext            react context
  * @param sessionService          [SessionService] from Android SDK
  * @param filePresentationService [FilePresentationService] from Android SDK
+ * @param filePresentationHolder  started [FilePresentation] data storage
  * @param filePresentationMapper  mapper for [FilePresentation] model and [File] creation
  */
 class RNFilePresentationServiceModule(
   reactContext: ReactApplicationContext,
+  private val eventEmitter: RNFilePresentationEventEmitter,
   private val sessionService: SessionService,
+  private val conferenceService: ConferenceService,
   private val filePresentationService: FilePresentationService,
+  private val filePresentationHolder: FilePresentationHolder,
   private val filePresentationMapper: FilePresentationMapper
-) : ReactContextBaseJavaModule(reactContext) {
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "DolbyIoIAPIFilePresentationService"
 
@@ -75,7 +82,9 @@ class RNFilePresentationServiceModule(
       }
       .thenValue { (file, filePresentation) ->
         val ownerId = requireNotNull(sessionService.participantId)
-        filePresentationMapper.toRN(ownerId, file.name, filePresentation)
+        val fileConvertedRN = filePresentationMapper.toRNFileConverted(ownerId, file.name, filePresentation)
+        eventEmitter.onFileConverted(fileConvertedRN.copy())
+        fileConvertedRN
       }
       .forward(promise)
   }
@@ -88,9 +97,44 @@ class RNFilePresentationServiceModule(
    */
   @ReactMethod
   fun start(fileConvertedRN: ReadableMap, promise: ReactPromise) {
-    Promises.promise({ filePresentationMapper.fromRN(fileConvertedRN) })
+    Promises.promise({ filePresentationMapper.fileConvertedFromRN(fileConvertedRN) })
       .thenPromise(filePresentationService::start)
       .forward(promise, ignoreReturnType = true)
   }
 
+  /**
+   * Returns information about the current file presentation.
+   *
+   * Use this accessor if you wish to receive information that is available in the [FilePresentation] object, such as
+   * the file ID, the number of images in the presentation, information about the file owner, or the current position in the presentation.
+   *
+   * @param promise returns current file presentation
+   */
+  @ReactMethod
+  fun getCurrent(promise: ReactPromise) {
+    Promises.promise({ conferenceService.conference }) { "Missing current conference" }
+      .thenValue { conference ->
+        val noStartedPresentationError = lazyOf(Exception("No started file presentation for current conference"))
+        val ownerId = filePresentationHolder.getOwnerId(conference.id) ?: throw noStartedPresentationError.value
+        val presentation = filePresentationHolder.getPresentation(conference.id) ?: throw noStartedPresentationError.value
+        val noPresentationOwnerError = lazyOf(Exception("Unable to find file presentation owner by id =  $ownerId"))
+        val owner = conference.findParticipantById(ownerId) ?: throw noPresentationOwnerError.value
+        owner to presentation
+      }
+      .thenValue { (owner, presentation) -> filePresentationMapper.toRN(owner, presentation) }
+      .forward(promise)
+  }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) = super.addListener(eventName)
+
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) = super.removeListeners(count)
 }

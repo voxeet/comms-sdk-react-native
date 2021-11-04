@@ -1,10 +1,10 @@
 package io.dolby.sdk.reactnative.eventemitters
 
-import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.ReadableMap
 
 open class RNEvent(val name: String) {
-  var data: WritableMap? = null
+  var data: ReadableMap? = null
     private set
 
-  fun withData(data: WritableMap) = apply { this.data = data }
+  fun withData(data: ReadableMap) = apply { this.data = data }
 }
