@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
@@ -77,7 +78,25 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       });
     const unsubscribeInvitationReceivedFn =
       DolbyIoIAPI.notification.onInvitationReceived((data) => {
-        console.log(data);
+        const {
+          conferenceAlias,
+          participant: {
+            info: { name },
+          },
+        } = data;
+        Toast.show({
+          type: 'custom',
+          text1: 'INVITATION RECEIVED EVENT DATA',
+          text2: JSON.stringify(
+            { conferenceAlias, inviterName: name },
+            null,
+            2
+          ),
+        });
+        console.log(
+          'INVITATION RECEIVED EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
       });
     return () => {
       unsubscribeConferenceChangeFn();
@@ -106,6 +125,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const initialize = async () => {
     try {
+      console.log(APP_ID, 'he?');
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
       Alert.alert('App initialized successfully');
@@ -142,6 +162,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       const createdConference = await DolbyIoIAPI.conference.create(
         conferenceOptions
       );
+      console.log(createdConference);
 
       const joinOptions = {
         constraints: {
@@ -154,7 +175,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         createdConference,
         joinOptions
       );
-      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
@@ -176,7 +196,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         fetchedConference,
         joinOptions
       );
-      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
