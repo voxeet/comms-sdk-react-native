@@ -9,6 +9,9 @@ import {
 
 import type { MediaStream, Participant } from '../services/conference/models';
 import { MediaStreamType } from '../services/conference/models';
+import NativeEvents from '../utils/NativeEvents';
+import type { UnregisterListener } from '../utils/types';
+import { VideoViewEventNames } from './events';
 
 const DIOVideoView = requireNativeComponent('DIOVideoView');
 
@@ -32,6 +35,8 @@ export default class VideoView extends PureComponent<Props, State> {
     mediaStream: undefined,
   };
 
+  private _nativeEvents = new NativeEvents(DIOVideoView);
+  private _onEventUnsubscribe?: UnregisterListener = undefined;
   private _videoView: React.Component | null;
   private _videoViewHandler: null | number;
   private static _dispatchId: number = 1;
@@ -42,6 +47,19 @@ export default class VideoView extends PureComponent<Props, State> {
     super(props);
     this._videoViewHandler = null;
     this._videoView = null;
+  }
+
+  componentDidMount() {
+    this._onEventUnsubscribe = this._nativeEvents.addListener(
+      VideoViewEventNames.CommandCallback,
+      this._onEvent
+    );
+  }
+
+  componentWillUnmount() {
+    if (this._onEventUnsubscribe) {
+      this._onEventUnsubscribe();
+    }
   }
 
   private _dispatchCommand = async (command: number, params: any[] = []) => {
@@ -134,7 +152,7 @@ export default class VideoView extends PureComponent<Props, State> {
 
   render() {
     return (
-      <View style={this.props.style}>
+      <View style={[{ borderWidth: 1, height: 100 }, this.props.style]}>
         <DIOVideoView
           // @ts-ignore
           isMirror={this.props.isMirror}
