@@ -1,5 +1,6 @@
 import { NativeEventEmitter } from 'react-native';
 
+import type { VideoViewEventMap } from '../components/events';
 import type { DolbyIoIAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
@@ -14,7 +15,8 @@ interface NativeEventType
     NotificationServiceEventMap,
     FilePresentationServiceEventMap,
     CommandServiceEventMap,
-    VideoPresentationEventMap {}
+    VideoPresentationEventMap,
+    VideoViewEventMap {}
 
 export default class NativeEvents {
   private _nativeEventEmitter: any = undefined;
