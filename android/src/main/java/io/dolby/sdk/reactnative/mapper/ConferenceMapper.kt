@@ -36,8 +36,10 @@ class ConferenceMapper(
   fun toRN(conference: Conference): ReadableMap =
     Arguments.createMap().apply {
       putString(CONFERENCE_ID, conference.id)
+      putString(CONFERENCE_TOKEN, conference.conferenceInfos?.securityToken)
       putString(CONFERENCE_ALIAS, conference.alias)
       putBoolean(CONFERENCE_IS_NEW, conference.isNew)
+      putString(CONFERENCE_STATUS, toRNConferenceStatus(conference.state))
       putString(CONFERENCE_STATUS, toRNConferenceStatus(conference.state))
       putMap(CONFERENCE_PARAMS, toRNConferenceParams(conference))
       putArray(CONFERENCE_PERMISSIONS, permissionMapper.toRN(conference.permissions))
@@ -87,6 +89,7 @@ class ConferenceMapper(
     private const val CONFERENCE_ALIAS = "alias"
     private const val CONFERENCE_IS_NEW = "isNew"
     private const val CONFERENCE_STATUS = "status"
+    private const val CONFERENCE_TOKEN = "token"
     private const val CONFERENCE_PARAMS = "params"
     private const val CONFERENCE_PERMISSIONS = "permissions"
     private const val CONFERENCE_PARTICIPANTS = "participants"
