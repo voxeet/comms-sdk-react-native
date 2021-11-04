@@ -11,7 +11,7 @@ import java.util.HashMap
 fun VoxeetSDK.filePresentation(): FilePresentationService {
   val origin = VoxeetSDK.filePresentation()
   if (!::sdkEnvironmentField.isInitialized) {
-    val field = javaClass.getDeclaredField("_sdk_environment_holder")
+    val field = requireNotNull(javaClass.superclass?.getDeclaredField("_sdk_environment_holder"))
     field.isAccessible = true
     sdkEnvironmentField = field
   }
