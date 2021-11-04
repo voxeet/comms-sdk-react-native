@@ -1,5 +1,6 @@
 package io.dolby.sdk.reactnative.view
 
+import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -47,6 +48,22 @@ class VideoViewManager(
       VideoViewCommand.IS_ATTACHED -> eventEmitter.onCommandCallback(requestId = requestId, result = videoView.isAttached)
       else -> throw IllegalArgumentException("Command $commandId is not supported")
     }
+  }
+
+  /**
+   * Required for RN built in Event Emitter Calls.
+   */
+  @ReactMethod
+  fun addListener(eventName: String) {
+    // no-op
+  }
+
+  /**
+   * Required for RN built in Event Emitter Calls.
+   */
+  @ReactMethod
+  fun removeListeners(count: Int) {
+    // no-op
   }
 
   /**
