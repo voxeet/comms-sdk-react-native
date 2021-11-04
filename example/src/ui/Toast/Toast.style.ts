@@ -4,10 +4,11 @@ export default StyleSheet.create({
   container: {
     position: 'relative',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     borderRadius: 5,
     backgroundColor: 'white',
-    shadowColor: '#000',
+    marginRight: 20,
+    shadowColor: '#fff',
     shadowOffset: {
       width: 0,
       height: 2,

@@ -12,7 +12,7 @@ const randomInvitedParticipant = ({
   includePermissions = false,
 } = {}): ParticipantInvited => ({
   info: {
-    externalId: 'Invited123',
+    externalId: 'externalId-123',
     name: 'John Invited',
   },
   permissions: includePermissions ? [ConferencePermission.INVITE] : [],
