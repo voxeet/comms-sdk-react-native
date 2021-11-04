@@ -11,6 +11,7 @@ import io.dolby.sdk.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNNotificationEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.reactnative.eventemitters.RNVideoPresentationEventEmitter
+import io.dolby.sdk.reactnative.eventemitters.RNVideoViewEventEmitter
 import io.dolby.sdk.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
@@ -33,6 +34,7 @@ import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
 import io.dolby.sdk.reactnative.services.RNSystemPermissionsModule
 import io.dolby.sdk.reactnative.services.RNVideoPresentationServiceModule
+import io.dolby.sdk.reactnative.view.VideoViewManager
 
 class RNDolbyioIAPISdkPackage : ReactPackage {
 
@@ -141,6 +143,11 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
 
   override fun createViewManagers(
     reactContext: ReactApplicationContext
-  ): List<ViewManager<*, *>> = emptyList()
+  ): List<ViewManager<*, *>> = listOf(
+    VideoViewManager(
+      eventEmitter = RNVideoViewEventEmitter(reactContext),
+      conferenceService = VoxeetSDK.conference()
+    )
+  )
 
 }
