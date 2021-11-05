@@ -37,6 +37,7 @@ export interface IDolbyIOProvider {
   join: (alias: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
+  setActiveParticipantId: (id: string) => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
@@ -52,6 +53,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   join: () => {},
   replay: () => {},
   leave: () => {},
+  setActiveParticipantId: () => {},
 });
 
 const DolbyIOProvider: React.FC = ({ children }) => {
@@ -125,10 +127,16 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
   const openSession = async (name: string, externalId?: string) => {
+    const timeoutPromise = setTimeout(() => {
+      DolbyIoIAPI.session.close();
+    }, 5000);
     try {
       await DolbyIoIAPI.session.open({ name, externalId });
+      clearTimeout(timeoutPromise);
       setMe(await DolbyIoIAPI.session.getCurrentUser());
     } catch (e: any) {
+      clearTimeout(timeoutPromise);
+      console.log(e);
       setMe(undefined);
       Alert.alert('Session not opened', e.toString());
     }
@@ -275,6 +283,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     join,
     replay,
     leave,
+    setActiveParticipantId,
   };
 
   return (

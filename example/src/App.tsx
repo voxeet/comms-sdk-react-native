@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import DolbyIOProvider from '@components/DolbyIOProvider';
 import RecordingProvider from '@components/RecordingProvider';
+import COLORS from '@constants/colors.constants';
 
 import Main from './Main';
 
@@ -19,6 +20,7 @@ export default class App extends Component<Props, State> {
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
+          <StatusBar backgroundColor={COLORS.BLACK} />
           <DolbyIOProvider>
             <RecordingProvider>
               <Main />
