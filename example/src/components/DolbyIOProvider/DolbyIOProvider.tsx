@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-import { InvitationEventResponse } from '@components/EventResponseComponents/InvitationEventResponse';
+import { InvitationResponseButtons } from '@components/EventResponseComponents/InvitationResponseButtons';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from '@env';
@@ -95,7 +95,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
               null,
               2
             ),
-            children: InvitationEventResponse({ conferenceId, setConference }),
+            children: InvitationResponseButtons({
+              conferenceId,
+              setConference,
+            }),
           },
         });
         console.log(
@@ -114,7 +117,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const updateConferenceParticipants = async () => {
     try {
       const updatedConference = await DolbyIoIAPI.conference.current();
-      console.log(updatedConference.participants);
       setConference((conference) => {
         if (!conference) return undefined;
         return {
@@ -130,7 +132,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const initialize = async () => {
     try {
-      console.log(APP_ID, 'he?');
+      console.log('ENVS', APP_ID, APP_SECRET);
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
       Alert.alert('App initialized successfully');
@@ -168,7 +170,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         conferenceOptions
       );
 
-      console.log(JSON.stringify(createdConference, null, 2), 'CREATED CONF');
       const joinOptions = {
         constraints: {
           audio: true,

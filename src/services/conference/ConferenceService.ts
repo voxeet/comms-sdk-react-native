@@ -41,7 +41,6 @@ export class ConferenceService {
    */
 
   public async create(options: ConferenceCreateOptions = {}): Promise<any> {
-    console.log(await this._nativeModule.create(options));
     return transformToConference(await this._nativeModule.create(options));
   }
 
@@ -61,7 +60,6 @@ export class ConferenceService {
    */
 
   public async current(): Promise<Conference> {
-    console.log(await this._nativeModule.current());
     return transformToConference(await this._nativeModule.current());
   }
 
