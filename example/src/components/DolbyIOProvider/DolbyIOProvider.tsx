@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
+import { InvitationResponseButtons } from '@components/EventResponseComponents/InvitationResponseButtons';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from '@env';
@@ -63,7 +65,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     const unsubscribeCommandMessageFn = DolbyIoIAPI.command.onMessageReceived(
       (data) => {
         console.log(
-          'MESSAGE RECEIVED EVENT DATA: \n',
+          'COMMAND ON MESSAGE RECEIVED EVENT DATA: \n',
           JSON.stringify(data, null, 2)
         );
       }
@@ -75,9 +77,30 @@ const DolbyIOProvider: React.FC = ({ children }) => {
           JSON.stringify(data, null, 2)
         );
       });
-
     const unsubscribeInvitationReceivedFn =
       DolbyIoIAPI.notification.onInvitationReceived((data) => {
+        const {
+          conferenceAlias,
+          conferenceId,
+          participant: {
+            info: { name },
+          },
+        } = data;
+        Toast.show({
+          type: 'custom',
+          props: {
+            title: 'INVITATION RECEIVED EVENT DATA',
+            content: JSON.stringify(
+              { conferenceAlias, inviterName: name },
+              null,
+              2
+            ),
+            children: InvitationResponseButtons({
+              conferenceId,
+              setConference,
+            }),
+          },
+        });
         console.log(
           'INVITATION RECEIVED EVENT DATA: \n',
           JSON.stringify(data, null, 2)
@@ -109,6 +132,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const initialize = async () => {
     try {
+      console.log('ENVS', APP_ID, APP_SECRET);
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
       Alert.alert('App initialized successfully');
@@ -157,7 +181,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         createdConference,
         joinOptions
       );
-      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
@@ -179,7 +202,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         fetchedConference,
         joinOptions
       );
-      console.log(JSON.stringify(joinedConference, null, 2));
       setConference(joinedConference);
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());

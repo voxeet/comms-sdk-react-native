@@ -46,7 +46,7 @@ import {
   switchCamera,
   switchSpeaker,
 } from '@utils/mediaDevice.tester';
-import { decline, inviteRandomParticipant } from '@utils/notification.tester';
+import { inviteRandomParticipant } from '@utils/notification.tester';
 import {
   getCurrentRecording,
   startRecording,
@@ -320,12 +320,6 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Invite"
               onPress={() => inviteRandomParticipant(conference)}
-            />
-            <Button
-              size="small"
-              color="dark"
-              text="Decline"
-              onPress={() => decline(conference)}
             />
           </Space>
           <Space mb="xs">

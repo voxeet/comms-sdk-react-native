@@ -1,11 +1,17 @@
 // @ts-ignore
 import Chance from 'chance';
-import React, { FunctionComponent, useState, useContext } from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
@@ -20,7 +26,20 @@ const LoginScreen: FunctionComponent = () => {
   const [externalId, setExternalId] = useState('');
   const { openSession } = useContext(DolbyIOContext);
 
+  useEffect(() => {
+    (async function () {
+      try {
+        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+      } catch (e: any) {
+        try {
+          await DolbyIoIAPI.session.close();
+        } catch {}
+      }
+    })();
+  }, []);
+
   const login = () => {
+    console.log(externalId, 'externalId');
     openSession(name, externalId);
   };
 
