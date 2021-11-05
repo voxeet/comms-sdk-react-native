@@ -146,6 +146,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         conferenceOptions
       );
 
+      console.log(JSON.stringify(createdConference, null, 2), 'CREATED CONF');
       const joinOptions = {
         constraints: {
           audio: true,
