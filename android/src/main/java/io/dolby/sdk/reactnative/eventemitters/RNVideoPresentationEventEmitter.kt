@@ -11,20 +11,23 @@ import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.VideoPresentationService
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
+import io.dolby.sdk.reactnative.state.VideoPresentationHolder
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode.MAIN
 
 /**
  * The video presentation event emitter
- * @param reactContext      react application context for sending event
+ * @param reactContext react application context for sending event
  * @param conferenceService [ConferenceService] from Android SDK
  * @param videoPresentationService [VideoPresentationService] from Android SDK
+ * @param videoPresentationHolder started video presentation data store
  * @param participantMapper mapper for a [Participant] and [Participant]-related model
  */
 class RNVideoPresentationEventEmitter(
   reactContext: ReactApplicationContext,
   private val conferenceService: ConferenceService,
   private val videoPresentationService: VideoPresentationService,
+  private val videoPresentationHolder: VideoPresentationHolder,
   private val participantMapper: ParticipantMapper
 ) : RNEventEmitter(reactContext) {
 
@@ -34,6 +37,11 @@ class RNVideoPresentationEventEmitter(
   @Subscribe(threadMode = MAIN)
   fun on(event: VideoPresentationStarted) {
     val participant = conferenceService.findParticipantById(event.participantId) ?: return
+
+    videoPresentationHolder.onStarted(
+      conferenceId = event.conferenceId,
+      owner = participant
+    )
 
     Arguments.createMap()
       .apply {
@@ -62,7 +70,7 @@ class RNVideoPresentationEventEmitter(
   }
 
   /**
-   * Emitted when the presenter resumes the video presentation. 
+   * Emitted when the presenter resumes the video presentation.
    */
   @Subscribe(threadMode = MAIN)
   fun on(event: VideoPresentationPlay) {
@@ -100,6 +108,8 @@ class RNVideoPresentationEventEmitter(
    */
   @Subscribe(threadMode = MAIN)
   fun on(event: VideoPresentationStopped) {
+    videoPresentationHolder.onStopped(event.conferenceId)
+
     send(VideoPresentationEvent.VideoPresentationStopped)
   }
 

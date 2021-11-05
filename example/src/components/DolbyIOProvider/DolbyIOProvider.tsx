@@ -81,6 +81,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       DolbyIoIAPI.notification.onInvitationReceived((data) => {
         const {
           conferenceAlias,
+          conferenceId,
           participant: {
             info: { name },
           },
@@ -94,7 +95,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
               null,
               2
             ),
-            children: InvitationEventResponse({ conferenceAlias }),
+            children: InvitationEventResponse({ conferenceId, setConference }),
           },
         });
         console.log(
@@ -167,6 +168,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         conferenceOptions
       );
 
+      console.log(JSON.stringify(createdConference, null, 2), 'CREATED CONF');
       const joinOptions = {
         constraints: {
           audio: true,
@@ -184,9 +186,11 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
 
-  const join = async (alias: string) => {
+  const join = async (conferenceId: string) => {
     try {
-      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
+      const fetchedConference = await DolbyIoIAPI.conference.fetch(
+        conferenceId
+      );
 
       const joinOptions = {
         constraints: {
