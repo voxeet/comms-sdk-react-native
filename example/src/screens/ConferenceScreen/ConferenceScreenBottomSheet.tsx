@@ -321,12 +321,6 @@ const ConferenceScreenBottomSheet = () => {
               text="Invite"
               onPress={() => inviteRandomParticipant(conference)}
             />
-            <Button
-              size="small"
-              color="dark"
-              text="Decline"
-              // onPress={() => decline(conference)}
-            />
           </Space>
           <Space mb="xs">
             <Text size="m" color={COLORS.BLACK}>

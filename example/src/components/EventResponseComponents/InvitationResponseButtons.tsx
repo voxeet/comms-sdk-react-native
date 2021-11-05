@@ -6,13 +6,13 @@ import Space from '@ui/Space';
 import { accept, decline } from '@utils/notification.tester';
 
 import type { Conference } from '../../../../src/services/conference/models';
-import styles from './InvitationEventResponse.style';
+import styles from './InvitationResponseButtons.style';
 
 type InvitationEventResponseProps = {
   conferenceId: string;
   setConference: (conference: Conference) => void;
 };
-export const InvitationEventResponse = ({
+export const InvitationResponseButtons = ({
   conferenceId,
   setConference,
 }: InvitationEventResponseProps) => {
