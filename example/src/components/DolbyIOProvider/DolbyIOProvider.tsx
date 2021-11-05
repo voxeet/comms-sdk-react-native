@@ -187,11 +187,9 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
 
-  const join = async (conferenceId: string) => {
+  const join = async (alias: string) => {
     try {
-      const fetchedConference = await DolbyIoIAPI.conference.fetch(
-        conferenceId
-      );
+      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
 
       const joinOptions = {
         constraints: {
