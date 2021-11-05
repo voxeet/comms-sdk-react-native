@@ -42,7 +42,6 @@ export const inviteRandomParticipant = async (conference: Conference) => {
 export const accept = async (conferenceId: string): Promise<Conference> => {
   try {
     const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
-    console.log('CONFERENCE ACCCEPT', JSON.stringify(conference, null, 2));
     return DolbyIoIAPI.conference.join(conference);
   } catch (e: any) {
     Alert.alert('accept error', e.toString());
@@ -53,7 +52,6 @@ export const accept = async (conferenceId: string): Promise<Conference> => {
 export const decline = async (conferenceId: string) => {
   try {
     const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
-    console.log('CONFERENCE DECLINE', JSON.stringify(conference, null, 2));
     await DolbyIoIAPI.notification.decline(conference);
   } catch (e: any) {
     Alert.alert('Decline error', e.toString());
