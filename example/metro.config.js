@@ -10,6 +10,7 @@ const modules = Object.keys({
 });
 
 module.exports = {
+  cacheVersion: (Math.random() + 1).toString(36).substring(2),
   projectRoot: __dirname,
   watchFolders: [root],
 
