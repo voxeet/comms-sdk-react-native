@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent, useContext, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
-// import { VideoView } from '@dolbyio/react-native-iapi-sdk';
+import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 import LeaveConferenceButton from '@screens/ConferenceScreen/LeaveConferenceButton';
 import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import Space from '@ui/Space';
@@ -22,22 +22,28 @@ import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import ParticipantAvatar from './ParticipantAvatar';
 
 const ConferenceScreen: FunctionComponent = () => {
-  const { me, conference, participants } = useContext(DolbyIOContext);
+  const { me, conference, participants, activeParticipant } =
+    useContext(DolbyIOContext);
   const { isRecording } = useContext(RecordingContext);
 
-  // const videoView = useRef(null);
+  const videoView = useRef(null);
 
-  // useEffect(() => {
-  //   if (videoView) {
-  //     if (activeUser?.streams?.length) {
-  //       videoView.current.attach(activeUser, activeUser.streams[0]);
-  //       console.log('attach');
-  //     } else {
-  //       videoView.current.detach();
-  //       console.log('detach');
-  //     }
-  //   }
-  // }, [activeUser]);
+  useEffect(() => {
+    if (videoView?.current) {
+      if (activeParticipant?.streams?.length) {
+        // @ts-ignore
+        videoView.current.attach(
+          activeParticipant,
+          activeParticipant.streams[activeParticipant.streams.length - 1]
+        );
+        console.log('attach');
+      } else {
+        // @ts-ignore
+        videoView.current.detach();
+        console.log('detach');
+      }
+    }
+  }, [activeParticipant]);
 
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -65,7 +71,7 @@ const ConferenceScreen: FunctionComponent = () => {
               ) : null}
             </Space>
           </View>
-          <View style={styles.center}>{/*<VideoView ref={videoView} />*/}</View>
+          <View style={styles.center}>{<VideoView ref={videoView} />}</View>
           <View style={styles.bottom}>
             <Space
               mh="m"
