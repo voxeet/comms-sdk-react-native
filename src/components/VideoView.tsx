@@ -3,17 +3,17 @@ import {
   View,
   ViewStyle,
   UIManager,
-  requireNativeComponent,
   findNodeHandle,
+  Platform,
+  StyleSheet,
 } from 'react-native';
 
 import type { MediaStream, Participant } from '../services/conference/models';
 import { MediaStreamType } from '../services/conference/models';
 import NativeEvents from '../utils/NativeEvents';
 import type { UnregisterListener } from '../utils/types';
+import DIOVideoView from './DIOVideoView';
 import { VideoViewEventNames } from './events';
-
-const DIOVideoView: any = requireNativeComponent('DIOVideoView');
 
 type Props = typeof VideoView.defaultProps & {
   isMirror?: boolean;
@@ -24,6 +24,15 @@ type Props = typeof VideoView.defaultProps & {
 type State = {
   mediaStream?: MediaStream;
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    overflow: 'hidden',
+  },
+  video: {
+    flex: 1,
+  },
+});
 
 export default class VideoView extends PureComponent<Props, State> {
   static defaultProps = {
@@ -50,14 +59,21 @@ export default class VideoView extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this._onEventUnsubscribe = this._nativeEvents.addListener(
-      VideoViewEventNames.CommandCallback,
-      this._onEvent
-    );
+    if (Platform.OS === 'android') {
+      this._onEventUnsubscribe = this._nativeEvents.addListener(
+        VideoViewEventNames.CommandCallback,
+        this._onEvent
+      );
+    }
   }
 
   componentWillUnmount() {
-    if (this._onEventUnsubscribe) {
+    this.detach();
+    // TODO: No removeListeners exported from Android module
+    if (
+      this._onEventUnsubscribe &&
+      typeof this._onEventUnsubscribe === 'function'
+    ) {
       this._onEventUnsubscribe();
     }
   }
@@ -150,15 +166,16 @@ export default class VideoView extends PureComponent<Props, State> {
 
   render() {
     return (
-      <View
-        style={[{ borderWidth: 1, height: 100, width: 100 }, this.props.style]}
-      >
+      <View style={[styles.wrapper, this.props.style]} pointerEvents="none">
         <DIOVideoView
-          style={{ width: 100, height: 100 }}
+          style={styles.video}
           isMirror={this.props.isMirror}
           scaleType={this.props.scaleType}
-          onCommandEvent={this._onCommandEvent}
+          onCommandEvent={
+            Platform.OS === 'ios' ? this._onCommandEvent : undefined
+          }
           ref={this._setRefs}
+          pointerEvents="none"
         />
       </View>
     );

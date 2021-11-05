@@ -6,7 +6,21 @@ import { SPACE_XXS, SPACE_M } from '@constants/sizes.constants';
 
 export default StyleSheet.create({
   wrapper: {
+    position: 'relative',
     flex: 1,
+  },
+  layerInfo: {
+    position: 'relative',
+    flex: 1,
+    zIndex: 9,
+  },
+  layerVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 1,
   },
   top: {},
   topBar: {
@@ -18,6 +32,8 @@ export default StyleSheet.create({
     borderColor: '#fff',
     borderWidth: 0,
     flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   bottom: {
     paddingBottom: Platform.OS === 'ios' ? 30 : 70,
@@ -30,10 +46,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.WHITE,
+    borderWidth: 1,
+    borderColor: COLORS.WHITE,
     paddingHorizontal: 10,
     borderRadius: SPACE_XXS,
     height: SPACE_M,
+  },
+  activeParticipant: {
+    backgroundColor: COLORS.WHITE,
   },
   buttonText: {
     justifyContent: 'center',
@@ -94,5 +114,30 @@ export default StyleSheet.create({
 
   modalCheckbox: {
     marginRight: 20,
+  },
+  videoButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  centerButtons: {
+    flexDirection: 'row',
+  },
+  videoButtonGreen: {
+    backgroundColor: COLORS.GREEN,
+  },
+  videoButtonRed: {
+    backgroundColor: COLORS.RED,
   },
 });
