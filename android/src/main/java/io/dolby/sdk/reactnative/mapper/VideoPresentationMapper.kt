@@ -12,13 +12,11 @@ class VideoPresentationMapper(
   private val participantMapper: ParticipantMapper
 ) {
 
-  // TODO tmp solution to make pause, play, seek work (test app uses `current` in those methods).
-  //  Replace `1.0` by the real timestamp (as lastSeekTimestamp isn't 0 only for seek) in DEXA-236.
   fun toRN(videoPresentation: VideoPresentation, participant: Participant): ReadableMap? = with(videoPresentation) {
     Arguments.createMap().apply {
       putMap(OWNER, participantMapper.toRN(participant))
       putString(URL, url)
-      putDouble(TIMESTAMP, 1.0)
+      putDouble(TIMESTAMP, lastSeekTimestamp.toDouble())
     }
   }
 
