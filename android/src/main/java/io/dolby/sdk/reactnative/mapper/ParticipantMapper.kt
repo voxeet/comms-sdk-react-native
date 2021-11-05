@@ -68,6 +68,7 @@ class ParticipantMapper {
   fun toRNMediaStream(stream: MediaStream): ReadableMap =
     Arguments.createMap().apply {
       putString(PARTICIPANT_STREAMS_ID, stream.peerId())
+      putString(PARTICIPANT_STREAMS_LABEL, stream.label())
       putString(PARTICIPANT_STREAMS_TYPE, toRNMediaStreamType(stream.type))
       putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toRNAudioTracks(stream.audioTracks()))
       putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toRNVideoTracks(stream.videoTracks()))
@@ -147,6 +148,7 @@ class ParticipantMapper {
     private const val PARTICIPANT_STREAMS = "streams"
     private const val PARTICIPANT_STREAMS_ID = "id"
     private const val PARTICIPANT_STREAMS_TYPE = "type"
+    private const val PARTICIPANT_STREAMS_LABEL = "label"
     private const val PARTICIPANT_STREAMS_AUDIO_TRACKS = "audioTracks"
     private const val PARTICIPANT_STREAMS_VIDEO_TRACKS = "videoTracks"
     private const val PARTICIPANT_TYPE = "type"
