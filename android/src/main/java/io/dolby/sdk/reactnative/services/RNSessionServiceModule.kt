@@ -84,7 +84,7 @@ class RNSessionServiceModule(
   @ReactMethod
   fun isOpen(promise: Promise) {
     Promises
-      .promise(sessionService.isSocketOpen)
+      .promise(sessionService.isOpen)
       .forward(promise)
   }
 }
