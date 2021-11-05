@@ -91,8 +91,9 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const onStreamsChange = (data: StreamChangedEventType) => {
     console.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
     setParticipants((participants) => {
-      const p = participants.get(data.participant.id);
+      let p = participants.get(data.participant.id);
       if (p) {
+        p = { ...p };
         p.streams = data.participant.streams;
         return new Map(participants.set(p.id, p));
       }
