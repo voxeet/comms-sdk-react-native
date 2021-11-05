@@ -12,11 +12,22 @@ const randomInvitedParticipant = ({
   includePermissions = false,
 } = {}): ParticipantInvited => ({
   info: {
-    externalId: 'Invited123',
+    externalId: 'externalId-123',
     name: 'John Invited',
   },
   permissions: includePermissions ? [ConferencePermission.INVITE] : [],
 });
+
+export const invite = async (
+  conference: Conference,
+  participants: ParticipantInvited[]
+) => {
+  try {
+    await DolbyIoIAPI.notification.invite(conference, participants);
+  } catch (e: any) {
+    Alert.alert('Invite error', e.toString());
+  }
+};
 
 export const inviteRandomParticipant = async (conference: Conference) => {
   try {
@@ -28,8 +39,19 @@ export const inviteRandomParticipant = async (conference: Conference) => {
   }
 };
 
-export const decline = async (conference: Conference) => {
+export const accept = async (conferenceId: string): Promise<Conference> => {
   try {
+    const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
+    return DolbyIoIAPI.conference.join(conference);
+  } catch (e: any) {
+    Alert.alert('accept error', e.toString());
+    return Promise.reject();
+  }
+};
+
+export const decline = async (conferenceId: string) => {
+  try {
+    const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
     await DolbyIoIAPI.notification.decline(conference);
   } catch (e: any) {
     Alert.alert('Decline error', e.toString());
