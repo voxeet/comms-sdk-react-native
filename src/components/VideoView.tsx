@@ -13,7 +13,7 @@ import NativeEvents from '../utils/NativeEvents';
 import type { UnregisterListener } from '../utils/types';
 import { VideoViewEventNames } from './events';
 
-const DIOVideoView = requireNativeComponent('DIOVideoView');
+const DIOVideoView: any = requireNativeComponent('DIOVideoView');
 
 type Props = typeof VideoView.defaultProps & {
   isMirror?: boolean;
@@ -31,7 +31,7 @@ export default class VideoView extends PureComponent<Props, State> {
     scaleType: 'fit',
   };
 
-  public state = {
+  state: State = {
     mediaStream: undefined,
   };
 
@@ -80,7 +80,6 @@ export default class VideoView extends PureComponent<Props, State> {
 
     this._onEvent(nativeEvent);
   };
-
   private _onEvent = (event: any) => {
     if (!event) return;
 
@@ -111,15 +110,10 @@ export default class VideoView extends PureComponent<Props, State> {
     participant: Participant,
     mediaStream: MediaStream
   ): Promise<boolean> => {
-    console.log(mediaStream.videoTracks);
-    console.log(mediaStream.videoTracks[0]);
-    if (!mediaStream.videoTracks[0]) return Promise.resolve(false);
-    console.log(participant.id, mediaStream.id);
-    console.log([participant.id, mediaStream.videoTracks[0]]);
     const res = !!(await this._dispatchCommand(
       // @ts-ignore
-      UIManager.DIOVideoView.Commands.attach,
-      [participant.id, mediaStream.videoTracks[0]]
+      UIManager.DIOVideoView.Commands.attach.toString(),
+      [participant.id, mediaStream.label]
     ));
     this.setState({
       mediaStream,
@@ -130,7 +124,7 @@ export default class VideoView extends PureComponent<Props, State> {
   public detach = async (): Promise<boolean> => {
     const res = !!(await this._dispatchCommand(
       // @ts-ignore
-      UIManager.DIOVideoView.Commands.detach
+      UIManager.DIOVideoView.Commands.detach.toString()
     ));
     this.setState({
       mediaStream: undefined,
@@ -141,7 +135,7 @@ export default class VideoView extends PureComponent<Props, State> {
   public isAttached = async (): Promise<boolean> => {
     return !!(await this._dispatchCommand(
       // @ts-ignore
-      UIManager.DIOVideoView.Commands.isAttached
+      UIManager.DIOVideoView.Commands.isAttached.toString()
     ));
   };
 
@@ -149,7 +143,6 @@ export default class VideoView extends PureComponent<Props, State> {
     return Promise.resolve(
       !!(
         this.state.mediaStream &&
-        // @ts-ignore
         this.state.mediaStream.type === MediaStreamType.ScreenShare
       )
     );
@@ -157,9 +150,11 @@ export default class VideoView extends PureComponent<Props, State> {
 
   render() {
     return (
-      <View style={[{ borderWidth: 1, height: 100 }, this.props.style]}>
+      <View
+        style={[{ borderWidth: 1, height: 100, width: 100 }, this.props.style]}
+      >
         <DIOVideoView
-          // @ts-ignore
+          style={{ width: 100, height: 100 }}
           isMirror={this.props.isMirror}
           scaleType={this.props.scaleType}
           onCommandEvent={this._onCommandEvent}

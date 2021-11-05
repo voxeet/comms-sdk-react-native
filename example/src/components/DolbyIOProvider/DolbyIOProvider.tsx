@@ -6,22 +6,22 @@ import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { APP_ID, APP_SECRET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { MessageReceivedEventType } from '../../../../lib/typescript/services/command/events';
+import type { MessageReceivedEventType } from '../../../../src/services/command/events';
 import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
   StreamChangedEventType,
-} from '../../../../lib/typescript/services/conference/events';
+} from '../../../../src/services/conference/events';
 import type {
   ConferenceStatus,
   UnsubscribeFunction,
-} from '../../../../lib/typescript/services/conference/models';
-import type { InvitationReceivedEventType } from '../../../../lib/typescript/services/notification/events';
+} from '../../../../src/services/conference/models';
 import { Codec, RTCPMode } from '../../../../src/services/conference/models';
 import type {
   Conference,
   Participant,
 } from '../../../../src/services/conference/models';
+import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import type { User } from '../../../../src/services/session/models';
 
 export interface IDolbyIOProvider {

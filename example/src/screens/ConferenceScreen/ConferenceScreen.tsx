@@ -14,9 +14,7 @@ import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 
-import type {
-  Participant, // Conference,
-} from '../../../../src/services/conference/models';
+import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import ParticipantAvatar from './ParticipantAvatar';
