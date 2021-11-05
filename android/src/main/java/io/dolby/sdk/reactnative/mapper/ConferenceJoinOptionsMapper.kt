@@ -39,7 +39,6 @@ class ConferenceJoinOptionsMapper {
     }
 
   companion object {
-    private const val CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN = "conferenceAccessToken"
     private const val CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING = "maxVideoForwarding"
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS = "constraints"
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_AUDIO = "audio"

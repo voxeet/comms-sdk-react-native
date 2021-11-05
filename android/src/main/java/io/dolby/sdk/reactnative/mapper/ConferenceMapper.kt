@@ -36,10 +36,8 @@ class ConferenceMapper(
   fun toRN(conference: Conference): ReadableMap =
     Arguments.createMap().apply {
       putString(CONFERENCE_ID, conference.id)
-      putString(CONFERENCE_TOKEN, conference.conferenceInfos?.securityToken)
       putString(CONFERENCE_ALIAS, conference.alias)
       putBoolean(CONFERENCE_IS_NEW, conference.isNew)
-      putString(CONFERENCE_STATUS, toRNConferenceStatus(conference.state))
       putString(CONFERENCE_STATUS, toRNConferenceStatus(conference.state))
       putMap(CONFERENCE_PARAMS, toRNConferenceParams(conference))
       putArray(CONFERENCE_PERMISSIONS, permissionMapper.toRN(conference.permissions))
