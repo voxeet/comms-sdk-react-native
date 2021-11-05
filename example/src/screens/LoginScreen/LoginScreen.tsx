@@ -26,7 +26,20 @@ const LoginScreen: FunctionComponent = () => {
   const [externalId, setExternalId] = useState('');
   const { openSession } = useContext(DolbyIOContext);
 
+  useEffect(() => {
+    (async function () {
+      try {
+        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+      } catch (e: any) {
+        try {
+          await DolbyIoIAPI.session.close();
+        } catch {}
+      }
+    })();
+  }, []);
+
   const login = () => {
+    console.log(externalId, 'externalId');
     openSession(name, externalId);
   };
 

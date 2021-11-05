@@ -21,7 +21,7 @@ export interface ConferenceCreateParameters {
   videoCodec?: Codec;
   /** Turns the live recording on and off. */
   liveRecording?: boolean;
-  /** Enable Dolby Voice */
+  /** Enable Dolby Voice (Default value = true) */
   dolbyVoice?: boolean;
 }
 

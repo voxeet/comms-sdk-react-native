@@ -42,6 +42,7 @@ jest.mock('react-native', () => {
   RN.NativeModules.DolbyIoIAPISessionServiceModule = {
     open: jest.fn(),
     close: jest.fn(),
+    isOpen: jest.fn(),
     getParticipant: jest.fn(),
   };
   RN.NativeModules.DolbyIoIAPINotificationService = {

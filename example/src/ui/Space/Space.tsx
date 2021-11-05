@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 
+import styles from './Space.style';
+
 type SizeValue = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
 interface SpaceProps {
@@ -26,7 +28,6 @@ interface SpaceProps {
   children: ReactNode;
 }
 
-import styles from './Space.style';
 const Space: React.FC<SpaceProps> = ({
   children,
   fw,

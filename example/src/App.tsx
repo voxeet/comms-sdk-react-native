@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import RNToast from 'react-native-toast-message';
 
 import DolbyIOProvider from '@components/DolbyIOProvider';
+import InvitationHandler from '@components/InvitationHandler';
+import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
+import { toastConfig } from '@utils/toast.config';
 
 import Main from './Main';
 
@@ -24,7 +28,14 @@ export default class App extends Component<Props, State> {
           <DolbyIOProvider>
             <RecordingProvider>
               <Main />
+              <RNToast
+                config={toastConfig}
+                ref={(ref) => RNToast.setRef(ref)}
+                autoHide={false}
+              />
             </RecordingProvider>
+            <MessageHandler />
+            <InvitationHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
