@@ -6,7 +6,6 @@ import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { APP_ID, APP_SECRET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { MessageReceivedEventType } from '../../../../src/services/command/events';
 import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
@@ -21,7 +20,6 @@ import type {
   Conference,
   Participant,
 } from '../../../../src/services/conference/models';
-import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import type { User } from '../../../../src/services/session/models';
 
 export interface IDolbyIOProvider {
@@ -103,20 +101,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     });
   };
 
-  const onMessageReceived = (data: MessageReceivedEventType) => {
-    console.log(
-      'MESSAGE RECEIVED EVENT DATA: \n',
-      JSON.stringify(data, null, 2)
-    );
-  };
-
-  const onInvitationReceived = (data: InvitationReceivedEventType) => {
-    console.log(
-      'INVITATION RECEIVED EVENT DATA: \n',
-      JSON.stringify(data, null, 2)
-    );
-  };
-
   const initialize = async () => {
     try {
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
@@ -152,14 +136,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange)
     );
     unsubscribers.push(DolbyIoIAPI.conference.onStreamsChange(onStreamsChange));
-
-    unsubscribers.push(
-      DolbyIoIAPI.command.onMessageReceived(onMessageReceived)
-    );
-
-    unsubscribers.push(
-      DolbyIoIAPI.notification.onInvitationReceived(onInvitationReceived)
-    );
     return () => {
       unsubscribers.forEach((u) => u());
     };

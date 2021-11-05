@@ -58,7 +58,7 @@ const ParticipantAvatar = (participant: Participant) => {
 
   return (
     <Space mr="xs">
-      <MenuOptionsButton options={options} longPress>
+      <MenuOptionsButton options={options}>
         <View
           style={[styles.participant, isActive && styles.activeParticipant]}
           key={participant.id}
