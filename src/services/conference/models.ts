@@ -263,6 +263,8 @@ export type MediaStream = {
   audioTracks: AudioTrack[];
   /** The video tracks available in the stream. */
   videoTracks: VideoTrack[];
+  /** The media stream label. */
+  label: String;
 };
 
 export type UnsubscribeFunction = () => void;
