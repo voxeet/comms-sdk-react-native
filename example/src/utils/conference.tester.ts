@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
-import type { Participant } from '../../../lib/typescript/services/conference/models';
+import type { Participant } from '../../../src/services/conference/models';
 import type {
   Conference,
   ParticipantPermissions,
@@ -26,9 +26,11 @@ export const replay = async (conference: Conference) => {
   }
 };
 export const startVideo = async (user: User) => {
+  console.log(user);
   try {
     await DolbyIoIAPI.conference.startVideo(user);
   } catch (e: any) {
+    console.log(e);
     Alert.alert('Error');
   }
 };
@@ -36,6 +38,7 @@ export const stopVideo = async (user: User) => {
   try {
     await DolbyIoIAPI.conference.stopVideo(user);
   } catch (e: any) {
+    console.log(e);
     Alert.alert('Error');
   }
 };
