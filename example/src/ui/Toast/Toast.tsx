@@ -7,19 +7,27 @@ import Text from '@ui/Text';
 
 import styles from './Toast.style';
 
-const Toast = ({ text1, text2, props }: any) => (
+type ToastProps = {
+  props: {
+    title: string;
+    content: string;
+    children: React.ReactChild;
+  };
+};
+
+const Toast = ({ props }: ToastProps) => (
   <Space mv={'xs'} mt={'xxs'} style={styles.container}>
     <Space pv="xs" ph="xs" pr="l" mr={'s'}>
       <Space style={styles.titleContainer}>
         <Text header size="s" color={'black'}>
-          {text1}
+          {props.title}
         </Text>
       </Space>
 
       <Text color="black" size="xs">
-        {text2}
+        {props.content}
       </Text>
-      {props.children}
+      <Space style={styles.childContainer}>{props.children}</Space>
     </Space>
     <ReactNativeText style={styles.exitIcon} onPress={() => RNToast.hide()}>
       ❌

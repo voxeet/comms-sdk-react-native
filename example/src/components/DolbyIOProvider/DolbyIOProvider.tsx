@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 
+import { InvitationEventResponse } from '@components/EventResponseComponents/InvitationEventResponse';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 // @ts-ignore
 import { APP_ID, APP_SECRET } from '@env';
@@ -86,12 +87,15 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         } = data;
         Toast.show({
           type: 'custom',
-          text1: 'INVITATION RECEIVED EVENT DATA',
-          text2: JSON.stringify(
-            { conferenceAlias, inviterName: name },
-            null,
-            2
-          ),
+          props: {
+            title: 'INVITATION RECEIVED EVENT DATA',
+            content: JSON.stringify(
+              { conferenceAlias, inviterName: name },
+              null,
+              2
+            ),
+            children: InvitationEventResponse({ conferenceAlias }),
+          },
         });
         console.log(
           'INVITATION RECEIVED EVENT DATA: \n',
@@ -162,7 +166,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       const createdConference = await DolbyIoIAPI.conference.create(
         conferenceOptions
       );
-      console.log(createdConference);
 
       const joinOptions = {
         constraints: {
