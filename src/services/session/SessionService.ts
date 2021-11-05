@@ -20,10 +20,11 @@ export class SessionService {
    * @returns {Promise<null>}
    */
   public async open(participantInfo: ParticipantInfo = {}): Promise<null> {
-    const { name, avatarUrl } = participantInfo;
+    const { name, avatarUrl, externalId } = participantInfo;
     return this._nativeModule.open({
       name,
       avatarUrl,
+      externalId,
     });
   }
 
@@ -33,6 +34,14 @@ export class SessionService {
    */
   public async close(): Promise<null> {
     return this._nativeModule.close();
+  }
+
+  /**
+   * Checks whether there is an open session that connects SDK with backend.
+   * @returns {Promise<Boolean>}
+   */
+  public async isOpen(): Promise<Boolean> {
+    return this._nativeModule.isOpen();
   }
 
   /**
