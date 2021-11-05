@@ -54,6 +54,9 @@ repositories {
     maven {
         url("http://android-sdk.voxeet.com/release")
     }
+    maven {
+      url("http://android-sdk.voxeet.com/beta")
+    }
     google()
     mavenCentral()
     maven {
@@ -70,7 +73,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.annotation:annotation:1.1.0"
 
-    implementation "com.voxeet.sdk:sdk:3.2.3"
+    implementation "com.voxeet.sdk:sdk:3.3.0-beta.2"
 
     testImplementation("junit:junit:${JUNIT_VERSION}")
     testImplementation("org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}")
