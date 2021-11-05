@@ -1,18 +1,12 @@
 // @ts-ignore
 import Chance from 'chance';
-import React, {
-  FunctionComponent,
-  useState,
-  useContext,
-  useEffect,
-} from 'react';
+import React, { FunctionComponent, useState, useContext } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import CreateConferenceButton from '@screens/JoinScreen/CreateConferenceButton';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
@@ -26,12 +20,6 @@ const chance = new Chance();
 const JoinScreen: FunctionComponent = () => {
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
   const { join, replay } = useContext(DolbyIOContext);
-
-  useEffect(() => {
-    (async function () {
-      console.log(await DolbyIoIAPI.session.getCurrentUser());
-    })();
-  }, []);
 
   const joinConference = () => {
     join(alias);

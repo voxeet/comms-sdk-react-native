@@ -22,6 +22,10 @@ export default StyleSheet.create({
     display: 'flex',
     width: '85%',
   },
+  childContainer: {
+    width: '100%',
+    display: 'flex',
+  },
   exitIcon: {
     position: 'absolute',
     top: 20,

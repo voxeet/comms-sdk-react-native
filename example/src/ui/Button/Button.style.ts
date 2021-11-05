@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 import COLORS from '@constants/colors.constants';
 import {
   SPACE_XXS,
@@ -5,7 +7,6 @@ import {
   SPACE_XL,
   SPACE_L,
 } from '@constants/sizes.constants';
-import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   'button': {
