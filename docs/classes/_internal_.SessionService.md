@@ -16,6 +16,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 
 - [close](_internal_.SessionService.md#close)
 - [getCurrentUser](_internal_.SessionService.md#getcurrentuser)
+- [isOpen](_internal_.SessionService.md#isopen)
 - [open](_internal_.SessionService.md#open)
 
 ## Constructors
@@ -47,6 +48,18 @@ Gets object of local user
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`User`](../interfaces/_internal_.User.md)\>
+
+___
+
+### isOpen
+
+▸ **isOpen**(): [`Promise`](../modules/_internal_.md#promise)<[`Boolean`](../modules/_internal_.md#boolean)\>
+
+Checks whether there is an open session that connects SDK with backend.
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<[`Boolean`](../modules/_internal_.md#boolean)\>
 
 ___
 

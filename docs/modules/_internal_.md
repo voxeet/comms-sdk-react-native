@@ -50,6 +50,8 @@
 - [ArrayLike](../interfaces/_internal_.ArrayLike.md)
 - [AudioProcessingOptions](../interfaces/_internal_.AudioProcessingOptions.md)
 - [AudioProcessingSenderOptions](../interfaces/_internal_.AudioProcessingSenderOptions.md)
+- [Boolean](../interfaces/_internal_.Boolean.md)
+- [BooleanConstructor](../interfaces/_internal_.BooleanConstructor.md)
 - [CollatorOptions](../interfaces/_internal_.CollatorOptions.md)
 - [ConcatArray](../interfaces/_internal_.ConcatArray.md)
 - [Conference](../interfaces/_internal_.Conference.md)
@@ -110,6 +112,7 @@
 ### Variables
 
 - [Array](_internal_.md#array)
+- [Boolean](_internal_.md#boolean)
 - [Promise](_internal_.md#promise)
 - [RegExp](_internal_.md#regexp)
 - [String](_internal_.md#string)
@@ -295,6 +298,12 @@ ___
 ### Array
 
 • **Array**: [`ArrayConstructor`](../interfaces/_internal_.ArrayConstructor.md)
+
+___
+
+### Boolean
+
+• **Boolean**: [`BooleanConstructor`](../interfaces/_internal_.BooleanConstructor.md)
 
 ___
 
