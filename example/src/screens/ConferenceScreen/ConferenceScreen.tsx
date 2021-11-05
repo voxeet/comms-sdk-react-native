@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext, useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -13,6 +13,7 @@ import LeaveConferenceButton from '@screens/ConferenceScreen/LeaveConferenceButt
 import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
+import { startVideo, stopVideo } from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
@@ -48,54 +49,86 @@ const ConferenceScreen: FunctionComponent = () => {
   }
 
   return (
-    <MenuProvider
-      customStyles={{
-        backdrop: styles.menuBackdrop,
-      }}
-    >
-      <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
-        <SafeAreaView style={styles.wrapper}>
-          <View style={styles.top}>
-            <Space mh="m" mv="m">
-              <Space mb="s" style={styles.topBar}>
-                <Text size="xs">Logged as: {me.info.name}</Text>
-                <LeaveConferenceButton />
-              </Space>
-              <Text size="s" align="center">
-                Conference: <Text weight="bold">{conference.alias}</Text>
-              </Text>
-              {isRecording ? (
-                <RecordingDotsText text="Conference is being recorded" />
-              ) : null}
-            </Space>
-          </View>
-          <View style={styles.center}>{<VideoView ref={videoView} />}</View>
-          <View style={styles.bottom}>
-            <Space
-              mh="m"
-              mt="m"
-              mb="xs"
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text
-                header
-                size="s"
-              >{`Participants (${participants.length})`}</Text>
-            </Space>
-            <Space mb="m">
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <Space mh="m" style={styles.participantsList}>
-                  {participants.map((p: Participant) => (
-                    <ParticipantAvatar key={p.id} {...p} />
-                  ))}
+    <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
+      <View style={styles.layerInfo}>
+        <MenuProvider
+          customStyles={{
+            backdrop: styles.menuBackdrop,
+          }}
+        >
+          <SafeAreaView style={styles.wrapper}>
+            <View style={styles.top}>
+              <Space mh="m" mv="m">
+                <Space mb="s" style={styles.topBar}>
+                  <Text size="xs">Logged as: {me.info.name}</Text>
+                  <LeaveConferenceButton />
                 </Space>
-              </ScrollView>
-            </Space>
-          </View>
-        </SafeAreaView>
+                <Text size="s" align="center">
+                  Conference: <Text weight="bold">{conference.alias}</Text>
+                </Text>
+                {isRecording ? (
+                  <RecordingDotsText text="Conference is being recorded" />
+                ) : null}
+              </Space>
+            </View>
+
+            <View style={styles.center}>
+              <View style={styles.centerButtons}>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={[styles.videoButton, styles.videoButtonGreen]}
+                    onPress={() => startVideo(me)}
+                  >
+                    <Text size="xs" align="center">
+                      START VIDEO
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={[styles.videoButton, styles.videoButtonRed]}
+                    onPress={() => stopVideo(me)}
+                  >
+                    <Text size="xs" align="center">
+                      STOP VIDEO
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+              </View>
+            </View>
+            <View style={styles.bottom}>
+              <Space
+                mh="m"
+                mt="m"
+                mb="xs"
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text
+                  header
+                  size="s"
+                >{`Participants (${participants.length})`}</Text>
+              </Space>
+              <Space mb="m">
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  <Space mh="m" style={styles.participantsList}>
+                    {participants.map((p: Participant) => (
+                      <ParticipantAvatar key={p.id} {...p} />
+                    ))}
+                  </Space>
+                </ScrollView>
+              </Space>
+            </View>
+          </SafeAreaView>
+        </MenuProvider>
         <ConferenceScreenBottomSheet />
-      </LinearGradient>
-    </MenuProvider>
+      </View>
+      <View style={styles.layerVideo} pointerEvents="none">
+        <VideoView ref={videoView} style={{ flex: 1 }} />
+      </View>
+    </LinearGradient>
   );
 };
 
