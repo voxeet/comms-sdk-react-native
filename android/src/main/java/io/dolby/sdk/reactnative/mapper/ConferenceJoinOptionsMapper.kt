@@ -23,7 +23,7 @@ class ConferenceJoinOptionsMapper {
       .Builder(conference)
       .apply {
         optionsRN?.let {
-          it.getString(CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN)?.let(::setConferenceAccessToken)
+          conference.conferenceInfos?.securityToken?.let { setConferenceAccessToken(it) }
           it.getConstraints()?.let(::setConstraints)
           it.getOptionalInt(CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING)
             ?.let(::setMaxVideoForwarding)
