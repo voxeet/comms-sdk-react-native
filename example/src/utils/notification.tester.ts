@@ -38,22 +38,3 @@ export const inviteRandomParticipant = async (conference: Conference) => {
     Alert.alert('Invite error', e.toString());
   }
 };
-
-export const accept = async (conferenceId: string): Promise<Conference> => {
-  try {
-    const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
-    return DolbyIoIAPI.conference.join(conference);
-  } catch (e: any) {
-    Alert.alert('accept error', e.toString());
-    return Promise.reject();
-  }
-};
-
-export const decline = async (conferenceId: string) => {
-  try {
-    const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
-    await DolbyIoIAPI.notification.decline(conference);
-  } catch (e: any) {
-    Alert.alert('Decline error', e.toString());
-  }
-};
