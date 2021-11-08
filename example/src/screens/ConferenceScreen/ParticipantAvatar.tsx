@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View } from 'react-native';
+import { Alert } from 'react-native';
 
+import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
@@ -14,6 +16,21 @@ import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
+
+  const { conference } = useContext(DolbyIOContext);
+
+  // first participant in conference.participants[] should be conference owner - this function takes away the option from other users to change conference owner permissions
+  const checkIsOwner = (): boolean => {
+    const participantIndex = conference?.participants.findIndex(
+      (p) => p.id === participant.id
+    );
+
+    if (participantIndex === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const options: Options = [
     {
@@ -40,13 +57,16 @@ const ParticipantAvatar = (participant: Participant) => {
     {
       text: 'update permissions',
       value: 'update permissions',
-      onSelect: () => setPermissionsModalActive(!permissionsModalActive),
+      onSelect: checkIsOwner()
+        ? () => Alert.alert('Cannot update conference owner permissions')
+        : () => setPermissionsModalActive(!permissionsModalActive),
+      // onSelect: () => setPermissionsModalActive(!permissionsModalActive),
     },
   ];
 
   return (
     <Space mr="xs">
-      <MenuOptionsButton options={options} longPress>
+      <MenuOptionsButton options={options}>
         <View style={styles.participant} key={participant.id}>
           <Text size="s" color={COLORS.BLACK}>
             {participant.info.name}
