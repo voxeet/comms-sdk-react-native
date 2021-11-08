@@ -15,7 +15,7 @@
 
 ### mediaStream
 
-• **mediaStream**: [`MediaStreamType`](../enums/_internal_.MediaStreamType.md)
+• **mediaStream**: [`MediaStream`](../modules/_internal_.md#mediastream)
 
 The media stream.
 
