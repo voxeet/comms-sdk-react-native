@@ -133,7 +133,7 @@ export default class VideoView extends PureComponent<Props, State> {
         // @ts-ignore
         ios: UIManager.DIOVideoView.Commands.attach,
       }),
-      [participant.id, mediaStream.label]
+      [participant.id, mediaStream.id]
     ));
     this.setState({
       mediaStream,
