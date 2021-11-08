@@ -106,11 +106,21 @@ const DolbyIOProvider: React.FC = ({ children }) => {
           JSON.stringify(data, null, 2)
         );
       });
+
+    const unsubscribePermissionsChangedFn =
+      DolbyIoIAPI.conference.onPermissionsChange((data) => {
+        console.log(
+          'PERMISSIONS UPDATED EVENT DATA: \n',
+          JSON.stringify(data, null, 2)
+        );
+      });
+
     return () => {
       unsubscribeConferenceChangeFn();
       unsubscribeCommandMessageFn();
       unsubscribeParticipantChangeFn();
       unsubscribeInvitationReceivedFn();
+      unsubscribePermissionsChangedFn();
     };
   }, []);
 
