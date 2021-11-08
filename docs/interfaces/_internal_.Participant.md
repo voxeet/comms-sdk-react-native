@@ -11,6 +11,7 @@
 - [id](_internal_.Participant.md#id)
 - [info](_internal_.Participant.md#info)
 - [status](_internal_.Participant.md#status)
+- [streams](_internal_.Participant.md#streams)
 - [type](_internal_.Participant.md#type)
 
 ## Properties
@@ -36,6 +37,14 @@ ___
 • `Optional` **status**: [`ParticipantStatus`](../enums/_internal_.ParticipantStatus.md)
 
 The participant's status.
+
+___
+
+### streams
+
+• `Optional` **streams**: [`MediaStream`](../modules/_internal_.md#mediastream)[]
+
+The participant streams
 
 ___
 

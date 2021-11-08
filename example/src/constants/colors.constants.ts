@@ -6,6 +6,8 @@ const GRAY_LIGHT = '#D0D3D4';
 const PINK = '#D2358A';
 const BLUE = '#3A48DC';
 const BLUE_DARK = '#472693';
+const GREEN = '#32a75c';
+const RED = '#983434';
 const GRADIENT = [BLACK, BLUE_DARK, PINK];
 
 export default {
@@ -17,5 +19,7 @@ export default {
   PINK,
   BLUE,
   BLUE_DARK,
+  GREEN,
+  RED,
   GRADIENT,
 };
