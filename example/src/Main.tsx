@@ -8,11 +8,11 @@ import JoinScreen from './screens/JoinScreen';
 import LoginScreen from './screens/LoginScreen';
 
 const Main = () => {
-  const { isInitialized, user, conference } = useContext(DolbyIOContext);
+  const { isInitialized, me, conference } = useContext(DolbyIOContext);
 
   if (!isInitialized) {
     return <InitializationScreen />;
-  } else if (!user) {
+  } else if (!me) {
     return <LoginScreen />;
   } else if (!conference) {
     return <JoinScreen />;

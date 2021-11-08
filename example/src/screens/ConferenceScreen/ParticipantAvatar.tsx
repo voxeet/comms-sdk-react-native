@@ -16,6 +16,8 @@ import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
+  const { activeParticipant, setActiveParticipantId } =
+    useContext(DolbyIOContext);
 
   const { conference } = useContext(DolbyIOContext);
 
@@ -34,28 +36,35 @@ const ParticipantAvatar = (participant: Participant) => {
 
   const options: Options = [
     {
-      text: 'kick',
+      text: 'Set as active',
+      value: 'setAsActive',
+      onSelect: () => {
+        setActiveParticipantId(participant.id);
+      },
+    },
+    {
+      text: 'Kick',
       value: 'kick',
       onSelect: async () => {
         await kick(participant);
       },
     },
     {
-      text: 'mute',
+      text: 'Mute',
       value: 'mute',
       onSelect: async () => {
         await mute(participant, true);
       },
     },
     {
-      text: 'unmute',
+      text: 'Unmute',
       value: 'unmute',
       onSelect: async () => {
         await mute(participant, false);
       },
     },
     {
-      text: 'update permissions',
+      text: 'Update permissions',
       value: 'update permissions',
       onSelect: checkIsOwner()
         ? () => Alert.alert('Cannot update conference owner permissions')
@@ -64,12 +73,20 @@ const ParticipantAvatar = (participant: Participant) => {
     },
   ];
 
+  const isActive = activeParticipant && activeParticipant.id === participant.id;
+
   return (
     <Space mr="xs">
       <MenuOptionsButton options={options}>
-        <View style={styles.participant} key={participant.id}>
-          <Text size="s" color={COLORS.BLACK}>
+        <View
+          style={[styles.participant, isActive && styles.activeParticipant]}
+          key={participant.id}
+        >
+          <Text size="s" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
             {participant.info.name}
+            <Text size="xxs" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
+              ({participant.status})
+            </Text>
           </Text>
         </View>
       </MenuOptionsButton>
