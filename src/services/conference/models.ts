@@ -106,6 +106,8 @@ export interface Participant {
   status?: ParticipantStatus;
   /** The participant's type. */
   type?: ParticipantType;
+  /** The participant streams */
+  streams?: MediaStream[];
 }
 
 export interface ParticipantInfo {
@@ -242,12 +244,28 @@ export enum AudioProcessing {
 export type AudioLevel = number;
 export type MaxVideoForwarding = number;
 
+export type AudioTrack = any;
+export type VideoTrack = any;
+
 export enum MediaStreamType {
   /** The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera. */
   Camera = 'Camera',
   /** The screen-share media stream. */
   ScreenShare = 'ScreenShare',
 }
+
+export type MediaStream = {
+  /** The media stream identifier. */
+  id: String;
+  /** The media stream type. */
+  type: MediaStreamType;
+  /** The audio tracks available in the stream. */
+  audioTracks: AudioTrack[];
+  /** The video tracks available in the stream. */
+  videoTracks: VideoTrack[];
+  /** The media stream label. */
+  label: String;
+};
 
 export type UnsubscribeFunction = () => void;
 

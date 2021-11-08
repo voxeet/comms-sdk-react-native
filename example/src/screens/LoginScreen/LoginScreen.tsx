@@ -43,6 +43,18 @@ const LoginScreen: FunctionComponent = () => {
     openSession(name, externalId);
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+      } catch (e) {
+        try {
+          await DolbyIoIAPI.session.close();
+        } catch (e2) {}
+      }
+    })();
+  }, []);
+
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
       <SafeAreaView style={styles.wrapper}>
