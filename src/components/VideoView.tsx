@@ -127,8 +127,12 @@ export default class VideoView extends PureComponent<Props, State> {
     mediaStream: MediaStream
   ): Promise<boolean> => {
     const res = !!(await this._dispatchCommand(
-      // @ts-ignore
-      UIManager.DIOVideoView.Commands.attach.toString(),
+      Platform.select({
+        // @ts-ignore
+        android: UIManager.DIOVideoView.Commands.attach.toString(),
+        // @ts-ignore
+        ios: UIManager.DIOVideoView.Commands.attach,
+      }),
       [participant.id, mediaStream.label]
     ));
     this.setState({
@@ -139,8 +143,12 @@ export default class VideoView extends PureComponent<Props, State> {
 
   public detach = async (): Promise<boolean> => {
     const res = !!(await this._dispatchCommand(
-      // @ts-ignore
-      UIManager.DIOVideoView.Commands.detach.toString()
+      Platform.select({
+        // @ts-ignore
+        android: UIManager.DIOVideoView.Commands.detach.toString(),
+        // @ts-ignore
+        ios: UIManager.DIOVideoView.Commands.detach,
+      })
     ));
     this.setState({
       mediaStream: undefined,
@@ -150,8 +158,12 @@ export default class VideoView extends PureComponent<Props, State> {
 
   public isAttached = async (): Promise<boolean> => {
     return !!(await this._dispatchCommand(
-      // @ts-ignore
-      UIManager.DIOVideoView.Commands.isAttached.toString()
+      Platform.select({
+        // @ts-ignore
+        android: UIManager.DIOVideoView.Commands.isAttached.toString(),
+        // @ts-ignore
+        ios: UIManager.DIOVideoView.Commands.isAttached,
+      })
     ));
   };
 
