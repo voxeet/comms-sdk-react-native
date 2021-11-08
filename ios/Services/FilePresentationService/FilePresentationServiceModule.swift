@@ -120,6 +120,66 @@ public class FilePresentationServiceModule: ReactEmitter {
 			error.send(with: reject)
 		}
 	}
+
+	// MARK: - Getters
+
+	/// Downloads and displays locally the presented file by retrieving URLs of the individual images.
+	/// - Parameters:
+	///	  - page: The number of the presented page.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(getImage:resolver:rejecter:)
+	public func getImage(
+		page: Int,
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		guard let url = VoxeetSDK.shared.filePresentation.image(page: page) else {
+			ModuleError.noImageForPage(page).send(with: reject)
+			return
+		}
+		resolve(url)
+	}
+
+	/// Provides the thumbnail's URL that refers to a specific page of the presented file.
+	/// - Parameters:
+	///	  - page: The number of the presented page.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(getThumbnail:resolver:rejecter:)
+	public func getThumbnail(
+		page: Int,
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		guard let url = VoxeetSDK.shared.filePresentation.thumbnail(page: page) else {
+			ModuleError.noThumbnailForPage(page).send(with: reject)
+			return
+		}
+		resolve(url)
+	}
+
+	// MARK: - Setters
+
+	/// Informs the service to send the updated page number to the conference participants.
+	/// - Parameters:
+	///	  - page: The page number that corresponds to the page that should be presented.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setPage:resolver:rejecter:)
+	public func setPage(
+		page: Int,
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		VoxeetSDK.shared.filePresentation.update(page: page) { error in
+			guard let error = error else {
+				resolve(NSNull())
+				return
+			}
+			error.send(with: reject)
+		}
+	}
 }
 
 extension FilePresentationServiceModule: VTFilePresentationDelegate {
