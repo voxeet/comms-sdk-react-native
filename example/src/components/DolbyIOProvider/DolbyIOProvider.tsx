@@ -84,7 +84,8 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       JSON.stringify(data, null, 2)
     );
     setParticipants(
-      new Map(participants.set(data.participant.id, data.participant))
+      (participants) =>
+        new Map(participants.set(data.participant.id, data.participant))
     );
   };
 
@@ -120,22 +121,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       setMe(await DolbyIoIAPI.session.getCurrentUser());
     } catch (e: any) {
       clearTimeout(timeoutPromise);
-      console.log(e);
       setMe(undefined);
       Alert.alert('Session not opened', e.toString());
     }
   };
 
   useEffect(() => {
-    const unsubscribers: UnsubscribeFunction[] = [];
-    unsubscribers.push(
-      DolbyIoIAPI.conference.onStatusChange(onConferenceStatusChange)
-    );
-
-    unsubscribers.push(
-      DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange)
-    );
-    unsubscribers.push(DolbyIoIAPI.conference.onStreamsChange(onStreamsChange));
+    const unsubscribers: UnsubscribeFunction[] = [
+      DolbyIoIAPI.conference.onStatusChange(onConferenceStatusChange),
+      DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange),
+      DolbyIoIAPI.conference.onStreamsChange(onStreamsChange),
+    ];
     return () => {
       unsubscribers.forEach((u) => u());
     };
