@@ -1,7 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Modal, ScrollView } from 'react-native';
 
-import CheckBox from '@react-native-community/checkbox';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
@@ -44,7 +43,7 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
       ['STREAM', 'Stream a conference'],
     ]);
 
-    // Change userPermissions array, during changes in checkboxes
+    // Change userPermissions array, on buttons press
     const updateUserPermissionsArray = (permission: string) => {
       if (userPermissions.includes(permission)) {
         setUserPermissions(
@@ -55,6 +54,13 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
       } else {
         setUserPermissions([...userPermissions, permission]);
       }
+    };
+
+    // check for permission button color
+    const checkButtonActive = (permission: string): boolean => {
+      if (userPermissions.includes(permission)) {
+        return true;
+      } else return false;
     };
 
     // Submit permissions
@@ -79,7 +85,6 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
 
     useEffect(() => {
       setUserPermissions(userPermissions);
-      console.log(`Permissions changed:`, userPermissions);
     }, [userPermissions]);
 
     return (
@@ -102,20 +107,15 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
                       mv="xxs"
                       pl="xxs"
                       fw
-                      style={styles.modalCheckboxContainer}
+                      style={styles.modalButtonContainer}
                       key={permission}
                     >
-                      <CheckBox
-                        style={styles.modalCheckbox}
-                        disabled={false}
-                        value={false}
-                        onValueChange={() =>
-                          updateUserPermissionsArray(permission)
-                        }
+                      <Button
+                        text={`${permissionNamingMap.get(permission)}`}
+                        color={checkButtonActive(permission) ? 'green' : 'red'}
+                        size="small"
+                        onPress={() => updateUserPermissionsArray(permission)}
                       />
-                      <Text color="black">
-                        {permissionNamingMap.get(permission)}
-                      </Text>
                     </Space>
                   );
                 })}
