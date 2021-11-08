@@ -17,4 +17,16 @@ RCT_EXTERN_METHOD(start:(NSDictionary * _Nonnull)file
 RCT_EXTERN_METHOD(stop:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(getImage:(NSInteger)page
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(getThumbnail:(NSInteger)page
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(setPage:(NSInteger)page
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 @end
