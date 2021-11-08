@@ -102,12 +102,15 @@
 
 ### Type aliases
 
+- [AudioTrack](_internal_.md#audiotrack)
 - [FlatArray](_internal_.md#flatarray)
 - [IteratorResult](_internal_.md#iteratorresult)
+- [MediaStream](_internal_.md#mediastream)
 - [PromiseSettledResult](_internal_.md#promisesettledresult)
 - [RefreshAccessTokenInBackgroundType](_internal_.md#refreshaccesstokeninbackgroundtype)
 - [RefreshAccessTokenType](_internal_.md#refreshaccesstokentype)
 - [UnsubscribeFunction](_internal_.md#unsubscribefunction)
+- [VideoTrack](_internal_.md#videotrack)
 
 ### Variables
 
@@ -215,6 +218,12 @@ Emitted when a video presentation is started.
 
 ## Type aliases
 
+### AudioTrack
+
+Ƭ **AudioTrack**: `any`
+
+___
+
 ### FlatArray
 
 Ƭ **FlatArray**<`Arr`, `Depth`\>: { `done`: `Arr` ; `recur`: `Arr` extends [`ReadonlyArray`](../interfaces/_internal_.ReadonlyArray.md)<infer InnerArr\> ? [`FlatArray`](_internal_.md#flatarray)<`InnerArr`, [``-1``, ``0``, ``1``, ``2``, ``3``, ``4``, ``5``, ``6``, ``7``, ``8``, ``9``, ``10``, ``11``, ``12``, ``13``, ``14``, ``15``, ``16``, ``17``, ``18``, ``19``, ``20``][`Depth`]\> : `Arr`  }[`Depth` extends ``-1`` ? ``"done"`` : ``"recur"``]
@@ -238,6 +247,22 @@ ___
 | :------ | :------ |
 | `T` | `T` |
 | `TReturn` | `any` |
+
+___
+
+### MediaStream
+
+Ƭ **MediaStream**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `audioTracks` | [`AudioTrack`](_internal_.md#audiotrack)[] | The audio tracks available in the stream. |
+| `id` | [`String`](_internal_.md#string) | The media stream identifier. |
+| `label` | [`String`](_internal_.md#string) | The media stream label. |
+| `type` | [`MediaStreamType`](../enums/_internal_.MediaStreamType.md) | The media stream type. |
+| `videoTracks` | [`VideoTrack`](_internal_.md#videotrack)[] | The video tracks available in the stream. |
 
 ___
 
@@ -292,6 +317,12 @@ ___
 ##### Returns
 
 `void`
+
+___
+
+### VideoTrack
+
+Ƭ **VideoTrack**: `any`
 
 ## Variables
 

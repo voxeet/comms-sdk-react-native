@@ -1,8 +1,8 @@
 import type {
   Participant,
-  MediaStreamType,
   ConferencePermission,
   ConferenceStatus,
+  MediaStream,
 } from './models';
 
 export enum ConferenceServiceEventNames {
@@ -41,7 +41,7 @@ export interface StreamChangedEventType {
   /** The conference participant. */
   participant: Participant;
   /** The media stream. */
-  mediaStream: MediaStreamType;
+  mediaStream: MediaStream;
 }
 
 export interface ConferenceServiceEventMap {
