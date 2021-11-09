@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
+import { DolbyIOContext } from '@components/DolbyIOProvider';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import InvitationResponseButtons from './InvitationResponseButtons';
 
 const InvitationHandler: React.FC = () => {
+  const { joinWithId } = useContext(DolbyIOContext);
   const onInvitationReceived = (data: InvitationReceivedEventType) => {
     console.log(
       'INVITATION RECEIVED EVENT DATA: \n',
@@ -30,6 +32,7 @@ const InvitationHandler: React.FC = () => {
         ),
         children: InvitationResponseButtons({
           conferenceId,
+          joinWithId,
         }),
       },
     });

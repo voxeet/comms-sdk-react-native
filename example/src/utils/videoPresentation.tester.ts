@@ -2,38 +2,38 @@ import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
-export const startVideoPresentation = (url: string) => {
+export const startVideoPresentation = async (url: string) => {
   try {
-    DolbyIoIAPI.videoPresentation.start(url);
+    await DolbyIoIAPI.videoPresentation.start(url);
   } catch (e: any) {
     Alert.alert('start error', e.message);
   }
 };
 
-export const pauseVideoPresentation = () => {
+export const pauseVideoPresentation = async () => {
   try {
-    const videoPresentation = DolbyIoIAPI.videoPresentation.current();
+    const videoPresentation = await DolbyIoIAPI.videoPresentation.current();
     if (!videoPresentation?.timestamp) {
       Alert.alert('you must start video presentation first');
       return;
     }
-    DolbyIoIAPI.videoPresentation.pause(videoPresentation.timestamp);
+    await DolbyIoIAPI.videoPresentation.pause(videoPresentation.timestamp);
   } catch (e: any) {
     Alert.alert('pause error', e.message);
   }
 };
 
-export const playVideoPresentation = () => {
+export const playVideoPresentation = async () => {
   try {
-    DolbyIoIAPI.videoPresentation.play();
+    await DolbyIoIAPI.videoPresentation.play();
   } catch (e: any) {
     Alert.alert('play error', e.message);
   }
 };
 
-export const currentVideoPresentation = () => {
+export const currentVideoPresentation = async () => {
   try {
-    const videoPresentation = DolbyIoIAPI.videoPresentation.current();
+    const videoPresentation = await DolbyIoIAPI.videoPresentation.current();
     Alert.alert(
       'Video presentation: ',
       JSON.stringify(videoPresentation, null, 2)
@@ -43,30 +43,30 @@ export const currentVideoPresentation = () => {
   }
 };
 
-export const seekVideoPresentation = () => {
+export const seekVideoPresentation = async () => {
   try {
-    const videoPresentation = DolbyIoIAPI.videoPresentation.current();
+    const videoPresentation = await DolbyIoIAPI.videoPresentation.current();
     if (!videoPresentation?.timestamp) {
       Alert.alert('you must start video presentation first');
       return;
     }
-    DolbyIoIAPI.videoPresentation.seek(videoPresentation?.timestamp);
+    await DolbyIoIAPI.videoPresentation.seek(videoPresentation?.timestamp);
   } catch (e: any) {
     Alert.alert('seek error', e.message);
   }
 };
 
-export const stopVideoPresentation = () => {
+export const stopVideoPresentation = async () => {
   try {
-    DolbyIoIAPI.videoPresentation.stop();
+    await DolbyIoIAPI.videoPresentation.stop();
   } catch (e: any) {
     Alert.alert('stop error', e.message);
   }
 };
 
-export const stateOfVideoPresentation = () => {
+export const stateOfVideoPresentation = async () => {
   try {
-    const state = DolbyIoIAPI.videoPresentation.state();
+    const state = await DolbyIoIAPI.videoPresentation.state();
     Alert.alert('Video presentation state: ', state);
   } catch (e: any) {
     Alert.alert('state of video presentation error', e.message);
