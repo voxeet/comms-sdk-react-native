@@ -29,7 +29,7 @@ import io.dolby.sdk.reactnative.services.RNCommandServiceModule
 import io.dolby.sdk.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.reactnative.services.RNDolbyioIAPISdkModule
 import io.dolby.sdk.reactnative.services.RNFilePresentationServiceModule
-import io.dolby.sdk.reactnative.services.RNMediaServiceModule
+import io.dolby.sdk.reactnative.services.RNMediaDeviceServiceModule
 import io.dolby.sdk.reactnative.services.RNNotificationServiceModule
 import io.dolby.sdk.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.reactnative.services.RNSessionServiceModule
@@ -155,7 +155,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         reactContext = reactContext,
         systemPermissionsMapper = SystemPermissionsMapper()
       ),
-      RNMediaServiceModule(
+      RNMediaDeviceServiceModule(
         reactContext = reactContext,
         mediaDeviceService = VoxeetSDK.mediaDevice(),
         mediaMapper = MediaMapper()
