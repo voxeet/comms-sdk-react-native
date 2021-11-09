@@ -32,7 +32,8 @@ export interface IDolbyIOProvider {
   initialize: () => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean) => void;
-  join: (alias: string) => void;
+  joinWithAlias: (alias: string) => void;
+  joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
   setActiveParticipantId: (id: string) => void;
@@ -48,7 +49,8 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
-  join: () => {},
+  joinWithAlias: () => {},
+  joinWithId: () => {},
   replay: () => {},
   leave: () => {},
   setActiveParticipantId: () => {},
@@ -104,6 +106,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const initialize = async () => {
     try {
+      console.log(APP_ID);
       await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
       setIsInitialized(true);
     } catch (e: any) {
@@ -180,7 +183,31 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       Alert.alert('Conference not joined', e.toString());
     }
   };
-  const join = async (alias: string) => {
+
+  const joinWithId = async (conferenceId: string) => {
+    try {
+      const fetchedConference = await DolbyIoIAPI.conference.fetch(
+        conferenceId
+      );
+      const joinedConference = await DolbyIoIAPI.conference.join(
+        fetchedConference
+      );
+      setConference(joinedConference);
+      const participantsMap = new Map();
+      joinedConference.participants.forEach((p) =>
+        participantsMap.set(p.id, p)
+      );
+      setParticipants(participantsMap);
+      AsyncStorage.setItem(
+        '@conference-previous',
+        JSON.stringify(joinedConference)
+      );
+    } catch (e: any) {
+      Alert.alert('Conference not joined', e.toString());
+    }
+  };
+
+  const joinWithAlias = async (alias: string) => {
     try {
       const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
 
@@ -252,7 +279,8 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     initialize,
     openSession,
     createAndJoin,
-    join,
+    joinWithAlias,
+    joinWithId,
     replay,
     leave,
     setActiveParticipantId,

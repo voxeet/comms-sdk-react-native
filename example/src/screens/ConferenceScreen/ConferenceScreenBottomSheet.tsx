@@ -30,6 +30,9 @@ import {
   updatePermissions,
   startScreenShare,
   stopScreenShare,
+  getLocalStats,
+  getStatus,
+  getMaxVideoForwarding,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -129,6 +132,24 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Get current"
               onPress={current}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Get local stats"
+              onPress={getLocalStats}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Get conference status"
+              onPress={() => getStatus(conference)}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Get max video forwarding"
+              onPress={getMaxVideoForwarding}
             />
             <Button
               size="small"

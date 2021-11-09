@@ -19,7 +19,7 @@ export class VideoPresentationService {
    * @param timestamp<number>
    * @returns void
    */
-  public pause(timestamp: number): void {
+  public pause(timestamp: number): Promise<void> {
     return this._nativeModule.pause(timestamp);
   }
 
@@ -27,7 +27,7 @@ export class VideoPresentationService {
    * Resumes the paused video presentation.
    * @returns void
    */
-  public play(): void {
+  public play(): Promise<void> {
     return this._nativeModule.play();
   }
 
@@ -38,7 +38,7 @@ export class VideoPresentationService {
    * URL of the presented video file.
    * @returns {VideoPresentation | null}
    */
-  public current(): VideoPresentation | null {
+  public current(): Promise<VideoPresentation | null> {
     return this._nativeModule.current();
   }
 
@@ -46,7 +46,7 @@ export class VideoPresentationService {
    * Provides the current state of the video presentation.
    * @returns VideoPresentationState
    */
-  public state(): VideoPresentationState {
+  public state(): Promise<VideoPresentationState> {
     return this._nativeModule.state();
   }
 
@@ -55,7 +55,7 @@ export class VideoPresentationService {
    * @param timestamp<number>
    * @returns void
    */
-  public seek(timestamp: number): void {
+  public seek(timestamp: number): Promise<void> {
     return this._nativeModule.seek(timestamp);
   }
 
@@ -64,7 +64,7 @@ export class VideoPresentationService {
    * @param url<number>
    * @returns void
    */
-  public start(url: string): void {
+  public start(url: string): Promise<void> {
     return this._nativeModule.start(url);
   }
 
@@ -72,7 +72,7 @@ export class VideoPresentationService {
    * Stops the video presentation.
    * @returns void
    */
-  public stop(): void {
+  public stop(): Promise<void> {
     return this._nativeModule.stop();
   }
 
