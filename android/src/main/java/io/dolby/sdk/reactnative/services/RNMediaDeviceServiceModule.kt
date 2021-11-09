@@ -13,7 +13,7 @@ import io.dolby.sdk.reactnative.utils.Promises.thenValue
 import io.dolby.sdk.reactnative.utils.ReactPromise
 
 /**
- * [RNMediaServiceModule] allows the application to manage media devices that are used during conferences.
+ * [RNMediaDeviceServiceModule] allows the application to manage media devices that are used during conferences.
  *
  * The service allows the application to:
  * - Switch device cameras [switchCamera]
@@ -27,13 +27,13 @@ import io.dolby.sdk.reactnative.utils.ReactPromise
  * @param mediaDeviceService  [MediaDeviceService] from Android SDK
  * @param mediaMapper         [MediaMapper] mapper for a media-related models
  */
-class RNMediaServiceModule constructor(
+class RNMediaDeviceServiceModule constructor(
   reactContext: ReactApplicationContext,
   private val mediaDeviceService: MediaDeviceService,
   private val mediaMapper: MediaMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
-  override fun getName(): String = "DolbyIoIAPIMediaService"
+    override fun getName(): String = "DolbyIoIAPIMediaDeviceService"
 
   /**
    * The ComfortNoiseLevel model represents the possible comfort noise levels in Dolby Voice conferences.
