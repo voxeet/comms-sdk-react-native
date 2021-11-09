@@ -59,5 +59,17 @@ public class SessionServiceModule: NSObject {
 			ModuleError.noCurrentParticipant.send(with: reject)
 		}
 	}
+
+	/// Checks whether there is an open session that connects SDK with backend.
+	/// - Parameters:
+	///   - resolve: returns BOOL on success
+	///   - reject: returns error on failure
+	@objc(isOpen:rejecter:)
+	public func isOpen(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		resolve(NSNumber(value: VoxeetSDK.shared.session.isOpen))
+	}
 }
 

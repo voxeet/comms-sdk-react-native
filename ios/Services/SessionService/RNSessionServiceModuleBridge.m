@@ -13,5 +13,8 @@ RCT_EXTERN_METHOD(close:(RCTPromiseResolveBlock _Nonnull)resolve
 RCT_EXTERN_METHOD(getParticipant:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(isOpen:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 @end
 
