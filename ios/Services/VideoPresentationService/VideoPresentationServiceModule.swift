@@ -24,6 +24,16 @@ public class VideoPresentationServiceModule: ReactEmitter {
 		return EventKeys.allCases.mapToStrings()
 	}
 
+	public override func startObserving() {
+		super.startObserving()
+		VoxeetSDK.shared.videoPresentation.delegate = self;
+	}
+
+	public override func stopObserving() {
+		super.stopObserving()
+		VoxeetSDK.shared.videoPresentation.delegate = nil;
+	}
+
 	// MARK: - Methods
 	/// Enables the video presentation and starts playing the shared video file.
 	/// - Parameters:
@@ -123,5 +133,75 @@ public class VideoPresentationServiceModule: ReactEmitter {
 			}
 			error.send(with: reject)
 		}
+	}
+
+	// MARK: - Getters
+	/// Returns information about the current video presentation.
+	/// Use this accessor if you wish to receive information that is available in the VTVideoPresentation object,
+	/// such as information about the participant who shares the video, the current timestamp, or the URL of the presented video file.
+	/// - Parameters:
+	///   - resolve: returns VideoPresentation object on success
+	///   - reject: returns error on failure
+	@objc(current:rejecter:)
+	public func current(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		guard let videoPresentation = VoxeetSDK.shared.videoPresentation.current else {
+			ModuleError.noCurrenVideoPresentation.send(with: reject)
+			return
+		}
+		resolve(videoPresentation.toReactModel())
+	}
+
+	/// Provides the current state of the video presentation.
+	/// - Parameters:
+	///   - resolve: returns VideoPresentationState object on success
+	///   - reject: returns error on failure
+	@objc(state:rejecter:)
+	public func state(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		resolve(VoxeetSDK.shared.videoPresentation.state.toReactModelValue() ?? NSNull())
+	}
+}
+
+// MARK: - VTVideoPresentationDelegate
+extension VideoPresentationServiceModule: VTVideoPresentationDelegate {
+
+	public func started(videoPresentation: VTVideoPresentation) {
+		send(
+			event: EventKeys.started,
+			body: videoPresentation.toReactModel()
+		)
+	}
+
+	public func stopped(videoPresentation: VTVideoPresentation) {
+		send(
+			event: EventKeys.stopped,
+			body: videoPresentation.toReactModel()
+		)
+	}
+
+	public func played(videoPresentation: VTVideoPresentation) {
+		send(
+			event: EventKeys.played,
+			body: videoPresentation.toReactModel()
+		)
+	}
+
+	public func paused(videoPresentation: VTVideoPresentation) {
+		send(
+			event: EventKeys.paused,
+			body: videoPresentation.toReactModel()
+		)
+	}
+
+	public func sought(videoPresentation: VTVideoPresentation) {
+		send(
+			event: EventKeys.sought,
+			body: videoPresentation.toReactModel()
+		)
 	}
 }
