@@ -32,7 +32,7 @@
 
 ### current
 
-▸ **current**(): ``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)
+▸ **current**(): [`Promise`](../modules/_internal_.md#promise)<``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)\>
 
 Returns information about the current video presentation. Use this accessor
 if you wish to receive information that is available in the VideoPresentation
@@ -41,7 +41,7 @@ URL of the presented video file.
 
 #### Returns
 
-``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)
+[`Promise`](../modules/_internal_.md#promise)<``null`` \| [`VideoPresentation`](../interfaces/_internal_.VideoPresentation.md)\>
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 ### pause
 
-▸ **pause**(`timestamp`): `void`
+▸ **pause**(`timestamp`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Pauses the video presentation.
 
@@ -99,7 +99,7 @@ Pauses the video presentation.
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 void
 
@@ -107,13 +107,13 @@ ___
 
 ### play
 
-▸ **play**(): `void`
+▸ **play**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Resumes the paused video presentation.
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 void
 
@@ -121,7 +121,7 @@ ___
 
 ### seek
 
-▸ **seek**(`timestamp`): `void`
+▸ **seek**(`timestamp`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Allows the presenter to navigate to the specific section of the shared video.
 
@@ -133,7 +133,7 @@ Allows the presenter to navigate to the specific section of the shared video.
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 void
 
@@ -141,7 +141,7 @@ ___
 
 ### start
 
-▸ **start**(`url`): `void`
+▸ **start**(`url`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Starts the video presentation.
 
@@ -153,7 +153,7 @@ Starts the video presentation.
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 void
 
@@ -161,13 +161,13 @@ ___
 
 ### state
 
-▸ **state**(): [`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)
+▸ **state**(): [`Promise`](../modules/_internal_.md#promise)<[`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)\>
 
 Provides the current state of the video presentation.
 
 #### Returns
 
-[`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)
+[`Promise`](../modules/_internal_.md#promise)<[`VideoPresentationState`](../enums/_internal_.VideoPresentationState.md)\>
 
 VideoPresentationState
 
@@ -175,12 +175,12 @@ ___
 
 ### stop
 
-▸ **stop**(): `void`
+▸ **stop**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Stops the video presentation.
 
 #### Returns
 
-`void`
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 void
