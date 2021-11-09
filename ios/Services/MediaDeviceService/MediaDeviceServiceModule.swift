@@ -18,6 +18,19 @@ public class MediaDeviceServiceModule: NSObject {
 		}
 	}
 
+	/// Switches the current speaker to another available speaker that is connected to the device.
+	/// - Parameters:
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(switchSpeaker:rejecter:)
+	public func switchSpeaker(
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		VoxeetSDK.shared.mediaDevice.switchDeviceSpeaker()
+		resolve(NSNull())
+	}
+
 	/// Checks if the application uses the front-facing (true) or back-facing camera (false).
 	/// - Parameters:
 	///   - resolve: returns on success

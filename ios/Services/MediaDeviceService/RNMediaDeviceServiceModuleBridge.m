@@ -6,6 +6,9 @@
 RCT_EXTERN_METHOD(switchCamera:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(switchSpeaker:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 RCT_EXTERN_METHOD(isFrontCamera:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
