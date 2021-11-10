@@ -374,6 +374,10 @@ public class ConferenceServiceModule: ReactEmitter {
 			ModuleError.noConferenceId.send(with: reject)
 			return
 		}
+		if let current = current, current.id == conferenceId {
+			resolve(current.participants.map { $0.toReactModel() })
+			return
+		}
 		VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { conference in
 			resolve(conference.participants.map { $0.toReactModel() })
 		}
