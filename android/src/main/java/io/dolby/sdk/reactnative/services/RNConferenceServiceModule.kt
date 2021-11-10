@@ -24,6 +24,7 @@ import io.dolby.sdk.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
+import io.dolby.sdk.reactnative.mapper.SpatialAudioMapper
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
 import io.dolby.sdk.reactnative.utils.Promises.rejectIfFalse
@@ -94,6 +95,7 @@ class RNConferenceServiceModule(
   private val conferenceMapper: ConferenceMapper,
   private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
   private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
+  private val spatialAudioMapper: SpatialAudioMapper,
   private val participantMapper: ParticipantMapper,
   private val participantPermissionMapper: ParticipantPermissionMapper,
   private val eventEmitter: RNEventEmitter
@@ -558,6 +560,54 @@ class RNConferenceServiceModule(
     }) { "Couldn't get the participant permissions" }
       .thenPromise(conferenceService::updatePermissions)
       .rejectIfFalse { "Update participant permissions operation failed" }
+      .forward(promise)
+  }
+
+  @ReactMethod
+  fun setSpatialEnvironment(
+    spatialScaleRN: ReadableMap,
+    forwardRN: ReadableMap,
+    upRN: ReadableMap,
+    rightRN: ReadableMap,
+    promise: ReactPromise
+  ) {
+    Promises
+      .promise({
+        conferenceService.setSpatialEnvironment(
+          spatialAudioMapper.spatialScaleFromRN(spatialScaleRN),
+          spatialAudioMapper.spatialPositionFromRN(forwardRN),
+          spatialAudioMapper.spatialPositionFromRN(upRN),
+          spatialAudioMapper.spatialPositionFromRN(rightRN),
+        )
+      }) { "Could not set spatial environment. Did you join participant with spatial audio enabled?" }
+      .forward(promise)
+  }
+
+  @ReactMethod
+  fun setSpatialPosition(
+    participantRN: ReadableMap,
+    spatialPositionRN: ReadableMap,
+    promise: ReactPromise
+  ) {
+    Promises
+      .promise({
+        val participant = toParticipant(participantRN)
+        val position = spatialAudioMapper.spatialPositionFromRN(spatialPositionRN)
+        conferenceService.setSpatialPosition(participant, position)
+      }) { "Could not set spatial position. Did you join participant with spatial audio enabled?" }
+      .forward(promise)
+  }
+
+  @ReactMethod
+  fun setSpatialDirection(
+    directionRN: ReadableMap,
+    promise: ReactPromise
+  ) {
+    Promises
+      .promise({
+        val direction = spatialAudioMapper.spatialDirectionFromRN(directionRN)
+        conferenceService.setSpatialDirection(direction)
+      }) { "Could not set spatial direction. Did you join participant with spatial audio enabled?" }
       .forward(promise)
   }
 

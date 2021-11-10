@@ -27,6 +27,7 @@ class ConferenceJoinOptionsMapper {
           it.getConstraints()?.let(::setConstraints)
           it.getOptionalInt(CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING)
             ?.let(::setMaxVideoForwarding)
+          it.getOptionalBoolean(CONFERENCE_JOIN_OPTIONS_SPATIAL_AUDIO)?.let(::setSpatialAudio)
         }
       }
       .build()
@@ -39,6 +40,7 @@ class ConferenceJoinOptionsMapper {
     }
 
   companion object {
+    private const val CONFERENCE_JOIN_OPTIONS_SPATIAL_AUDIO = "spatialAudio"
     private const val CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN = "conferenceAccessToken"
     private const val CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING = "maxVideoForwarding"
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS = "constraints"
