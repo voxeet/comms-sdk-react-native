@@ -563,6 +563,21 @@ class RNConferenceServiceModule(
       .forward(promise)
   }
 
+  /**
+   * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+   * This method is available only for participants who joined the conference with the spatialAudio parameter enabled. Otherwise, SDK triggers SpatialAudioException.
+   * If not called, the SDK uses the default spatial environment, which consists of the following values:
+   * * forward = (0, 0, 1), where +Z axis is in front
+   * * up = (0, 1, 0), where +Y axis is above
+   * * right = (1, 0, 0), where +X axis is to the right
+   * * scale = (1, 1, 1), where one unit on any axis is 1 meter
+   *
+   * @param spatialScaleRN The application's distance units or scale in application units per one meter. The value must be greater than 0.
+   * @param forwardRN      A vector describing the direction the application considers as forward. The value must be orthogonal to up and right.
+   * @param upRN           A vector describing the direction the application considers as up. The value must be orthogonal to forward and right.
+   * @param rightRN        A vector describing the direction the application considers as right. The value must be orthogonal to forward and up.
+   * @param promise        returns null
+   */
   @ReactMethod
   fun setSpatialEnvironment(
     spatialScaleRN: ReadableMap,
@@ -583,6 +598,19 @@ class RNConferenceServiceModule(
       .forward(promise)
   }
 
+  /**
+   * Sets a remote participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
+   * If the remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified.
+   * This method is available only for participants who joined the conference with the setSpatialAudio parameter enabled. Otherwise, SDK triggers the SpatialAudioException.
+   *
+   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}),
+   * Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}),
+   * he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front.
+   *
+   * @param participantRN       The selected remote participant.
+   * @param spatialPositionRN The participant's audio location from which their audio will be rendered.
+   * @param promise           returns null
+   */
   @ReactMethod
   fun setSpatialPosition(
     participantRN: ReadableMap,
@@ -598,6 +626,19 @@ class RNConferenceServiceModule(
       .forward(promise)
   }
 
+  /**
+   * Sets the direction a participant is facing in space.
+   * This method is available only for participants who joined the conference with the spatialAudio parameter enabled. Otherwise, SDK triggers UnsupportedError.
+   *
+   * Currently, this method is only supported for the local participant. The method changes the direction the local participant is facing.
+   * When the specified participant is a remote participant, SDK triggers UnsupportedError.
+   *
+   * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right.
+   * If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position.
+   *
+   * @param directionRN The direction the local participant is facing in space.
+   * @param promise     returns null
+   */
   @ReactMethod
   fun setSpatialDirection(
     directionRN: ReadableMap,
