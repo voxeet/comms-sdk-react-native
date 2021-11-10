@@ -22,17 +22,9 @@ const ParticipantAvatar = (participant: Participant) => {
   const { conference } = useContext(DolbyIOContext);
 
   // first participant in conference.participants[] should be conference owner - this function takes away the option from other users to change conference owner permissions
-  const checkIsOwner = (): boolean => {
-    const participantIndex = conference?.participants.findIndex(
-      (p) => p.id === participant.id
-    );
 
-    if (participantIndex === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const checkIsOwner =
+    conference?.participants.findIndex((p) => p.id === participant.id) === 0;
 
   const options: Options = [
     {
@@ -66,7 +58,7 @@ const ParticipantAvatar = (participant: Participant) => {
     {
       text: 'Update permissions',
       value: 'update permissions',
-      onSelect: checkIsOwner()
+      onSelect: checkIsOwner
         ? () => Alert.alert('Cannot update conference owner permissions')
         : () => setPermissionsModalActive(!permissionsModalActive),
       // onSelect: () => setPermissionsModalActive(!permissionsModalActive),
