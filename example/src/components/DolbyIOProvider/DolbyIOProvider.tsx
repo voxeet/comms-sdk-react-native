@@ -110,6 +110,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       'PERMISSIONS UPDATED EVENT DATA: \n',
       JSON.stringify(data, null, 2)
     );
+    Alert.alert('Permissions updated event');
   };
 
   const initialize = async () => {
