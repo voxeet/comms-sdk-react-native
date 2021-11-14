@@ -86,7 +86,6 @@ public class DolbyIoIAPIModule: ReactEmitter {
 	}
 
 	private func setupSDK() {
-		VoxeetSDK.shared.notification.push.type = .callKit
 		VoxeetSDK.shared.telemetry.platform = .reactNative
 
 		if let appGroup = Bundle.appGroup {
