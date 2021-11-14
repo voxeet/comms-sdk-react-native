@@ -10,6 +10,7 @@ internal enum ModuleError: Error {
 	case noLocalStats
 	case noUrlProvided
 	case noCurrentFilePresentation
+	case noCurrenVideoPresentation
 	case noImageForPage(Int)
 	case noThumbnailForPage(Int)
 	case invalidFile(String)
@@ -40,6 +41,8 @@ internal extension ModuleError {
 			return "No url provided"
 		case .noCurrentFilePresentation:
 			return "Missing current file presentation."
+		case .noCurrenVideoPresentation:
+			return "Missing current video presentation."
 		case let .noImageForPage(page):
 			return "Couldn't find image for page: \(page)"
 		case let .noThumbnailForPage(page):
