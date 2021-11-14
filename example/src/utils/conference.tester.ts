@@ -189,7 +189,6 @@ export const updatePermissions = async (
 ) => {
   try {
     await DolbyIoIAPI.conference.updatePermissions(participantPermissions);
-    Alert.alert('Permissions updated!');
   } catch (e: any) {
     Alert.alert('updatePermissions error', e.toString());
   }

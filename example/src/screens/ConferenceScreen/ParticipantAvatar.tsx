@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { View } from 'react-native';
-import { Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
@@ -18,13 +17,6 @@ const ParticipantAvatar = (participant: Participant) => {
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const { activeParticipant, setActiveParticipantId } =
     useContext(DolbyIOContext);
-
-  const { conference } = useContext(DolbyIOContext);
-
-  // first participant in conference.participants[] should be conference owner - this function takes away the option from other users to change conference owner permissions
-
-  const checkIsOwner =
-    conference?.participants.findIndex((p) => p.id === participant.id) === 0;
 
   const options: Options = [
     {
@@ -58,10 +50,7 @@ const ParticipantAvatar = (participant: Participant) => {
     {
       text: 'Update permissions',
       value: 'update permissions',
-      onSelect: checkIsOwner
-        ? () => Alert.alert('Cannot update conference owner permissions')
-        : () => setPermissionsModalActive(!permissionsModalActive),
-      // onSelect: () => setPermissionsModalActive(!permissionsModalActive),
+      onSelect: () => setPermissionsModalActive(!permissionsModalActive),
     },
   ];
 
