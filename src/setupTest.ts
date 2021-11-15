@@ -38,6 +38,9 @@ jest.mock('react-native', () => {
     leave: jest.fn(),
     startScreenShare: jest.fn(),
     stopScreenShare: jest.fn(),
+    setSpatialDirection: jest.fn(),
+    setSpatialEnvironment: jest.fn(),
+    setSpatialPosition: jest.fn(),
   };
   RN.NativeModules.DolbyIoIAPISessionServiceModule = {
     open: jest.fn(),

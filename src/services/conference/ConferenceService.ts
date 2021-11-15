@@ -23,6 +23,9 @@ import type {
   ParticipantPermissions,
   UnsubscribeFunction,
   RTCStatsType,
+  SpatialDirection,
+  SpatialScale,
+  SpatialPosition,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
@@ -427,6 +430,49 @@ export class ConferenceService {
    */
   public async stopScreenShare(): Promise<void> {
     return this._nativeModule.stopScreenShare();
+  }
+
+  /**
+   * Sets the direction a participant is facing in space.
+   * @param participant<Participant> The selected remote participant.
+   * @param direction<SpatialDirection> The direction the local participant is facing in space.
+   * @returns {Promise<void>}
+   */
+  public async setSpatialDirection(
+    participant: Participant,
+    direction: SpatialDirection
+  ): Promise<void> {
+    return this._nativeModule.setSpatialDirection(participant, direction);
+  }
+
+  /**
+   * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+   * @param scale<SpatialScale> The application's distance units or scale in application units per one meter. The value must be greater than 0.
+   * @param forward<SpatialPosition> A vector describing the direction the application considers as forward. The value must be orthogonal to up and right.
+   * @param up<SpatialPosition> A vector describing the direction the application considers as up. The value must be orthogonal to forward and right.
+   * @param right<SpatialPosition> A vector describing the direction the application considers as right. The value must be orthogonal to forward and up.
+   * @returns {Promise<void>}
+   */
+  public async setSpatialEnvironment(
+    scale: SpatialScale,
+    forward: SpatialPosition,
+    up: SpatialPosition,
+    right: SpatialPosition
+  ): Promise<void> {
+    return this._nativeModule.setSpatialEnvironment(scale, forward, up, right);
+  }
+
+  /**
+   * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
+   * @param participant<Participant> The selected remote participant.
+   * @param position<SpatialPosition> The participant's audio location from which their audio will be rendered.
+   * @returns {Promise<void>}
+   */
+  public async setSpatialPosition(
+    participant: Participant,
+    position: SpatialPosition
+  ): Promise<void> {
+    return this._nativeModule.setSpatialPosition(participant, position);
   }
 }
 
