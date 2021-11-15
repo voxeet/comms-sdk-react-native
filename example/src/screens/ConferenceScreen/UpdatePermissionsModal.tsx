@@ -1,7 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { Modal, ScrollView } from 'react-native';
 
-import CheckBox from '@react-native-community/checkbox';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
@@ -11,10 +10,6 @@ import type { Participant } from '../../../../src/services/conference/models';
 import { ConferencePermission } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 
-const enumToArray = (enumValue: any): string[] => {
-  return Object.keys(enumValue).map((i) => enumValue[i]);
-};
-
 type UpdatePermissionsModalProps = {
   participant: Participant;
   open: boolean;
@@ -23,39 +18,40 @@ type UpdatePermissionsModalProps = {
 
 const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
   ({ participant, open, closeModal }) => {
-    const [userPermissions, setUserPermissions] = useState<string[]>([]);
+    const [userPermissions, setUserPermissions] = useState<
+      Array<ConferencePermission>
+    >([]);
 
     // Creates array from ConferencePermissions enum
-    const permissions = enumToArray(ConferencePermission);
+    const permissions = [...Object.values(ConferencePermission)];
 
     // Convert permission name to display in modal name
-    const permissionNamingMap = new Map([
-      ['INVITE', 'Invite participants'],
-      ['KICK', 'Kick participants'],
-      ['UPDATE_PERMISSIONS', 'Update participants permissions'],
-      ['JOIN', 'Join a conference'],
-      ['SEND_AUDIO', 'Send audio stream'],
-      ['SEND_VIDEO', 'Send video stream'],
-      ['SHARE_SCREEN', 'Share a screen'],
-      ['SHARE_VIDEO', 'Share a video'],
-      ['SHARE_FILE', 'Share a file'],
-      ['SEND_MESSAGE', 'Send a message'],
-      ['RECORD', 'Record a conference'],
-      ['STREAM', 'Stream a conference'],
-    ]);
-
-    // Change userPermissions array, during changes in checkboxes
-    const updateUserPermissionsArray = (permission: string) => {
-      if (userPermissions.includes(permission)) {
-        setUserPermissions(
-          userPermissions.filter(
-            (userPermission) => userPermission !== permission
-          )
-        );
-      } else {
-        setUserPermissions([...userPermissions, permission]);
-      }
+    const mapPermissionToButtonName: Record<string, string> = {
+      [ConferencePermission.INVITE]: 'Invite participants',
+      [ConferencePermission.KICK]: 'Kick participants',
+      [ConferencePermission.UPDATE_PERMISSIONS]:
+        'Update participants permissions',
+      [ConferencePermission.JOIN]: 'Join a conference',
+      [ConferencePermission.SEND_AUDIO]: 'Send audio stream',
+      [ConferencePermission.SEND_VIDEO]: 'Send video stream',
+      [ConferencePermission.SHARE_SCREEN]: 'Share a screen',
+      [ConferencePermission.SHARE_VIDEO]: 'Share a video',
+      [ConferencePermission.SHARE_FILE]: 'Share a file',
+      [ConferencePermission.SEND_MESSAGE]: 'Send a message',
+      [ConferencePermission.RECORD]: 'Record a conference',
+      [ConferencePermission.STREAM]: 'Stream a conference',
     };
+
+    // Change userPermissions array, on buttons press
+    const toggleUserPermission = (permission: ConferencePermission) => {
+      userPermissions.includes(permission)
+        ? setUserPermissions((up) => up.filter((p) => p !== permission))
+        : setUserPermissions([...userPermissions, permission]);
+    };
+
+    // check for permission button color
+    const hasUserPermission = (permission: ConferencePermission): boolean =>
+      userPermissions.includes(permission);
 
     // Submit permissions
     const submitPermissions = async () => {
@@ -63,9 +59,7 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
       await updatePermissions([
         {
           participant,
-          permissions: userPermissions.map((userPermission) => {
-            return userPermission as ConferencePermission;
-          }),
+          permissions: Array.from(userPermissions),
         },
       ]);
       setUserPermissions([]);
@@ -79,7 +73,7 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
 
     useEffect(() => {
       setUserPermissions(userPermissions);
-      console.log(`Permissions changed:`, userPermissions);
+      console.log(userPermissions);
     }, [userPermissions]);
 
     return (
@@ -102,20 +96,17 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
                       mv="xxs"
                       pl="xxs"
                       fw
-                      style={styles.modalCheckboxContainer}
+                      style={styles.modalButtonContainer}
                       key={permission}
                     >
-                      <CheckBox
-                        style={styles.modalCheckbox}
-                        disabled={false}
-                        value={false}
-                        onValueChange={() =>
-                          updateUserPermissionsArray(permission)
-                        }
+                      <Button
+                        text={`${mapPermissionToButtonName[permission]}`}
+                        color={hasUserPermission(permission) ? 'green' : 'red'}
+                        size="small"
+                        onPress={() => {
+                          toggleUserPermission(permission);
+                        }}
                       />
-                      <Text color="black">
-                        {permissionNamingMap.get(permission)}
-                      </Text>
                     </Space>
                   );
                 })}
