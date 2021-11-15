@@ -15,6 +15,7 @@
 - [preferRecvMono](_internal_.ConferenceJoinOptions.md#preferrecvmono)
 - [preferSendMono](_internal_.ConferenceJoinOptions.md#prefersendmono)
 - [simulcast](_internal_.ConferenceJoinOptions.md#simulcast)
+- [spatialAudio](_internal_.ConferenceJoinOptions.md#spatialaudio)
 
 ## Properties
 
@@ -57,3 +58,9 @@ ___
 ### simulcast
 
 • `Optional` **simulcast**: `boolean`
+
+___
+
+### spatialAudio
+
+• `Optional` **spatialAudio**: `boolean`
