@@ -23,6 +23,7 @@ import io.dolby.sdk.reactnative.mapper.MediaMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.reactnative.mapper.RecordingMapper
+import io.dolby.sdk.reactnative.mapper.SpatialAudioMapper
 import io.dolby.sdk.reactnative.mapper.SystemPermissionsMapper
 import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.reactnative.services.RNCommandServiceModule
@@ -110,6 +111,7 @@ class RNDolbyioIAPISdkPackage : ReactPackage {
         conferenceMapper = conferenceMapper,
         conferenceCreateOptionsMapper = ConferenceCreateOptionsMapper(),
         conferenceJoinOptionsMapper = ConferenceJoinOptionsMapper(),
+        spatialAudioMapper = SpatialAudioMapper(),
         participantMapper = participantMapper,
         eventEmitter = conferenceEventEmitter,
         participantPermissionMapper = participantPermissionMapper
