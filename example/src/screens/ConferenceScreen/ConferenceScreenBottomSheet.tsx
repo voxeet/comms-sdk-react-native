@@ -79,7 +79,7 @@ const ConferenceScreenBottomSheet = () => {
   const { me, conference } = useContext(DolbyIOContext);
   const { startRecord, stopRecord } = useContext(RecordingContext);
   const { participants } = conference as Conference;
-  var convertedFile: FileConverted | null = null;
+  let convertedFile: FileConverted | null = null;
 
   const convertFile = async () => {
     try {

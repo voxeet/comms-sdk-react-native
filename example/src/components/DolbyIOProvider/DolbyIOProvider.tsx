@@ -7,6 +7,10 @@ import { APP_ID, APP_SECRET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type {
+  FileConvertedEventType,
+  FilePresentationChangedEventType,
+} from '../../../../lib/typescript/services/filePresentation/events';
+import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
   StreamChangedEventType,
@@ -81,6 +85,26 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     setConferenceStatus(data.status);
   };
 
+  const onFileConverted = (e: FileConvertedEventType) => {
+    console.log('ON FILE CONVERTED\n', JSON.stringify(e, null, 2));
+  };
+
+  const onFilePresentationChange = async (
+    e: FilePresentationChangedEventType,
+    type?: any
+  ) => {
+    console.log(
+      'ON FILE PRESENTATION CHANGE\n',
+      JSON.stringify(e, null, 2),
+      type
+    );
+    const {
+      filePresentation: { id },
+    } = e;
+    const a = await DolbyIoIAPI.filePresentation.getImage(0);
+    console.log(a, 'RETURN FROM GETIMAGE');
+  };
+
   const onParticipantsChange = (data: ParticipantChangedEventType) => {
     console.log(
       'PARTICIPANT CHANGE EVENT DATA: \n',
@@ -143,6 +167,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       DolbyIoIAPI.conference.onStatusChange(onConferenceStatusChange),
       DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange),
       DolbyIoIAPI.conference.onStreamsChange(onStreamsChange),
+      DolbyIoIAPI.filePresentation.onFilePresentationChange(
+        onFilePresentationChange
+      ),
+      DolbyIoIAPI.filePresentation.onFileConverted(onFileConverted),
       DolbyIoIAPI.conference.onPermissionsChange(onPermissionsChange),
     ];
     return () => {

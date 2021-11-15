@@ -20,7 +20,8 @@ export const stop = async () => {
 // TODO Includes temporary converted file
 export const start = async (file: FileConverted | null) => {
   try {
-    if (file == null) return
+    if (file == null) return;
+    console.log('file that were passing', file);
     await DolbyIoIAPI.filePresentation.start(file);
     Alert.alert('File presentation started');
   } catch (e) {
@@ -52,12 +53,12 @@ export const setPage = async (page: number) => {
 export const convert = async (file: File): Promise<FileConverted | null> => {
   try {
     const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
-    Alert.alert('Conversion done', convertedFile.toString());
-    return convertedFile
+    Alert.alert('Conversion done', JSON.stringify(convertedFile));
+    return convertedFile;
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Convert error', msg);
-    return null
+    return null;
   }
 };
 
