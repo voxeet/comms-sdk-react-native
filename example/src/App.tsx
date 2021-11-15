@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import RNToast from 'react-native-toast-message';
 
 import DolbyIOProvider from '@components/DolbyIOProvider';
+import FilePresentationHandler from '@components/FilePresentationHandler';
 import InvitationHandler from '@components/InvitationHandler';
 import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
@@ -36,6 +37,7 @@ export default class App extends Component<Props, State> {
             </RecordingProvider>
             <MessageHandler />
             <InvitationHandler />
+            <FilePresentationHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
