@@ -2,7 +2,12 @@ import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
-import type { Participant } from '../../../src/services/conference/models';
+import type {
+  Participant,
+  SpatialDirection,
+  SpatialScale,
+  SpatialPosition,
+} from '../../../src/services/conference/models';
 import type {
   Conference,
   ParticipantPermissions,
@@ -211,5 +216,54 @@ export const stopScreenShare = async () => {
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Stop screen sharing error', msg);
+  }
+};
+
+export const setSpatialDirection = async (
+  participant: Participant,
+  spatialDirection: SpatialDirection
+) => {
+  try {
+    await DolbyIoIAPI.conference.setSpatialDirection(
+      participant,
+      spatialDirection
+    );
+    Alert.alert('setSpatialDirection success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialDirection error', msg);
+  }
+};
+
+export const setSpatialEnvironment = async (
+  scale: SpatialScale,
+  forward: SpatialScale,
+  up: SpatialScale,
+  right: SpatialScale
+) => {
+  try {
+    await DolbyIoIAPI.conference.setSpatialEnvironment(
+      scale,
+      forward,
+      up,
+      right
+    );
+    Alert.alert('setSpatialEnvironent success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialEnvironment error', msg);
+  }
+};
+
+export const setSpatialPosition = async (
+  participant: Participant,
+  position: SpatialPosition
+) => {
+  try {
+    await DolbyIoIAPI.conference.setSpatialPosition(participant, position);
+    Alert.alert('setSpatialPosition success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialPosition error', msg);
   }
 };
