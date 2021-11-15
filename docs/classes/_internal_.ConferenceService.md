@@ -35,6 +35,9 @@
 - [replay](_internal_.ConferenceService.md#replay)
 - [setAudioProcessing](_internal_.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](_internal_.ConferenceService.md#setmaxvideoforwarding)
+- [setSpatialDirection](_internal_.ConferenceService.md#setspatialdirection)
+- [setSpatialEnvironment](_internal_.ConferenceService.md#setspatialenvironment)
+- [setSpatialPosition](_internal_.ConferenceService.md#setspatialposition)
 - [startAudio](_internal_.ConferenceService.md#startaudio)
 - [startScreenShare](_internal_.ConferenceService.md#startscreenshare)
 - [startVideo](_internal_.ConferenceService.md#startvideo)
@@ -474,6 +477,65 @@ Sets the maximum number of video streams that may be transmitted to the local pa
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<`any`\>
+
+___
+
+### setSpatialDirection
+
+▸ **setSpatialDirection**(`participant`, `direction`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+Sets the direction a participant is facing in space.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `direction` | [`SpatialDirection`](../interfaces/_internal_.SpatialDirection.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+___
+
+### setSpatialEnvironment
+
+▸ **setSpatialEnvironment**(`scale`, `forward`, `up`, `right`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `scale` | [`SpatialScale`](../interfaces/_internal_.SpatialScale.md) |
+| `forward` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+| `up` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+| `right` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+___
+
+### setSpatialPosition
+
+▸ **setSpatialPosition**(`participant`, `position`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+
+Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| `position` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+
+#### Returns
+
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
