@@ -386,12 +386,23 @@ describe('ConferenceService', () => {
         testParticipant,
         testSpatialDirection
       );
+      expect(
+        DolbyIoIAPIConferenceService.setSpatialDirection
+      ).toHaveBeenCalledWith(testParticipant, testSpatialDirection);
     });
   });
 
   describe('setSpatialEnvironment()', () => {
     it('should invoke exported method with correct arguments', () => {
       ConferenceService.setSpatialEnvironment(
+        testSpatialScale,
+        testSpatialPosition,
+        testSpatialPosition,
+        testSpatialPosition
+      );
+      expect(
+        DolbyIoIAPIConferenceService.setSpatialEnvironment
+      ).toHaveBeenCalledWith(
         testSpatialScale,
         testSpatialPosition,
         testSpatialPosition,
@@ -406,6 +417,9 @@ describe('ConferenceService', () => {
         testParticipant,
         testSpatialPosition
       );
+      expect(
+        DolbyIoIAPIConferenceService.setSpatialPosition
+      ).toHaveBeenCalledWith(testParticipant, testSpatialPosition);
     });
   });
 });
