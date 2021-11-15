@@ -33,6 +33,9 @@ import {
   getLocalStats,
   getStatus,
   getMaxVideoForwarding,
+  setSpatialDirection,
+  setSpatialEnvironment,
+  setSpatialPosition,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -222,6 +225,35 @@ const ConferenceScreenBottomSheet = () => {
                     permissions: [ConferencePermission.KICK],
                   },
                 ])
+              }
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="setSpatialDirection"
+              onPress={() =>
+                setSpatialDirection(participants[0], { x: 1, y: 2, z: 3 })
+              }
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="setSpatialEnvironment"
+              onPress={() =>
+                setSpatialEnvironment(
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 }
+                )
+              }
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="setSpatialPosition"
+              onPress={() =>
+                setSpatialPosition(participants[0], { x: 1, y: 2, z: 3 })
               }
             />
           </Space>
