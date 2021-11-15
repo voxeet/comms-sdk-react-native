@@ -81,7 +81,7 @@ export default StyleSheet.create({
   },
 
   modalContainer: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: 'lightgray',
     borderRadius: SPACE_XXS,
     width: '90%',
     height: '50%',
@@ -107,7 +107,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
-  modalCheckboxContainer: {
+  modalButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },

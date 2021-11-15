@@ -10,6 +10,7 @@ import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
   StreamChangedEventType,
+  PermissionsUpdatedEventType,
 } from '../../../../src/services/conference/events';
 import type {
   ConferenceStatus,
@@ -104,6 +105,14 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     });
   };
 
+  const onPermissionsChange = (data: PermissionsUpdatedEventType) => {
+    console.log(
+      'PERMISSIONS UPDATED EVENT DATA: \n',
+      JSON.stringify(data, null, 2)
+    );
+    Alert.alert('Permissions updated event');
+  };
+
   const initialize = async () => {
     try {
       console.log(APP_ID);
@@ -134,6 +143,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       DolbyIoIAPI.conference.onStatusChange(onConferenceStatusChange),
       DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange),
       DolbyIoIAPI.conference.onStreamsChange(onStreamsChange),
+      DolbyIoIAPI.conference.onPermissionsChange(onPermissionsChange),
     ];
     return () => {
       unsubscribers.forEach((u) => u());

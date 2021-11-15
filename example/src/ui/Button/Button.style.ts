@@ -38,4 +38,10 @@ export default StyleSheet.create({
   'color-dark': {
     backgroundColor: COLORS.BLUE,
   },
+  'color-red': {
+    backgroundColor: 'red',
+  },
+  'color-green': {
+    backgroundColor: 'green',
+  },
 });
