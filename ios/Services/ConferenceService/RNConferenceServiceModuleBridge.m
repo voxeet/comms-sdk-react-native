@@ -106,4 +106,21 @@ RCT_EXTERN_METHOD(startScreenShare:(RCTPromiseResolveBlock _Nonnull)resolve
 RCT_EXTERN_METHOD(stopScreenShare:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(setSpatialDirection:(NSDictionary * _Nonnull)participant
+				  direction:(NSDictionary * _Nonnull)direction
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(setSpatialEnvironment:(NSDictionary * _Nonnull)scale
+				  forward:(NSDictionary * _Nonnull)forward
+				  up:(NSDictionary * _Nonnull)up
+				  right:(NSDictionary * _Nonnull)right
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(setSpatialPosition:(NSDictionary * _Nonnull)participant
+				  position:(NSDictionary * _Nonnull)position
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 @end

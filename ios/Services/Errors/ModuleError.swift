@@ -19,6 +19,7 @@ internal enum ModuleError: Error {
 	case noConference(String)
 	case noParticipant(String)
 	case noParticipantId(String)
+	case waitingForSDKImplementation(String)
 }
 
 internal extension ModuleError {
@@ -59,6 +60,8 @@ internal extension ModuleError {
 			return "Couldn't find the participant: \(participant)"
 		case let .noParticipantId(participantId):
 			return "Couldn't find the participant with id: \(participantId)"
+		case let .waitingForSDKImplementation(version):
+			return "Waiting for implementation in SDK version: \(version)"
 		}
 	}
 }

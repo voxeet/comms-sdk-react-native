@@ -586,6 +586,58 @@ public class ConferenceServiceModule: ReactEmitter {
 			}
 		}
 	}
+
+	/// Sets the direction a participant is facing in space.
+	/// - Parameters:
+	///   - participant: The selected remote participant.
+	///   - direction: The direction the local participant is facing in space.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setSpatialDirection:direction:resolver:rejecter:)
+	public func setSpatialDirection(
+		participant: [String: Any],
+		direction: [String: Any],
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+	}
+
+	/// Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+	/// - Parameters:
+	///   - scale: The application's distance units or scale in application units per one meter. The value must be greater than 0.
+	///   - forward: A vector describing the direction the application considers as forward. The value must be orthogonal to up and right.
+	///   - up: A vector describing the direction the application considers as up. The value must be orthogonal to forward and right.
+	///   - right: A vector describing the direction the application considers as right. The value must be orthogonal to forward and up.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setSpatialEnvironment:forward:up:right:resolver:rejecter:)
+	public func setSpatialEnvironment(
+		scale: [String: Any],
+		forward: [String: Any],
+		up: [String: Any],
+		right: [String: Any],
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+	}
+
+	/// Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
+	/// - Parameters:
+	///   - participant: The selected remote participant.
+	///   - position: The participant's audio location from which their audio will be rendered.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setSpatialPosition:position:resolver:rejecter:)
+	public func setSpatialPosition(
+		participant: [String: Any],
+		position: [String: Any],
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+	}
 }
 
 extension ConferenceServiceModule: VTConferenceDelegate {

@@ -23,12 +23,13 @@ extension VTJoinOptions: ReactModelMappable {
 		[
 			Keys.constraints: constraints.toReactModel(),
 			Keys.maxVideoForwarding: maxVideoForwarding ?? NSNull(),
-			Keys.conferenceAccessToken: conferenceAccessToken ?? NSNull()
+			Keys.conferenceAccessToken: conferenceAccessToken ?? NSNull(),
+			Keys.spatialAudio: NSNumber(value: false)
 		].mapKeysToRawValue()
 	}
 }
 
 // MARK: - ReactModel Keys
 private enum Keys: String {
-	case constraints, maxVideoForwarding, conferenceAccessToken
+	case constraints, maxVideoForwarding, conferenceAccessToken, spatialAudio
 }
