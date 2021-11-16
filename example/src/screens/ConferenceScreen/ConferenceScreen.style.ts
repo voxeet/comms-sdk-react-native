@@ -140,4 +140,17 @@ export default StyleSheet.create({
   videoButtonRed: {
     backgroundColor: COLORS.RED,
   },
+  filePresentationWrapper: {
+    position: 'relative',
+  },
+  filePresentation: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+  },
+  filePresentationImage: {
+    height: 100,
+    width: 75,
+  },
 });

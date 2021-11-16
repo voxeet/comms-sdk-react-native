@@ -5,6 +5,7 @@ import RNToast from 'react-native-toast-message';
 
 import DolbyIOProvider from '@components/DolbyIOProvider';
 import FilePresentationHandler from '@components/FilePresentationHandler';
+import FilePresentationProvider from '@components/FilePresentationHandler';
 import InvitationHandler from '@components/InvitationHandler';
 import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
@@ -28,16 +29,18 @@ export default class App extends Component<Props, State> {
           <StatusBar backgroundColor={COLORS.BLACK} />
           <DolbyIOProvider>
             <RecordingProvider>
-              <Main />
-              <RNToast
-                config={toastConfig}
-                ref={(ref) => RNToast.setRef(ref)}
-                autoHide={false}
-              />
+              <FilePresentationProvider>
+                <Main />
+                <RNToast
+                  config={toastConfig}
+                  ref={(ref) => RNToast.setRef(ref)}
+                  autoHide={false}
+                />
+                <FilePresentationHandler />
+              </FilePresentationProvider>
             </RecordingProvider>
             <MessageHandler />
             <InvitationHandler />
-            <FilePresentationHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
