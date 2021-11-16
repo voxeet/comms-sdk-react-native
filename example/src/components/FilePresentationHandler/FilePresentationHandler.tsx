@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
+import { FilePresentationContext } from '@components/FilePresentationHandler/FilePresentationProvider';
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type {
@@ -10,6 +11,9 @@ import type {
 import { FilePresentationServiceEventNames } from '../../../../src/services/filePresentation/events';
 
 const FilePresentationHandler: React.FC = () => {
+  const { resetFilePresentation, startFilePresentation } = useContext(
+    FilePresentationContext
+  );
   const convertedFileEventHandler = (event: FileConvertedEventType) => {
     console.log('ON FILE CONVERTED\n', JSON.stringify(event, null, 2));
     Toast.show({
@@ -51,13 +55,19 @@ const FilePresentationHandler: React.FC = () => {
         ),
       },
     });
+    if (type === FilePresentationServiceEventNames.FilePresentationStopped) {
+      resetFilePresentation();
+      return;
+    }
     if (
       type === FilePresentationServiceEventNames.FilePresentationStarted ||
       type === FilePresentationServiceEventNames.FilePresentationUpdated
     ) {
       try {
-        const imageSrc = await DolbyIoIAPI.filePresentation.getImage(0);
-        console.log(imageSrc, 'FILE PRESENTATION GET IMAGE LINK');
+        const imageSrc = await DolbyIoIAPI.filePresentation.getImage(
+          event.filePresentation.imageCount || 0
+        );
+        startFilePresentation(imageSrc, event.filePresentation.owner.info.name);
       } catch (e) {
         console.log('failed to get presented file image source', e);
       }
