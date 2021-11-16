@@ -138,7 +138,7 @@ public class FilePresentationServiceModule: ReactEmitter {
 			ModuleError.noImageForPage(page).send(with: reject)
 			return
 		}
-		resolve(url)
+		resolve(url.toReactModelValue())
 	}
 
 	/// Provides the thumbnail's URL that refers to a specific page of the presented file.
@@ -156,7 +156,7 @@ public class FilePresentationServiceModule: ReactEmitter {
 			ModuleError.noThumbnailForPage(page).send(with: reject)
 			return
 		}
-		resolve(url)
+		resolve(url.toReactModelValue())
 	}
 
 	// MARK: - Setters
