@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useContext, useEffect, useRef } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
+import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
 import { VideoView } from '@dolbyio/react-native-iapi-sdk';
@@ -24,6 +25,9 @@ const ConferenceScreen: FunctionComponent = () => {
   const { me, conference, participants, activeParticipant } =
     useContext(DolbyIOContext);
   const { isRecording } = useContext(RecordingContext);
+  const { fileSrc, isPresentingFile, fileOwnerName } = useContext(
+    FilePresentationContext
+  );
 
   const videoView = useRef(null);
 
@@ -71,6 +75,18 @@ const ConferenceScreen: FunctionComponent = () => {
                 ) : null}
               </Space>
             </View>
+
+            {isPresentingFile && fileSrc ? (
+              <View style={styles.filePresentationWrapper}>
+                <View style={styles.filePresentation}>
+                  <Text>File presentation by: {fileOwnerName}</Text>
+                  <Image
+                    style={styles.filePresentationImage}
+                    source={{ uri: fileSrc }}
+                  />
+                </View>
+              </View>
+            ) : null}
 
             <View style={styles.center}>
               <View style={styles.centerButtons}>
