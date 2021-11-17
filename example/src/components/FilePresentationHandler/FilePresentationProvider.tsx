@@ -17,7 +17,7 @@ export const FilePresentationContext =
     startFilePresentation: () => {},
   });
 
-const FilePresentationProvider: React.FC = ({ children }) => {
+export const FilePresentationProvider: React.FC = ({ children }) => {
   const [isPresentingFile, setIsPresentingFile] = useState(false);
   const [fileOwnerName, setFileOwnerName] = useState('');
   const [fileSrc, setFileSrc] = useState('');
@@ -51,5 +51,3 @@ const FilePresentationProvider: React.FC = ({ children }) => {
     </FilePresentationContext.Provider>
   );
 };
-
-export default FilePresentationProvider;

@@ -65,7 +65,7 @@ const FilePresentationHandler: React.FC = () => {
     ) {
       try {
         const imageSrc = await DolbyIoIAPI.filePresentation.getImage(
-          event.filePresentation.imageCount || 0
+          event.filePresentation.position || 0
         );
         startFilePresentation(imageSrc, event.filePresentation.owner.info.name);
       } catch (e) {
