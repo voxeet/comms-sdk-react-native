@@ -35,7 +35,7 @@ const ConferenceScreen: FunctionComponent = () => {
     FilePresentationContext
   );
 
-  const [scaleType, setScaleType] = useState('fill');
+  const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
 
   const videoView = useRef() as React.MutableRefObject<VideoView>;
 
