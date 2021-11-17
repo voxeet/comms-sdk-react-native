@@ -1,2 +1,5 @@
 export { default } from './FilePresentationHandler';
-export { FilePresentationContext } from './FilePresentationProvider';
+export {
+  FilePresentationContext,
+  FilePresentationProvider,
+} from './FilePresentationProvider';
