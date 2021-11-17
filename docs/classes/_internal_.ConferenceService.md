@@ -562,6 +562,16 @@ ___
 ▸ **startScreenShare**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 	Starts a screen sharing session.
+	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
+
+Instead of setting properties:
+VoxeetSDK.shared.appGroup = "YOUR_APP_GROUP"
+VoxeetSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
+Setup keys in your Info.plist file:
+
+Open your Info.plist file then:
+- add a new DolbyioSdkAppGroupKey as a String type and enter the group name ("YOUR_APP_GROUP")
+- add a new DolbyioSdkPreferredExtensionKey as a String type and enter the broadcast extension bundle id ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID")
 
 #### Returns
 
