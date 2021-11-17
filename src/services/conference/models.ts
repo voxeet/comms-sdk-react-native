@@ -250,9 +250,11 @@ export type VideoTrack = any;
 
 export enum MediaStreamType {
   /** The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera. */
-  Camera = 'Camera',
+  Camera = 'CAMERA',
   /** The screen-share media stream. */
-  ScreenShare = 'ScreenShare',
+  ScreenShare = 'SCREEN_SHARE',
+  /** The non-specified media stream. */
+  Custom = 'CUSTOM',
 }
 
 export type MediaStream = {
