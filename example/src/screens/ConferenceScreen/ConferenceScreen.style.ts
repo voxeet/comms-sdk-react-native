@@ -116,6 +116,7 @@ export default StyleSheet.create({
     marginRight: 20,
   },
   videoButton: {
+    backgroundColor: COLORS.BLUE_DARK,
     width: 60,
     height: 60,
     borderRadius: 30,

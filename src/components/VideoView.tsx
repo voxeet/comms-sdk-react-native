@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import type { MediaStream, Participant } from '../services/conference/models';
-import { MediaStreamType } from '../services/conference/models';
 import NativeEvents from '../utils/NativeEvents';
 import type { UnregisterListener } from '../utils/types';
 import DIOVideoView from './DIOVideoView';
@@ -44,7 +43,8 @@ export default class VideoView extends PureComponent<Props, State> {
     mediaStream: undefined,
   };
 
-  private _nativeEvents = new NativeEvents(DIOVideoView);
+  private _nativeEvents =
+    Platform.OS === 'android' ? new NativeEvents(DIOVideoView) : null;
   private _onEventUnsubscribe?: UnregisterListener = undefined;
   private _videoView: React.Component | null;
   private _videoViewHandler: null | number;
@@ -59,7 +59,7 @@ export default class VideoView extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    if (Platform.OS === 'android') {
+    if (this._nativeEvents) {
       this._onEventUnsubscribe = this._nativeEvents.addListener(
         VideoViewEventNames.CommandCallback,
         this._onEvent
@@ -69,7 +69,6 @@ export default class VideoView extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this.detach();
-    // TODO: No removeListeners exported from Android module
     if (
       this._onEventUnsubscribe &&
       typeof this._onEventUnsubscribe === 'function'
@@ -108,7 +107,7 @@ export default class VideoView extends PureComponent<Props, State> {
     if (error) {
       promise.reject(error);
     } else {
-      promise.resolve(event);
+      promise.resolve(event.result);
     }
   };
 
@@ -170,8 +169,7 @@ export default class VideoView extends PureComponent<Props, State> {
   public isScreenShare = async (): Promise<boolean> => {
     return Promise.resolve(
       !!(
-        this.state.mediaStream &&
-        this.state.mediaStream.type === MediaStreamType.ScreenShare
+        this.state.mediaStream && this.state.mediaStream.type === 'SCREEN_SHARE'
       )
     );
   };
