@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useContext, useEffect, useRef } from 'react';
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -29,7 +35,9 @@ const ConferenceScreen: FunctionComponent = () => {
     FilePresentationContext
   );
 
-  const videoView = useRef(null);
+  const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
+
+  const videoView = useRef() as React.MutableRefObject<VideoView>;
 
   useEffect(() => {
     if (videoView?.current) {
@@ -110,6 +118,18 @@ const ConferenceScreen: FunctionComponent = () => {
                     </Text>
                   </TouchableOpacity>
                 </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
+                    }}
+                  >
+                    <Text size="xs" align="center">
+                      FILL/FIT
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
               </View>
             </View>
             <View style={styles.bottom}>
@@ -142,7 +162,11 @@ const ConferenceScreen: FunctionComponent = () => {
         <ConferenceScreenBottomSheet />
       </View>
       <View style={styles.layerVideo} pointerEvents="none">
-        <VideoView ref={videoView} style={{ flex: 1 }} />
+        <VideoView
+          ref={videoView}
+          style={{ flex: 1, borderRadius: 50 }}
+          scaleType={scaleType}
+        />
       </View>
     </LinearGradient>
   );
