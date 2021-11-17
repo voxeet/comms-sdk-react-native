@@ -9,20 +9,29 @@
 ### Enumeration members
 
 - [Camera](_internal_.MediaStreamType.md#camera)
+- [Custom](_internal_.MediaStreamType.md#custom)
 - [ScreenShare](_internal_.MediaStreamType.md#screenshare)
 
 ## Enumeration members
 
 ### Camera
 
-• **Camera** = `"Camera"`
+• **Camera** = `"CAMERA"`
 
 The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera.
 
 ___
 
+### Custom
+
+• **Custom** = `"CUSTOM"`
+
+The non-specified media stream.
+
+___
+
 ### ScreenShare
 
-• **ScreenShare** = `"ScreenShare"`
+• **ScreenShare** = `"SCREEN_SHARE"`
 
 The screen-share media stream.
