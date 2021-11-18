@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / ConferenceService
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / ConferenceService
 
 # Class: ConferenceService
 
@@ -56,7 +56,7 @@
 
 ### create
 
-▸ **create**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **create**(`options?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
 Create a conference with options
 
@@ -68,7 +68,7 @@ Create a conference with options
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
 Promise with a Conference object
 

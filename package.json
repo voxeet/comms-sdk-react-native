@@ -30,9 +30,8 @@
     "bootstrap": "yarn example && yarn && yarn pods",
     "documentation": "rm -rf docs && typedoc --disableSources --excludeInternal",
     "documentation:append": "git add docs",
-    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies",
-    "license:testapp": "yarn npm-license-crawler --production --start ./example --json ./example/LICENSES.json --onlyDirectDependencies"
-  },
+    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies"
+ },
   "keywords": [
     "react-native",
     "ios",

@@ -1,7 +1,7 @@
 {
   "entryPoints": [
-    "./src/DolbyIoIAPI.ts"
-
+    "./src/DolbyIoIAPI.ts",
+    "./src/VideoView/VideoView.ts"
   ],
   "exclude": [
     "./src/utils/**/*",
