@@ -49,9 +49,7 @@ export class NotificationService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
   }
 }
