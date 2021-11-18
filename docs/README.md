@@ -141,12 +141,12 @@ VideoView properties
 
 VideoView methods
 
-|Name|Type|Description|
-|---|---|---|
-|attach|(participant: Participant,mediaStream: MediaStream): Promise<boolean>|
-|detach||
-|isAttached||
-|isScreenshot||
+|Name|Arguments|Returns|Description|
+|---|---|---|---|
+|attach()|(participant: Participant,mediaStream: MediaStream)|Promise(boolean)|Allows displaying the stream of participant|
+|detach()|none|Promise(boolean)|It allows you to finish displaying the stream|
+|isAttached()|none|Promise(boolean)|Gets information about whether the stream is active|
+|isScreenSharing()|none|Promise(boolean)|Gets information about whether the active stream is screen-sharing|
 
 ## Documentation
 
@@ -204,6 +204,6 @@ Before using the latest version of the @dolbyio/react-native-iapi-sdk, please re
 
 ## Third Party licenses
 
-Direct licenses can be found [here](./LICENSES.md)
+Direct licenses can be found [here](./LICENSES.json)
 
 © Dolby, 2021
