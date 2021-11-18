@@ -1,5 +1,6 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
+import Logger from '../../utils/Logger';
 import type { ComfortNoiseLevel } from './models';
 
 const { DolbyIoIAPIMediaDeviceService } = NativeModules;
@@ -51,6 +52,12 @@ export class MediaDeviceService {
    * @returns {Promise<void>}
    */
   public async switchSpeaker(): Promise<void> {
+    if (Platform.OS === 'android') {
+      Logger.warning('Switching speaker is not available on Android devices');
+      return Promise.reject(
+        'Switching speaker is not available on Android devices'
+      );
+    }
     return this._nativeModule.switchSpeaker();
   }
 }
