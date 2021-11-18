@@ -66,7 +66,10 @@ const testSpatialPosition: SpatialPosition = {
 };
 
 describe('ConferenceService', () => {
-  ConferenceService._nativeEvents.addListener = jest.fn();
+  const removeListenerMock = jest.fn();
+  ConferenceService._nativeEvents.addListener = jest
+    .fn()
+    .mockReturnValue(removeListenerMock);
   describe('create()', () => {
     it('should invoke exported create method with correct arguments', () => {
       const options = {
@@ -148,7 +151,7 @@ describe('ConferenceService', () => {
     });
   });
 
-  describe('getParticipants', () => {
+  describe('getParticipants()', () => {
     it('should invoke exported getParticipants method with correct arguments', () => {
       ConferenceService.getParticipants(testConference);
       expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalledWith(
@@ -303,66 +306,84 @@ describe('ConferenceService', () => {
   });
 
   describe('onStatusChange()', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with StatusUpdated event', () => {
-      ConferenceService.onStatusChange(() => {});
+      const unsubscribeFn = ConferenceService.onStatusChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StatusUpdated,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
   describe('onPermissionsChange()', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with PermissionsUpdated event', () => {
-      ConferenceService.onPermissionsChange(() => {});
+      const unsubscribeFn = ConferenceService.onPermissionsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.PermissionsUpdated,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
   describe('onParticipantsChange()', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with ParticipantAdded event', () => {
-      ConferenceService.onParticipantsChange(() => {});
+      const unsubscribeFn = ConferenceService.onParticipantsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantAdded,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
 
     it('should invoke NativeEvents.addListener with ParticipantUpdated event', () => {
-      ConferenceService.onParticipantsChange(() => {});
+      const unsubscribeFn = ConferenceService.onParticipantsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.ParticipantUpdated,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
   describe('onStreamsChange()', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with StreamAdded event', () => {
-      ConferenceService.onStreamsChange(() => {});
+      const unsubscribeFn = ConferenceService.onStreamsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamAdded,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
 
     it('should invoke NativeEvents.addListener with StreamUpdated event', () => {
-      ConferenceService.onStreamsChange(() => {});
+      const unsubscribeFn = ConferenceService.onStreamsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamUpdated,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
 
     it('should invoke NativeEvents.addListener with StreamRemoved event', () => {
-      ConferenceService.onStreamsChange(() => {});
+      const unsubscribeFn = ConferenceService.onStreamsChange(handlerFn);
       expect(ConferenceService._nativeEvents.addListener).toHaveBeenCalledWith(
         ConferenceServiceEventNames.StreamRemoved,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
