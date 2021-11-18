@@ -135,23 +135,23 @@ export interface ParticipantInvited {
 
 export enum ParticipantStatus {
   /** A participant successfully connected to a conference. */
-  CONNECTED = 'Connected',
+  CONNECTED = 'CONNECTED',
   /** A participant received the conference invitation and is connecting to a conference. */
-  CONNECTING = 'Connecting',
+  CONNECTING = 'CONNECTING',
   /** An invited participant declined the conference invitation.  */
-  DECLINE = 'Decline',
+  DECLINE = 'DECLINE',
   /** A peer connection failed, and the participant cannot connect to a conference. */
-  ERROR = 'Error',
+  ERROR = 'ERROR',
   /** A participant did not enable audio, video, or screen-share and, therefore, is not connected to any stream. */
-  INACTIVE = 'Inactive',
+  INACTIVE = 'INACTIVE',
   /** A participant was kicked from the conference. */
-  KICKED = 'Kicked',
+  KICKED = 'KICKED',
   /** A participant left the conference. */
-  LEFT = 'Left',
+  LEFT = 'LEFT',
   /** A participant is invited to a conference and waits for an invitation. */
-  RESERVED = 'Reserved',
+  RESERVED = 'RESERVED',
   /** A participant experiences a peer connection problem, which may result in the Error or Connected status. */
-  WARNING = 'Warning',
+  WARNING = 'WARNING',
 }
 
 export enum ParticipantType {
