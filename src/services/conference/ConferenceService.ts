@@ -43,7 +43,9 @@ export class ConferenceService {
    * @returns {Promise<Conference>} Promise with a Conference object
    */
 
-  public async create(options: ConferenceCreateOptions = {}): Promise<any> {
+  public async create(
+    options: ConferenceCreateOptions = {}
+  ): Promise<Conference> {
     return transformToConference(await this._nativeModule.create(options));
   }
 
@@ -322,9 +324,7 @@ export class ConferenceService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       ConferenceServiceEventNames.StatusUpdated,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
   }
 
@@ -339,9 +339,7 @@ export class ConferenceService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       ConferenceServiceEventNames.PermissionsUpdated,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
   }
 

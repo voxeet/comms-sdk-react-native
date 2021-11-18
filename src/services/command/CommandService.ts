@@ -35,7 +35,7 @@ export class CommandService {
   ): () => void {
     return this._nativeEvents.addListener(
       CommandServiceEventNames.MessageReceived,
-      (data) => handler(data)
+      handler
     );
   }
 }
