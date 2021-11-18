@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -114,6 +114,28 @@ const ConferenceScreenBottomSheet = () => {
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
+
+  const comfortNoiseLevelOptions: Array<{
+    text: string;
+    onClick: () => void;
+  }> = [
+    {
+      text: 'setComfortNoiseLevel - Default',
+      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Default),
+    },
+    {
+      text: 'setComfortNoiseLevel - Low',
+      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Low),
+    },
+    {
+      text: 'setComfortNoiseLevel - Medium',
+      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Medium),
+    },
+    {
+      text: 'setComfortNoiseLevel - Off',
+      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Off),
+    },
+  ];
 
   return (
     <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[60, 500]}>
@@ -484,24 +506,31 @@ const ConferenceScreenBottomSheet = () => {
               text="getComfortNoiseLevel"
               onPress={getComfortNoiseLevel}
             />
-            <Button
-              size="small"
-              color="dark"
-              text="setComfortNoiseLevel"
-              onPress={() => setComfortNoiseLevel(ComfortNoiseLevel.Default)}
-            />
+            {comfortNoiseLevelOptions.map((option) => {
+              return (
+                <Button
+                  key={option.text}
+                  size="small"
+                  color="dark"
+                  text={option.text}
+                  onPress={option.onClick}
+                />
+              );
+            })}
             <Button
               size="small"
               color="dark"
               text="switchCamera"
               onPress={switchCamera}
             />
-            <Button
-              size="small"
-              color="dark"
-              text="switchSpeaker"
-              onPress={switchSpeaker}
-            />
+            {Platform.OS === 'ios' && (
+              <Button
+                size="small"
+                color="dark"
+                text="switchSpeaker"
+                onPress={switchSpeaker}
+              />
+            )}
           </Space>
         </Space>
       </ScrollView>
