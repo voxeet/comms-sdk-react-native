@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / RegExpMatchArray
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / RegExpMatchArray
 
 # Interface: RegExpMatchArray
 
@@ -104,7 +104,7 @@ Iterator
 
 #### Inherited from
 
-Array.\_\_@iterator@348
+Array.\_\_@iterator@346
 
 ___
 
@@ -131,7 +131,7 @@ when they will be absent when used in a 'with' statement.
 
 #### Inherited from
 
-Array.\_\_@unscopables@350
+Array.\_\_@unscopables@348
 
 ___
 
