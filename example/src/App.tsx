@@ -10,6 +10,7 @@ import FilePresentationHandler, {
 import InvitationHandler from '@components/InvitationHandler';
 import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
+import VideoPresentationHandler from '@components/VideoPresentationHandler';
 import COLORS from '@constants/colors.constants';
 import { toastConfig } from '@utils/toast.config';
 
@@ -40,6 +41,7 @@ export default class App extends Component<Props, State> {
                 <FilePresentationHandler />
               </FilePresentationProvider>
             </RecordingProvider>
+            <VideoPresentationHandler />
             <MessageHandler />
             <InvitationHandler />
           </DolbyIOProvider>
