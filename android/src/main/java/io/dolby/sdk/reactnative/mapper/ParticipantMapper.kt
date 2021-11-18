@@ -91,6 +91,7 @@ class ParticipantMapper {
 
   private fun toRNParticipantStatus(participantStatus: ConferenceParticipantStatus): String =
     when (participantStatus) {
+      ConferenceParticipantStatus.ON_AIR -> "CONNECTED"
       ConferenceParticipantStatus.CONNECTING -> "CONNECTING"
       ConferenceParticipantStatus.DECLINE -> "DECLINE"
       ConferenceParticipantStatus.ERROR -> "ERROR"
@@ -100,7 +101,6 @@ class ParticipantMapper {
       ConferenceParticipantStatus.RESERVED -> "RESERVED"
       ConferenceParticipantStatus.WARNING -> "WARNING"
       ConferenceParticipantStatus.IN_PROGRESS,
-      ConferenceParticipantStatus.ON_AIR,
       ConferenceParticipantStatus.LATER,
       ConferenceParticipantStatus.MISSED,
       ConferenceParticipantStatus.UNKNOWN -> "UNKNOWN"

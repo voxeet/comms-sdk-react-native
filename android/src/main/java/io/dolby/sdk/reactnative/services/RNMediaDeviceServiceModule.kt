@@ -46,7 +46,7 @@ class RNMediaDeviceServiceModule constructor(
    * @param promise               returns null
    */
   @ReactMethod
-  fun setComfortNoiseLevel(comfortNoiseLevelRN: ReadableMap, promise: ReactPromise) {
+  fun setComfortNoiseLevel(comfortNoiseLevelRN: String, promise: ReactPromise) {
     Promises.promise({ mediaMapper.fromRN(comfortNoiseLevelRN) }) { "Invalid comfort noise level" }
       .thenValue(mediaDeviceService::setComfortNoiseLevel)
       .forward(promise, ignoreReturnType = true)
