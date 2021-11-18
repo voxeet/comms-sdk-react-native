@@ -150,9 +150,11 @@ const ConferenceScreen: FunctionComponent = () => {
               <Space mb="m">
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                   <Space mh="m" style={styles.participantsList}>
-                    {participants.map((p: Participant) => (
-                      <ParticipantAvatar key={p.id} {...p} />
-                    ))}
+                    {participants
+                      .filter((p: Participant) => p.status === 'CONNECTED')
+                      .map((p: Participant) => (
+                        <ParticipantAvatar key={p.id} {...p} />
+                      ))}
                   </Space>
                 </ScrollView>
               </Space>
