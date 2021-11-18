@@ -32,7 +32,7 @@ A 1-on-1 help desk service for your specialized customers
     yarn add @dolbyio/react-native-iapi-sdk
     ```
 
-2. If you are using React Native >= 0.60, install native dependencies via CocoaPods from your ios directory:
+2. If you are using React Native >= 0.60, install native dependencies via CocoaPods from your /ios directory:
 
    ```bash
    pod install
@@ -43,7 +43,7 @@ A 1-on-1 help desk service for your specialized customers
    ```bash
    react-native link @dolbyio/react-native-iapi-sdk
    ```
-   and then, install from your ios directory:
+   and then, install from your /ios directory:
    ```bash
    pod install --repo-update
    ```
@@ -150,7 +150,7 @@ VideoView methods
 
 ## Documentation
 
-Complete list of available services in SDK along with method documentation
+A complete list of available services in SDK along with method documentation
 
 [DolbyIoIAPI](docs/classes/DolbyIoIAPI.md)
 is the main module that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.

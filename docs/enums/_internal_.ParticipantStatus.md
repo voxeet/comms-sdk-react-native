@@ -22,7 +22,7 @@
 
 ### CONNECTED
 
-• **CONNECTED** = `"Connected"`
+• **CONNECTED** = `"CONNECTED"`
 
 A participant successfully connected to a conference.
 
@@ -30,7 +30,7 @@ ___
 
 ### CONNECTING
 
-• **CONNECTING** = `"Connecting"`
+• **CONNECTING** = `"CONNECTING"`
 
 A participant received the conference invitation and is connecting to a conference.
 
@@ -38,7 +38,7 @@ ___
 
 ### DECLINE
 
-• **DECLINE** = `"Decline"`
+• **DECLINE** = `"DECLINE"`
 
 An invited participant declined the conference invitation.
 
@@ -46,7 +46,7 @@ ___
 
 ### ERROR
 
-• **ERROR** = `"Error"`
+• **ERROR** = `"ERROR"`
 
 A peer connection failed, and the participant cannot connect to a conference.
 
@@ -54,7 +54,7 @@ ___
 
 ### INACTIVE
 
-• **INACTIVE** = `"Inactive"`
+• **INACTIVE** = `"INACTIVE"`
 
 A participant did not enable audio, video, or screen-share and, therefore, is not connected to any stream.
 
@@ -62,7 +62,7 @@ ___
 
 ### KICKED
 
-• **KICKED** = `"Kicked"`
+• **KICKED** = `"KICKED"`
 
 A participant was kicked from the conference.
 
@@ -70,7 +70,7 @@ ___
 
 ### LEFT
 
-• **LEFT** = `"Left"`
+• **LEFT** = `"LEFT"`
 
 A participant left the conference.
 
@@ -78,7 +78,7 @@ ___
 
 ### RESERVED
 
-• **RESERVED** = `"Reserved"`
+• **RESERVED** = `"RESERVED"`
 
 A participant is invited to a conference and waits for an invitation.
 
@@ -86,6 +86,6 @@ ___
 
 ### WARNING
 
-• **WARNING** = `"Warning"`
+• **WARNING** = `"WARNING"`
 
 A participant experiences a peer connection problem, which may result in the Error or Connected status.
