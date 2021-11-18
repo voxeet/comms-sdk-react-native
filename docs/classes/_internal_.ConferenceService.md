@@ -56,7 +56,7 @@
 
 ### create
 
-▸ **create**(`options?`): [`Promise`](../modules/_internal_.md#promise)<`any`\>
+▸ **create**(`options?`): [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
 Create a conference with options
 
@@ -68,7 +68,7 @@ Create a conference with options
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<`any`\>
+[`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
 Promise with a Conference object
 
