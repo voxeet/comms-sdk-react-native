@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](README.md) / Exports
+[@dolbyio/react-native-iapi-sdk](README.md) / Modules
 
 # @dolbyio/react-native-iapi-sdk
 
