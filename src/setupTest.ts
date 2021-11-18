@@ -7,8 +7,8 @@ jest.mock('react-native', () => {
     initializeToken: jest.fn(),
     onAccessTokenOk: jest.fn(),
     onAccessTokenKo: jest.fn(),
-    addListener: jest.fn(),
     removeListeners: jest.fn(),
+    addListener: jest.fn(),
   };
   RN.NativeModules.DolbyIoIAPIConferenceService = {
     create: jest.fn(),

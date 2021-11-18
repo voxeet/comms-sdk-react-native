@@ -6,7 +6,10 @@ import { VideoPresentationEventNames } from '../events';
 const { DolbyIoIAPIVideoPresentationService } = NativeModules;
 
 describe('VideoPresentationService', () => {
-  VideoPresentationService._nativeEvents.addListener = jest.fn();
+  const removeListenerMock = jest.fn();
+  VideoPresentationService._nativeEvents.addListener = jest
+    .fn()
+    .mockReturnValue(removeListenerMock);
 
   describe('current()', () => {
     it('should invoke exported current method', () => {
@@ -54,53 +57,55 @@ describe('VideoPresentationService', () => {
   });
 
   describe('onVideoPresentationChange()', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with started event', () => {
-      VideoPresentationService.onVideoPresentationChange(() => {});
+      const unsubscribeFn =
+        VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(
-        VideoPresentationEventNames.started,
-        expect.any(Function)
-      );
+      ).toHaveBeenCalledWith(VideoPresentationEventNames.started, handlerFn);
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
     it('should invoke NativeEvents.addListener with played event', () => {
-      VideoPresentationService.onVideoPresentationChange(() => {});
+      const unsubscribeFn =
+        VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(
-        VideoPresentationEventNames.played,
-        expect.any(Function)
-      );
+      ).toHaveBeenCalledWith(VideoPresentationEventNames.played, handlerFn);
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
     it('should invoke NativeEvents.addListener with paused event', () => {
-      VideoPresentationService.onVideoPresentationChange(() => {});
+      const unsubscribeFn =
+        VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(
-        VideoPresentationEventNames.paused,
-        expect.any(Function)
-      );
+      ).toHaveBeenCalledWith(VideoPresentationEventNames.paused, handlerFn);
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
     it('should invoke NativeEvents.addListener with sought event', () => {
-      VideoPresentationService.onVideoPresentationChange(() => {});
+      const unsubscribeFn =
+        VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(
-        VideoPresentationEventNames.sought,
-        expect.any(Function)
-      );
+      ).toHaveBeenCalledWith(VideoPresentationEventNames.sought, handlerFn);
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
   describe('onVideoPresentationStopped', () => {
+    const handlerFn = () => {};
     it('should invoke NativeEvents.addListener with stopped event', () => {
-      VideoPresentationService.onVideoPresentationStopped(() => {});
+      const unsubscribeFn =
+        VideoPresentationService.onVideoPresentationStopped(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(
-        VideoPresentationEventNames.stopped,
-        expect.any(Function)
-      );
+      ).toHaveBeenCalledWith(VideoPresentationEventNames.stopped, handlerFn);
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 });
