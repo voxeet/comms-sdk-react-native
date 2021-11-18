@@ -447,7 +447,7 @@ const ConferenceScreenBottomSheet = () => {
               text="Start video presentation"
               onPress={() =>
                 startVideoPresentation(
-                  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                  'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1'
                 )
               }
             />
