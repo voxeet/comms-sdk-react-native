@@ -33,7 +33,6 @@ export interface IDolbyIOProvider {
   initialize: () => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean) => void;
-  joinWithAlias: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
@@ -50,7 +49,6 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
-  joinWithAlias: () => {},
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
@@ -217,35 +215,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
 
-  const joinWithAlias = async (alias: string) => {
-    try {
-      const fetchedConference = await DolbyIoIAPI.conference.fetch(alias);
-
-      const joinOptions = {
-        constraints: {
-          audio: true,
-          video: false,
-        },
-        simulcast: false,
-      };
-      const joinedConference = await DolbyIoIAPI.conference.join(
-        fetchedConference,
-        joinOptions
-      );
-      setConference(joinedConference);
-      const participantsMap = new Map();
-      joinedConference.participants.forEach((p) =>
-        participantsMap.set(p.id, p)
-      );
-      setParticipants(participantsMap);
-      AsyncStorage.setItem(
-        '@conference-previous',
-        JSON.stringify(joinedConference)
-      );
-    } catch (e: any) {
-      Alert.alert('Conference not joined', e.toString());
-    }
-  };
   const replay = async () => {
     try {
       const prevConferenceString = await AsyncStorage.getItem(
@@ -289,7 +258,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     initialize,
     openSession,
     createAndJoin,
-    joinWithAlias,
     joinWithId,
     replay,
     leave,

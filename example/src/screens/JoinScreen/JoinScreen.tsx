@@ -19,10 +19,10 @@ const chance = new Chance();
 
 const JoinScreen: FunctionComponent = () => {
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
-  const { joinWithAlias, replay } = useContext(DolbyIOContext);
+  const { createAndJoin, replay } = useContext(DolbyIOContext);
 
   const joinConference = () => {
-    joinWithAlias(alias);
+    createAndJoin(alias, false);
   };
 
   const replayLastConference = () => {

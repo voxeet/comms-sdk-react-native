@@ -22,11 +22,11 @@
     "react-native-dotenv": "^3.2.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-linear-gradient": "^2.5.6",
-    "react-native-toast-message": "^1.6.0",
     "react-native-permissions": "^3.0.5",
     "react-native-popup-menu": "^0.15.11",
     "react-native-reanimated": "^2.2.2",
-    "react-native-safe-area-context": "^3.3.2"
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-toast-message": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
