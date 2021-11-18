@@ -6,6 +6,7 @@ import {
   findNodeHandle,
   Platform,
   StyleSheet,
+  LogBox,
 } from 'react-native';
 
 import type { MediaStream, Participant } from '../services/conference/models';
@@ -13,6 +14,11 @@ import NativeEvents from '../utils/NativeEvents';
 import type { UnregisterListener } from '../utils/types';
 import DIOVideoView from './DIOVideoView';
 import { VideoViewEventNames } from './events';
+
+LogBox.ignoreLogs([
+  '`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.',
+  '`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.',
+]);
 
 type Props = typeof VideoView.defaultProps & {
   isMirror?: boolean;
