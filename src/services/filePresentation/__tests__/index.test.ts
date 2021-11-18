@@ -15,7 +15,10 @@ const testFile = {
 };
 
 describe('FilePresentationService', () => {
-  FilePresentationService._nativeEvents.addListener = jest.fn();
+  const removeListenerMock = jest.fn();
+  FilePresentationService._nativeEvents.addListener = jest
+    .fn()
+    .mockReturnValue(removeListenerMock);
 
   describe('stop()', () => {
     it('should invoke exported method', () => {
@@ -78,45 +81,60 @@ describe('FilePresentationService', () => {
 
   describe('onFileConverted()', () => {
     it('should invoke NativeEvents.addListener with FileConverted event', () => {
-      FilePresentationService.onFileConverted(() => {});
+      const handlerFn = () => {};
+      const unsubscribeFn = FilePresentationService.onFileConverted(handlerFn);
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
         FilePresentationServiceEventNames.FileConverted,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 
   describe('onFilePresentationChange()', () => {
     it('should invoke NativeEvents.addListener with FilePresentationStarted event', () => {
-      FilePresentationService.onFilePresentationChange(() => {});
+      const handlerFn = () => {};
+      const unsubscribeFn =
+        FilePresentationService.onFilePresentationChange(handlerFn);
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
         FilePresentationServiceEventNames.FilePresentationStarted,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
 
     it('should invoke NativeEvents.addListener with FilePresentationStopped event', () => {
-      FilePresentationService.onFilePresentationChange(() => {});
+      const handlerFn = () => {};
+      const unsubscribeFn =
+        FilePresentationService.onFilePresentationChange(handlerFn);
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
         FilePresentationServiceEventNames.FilePresentationStopped,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
 
     it('should invoke NativeEvents.addListener with FilePresentationUpdated event', () => {
-      FilePresentationService.onFilePresentationChange(() => {});
+      const handlerFn = () => {};
+      const unsubscribeFn =
+        FilePresentationService.onFilePresentationChange(handlerFn);
       expect(
         FilePresentationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
         FilePresentationServiceEventNames.FilePresentationUpdated,
-        expect.any(Function)
+        handlerFn
       );
+      unsubscribeFn();
+      expect(removeListenerMock).toHaveBeenCalled();
     });
   });
 });

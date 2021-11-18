@@ -93,9 +93,7 @@ export class FilePresentationService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       FilePresentationServiceEventNames.FileConverted,
-      (data) => {
-        handler(data);
-      }
+      handler
     );
   }
 
