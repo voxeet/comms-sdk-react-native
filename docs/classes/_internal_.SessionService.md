@@ -4,7 +4,8 @@
 
 [<internal>](../modules/_internal_.md).SessionService
 
-The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
+The SessionService allows opening and closing sessions. Opening a session is
+mandatory before interacting with any service.
 
 ## Table of contents
 
@@ -29,13 +30,13 @@ The SessionService allows opening and closing sessions. Opening a session is man
 
 ### close
 
-▸ **close**(): [`Promise`](../modules/_internal_.md#promise)<``null``\>
+▸ **close**(): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Closes the current session.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<``null``\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 ___
 
@@ -65,7 +66,7 @@ ___
 
 ### open
 
-▸ **open**(`participantInfo?`): [`Promise`](../modules/_internal_.md#promise)<``null``\>
+▸ **open**(`participantInfo?`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Opens a new session.
 
@@ -77,4 +78,4 @@ Opens a new session.
 
 #### Returns
 
-[`Promise`](../modules/_internal_.md#promise)<``null``\>
+[`Promise`](../modules/_internal_.md#promise)<`void`\>

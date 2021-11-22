@@ -4,6 +4,9 @@
 
 [<internal>](../modules/_internal_.md).CommandService
 
+The Command service allows the application to send text messages or notifications to all conference participants.
+The service also emits an received event to inform the application about received messages.
+
 ## Table of contents
 
 ### Constructors
@@ -31,15 +34,15 @@ Adds a native listener for message received
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`MessageReceivedEventType`](../interfaces/_internal_.MessageReceivedEventType.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`MessageReceivedEventType`](../interfaces/_internal_.MessageReceivedEventType.md)) => `void` | Event callback function |
 
 #### Returns
 
 `fn`
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ▸ (): `void`
 
@@ -49,7 +52,7 @@ Adds a native listener for message received
 
 `void`
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -61,9 +64,9 @@ Sends a message, in the form of a basic stream, to all conference participants.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `message` | `string` | Message to send |
 
 #### Returns
 
