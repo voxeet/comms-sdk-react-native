@@ -12,7 +12,7 @@ import MediaDeviceService from './services/mediaDevice/MediaDeviceService';
 import NotificationService from './services/notification/NotificationService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
-import VideoPresentationService from './services/videoPresentation/VideoPresentation';
+import VideoPresentationService from './services/videoPresentation/VideoPresentationService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
 
