@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -23,10 +23,16 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { startVideo, stopVideo } from '@utils/conference.tester';
 
+import { ParticipantStatus } from '../../../../src/services/conference/models';
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import ParticipantAvatar from './ParticipantAvatar';
+
+const DISPLAYED_STATUSES: ParticipantStatus[] = [
+  ParticipantStatus.CONNECTED,
+  ParticipantStatus.INACTIVE,
+];
 
 const ConferenceScreen: FunctionComponent = () => {
   const { me, conference, participants, activeParticipant } =
@@ -58,12 +64,16 @@ const ConferenceScreen: FunctionComponent = () => {
   }, [activeParticipant]);
 
   const connectedParticipants = useMemo(() => {
-    return participants.filter((p) => p.status === 'CONNECTED');
+    return participants.filter(
+      (p) => p.status && DISPLAYED_STATUSES.includes(p.status)
+    );
   }, [participants]);
 
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
+
+  console.log(connectedParticipants);
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
