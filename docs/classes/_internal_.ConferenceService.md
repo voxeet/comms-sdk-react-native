@@ -4,6 +4,9 @@
 
 [<internal>](../modules/_internal_.md).ConferenceService
 
+The ConferenceService allows the application to manage the conference
+life-cycle and interact with the conference.
+
 ## Table of contents
 
 ### Constructors
@@ -62,15 +65,13 @@ Create a conference with options
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | [`ConferenceCreateOptions`](../interfaces/_internal_.ConferenceCreateOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | [`ConferenceCreateOptions`](../interfaces/_internal_.ConferenceCreateOptions.md) | The conference options |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
-
-Promise with a Conference object
 
 ___
 
@@ -84,8 +85,6 @@ Provides information about the current conference.
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
 
-Promise with a Conference object
-
 ___
 
 ### fetch
@@ -96,15 +95,13 @@ Provides a Conference object that allows joining a conference. Without a param i
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conferenceId?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conferenceId?` | `string` | The conference ID. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
-
-Promise with a Conference object
 
 ___
 
@@ -116,15 +113,13 @@ Gets the participant's audio level
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The participant object. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<`number`\>
-
-Promise with AudioLevel
 
 ___
 
@@ -138,8 +133,6 @@ Provides standard WebRTC statistics for the application.
 
 [`Promise`](../modules/_internal_.md#promise)<[`RTCStatsType`](../enums/_internal_.RTCStatsType.md)[]\>
 
-Promise with LocalStats
-
 ___
 
 ### getMaxVideoForwarding
@@ -152,8 +145,6 @@ Provides the number of video streams that are transmitted to the local user.
 
 [`Promise`](../modules/_internal_.md#promise)<`number`\>
 
-Promise with MaxVideoForwarding
-
 ___
 
 ### getParticipant
@@ -164,15 +155,13 @@ The participant's information.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participantId` | [`String`](../modules/_internal_.md#string) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participantId` | [`String`](../modules/_internal_.md#string) | ID of Participant. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)\>
-
-Promise with Participant
 
 ___
 
@@ -192,8 +181,6 @@ Gets a list of conference participants
 
 [`Promise`](../modules/_internal_.md#promise)<[`Participant`](../interfaces/_internal_.Participant.md)[]\>
 
-Promise with array of Participants
-
 ___
 
 ### getStatus
@@ -204,15 +191,13 @@ Provides the conference status.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) | The Conference object. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`ConferenceStatus`](../enums/_internal_.ConferenceStatus.md)\>
-
-Promise with a ConferenceStatus string
 
 ___
 
@@ -252,15 +237,13 @@ Gets the participant's current speaking status for an active talker indicator.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The Participant object. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
-
-A boolean indicating whether the current participant is speaking.
 
 ___
 
@@ -272,16 +255,14 @@ Joins the conference.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
-| `options?` | [`ConferenceJoinOptions`](../interfaces/_internal_.ConferenceJoinOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) | The Conference object. |
+| `options?` | [`ConferenceJoinOptions`](../interfaces/_internal_.ConferenceJoinOptions.md) | The additional options for the joining participant. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
-
-Promise with the Conference
 
 ___
 
@@ -293,9 +274,9 @@ Allows the conference owner, or a participant with adequate permissions, to kick
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The participant who needs to be kicked from the conference. |
 
 #### Returns
 
@@ -311,9 +292,9 @@ Leaves the conference.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options?` | [`ConferenceLeaveOptions`](../interfaces/_internal_.ConferenceLeaveOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options?` | [`ConferenceLeaveOptions`](../interfaces/_internal_.ConferenceLeaveOptions.md) | The additional options for the leaving participant. |
 
 #### Returns
 
@@ -329,10 +310,10 @@ Stops playing the specified remote participants' audio to the local participant 
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
-| `isMuted` | `boolean` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | A remote participant |
+| `isMuted` | `boolean` | A boolean, true indicates that the local participant is muted, false indicates that a participant is not muted |
 
 #### Returns
 
@@ -346,19 +327,19 @@ ___
 
 ▸ **onParticipantsChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for participants changes
+Adds a listener for participants changed event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/_internal_.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/_internal_.md#participantadded) \| [`ParticipantUpdated`](../modules/_internal_.md#participantupdated)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/_internal_.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/_internal_.md#participantadded) \| [`ParticipantUpdated`](../modules/_internal_.md#participantupdated)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -366,19 +347,19 @@ ___
 
 ▸ **onPermissionsChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for permissions changes
+Adds a listener for permissions changed event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/_internal_.PermissionsUpdatedEventType.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/_internal_.PermissionsUpdatedEventType.md)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -386,19 +367,19 @@ ___
 
 ▸ **onStatusChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for conference status changes
+Adds a listener for conference status changed event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/_internal_.ConferenceStatusUpdatedEventType.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/_internal_.ConferenceStatusUpdatedEventType.md)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -406,19 +387,19 @@ ___
 
 ▸ **onStreamsChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for streams changes
+Adds a listener for streams changed event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/_internal_.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/_internal_.md#streamadded) \| [`StreamUpdated`](../modules/_internal_.md#streamupdated) \| [`StreamRemoved`](../modules/_internal_.md#streamremoved)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/_internal_.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/_internal_.md#streamadded) \| [`StreamUpdated`](../modules/_internal_.md#streamupdated) \| [`StreamRemoved`](../modules/_internal_.md#streamremoved)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -430,16 +411,14 @@ Replays a previously recorded conference.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
-| `replayOptions?` | [`ConferenceReplayOptions`](../interfaces/_internal_.ConferenceReplayOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) | Conference object. |
+| `replayOptions?` | [`ConferenceReplayOptions`](../interfaces/_internal_.ConferenceReplayOptions.md) | Replay options. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`Conference`](../interfaces/_internal_.Conference.md)\>
-
-Promise with a Conference object
 
 ___
 
@@ -451,9 +430,9 @@ Enables and disables audio processing for the conference participant.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | [`AudioProcessingOptions`](../interfaces/_internal_.AudioProcessingOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | [`AudioProcessingOptions`](../interfaces/_internal_.AudioProcessingOptions.md) | The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing. |
 
 #### Returns
 
@@ -469,10 +448,10 @@ Sets the maximum number of video streams that may be transmitted to the local pa
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `max` | `number` | `4` |
-| `prioritizedParticipants` | [`Participant`](../interfaces/_internal_.Participant.md)[] | `[]` |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 4 for mobile browsers with 4 as default value. |
+| `prioritizedParticipants` | [`Participant`](../interfaces/_internal_.Participant.md)[] | `[]` | The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk. |
 
 #### Returns
 
@@ -488,10 +467,10 @@ Sets the direction a participant is facing in space.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
-| `direction` | [`SpatialDirection`](../interfaces/_internal_.SpatialDirection.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The selected remote participant. |
+| `direction` | [`SpatialDirection`](../interfaces/_internal_.SpatialDirection.md) | The direction the local participant is facing in space. |
 
 #### Returns
 
@@ -507,12 +486,12 @@ Configures a spatial environment of an application, so the audio renderer unders
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `scale` | [`SpatialScale`](../interfaces/_internal_.SpatialScale.md) |
-| `forward` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
-| `up` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
-| `right` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `scale` | [`SpatialScale`](../interfaces/_internal_.SpatialScale.md) | The application's distance units or scale in application units per one meter. The value must be greater than 0. |
+| `forward` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) | A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. |
+| `up` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) | A vector describing the direction the application considers as up. The value must be orthogonal to forward and right. |
+| `right` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) | A vector describing the direction the application considers as right. The value must be orthogonal to forward and up. |
 
 #### Returns
 
@@ -528,10 +507,10 @@ Sets a participant's position in space to enable the spatial audio experience du
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
-| `position` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The selected remote participant. |
+| `position` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) | The participant's audio location from which their audio will be rendered. |
 
 #### Returns
 
@@ -547,9 +526,9 @@ Starts audio transmission between the local client and a conference.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The participant whose stream should be sent to the local participant. |
 
 #### Returns
 
@@ -587,9 +566,9 @@ Notifies the server to either start sending the local participant's video stream
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The Participant object. |
 
 #### Returns
 
@@ -605,9 +584,9 @@ Stops audio transmission between the local client and a conference.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The Participant object. |
 
 #### Returns
 
@@ -635,9 +614,9 @@ Notifies the server to either stop sending the local participant's video stream 
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The Participant object. |
 
 #### Returns
 
@@ -653,9 +632,9 @@ Updates the participant's conference permissions.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `participantPermissions` | [`ParticipantPermissions`](../interfaces/_internal_.ParticipantPermissions.md)[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `participantPermissions` | [`ParticipantPermissions`](../interfaces/_internal_.ParticipantPermissions.md)[] | The set of participant's conference permissions. |
 
 #### Returns
 

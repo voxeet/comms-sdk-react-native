@@ -26,7 +26,6 @@ RCT_EXTERN_METHOD(leave:(RCTPromiseResolveBlock _Nonnull)resolve
 
 RCT_EXTERN_METHOD(replay:(NSDictionary * _Nonnull)conference
 				  replayOptions:(NSDictionary * _Nullable)replayOptions
-				  mixingOptions:(NSDictionary * _Nullable)mixingOptions
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 

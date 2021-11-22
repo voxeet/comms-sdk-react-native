@@ -30,7 +30,7 @@ A 1-on-1 help desk service for your specialized customers
     yarn add @dolbyio/react-native-iapi-sdk
     ```
 
-2. If you are using React Native >= 0.60, install native dependencies via CocoaPods from your ios directory:
+2. If you are using React Native >= 0.60, install native dependencies via CocoaPods from your /ios directory:
 
    ```bash
    pod install
@@ -41,7 +41,7 @@ A 1-on-1 help desk service for your specialized customers
    ```bash
    react-native link @dolbyio/react-native-iapi-sdk
    ```
-   and then, install from your ios directory:
+   and then, install from your /ios directory:
    ```bash
    pod install --repo-update
    ```
@@ -54,21 +54,21 @@ A 1-on-1 help desk service for your specialized customers
 
 1) Import the SDK to your project
 
-```
+```js
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 ```
 
 2) Initialize the SDK with your Dolby.io credentials
 
-```
+```js
 await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
 ```
 3) Open a session
-```
+```js
 await DolbyIoIAPI.session.open({ name, externalId });
 ```
 4) Create a conference
-```
+```js
 const conferenceOptions = {
   alias,
   params: {},
@@ -79,7 +79,7 @@ const createdConference = await DolbyIoIAPI.conference.create(
 );
 ```
 4) Join created conference
-```
+```js
 const joinedConference = await DolbyIoIAPI.conference.join(
   createdConference,
   {}
@@ -87,11 +87,11 @@ const joinedConference = await DolbyIoIAPI.conference.join(
 ```
 
 5) Import some additional services
-```
+```js
 import {Conference} from '@dolbyio/react-native-iapi-sdk';
 ```
 or
-```
+```js
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 const {Conference} = DolbyIoIAPI;
 ```
@@ -99,7 +99,7 @@ const {Conference} = DolbyIoIAPI;
 ## Integrate video
 
 Place VideoView in your component
-```
+```jsx
 import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 ...
 return (
@@ -110,7 +110,7 @@ return (
 ```
 
 Get a reference to your VideoView component
-```
+```jsx
 const videoView = useRef() as React.MutableRefObject<VideoView>;
 ...
 return (
@@ -122,7 +122,7 @@ return (
 ```
 
 Attach a stream to video
-```
+```js
 videoView.current.attach(
   participant,
   participant.streams[participant.streams.length - 1]
@@ -148,7 +148,7 @@ VideoView methods
 
 ## Documentation
 
-Complete list of available services in SDK along with method documentation
+A complete list of available services in SDK along with method documentation
 
 [DolbyIoIAPI](docs/classes/DolbyIoIAPI.md)
 is the main module that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.

@@ -17,7 +17,7 @@ extension VTParticipantStatus: ReactModelValueMappable {
 		case .connecting:
 			return "CONNECTING"
 		case .connected:
-			return "ON_AIR"
+			return "CONNECTED"
 		case .left:
 			return "LEFT"
 		case .warning:
