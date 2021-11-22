@@ -11,10 +11,18 @@ import { mute, kick } from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
+import SpatialConfigModal from './SpatialConfigModal';
+import type { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
+
+  const [spatialConfigModalActive, setSpatialConfigModalActive] =
+    useState(false);
+  const [spatialConfigModalType, setSpatialConfigModalType] =
+    useState<SpatialConfigModalTypeModel>('setSpatialDirection');
+
   const { activeParticipant, setActiveParticipantId } =
     useContext(DolbyIOContext);
 
@@ -52,6 +60,30 @@ const ParticipantAvatar = (participant: Participant) => {
       value: 'update permissions',
       onSelect: () => setPermissionsModalActive(!permissionsModalActive),
     },
+    {
+      text: 'Set spatial direction',
+      value: 'setSpatialDirection',
+      onSelect: () => {
+        setSpatialConfigModalActive(!spatialConfigModalActive);
+        setSpatialConfigModalType('setSpatialDirection');
+      },
+    },
+    {
+      text: 'Set spatial environment',
+      value: 'setSpatialEnvironment',
+      onSelect: () => {
+        setSpatialConfigModalActive(!spatialConfigModalActive);
+        setSpatialConfigModalType('setSpatialEnvironment');
+      },
+    },
+    {
+      text: 'Set spatial position',
+      value: 'setSpatialPosition',
+      onSelect: () => {
+        setSpatialConfigModalActive(!spatialConfigModalActive);
+        setSpatialConfigModalType('setSpatialPosition');
+      },
+    },
   ];
 
   const isActive = activeParticipant && activeParticipant.id === participant.id;
@@ -76,6 +108,12 @@ const ParticipantAvatar = (participant: Participant) => {
         participant={participant}
         open={permissionsModalActive}
         closeModal={() => setPermissionsModalActive(false)}
+      />
+      <SpatialConfigModal
+        type={spatialConfigModalType}
+        participant={participant}
+        open={spatialConfigModalActive}
+        closeModal={() => setSpatialConfigModalActive(false)}
       />
     </Space>
   );
