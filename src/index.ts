@@ -7,6 +7,6 @@ export { default as MediaDevice } from './services/mediaDevice/MediaDeviceServic
 export { default as Notification } from './services/notification/NotificationService';
 export { default as Recording } from './services/recording/RecordingService';
 export { default as Session } from './services/session/SessionService';
-export { default as VideoPresentation } from './services/videoPresentation/VideoPresentation';
+export { default as VideoPresentation } from './services/videoPresentation/VideoPresentationService';
 
 export { default as VideoView } from './VideoView/VideoView';
