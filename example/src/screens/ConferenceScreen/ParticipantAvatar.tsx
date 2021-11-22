@@ -65,6 +65,9 @@ const ParticipantAvatar = (participant: Participant) => {
         >
           <Text size="s" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
             {participant.info.name}
+            <Text size="s" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
+              ({participant.status})
+            </Text>
           </Text>
         </View>
       </MenuOptionsButton>
