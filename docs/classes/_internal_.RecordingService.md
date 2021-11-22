@@ -39,8 +39,6 @@ that informs when the recording was started.
 
 [`Promise`](../modules/_internal_.md#promise)<``null`` \| [`Recording`](../interfaces/_internal_.Recording.md)\>
 
-Promise with the Recording or null
-
 ___
 
 ### start

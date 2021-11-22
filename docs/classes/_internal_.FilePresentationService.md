@@ -4,6 +4,10 @@
 
 [<internal>](../modules/_internal_.md).FilePresentationService
 
+The FilePresentationService allows presenting files during a conference.
+The Dolby.io Communications APIs service converts the user-provided file into
+multiple pages, as images, accessible through the image method.
+
 ## Table of contents
 
 ### Constructors
@@ -38,15 +42,13 @@ Returns information about the current recording. Use this accessor if you wish t
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `file` | [`File`](../interfaces/_internal_.File.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `file` | [`File`](../interfaces/_internal_.File.md) | The file that the presenter wants to share during the conference. |
 
 #### Returns
 
 [`Promise`](../modules/_internal_.md#promise)<[`FileConverted`](../interfaces/_internal_.FileConverted.md)\>
-
-Promise with the FileConverted object.
 
 ___
 
@@ -60,8 +62,6 @@ Gets current file presentation.
 
 [`Promise`](../modules/_internal_.md#promise)<[`FilePresentation`](../interfaces/_internal_.FilePresentation.md)\>
 
-Promise with the FilePresentation object
-
 ___
 
 ### getImage
@@ -72,9 +72,9 @@ Downloads and displays locally the presented file by retrieving URLs of the indi
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `page` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `page` | `number` | The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to 0. |
 
 #### Returns
 
@@ -90,9 +90,9 @@ Provides the thumbnail's URL that refers to a specific page of the presented fil
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `page` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `page` | `number` | The number of the presented page. Files that do not include any pages, for example jpg images, require setting the value of this parameter to 0. |
 
 #### Returns
 
@@ -104,19 +104,19 @@ ___
 
 ▸ **onFileConverted**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for file converted
+Adds a listener for file converted event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`FileConvertedEventType`](../interfaces/_internal_.FileConvertedEventType.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`FileConvertedEventType`](../interfaces/_internal_.FileConvertedEventType.md)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -124,19 +124,19 @@ ___
 
 ▸ **onFilePresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for file presentation changes
+Adds a listener for file presentation changed event
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handler` | (`data`: [`FilePresentationChangedEventType`](../interfaces/_internal_.FilePresentationChangedEventType.md), `type?`: [`FilePresentationStarted`](../modules/_internal_.md#filepresentationstarted) \| [`FilePresentationStopped`](../modules/_internal_.md#filepresentationstopped) \| [`FilePresentationUpdated`](../modules/_internal_.md#filepresentationupdated)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`FilePresentationChangedEventType`](../interfaces/_internal_.FilePresentationChangedEventType.md), `type?`: [`FilePresentationStarted`](../modules/_internal_.md#filepresentationstarted) \| [`FilePresentationStopped`](../modules/_internal_.md#filepresentationstopped) \| [`FilePresentationUpdated`](../modules/_internal_.md#filepresentationupdated)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners
 
 ___
 
@@ -148,9 +148,9 @@ Informs the service to send the updated page number to the conference participan
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `page` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `page` | `number` | The page number that corresponds to the page that should be presented. |
 
 #### Returns
 
@@ -166,9 +166,9 @@ Starts a file presentation.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `file` | [`FileConverted`](../interfaces/_internal_.FileConverted.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `file` | [`FileConverted`](../interfaces/_internal_.FileConverted.md) | The converted file that the presenter wants to share during the conference. |
 
 #### Returns
 
