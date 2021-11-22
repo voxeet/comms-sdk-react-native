@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -55,6 +56,10 @@ const ConferenceScreen: FunctionComponent = () => {
       }
     }
   }, [activeParticipant]);
+
+  const connectedParticipants = useMemo(() => {
+    return participants.filter((p) => p.status === 'CONNECTED');
+  }, [participants]);
 
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -145,16 +150,14 @@ const ConferenceScreen: FunctionComponent = () => {
                 <Text
                   header
                   size="s"
-                >{`Participants (${participants.length})`}</Text>
+                >{`Participants (${connectedParticipants.length})`}</Text>
               </Space>
               <Space mb="m">
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                   <Space mh="m" style={styles.participantsList}>
-                    {participants
-                      .filter((p: Participant) => p.status === 'CONNECTED')
-                      .map((p: Participant) => (
-                        <ParticipantAvatar key={p.id} {...p} />
-                      ))}
+                    {connectedParticipants.map((p: Participant) => (
+                      <ParticipantAvatar key={p.id} {...p} />
+                    ))}
                   </Space>
                 </ScrollView>
               </Space>
