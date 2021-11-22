@@ -4,6 +4,9 @@
 
 [<internal>](../modules/_internal_.md).MediaDeviceService
 
+MediaDeviceService allows the application to manage media devices that are
+used during conferences.
+
 ## Table of contents
 
 ### Constructors
@@ -36,8 +39,6 @@ Retrieves the comfort noise level setting for output devices in Dolby Voice conf
 
 [`Promise`](../modules/_internal_.md#promise)<[`ComfortNoiseLevel`](../enums/_internal_.ComfortNoiseLevel.md)\>
 
-Promise with the ComfortNoiseLevel
-
 ___
 
 ### isFrontCamera
@@ -60,9 +61,9 @@ Configures the comfort noise level for output devices in Dolby Voice conferences
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `noiseLevel` | [`ComfortNoiseLevel`](../enums/_internal_.ComfortNoiseLevel.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `noiseLevel` | [`ComfortNoiseLevel`](../enums/_internal_.ComfortNoiseLevel.md) | The selected comfort noise level. |
 
 #### Returns
 
