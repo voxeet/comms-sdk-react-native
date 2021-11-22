@@ -7,7 +7,8 @@ import { transformToUser } from './transformers';
 const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
 /**
- * The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
+ * The SessionService allows opening and closing sessions. Opening a session is
+ * mandatory before interacting with any service.
  */
 
 export class SessionService {
@@ -16,10 +17,9 @@ export class SessionService {
 
   /**
    * Opens a new session.
-   * @param participantInfo [participantInfo={}] The optional information about the local participant.
-   * @returns {Promise<null>}
+   * @param participantInfo The optional information about the local participant.
    */
-  public async open(participantInfo: ParticipantInfo = {}): Promise<null> {
+  public async open(participantInfo: ParticipantInfo = {}): Promise<void> {
     const { name, avatarUrl, externalId } = participantInfo;
     return this._nativeModule.open({
       name,
@@ -30,15 +30,13 @@ export class SessionService {
 
   /**
    * Closes the current session.
-   * @returns {Promise<null>}
    */
-  public async close(): Promise<null> {
+  public async close(): Promise<void> {
     return this._nativeModule.close();
   }
 
   /**
    * Checks whether there is an open session that connects SDK with backend.
-   * @returns {Promise<Boolean>}
    */
   public async isOpen(): Promise<Boolean> {
     return this._nativeModule.isOpen();
@@ -46,7 +44,6 @@ export class SessionService {
 
   /**
    * Gets object of local user
-   * @returns {Promise<User>}
    */
   public async getCurrentUser(): Promise<User> {
     return transformToUser(await this._nativeModule.getParticipant());
