@@ -4,6 +4,8 @@
 
 [<internal>](../modules/_internal_.md).NotificationService
 
+The NotificationService enables inviting participants to a conference.
+
 ## Table of contents
 
 ### Constructors
@@ -32,9 +34,9 @@ Declines the conference invitation.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) | The conference object. |
 
 #### Returns
 
@@ -50,10 +52,10 @@ Notifies conference participants about a conference invitation.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) |
-| `participants` | [`ParticipantInvited`](../interfaces/_internal_.ParticipantInvited.md)[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/_internal_.Conference.md) | The conference object. |
+| `participants` | [`ParticipantInvited`](../interfaces/_internal_.ParticipantInvited.md)[] | Information about the invited application users. |
 
 #### Returns
 
@@ -65,16 +67,16 @@ ___
 
 ▸ **onInvitationReceived**(`handler`): [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Add a handler for invitation received
+Add a listener for invitation received event
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/_internal_.InvitationReceivedEventType.md)) => `void` | Handling function |
+| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/_internal_.InvitationReceivedEventType.md)) => `void` | Event callback function |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/_internal_.md#unsubscribefunction)
 
-Function that removes handler
+Function that unsubscribes from listeners

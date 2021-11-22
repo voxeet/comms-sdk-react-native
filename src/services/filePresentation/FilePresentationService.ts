@@ -11,6 +11,11 @@ import type { FileConverted, File, FilePresentation } from './models';
 
 const { DolbyIoIAPIFilePresentationService } = NativeModules;
 
+/**
+ * The FilePresentationService allows presenting files during a conference.
+ * The Dolby.io Communications APIs service converts the user-provided file into
+ * multiple pages, as images, accessible through the image method.
+ */
 export class FilePresentationService {
   /** @internal */
   _nativeModule = DolbyIoIAPIFilePresentationService;
@@ -20,47 +25,38 @@ export class FilePresentationService {
 
   /**
    * Stops the file presentation.
-   * @returns {Promise<void>}
    */
-
   public async stop(): Promise<void> {
     return this._nativeModule.stop();
   }
 
   /**
    * Starts a file presentation.
-   * @param file<FileConverted> The converted file that the presenter wants to share during the conference.
-   * @returns {Promise<void>}
+   * @param file The converted file that the presenter wants to share during the conference.
    */
-
   public async start(file: FileConverted): Promise<void> {
     return this._nativeModule.start(file);
   }
 
   /**
    * Provides the thumbnail's URL that refers to a specific page of the presented file.
-   * @param page<number> The number of the presented page. Files that do not include any pages, for example jpg images, require setting the value of this parameter to 0.
-   * @returns {Promise<string>}
+   * @param page The number of the presented page. Files that do not include any pages, for example jpg images, require setting the value of this parameter to 0.
    */
-
   public async getThumbnail(page: number): Promise<string> {
     return this._nativeModule.getThumbnail(page);
   }
 
   /**
    * Informs the service to send the updated page number to the conference participants.
-   * @param page<number> The page number that corresponds to the page that should be presented.
-   * @returns {Promise<void>}
+   * @param page The page number that corresponds to the page that should be presented.
    */
-
   public async setPage(page: number): Promise<void> {
     return this._nativeModule.setPage(page);
   }
 
   /**
    * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the Recording object, such as the ID of the participant who started the recording or the timestamp that informs when the recording was started.
-   * @param file<File> 	The file that the presenter wants to share during the conference.
-   * @returns {Promise<FileConverted>} Promise with the FileConverted object.
+   * @param file The file that the presenter wants to share during the conference.
    */
   public async convert(file: File): Promise<FileConverted> {
     return this._nativeModule.convert(file);
@@ -68,7 +64,6 @@ export class FilePresentationService {
 
   /**
    * Gets current file presentation.
-   * @returns {Promise<FilePresentation>} Promise with the FilePresentation object
    */
   public async getCurrent(): Promise<FilePresentation> {
     return this._nativeModule.getCurrent();
@@ -76,17 +71,16 @@ export class FilePresentationService {
 
   /**
    * Downloads and displays locally the presented file by retrieving URLs of the individual images.
-   * @param page<number> The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to 0.
-   * @returns {Promise<string>}
+   * @param page The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to 0.
    */
   public async getImage(page: number): Promise<string> {
     return this._nativeModule.getImage(page);
   }
 
   /**
-   * Add a handler for file converted
-   * @param handler<(data: FileConvertedEventType) => void> Handling function
-   * @returns {UnsubscribeFunction} Function that removes handler
+   * Adds a listener for file converted event
+   * @param handler Event callback function
+   * @returns Function that unsubscribes from listeners
    */
   public onFileConverted(
     handler: (data: FileConvertedEventType) => void
@@ -98,12 +92,9 @@ export class FilePresentationService {
   }
 
   /**
-   * Add a handler for file presentation changes
-   * @param handler<(data: FilePresentationChangedEventType, type?:
-   *  | FilePresentationServiceEventNames.FilePresentationStarted
-   *  | FilePresentationServiceEventNames.FilePresentationStopped
-   *  | FilePresentationServiceEventNames.FilePresentationUpdated) => void> Handling function
-   * @returns {UnsubscribeFunction} Function that removes handler
+   * Adds a listener for file presentation changed event
+   * @param handler Event callback function
+   * @returns Function that unsubscribes from listeners
    */
 
   public onFilePresentationChange(

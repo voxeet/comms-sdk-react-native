@@ -11,6 +11,9 @@ import type { InvitationReceivedEventType } from './events';
 
 const { DolbyIoIAPINotificationService } = NativeModules;
 
+/**
+ * The NotificationService enables inviting participants to a conference.
+ */
 export class NotificationService {
   /** @internal */
   _nativeModule = DolbyIoIAPINotificationService;
@@ -19,9 +22,8 @@ export class NotificationService {
 
   /**
    * Notifies conference participants about a conference invitation.
-   * @param conference<Conference> The conference object.
-   * @param participants<ParticipantInvited[]> Information about the invited application users.
-   * @returns {Promise<void>}
+   * @param conference The conference object.
+   * @param participants Information about the invited application users.
    */
   public async invite(
     conference: Conference,
@@ -32,17 +34,16 @@ export class NotificationService {
 
   /**
    * Declines the conference invitation.
-   * @param conference<Conference> The conference object.
-   * @returns {Promise<void>}
+   * @param conference The conference object.
    */
   public async decline(conference: Conference): Promise<void> {
     return this._nativeModule.decline(conference);
   }
 
   /**
-   * Add a handler for invitation received
-   * @param handler {(data: InvitationReceivedEventType) => void} Handling function
-   * @returns {() => void} Function that removes handler
+   * Add a listener for invitation received event
+   * @param handler Event callback function
+   * @returns Function that unsubscribes from listeners
    */
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void

@@ -150,14 +150,12 @@ public class ConferenceServiceModule: ReactEmitter {
 	/// - Parameters:
 	///   - conference: conference object
 	///   - replayOptions: The replay options.
-	///   - mixingOptions: The object that notifies the server that a participant who replays the conference is a special participant called Mixer.
 	///   - resolve: returns current conference object
 	///   - reject: returns error on failure
-	@objc(replay:replayOptions:mixingOptions:resolver:rejecter:)
+	@objc(replay:replayOptions:resolver:rejecter:)
 	public func replay(
 		conference: [String: Any],
 		replayOptions: [String: Any]?,
-		mixingOptions: [String: Any]?,
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
@@ -165,12 +163,12 @@ public class ConferenceServiceModule: ReactEmitter {
 			ModuleError.noConferenceId.send(with: reject)
 			return
 		}
-		VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { conference in
+		VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { [weak self] conference in
 			VoxeetSDK.shared.conference.replay(
 				conference: conference,
 				options: VTReplayOptions.create(with: replayOptions)) { error in
 					guard let error = error else {
-						resolve(NSNull())
+						resolve(self?.current?.toReactModel())
 						return
 					}
 					error.send(with: reject)

@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import VideoPresentationService from '../VideoPresentation';
+import VideoPresentationService from '../VideoPresentationService';
 import { VideoPresentationEventNames } from '../events';
 
 const { DolbyIoIAPIVideoPresentationService } = NativeModules;

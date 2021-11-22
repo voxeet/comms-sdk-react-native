@@ -16,7 +16,6 @@ export class RecordingService {
    * Returns information about the current recording. Use this accessor if you wish to receive information that is
    * available in the Recording object, such as the ID of the participant who started the recording or the timestamp
    * that informs when the recording was started.
-   * @returns {Promise<Recording | null>} Promise with the Recording or null
    */
   public async current(): Promise<Recording | null> {
     return this._nativeModule.current();
