@@ -3,6 +3,7 @@ package io.dolby.sdk.reactnative.mapper
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.models.Participant
+import com.voxeet.sdk.services.presentation.PresentationState
 import com.voxeet.sdk.services.presentation.video.VideoPresentation
 
 /**
@@ -18,6 +19,13 @@ class VideoPresentationMapper(
       putString(URL, url)
       putDouble(TIMESTAMP, lastSeekTimestamp.toDouble())
     }
+  }
+
+  fun stateToRN(state: PresentationState?) = when (state) {
+    PresentationState.PLAY -> "playing"
+    PresentationState.PAUSED -> "paused"
+    PresentationState.STOP -> "stopped"
+    else -> null
   }
 
   companion object {

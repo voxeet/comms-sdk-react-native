@@ -16,6 +16,7 @@ import io.dolby.sdk.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.reactnative.state.VideoPresentationHolder
 import io.dolby.sdk.reactnative.utils.Promises
 import io.dolby.sdk.reactnative.utils.Promises.forward
+import io.dolby.sdk.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.reactnative.utils.Promises.thenValue
 
 /**
@@ -147,6 +148,19 @@ class RNVideoPresentationServiceModule(
         owner to videoPresentation
       }
       .thenValue { (owner, videoPresentation) -> videoPresentationMapper.toRN(videoPresentation, owner) }
+      .forward(promise)
+  }
+
+  /**
+   * Provides the current state of the video presentation.
+   *
+   * @return returns the current state of the video presentation
+   */
+  @ReactMethod
+  fun state(promise: Promise) {
+    Promises.promise(videoPresentationService.currentPresentation) { "Couldn't get the current video presentation" }
+      .thenValue { videoPresentationMapper.stateToRN(it.state) }
+      .rejectIfNull { "Unknown video presentation state" }
       .forward(promise)
   }
 
