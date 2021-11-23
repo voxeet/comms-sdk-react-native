@@ -169,13 +169,6 @@ describe('ConferenceService', () => {
     });
   });
 
-  describe('isOutputMuted()', () => {
-    it('should invoke exported isOutputMuted method', () => {
-      ConferenceService.isOutputMuted();
-      expect(DolbyIoIAPIConferenceService.isOutputMuted).toHaveBeenCalled();
-    });
-  });
-
   describe('isMuted()', () => {
     it('should invoke exported isMuted method', () => {
       ConferenceService.isMuted();
