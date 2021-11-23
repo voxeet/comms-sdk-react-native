@@ -94,8 +94,8 @@ RCT_EXTERN_METHOD(muteOutput:(BOOL)isMuted
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
-RCT_EXTERN_METHOD(mute:(BOOL)isMuted
-				  participant:(NSDictionary * _Nonnull)participant
+RCT_EXTERN_METHOD(mute: (NSDictionary * _Nonnull)participant
+				  isMuted: (BOOL)isMuted			  
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 

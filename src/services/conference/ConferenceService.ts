@@ -185,7 +185,7 @@ export class ConferenceService {
     participant: Participant,
     isMuted: boolean
   ): Promise<boolean> {
-    return this._nativeModule.mute(isMuted, participant);
+    return this._nativeModule.mute(participant, isMuted);
   }
 
   /**

@@ -518,10 +518,11 @@ public class ConferenceServiceModule: ReactEmitter {
 	///   - participant: the participant you want to mute.
 	///   - resolve: returns on success
 	///   - reject: returns error on failure
-	@objc(mute:participant:resolver:rejecter:)
+	// @objc(participant:mute:resolver:rejecter:)
+	@objc(mute:isMuted:resolver:rejecter:)
 	public func mute(
-		isMuted: Bool,
 		participant: [String: Any],
+		isMuted: Bool,
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
