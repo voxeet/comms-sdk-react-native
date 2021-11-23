@@ -7,10 +7,9 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
-} from '../../../src/services/conference/models';
-import type {
   Conference,
   ParticipantPermissions,
+  AudioProcessingOptions,
 } from '../../../src/services/conference/models';
 import type { User } from '../../../src/services/session/models';
 
@@ -146,15 +145,6 @@ export const getParticipants = async (conference: Conference) => {
   }
 };
 
-export const isOutputMuted = async () => {
-  try {
-    const outputMuted = await DolbyIoIAPI.conference.isOutputMuted();
-    Alert.alert('Output:', outputMuted.toString());
-  } catch (e: any) {
-    Alert.alert('isOutputMuted error', e.toString());
-  }
-};
-
 export const isMuted = async () => {
   try {
     const muted = await DolbyIoIAPI.conference.isMuted();
@@ -173,17 +163,19 @@ export const isSpeaking = async (participant: Participant) => {
   }
 };
 
-export const setAudioProcessing = async () => {
+export const setAudioProcessing = async (options: AudioProcessingOptions) => {
   try {
-    await DolbyIoIAPI.conference.setAudioProcessing();
+    await DolbyIoIAPI.conference.setAudioProcessing(options);
+    Alert.alert('setAudioProcessing success');
   } catch (e: any) {
     Alert.alert('setAudioProcessing error', e.toString());
   }
 };
 
-export const setMaxVideoForwarding = async () => {
+export const setMaxVideoForwarding = async (max: number) => {
   try {
-    await DolbyIoIAPI.conference.setMaxVideoForwarding();
+    await DolbyIoIAPI.conference.setMaxVideoForwarding(max);
+    Alert.alert('setMaxVideoForwarding success');
   } catch (e: any) {
     Alert.alert('setMaxVideoForwarding error', e.toString());
   }

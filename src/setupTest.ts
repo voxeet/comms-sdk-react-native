@@ -22,7 +22,6 @@ jest.mock('react-native', () => {
     getParticipant: jest.fn(),
     getParticipants: jest.fn(),
     getStatus: jest.fn(),
-    isOutputMuted: jest.fn(),
     isMuted: jest.fn(),
     isSpeaking: jest.fn(),
     setAudioProcessing: jest.fn(),
