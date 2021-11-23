@@ -221,8 +221,8 @@ describe('ConferenceService', () => {
     it('should invoke exported mute method with correct arguments', () => {
       ConferenceService.mute(testParticipant, true);
       expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
-        true,
-        testParticipant
+        testParticipant,
+        true
       );
     });
   });
