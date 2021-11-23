@@ -70,15 +70,6 @@ export const getAudioLevel = async (user: User) => {
   }
 };
 
-// export const getAudioProcessing = async () => {
-//   try {
-//     const audioProcessing = await DolbyIoIAPI.conference.getAudioProcessing();
-//     Alert.alert('Audio processing', JSON.stringify(audioProcessing));
-//   } catch (e: any) {
-//     Alert.alert('Cant get audio processing', e);
-//   }
-// };
-
 export const getStatus = async (conference: Conference) => {
   try {
     const status = await DolbyIoIAPI.conference.getStatus(conference);
@@ -119,6 +110,7 @@ export const kick = async (participant: Participant) => {
 export const mute = async (participant: Participant, isMuted: boolean) => {
   try {
     await DolbyIoIAPI.conference.mute(participant, isMuted);
+    Alert.alert('Mute success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
   }
