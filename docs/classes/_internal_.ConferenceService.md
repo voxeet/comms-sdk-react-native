@@ -25,7 +25,6 @@ life-cycle and interact with the conference.
 - [getParticipants](_internal_.ConferenceService.md#getparticipants)
 - [getStatus](_internal_.ConferenceService.md#getstatus)
 - [isMuted](_internal_.ConferenceService.md#ismuted)
-- [isOutputMuted](_internal_.ConferenceService.md#isoutputmuted)
 - [isSpeaking](_internal_.ConferenceService.md#isspeaking)
 - [join](_internal_.ConferenceService.md#join)
 - [kick](_internal_.ConferenceService.md#kick)
@@ -212,20 +211,6 @@ Gets the current mute state of the participant.
 [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
 
 Information if the local participant is muted.
-
-___
-
-### isOutputMuted
-
-▸ **isOutputMuted**(): [`Promise`](../modules/_internal_.md#promise)<`boolean`\>
-
-Informs whether the application plays the remote participants' audio to the local participant.
-
-#### Returns
-
-[`Promise`](../modules/_internal_.md#promise)<`boolean`\>
-
-A boolean indicating whether the application plays the remote participants' audio to the local participant.
 
 ___
 
