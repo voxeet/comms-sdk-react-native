@@ -135,14 +135,6 @@ export class ConferenceService {
   }
 
   /**
-   * Informs whether the application plays the remote participants' audio to the local participant.
-   * @returns A boolean indicating whether the application plays the remote participants' audio to the local participant.
-   */
-  public async isOutputMuted(): Promise<boolean> {
-    return !!(await this._nativeModule.isOutputMuted());
-  }
-
-  /**
    * Gets the current mute state of the participant.
    * @returns Information if the local participant is muted.
    */
@@ -193,7 +185,7 @@ export class ConferenceService {
     participant: Participant,
     isMuted: boolean
   ): Promise<boolean> {
-    return this._nativeModule.mute(isMuted, participant);
+    return this._nativeModule.mute(participant, isMuted);
   }
 
   /**
