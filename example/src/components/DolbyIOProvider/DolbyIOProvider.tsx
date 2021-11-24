@@ -170,6 +170,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
           audio: true,
           video: false,
         },
+        maxVideoForwarding: 4,
         simulcast: false,
       };
       const joinedConference = await DolbyIoIAPI.conference.join(
