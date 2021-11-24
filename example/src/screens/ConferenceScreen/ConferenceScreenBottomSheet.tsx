@@ -22,17 +22,18 @@ import {
   current,
   getParticipant,
   getParticipants,
-  isOutputMuted,
   isMuted,
   isSpeaking,
   setAudioProcessing,
   setMaxVideoForwarding,
-  updatePermissions,
   startScreenShare,
   stopScreenShare,
   getLocalStats,
   getStatus,
   getMaxVideoForwarding,
+  setSpatialPosition,
+  setSpatialEnvironment,
+  setSpatialDirection,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -67,7 +68,7 @@ import {
 } from '@utils/videoPresentation.tester';
 
 import type { Conference } from '../../../../src/services/conference/models';
-import { ConferencePermission } from '../../../../src/services/conference/models';
+import type { AudioProcessingOptions } from '../../../../src/services/conference/models';
 import { ComfortNoiseLevel } from '../../../../src/services/mediaDevice/models';
 import styles from './ConferenceScreen.style';
 
@@ -134,6 +135,12 @@ const ConferenceScreenBottomSheet = () => {
     },
   ];
 
+  const audioOptions: AudioProcessingOptions = {
+    send: {
+      audioProcessing: true,
+    },
+  };
+
   return (
     <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[60, 500]}>
       <ScrollView>
@@ -188,12 +195,6 @@ const ConferenceScreenBottomSheet = () => {
             <Button
               size="small"
               color="dark"
-              text="Check output muted"
-              onPress={isOutputMuted}
-            />
-            <Button
-              size="small"
-              color="dark"
               text="Check is muted"
               onPress={isMuted}
             />
@@ -207,13 +208,13 @@ const ConferenceScreenBottomSheet = () => {
               size="small"
               color="dark"
               text="Set Audio Processing"
-              onPress={setAudioProcessing}
+              onPress={() => setAudioProcessing(audioOptions)}
             />
             <Button
               size="small"
               color="dark"
               text="Set Max Video Forwarding"
-              onPress={setMaxVideoForwarding}
+              onPress={() => setMaxVideoForwarding(2)}
             />
             <Button
               size="small"
@@ -230,20 +231,30 @@ const ConferenceScreenBottomSheet = () => {
             <Button
               size="small"
               color="dark"
-              text="Update Permissions nodata"
-              onPress={() => updatePermissions([])}
+              text="setSpatialDirection"
+              onPress={() =>
+                setSpatialDirection(participants[0], { x: 1, y: 2, z: 3 })
+              }
             />
             <Button
               size="small"
               color="dark"
-              text="Update Permissions random data"
+              text="setSpatialEnvironment"
               onPress={() =>
-                updatePermissions([
-                  {
-                    participant: participants[0],
-                    permissions: [ConferencePermission.KICK],
-                  },
-                ])
+                setSpatialEnvironment(
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 },
+                  { x: 1, y: 2, z: 3 }
+                )
+              }
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="setSpatialPosition"
+              onPress={() =>
+                setSpatialPosition(participants[0], { x: 1, y: 2, z: 3 })
               }
             />
           </Space>
