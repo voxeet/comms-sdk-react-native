@@ -32,7 +32,11 @@ export interface IDolbyIOProvider {
   activeParticipant?: Participant;
   initialize: () => void;
   openSession: (name: string, externalId?: string) => void;
-  createAndJoin: (alias: string, liveRecording: boolean) => void;
+  createAndJoin: (
+    alias: string,
+    liveRecording: boolean,
+    dolbyVoice: boolean
+  ) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
@@ -147,14 +151,18 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       unsubscribers.forEach((u) => u());
     };
   }, []);
-  const createAndJoin = async (alias: string, liveRecording: boolean) => {
+  const createAndJoin = async (
+    alias: string,
+    liveRecording: boolean,
+    dolbyVoice: boolean
+  ) => {
     try {
       const conferenceParams = {
         liveRecording: liveRecording,
         rtcpMode: RTCPMode.AVERAGE,
         ttl: 0,
         videoCodec: Codec.H264,
-        dolbyVoice: true,
+        dolbyVoice: dolbyVoice,
       };
       const conferenceOptions = {
         alias,
