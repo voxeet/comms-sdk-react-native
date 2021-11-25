@@ -172,6 +172,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         },
         maxVideoForwarding: 4,
         simulcast: false,
+        spatialAudio: true,
       };
       const joinedConference = await DolbyIoIAPI.conference.join(
         createdConference,
