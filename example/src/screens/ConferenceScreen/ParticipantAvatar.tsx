@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
@@ -23,7 +23,7 @@ const ParticipantAvatar = (participant: Participant) => {
   const [spatialConfigModalType, setSpatialConfigModalType] =
     useState<SpatialConfigModalTypeModel>('setSpatialDirection');
 
-  const { activeParticipant, setActiveParticipantId } =
+  const { activeParticipant, setActiveParticipantId, me } =
     useContext(DolbyIOContext);
 
   const options: Options = [
@@ -64,16 +64,30 @@ const ParticipantAvatar = (participant: Participant) => {
       text: 'Set spatial direction',
       value: 'setSpatialDirection',
       onSelect: () => {
-        setSpatialConfigModalActive(!spatialConfigModalActive);
-        setSpatialConfigModalType('setSpatialDirection');
+        if (me!.id === participant.id) {
+          setSpatialConfigModalActive(!spatialConfigModalActive);
+          setSpatialConfigModalType('setSpatialDirection');
+        } else {
+          Alert.alert(
+            'Error',
+            'Action available only from local participant avatar'
+          );
+        }
       },
     },
     {
       text: 'Set spatial environment',
       value: 'setSpatialEnvironment',
       onSelect: () => {
-        setSpatialConfigModalActive(!spatialConfigModalActive);
-        setSpatialConfigModalType('setSpatialEnvironment');
+        if (me!.id === participant.id) {
+          setSpatialConfigModalActive(!spatialConfigModalActive);
+          setSpatialConfigModalType('setSpatialEnvironment');
+        } else {
+          Alert.alert(
+            'Error',
+            'Action available only from local participant avatar'
+          );
+        }
       },
     },
     {

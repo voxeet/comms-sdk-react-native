@@ -383,7 +383,7 @@ export class ConferenceService {
 
   /**
    * Sets the direction a participant is facing in space.
-   * @param participant The selected remote participant.
+   * @param participant The local participant.
    * @param direction The direction the local participant is facing in space.
    */
   public async setSpatialDirection(
