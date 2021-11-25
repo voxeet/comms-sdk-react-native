@@ -383,14 +383,10 @@ export class ConferenceService {
 
   /**
    * Sets the direction a participant is facing in space.
-   * @param participant The local participant.
    * @param direction The direction the local participant is facing in space.
    */
-  public async setSpatialDirection(
-    participant: Participant,
-    direction: SpatialDirection
-  ): Promise<void> {
-    return this._nativeModule.setSpatialDirection(participant, direction);
+  public async setSpatialDirection(direction: SpatialDirection): Promise<void> {
+    return this._nativeModule.setSpatialDirection(direction);
   }
 
   /**
@@ -411,7 +407,7 @@ export class ConferenceService {
 
   /**
    * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
-   * @param participant The selected remote participant.
+   * @param participant The selected participant.
    * @param position The participant's audio location from which their audio will be rendered.
    */
   public async setSpatialPosition(
