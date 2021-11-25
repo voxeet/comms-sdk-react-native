@@ -595,7 +595,7 @@ class RNConferenceServiceModule(
           spatialAudioMapper.spatialPositionFromRN(rightRN),
         )
       }) { "Could not set spatial environment. Did you join participant with spatial audio enabled?" }
-      .forward(promise)
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**
@@ -623,7 +623,7 @@ class RNConferenceServiceModule(
         val position = spatialAudioMapper.spatialPositionFromRN(spatialPositionRN)
         conferenceService.setSpatialPosition(participant, position)
       }) { "Could not set spatial position. Did you join participant with spatial audio enabled?" }
-      .forward(promise)
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**
@@ -649,7 +649,7 @@ class RNConferenceServiceModule(
         val direction = spatialAudioMapper.spatialDirectionFromRN(directionRN)
         conferenceService.setSpatialDirection(direction)
       }) { "Could not set spatial direction. Did you join participant with spatial audio enabled?" }
-      .forward(promise)
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**
