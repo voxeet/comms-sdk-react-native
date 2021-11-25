@@ -17,17 +17,24 @@ const CreateConferenceButton: FunctionComponent<CreateConferenceButtonProps> =
     const { createAndJoin } = useContext(DolbyIOContext);
     const leaveOptions: Options = [
       {
-        text: 'Create conference with mixer recording options',
+        text: 'Create conference with mixer recording options, with Dolby Voice',
         value: 'createConferenceWithMixer',
         onSelect: async () => {
-          await createAndJoin(conferenceAlias, true);
+          await createAndJoin(conferenceAlias, true, true);
         },
       },
       {
-        text: 'Create conference without mixer recording options',
+        text: 'Create conference without mixer recording options, with Dolby Voice',
         value: 'createConference',
         onSelect: async () => {
-          await createAndJoin(conferenceAlias, false);
+          await createAndJoin(conferenceAlias, false, true);
+        },
+      },
+      {
+        text: 'Create conference without mixer recording options, without Dolby Voice',
+        value: 'createConferenceWithoutDolbyVoice',
+        onSelect: async () => {
+          await createAndJoin(conferenceAlias, false, false);
         },
       },
     ];
