@@ -109,7 +109,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
   // Submit, reset state and submit modal
   const submitSpatialConfig = async () => {
     if (type === ('setSpatialDirection' as SpatialConfigModalTypeModel))
-      await setSpatialDirection(participant, spatialDirectionValues);
+      await setSpatialDirection(spatialDirectionValues);
     else if (type === ('setSpatialEnvironment' as SpatialConfigModalTypeModel))
       await setSpatialEnvironment(
         spatialEnvironmentValues.scale,
