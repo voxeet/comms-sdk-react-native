@@ -204,14 +204,10 @@ export const stopScreenShare = async () => {
 };
 
 export const setSpatialDirection = async (
-  participant: Participant,
   spatialDirection: SpatialDirection
 ) => {
   try {
-    await DolbyIoIAPI.conference.setSpatialDirection(
-      participant,
-      spatialDirection
-    );
+    await DolbyIoIAPI.conference.setSpatialDirection(spatialDirection);
     Alert.alert('setSpatialDirection success');
   } catch (e) {
     const msg = (e as Error).message;
