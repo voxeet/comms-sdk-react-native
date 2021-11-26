@@ -94,7 +94,7 @@ export const getMaxVideoForwarding = async () => {
       await DolbyIoIAPI.conference.getMaxVideoForwarding();
     Alert.alert('Max video forwarding', JSON.stringify(maxVideoForwarding));
   } catch (e: any) {
-    Alert.alert('Cant get max video forwarding', e);
+    Alert.alert('Cant get max video forwarding', e.toString());
   }
 };
 
