@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / BooleanConstructor
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / [%3Cinternal%3E](../modules/_internal_.md) / BooleanConstructor
 
 # Interface: BooleanConstructor
 

@@ -1,4 +1,4 @@
-[@dolbyio/react-native-iapi-sdk](../README.md) / [Modules](../modules.md) / DolbyIoIAPI
+[@dolbyio/react-native-iapi-sdk](../README.md) / [Exports](../modules.md) / DolbyIoIAPI
 
 # Class: DolbyIoIAPI
 
