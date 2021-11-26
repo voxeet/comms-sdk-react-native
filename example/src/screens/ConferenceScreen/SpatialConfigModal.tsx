@@ -31,10 +31,10 @@ type SetSpatialConfigModalProps = {
 };
 
 type SpatialEnvironmentType = {
-  scale: { x: 0; y: 0; z: 0 };
-  forward: { x: 0; y: 0; z: 0 };
-  up: { x: 0; y: 0; z: 0 };
-  right: { x: 0; y: 0; z: 0 };
+  scale: { x: number; y: number; z: number };
+  forward: { x: number; y: number; z: number };
+  up: { x: number; y: number; z: number };
+  right: { x: number; y: number; z: number };
 };
 
 const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
@@ -51,10 +51,10 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
   };
 
   const initialSpatialEnvironmentValues: SpatialEnvironmentType = {
-    scale: { x: 0, y: 0, z: 0 },
-    forward: { x: 0, y: 0, z: 0 },
-    up: { x: 0, y: 0, z: 0 },
-    right: { x: 0, y: 0, z: 0 },
+    scale: { x: 1, y: 1, z: 1 },
+    forward: { x: 0, y: 0, z: 1 },
+    up: { x: 0, y: 1, z: 0 },
+    right: { x: 1, y: 0, z: 0 },
   };
 
   const initialSpatialPositionValues: SpatialPosition = { x: 0, y: 0, z: 0 };
