@@ -588,13 +588,11 @@ public class ConferenceServiceModule: ReactEmitter {
 
 	/// Sets the direction a participant is facing in space.
 	/// - Parameters:
-	///   - participant: The selected remote participant.
 	///   - direction: The direction the local participant is facing in space.
 	///   - resolve: returns on success
 	///   - reject: returns error on failure
-	@objc(setSpatialDirection:direction:resolver:rejecter:)
+	@objc(setSpatialDirection:resolver:rejecter:)
 	public func setSpatialDirection(
-		participant: [String: Any],
 		direction: [String: Any],
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock

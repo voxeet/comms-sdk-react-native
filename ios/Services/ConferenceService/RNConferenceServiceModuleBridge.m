@@ -105,8 +105,7 @@ RCT_EXTERN_METHOD(startScreenShare:(RCTPromiseResolveBlock _Nonnull)resolve
 RCT_EXTERN_METHOD(stopScreenShare:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
-RCT_EXTERN_METHOD(setSpatialDirection:(NSDictionary * _Nonnull)participant
-				  direction:(NSDictionary * _Nonnull)direction
+RCT_EXTERN_METHOD(setSpatialDirection:(NSDictionary * _Nonnull)direction
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
