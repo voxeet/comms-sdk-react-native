@@ -12,7 +12,7 @@ import { mute, kick } from '@utils/conference.tester';
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
-import type { SpatialConfigModalTypeModel } from './SpatialConfigModal';
+import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
@@ -21,7 +21,9 @@ const ParticipantAvatar = (participant: Participant) => {
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
     useState(false);
   const [spatialConfigModalType, setSpatialConfigModalType] =
-    useState<SpatialConfigModalTypeModel>('setSpatialDirection');
+    useState<SpatialConfigModalTypeModel>(
+      SpatialConfigModalTypeModel.setSpatialDirectionType
+    );
 
   const { activeParticipant, setActiveParticipantId, me } =
     useContext(DolbyIOContext);
@@ -66,7 +68,9 @@ const ParticipantAvatar = (participant: Participant) => {
       onSelect: () => {
         if (me!.id === participant.id) {
           setSpatialConfigModalActive(!spatialConfigModalActive);
-          setSpatialConfigModalType('setSpatialDirection');
+          setSpatialConfigModalType(
+            SpatialConfigModalTypeModel.setSpatialDirectionType
+          );
         } else {
           Alert.alert(
             'Error',
@@ -81,7 +85,9 @@ const ParticipantAvatar = (participant: Participant) => {
       onSelect: () => {
         if (me!.id === participant.id) {
           setSpatialConfigModalActive(!spatialConfigModalActive);
-          setSpatialConfigModalType('setSpatialEnvironment');
+          setSpatialConfigModalType(
+            SpatialConfigModalTypeModel.setSpatialEnvironmentType
+          );
         } else {
           Alert.alert(
             'Error',
@@ -95,7 +101,9 @@ const ParticipantAvatar = (participant: Participant) => {
       value: 'setSpatialPosition',
       onSelect: () => {
         setSpatialConfigModalActive(!spatialConfigModalActive);
-        setSpatialConfigModalType('setSpatialPosition');
+        setSpatialConfigModalType(
+          SpatialConfigModalTypeModel.setSpatialPositionType
+        );
       },
     },
   ];
