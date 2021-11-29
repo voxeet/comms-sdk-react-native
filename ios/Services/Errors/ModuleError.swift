@@ -61,7 +61,7 @@ internal extension ModuleError {
 		case let .noParticipantId(participantId):
 			return "Couldn't find the participant with id: \(participantId)"
 		case let .waitingForSDKImplementation(version):
-			return "Waiting for implementation in SDK version: \(version)"
+			return "Waiting for implementation in iOS SDK version: \(version)"
 		}
 	}
 }
