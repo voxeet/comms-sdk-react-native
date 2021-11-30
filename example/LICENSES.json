@@ -5,6 +5,18 @@
         "licenseUrl": "https://github.com/gorhom/react-native-bottom-sheet/raw/master/LICENSE",
         "parents": "react-native-dolbyio-sdk-example"
     },
+    "@react-native-async-storage/async-storage@1.15.9": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-async-storage/async-storage",
+        "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
+    "axios@0.24.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/axios/axios",
+        "licenseUrl": "https://github.com/axios/axios/raw/master/LICENSE",
+        "parents": "react-native-dolbyio-sdk-example"
+    },
     "chance@1.1.8": {
         "licenses": "MIT",
         "repository": "https://github.com/chancejs/chancejs",
@@ -23,10 +35,10 @@
         "licenseUrl": "https://github.com/jinder/path/raw/master/LICENSE",
         "parents": "react-native-dolbyio-sdk-example"
     },
-    "react-native-dotenv@3.2.0": {
+    "react-native-document-picker@7.1.1": {
         "licenses": "MIT",
-        "repository": "github:goatandsheep/react-native-dotenv",
-        "licenseUrl": "github:goatandsheep/react-native-dotenv",
+        "repository": "https://github.com/rnmods/react-native-document-picker",
+        "licenseUrl": "https://github.com/rnmods/react-native-document-picker/raw/master/LICENSE.md",
         "parents": "react-native-dolbyio-sdk-example"
     },
     "react-native-gesture-handler@1.10.3": {
