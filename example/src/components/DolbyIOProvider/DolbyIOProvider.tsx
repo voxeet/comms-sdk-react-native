@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-// @ts-ignore
-import { APP_ID, APP_SECRET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type {
@@ -30,7 +28,7 @@ export interface IDolbyIOProvider {
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
   activeParticipant?: Participant;
-  initialize: () => void;
+  initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (
     alias: string,
@@ -115,16 +113,19 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     Alert.alert('Permissions updated event');
   };
 
-  const initialize = async () => {
+  const initialize = async (
+    token: string,
+    refreshToken: () => Promise<string>
+  ) => {
     try {
-      console.log(APP_ID);
-      await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
+      await DolbyIoIAPI.initializeToken(token, refreshToken);
       setIsInitialized(true);
     } catch (e: any) {
       setIsInitialized(false);
       Alert.alert('App not initialized', e);
     }
   };
+
   const openSession = async (name: string, externalId?: string) => {
     const timeoutPromise = setTimeout(() => {
       DolbyIoIAPI.session.close();

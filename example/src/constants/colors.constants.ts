@@ -9,6 +9,7 @@ const BLUE_DARK = '#472693';
 const GREEN = '#32a75c';
 const RED = '#983434';
 const GRADIENT = [BLACK, BLUE_DARK, PINK];
+const TRANSPARENT_BLACK = 'rgba(0, 0, 0, 0.7)';
 
 export default {
   WHITE,
@@ -22,4 +23,5 @@ export default {
   GREEN,
   RED,
   GRADIENT,
+  TRANSPARENT_BLACK,
 };
