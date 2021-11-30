@@ -52,9 +52,6 @@ export default StyleSheet.create({
     borderRadius: SPACE_XXS,
     height: SPACE_M,
   },
-  activeParticipant: {
-    backgroundColor: COLORS.WHITE,
-  },
   buttonText: {
     justifyContent: 'center',
     alignContent: 'center',
