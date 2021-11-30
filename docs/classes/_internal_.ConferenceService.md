@@ -446,7 +446,7 @@ ___
 
 ### setSpatialDirection
 
-▸ **setSpatialDirection**(`participant`, `direction`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
+▸ **setSpatialDirection**(`direction`): [`Promise`](../modules/_internal_.md#promise)<`void`\>
 
 Sets the direction a participant is facing in space.
 
@@ -454,7 +454,6 @@ Sets the direction a participant is facing in space.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The selected remote participant. |
 | `direction` | [`SpatialDirection`](../interfaces/_internal_.SpatialDirection.md) | The direction the local participant is facing in space. |
 
 #### Returns
@@ -494,7 +493,7 @@ Sets a participant's position in space to enable the spatial audio experience du
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The selected remote participant. |
+| `participant` | [`Participant`](../interfaces/_internal_.Participant.md) | The selected participant. |
 | `position` | [`SpatialPosition`](../interfaces/_internal_.SpatialPosition.md) | The participant's audio location from which their audio will be rendered. |
 
 #### Returns
