@@ -154,4 +154,25 @@ export default StyleSheet.create({
     height: 100,
     width: 75,
   },
+
+  spatialInputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  spatialInputWrapper: {
+    flex: 2,
+  },
+  spatialInput: {
+    height: 40,
+    margin: 4,
+    borderWidth: 1,
+    paddingLeft: 10,
+  },
+  spatialInputLabelWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
