@@ -71,25 +71,25 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     useState<SpatialPosition>(initialSpatialPositionValues);
 
   // For creating content
-  const methodSetSpatialDirectionParams: {
+  const spatialDirectionElements: {
     title: string;
-    params: Array<keyof SpatialDirection>;
-  }[] = [{ title: 'Spatial Direction', params: ['x', 'y', 'z'] }];
+    coordinates: Array<keyof SpatialDirection>;
+  }[] = [{ title: 'Spatial Direction', coordinates: ['x', 'y', 'z'] }];
 
-  const methodSetSpatialEnvironmentParams: {
+  const spatialEnvironmentElements: {
     title: keyof SpatialEnvironmentType;
-    params: Array<keyof SpatialScale> | Array<keyof SpatialPosition>;
+    coordinates: Array<keyof SpatialScale> | Array<keyof SpatialPosition>;
   }[] = [
-    { title: 'scale', params: ['x', 'y', 'z'] },
-    { title: 'forward', params: ['x', 'y', 'z'] },
-    { title: 'up', params: ['x', 'y', 'z'] },
-    { title: 'right', params: ['x', 'y', 'z'] },
+    { title: 'scale', coordinates: ['x', 'y', 'z'] },
+    { title: 'forward', coordinates: ['x', 'y', 'z'] },
+    { title: 'up', coordinates: ['x', 'y', 'z'] },
+    { title: 'right', coordinates: ['x', 'y', 'z'] },
   ];
 
-  const methodSetSpatialPositionParams: {
+  const spatialPositionElements: {
     title: string;
-    params: Array<keyof SpatialPosition>;
-  }[] = [{ title: 'Spatial Position', params: ['x', 'y', 'z'] }];
+    coordinates: Array<keyof SpatialPosition>;
+  }[] = [{ title: 'Spatial Position', coordinates: ['x', 'y', 'z'] }];
 
   const resetSpatialModalFields = () => {
     if (type === SpatialConfigModalTypeModel.setSpatialDirectionType)
@@ -125,9 +125,9 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
 
   // Render inputs for spatialDirection and spatialPosition
   const renderModalInputSimple = (
-    i: {
+    element: {
       title: string;
-      params: Array<keyof SpatialDirection> | Array<keyof SpatialPosition>;
+      coordinates: Array<keyof SpatialDirection> | Array<keyof SpatialPosition>;
     },
     state: SpatialDirection | SpatialPosition,
     setState: any
@@ -135,13 +135,13 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     return (
       <Space ml="xs" mr="xs">
         <Text size="m" align="left" color="black">
-          {i.title}
+          {element.title}
         </Text>
-        {i.params.map((el) => {
+        {element.coordinates.map((coord) => {
           return (
             <Space fw style={styles.spatialInputContainer}>
               <Space style={styles.spatialInputLabelWrapper}>
-                <Text color="black">{el.toUpperCase()}</Text>
+                <Text color="black">{coord.toUpperCase()}</Text>
               </Space>
               <Space style={styles.spatialInputWrapper}>
                 <TextInput
@@ -149,10 +149,10 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
                   onChangeText={(value) =>
                     setState({
                       ...state,
-                      [el]: Number(value),
+                      [coord]: Number(value),
                     })
                   }
-                  value={state[el].toString()}
+                  value={state[coord].toString()}
                   keyboardType="numeric"
                 />
               </Space>
@@ -165,9 +165,9 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
 
   // Render inputs for spatialEnvironment
   const renderModalInputContext = (
-    i: {
+    element: {
       title: keyof SpatialEnvironmentType;
-      params: Array<keyof SpatialScale> | Array<keyof SpatialPosition>;
+      coordinates: Array<keyof SpatialScale> | Array<keyof SpatialPosition>;
     },
     state: SpatialEnvironmentType,
     setState: any
@@ -175,13 +175,13 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     return (
       <Space ml="xs" mr="xs">
         <Text size="m" align="left" color="black">
-          {i.title}
+          {element.title}
         </Text>
-        {i.params.map((el) => {
+        {element.coordinates.map((coord) => {
           return (
             <Space fw style={styles.spatialInputContainer}>
               <Space style={styles.spatialInputLabelWrapper}>
-                <Text color="black">{el.toUpperCase()}</Text>
+                <Text color="black">{coord.toUpperCase()}</Text>
               </Space>
               <Space style={styles.spatialInputWrapper}>
                 <TextInput
@@ -189,13 +189,13 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
                   onChangeText={(value) =>
                     setState({
                       ...state,
-                      [i.title]: {
-                        ...state[i.title],
-                        [el]: Number(value),
+                      [element.title]: {
+                        ...state[element.title],
+                        [coord]: Number(value),
                       },
                     })
                   }
-                  value={state[i.title][el].toString()}
+                  value={state[element.title][coord].toString()}
                   keyboardType="numeric"
                 />
               </Space>
@@ -206,29 +206,29 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     );
   };
 
-  const spatialDirectionTypeContent = methodSetSpatialDirectionParams.map(
-    (i) => {
+  const spatialDirectionTypeContent = spatialDirectionElements.map(
+    (element) => {
       return renderModalInputSimple(
-        i,
+        element,
         spatialDirectionValues,
         setSpatialDirectionValues
       );
     }
   );
 
-  const spatialEnvironmentTypeContent = methodSetSpatialEnvironmentParams.map(
-    (i) => {
+  const spatialEnvironmentTypeContent = spatialEnvironmentElements.map(
+    (element) => {
       return renderModalInputContext(
-        i,
+        element,
         spatialEnvironmentValues,
         setSpatialEnvironmentValues
       );
     }
   );
 
-  const spatialPositionTypeContent = methodSetSpatialPositionParams.map((i) => {
+  const spatialPositionTypeContent = spatialPositionElements.map((element) => {
     return renderModalInputSimple(
-      i,
+      element,
       spatialPositionValues,
       setSpatialPositionValues
     );
