@@ -41,8 +41,8 @@ public class DolbyIoIAPIModule: ReactEmitter {
 	///	  - accessToken: the access token that is provided by the customer's backend
 	///   - resolve: returns on success
 	///   - reject: returns error on failure
-	@objc(initialize:resolver:rejecter:)
-	public func initialize(
+	@objc(initializeToken:resolver:rejecter:)
+	public func initializeToken(
 		accessToken: String,
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
