@@ -27,7 +27,6 @@ export interface IDolbyIOProvider {
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
-  activeParticipant?: Participant;
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (
@@ -38,7 +37,6 @@ export interface IDolbyIOProvider {
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
-  setActiveParticipantId: (id: string) => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
@@ -47,14 +45,12 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   conference: undefined,
   conferenceStatus: undefined,
   participants: [],
-  activeParticipant: undefined,
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
-  setActiveParticipantId: () => {},
 });
 
 const DolbyIOProvider: React.FC = ({ children }) => {
@@ -69,9 +65,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [participants, setParticipants] = useState<Map<string, Participant>>(
     new Map()
   );
-  const [activeParticipantId, setActiveParticipantId] = useState<
-    string | undefined
-  >(undefined);
 
   const onConferenceStatusChange = (data: ConferenceStatusUpdatedEventType) => {
     console.log(
@@ -193,7 +186,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         participantsMap.set(p.id, p)
       );
       setParticipants(participantsMap);
-      setActiveParticipantId(joinedConference.participants[0].id);
       AsyncStorage.setItem(
         '@conference-previous',
         JSON.stringify(joinedConference)
@@ -263,16 +255,12 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     conference,
     conferenceStatus,
     participants: Array.from(participants.values()),
-    activeParticipant: activeParticipantId
-      ? participants.get(activeParticipantId)
-      : undefined,
     initialize,
     openSession,
     createAndJoin,
     joinWithId,
     replay,
     leave,
-    setActiveParticipantId,
   };
 
   return (

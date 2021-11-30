@@ -16,6 +16,8 @@ import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
+  const { me } = useContext(DolbyIOContext);
+
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
 
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
@@ -25,17 +27,7 @@ const ParticipantAvatar = (participant: Participant) => {
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
 
-  const { activeParticipant, setActiveParticipantId, me } =
-    useContext(DolbyIOContext);
-
   const options: Options = [
-    {
-      text: 'Set as active',
-      value: 'setAsActive',
-      onSelect: () => {
-        setActiveParticipantId(participant.id);
-      },
-    },
     {
       text: 'Kick',
       value: 'kick',
@@ -108,18 +100,13 @@ const ParticipantAvatar = (participant: Participant) => {
     },
   ];
 
-  const isActive = activeParticipant && activeParticipant.id === participant.id;
-
   return (
     <Space mr="xs">
       <MenuOptionsButton options={options}>
-        <View
-          style={[styles.participant, isActive && styles.activeParticipant]}
-          key={participant.id}
-        >
-          <Text size="s" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
+        <View style={styles.participant} key={participant.id}>
+          <Text size="s" color={COLORS.WHITE}>
             {participant.info.name}
-            <Text size="s" color={isActive ? COLORS.BLACK : COLORS.WHITE}>
+            <Text size="s" color={COLORS.WHITE}>
               ({participant.status})
             </Text>
           </Text>
