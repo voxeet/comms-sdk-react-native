@@ -392,14 +392,13 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		guard let conferenceId = conference.identifier else {
+		guard let conferenceId = conference.identifier,
+			  let conference = current,
+			  conference.id == conferenceId else {
 			ModuleError.noConferenceId.send(with: reject)
 			return
 		}
-		
-		VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { conference in
-			resolve(conference.status.toReactModelValue)
-		}
+			resolve(conference.status.toReactModelValue())
 	}
 	
 	/// Informs whether a participant is muted.
