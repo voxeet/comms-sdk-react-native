@@ -396,13 +396,10 @@ describe('ConferenceService', () => {
 
   describe('setSpatialDirection()', () => {
     it('should invoke exported method with correct arguments', () => {
-      ConferenceService.setSpatialDirection(
-        testParticipant,
-        testSpatialDirection
-      );
+      ConferenceService.setSpatialDirection(testSpatialDirection);
       expect(
         DolbyIoIAPIConferenceService.setSpatialDirection
-      ).toHaveBeenCalledWith(testParticipant, testSpatialDirection);
+      ).toHaveBeenCalledWith(testSpatialDirection);
     });
   });
 
