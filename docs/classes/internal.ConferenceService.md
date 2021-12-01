@@ -23,7 +23,6 @@ life-cycle and interact with the conference.
 - [getParticipants](internal.ConferenceService.md#getparticipants)
 - [getStatus](internal.ConferenceService.md#getstatus)
 - [isMuted](internal.ConferenceService.md#ismuted)
-- [isOutputMuted](internal.ConferenceService.md#isoutputmuted)
 - [isSpeaking](internal.ConferenceService.md#isspeaking)
 - [join](internal.ConferenceService.md#join)
 - [kick](internal.ConferenceService.md#kick)
@@ -210,20 +209,6 @@ Gets the current mute state of the participant.
 `Promise`<`boolean`\>
 
 Information if the local participant is muted.
-
-___
-
-### isOutputMuted
-
-▸ **isOutputMuted**(): `Promise`<`boolean`\>
-
-Informs whether the application plays the remote participants' audio to the local participant.
-
-#### Returns
-
-`Promise`<`boolean`\>
-
-A boolean indicating whether the application plays the remote participants' audio to the local participant.
 
 ___
 
@@ -459,7 +444,7 @@ ___
 
 ### setSpatialDirection
 
-▸ **setSpatialDirection**(`participant`, `direction`): `Promise`<`void`\>
+▸ **setSpatialDirection**(`direction`): `Promise`<`void`\>
 
 Sets the direction a participant is facing in space.
 
@@ -467,7 +452,6 @@ Sets the direction a participant is facing in space.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected remote participant. |
 | `direction` | [`SpatialDirection`](../interfaces/internal.SpatialDirection.md) | The direction the local participant is facing in space. |
 
 #### Returns
@@ -507,7 +491,7 @@ Sets a participant's position in space to enable the spatial audio experience du
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected remote participant. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. |
 | `position` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | The participant's audio location from which their audio will be rendered. |
 
 #### Returns
