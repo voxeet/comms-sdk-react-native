@@ -19,7 +19,9 @@ import NativeEvents from './utils/NativeEvents';
 const { DolbyIoIAPIModule } = NativeModules;
 
 export class DolbyIoIAPI {
+  /** @internal */
   private _nativeEvents = new NativeEvents(DolbyIoIAPIModule);
+  /** @internal */
   private refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
 
@@ -36,7 +38,6 @@ export class DolbyIoIAPI {
    * Initializes the SDK using the customer key and secret.
    * @param consumerKey  The customer key.
    * @param consumerSecret  The customer secret.
-   * @returns {Promise<null>}
    */
   public async initialize(
     consumerKey: string,
@@ -83,7 +84,6 @@ export class DolbyIoIAPI {
    * Where (1) and (2) are two REST API endpoints available on Dolby.io servers and documented on the developer portal.
    * @param accessToken  The access token provided by the customer's backend..
    * @param refreshAccessToken  A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired.
-   * @returns {Promise<null>}
    */
   public async initializeToken(
     accessToken: string | null,

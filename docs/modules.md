@@ -1,12 +1,10 @@
-[@dolbyio/react-native-iapi-sdk](README.md) / Exports
-
 # @dolbyio/react-native-iapi-sdk
 
 ## Table of contents
 
 ### Namespaces
 
-- [%3Cinternal%3E](modules/_internal_.md)
+- [internal](modules/internal.md)
 
 ### Classes
 
