@@ -5,5 +5,13 @@
   "exclude": [
     "./src/utils/**/*",
     "./example/**/*"
-  ]
+  ],
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "validation": {
+    "invalidLink": true,
+    "notExported": true
+  },
+  "internalNamespace": "internal",
+  "hideBreadcrumbs": true
 }
