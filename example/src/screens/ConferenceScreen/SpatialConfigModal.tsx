@@ -139,7 +139,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
         </Text>
         {element.coordinates.map((coord) => {
           return (
-            <Space fw style={styles.spatialInputContainer}>
+            <Space fw style={styles.spatialInputContainer} key={coord}>
               <Space style={styles.spatialInputLabelWrapper}>
                 <Text color="black">{coord.toUpperCase()}</Text>
               </Space>
@@ -179,7 +179,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
         </Text>
         {element.coordinates.map((coord) => {
           return (
-            <Space fw style={styles.spatialInputContainer}>
+            <Space fw style={styles.spatialInputContainer} key={coord}>
               <Space style={styles.spatialInputLabelWrapper}>
                 <Text color="black">{coord.toUpperCase()}</Text>
               </Space>
