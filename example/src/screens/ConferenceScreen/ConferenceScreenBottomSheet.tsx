@@ -87,7 +87,7 @@ const ConferenceScreenBottomSheet = () => {
           DocumentPicker.types.pptx,
         ],
       });
-      //Printing the log realted to the choosen file
+      //Printing the log related to the choosen file
       console.log('file result : ' + JSON.stringify(res));
       console.log('file uri : ' + res.uri);
 
