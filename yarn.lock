@@ -8992,10 +8992,10 @@ typedoc-plugin-markdown@^3.11.0:
   dependencies:
     handlebars "^4.7.7"
 
-typedoc-plugin-missing-exports@^0.22.3:
-  version "0.22.3"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-0.22.3.tgz#244a5926d8d780f0191c47b6de30c06052f9cd22"
-  integrity sha512-/oi1EwSw6/aWUjPzqfGbS2m0JZmeOFgnyW0XpAhLofyPfLM3lBom8ME29UKTV1S8xgObY+s6gjYccujjDFOQ/A==
+typedoc-plugin-missing-exports@^0.22.4:
+  version "0.22.4"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-0.22.4.tgz#22a2cf10c0dc1724460c5ba9c81ae66c60a3658e"
+  integrity sha512-NRagPFyh8Oma5E7rR8534x4d8GQ/87Tp3WYfBJcxradPjXTZ4D2MXD5eHfG98DQCMqYrb+CRZnvO4iaGaqQC7w==
 
 typedoc@^0.22.4:
   version "0.22.4"
