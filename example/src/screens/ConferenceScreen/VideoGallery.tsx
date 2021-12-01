@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 
 import type { Participant } from '../../../../src/services/conference/models';
@@ -24,10 +24,6 @@ type VideoGalleryProps = {
 const VideoGallery = ({ participants, scaleType }: VideoGalleryProps) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    console.log(participants.length);
-  }, [participants]);
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width: newWidth, height: newHeight } = event.nativeEvent.layout;
