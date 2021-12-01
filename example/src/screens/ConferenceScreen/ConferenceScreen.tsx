@@ -1,11 +1,4 @@
-import React, {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { FunctionComponent, useContext, useMemo, useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -16,9 +9,9 @@ import { DolbyIOContext } from '@components/DolbyIOProvider';
 import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
-import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 import LeaveConferenceButton from '@screens/ConferenceScreen/LeaveConferenceButton';
 import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
+import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { startVideo, stopVideo } from '@utils/conference.tester';
@@ -35,33 +28,13 @@ const DISPLAYED_STATUSES: ParticipantStatus[] = [
 ];
 
 const ConferenceScreen: FunctionComponent = () => {
-  const { me, conference, participants, activeParticipant } =
-    useContext(DolbyIOContext);
+  const { me, conference, participants } = useContext(DolbyIOContext);
   const { isRecording } = useContext(RecordingContext);
   const { fileSrc, isPresentingFile, fileOwnerName } = useContext(
     FilePresentationContext
   );
 
   const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
-
-  const videoView = useRef() as React.MutableRefObject<VideoView>;
-
-  useEffect(() => {
-    if (videoView?.current) {
-      if (activeParticipant?.streams?.length) {
-        // @ts-ignore
-        videoView.current.attach(
-          activeParticipant,
-          activeParticipant.streams[activeParticipant.streams.length - 1]
-        );
-        console.log('attach');
-      } else {
-        // @ts-ignore
-        videoView.current.detach();
-        console.log('detach');
-      }
-    }
-  }, [activeParticipant]);
 
   const connectedParticipants = useMemo(() => {
     return participants.filter(
@@ -72,8 +45,6 @@ const ConferenceScreen: FunctionComponent = () => {
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
-
-  console.log(connectedParticipants);
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
@@ -177,9 +148,8 @@ const ConferenceScreen: FunctionComponent = () => {
         <ConferenceScreenBottomSheet />
       </View>
       <View style={styles.layerVideo} pointerEvents="none">
-        <VideoView
-          ref={videoView}
-          style={{ flex: 1, borderRadius: 50 }}
+        <VideoGallery
+          participants={connectedParticipants}
           scaleType={scaleType}
         />
       </View>

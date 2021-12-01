@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-// @ts-ignore
-import { APP_ID, APP_SECRET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type {
@@ -29,8 +27,7 @@ export interface IDolbyIOProvider {
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
-  activeParticipant?: Participant;
-  initialize: () => void;
+  initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (
     alias: string,
@@ -40,7 +37,6 @@ export interface IDolbyIOProvider {
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
-  setActiveParticipantId: (id: string) => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
@@ -49,14 +45,12 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   conference: undefined,
   conferenceStatus: undefined,
   participants: [],
-  activeParticipant: undefined,
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
-  setActiveParticipantId: () => {},
 });
 
 const DolbyIOProvider: React.FC = ({ children }) => {
@@ -71,9 +65,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [participants, setParticipants] = useState<Map<string, Participant>>(
     new Map()
   );
-  const [activeParticipantId, setActiveParticipantId] = useState<
-    string | undefined
-  >(undefined);
 
   const onConferenceStatusChange = (data: ConferenceStatusUpdatedEventType) => {
     console.log(
@@ -115,16 +106,19 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     Alert.alert('Permissions updated event');
   };
 
-  const initialize = async () => {
+  const initialize = async (
+    token: string,
+    refreshToken: () => Promise<string>
+  ) => {
     try {
-      console.log(APP_ID);
-      await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
+      await DolbyIoIAPI.initializeToken(token, refreshToken);
       setIsInitialized(true);
     } catch (e: any) {
       setIsInitialized(false);
       Alert.alert('App not initialized', e);
     }
   };
+
   const openSession = async (name: string, externalId?: string) => {
     const timeoutPromise = setTimeout(() => {
       DolbyIoIAPI.session.close();
@@ -192,7 +186,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         participantsMap.set(p.id, p)
       );
       setParticipants(participantsMap);
-      setActiveParticipantId(joinedConference.participants[0].id);
       AsyncStorage.setItem(
         '@conference-previous',
         JSON.stringify(joinedConference)
@@ -262,16 +255,12 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     conference,
     conferenceStatus,
     participants: Array.from(participants.values()),
-    activeParticipant: activeParticipantId
-      ? participants.get(activeParticipantId)
-      : undefined,
     initialize,
     openSession,
     createAndJoin,
     joinWithId,
     replay,
     leave,
-    setActiveParticipantId,
   };
 
   return (

@@ -73,7 +73,6 @@ const UpdatePermissionsModal: FunctionComponent<UpdatePermissionsModalProps> =
 
     useEffect(() => {
       setUserPermissions(userPermissions);
-      console.log(userPermissions);
     }, [userPermissions]);
 
     return (
