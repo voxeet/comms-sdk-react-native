@@ -35,9 +35,6 @@ life-cycle and interact with the conference.
 - [replay](internal.ConferenceService.md#replay)
 - [setAudioProcessing](internal.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](internal.ConferenceService.md#setmaxvideoforwarding)
-- [setSpatialDirection](internal.ConferenceService.md#setspatialdirection)
-- [setSpatialEnvironment](internal.ConferenceService.md#setspatialenvironment)
-- [setSpatialPosition](internal.ConferenceService.md#setspatialposition)
 - [startAudio](internal.ConferenceService.md#startaudio)
 - [startScreenShare](internal.ConferenceService.md#startscreenshare)
 - [startVideo](internal.ConferenceService.md#startvideo)
@@ -439,64 +436,6 @@ Sets the maximum number of video streams that may be transmitted to the local pa
 #### Returns
 
 `Promise`<`any`\>
-
-___
-
-### setSpatialDirection
-
-▸ **setSpatialDirection**(`direction`): `Promise`<`void`\>
-
-Sets the direction a participant is facing in space.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `direction` | [`SpatialDirection`](../interfaces/internal.SpatialDirection.md) | The direction the local participant is facing in space. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### setSpatialEnvironment
-
-▸ **setSpatialEnvironment**(`scale`, `forward`, `up`, `right`): `Promise`<`void`\>
-
-Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `scale` | [`SpatialScale`](../interfaces/internal.SpatialScale.md) | The application's distance units or scale in application units per one meter. The value must be greater than 0. |
-| `forward` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. |
-| `up` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | A vector describing the direction the application considers as up. The value must be orthogonal to forward and right. |
-| `right` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | A vector describing the direction the application considers as right. The value must be orthogonal to forward and up. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### setSpatialPosition
-
-▸ **setSpatialPosition**(`participant`, `position`): `Promise`<`void`\>
-
-Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. |
-| `position` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | The participant's audio location from which their audio will be rendered. |
-
-#### Returns
-
-`Promise`<`void`\>
 
 ___
 
