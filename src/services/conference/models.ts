@@ -316,29 +316,3 @@ export enum RTCStatsType {
   /** Information about the connection to an ICE server (e.g. STUN or TURN). */
   'ice-server',
 }
-
-export interface SpatialDirection {
-  /** The Euler rotation about the x-axis, in degrees. */
-  x: number;
-  /** The Euler rotation about the y-axis, in degrees. */
-  y: number;
-  /** The Euler rotation about the z-axis, in degrees. */
-  z: number;
-}
-
-export interface SpatialScale {
-  /** The x component of the SpatialScale vector. */
-  x: number;
-  /** The y component of the SpatialScale vector. */
-  y: number;
-  /** The z component of the SpatialScale vector. */
-  z: number;
-}
-export interface SpatialPosition {
-  /** The x-coordinate of a new audio location. */
-  x: number;
-  /** The y-coordinate of a new audio location. */
-  y: number;
-  /** The z-coordinate of a new audio location. */
-  z: number;
-}
