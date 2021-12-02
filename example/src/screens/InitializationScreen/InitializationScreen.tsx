@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -72,17 +73,19 @@ const InitializationScreen: FunctionComponent = () => {
             Select environment:
           </Text>
         </Space>
-        {availableKeys.map(({ key, name }) => (
-          <Space mh="s" mt="xs" key={key}>
-            <TouchableOpacity
-              style={styles.environment}
-              onPress={() => getTokenAndInitialize(key)}
-            >
-              <Text size="m">{name}</Text>
-              <Text size="xs">{key}</Text>
-            </TouchableOpacity>
-          </Space>
-        ))}
+        <ScrollView>
+          {availableKeys.map(({ key, name }) => (
+            <Space mh="s" mt="xs" key={key}>
+              <TouchableOpacity
+                style={styles.environment}
+                onPress={() => getTokenAndInitialize(key)}
+              >
+                <Text size="m">{name}</Text>
+                <Text size="xs">{key}</Text>
+              </TouchableOpacity>
+            </Space>
+          ))}
+        </ScrollView>
       </SafeAreaView>
     </LinearGradient>
   );
