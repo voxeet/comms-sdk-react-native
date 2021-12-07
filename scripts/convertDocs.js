@@ -28,8 +28,6 @@ const REGEXP_MATCH_INTERNAL_LINKS = /\[internal].+/g;
 const SLUG_PREFIX = 'rn-client-sdk-';
 const LINK_SLUG_PREFIX = 'doc:rn-client-sdk-';
 
-// TODO: updatedAt and createdAt is equal in header, should not be
-
 const FILE_PATHS = [];
 const DOCS_DIR = '../docs';
 
@@ -62,8 +60,7 @@ const DOCS_DIR = '../docs';
 })();
 
 function createDocHeader(rawModuleName, slug, order) {
-  return `
----
+  return `---
 apiVersion: 1.0
 categoryName: ReactNative SDK
 title: ${rawModuleName}
@@ -93,12 +90,12 @@ function convertDoc(filePath, index) {
   let moduleName = getFilePathModuleName(filePath);
 
   if (isInternalDocFile(filePath) && moduleName) {
-    const rawModuleName = filePath.match(REGEXP_MATCH_DOC_FILENAME);
-    if (!rawModuleName) {
+    const rawFileName = filePath.match(REGEXP_MATCH_DOC_FILENAME);
+    if (!rawFileName) {
       throw new Error(`[${filePath}]: reading raw filename error`);
     }
     const slug = createHeaderSlug(filePath);
-    const header = createDocHeader(rawModuleName[1], slug, index);
+    const header = createDocHeader(rawFileName[1], slug, index);
     // we use substring to create new path; here we're going from
     // ../docs/interface/.. to ./docs/interface/..
     const newFilePath = path.dirname(filePath).substring(1);
@@ -111,7 +108,9 @@ function convertDoc(filePath, index) {
     const docAsString = fileBuffer.toString();
     const docWithHeader = header + docAsString;
     const convertedDocAsString = docWithHeader
-      .replaceAll(REGEXP_MATCH_DOC_LINKS, changeLinkFormatReplacerFn)
+      .replaceAll(REGEXP_MATCH_DOC_LINKS, (substring) =>
+        changeLinkFormatReplacerFn(substring, moduleName)
+      )
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_HEADER, '')
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_LINK, '')
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_INIT, '')
@@ -178,7 +177,7 @@ function getFilePathModuleName(filePath) {
   return '';
 }
 
-function changeLinkFormatReplacerFn(substring) {
+function changeLinkFormatReplacerFn(substring, moduleName) {
   let replaceString;
   const isRootInternalModule = new RegExp('internal.md').test(substring);
   if (isRootInternalModule) {
@@ -193,7 +192,7 @@ function changeLinkFormatReplacerFn(substring) {
   }
   replaceString =
     LINK_SLUG_PREFIX +
-    (module ? `${module[1]}-` : '') +
+    (module ? `${module[1]}-` : `${moduleName}-`) +
     `${service[1].toLowerCase()}`;
   return substring.replace(/(?<=\[.+]\().+\.md(?=.+\))?/, replaceString);
 }
