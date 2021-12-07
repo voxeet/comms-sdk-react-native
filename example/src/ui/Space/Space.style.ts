@@ -1,7 +1,6 @@
 // m, mv, mh, mt, mr, mb, ml, p, pv, ph, pt, pr, pb, pl
 // fw for width 100%
 // fh for height 100%
-
 import { SPACES } from '@constants/sizes.constants';
 
 const options = [
