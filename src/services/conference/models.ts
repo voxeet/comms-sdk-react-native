@@ -170,13 +170,6 @@ export enum RTCPMode {
   BEST = 'best',
 }
 
-export enum Mode {
-  // TODO - doc
-  STANDARD = 'standard',
-  // TODO - doc
-  PUSH = 'push',
-}
-
 export enum Codec {
   // TODO - doc
   VP8 = 'VP8',
