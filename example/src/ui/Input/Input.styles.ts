@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 import COLORS from '@constants/colors.constants';
-import { SPACE_S, SPACE_XL } from '@constants/sizes.constants';
 import { FONT_WEIGHTS, FONT_SIZES } from '@constants/fonts.constants';
+import { SPACE_S, SPACE_XL } from '@constants/sizes.constants';
 
 export default StyleSheet.create({
   view: {
