@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native';
 
 import NativeEvents from '../../utils/NativeEvents';
+import type { UnsubscribeFunction } from '../conference/models';
 import type { MessageReceivedEventType } from './events';
 import { CommandServiceEventNames } from './events';
 
@@ -8,7 +9,7 @@ const { DolbyIoIAPICommandServiceModule } = NativeModules;
 
 /**
 The Command service allows the application to send text messages or notifications to all conference participants.
-The service also emits an received event to inform the application about received messages.
+The service also emits a received event to inform the application about received messages.
  */
 export class CommandService {
   /** @internal */
@@ -31,7 +32,7 @@ export class CommandService {
    */
   public onMessageReceived(
     handler: (data: MessageReceivedEventType) => void
-  ): () => void {
+  ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       CommandServiceEventNames.MessageReceived,
       handler

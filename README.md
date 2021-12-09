@@ -150,32 +150,32 @@ VideoView methods
 
 A complete list of available services in SDK along with method documentation
 
-[DolbyIoIAPI](docs/classes/DolbyIoIAPI.md)
+[DolbyIoIAPI](classes/DolbyIoIAPI.md)
 is the main module that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
 
-[CommandService](docs/classes/_internal_.CommandService.md)
+[CommandService](classes/internal.CommandService.md)
 allows the application to send text messages or notifications to all conference participants. The service also emits an received event to inform the application about received messages.
 
-[ConferenceService](docs/classes/_internal_.ConferenceService.md)
+[ConferenceService](classes/internal.ConferenceService.md)
 allows the application to manage the conference life-cycle and interact with the conference.
 
-[FilePresentationService](docs/classes/_internal_.FilePresentationService.md)
+[FilePresentationService](classes/internal.FilePresentationService.md)
 allows the application to manage the conference life-cycle and interact with the conference.
 
-[MediaDeviceService](docs/classes/_internal_.MediaDeviceService.md)
+[MediaDeviceService](classes/internal.MediaDeviceService.md)
 allows the application to manage media devices that are used during conferences.
 
-[NotificationService](docs/classes/_internal_.NotificationService.md)
+[NotificationService](classes/internal.NotificationService.md)
 enables inviting participants to a conference.
 
-[RecordingService](docs/classes/_internal_.RecordingService.md)
+[RecordingService](classes/internal.RecordingService.md)
 allows an application to record conferences by using the start and stop
 methods that turn the recording on and off.
 
-[SessionService](docs/classes/_internal_.SessionService.md)
+[SessionService](classes/internal.SessionService.md)
 allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
 
-[VideoPresentationService](docs/classes/_internal_.VideoPresentationService.md)
+[VideoPresentationService](classes/internal.VideoPresentationService.md)
 allows sharing videos during a conference.
 
 ## License
