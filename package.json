@@ -22,6 +22,8 @@
     "typescript": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
+    "prettier:check": "prettier --check \"src/**/*.{js,ts,tsx}\"\n",
+    "prettier:fix": "prettier --write \"src/**/*.{js,ts,tsx}\"\n",
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
@@ -95,7 +97,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn typescript && touch .hook_commit",
+      "pre-commit": "yarn lint && yarn prettier:check && yarn typescript && touch .hook_commit",
       "post-commit": " ( [ -e .hook_commit ] && rm .hook_commit && yarn append && git commit --amend -C HEAD --no-verify) "
     }
   },
