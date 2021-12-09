@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import type { MessageReceivedEventType } from '../../../../src/services/command/events';
 import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
@@ -106,6 +108,25 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     Alert.alert('Permissions updated event');
   };
 
+  const onMessageReceived = (data: MessageReceivedEventType) => {
+    console.log(
+      'MESSAGE RECEIVED EVENT DATA: \n',
+      JSON.stringify(data, null, 2)
+    );
+    Platform.OS === 'android'
+      ? Alert.alert(
+          'MESSAGE RECEIVED EVENT DATA',
+          JSON.stringify(data.message, null, 2)
+        )
+      : Toast.show({
+          type: 'custom',
+          props: {
+            title: 'MESSAGE RECEIVED EVENT DATA',
+            content: JSON.stringify(data.message, null, 2),
+          },
+        });
+  };
+
   const initialize = async (
     token: string,
     refreshToken: () => Promise<string>
@@ -140,6 +161,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange),
       DolbyIoIAPI.conference.onStreamsChange(onStreamsChange),
       DolbyIoIAPI.conference.onPermissionsChange(onPermissionsChange),
+      DolbyIoIAPI.command.onMessageReceived(onMessageReceived),
     ];
     return () => {
       unsubscribers.forEach((u) => u());
