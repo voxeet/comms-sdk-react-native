@@ -107,7 +107,7 @@ export const kick = async (participant: Participant) => {
 export const mute = async (participant: Participant, isMuted: boolean) => {
   try {
     await DolbyIoIAPI.conference.mute(participant, isMuted);
-    Alert.alert('Mute success');
+    Alert.alert('Switch mute success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
   }

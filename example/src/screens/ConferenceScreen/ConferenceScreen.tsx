@@ -14,12 +14,13 @@ import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { startVideo, stopVideo } from '@utils/conference.tester';
+import { startVideo, stopVideo, mute } from '@utils/conference.tester';
 
 import { ParticipantStatus } from '../../../../src/services/conference/models';
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
+import MessageModal from './MessageModal';
 import ParticipantAvatar from './ParticipantAvatar';
 
 const DISPLAYED_STATUSES: ParticipantStatus[] = [
@@ -35,6 +36,8 @@ const ConferenceScreen: FunctionComponent = () => {
   );
 
   const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
+  const [isMessageModalActive, setIsMessageModalActive] =
+    useState<boolean>(false);
 
   const connectedParticipants = useMemo(() => {
     return participants.filter(
@@ -83,40 +86,78 @@ const ConferenceScreen: FunctionComponent = () => {
             ) : null}
 
             <View style={styles.center}>
+              {/*  */}
               <View style={styles.centerButtons}>
-                <Space mh="xxs">
-                  <TouchableOpacity
-                    style={[styles.videoButton, styles.videoButtonGreen]}
-                    onPress={() => startVideo(me)}
-                  >
-                    <Text size="xs" align="center">
-                      START VIDEO
-                    </Text>
-                  </TouchableOpacity>
-                </Space>
-                <Space mh="xxs">
-                  <TouchableOpacity
-                    style={[styles.videoButton, styles.videoButtonRed]}
-                    onPress={() => stopVideo(me)}
-                  >
-                    <Text size="xs" align="center">
-                      STOP VIDEO
-                    </Text>
-                  </TouchableOpacity>
-                </Space>
-                <Space mh="xxs">
-                  <TouchableOpacity
-                    style={styles.videoButton}
-                    onPress={() => {
-                      setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
-                    }}
-                  >
-                    <Text size="xs" align="center">
-                      FILL/FIT
-                    </Text>
-                  </TouchableOpacity>
-                </Space>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={[styles.videoButton]}
+                      onPress={() => setIsMessageModalActive(true)}
+                    >
+                      <Text size="xs" align="center">
+                        SEND MSG
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={[styles.videoButton, styles.videoButtonRed]}
+                      onPress={() => {
+                        mute(me, true);
+                      }}
+                    >
+                      <Text size="xs" align="center">
+                        MUTE ME
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={[styles.videoButton, styles.videoButtonGreen]}
+                      onPress={() => {
+                        mute(me, false);
+                      }}
+                    >
+                      <Text size="xs" align="center">
+                        UNMUTE ME
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={[styles.videoButton, styles.videoButtonGreen]}
+                      onPress={() => startVideo(me)}
+                    >
+                      <Text size="xs" align="center">
+                        START VIDEO
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={[styles.videoButton, styles.videoButtonRed]}
+                      onPress={() => stopVideo(me)}
+                    >
+                      <Text size="xs" align="center">
+                        STOP VIDEO
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                  <Space mh="xxs">
+                    <TouchableOpacity
+                      style={styles.videoButton}
+                      onPress={() => {
+                        setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
+                      }}
+                    >
+                      <Text size="xs" align="center">
+                        FILL/FIT
+                      </Text>
+                    </TouchableOpacity>
+                  </Space>
+                </ScrollView>
               </View>
+              {/*  */}
             </View>
             <View style={styles.bottom}>
               <Space
@@ -153,6 +194,10 @@ const ConferenceScreen: FunctionComponent = () => {
           scaleType={scaleType}
         />
       </View>
+      <MessageModal
+        open={isMessageModalActive}
+        closeModal={() => setIsMessageModalActive(false)}
+      />
     </LinearGradient>
   );
 };
