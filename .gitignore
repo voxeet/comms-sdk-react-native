@@ -67,3 +67,5 @@ lib/
 .env
 
 coverage
+
+scripts/docs

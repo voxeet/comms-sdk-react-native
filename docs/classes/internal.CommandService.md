@@ -3,7 +3,7 @@
 [internal](../modules/internal.md).CommandService
 
 The Command service allows the application to send text messages or notifications to all conference participants.
-The service also emits an received event to inform the application about received messages.
+The service also emits a received event to inform the application about received messages.
 
 ## Table of contents
 
@@ -26,7 +26,7 @@ The service also emits an received event to inform the application about receive
 
 ### onMessageReceived
 
-▸ **onMessageReceived**(`handler`): () => `void`
+▸ **onMessageReceived**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
 Adds a native listener for message received
 
@@ -38,17 +38,7 @@ Adds a native listener for message received
 
 #### Returns
 
-`fn`
-
-Function that unsubscribes from listeners
-
-▸ (): `void`
-
-Adds a native listener for message received
-
-##### Returns
-
-`void`
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
 Function that unsubscribes from listeners
 

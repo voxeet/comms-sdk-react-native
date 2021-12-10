@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import SHADOWS from '@constants/boxshadow.constants';
 import COLORS from '@constants/colors.constants';
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   bottom: {
-    paddingBottom: Platform.OS === 'ios' ? 30 : 70,
+    paddingBottom: 120,
   },
   participantsList: {
     flexDirection: 'row',
