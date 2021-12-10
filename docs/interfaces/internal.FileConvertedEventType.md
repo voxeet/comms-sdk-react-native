@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).FileConvertedEventType
 
+The FileConvertedEventType interface gathers information about the converted file.
+
 ## Table of contents
 
 ### Properties

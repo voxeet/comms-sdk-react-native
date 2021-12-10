@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).NotificationService
 
-The NotificationService enables inviting participants to a conference.
+The NotificationService allows inviting participants to a conference.
 
 ## Table of contents
 
@@ -65,16 +65,16 @@ ___
 
 ▸ **onInvitationReceived**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Add a listener for invitation received event
+Adds a listener to the invitation received event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/internal.InvitationReceivedEventType.md)) => `void` | Event callback function |
+| `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/internal.InvitationReceivedEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.

@@ -2,8 +2,7 @@
 
 [internal](../modules/internal.md).ConferenceService
 
-The ConferenceService allows the application to manage the conference
-life-cycle and interact with the conference.
+The ConferenceService allows an application to manage the conference life-cycle and interact with a conference. The service allows creating, joining, and leaving conferences and managing the audio, video, and screen-share streams.
 
 ## Table of contents
 
@@ -55,13 +54,13 @@ life-cycle and interact with the conference.
 
 ▸ **create**(`options?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Create a conference with options
+Creates a conference.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | [`ConferenceCreateOptions`](../interfaces/internal.ConferenceCreateOptions.md) | The conference options |
+| `options` | [`ConferenceCreateOptions`](../interfaces/internal.ConferenceCreateOptions.md) | The conference options. |
 
 #### Returns
 
@@ -73,7 +72,7 @@ ___
 
 ▸ **current**(): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Provides information about the current conference.
+Returns information about the current conference.
 
 #### Returns
 
@@ -85,7 +84,7 @@ ___
 
 ▸ **fetch**(`conferenceId?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Provides a Conference object that allows joining a conference. Without a param it returns current Conference object.
+Provides a Conference object that allows joining a conference. If the parameter is not provided, the method returns the current Conference object.
 
 #### Parameters
 
@@ -103,13 +102,13 @@ ___
 
 ▸ **getAudioLevel**(`participant`): `Promise`<`number`\>
 
-Gets the participant's audio level
+Gets the participant's audio level, in the range from 0.0 to 1.0.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant object. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The Participant object. |
 
 #### Returns
 
@@ -119,13 +118,13 @@ ___
 
 ### getLocalStats
 
-▸ **getLocalStats**(): `Promise`<[`RTCStatsType`](../enums/internal.RTCStatsType.md)[]\>
+▸ **getLocalStats**(): `Promise`<`RTCStatsType`[]\>
 
-Provides standard WebRTC statistics for the application.
+Provides the [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
 
 #### Returns
 
-`Promise`<[`RTCStatsType`](../enums/internal.RTCStatsType.md)[]\>
+`Promise`<`RTCStatsType`[]\>
 
 ___
 
@@ -145,13 +144,13 @@ ___
 
 ▸ **getParticipant**(`participantId`): `Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
-The participant's information.
+Information about a participant.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participantId` | `String` | ID of Participant. |
+| `participantId` | `String` | The participant's ID. |
 
 #### Returns
 
@@ -163,7 +162,7 @@ ___
 
 ▸ **getParticipants**(`conference`): `Promise`<[`Participant`](../interfaces/internal.Participant.md)[]\>
 
-Gets a list of conference participants
+Gets a list of conference participants.
 
 #### Parameters
 
@@ -199,13 +198,11 @@ ___
 
 ▸ **isMuted**(): `Promise`<`boolean`\>
 
-Gets the current mute state of the participant.
+Gets the current mute state of the local participant.
 
 #### Returns
 
 `Promise`<`boolean`\>
-
-Information if the local participant is muted.
 
 ___
 
@@ -231,7 +228,7 @@ ___
 
 ▸ **join**(`conference`, `options?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Joins the conference.
+Joins a conference.
 
 #### Parameters
 
@@ -250,13 +247,13 @@ ___
 
 ▸ **kick**(`participant`): `Promise`<`void`\>
 
-Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token.
+Allows the conference owner or a participant with adequate permissions to kick another participant from the conference by revoking the conference access token.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who needs to be kicked from the conference. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who needs to be kicked from a conference. |
 
 #### Returns
 
@@ -268,7 +265,7 @@ ___
 
 ▸ **leave**(`options?`): `Promise`<`void`\>
 
-Leaves the conference.
+Leaves a conference.
 
 #### Parameters
 
@@ -292,14 +289,12 @@ Stops playing the specified remote participants' audio to the local participant 
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | A remote participant |
-| `isMuted` | `boolean` | A boolean, true indicates that the local participant is muted, false indicates that a participant is not muted |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | A remote participant. |
+| `isMuted` | `boolean` | The mute state, `true` indicates that a participant is muted, `false` indicates that a participant is not muted. |
 
 #### Returns
 
 `Promise`<`boolean`\>
-
-Informs if the mute state has changed.
 
 ___
 
@@ -307,19 +302,19 @@ ___
 
 ▸ **onParticipantsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for participants changed event
+Adds a listener to the participants changed event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/internal.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/internal.md#participantadded) \| [`ParticipantUpdated`](../modules/internal.md#participantupdated)) => `void` | Event callback function |
+| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/internal.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/internal.md#participantadded) \| [`ParticipantUpdated`](../modules/internal.md#participantupdated)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -327,19 +322,19 @@ ___
 
 ▸ **onPermissionsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for permissions changed event
+Adds a listener to the permissions changed event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/internal.PermissionsUpdatedEventType.md)) => `void` | Event callback function |
+| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/internal.PermissionsUpdatedEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -347,19 +342,19 @@ ___
 
 ▸ **onStatusChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for conference status changed event
+Adds a listener to the conference status changed event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/internal.ConferenceStatusUpdatedEventType.md)) => `void` | Event callback function |
+| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/internal.ConferenceStatusUpdatedEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -367,19 +362,19 @@ ___
 
 ▸ **onStreamsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for streams changed event
+Adds a listener to the streams changed event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/internal.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/internal.md#streamadded) \| [`StreamUpdated`](../modules/internal.md#streamupdated) \| [`StreamRemoved`](../modules/internal.md#streamremoved)) => `void` | Event callback function |
+| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/internal.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/internal.md#streamadded) \| [`StreamUpdated`](../modules/internal.md#streamupdated) \| [`StreamRemoved`](../modules/internal.md#streamremoved)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -387,14 +382,14 @@ ___
 
 ▸ **replay**(`conference`, `replayOptions?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Replays a previously recorded conference.
+Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `conference` | [`Conference`](../interfaces/internal.Conference.md) | Conference object. |
-| `replayOptions?` | [`ConferenceReplayOptions`](../interfaces/internal.ConferenceReplayOptions.md) | Replay options. |
+| `conference` | [`Conference`](../interfaces/internal.Conference.md) | The Conference object. |
+| `replayOptions?` | [`ConferenceReplayOptions`](../interfaces/internal.ConferenceReplayOptions.md) | The replay options. |
 
 #### Returns
 
@@ -406,7 +401,7 @@ ___
 
 ▸ **setAudioProcessing**(`options?`): `Promise`<`void`\>
 
-Enables and disables audio processing for the conference participant.
+Enables and disables audio processing for a conference participant.
 
 #### Parameters
 
@@ -430,7 +425,7 @@ Sets the maximum number of video streams that may be transmitted to the local pa
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 4 for mobile browsers with 4 as default value. |
+| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. |
 | `prioritizedParticipants` | [`Participant`](../interfaces/internal.Participant.md)[] | `[]` | The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk. |
 
 #### Returns
@@ -443,13 +438,15 @@ ___
 
 ▸ **startAudio**(`participant`): `Promise`<`void`\>
 
-Starts audio transmission between the local client and a conference.
+Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
+- When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
+- When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant whose stream should be sent to the local participant. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects. |
 
 #### Returns
 
@@ -463,15 +460,12 @@ ___
 
 	Starts a screen sharing session.
 	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
-
-Instead of setting properties:
-VoxeetSDK.shared.appGroup = "YOUR_APP_GROUP"
-VoxeetSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
-Setup keys in your Info.plist file:
-
-Open your Info.plist file then:
-- add a new DolbyioSdkAppGroupKey as a String type and enter the group name ("YOUR_APP_GROUP")
-- add a new DolbyioSdkPreferredExtensionKey as a String type and enter the broadcast extension bundle id ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID")
+Instead of setting the following properties:
+- VoxeetSDK.shared.appGroup = "YOUR_APP_GROUP"
+- VoxeetSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
+ Set up keys in your `Info.plist` file:
+- Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
+- Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
 
 #### Returns
 
@@ -483,13 +477,13 @@ ___
 
 ▸ **startVideo**(`participant`): `Promise`<`void`\>
 
-Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant.
+Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The Participant object. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who will receive the video stream, either remote or local. |
 
 #### Returns
 
@@ -501,13 +495,15 @@ ___
 
 ▸ **stopAudio**(`participant`): `Promise`<`void`\>
 
-Stops audio transmission between the local client and a conference.
+Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
+- When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
+- When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The Participant object. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects. |
 
 #### Returns
 
@@ -537,7 +533,7 @@ Notifies the server to either stop sending the local participant's video stream 
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The Participant object. |
+| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who wants to stop receiving a video stream. |
 
 #### Returns
 

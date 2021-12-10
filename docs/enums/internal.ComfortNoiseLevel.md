@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ComfortNoiseLevel
 
+The ComfortNoiseLevel enum gathers the available comfort noise levels.
+
 ## Table of contents
 
 ### Enumeration members
