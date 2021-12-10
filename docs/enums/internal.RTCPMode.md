@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).RTCPMode
 
+The RTCPMode enum gathers the possible bitrate adaptation modes for video transmission.
+
 ## Table of contents
 
 ### Enumeration members
@@ -16,7 +18,7 @@
 
 • **AVERAGE** = `"average"`
 
-Averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value
+Averages the available bandwidth of all receivers and adjusts the transmission bitrate to this value.
 
 ___
 
@@ -24,7 +26,7 @@ ___
 
 • **BEST** = `"best"`
 
-Does not adjust the transmission bitrate to the receiver’s bandwidth
+Does not adjust the transmission bitrate to the receiver’s bandwidth.
 
 ___
 
@@ -32,4 +34,4 @@ ___
 
 • **WORST** = `"worst"`
 
-Adjusts the transmission bitrate to the receiver who has the worst network conditions
+Adjusts the transmission bitrate to the receiver who has the worst network conditions.

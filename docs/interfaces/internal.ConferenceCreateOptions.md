@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceCreateOptions
 
+The ConferenceCreateOptions interface gathers information about a new conference.
+
 ## Table of contents
 
 ### Properties
@@ -32,4 +34,4 @@ ___
 
 • `Optional` **pinCode**: `number`
 
-The conference PIN code.
+The PIN code of a conference.

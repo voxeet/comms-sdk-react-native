@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantStatus
 
+The ParticipantStatus enum gathers the possible statuses of conference participants.
+
 ## Table of contents
 
 ### Enumeration members
@@ -30,7 +32,7 @@ ___
 
 • **CONNECTING** = `"CONNECTING"`
 
-A participant received the conference invitation and is connecting to a conference.
+A participant received a conference invitation and is connecting to a conference.
 
 ___
 
@@ -38,7 +40,7 @@ ___
 
 • **DECLINE** = `"DECLINE"`
 
-An invited participant declined the conference invitation.
+An invited participant declined a conference invitation.
 
 ___
 
@@ -46,7 +48,7 @@ ___
 
 • **ERROR** = `"ERROR"`
 
-A peer connection failed, and the participant cannot connect to a conference.
+A peer connection failed and a participant cannot connect to a conference.
 
 ___
 
@@ -54,7 +56,7 @@ ___
 
 • **INACTIVE** = `"INACTIVE"`
 
-A participant did not enable audio, video, or screen-share and, therefore, is not connected to any stream.
+A participant did not enable audio, video, or screen-share and is not connected to any stream.
 
 ___
 
@@ -62,7 +64,7 @@ ___
 
 • **KICKED** = `"KICKED"`
 
-A participant was kicked from the conference.
+A participant was kicked from a conference.
 
 ___
 
@@ -70,7 +72,7 @@ ___
 
 • **LEFT** = `"LEFT"`
 
-A participant left the conference.
+A participant left a conference.
 
 ___
 
@@ -86,4 +88,4 @@ ___
 
 • **WARNING** = `"WARNING"`
 
-A participant experiences a peer connection problem, which may result in the Error or Connected status.
+A participant experiences a peer connection problem which may result in the Error or Connected status.

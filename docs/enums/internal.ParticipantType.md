@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantType
 
+The ParticipantTypes enum gathers the possible types of conference participants.
+
 ## Table of contents
 
 ### Enumeration members
@@ -15,7 +17,7 @@
 
 • **LISTENER** = `"listener"`
 
-A participant who cannot send the audio and video stream during the conference.
+A participant who cannot send any audio or video stream during a conference.
 
 ___
 
@@ -23,4 +25,4 @@ ___
 
 • **USER** = `"user"`
 
-A participant who can send and receive the audio and video stream during the conference.
+A participant who can send and receive audio and video during the conference.

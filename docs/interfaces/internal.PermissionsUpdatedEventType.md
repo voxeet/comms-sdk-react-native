@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).PermissionsUpdatedEventType
 
+The PermissionsUpdatedEventType gathers events that inform about the updated permissions of the local participant.
+
 ## Table of contents
 
 ### Properties

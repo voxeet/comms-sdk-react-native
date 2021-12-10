@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantPermissions
 
+The ParticipantPermissions interface gathers information about the invited participants and their conference permissions.
+
 ## Table of contents
 
 ### Properties

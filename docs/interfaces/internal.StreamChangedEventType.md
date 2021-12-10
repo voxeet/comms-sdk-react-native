@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).StreamChangedEventType
 
+The StreamChangedEventType gathers events that inform about the added, updated, and removed streams.
+
 ## Table of contents
 
 ### Properties
