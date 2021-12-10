@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceLeaveOptions
 
+The ConferenceLeaveOptions interface gathers information about preferences for leaving a conference.
+
 ## Table of contents
 
 ### Properties

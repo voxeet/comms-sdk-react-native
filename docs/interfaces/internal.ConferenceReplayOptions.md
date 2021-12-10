@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceReplayOptions
 
+The ConferenceReplayOptions interface gathers properties responsible for replaying conferences.
+
 ## Table of contents
 
 ### Properties
@@ -23,4 +25,4 @@ ___
 
 • **offset**: `number`
 
-Allows the application users to start replaying the recorded conference at a specific timestamp. The offset is the number of milliseconds between the beginning of the recording and the required starting point.
+Allows application users to start replaying a recorded conference at a specific timestamp. The offset parameter is the number of milliseconds between the beginning of the recording and the required starting point.

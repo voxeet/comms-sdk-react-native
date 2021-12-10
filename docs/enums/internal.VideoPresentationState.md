@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).VideoPresentationState
 
+The VideoPresentationState enum gathers the possible statuses of a video presentation.
+
 ## Table of contents
 
 ### Enumeration members

@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).Conference
 
+The Conference interface gathers information about a conference.
+
 ## Table of contents
 
 ### Properties
@@ -34,7 +36,7 @@ ___
 
 • `Optional` **isNew**: `boolean`
 
-Provides information if the created conference is new one.
+A boolean indicating if a created conference is new.
 
 ___
 
@@ -42,7 +44,7 @@ ___
 
 • **participants**: [`Participant`](internal.Participant.md)[]
 
-Provides array of conference participants.
+An array of conference participants.
 
 ___
 
@@ -50,4 +52,4 @@ ___
 
 • **status**: [`ConferenceStatus`](../enums/internal.ConferenceStatus.md)
 
-Provides the current conference status.
+The current conference status.

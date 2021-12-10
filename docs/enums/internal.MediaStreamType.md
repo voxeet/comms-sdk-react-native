@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).MediaStreamType
 
+The MediaStreamType enum gathers the possible types of media streams.
+
 ## Table of contents
 
 ### Enumeration members
@@ -16,7 +18,7 @@
 
 • **Camera** = `"CAMERA"`
 
-The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera.
+The camera media stream, either audio, video, or audio and video. This stream type is enabled by default.
 
 ___
 
@@ -24,7 +26,7 @@ ___
 
 • **Custom** = `"CUSTOM"`
 
-The non-specified media stream.
+A media stream produced by an external device.
 
 ___
 

@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantInfo
 
+The ParticipantInfo interface gathers information about a conference participant.
+
 ## Table of contents
 
 ### Properties

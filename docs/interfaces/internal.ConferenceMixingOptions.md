@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceMixingOptions
 
+The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+
 ## Table of contents
 
 ### Properties
@@ -14,4 +16,4 @@
 
 • **enabled**: `boolean`
 
-A boolean value that notifies the server whether the participant is a Mixer (true) or not (false).
+A boolean that notifies the server whether a participant is a Mixer (true) or not (false).
