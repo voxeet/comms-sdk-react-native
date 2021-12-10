@@ -5,17 +5,14 @@ import type { Recording } from './models';
 const { DolbyIoIAPIRecordingServiceModule } = NativeModules;
 
 /**
- * The RecordingService allows an application to record conferences by using the start and stop methods that turn
- * the recording on and off.
+ * The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording](doc:recording-javascript) and [Recording Mechanisms](doc:guides-recording-mechanisms) documents.
  */
 export class RecordingService {
   /** @internal */
   _nativeModule = DolbyIoIAPIRecordingServiceModule;
 
   /**
-   * Returns information about the current recording. Use this accessor if you wish to receive information that is
-   * available in the Recording object, such as the ID of the participant who started the recording or the timestamp
-   * that informs when the recording was started.
+   * Returns information about the current recording.
    */
   public async current(): Promise<Recording | null> {
     return this._nativeModule.current();
