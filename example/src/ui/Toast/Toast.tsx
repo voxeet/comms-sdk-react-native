@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as ReactNativeText } from 'react-native';
+import { Text as ReactNativeText, View } from 'react-native';
 import RNToast from 'react-native-toast-message';
 
 import Space from '@ui/Space';
@@ -15,7 +15,7 @@ type ToastProps = {
   };
 };
 
-const Toast = ({ props }: ToastProps) => (
+export const Toast = ({ props }: ToastProps) => (
   <Space mv={'xs'} mt={'xxs'} style={styles.container}>
     <Space pv="xs" ph="xs" pr="l" mr={'s'}>
       <Space style={styles.titleContainer}>
@@ -29,10 +29,28 @@ const Toast = ({ props }: ToastProps) => (
       </Text>
       <Space style={styles.childContainer}>{props.children}</Space>
     </Space>
-    <ReactNativeText style={styles.exitIcon} onPress={() => RNToast.hide()}>
+    <ReactNativeText
+      style={styles.exitIcon}
+      onPress={() => {
+        console.log('click motherfucker');
+        RNToast.hide();
+      }}
+    >
       ❌
     </ReactNativeText>
   </Space>
 );
 
-export default Toast;
+const toastConfig = {
+  custom: Toast,
+};
+
+export const ToastInit = () => (
+  <View style={styles.initContainer}>
+    <RNToast
+      config={toastConfig}
+      ref={(ref) => RNToast.setRef(ref)}
+      autoHide={false}
+    />
+  </View>
+);
