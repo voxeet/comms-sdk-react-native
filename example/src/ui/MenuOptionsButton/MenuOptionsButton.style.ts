@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
+
 import { FONT_WEIGHTS } from '@constants/fonts.constants';
 import { SPACE_XXS, SPACE_XS, SPACE_M } from '@constants/sizes.constants';
-import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   optionsContainerStyle: {

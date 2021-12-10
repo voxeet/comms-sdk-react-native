@@ -22,7 +22,6 @@ export const start = async (file: FileConverted | null) => {
     if (file == null) return;
     console.log('file that were passing', file);
     await DolbyIoIAPI.filePresentation.start(file);
-    Alert.alert('File presentation started');
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Start error', msg);

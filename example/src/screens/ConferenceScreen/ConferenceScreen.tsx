@@ -163,7 +163,7 @@ const ConferenceScreen: FunctionComponent = () => {
               <Space
                 mh="m"
                 mt="m"
-                mb="xs"
+                mb="s"
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',

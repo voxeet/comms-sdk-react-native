@@ -1,5 +1,6 @@
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 import { Alert } from 'react-native';
+
+import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 
 export const startRecording = async () => {
   try {
