@@ -9,9 +9,7 @@ import type { VideoPresentation, VideoPresentationState } from './models';
 const { DolbyIoIAPIVideoPresentationService } = NativeModules;
 
 /**
- * The VideoPresentationService allows sharing videos during a conference.
- * To present a video, the conference participant needs to provide the URL that
- * defines the video location. We recommend sharing files in the MPEG-4 Part 14 or MP4 video formats.
+ * The VideoPresentationService allows sharing videos during a conference. To present a video, a conference participant needs to provide a URL that defines the video location. We recommend sharing files in the MPEG-4 Part 14 or MP4 video format.
  */
 export class VideoPresentationService {
   /** @internal */
@@ -20,7 +18,7 @@ export class VideoPresentationService {
   _nativeEvents = new NativeEvents(DolbyIoIAPIVideoPresentationService || {});
 
   /**
-   * Pauses the video presentation.
+   * Pauses a video presentation.
    * @param timestamp The timestamp that informs when the video needs to be paused, in milliseconds.
    */
   public pause(timestamp: number): Promise<void> {
@@ -28,31 +26,28 @@ export class VideoPresentationService {
   }
 
   /**
-   * Resumes the paused video presentation.
+   * Resumes the paused video.
    */
   public play(): Promise<void> {
     return this._nativeModule.play();
   }
 
   /**
-   * Returns information about the current video presentation. Use this accessor
-   * if you wish to receive information that is available in the VideoPresentation
-   * object, such as information about the participant who shares the video or the
-   * URL of the presented video file.
+   * Returns information about the current video presentation.
    */
   public current(): Promise<VideoPresentation | null> {
     return this._nativeModule.current();
   }
 
   /**
-   * Provides the current state of the video presentation.
+   * Provides the current state of a video presentation.
    */
   public state(): Promise<VideoPresentationState> {
     return this._nativeModule.state();
   }
 
   /**
-   * Allows the presenter to navigate to the specific section of the shared video.
+   * Allows a presenter to navigate to the specific section of the shared video.
    * @param timestamp The timestamp the presenter wants to start playing the video from, in milliseconds.
    */
   public seek(timestamp: number): Promise<void> {
@@ -60,7 +55,7 @@ export class VideoPresentationService {
   }
 
   /**
-   * Starts the video presentation.
+   * Starts a video presentation.
    * @param url The URL that specifies the video file location.
    */
   public start(url: string): Promise<void> {
@@ -68,16 +63,16 @@ export class VideoPresentationService {
   }
 
   /**
-   * Stops the video presentation.
+   * Stops a video presentation.
    */
   public stop(): Promise<void> {
     return this._nativeModule.stop();
   }
 
   /**
-   * Adds a listener for video presentation started, sought, paused and played events
-   * @param handler Event callback function
-   * @returns Function that unsubscribes from listeners
+   * Adds a listener to the video presentation started, sought, paused, and played events.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
    */
   public onVideoPresentationChange(
     handler: (
@@ -118,9 +113,8 @@ export class VideoPresentationService {
   }
 
   /**
-   * Adds a listener for video presentation stopped event
+   * Adds a listener to the video presentation stopped event.
    * @param handler Event callback function
-   * @returns Function that unsubscribes from listeners
    */
   onVideoPresentationStopped(handler: () => void): UnsubscribeFunction {
     return this._nativeEvents.addListener(
