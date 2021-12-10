@@ -139,7 +139,7 @@ const ConferenceScreenBottomSheet = () => {
   };
 
   return (
-    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[60, 500]}>
+    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[140, 500]}>
       <ScrollView>
         <Space mh="m" mb="s">
           <Text header size="s" color={COLORS.BLACK}>
