@@ -1,5 +1,6 @@
 import type { Participant } from '../conference/models';
 
+/** The VideoPresentation interface gathers information about a video presentation. */
 export interface VideoPresentation {
   /** The participant who started the presentation. */
   owner: Participant;
@@ -9,6 +10,7 @@ export interface VideoPresentation {
   url: string;
 }
 
+/** The VideoPresentationState enum gathers the possible statuses of a video presentation. */
 export enum VideoPresentationState {
   /** The video presentation is paused. */
   PAUSED = 'paused',
