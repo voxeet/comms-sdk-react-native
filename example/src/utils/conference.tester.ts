@@ -104,10 +104,19 @@ export const kick = async (participant: Participant) => {
   }
 };
 
-export const mute = async (participant: Participant, isMuted: boolean) => {
+export const mute = async (participant: Participant) => {
   try {
-    await DolbyIoIAPI.conference.mute(participant, isMuted);
+    await DolbyIoIAPI.conference.mute(participant, true);
     Alert.alert('Mute success');
+  } catch (e: any) {
+    Alert.alert('Error', e.toString());
+  }
+};
+
+export const unmute = async (participant: Participant) => {
+  try {
+    await DolbyIoIAPI.conference.mute(participant, false);
+    Alert.alert('Unmute success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
   }
