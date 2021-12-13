@@ -6,7 +6,7 @@ import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { mute, kick } from '@utils/conference.tester';
+import { mute, unmute, kick } from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
 import styles from './ConferenceScreen.style';
@@ -27,14 +27,14 @@ const ParticipantAvatar = (participant: Participant) => {
       text: 'Mute',
       value: 'mute',
       onSelect: async () => {
-        await mute(participant, true);
+        await mute(participant);
       },
     },
     {
       text: 'Unmute',
       value: 'unmute',
       onSelect: async () => {
-        await mute(participant, false);
+        await unmute(participant);
       },
     },
     {
