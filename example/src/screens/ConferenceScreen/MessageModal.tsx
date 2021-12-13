@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, useEffect } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Modal, TextInput } from 'react-native';
 
 import Button from '@ui/Button';
@@ -18,21 +18,15 @@ const SendMessageModal: FunctionComponent<SendMessageModalProps> = ({
 }) => {
   const [message, setMessage] = useState<string>('');
 
-  // Close modal without submit
   const closeModalWithoutSubmit = () => {
     setMessage('');
     closeModal();
   };
 
-  // Submit send message
   const submitSendMessage = async () => {
     await sendCommandMessage(message);
     closeModalWithoutSubmit();
   };
-
-  useEffect(() => {
-    setMessage(message);
-  }, [message]);
 
   return (
     <Modal visible={open} animationType="fade" transparent>

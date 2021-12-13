@@ -14,7 +14,7 @@ import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { startVideo, stopVideo, mute } from '@utils/conference.tester';
+import { startVideo, stopVideo, mute, unmute } from '@utils/conference.tester';
 
 import { ParticipantStatus } from '../../../../src/services/conference/models';
 import type { Participant } from '../../../../src/services/conference/models';
@@ -84,9 +84,7 @@ const ConferenceScreen: FunctionComponent = () => {
                 </View>
               </View>
             ) : null}
-
             <View style={styles.center}>
-              {/*  */}
               <View style={styles.centerButtons}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                   <Space mh="xxs">
@@ -103,7 +101,7 @@ const ConferenceScreen: FunctionComponent = () => {
                     <TouchableOpacity
                       style={[styles.videoButton, styles.videoButtonRed]}
                       onPress={() => {
-                        mute(me, true);
+                        mute(me);
                       }}
                     >
                       <Text size="xs" align="center">
@@ -115,7 +113,7 @@ const ConferenceScreen: FunctionComponent = () => {
                     <TouchableOpacity
                       style={[styles.videoButton, styles.videoButtonGreen]}
                       onPress={() => {
-                        mute(me, false);
+                        unmute(me);
                       }}
                     >
                       <Text size="xs" align="center">
@@ -157,7 +155,6 @@ const ConferenceScreen: FunctionComponent = () => {
                   </Space>
                 </ScrollView>
               </View>
-              {/*  */}
             </View>
             <View style={styles.bottom}>
               <Space
