@@ -145,10 +145,16 @@ export const isMuted = async () => {
 
 export const isSpeaking = async (participant: Participant) => {
   try {
-    const speaking = await DolbyIoIAPI.conference.isSpeaking(participant);
-    Alert.alert('speaking:', speaking.toString());
+    const isParticipantSpeaking = await DolbyIoIAPI.conference.isSpeaking(
+      participant
+    );
+    Alert.alert(
+      `is Participant ${
+        participant.info.name
+      } speaking: ${isParticipantSpeaking.toString()}`
+    );
   } catch (e: any) {
-    Alert.alert('isSpeaking error', e.toString());
+    Alert.alert(e, 'isSpeaking error');
   }
 };
 
