@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferencePermission
 
+The ConferencePermission enum gathers the possible permissions a participant may have in a conference.
+
 ## Table of contents
 
 ### Enumeration members
@@ -25,7 +27,7 @@
 
 • **INVITE** = `"INVITE"`
 
-Allows a participant to invite participants to a conference.
+Allows a participant to invite other participants to a conference.
 
 ___
 

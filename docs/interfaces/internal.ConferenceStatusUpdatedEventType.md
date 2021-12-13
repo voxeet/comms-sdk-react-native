@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceStatusUpdatedEventType
 
+The ConferenceStatusUpdatedEventType gathers events that inform about the changed status of a conference.
+
 ## Table of contents
 
 ### Properties

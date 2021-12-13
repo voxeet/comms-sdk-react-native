@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).FilePresentationChangedEventType
 
+The FilePresentationChangedEventType interface gathers information about the presented file.
+
 ## Table of contents
 
 ### Properties

@@ -2,9 +2,7 @@
 
 [internal](../modules/internal.md).VideoPresentationService
 
-The VideoPresentationService allows sharing videos during a conference.
-To present a video, the conference participant needs to provide the URL that
-defines the video location. We recommend sharing files in the MPEG-4 Part 14 or MP4 video formats.
+The VideoPresentationService allows sharing videos during a conference. To present a video, a conference participant needs to provide a URL that defines the video location. We recommend sharing files in the MPEG-4 Part 14 or MP4 video format.
 
 ## Table of contents
 
@@ -36,10 +34,7 @@ defines the video location. We recommend sharing files in the MPEG-4 Part 14 or 
 
 ▸ **current**(): `Promise`<``null`` \| [`VideoPresentation`](../interfaces/internal.VideoPresentation.md)\>
 
-Returns information about the current video presentation. Use this accessor
-if you wish to receive information that is available in the VideoPresentation
-object, such as information about the participant who shares the video or the
-URL of the presented video file.
+Returns information about the current video presentation.
 
 #### Returns
 
@@ -51,19 +46,19 @@ ___
 
 ▸ **onVideoPresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for video presentation started, sought, paused and played events
+Adds a listener to the video presentation started, sought, paused, and played events.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`paused`](../modules/internal.md#paused) \| [`played`](../modules/internal.md#played) \| [`sought`](../modules/internal.md#sought) \| [`started`](../modules/internal.md#started)) => `void` | Event callback function |
+| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`paused`](../modules/internal.md#paused) \| [`played`](../modules/internal.md#played) \| [`sought`](../modules/internal.md#sought) \| [`started`](../modules/internal.md#started)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -71,7 +66,7 @@ ___
 
 ▸ **onVideoPresentationStopped**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener for video presentation stopped event
+Adds a listener to the video presentation stopped event.
 
 #### Parameters
 
@@ -83,15 +78,13 @@ Adds a listener for video presentation stopped event
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
-
 ___
 
 ### pause
 
 ▸ **pause**(`timestamp`): `Promise`<`void`\>
 
-Pauses the video presentation.
+Pauses a video presentation.
 
 #### Parameters
 
@@ -109,7 +102,7 @@ ___
 
 ▸ **play**(): `Promise`<`void`\>
 
-Resumes the paused video presentation.
+Resumes the paused video.
 
 #### Returns
 
@@ -121,7 +114,7 @@ ___
 
 ▸ **seek**(`timestamp`): `Promise`<`void`\>
 
-Allows the presenter to navigate to the specific section of the shared video.
+Allows a presenter to navigate to the specific section of the shared video.
 
 #### Parameters
 
@@ -139,7 +132,7 @@ ___
 
 ▸ **start**(`url`): `Promise`<`void`\>
 
-Starts the video presentation.
+Starts a video presentation.
 
 #### Parameters
 
@@ -157,7 +150,7 @@ ___
 
 ▸ **state**(): `Promise`<[`VideoPresentationState`](../enums/internal.VideoPresentationState.md)\>
 
-Provides the current state of the video presentation.
+Provides the current state of a video presentation.
 
 #### Returns
 
@@ -169,7 +162,7 @@ ___
 
 ▸ **stop**(): `Promise`<`void`\>
 
-Stops the video presentation.
+Stops a video presentation.
 
 #### Returns
 

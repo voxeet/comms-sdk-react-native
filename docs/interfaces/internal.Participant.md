@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).Participant
 
+The Participant interface gathers information about a conference participant.
+
 ## Table of contents
 
 ### Properties
@@ -26,7 +28,7 @@ ___
 
 • **info**: [`ParticipantInfo`](internal.ParticipantInfo.md)
 
-The participant's informations.
+Information about a conference participant.
 
 ___
 
@@ -42,7 +44,7 @@ ___
 
 • `Optional` **streams**: [`MediaStream`](../modules/internal.md#mediastream)[]
 
-The participant streams
+The participant's streams.
 
 ___
 

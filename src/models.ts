@@ -1,4 +1,4 @@
-// TODO - doc
+/** @internal */
 export type RefreshAccessTokenType = () => Promise<string>;
-// TODO - doc
+/** @internal */
 export type RefreshAccessTokenInBackgroundType = () => void;
