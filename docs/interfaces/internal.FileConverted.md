@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).FileConverted
 
+The FileConverted interface gathers information about the converted file.
+
 ## Table of contents
 
 ### Properties

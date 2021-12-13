@@ -2,8 +2,7 @@
 
 [internal](../modules/internal.md).CommandService
 
-The Command service allows the application to send text messages or notifications to all conference participants.
-The service also emits a received event to inform the application about received messages.
+The CommandService allows the application to send and receive text messages and notifications during a conference.
 
 ## Table of contents
 
@@ -28,19 +27,19 @@ The service also emits a received event to inform the application about received
 
 ▸ **onMessageReceived**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a native listener for message received
+Adds a listener to events informing about received messages.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`MessageReceivedEventType`](../interfaces/internal.MessageReceivedEventType.md)) => `void` | Event callback function |
+| `handler` | (`data`: [`MessageReceivedEventType`](../interfaces/internal.MessageReceivedEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Function that unsubscribes from listeners
+A function that unsubscribes from event listeners.
 
 ___
 
@@ -48,13 +47,13 @@ ___
 
 ▸ **send**(`message`): `Promise`<`void`\>
 
-Sends a message, in the form of a basic stream, to all conference participants.
+Sends a message to all conference participants. The message is in a form of a basic stream.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `message` | `string` | Message to send |
+| `message` | `string` | The message to send. |
 
 #### Returns
 

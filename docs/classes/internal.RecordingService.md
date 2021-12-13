@@ -2,8 +2,7 @@
 
 [internal](../modules/internal.md).RecordingService
 
-The RecordingService allows an application to record conferences by using the start and stop methods that turn
-the recording on and off.
+The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording](doc:recording-javascript) and [Recording Mechanisms](doc:guides-recording-mechanisms) documents.
 
 ## Table of contents
 
@@ -29,9 +28,7 @@ the recording on and off.
 
 ▸ **current**(): `Promise`<``null`` \| [`Recording`](../interfaces/internal.Recording.md)\>
 
-Returns information about the current recording. Use this accessor if you wish to receive information that is
-available in the Recording object, such as the ID of the participant who started the recording or the timestamp
-that informs when the recording was started.
+Returns information about the current recording.
 
 #### Returns
 

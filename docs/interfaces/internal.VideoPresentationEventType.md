@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).VideoPresentationEventType
 
+The VideoPresentationEventType interface gathers information about a video presentation.
+
 ## Table of contents
 
 ### Properties

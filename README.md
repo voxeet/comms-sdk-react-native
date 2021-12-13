@@ -4,9 +4,9 @@ The Dolby.io Communications APIs provide a platform for unified communications a
 
 For example, with the Client SDKs you can build:
 
-A video conference application for your employee portal
-A broadcast webinar application for presentations to grow your audience
-A 1-on-1 help desk service for your specialized customers
+ - A video conference application for your employee portal
+ - A broadcast webinar application for presentations to grow your audience
+ - A 1-on-1 help desk service for your specialized customers
 
 ## Requirements
 
@@ -21,7 +21,7 @@ A 1-on-1 help desk service for your specialized customers
 
 ## Installation
 
-1. Install module by `npm` or `yarn`:
+1. Install module using `npm` or `yarn`:
 
     ```bash
     npm install @dolbyio/react-native-iapi-sdk --save
@@ -30,18 +30,18 @@ A 1-on-1 help desk service for your specialized customers
     yarn add @dolbyio/react-native-iapi-sdk
     ```
 
-2. If you are using React Native >= 0.60, install native dependencies via CocoaPods from your /ios directory:
+2. If you are using React Native version 0.60 or later, install native dependencies via CocoaPods from your /ios directory:
 
    ```bash
    pod install
    ```
 
-3. Or if you are using React Native < 0.60, link native dependency:
+3. If you are using a React Native version prior to 0.60, link the native dependency:
 
    ```bash
    react-native link @dolbyio/react-native-iapi-sdk
    ```
-   and then, install from your /ios directory:
+   Then, install from your /ios directory:
    ```bash
    pod install --repo-update
    ```
@@ -52,22 +52,22 @@ A 1-on-1 help desk service for your specialized customers
 
 ## Getting started
 
-1) Import the SDK to your project
+1) Import the SDK to your project.
 
 ```js
 import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
 ```
 
-2) Initialize the SDK with your Dolby.io credentials
+2) Initialize the SDK with your Dolby.io credentials.
 
 ```js
 await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
 ```
-3) Open a session
+3) Open a session.
 ```js
 await DolbyIoIAPI.session.open({ name, externalId });
 ```
-4) Create a conference
+4) Create a conference.
 ```js
 const conferenceOptions = {
   alias,
@@ -78,7 +78,7 @@ const createdConference = await DolbyIoIAPI.conference.create(
   conferenceOptions
 );
 ```
-4) Join created conference
+4) Join the created conference.
 ```js
 const joinedConference = await DolbyIoIAPI.conference.join(
   createdConference,
@@ -86,7 +86,7 @@ const joinedConference = await DolbyIoIAPI.conference.join(
 );
 ```
 
-5) Import some additional services
+5) Import some additional services.
 ```js
 import {Conference} from '@dolbyio/react-native-iapi-sdk';
 ```
@@ -98,7 +98,7 @@ const {Conference} = DolbyIoIAPI;
 
 ## Integrate video
 
-Place VideoView in your component
+1) Place the VideoView in your component.
 ```jsx
 import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 ...
@@ -109,7 +109,7 @@ return (
   />
 ```
 
-Get a reference to your VideoView component
+2) Get a reference to your VideoView component.
 ```jsx
 const videoView = useRef() as React.MutableRefObject<VideoView>;
 ...
@@ -121,7 +121,7 @@ return (
   />
 ```
 
-Attach a stream to video
+3) Attach a stream to video.
 ```js
 videoView.current.attach(
   participant,

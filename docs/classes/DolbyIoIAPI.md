@@ -34,11 +34,15 @@
 
 • **command**: [`CommandService`](internal.CommandService.md)
 
+Retrieves the CommandService instance that allows sending messages to conferences.
+
 ___
 
 ### conference
 
 • **conference**: [`ConferenceService`](internal.ConferenceService.md)
+
+Retrieves the ConferenceService instance that allows interacting with conferences.
 
 ___
 
@@ -46,11 +50,15 @@ ___
 
 • **filePresentation**: [`FilePresentationService`](internal.FilePresentationService.md)
 
+Retrieves the FilePresentationService instance that allows presenting files during conferences.
+
 ___
 
 ### mediaDevice
 
 • **mediaDevice**: [`MediaDeviceService`](internal.MediaDeviceService.md)
+
+Retrieves the MediaDeviceService instance that allows interacting with devices through the system.
 
 ___
 
@@ -58,11 +66,15 @@ ___
 
 • **notification**: [`NotificationService`](internal.NotificationService.md)
 
+Retrieves the NotificationService instance that allows inviting participants to a conference.
+
 ___
 
 ### recording
 
 • **recording**: [`RecordingService`](internal.RecordingService.md)
+
+Retrieves the RecordingService instance that allows recording conferences.
 
 ___
 
@@ -70,11 +82,15 @@ ___
 
 • **session**: [`SessionService`](internal.SessionService.md)
 
+Retrieves the SessionService instance that allows using sessions.
+
 ___
 
 ### videoPresentation
 
 • **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md)
+
+Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
 
 ## Methods
 
@@ -101,7 +117,7 @@ ___
 
 ▸ **initializeToken**(`accessToken`, `refreshAccessToken`): `Promise`<``null``\>
 
-Initialize the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
+Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
 The following diagram presents the authentication flow:
 ```
 Client          Customer Server       Dolby Server
@@ -113,9 +129,9 @@ Client          Customer Server       Dolby Server
 |  initializeToken(accessToken, callback) |
 |---------------------------------------->|
 ```
-The access token has a limited period of validity and needs to be refreshed for security reasons. In such case,
-The IAPI SDK will call the callback provided to initializeToken. The callback must return a Promise
-containing the refreshed access token by calling the customer backend, as presented in the following diagram:
+Where (1) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
+
+The access token has a limited period of validity and needs to be refreshed for security reasons. In such case, the SDK calls the callback provided to initializeToken. The callback must return a promise containing the refreshed access token by calling the customer backend, as presented in the following diagram:
 
 ```
 Client          Customer Server       Dolby Server
@@ -124,14 +140,14 @@ Client          Customer Server       Dolby Server
 |    Access Token    |    Access Token    |
 |<-------------------|<-------------------|
 ```
-Where (1) and (2) are two REST API endpoints available on Dolby.io servers and documented on the developer portal.
+Where (2) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `accessToken` | ``null`` \| `string` | The access token provided by the customer's backend.. |
-| `refreshAccessToken` | [`RefreshAccessTokenType`](../modules/internal.md#refreshaccesstokentype) | A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired. |
+| `accessToken` | ``null`` \| `string` | The access token provided by the customer's backend. |
+| `refreshAccessToken` | `RefreshAccessTokenType` | A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired. |
 
 #### Returns
 

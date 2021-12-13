@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).FilePresentation
 
+The FilePresentation interface gathers information about a file presentation.
+
 ## Table of contents
 
 ### Properties
@@ -25,7 +27,7 @@ ___
 
 • `Optional` **imageCount**: `number`
 
-The number of images in the presentation.
+The number of images within a file presentation.
 
 ___
 
@@ -41,4 +43,4 @@ ___
 
 • `Optional` **position**: `number`
 
-The number of the currently displayed image of the shared file.
+The number of the currently displayed image.

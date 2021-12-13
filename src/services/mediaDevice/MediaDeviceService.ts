@@ -6,15 +6,14 @@ import type { ComfortNoiseLevel } from './models';
 const { DolbyIoIAPIMediaDeviceService } = NativeModules;
 
 /**
- * MediaDeviceService allows the application to manage media devices that are
- * used during conferences.
+ * The MediaDeviceService allows an application to manage media devices that are used during a conference.
  */
 export class MediaDeviceService {
   /** @internal */
   _nativeModule = DolbyIoIAPIMediaDeviceService;
 
   /**
-   * Checks if the application uses the front-facing (true) or back-facing camera (false).
+   * Checks whether an application uses the front-facing (true) or back-facing camera (false).
    */
   public async isFrontCamera(): Promise<boolean> {
     return this._nativeModule.isFrontCamera();
@@ -38,7 +37,7 @@ export class MediaDeviceService {
   }
 
   /**
-   * Switches the current camera to another available camera that is connected to the device.
+   * Switches the current camera to another available camera that is connected to a device.
    * @returns {Promise<void}
    */
   public async switchCamera(): Promise<void> {
@@ -46,7 +45,7 @@ export class MediaDeviceService {
   }
 
   /**
-   * Switches the current speaker to another available speaker that is connected to the device.
+   * Switches the current speaker to another available speaker that is connected to a device.
    */
   public async switchSpeaker(): Promise<void> {
     if (Platform.OS === 'android') {

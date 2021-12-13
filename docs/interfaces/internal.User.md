@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).User
 
+The User interface gathers information the local participant that belongs to the current session.
+
 ## Table of contents
 
 ### Properties
@@ -15,7 +17,7 @@
 
 • **id**: `string`
 
-The user's ID.
+The ID of the local participant.
 
 ___
 
@@ -23,4 +25,4 @@ ___
 
 • **info**: [`ParticipantInfo`](internal.ParticipantInfo.md)
 
-The user's informations.
+Information about the local participant.

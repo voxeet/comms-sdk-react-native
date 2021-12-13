@@ -1,5 +1,6 @@
 import type { Participant } from '../conference/models';
 
+/** The VideoPresentationEventNames enum gathers the possible statuses of a video presentation. */
 export enum VideoPresentationEventNames {
   /** Emitted when a video presentation is paused. */
   paused = 'EVENT_VIDEOPRESENTATION_PAUSED',
@@ -13,6 +14,7 @@ export enum VideoPresentationEventNames {
   stopped = 'EVENT_VIDEOPRESENTATION_STOPPED',
 }
 
+/** The VideoPresentationEventType interface gathers information about a video presentation. */
 export interface VideoPresentationEventType {
   /** The participant who started the presentation. */
   owner: Participant;

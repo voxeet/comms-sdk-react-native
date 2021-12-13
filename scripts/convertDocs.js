@@ -5,7 +5,7 @@ const path = require('path');
  * This will match and capture raw documentation filenames (ignoring any prefixes)
  * e.g. it will match `internal.ConferenceService.md` and capture `ConferenceService`
  */
-const REGEXP_MATCH_DOC_FILENAME = /.+\/internal\.(\w+)\.md/;
+const REGEXP_MATCH_DOC_FILENAME = /(?:.+\/internal\.)?(\w+)\.md/;
 
 /**
  * This will match and capture all documentation links that need to be changed
@@ -31,6 +31,8 @@ const LINK_SLUG_PREFIX = 'doc:rn-client-sdk-';
 const FILE_PATHS = [];
 const DOCS_DIR = '../docs';
 
+const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
+
 /**
  * This function will convert current auto-generated docs to format that is aligned with
  * internal Dolby requirements for distributing documentation on Dolby.io website.
@@ -51,10 +53,16 @@ const DOCS_DIR = '../docs';
     console.error('Unknown node version... Proceeding anyway.');
   }
   buildFilesPathArray(DOCS_DIR);
+  // console.log(FILE_PATHS);
 
-  if (!FILE_PATHS.length) throw new Error(`No file paths found to work on!`);
+  const FILTERED_FILE_PATHS = FILE_PATHS.filter(
+    (p) => !IGNORED_FILES.includes(path.basename(p))
+  );
 
-  FILE_PATHS.forEach(convertDoc);
+  if (!FILTERED_FILE_PATHS.length)
+    throw new Error(`No file paths found to work on!`);
+
+  FILTERED_FILE_PATHS.forEach(convertDoc);
 
   console.log('Conversion successful!');
 })();
@@ -147,7 +155,7 @@ function buildFilesPathArray(dir) {
 
 /**
  * This function ensures that whatever file we're reading and changing, has `internal`
- * in it's path (then it means it's DolbyIoSDK module)
+ * in its path (then it means it's DolbyIoSDK module)
  */
 function isInternalDocFile(filepath) {
   return !!new RegExp(REGEXP_MATCH_DOC_FILENAME).test(filepath);
@@ -155,7 +163,7 @@ function isInternalDocFile(filepath) {
 
 /**
  * This function creates header slug (format slug prefix + module + filename in lowercase)
- * e.g slug for a file `../docs/interfaces/internal.ConferenceMixingOptions.md` should look like
+ * e.g. slug for a file `../docs/interfaces/internal.ConferenceMixingOptions.md` should look like
  * `rn-client-sdk-interfaces-conferencemixingoptions`
  * NOTE: at this point we assume filepath is correct (isInternalDocFile function should return true)
  */
@@ -166,7 +174,7 @@ function createHeaderSlug(filePath) {
 }
 
 /**
- * This function gets module name from filepath, e.g from `../docs/interfaces/Conference.md`
+ * This function gets module name from filepath, e.g. from `../docs/interfaces/Conference.md`
  * it should return `interfaces`
  */
 function getFilePathModuleName(filePath) {
@@ -187,6 +195,10 @@ function changeLinkFormatReplacerFn(substring, moduleName) {
   const module = substring.match(/\(\.\.\/(.+)\//);
   const service = substring.match(/internal\.(.+)\.md(#.+)?\)/);
   if (!service) {
+    if (substring.match(REGEXP_MATCH_DOC_FILENAME)[0] === 'DolbyIoIAPI.md') {
+      const link = substring.match(/#\w+/);
+      return substring.replace(/(?<=.+\()(.+)(?=\))/, link[0]);
+    }
     console.error('service not found in changeLinkFormatReplaceFn', substring);
     return substring;
   }
