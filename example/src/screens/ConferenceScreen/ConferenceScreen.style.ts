@@ -166,6 +166,13 @@ export default StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 10,
   },
+  messageInput: {
+    height: 80,
+    margin: 12,
+    marginTop: 100,
+    borderWidth: 1,
+    padding: 10,
+  },
   spatialInputLabelWrapper: {
     flex: 1,
     justifyContent: 'center',
