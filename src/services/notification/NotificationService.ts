@@ -12,7 +12,7 @@ import type { InvitationReceivedEventType } from './events';
 const { DolbyIoIAPINotificationService } = NativeModules;
 
 /**
- * The NotificationService enables inviting participants to a conference.
+ * The NotificationService allows inviting participants to a conference.
  */
 export class NotificationService {
   /** @internal */
@@ -41,9 +41,9 @@ export class NotificationService {
   }
 
   /**
-   * Add a listener for invitation received event
-   * @param handler Event callback function
-   * @returns Function that unsubscribes from listeners
+   * Adds a listener to the invitation received event.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
    */
   public onInvitationReceived(
     handler: (data: InvitationReceivedEventType) => void

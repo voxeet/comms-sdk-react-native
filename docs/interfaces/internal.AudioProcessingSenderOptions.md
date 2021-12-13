@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).AudioProcessingSenderOptions
 
+The AudioProcessingSenderOptions interface allows enabling and disabling audio processing for the local participant who transmits an audio stream.
+
 ## Table of contents
 
 ### Properties
@@ -14,4 +16,4 @@
 
 • `Optional` **audioProcessing**: `boolean`
 
-A boolean value that indicates whether the audio processing is enabled or disabled.
+A boolean value that indicates whether audio processing is enabled or disabled.

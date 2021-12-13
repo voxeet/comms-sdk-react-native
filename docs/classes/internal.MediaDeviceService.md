@@ -2,8 +2,7 @@
 
 [internal](../modules/internal.md).MediaDeviceService
 
-MediaDeviceService allows the application to manage media devices that are
-used during conferences.
+The MediaDeviceService allows an application to manage media devices that are used during a conference.
 
 ## Table of contents
 
@@ -43,7 +42,7 @@ ___
 
 ▸ **isFrontCamera**(): `Promise`<`boolean`\>
 
-Checks if the application uses the front-facing (true) or back-facing camera (false).
+Checks whether an application uses the front-facing (true) or back-facing camera (false).
 
 #### Returns
 
@@ -73,7 +72,7 @@ ___
 
 ▸ **switchCamera**(): `Promise`<`void`\>
 
-Switches the current camera to another available camera that is connected to the device.
+Switches the current camera to another available camera that is connected to a device.
 
 #### Returns
 
@@ -85,7 +84,7 @@ ___
 
 ▸ **switchSpeaker**(): `Promise`<`void`\>
 
-Switches the current speaker to another available speaker that is connected to the device.
+Switches the current speaker to another available speaker that is connected to a device.
 
 #### Returns
 

@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).MessageReceivedEventType
 
+The MessageReceivedEventType interface gathers information about the received message.
+
 ## Table of contents
 
 ### Properties

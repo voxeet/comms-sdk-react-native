@@ -76,7 +76,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   modalContainer: {
     backgroundColor: 'lightgray',
     borderRadius: SPACE_XXS,

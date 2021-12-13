@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).InvitationReceivedEventType
 
+The InvitationReceivedEventType interface gathers information about the received invitation.
+
 ## Table of contents
 
 ### Properties

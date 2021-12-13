@@ -1,116 +1,139 @@
+/** The Conference interface gathers information about a conference. */
 export interface Conference {
   /** The conference ID. */
   id?: string;
   /** The conference alias. */
   alias?: string;
-  /** Provides information if the created conference is new one. */
+  /** A boolean indicating if a created conference is new. */
   isNew?: boolean;
-  /** Provides array of conference participants. */
+  /** An array of conference participants. */
   participants: Participant[];
-  /** Provides the current conference status. */
+  /** The current conference status. */
   status: ConferenceStatus;
 }
 
+/** The ConferenceCreateParameters interface gathers parameters settings for a requested conference. */
 export interface ConferenceCreateParameters {
-  /** The time to live that enables customizing the waiting time (in seconds) and terminating empty conferences.
-   The Voxeet service terminates conferences after the established time if no one has joined the new conference or the last participant has left it. The default value is 0 seconds. */
+  /** The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds. */
   ttl?: number;
-  /** The bitrate adaptation mode for the video transmission. The rtcpMode triggers the server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
+  /** The bitrate adaptation mode for video transmission. The parameter triggers a server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
   rtcpMode?: RTCPMode;
-  /** The preferred video codec that is used during conferences, either H264 or VP8. By default, the value is set to H264. */
+  /** The preferred video codec that is used during a conference, either H264 or VP8. By default, the SDK uses the H264 codec. */
   videoCodec?: Codec;
-  /** Turns the live recording on and off. */
+  /** A boolean that enables and disables live recording. Specify this parameter during the conference creation:
+   * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
+   * - When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
+   *
+   * This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms#recording-types) article. */
   liveRecording?: boolean;
-  /** Enable Dolby Voice (Default value = true) */
+  /** A boolean that indicates whether an application wishes to create a conference with Dolby Voice enabled. For more information about Dolby Voice, see the [Dolby Voice](doc:guides-dolby-voice) article. By default, the parameter is set to `true`. */
   dolbyVoice?: boolean;
 }
 
+/** The ConferenceCreateOptions interface gathers information about a new conference. */
 export interface ConferenceCreateOptions {
   /** The conference alias. */
   alias?: string;
   /** The conference parameters. */
   params?: ConferenceCreateParameters;
-  /** The conference PIN code. */
+  /** The PIN code of a conference. */
   pinCode?: number;
 }
 
+/** The ConferenceLeaveOptions interface gathers information about preferences for leaving a conference. */
 export interface ConferenceLeaveOptions {
   /** A boolean indicating whether the SDK should close a session after leaving a conference or leave a session open. */
   leaveRoom: boolean;
 }
 
+/** The ConferenceStatus enum gathers the possible conference statuses. */
 export enum ConferenceStatus {
-  /** Default status */
+  /** The default conference status. */
   DEFAULT = 'DEFAULT',
-  /** Informs that the conference is creating */
+  /** The SDK is creating a conference. */
   CREATING = 'CREATING',
-  /** Informs that a new conference is created. */
+  /** A new conference is created. */
   CREATED = 'CREATED',
-  /** Informs that the local participant is joining a conference. */
+  /** The local participant is joining a conference. */
   JOINING = 'JOINING',
-  /** Informs that the local participant successfully joined a conference. */
+  /** The local participant successfully joined a conference. */
   JOINED = 'JOINED',
-  /** @deprecated */
+  /** @deprecated @internal  */
   FIRST_PARTICIPANT = 'FIRST_PARTICIPANT',
-  /** @deprecated */
+  /** @deprecated @internal*/
   NO_MORE_PARTICIPANT = 'NO_MORE_PARTICIPANT',
-  /** Informs that the local participant is leaving a conference. */
+  /** The local participant is leaving a conference. */
   LEAVING = 'LEAVING',
-  /** Informs that the local participant successfully left a conference. */
+  /** The local participant successfully left a conference. */
   LEFT = 'LEFT',
-  /** Informs that an error occurred during a conference. */
+  /** An error occurred during a conference. */
   ERROR = 'ERROR',
   /** Informs that the conference is destroyed. This status may be triggered by the following situations:
-
-  All conference participants left the conference
-  The time to live or the conference time limit elapsed
-  The conference creator used the Terminate REST API to terminate an ongoing conference */
+   * - All conference participants left a conference
+   * - The time to live or the conference time limit elapsed
+   * - A conference creator used the Terminate REST API to terminate an ongoing conference */
   DESTROYED = 'DESTROYED',
-  /** Informs that a conference is ended. */
+  /** A conference is ended. */
   ENDED = 'ENDED',
 }
 
+/** The ConferenceConstraints interface gathers information about the preferred conference constraints. */
 export interface ConferenceConstraints {
+  /** A boolean that indicates whether audio should be enabled for the local participant. */
   audio: boolean;
+  /** A boolean that indicates whether video should be enabled for the local participant. */
   video: boolean;
 }
 
+/** The ConferenceJoinOptions interface defines how an application expects to join a conference in terms of media preference. */
 export interface ConferenceJoinOptions {
+  /** The conference access token that is required to join a protected conference if the conference is created using the [create](ref:conference#operation-postConferenceCreate) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document. */
   conferenceAccessToken?: string;
+  /** Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}`. */
   constraints?: ConferenceConstraints;
+  /** Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. */
   maxVideoForwarding?: number;
+  /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms) article. */
   mixing?: ConferenceMixingOptions;
+  /** Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
   preferRecvMono?: boolean;
+  /** Indicates whether a participant wants to send mono sound to a conference. By default, when using the Opus codec, participants' audio is sent as stereo. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
   preferSendMono?: boolean;
+  /** Enables sending the Simulcast video streams to other conference participants. */
   simulcast?: boolean;
+  /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method. */
   spatialAudio?: boolean;
 }
 
+/** The ConferenceReplayOptions interface gathers properties responsible for replaying conferences. */
 export interface ConferenceReplayOptions {
   /** The conference access token. */
   conferenceAccessToken?: string;
-  /** Allows the application users to start replaying the recorded conference at a specific timestamp. The offset is the number of milliseconds between the beginning of the recording and the required starting point. */
+  /** Allows application users to start replaying a recorded conference at a specific timestamp. The offset parameter is the number of milliseconds between the beginning of the recording and the required starting point. */
   offset: number;
 }
 
+/** The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article. */
 export interface ConferenceMixingOptions {
-  /** A boolean value that notifies the server whether the participant is a Mixer (true) or not (false). */
+  /** A boolean that notifies the server whether a participant is a Mixer (true) or not (false). */
   enabled: boolean;
 }
 
+/** The Participant interface gathers information about a conference participant. */
 export interface Participant {
   /**  The participant's ID. */
   id: string;
-  /**  The participant's informations. */
+  /**  Information about a conference participant. */
   info: ParticipantInfo;
   /** The participant's status. */
   status?: ParticipantStatus;
   /** The participant's type. */
   type?: ParticipantType;
-  /** The participant streams */
+  /** The participant's streams. */
   streams?: MediaStream[];
 }
 
+/** The ParticipantInfo interface gathers information about a conference participant. */
 export interface ParticipantInfo {
   /** The participant's name. */
   name?: string;
@@ -128,62 +151,71 @@ export interface ParticipantInfo {
   externalId?: string;
 }
 
+/** The ParticipantInvited interface gathers information about the invited participant. */
 export interface ParticipantInvited {
+  /**  Information about the invited participant. */
   info: ParticipantInfo;
+  /**  The participant's permissions. */
   permissions?: Array<ConferencePermission>;
 }
 
+/** The ParticipantStatus enum gathers the possible statuses of conference participants. */
 export enum ParticipantStatus {
   /** A participant successfully connected to a conference. */
   CONNECTED = 'CONNECTED',
-  /** A participant received the conference invitation and is connecting to a conference. */
+  /** A participant received a conference invitation and is connecting to a conference. */
   CONNECTING = 'CONNECTING',
-  /** An invited participant declined the conference invitation.  */
+  /** An invited participant declined a conference invitation.  */
   DECLINE = 'DECLINE',
-  /** A peer connection failed, and the participant cannot connect to a conference. */
+  /** A peer connection failed and a participant cannot connect to a conference. */
   ERROR = 'ERROR',
-  /** A participant did not enable audio, video, or screen-share and, therefore, is not connected to any stream. */
+  /** A participant did not enable audio, video, or screen-share and is not connected to any stream. */
   INACTIVE = 'INACTIVE',
-  /** A participant was kicked from the conference. */
+  /** A participant was kicked from a conference. */
   KICKED = 'KICKED',
-  /** A participant left the conference. */
+  /** A participant left a conference. */
   LEFT = 'LEFT',
   /** A participant is invited to a conference and waits for an invitation. */
   RESERVED = 'RESERVED',
-  /** A participant experiences a peer connection problem, which may result in the Error or Connected status. */
+  /** A participant experiences a peer connection problem which may result in the Error or Connected status. */
   WARNING = 'WARNING',
 }
 
+/** The ParticipantTypes enum gathers the possible types of conference participants. */
 export enum ParticipantType {
-  /** A participant who cannot send the audio and video stream during the conference. */
+  /** A participant who cannot send any audio or video stream during a conference. */
   LISTENER = 'listener',
-  /** A participant who can send and receive the audio and video stream during the conference. */
+  /** A participant who can send and receive audio and video during the conference. */
   USER = 'user',
 }
 
+/** The RTCPMode enum gathers the possible bitrate adaptation modes for video transmission. */
 export enum RTCPMode {
-  /** Adjusts the transmission bitrate to the receiver who has the worst network conditions */
+  /** Adjusts the transmission bitrate to the receiver who has the worst network conditions. */
   WORST = 'worst',
-  /** Averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value */
+  /** Averages the available bandwidth of all receivers and adjusts the transmission bitrate to this value. */
   AVERAGE = 'average',
-  /** Does not adjust the transmission bitrate to the receiver’s bandwidth */
+  /** Does not adjust the transmission bitrate to the receiver’s bandwidth. */
   BEST = 'best',
 }
 
+/** The Codec enum gathers the available video codecs. */
 export enum Codec {
-  // TODO - doc
+  /** The VP8 video codec. */
   VP8 = 'VP8',
-  /** Default */
+  /** The default H264 video codec. */
   H264 = 'H264',
 }
 
+/** The UserType enum gathers the possible statuses of a conference participant. */
 export enum UserType {
-  /** A participant who can send and receive the audio and video stream during the conference. */
+  /** A participant who can send and receive audio and video during the conference. */
   USER = 'user',
-  /** A participant who cannot send the audio and video stream during the conference. */
+  /** A participant who cannot send any audio or video stream during a conference. */
   LISTENER = 'listener',
 }
 
+/** The ParticipantPermissions interface gathers information about the invited participants and their conference permissions. */
 export interface ParticipantPermissions {
   /** The invited participant. */
   participant: Participant;
@@ -191,8 +223,9 @@ export interface ParticipantPermissions {
   permissions: Array<ConferencePermission>;
 }
 
+/** The ConferencePermission enum gathers the possible permissions a participant may have in a conference. */
 export enum ConferencePermission {
-  /** Allows a participant to invite participants to a conference. */
+  /** Allows a participant to invite other participants to a conference. */
   INVITE = 'INVITE',
   /** Allows a participant to kick other participants from a conference */
   KICK = 'KICK',
@@ -218,38 +251,45 @@ export enum ConferencePermission {
   STREAM = 'STREAM',
 }
 
+/** The AudioProcessingOptions interface gathers parameters The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing. */
 export interface AudioProcessingOptions {
-  /** The AudioProcessingSenderOptions model allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
+  /** The AudioProcessingSenderOptions parameter allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
   send?: AudioProcessingSenderOptions;
 }
 
+/** The AudioProcessingSenderOptions interface allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
 export interface AudioProcessingSenderOptions {
-  /** A boolean value that indicates whether the audio processing is enabled or disabled. */
+  /** A boolean value that indicates whether audio processing is enabled or disabled. */
   audioProcessing?: boolean;
 }
 
+/** The AudioProcessing enum gathers the possible audio processing options. */
 export enum AudioProcessing {
-  /** Enables audio processing to offer a high-quality voice communication */
+  /** Enables audio processing to offer a high-quality voice communication. */
   VOCAL,
-  /** Disables audio processing to transmit background sounds, such as music */
+  /** Disables audio processing to transmit background sounds, such as music. */
   ENVIRONMENT,
 }
 
 export type AudioLevel = number;
 export type MaxVideoForwarding = number;
 
+/** The AudioTrack type gathers audio tracks available in a stream. */
 export type AudioTrack = any;
+/** The VideoTrack type gathers video tracks available in a stream. */
 export type VideoTrack = any;
 
+/** The MediaStreamType enum gathers the possible types of media streams. */
 export enum MediaStreamType {
-  /** The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera. */
+  /** The camera media stream, either audio, video, or audio and video. This stream type is enabled by default. */
   Camera = 'CAMERA',
   /** The screen-share media stream. */
   ScreenShare = 'SCREEN_SHARE',
-  /** The non-specified media stream. */
+  /** A media stream produced by an external device. */
   Custom = 'CUSTOM',
 }
 
+/** The MediaStream type gathers information about media streams. */
 export type MediaStream = {
   /** The media stream identifier. */
   id: String;
@@ -263,8 +303,10 @@ export type MediaStream = {
   label: String;
 };
 
+/** The UnsubscribeFunction unsubscribes from event listeners. */
 export type UnsubscribeFunction = () => void;
 
+/** @internal */
 export enum RTCStatsType {
   /** Statistics for a codec that is currently being used by RTP streams being sent or received by this RTCPeerConnection object. It is accessed by the RTCCodecStats. */
   'codec',

@@ -2,8 +2,7 @@
 
 [internal](../modules/internal.md).SessionService
 
-The SessionService allows opening and closing sessions. Opening a session is
-mandatory before interacting with any service.
+The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
 
 ## Table of contents
 
@@ -42,7 +41,7 @@ ___
 
 ▸ **getCurrentUser**(): `Promise`<[`User`](../interfaces/internal.User.md)\>
 
-Gets object of local user
+Provides the local participant object that belongs to the current session.
 
 #### Returns
 

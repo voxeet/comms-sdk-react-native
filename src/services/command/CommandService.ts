@@ -8,8 +8,7 @@ import { CommandServiceEventNames } from './events';
 const { DolbyIoIAPICommandServiceModule } = NativeModules;
 
 /**
-The Command service allows the application to send text messages or notifications to all conference participants.
-The service also emits a received event to inform the application about received messages.
+The CommandService allows the application to send and receive text messages and notifications during a conference.
  */
 export class CommandService {
   /** @internal */
@@ -18,17 +17,17 @@ export class CommandService {
   _nativeEvents = new NativeEvents(DolbyIoIAPICommandServiceModule);
 
   /**
-   * Sends a message, in the form of a basic stream, to all conference participants.
-   * @param message Message to send
+   * Sends a message to all conference participants. The message is in a form of a basic stream.
+   * @param message The message to send.
    */
   public async send(message: string): Promise<void> {
     return this._nativeModule.send(message);
   }
 
   /**
-   * Adds a native listener for message received
-   * @param handler Event callback function
-   * @returns Function that unsubscribes from listeners
+   * Adds a listener to events informing about received messages.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
    */
   public onMessageReceived(
     handler: (data: MessageReceivedEventType) => void
