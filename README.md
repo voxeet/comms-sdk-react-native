@@ -30,11 +30,27 @@ For example, with the Client SDKs you can build:
     yarn add @dolbyio/react-native-iapi-sdk
     ```
 
-2. If you are using React Native version 0.60 or later, install native dependencies via CocoaPods from your /ios directory:
+2. If you are using React Native version 0.60 or later:
+- for IOS: install native dependencies via CocoaPods from your /ios directory:
 
    ```bash
    pod install
    ```
+- for Android: add following lines to your `android/build.grade` file:
+   ```
+    maven { url("http://android-sdk.voxeet.com/release") }
+    maven { url("http://android-sdk.voxeet.com/beta") }
+   ```
+  and also add following lines to your `android/app/build.gradle` file:
+   ```
+  packagingOptions {
+      pickFirst '**/armeabi-v7a/libc++_shared.so'
+      pickFirst '**/x86/libc++_shared.so'
+      pickFirst '**/arm64-v8a/libc++_shared.so'
+      pickFirst '**/x86_64/libc++_shared.so'
+  }
+  ```
+
 
 3. If you are using a React Native version prior to 0.60, link the native dependency:
 
