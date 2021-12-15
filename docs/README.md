@@ -36,7 +36,7 @@ For example, with the Client SDKs you can build:
 - for IOS: install native dependencies via CocoaPods from your /ios directory:
 
    ```bash
-   pod install
+   pod install --repo-update
    ```
 - for Android: add following lines to your `android/build.grade` file:
    ```

@@ -24,6 +24,14 @@ const REGEXP_MATCH_CONSTRUCTOR_HEADER = /###? Constructors?/gi;
 const REGEXP_MATCH_CONSTRUCTOR_LINK = /- \[constructor].+/g;
 const REGEXP_MATCH_CONSTRUCTOR_INIT = /• \*\*new.+/g;
 const REGEXP_MATCH_INTERNAL_LINKS = /\[internal].+/g;
+const REGEXP_MATCH_CLASS_TITLES = /# Class: \w+/g;
+
+/**
+ * This will match and capture all full link descriptions
+ * e.g. it will capture `Participant` and Participant from [`Participant`](../interfaces/internal.Participant.md)
+ * (we want to replace [`Participant`] for [Participant])
+ */
+const REGEXP_MATCH_BACKTICKS = /\[(`(\w+)`)?]\(.+?\)/g;
 
 const SLUG_PREFIX = 'rn-client-sdk-';
 const LINK_SLUG_PREFIX = 'doc:rn-client-sdk-';
@@ -70,7 +78,7 @@ const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
 function createDocHeader(rawModuleName, slug, order) {
   return `---
 apiVersion: 1.0
-categoryName: ReactNative SDK
+categoryName: React Native SDK
 title: ${rawModuleName}
 slug: ${slug}
 excerpt: None
@@ -122,7 +130,18 @@ function convertDoc(filePath, index) {
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_HEADER, '')
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_LINK, '')
       .replaceAll(REGEXP_MATCH_CONSTRUCTOR_INIT, '')
-      .replaceAll(REGEXP_MATCH_INTERNAL_LINKS, '');
+      .replaceAll(REGEXP_MATCH_INTERNAL_LINKS, '')
+      .replaceAll(REGEXP_MATCH_CLASS_TITLES, '')
+      .replaceAll(
+        REGEXP_MATCH_BACKTICKS,
+        (substring, captureGroupOne, captureGroupTwo) => {
+          console.log(substring, captureGroupTwo);
+          return substring.replace(
+            /(?<=\[)(`(\w+)`)(?=]\(.+\))/,
+            captureGroupTwo
+          );
+        }
+      );
     try {
       if (!fs.existsSync(newFilePath)) {
         fs.mkdirSync(newFilePath, {
