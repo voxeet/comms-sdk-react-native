@@ -1,3 +1,5 @@
+# This project is still a work in progress and not yet ready for production. Please stayed tuned.
+
 # Dolby.io IAPI React Native SDK
 
 The Dolby.io Communications APIs provide a platform for unified communications and collaboration. You can combine voice, video, and messaging as an integrated solution for your own applications in a way that is cohesive to your end-users. This is in contrast to out-of-app communications where users must exit your application and turn to third-party stand-alone tools.
