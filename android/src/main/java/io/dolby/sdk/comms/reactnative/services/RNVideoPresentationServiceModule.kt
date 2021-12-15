@@ -70,7 +70,7 @@ class RNVideoPresentationServiceModule(
   private val videoPresentationMapper: VideoPresentationMapper
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
-  override fun getName(): String = "CommsAPIVideoPresentationService"
+  override fun getName(): String = "CommsAPIVideoPresentationServiceModule"
 
   /**
    * Starts sharing a video file with other conference participants.

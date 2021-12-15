@@ -45,7 +45,7 @@ class RNNotificationServiceModule constructor(
   private val invitationMapper: InvitationMapper
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
-  override fun getName(): String = "CommsAPINotificationService"
+  override fun getName(): String = "CommsAPINotificationServiceModule"
 
   /**
    * Notifies conference participants about a conference invitation.

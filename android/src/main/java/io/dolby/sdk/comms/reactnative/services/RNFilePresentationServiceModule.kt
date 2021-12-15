@@ -6,7 +6,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
-import io.dolby.sdk.comms.reactnative.FilePresentationService
+import io.dolby.sdk.FilePresentationService
 import io.dolby.sdk.comms.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.comms.reactnative.state.FilePresentationHolder
@@ -56,7 +56,7 @@ class RNFilePresentationServiceModule(
   private val filePresentationMapper: FilePresentationMapper
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
-  override fun getName(): String = "CommsAPIFilePresentationService"
+  override fun getName(): String = "CommsAPIFilePresentationServiceModule"
 
   /**
    * Converts the user-provided file into multiple pages, as images, that can be shared during the file presentation.

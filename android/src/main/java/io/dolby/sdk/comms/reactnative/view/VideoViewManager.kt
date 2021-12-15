@@ -124,7 +124,7 @@ class VideoViewManager(
   }
 
   companion object {
-    private const val VIDEO_VIEW_NAME = "DIOVideoView"
+    private const val VIDEO_VIEW_NAME = "COMVideoView"
 
     private const val SCALE_TYPE_FILL = "fill"
 

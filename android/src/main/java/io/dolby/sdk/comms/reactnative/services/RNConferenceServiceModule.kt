@@ -101,7 +101,7 @@ class RNConferenceServiceModule(
   private val eventEmitter: RNEventEmitter
 ) : RNEventEmitterModule(reactContext, eventEmitter) {
 
-  override fun getName() = "CommsAPIConferenceService"
+  override fun getName() = "CommsAPIConferenceServiceModule"
 
   /**
    * Creates the conference based on information from the `optionsRN`.

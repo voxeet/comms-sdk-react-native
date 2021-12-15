@@ -32,7 +32,7 @@ class RNMediaDeviceServiceModule constructor(
   private val mediaMapper: MediaMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String = "CommsAPIMediaDeviceService"
+    override fun getName(): String = "CommsAPIMediaDeviceServiceModule"
 
   /**
    * The ComfortNoiseLevel model represents the possible comfort noise levels in Dolby Voice conferences.

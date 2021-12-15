@@ -4,7 +4,6 @@ import com.voxeet.VoxeetSDK
 import com.voxeet.promise.solve.Solver
 import com.voxeet.sdk.services.SdkEnvironmentHolder
 import com.voxeet.sdk.services.presentation.file.FilePresentation
-import io.dolby.sdk.comms.reactnative.FilePresentationService
 import java.lang.reflect.Field
 import java.util.HashMap
 
