@@ -1,4 +1,4 @@
-# This project is still a work in progress and not yet ready for production. Please stayed tuned.
+# This project is still a work in progress and not yet ready for production. Please stay tuned.
 
 # Dolby.io IAPI React Native SDK
 
