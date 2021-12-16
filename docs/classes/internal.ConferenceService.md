@@ -464,8 +464,8 @@ Instead of setting the following properties:
 - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
 - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
  Set up keys in your `Info.plist` file:
-- Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
-- Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
+- Add a new `CommsSDKAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
+- Add a new `CommsSDKPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
 
 #### Returns
 

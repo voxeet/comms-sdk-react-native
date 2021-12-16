@@ -2,7 +2,7 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIConferenceService, RNConferenceServiceModule, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIConferenceServiceModule, RNConferenceServiceModule, NSObject)
 
 RCT_EXTERN_METHOD(create:(NSDictionary * _Nullable)options
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve

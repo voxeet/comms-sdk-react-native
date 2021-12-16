@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIMediaDeviceService, RNMediaDeviceServiceModule, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIMediaDeviceServiceModule, RNMediaDeviceServiceModule, NSObject)
 
 RCT_EXTERN_METHOD(switchCamera:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);

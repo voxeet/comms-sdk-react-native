@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIModule, RNDolbyioIAPISdk, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIModule, RNCommsAPIModule, NSObject)
 
 RCT_EXTERN_METHOD(initialize:(NSString * _Nonnull)consumerKey
 				  consumerSecret:(NSString * _Nonnull)consumerSecret
