@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).User
 
-The User interface gathers information the local participant that belongs to the current session.
+The User interface gathers information about the local participant that belongs to the current session.
 
 ## Table of contents
 

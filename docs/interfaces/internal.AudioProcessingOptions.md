@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).AudioProcessingOptions
 
-The AudioProcessingOptions interface gathers parameters The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
+The AudioProcessingOptions interface is responsible for enabling and disabling audio processing.
 
 ## Table of contents
 
@@ -16,4 +16,4 @@ The AudioProcessingOptions interface gathers parameters The AudioProcessingOptio
 
 • `Optional` **send**: [`AudioProcessingSenderOptions`](internal.AudioProcessingSenderOptions.md)
 
-The AudioProcessingSenderOptions parameter allows enabling and disabling audio processing for the local participant who transmits an audio stream.
+Allows enabling and disabling audio processing for the local participant who transmits an audio stream.
