@@ -9,16 +9,16 @@ import type {
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
 
-const { DolbyIoIAPINotificationService } = NativeModules;
+const { CommsAPINotificationServiceModule } = NativeModules;
 
 /**
  * The NotificationService allows inviting participants to a conference.
  */
 export class NotificationService {
   /** @internal */
-  _nativeModule = DolbyIoIAPINotificationService;
+  _nativeModule = CommsAPINotificationServiceModule;
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPINotificationService);
+  _nativeEvents = new NativeEvents(CommsAPINotificationServiceModule);
 
   /**
    * Notifies conference participants about a conference invitation.

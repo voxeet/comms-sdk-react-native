@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import InvitationResponseButtons from './InvitationResponseButtons';
@@ -39,7 +39,8 @@ const InvitationHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return DolbyIoIAPI.notification.onInvitationReceived(onInvitationReceived);
+    return CommsAPI.notification.onInvitationReceived(onInvitationReceived);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

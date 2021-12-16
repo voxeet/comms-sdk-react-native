@@ -1,11 +1,6 @@
 {
-  "entryPoints": [
-    "./src/DolbyIoIAPI.ts"
-  ],
-  "exclude": [
-    "./src/utils/**/*",
-    "./example/**/*"
-  ],
+  "entryPoints": ["./src/CommsAPI.ts"],
+  "exclude": ["./src/utils/**/*", "./example/**/*"],
   "excludeInternal": true,
   "excludeExternals": true,
   "validation": {

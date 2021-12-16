@@ -6,60 +6,64 @@ The Dolby.io Communications APIs provide a platform for unified communications a
 
 For example, with the Client SDKs you can build:
 
- - A video conference application for your employee portal
- - A broadcast webinar application for presentations to grow your audience
- - A 1-on-1 help desk service for your specialized customers
+- A video conference application for your employee portal
+- A broadcast webinar application for presentations to grow your audience
+- A 1-on-1 help desk service for your specialized customers
 
 ## Requirements
 
 ### iOS
 
-* Xcode 12 and iOS SDK 14
-* iOS 11.0+ target deployment
+- Xcode 12 and iOS SDK 14
+- iOS 11.0+ target deployment
 
 ### Android
 
-* Minimum Android SDK version - 25
+- Minimum Android SDK version - 25
 
 ## Installation
 
 1. Install module using `npm` or `yarn`:
 
-    ```bash
-    npm install @dolbyio/react-native-iapi-sdk --save
-    ```
-    ```bash
-    yarn add @dolbyio/react-native-iapi-sdk
-    ```
-
-2. If you are using React Native version 0.60 or later:
-- for IOS: install native dependencies via CocoaPods from your /ios directory:
+   ```bash
+   npm install @dolbyio/react-native-iapi-sdk --save
+   ```
 
    ```bash
-   pod install --repo-update
+   yarn add @dolbyio/react-native-iapi-sdk
    ```
-- for Android: add following lines to your `android/build.grade` file:
-   ```
-    maven { url("http://android-sdk.voxeet.com/release") }
-    maven { url("http://android-sdk.voxeet.com/beta") }
-   ```
-  and also add following lines to your `android/app/build.gradle` file:
-   ```
-  packagingOptions {
-      pickFirst '**/armeabi-v7a/libc++_shared.so'
-      pickFirst '**/x86/libc++_shared.so'
-      pickFirst '**/arm64-v8a/libc++_shared.so'
-      pickFirst '**/x86_64/libc++_shared.so'
-  }
+
+2. If you are using React Native version 0.60 or later:
+
+- for IOS: install native dependencies via CocoaPods from your /ios directory:
+
+  ```bash
+  pod install --repo-update
   ```
 
+- for Android: add following lines to your `android/build.grade` file:
+  ```
+   maven { url("http://android-sdk.voxeet.com/release") }
+   maven { url("http://android-sdk.voxeet.com/beta") }
+  ```
+  and also add following lines to your `android/app/build.gradle` file:
+  ```
+  packagingOptions {
+     pickFirst '**/armeabi-v7a/libc++_shared.so'
+     pickFirst '**/x86/libc++_shared.so'
+     pickFirst '**/arm64-v8a/libc++_shared.so'
+     pickFirst '**/x86_64/libc++_shared.so'
+  }
+  ```
 
 3. If you are using a React Native version prior to 0.60, link the native dependency:
 
    ```bash
    react-native link @dolbyio/react-native-iapi-sdk
    ```
+
    Then, install from your /ios directory:
+
    ```bash
    pod install --repo-update
    ```
@@ -70,53 +74,63 @@ For example, with the Client SDKs you can build:
 
 ## Getting started
 
-1) Import the SDK to your project.
+1. Import the SDK to your project.
 
 ```js
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 ```
 
-2) Initialize the SDK with your Dolby.io credentials.
+2. Initialize the SDK with your Dolby.io credentials.
 
 ```js
-await DolbyIoIAPI.initialize(APP_ID, APP_SECRET);
+await CommsAPI.initialize(APP_ID, APP_SECRET);
 ```
-3) Open a session.
+
+3. Open a session.
+
 ```js
-await DolbyIoIAPI.session.open({ name, externalId });
+await CommsAPI.session.open({ name, externalId });
 ```
-4) Create a conference.
+
+4. Create a conference.
+
 ```js
 const conferenceOptions = {
   alias,
   params: {},
 };
 
-const createdConference = await DolbyIoIAPI.conference.create(
+const createdConference = await CommsAPI.conference.create(
   conferenceOptions
 );
 ```
-4) Join the created conference.
+
+4. Join the created conference.
+
 ```js
-const joinedConference = await DolbyIoIAPI.conference.join(
+const joinedConference = await CommsAPI.conference.join(
   createdConference,
   {}
 );
 ```
 
-5) Import some additional services.
+5. Import some additional services.
+
 ```js
-import {Conference} from '@dolbyio/react-native-iapi-sdk';
+import { Conference } from '@dolbyio/react-native-iapi-sdk';
 ```
+
 or
+
 ```js
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
-const {Conference} = DolbyIoIAPI;
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
+const { Conference } = CommsAPI;
 ```
 
 ## Integrate video
 
-1) Place the VideoView in your component.
+1. Place the VideoView in your component.
+
 ```jsx
 import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 ...
@@ -127,7 +141,8 @@ return (
   />
 ```
 
-2) Get a reference to your VideoView component.
+2. Get a reference to your VideoView component.
+
 ```jsx
 const videoView = useRef() as React.MutableRefObject<VideoView>;
 ...
@@ -139,7 +154,8 @@ return (
   />
 ```
 
-3) Attach a stream to video.
+3. Attach a stream to video.
+
 ```js
 videoView.current.attach(
   participant,
@@ -149,27 +165,27 @@ videoView.current.attach(
 
 VideoView properties
 
-|Name|Type|Description|
-|---|---|---|
-|isMirror|boolean |It allows the image to be reflected horizontally   |
-|scaleType|'fit' or 'fill'|It allows you to fit the image differently to the canvas|
-|style|   |It allows you to style the video window according to React Native standards   |
+| Name      | Type            | Description                                                                 |
+| --------- | --------------- | --------------------------------------------------------------------------- |
+| isMirror  | boolean         | It allows the image to be reflected horizontally                            |
+| scaleType | 'fit' or 'fill' | It allows you to fit the image differently to the canvas                    |
+| style     |                 | It allows you to style the video window according to React Native standards |
 
 VideoView methods
 
-|Name|Arguments|Returns|Description|
-|---|---|---|---|
-|attach()|(participant: Participant,mediaStream: MediaStream)|Promise(boolean)|Allows displaying the stream of participant|
-|detach()|none|Promise(boolean)|It allows you to finish displaying the stream|
-|isAttached()|none|Promise(boolean)|Gets information about whether the stream is active|
-|isScreenSharing()|none|Promise(boolean)|Gets information about whether the active stream is screen-sharing|
+| Name              | Arguments                                           | Returns          | Description                                                        |
+| ----------------- | --------------------------------------------------- | ---------------- | ------------------------------------------------------------------ |
+| attach()          | (participant: Participant,mediaStream: MediaStream) | Promise(boolean) | Allows displaying the stream of participant                        |
+| detach()          | none                                                | Promise(boolean) | It allows you to finish displaying the stream                      |
+| isAttached()      | none                                                | Promise(boolean) | Gets information about whether the stream is active                |
+| isScreenSharing() | none                                                | Promise(boolean) | Gets information about whether the active stream is screen-sharing |
 
 ## Documentation
 
 A complete list of available services in SDK along with method documentation
 
-[DolbyIoIAPI](classes/DolbyIoIAPI.md)
-is the main module that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
+[CommsAPI](classes/CommsAPI.md)
+is the main module that allows the application to interact with DolbyIo services. The SDK is asynchronous and uses promise at its core.
 
 [CommandService](classes/internal.CommandService.md)
 allows the application to send text messages or notifications to all conference participants. The service also emits an received event to inform the application about received messages.
