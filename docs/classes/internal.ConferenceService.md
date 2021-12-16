@@ -461,8 +461,8 @@ ___
 	Starts a screen sharing session.
 	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
 Instead of setting the following properties:
-- VoxeetSDK.shared.appGroup = "YOUR_APP_GROUP"
-- VoxeetSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
+- CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
+- CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
  Set up keys in your `Info.plist` file:
 - Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
 - Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
