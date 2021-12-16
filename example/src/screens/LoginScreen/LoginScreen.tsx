@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
@@ -29,10 +29,10 @@ const LoginScreen: FunctionComponent = () => {
   useEffect(() => {
     (async function () {
       try {
-        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+        await CommsAPI.conference.leave({ leaveRoom: true });
       } catch (e: any) {
         try {
-          await DolbyIoIAPI.session.close();
+          await CommsAPI.session.close();
         } catch {}
       }
     })();
@@ -46,10 +46,10 @@ const LoginScreen: FunctionComponent = () => {
   useEffect(() => {
     (async () => {
       try {
-        await DolbyIoIAPI.conference.leave({ leaveRoom: true });
+        await CommsAPI.conference.leave({ leaveRoom: true });
       } catch (e) {
         try {
-          await DolbyIoIAPI.session.close();
+          await CommsAPI.session.close();
         } catch (e2) {}
       }
     })();

@@ -2,14 +2,14 @@ import { NativeModules } from 'react-native';
 
 import type { Recording } from './models';
 
-const { DolbyIoIAPIRecordingServiceModule } = NativeModules;
+const { CommsAPIRecordingServiceModule } = NativeModules;
 
 /**
  * The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording](doc:recording-javascript) and [Recording Mechanisms](doc:guides-recording-mechanisms) documents.
  */
 export class RecordingService {
   /** @internal */
-  _nativeModule = DolbyIoIAPIRecordingServiceModule;
+  _nativeModule = CommsAPIRecordingServiceModule;
 
   /**
    * Returns information about the current recording.

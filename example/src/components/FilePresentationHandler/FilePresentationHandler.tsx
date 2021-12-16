@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
 import { FilePresentationContext } from '@components/FilePresentationHandler/FilePresentationProvider';
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type {
   FileConvertedEventType,
@@ -64,7 +64,7 @@ const FilePresentationHandler: React.FC = () => {
       type === FilePresentationServiceEventNames.FilePresentationUpdated
     ) {
       try {
-        const imageSrc = await DolbyIoIAPI.filePresentation.getImage(
+        const imageSrc = await CommsAPI.filePresentation.getImage(
           event.filePresentation.position || 0
         );
         startFilePresentation(imageSrc, event.filePresentation.owner.info.name);
@@ -76,15 +76,16 @@ const FilePresentationHandler: React.FC = () => {
 
   useEffect(() => {
     const fileConvertedUnsubscribeFn =
-      DolbyIoIAPI.filePresentation.onFileConverted(convertedFileEventHandler);
+      CommsAPI.filePresentation.onFileConverted(convertedFileEventHandler);
     const filePresentationChangeUnsubscribeFn =
-      DolbyIoIAPI.filePresentation.onFilePresentationChange(
+      CommsAPI.filePresentation.onFilePresentationChange(
         filePresentationChangeEventHandler
       );
     return () => {
       fileConvertedUnsubscribeFn();
       filePresentationChangeUnsubscribeFn();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

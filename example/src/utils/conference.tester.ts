@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type {
   Participant,
@@ -12,7 +12,7 @@ import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
   try {
-    const conf = await DolbyIoIAPI.conference.current();
+    const conf = await CommsAPI.conference.current();
     Alert.alert('Current conference', JSON.stringify(conf, null, 2));
   } catch (e: any) {
     console.log(e);
@@ -21,7 +21,7 @@ export const current = async () => {
 };
 export const replay = async (conference: Conference) => {
   try {
-    await DolbyIoIAPI.conference.replay(conference);
+    await CommsAPI.conference.replay(conference);
   } catch (e: any) {
     Alert.alert('Error');
   }
@@ -29,7 +29,7 @@ export const replay = async (conference: Conference) => {
 export const startVideo = async (user: User) => {
   console.log(user);
   try {
-    await DolbyIoIAPI.conference.startVideo(user);
+    await CommsAPI.conference.startVideo(user);
   } catch (e: any) {
     console.log(e);
     Alert.alert('Error');
@@ -37,7 +37,7 @@ export const startVideo = async (user: User) => {
 };
 export const stopVideo = async (user: User) => {
   try {
-    await DolbyIoIAPI.conference.stopVideo(user);
+    await CommsAPI.conference.stopVideo(user);
   } catch (e: any) {
     console.log(e);
     Alert.alert('Error');
@@ -45,14 +45,14 @@ export const stopVideo = async (user: User) => {
 };
 export const startAudio = async (user: User) => {
   try {
-    await DolbyIoIAPI.conference.startAudio(user);
+    await CommsAPI.conference.startAudio(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
 export const stopAudio = async (user: User) => {
   try {
-    await DolbyIoIAPI.conference.stopAudio(user);
+    await CommsAPI.conference.stopAudio(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
@@ -60,7 +60,7 @@ export const stopAudio = async (user: User) => {
 
 export const getAudioLevel = async (user: User) => {
   try {
-    const audioLevel = await DolbyIoIAPI.conference.getAudioLevel(user);
+    const audioLevel = await CommsAPI.conference.getAudioLevel(user);
     Alert.alert('Audio level', JSON.stringify(audioLevel));
   } catch (e: any) {
     Alert.alert('Cant get audio level', e);
@@ -69,7 +69,7 @@ export const getAudioLevel = async (user: User) => {
 
 export const getStatus = async (conference: Conference) => {
   try {
-    const status = await DolbyIoIAPI.conference.getStatus(conference);
+    const status = await CommsAPI.conference.getStatus(conference);
     Alert.alert('Status', JSON.stringify(status));
   } catch (e: any) {
     Alert.alert('Cant get status', e);
@@ -78,7 +78,7 @@ export const getStatus = async (conference: Conference) => {
 
 export const getLocalStats = async () => {
   try {
-    const localStats = await DolbyIoIAPI.conference.getLocalStats();
+    const localStats = await CommsAPI.conference.getLocalStats();
     Alert.alert('Local stats', JSON.stringify(localStats));
   } catch (e: any) {
     Alert.alert('Cant get local stats', e);
@@ -88,7 +88,7 @@ export const getLocalStats = async () => {
 export const getMaxVideoForwarding = async () => {
   try {
     const maxVideoForwarding =
-      await DolbyIoIAPI.conference.getMaxVideoForwarding();
+      await CommsAPI.conference.getMaxVideoForwarding();
     Alert.alert('Max video forwarding', JSON.stringify(maxVideoForwarding));
   } catch (e: any) {
     Alert.alert('Cant get max video forwarding', e.toString());
@@ -98,7 +98,7 @@ export const getMaxVideoForwarding = async () => {
 export const kick = async (participant: Participant) => {
   try {
     console.log('KICKED PARTICIPANT', JSON.stringify(participant, null, 2));
-    await DolbyIoIAPI.conference.kick(participant);
+    await CommsAPI.conference.kick(participant);
   } catch (e: any) {
     Alert.alert('Error', e.toString());
   }
@@ -106,7 +106,7 @@ export const kick = async (participant: Participant) => {
 
 export const mute = async (participant: Participant) => {
   try {
-    await DolbyIoIAPI.conference.mute(participant, true);
+    await CommsAPI.conference.mute(participant, true);
     Alert.alert('Mute success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
@@ -115,7 +115,7 @@ export const mute = async (participant: Participant) => {
 
 export const unmute = async (participant: Participant) => {
   try {
-    await DolbyIoIAPI.conference.mute(participant, false);
+    await CommsAPI.conference.mute(participant, false);
     Alert.alert('Unmute success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
@@ -124,8 +124,9 @@ export const unmute = async (participant: Participant) => {
 
 export const getParticipant = async (participantId: string) => {
   try {
-    const participant: Participant =
-      await DolbyIoIAPI.conference.getParticipant(participantId);
+    const participant: Participant = await CommsAPI.conference.getParticipant(
+      participantId
+    );
     Alert.alert('Participant:', JSON.stringify(participant));
   } catch (e: any) {
     Alert.alert('getParticipant error', e.toString());
@@ -134,9 +135,7 @@ export const getParticipant = async (participantId: string) => {
 
 export const getParticipants = async (conference: Conference) => {
   try {
-    const participants = await DolbyIoIAPI.conference.getParticipants(
-      conference
-    );
+    const participants = await CommsAPI.conference.getParticipants(conference);
     Alert.alert('Participants:', JSON.stringify(participants));
   } catch (e: any) {
     Alert.alert('getParticipants error', e.toString());
@@ -145,7 +144,7 @@ export const getParticipants = async (conference: Conference) => {
 
 export const isMuted = async () => {
   try {
-    const muted = await DolbyIoIAPI.conference.isMuted();
+    const muted = await CommsAPI.conference.isMuted();
     Alert.alert('muted:', muted.toString());
   } catch (e: any) {
     Alert.alert('isMuted error', e.toString());
@@ -154,7 +153,7 @@ export const isMuted = async () => {
 
 export const isSpeaking = async (participant: Participant) => {
   try {
-    const isParticipantSpeaking = await DolbyIoIAPI.conference.isSpeaking(
+    const isParticipantSpeaking = await CommsAPI.conference.isSpeaking(
       participant
     );
     Alert.alert(
@@ -169,7 +168,7 @@ export const isSpeaking = async (participant: Participant) => {
 
 export const setAudioProcessing = async (options: AudioProcessingOptions) => {
   try {
-    await DolbyIoIAPI.conference.setAudioProcessing(options);
+    await CommsAPI.conference.setAudioProcessing(options);
     Alert.alert('setAudioProcessing success');
   } catch (e: any) {
     Alert.alert('setAudioProcessing error', e.toString());
@@ -178,7 +177,7 @@ export const setAudioProcessing = async (options: AudioProcessingOptions) => {
 
 export const setMaxVideoForwarding = async (max: number) => {
   try {
-    await DolbyIoIAPI.conference.setMaxVideoForwarding(max);
+    await CommsAPI.conference.setMaxVideoForwarding(max);
     Alert.alert('setMaxVideoForwarding success');
   } catch (e: any) {
     Alert.alert('setMaxVideoForwarding error', e.toString());
@@ -189,7 +188,7 @@ export const updatePermissions = async (
   participantPermissions: ParticipantPermissions[]
 ) => {
   try {
-    await DolbyIoIAPI.conference.updatePermissions(participantPermissions);
+    await CommsAPI.conference.updatePermissions(participantPermissions);
   } catch (e: any) {
     Alert.alert('updatePermissions error', e.toString());
   }
@@ -197,7 +196,7 @@ export const updatePermissions = async (
 
 export const startScreenShare = async () => {
   try {
-    await DolbyIoIAPI.conference.startScreenShare();
+    await CommsAPI.conference.startScreenShare();
     Alert.alert('Screen sharing started');
   } catch (e) {
     const msg = (e as Error).message;
@@ -207,7 +206,7 @@ export const startScreenShare = async () => {
 
 export const stopScreenShare = async () => {
   try {
-    await DolbyIoIAPI.conference.stopScreenShare();
+    await CommsAPI.conference.stopScreenShare();
     Alert.alert('Screen sharing stopped');
   } catch (e) {
     const msg = (e as Error).message;

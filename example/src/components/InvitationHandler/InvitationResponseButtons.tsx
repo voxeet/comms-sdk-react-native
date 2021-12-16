@@ -4,7 +4,7 @@ import RNToast from 'react-native-toast-message';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 
-import DolbyIoIAPI from '../../../../src/DolbyIoIAPI';
+import CommsAPI from '../../../../src/CommsAPI';
 import styles from './InvitationResponseButtons.style';
 
 type InvitationEventResponseProps = {
@@ -17,8 +17,8 @@ const InvitationResponseButtons = ({
 }: InvitationEventResponseProps) => {
   const decline = async () => {
     try {
-      const conference = await DolbyIoIAPI.conference.fetch(conferenceId);
-      await DolbyIoIAPI.notification.decline(conference);
+      const conference = await CommsAPI.conference.fetch(conferenceId);
+      await CommsAPI.notification.decline(conference);
       RNToast.hide();
     } catch (e: any) {
       console.log('couldnt decline conference invitation\n', e.toString());

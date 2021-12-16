@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type {
   FileConverted,
@@ -9,7 +9,7 @@ import type {
 
 export const stop = async () => {
   try {
-    await DolbyIoIAPI.filePresentation.stop();
+    await CommsAPI.filePresentation.stop();
     console.log('File presentation stopped');
   } catch (e) {
     const msg = (e as Error).message;
@@ -21,7 +21,7 @@ export const start = async (file: FileConverted | null) => {
   try {
     if (file == null) return;
     console.log('file that were passing', file);
-    await DolbyIoIAPI.filePresentation.start(file);
+    await CommsAPI.filePresentation.start(file);
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Start error', msg);
@@ -30,7 +30,7 @@ export const start = async (file: FileConverted | null) => {
 
 export const getThumbnail = async (page: number) => {
   try {
-    const thumbnail = await DolbyIoIAPI.filePresentation.getThumbnail(page);
+    const thumbnail = await CommsAPI.filePresentation.getThumbnail(page);
     Alert.alert('Thumbnail:', thumbnail.toString());
   } catch (e) {
     const msg = (e as Error).message;
@@ -40,7 +40,7 @@ export const getThumbnail = async (page: number) => {
 
 export const setPage = async (page: number) => {
   try {
-    await DolbyIoIAPI.filePresentation.setPage(page);
+    await CommsAPI.filePresentation.setPage(page);
     Alert.alert('Set page done');
   } catch (e) {
     const msg = (e as Error).message;
@@ -50,7 +50,7 @@ export const setPage = async (page: number) => {
 
 export const convert = async (file: File): Promise<FileConverted | null> => {
   try {
-    const convertedFile = await DolbyIoIAPI.filePresentation.convert(file);
+    const convertedFile = await CommsAPI.filePresentation.convert(file);
     console.log('File Conversion done', JSON.stringify(convertedFile, null, 2));
     return convertedFile;
   } catch (e) {
@@ -63,7 +63,7 @@ export const convert = async (file: File): Promise<FileConverted | null> => {
 export const getCurrent = async () => {
   try {
     const currentFilePresentation =
-      await DolbyIoIAPI.filePresentation.getCurrent();
+      await CommsAPI.filePresentation.getCurrent();
     console.log('Get current done:', currentFilePresentation);
   } catch (e) {
     const msg = (e as Error).message;
@@ -73,7 +73,7 @@ export const getCurrent = async () => {
 
 export const getImage = async (page: number) => {
   try {
-    const image = await DolbyIoIAPI.filePresentation.getImage(page);
+    const image = await CommsAPI.filePresentation.getImage(page);
     console.log('Get image done:', image);
   } catch (e) {
     const msg = (e as Error).message;
