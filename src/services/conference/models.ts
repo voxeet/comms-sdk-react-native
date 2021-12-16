@@ -58,9 +58,9 @@ export enum ConferenceStatus {
   JOINING = 'JOINING',
   /** The local participant successfully joined a conference. */
   JOINED = 'JOINED',
-  /** @deprecated @internal  */
+  /** @internal  */
   FIRST_PARTICIPANT = 'FIRST_PARTICIPANT',
-  /** @deprecated @internal*/
+  /** @internal*/
   NO_MORE_PARTICIPANT = 'NO_MORE_PARTICIPANT',
   /** The local participant is leaving a conference. */
   LEAVING = 'LEAVING',
@@ -139,14 +139,7 @@ export interface ParticipantInfo {
   name?: string;
   /** The URL of the participant's avatar. */
   avatarUrl?: string;
-  /** The external unique identifier that the customer's application can add to
-   * the participant while opening a session. If a participant uses the same
-   * external ID in conferences, the participant's ID also remains the same
-   * across all sessions. When a second participant joins a conference using
-   * the same external ID as another participant who has already joined the
-   * conference, the SDK removes the first participant who uses this external
-   * ID and emits the switched event (SDK 2.2.3+).
-   * Note: This property is required to invite participants to a conference.
+  /** The external unique identifier that the customer's application can add to the participant while opening a session. If a participant uses the same external ID in conferences, the participant's ID also remains the same across all sessions. This property is required to invite participants to a conference.
    */
   externalId?: string;
 }
@@ -251,9 +244,9 @@ export enum ConferencePermission {
   STREAM = 'STREAM',
 }
 
-/** The AudioProcessingOptions interface gathers parameters The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing. */
+/** The AudioProcessingOptions interface is responsible for enabling and disabling audio processing. */
 export interface AudioProcessingOptions {
-  /** The AudioProcessingSenderOptions parameter allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
+  /** Allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
   send?: AudioProcessingSenderOptions;
 }
 
