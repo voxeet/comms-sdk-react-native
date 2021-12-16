@@ -1,5 +1,5 @@
 {
-  "name": "@dolbyio/react-native-iapi-sdk",
+  "name": "@dolbyio/comms-sdk-reactnative",
   "version": "3.4.0",
   "description": "Dolby.io iAPI SDK for React Native",
   "main": "lib/commonjs/index",
