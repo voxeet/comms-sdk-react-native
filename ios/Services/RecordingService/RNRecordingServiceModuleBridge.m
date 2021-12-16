@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIRecordingServiceModule, RNRecordingServiceModule, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIRecordingServiceModule, RNRecordingServiceModule, NSObject)
 
 RCT_EXTERN_METHOD(current:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);

@@ -2,7 +2,7 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIVideoPresentationService, RNVideoPresentationServiceModule, RCTEventEmitter)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIVideoPresentationServiceModule, RNVideoPresentationServiceModule, RCTEventEmitter)
 
 RCT_EXTERN_METHOD(start:(NSString * _Nonnull)urlString
 									resolver:(RCTPromiseResolveBlock _Nonnull)resolve

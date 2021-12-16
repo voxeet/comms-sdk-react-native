@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPISessionServiceModule, RNSessionServiceModule, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPISessionServiceModule, RNSessionServiceModule, NSObject)
 
 RCT_EXTERN_METHOD(open:(NSDictionary * _Nonnull)userInfo
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
