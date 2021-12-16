@@ -214,7 +214,7 @@ function changeLinkFormatReplacerFn(substring, moduleName) {
   const module = substring.match(/\(\.\.\/(.+)\//);
   const service = substring.match(/internal\.(.+)\.md(#.+)?\)/);
   if (!service) {
-    if (substring.match(REGEXP_MATCH_DOC_FILENAME)[0] === 'DolbyIoIAPI.md') {
+    if (substring.match(REGEXP_MATCH_DOC_FILENAME)[0] === 'CommsAPI.md') {
       const link = substring.match(/#\w+/);
       return substring.replace(/(?<=.+\()(.+)(?=\))/, link[0]);
     }

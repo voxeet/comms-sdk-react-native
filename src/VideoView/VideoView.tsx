@@ -12,7 +12,7 @@ import {
 import type { MediaStream, Participant } from '../services/conference/models';
 import NativeEvents from '../utils/NativeEvents';
 import type { UnregisterListener } from '../utils/types';
-import DIOVideoView from './DIOVideoView';
+import COMVideoView from './COMVideoView';
 import { VideoViewEventNames } from './events';
 
 LogBox.ignoreLogs([
@@ -50,7 +50,7 @@ export default class VideoView extends PureComponent<Props, State> {
   };
 
   private _nativeEvents =
-    Platform.OS === 'android' ? new NativeEvents(DIOVideoView) : null;
+    Platform.OS === 'android' ? new NativeEvents(COMVideoView) : null;
   private _onEventUnsubscribe?: UnregisterListener = undefined;
   private _videoView: React.Component | null;
   private _videoViewHandler: null | number;
@@ -134,9 +134,9 @@ export default class VideoView extends PureComponent<Props, State> {
     const res = !!(await this._dispatchCommand(
       Platform.select({
         // @ts-ignore
-        android: UIManager.DIOVideoView.Commands.attach.toString(),
+        android: UIManager.COMVideoView.Commands.attach.toString(),
         // @ts-ignore
-        ios: UIManager.DIOVideoView.Commands.attach,
+        ios: UIManager.COMVideoView.Commands.attach,
       }),
       [participant.id, mediaStream.id]
     ));
@@ -150,9 +150,9 @@ export default class VideoView extends PureComponent<Props, State> {
     const res = !!(await this._dispatchCommand(
       Platform.select({
         // @ts-ignore
-        android: UIManager.DIOVideoView.Commands.detach.toString(),
+        android: UIManager.COMVideoView.Commands.detach.toString(),
         // @ts-ignore
-        ios: UIManager.DIOVideoView.Commands.detach,
+        ios: UIManager.COMVideoView.Commands.detach,
       })
     ));
     this.setState({
@@ -165,9 +165,9 @@ export default class VideoView extends PureComponent<Props, State> {
     return !!(await this._dispatchCommand(
       Platform.select({
         // @ts-ignore
-        android: UIManager.DIOVideoView.Commands.isAttached.toString(),
+        android: UIManager.COMVideoView.Commands.isAttached.toString(),
         // @ts-ignore
-        ios: UIManager.DIOVideoView.Commands.isAttached,
+        ios: UIManager.COMVideoView.Commands.isAttached,
       })
     ));
   };
@@ -183,7 +183,7 @@ export default class VideoView extends PureComponent<Props, State> {
   render() {
     return (
       <View style={[styles.wrapper, this.props.style]} pointerEvents="none">
-        <DIOVideoView
+        <COMVideoView
           style={styles.video}
           isMirror={this.props.isMirror}
           scaleType={this.props.scaleType}

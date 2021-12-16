@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
 
@@ -13,7 +13,7 @@ const MessageHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return DolbyIoIAPI.command.onMessageReceived(onMessageReceived);
+    return CommsAPI.command.onMessageReceived(onMessageReceived);
   }, []);
 
   return null;

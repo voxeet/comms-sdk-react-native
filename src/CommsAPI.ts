@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import { DolbyIoIAPIEventNames } from './events';
+import { CommsAPIEventNames } from './events';
 import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
@@ -16,11 +16,11 @@ import VideoPresentationService from './services/videoPresentation/VideoPresenta
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
 
-const { DolbyIoIAPIModule } = NativeModules;
+const { CommsAPIModule } = NativeModules;
 
-export class DolbyIoIAPI {
+export class CommsAPI {
   /** @internal */
-  private _nativeEvents = new NativeEvents(DolbyIoIAPIModule);
+  private _nativeEvents = new NativeEvents(CommsAPIModule);
   /** @internal */
   private refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
@@ -78,7 +78,7 @@ export class DolbyIoIAPI {
     Logger.warning(
       'Initialize method is deprecated. For security reasons Dolby recommends the initializeToken method in production. Use initialize method for prototyping of the app only.'
     );
-    return DolbyIoIAPIModule.initialize(consumerKey, consumerSecret);
+    return CommsAPIModule.initialize(consumerKey, consumerSecret);
   }
 
   /**
@@ -118,20 +118,20 @@ export class DolbyIoIAPI {
         try {
           const token = await refreshAccessToken();
           if (token) {
-            DolbyIoIAPIModule.onAccessTokenOk(token);
+            CommsAPIModule.onAccessTokenOk(token);
           }
         } catch (e) {
           Logger.error(`Refreshing token failed ${e}`);
-          DolbyIoIAPIModule.onAccessTokenKo('Refreshing token failed');
+          CommsAPIModule.onAccessTokenKo('Refreshing token failed');
         }
       };
-      this._nativeEvents.addListener(DolbyIoIAPIEventNames.TokenRefresh, () => {
+      this._nativeEvents.addListener(CommsAPIEventNames.TokenRefresh, () => {
         this.refreshAccessTokenInBackground &&
           this.refreshAccessTokenInBackground();
       });
     }
-    return DolbyIoIAPIModule.initializeToken(accessToken);
+    return CommsAPIModule.initializeToken(accessToken);
   }
 }
 
-export default new DolbyIoIAPI();
+export default new CommsAPI();

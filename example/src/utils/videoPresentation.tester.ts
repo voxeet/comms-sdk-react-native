@@ -1,10 +1,10 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 export const startVideoPresentation = async (url: string) => {
   try {
-    await DolbyIoIAPI.videoPresentation.start(url);
+    await CommsAPI.videoPresentation.start(url);
   } catch (e: any) {
     Alert.alert('start error', e.message);
   }
@@ -12,7 +12,7 @@ export const startVideoPresentation = async (url: string) => {
 
 export const pauseVideoPresentation = async () => {
   try {
-    await DolbyIoIAPI.videoPresentation.pause(1);
+    await CommsAPI.videoPresentation.pause(1);
   } catch (e: any) {
     Alert.alert('pause error', e.message);
   }
@@ -20,7 +20,7 @@ export const pauseVideoPresentation = async () => {
 
 export const playVideoPresentation = async () => {
   try {
-    await DolbyIoIAPI.videoPresentation.play();
+    await CommsAPI.videoPresentation.play();
   } catch (e: any) {
     Alert.alert('play error', e.message);
   }
@@ -28,7 +28,7 @@ export const playVideoPresentation = async () => {
 
 export const currentVideoPresentation = async () => {
   try {
-    const videoPresentation = await DolbyIoIAPI.videoPresentation.current();
+    const videoPresentation = await CommsAPI.videoPresentation.current();
     Alert.alert(
       'Video presentation: ',
       JSON.stringify(videoPresentation, null, 2)
@@ -40,7 +40,7 @@ export const currentVideoPresentation = async () => {
 
 export const seekVideoPresentation = async () => {
   try {
-    await DolbyIoIAPI.videoPresentation.seek(3);
+    await CommsAPI.videoPresentation.seek(3);
   } catch (e: any) {
     Alert.alert('seek error', e.message);
   }
@@ -48,7 +48,7 @@ export const seekVideoPresentation = async () => {
 
 export const stopVideoPresentation = async () => {
   try {
-    await DolbyIoIAPI.videoPresentation.stop();
+    await CommsAPI.videoPresentation.stop();
   } catch (e: any) {
     Alert.alert('stop error', e.message);
   }
@@ -56,7 +56,7 @@ export const stopVideoPresentation = async () => {
 
 export const stateOfVideoPresentation = async () => {
   try {
-    const state = await DolbyIoIAPI.videoPresentation.state();
+    const state = await CommsAPI.videoPresentation.state();
     Alert.alert('Video presentation state: ', state);
   } catch (e: any) {
     Alert.alert('state of video presentation error', e.message);

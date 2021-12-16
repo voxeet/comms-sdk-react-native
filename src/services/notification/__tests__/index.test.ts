@@ -4,7 +4,7 @@ import { Conference, ConferenceStatus } from '../../conference/models';
 import NotificationService from '../NotificationService';
 import { NotificationServiceEventNames } from '../events';
 
-const { DolbyIoIAPINotificationService } = NativeModules;
+const { CommsAPINotificationServiceModule } = NativeModules;
 
 const testConference: Conference = {
   participants: [{ id: '123', info: { name: 'John Doe' } }],
@@ -17,7 +17,7 @@ describe('NotificationService', () => {
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
       NotificationService.invite(testConference, [{ info: {} }]);
-      expect(DolbyIoIAPINotificationService.invite).toHaveBeenCalledWith(
+      expect(CommsAPINotificationServiceModule.invite).toHaveBeenCalledWith(
         testConference,
         [{ info: {} }]
       );
@@ -27,7 +27,7 @@ describe('NotificationService', () => {
   describe('decline()', () => {
     it('should invoke exported decline method with correct arguments', () => {
       NotificationService.decline(testConference);
-      expect(DolbyIoIAPINotificationService.decline).toHaveBeenCalledWith(
+      expect(CommsAPINotificationServiceModule.decline).toHaveBeenCalledWith(
         testConference
       );
     });

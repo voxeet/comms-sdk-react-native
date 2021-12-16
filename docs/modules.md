@@ -8,7 +8,7 @@
 
 ### Classes
 
-- [DolbyIoIAPI](classes/DolbyIoIAPI.md)
+- [CommsAPI](classes/CommsAPI.md)
 
 ### Properties
 
@@ -18,4 +18,4 @@
 
 ### default
 
-• **default**: [`DolbyIoIAPI`](classes/DolbyIoIAPI.md)
+• **default**: [`CommsAPI`](classes/CommsAPI.md)

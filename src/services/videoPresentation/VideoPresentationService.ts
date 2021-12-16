@@ -6,16 +6,18 @@ import type { VideoPresentationEventType } from './events';
 import { VideoPresentationEventNames } from './events';
 import type { VideoPresentation, VideoPresentationState } from './models';
 
-const { DolbyIoIAPIVideoPresentationService } = NativeModules;
+const { CommsAPIVideoPresentationServiceModule } = NativeModules;
 
 /**
  * The VideoPresentationService allows sharing videos during a conference. To present a video, a conference participant needs to provide a URL that defines the video location. We recommend sharing files in the MPEG-4 Part 14 or MP4 video format.
  */
 export class VideoPresentationService {
   /** @internal */
-  _nativeModule = DolbyIoIAPIVideoPresentationService;
+  _nativeModule = CommsAPIVideoPresentationServiceModule;
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPIVideoPresentationService || {});
+  _nativeEvents = new NativeEvents(
+    CommsAPIVideoPresentationServiceModule || {}
+  );
 
   /**
    * Pauses a video presentation.

@@ -5,16 +5,16 @@ import type { UnsubscribeFunction } from '../conference/models';
 import type { MessageReceivedEventType } from './events';
 import { CommandServiceEventNames } from './events';
 
-const { DolbyIoIAPICommandServiceModule } = NativeModules;
+const { CommsAPICommandServiceModule } = NativeModules;
 
 /**
 The CommandService allows the application to send and receive text messages and notifications during a conference.
  */
 export class CommandService {
   /** @internal */
-  _nativeModule = DolbyIoIAPICommandServiceModule;
+  _nativeModule = CommsAPICommandServiceModule;
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPICommandServiceModule);
+  _nativeEvents = new NativeEvents(CommsAPICommandServiceModule);
 
   /**
    * Sends a message to all conference participants. The message is in a form of a basic stream.
