@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-reactnative';
 
 export const startRecording = async () => {
   try {
