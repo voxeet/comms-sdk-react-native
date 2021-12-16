@@ -1,4 +1,4 @@
-export { default } from './DolbyIoIAPI';
+export { default } from './CommsAPI';
 
 export { default as Command } from './services/command/CommandService';
 export { default as Conference } from './services/conference/ConferenceService';
