@@ -425,7 +425,7 @@ Sets the maximum number of video streams that may be transmitted to the local pa
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. |
+| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4. |
 | `prioritizedParticipants` | [`Participant`](../interfaces/internal.Participant.md)[] | `[]` | The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk. |
 
 #### Returns

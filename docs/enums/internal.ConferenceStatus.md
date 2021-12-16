@@ -14,12 +14,10 @@ The ConferenceStatus enum gathers the possible conference statuses.
 - [DESTROYED](internal.ConferenceStatus.md#destroyed)
 - [ENDED](internal.ConferenceStatus.md#ended)
 - [ERROR](internal.ConferenceStatus.md#error)
-- [FIRST_PARTICIPANT](internal.ConferenceStatus.md#first_participant)
 - [JOINED](internal.ConferenceStatus.md#joined)
 - [JOINING](internal.ConferenceStatus.md#joining)
 - [LEAVING](internal.ConferenceStatus.md#leaving)
 - [LEFT](internal.ConferenceStatus.md#left)
-- [NO_MORE_PARTICIPANT](internal.ConferenceStatus.md#no_more_participant)
 
 ## Enumeration members
 
@@ -74,14 +72,6 @@ An error occurred during a conference.
 
 ___
 
-### FIRST\_PARTICIPANT
-
-• **FIRST\_PARTICIPANT** = `"FIRST_PARTICIPANT"`
-
-**`deprecated`** @internal
-
-___
-
 ### JOINED
 
 • **JOINED** = `"JOINED"`
@@ -111,11 +101,3 @@ ___
 • **LEFT** = `"LEFT"`
 
 The local participant successfully left a conference.
-
-___
-
-### NO\_MORE\_PARTICIPANT
-
-• **NO\_MORE\_PARTICIPANT** = `"NO_MORE_PARTICIPANT"`
-
-**`deprecated`** @internal
