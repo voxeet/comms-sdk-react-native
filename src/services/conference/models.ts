@@ -244,9 +244,9 @@ export enum ConferencePermission {
   STREAM = 'STREAM',
 }
 
-/** The AudioProcessingOptions interface gathers parameters The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing. */
+/** The AudioProcessingOptions interface is responsible for enabling and disabling audio processing. */
 export interface AudioProcessingOptions {
-  /** The AudioProcessingSenderOptions parameter allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
+  /** Allows enabling and disabling audio processing for the local participant who transmits an audio stream. */
   send?: AudioProcessingSenderOptions;
 }
 
