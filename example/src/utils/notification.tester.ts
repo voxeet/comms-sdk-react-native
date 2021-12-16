@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type {
   Conference,
@@ -23,7 +23,7 @@ export const invite = async (
   participants: ParticipantInvited[]
 ) => {
   try {
-    await DolbyIoIAPI.notification.invite(conference, participants);
+    await CommsAPI.notification.invite(conference, participants);
   } catch (e: any) {
     Alert.alert('Invite error', e.toString());
   }
@@ -31,7 +31,7 @@ export const invite = async (
 
 export const inviteRandomParticipant = async (conference: Conference) => {
   try {
-    await DolbyIoIAPI.notification.invite(conference, [
+    await CommsAPI.notification.invite(conference, [
       randomInvitedParticipant(),
     ]);
   } catch (e: any) {

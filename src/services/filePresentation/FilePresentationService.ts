@@ -9,7 +9,7 @@ import {
 } from './events';
 import type { FileConverted, File, FilePresentation } from './models';
 
-const { DolbyIoIAPIFilePresentationService } = NativeModules;
+const { CommsAPIFilePresentationServiceModule } = NativeModules;
 
 /**
  * The FilePresentationService allows presenting files during a conference. The Dolby.io Communications APIs service converts provided files into multiple images that are accessible through the [getImage](#getimage) method.
@@ -37,10 +37,10 @@ const { DolbyIoIAPIFilePresentationService } = NativeModules;
  */
 export class FilePresentationService {
   /** @internal */
-  _nativeModule = DolbyIoIAPIFilePresentationService;
+  _nativeModule = CommsAPIFilePresentationServiceModule;
 
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPIFilePresentationService || {});
+  _nativeEvents = new NativeEvents(CommsAPIFilePresentationServiceModule || {});
 
   /**
    * Stops a file presentation.

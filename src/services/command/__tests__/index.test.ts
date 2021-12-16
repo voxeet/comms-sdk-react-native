@@ -3,7 +3,7 @@ import { NativeModules } from 'react-native';
 import CommandService from '../CommandService';
 import { CommandServiceEventNames } from '../events';
 
-const { DolbyIoIAPICommandServiceModule } = NativeModules;
+const { CommsAPICommandServiceModule } = NativeModules;
 
 describe('CommandService', () => {
   CommandService._nativeEvents.addListener = jest.fn();
@@ -11,7 +11,7 @@ describe('CommandService', () => {
   describe('send()', () => {
     it('should invoke exported send method with correct arguments', () => {
       CommandService.send('some message');
-      expect(DolbyIoIAPICommandServiceModule.send).toHaveBeenCalledWith(
+      expect(CommsAPICommandServiceModule.send).toHaveBeenCalledWith(
         'some message'
       );
     });

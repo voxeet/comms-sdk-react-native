@@ -3,14 +3,14 @@ import { NativeModules, Platform } from 'react-native';
 import Logger from '../../utils/Logger';
 import type { ComfortNoiseLevel } from './models';
 
-const { DolbyIoIAPIMediaDeviceService } = NativeModules;
+const { CommsAPIMediaDeviceServiceModule } = NativeModules;
 
 /**
  * The MediaDeviceService allows an application to manage media devices that are used during a conference.
  */
 export class MediaDeviceService {
   /** @internal */
-  _nativeModule = DolbyIoIAPIMediaDeviceService;
+  _nativeModule = CommsAPIMediaDeviceServiceModule;
 
   /**
    * Checks whether an application uses the front-facing (true) or back-facing camera (false).
