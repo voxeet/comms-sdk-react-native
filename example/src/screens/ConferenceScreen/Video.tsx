@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import { VideoView } from '@dolbyio/react-native-iapi-sdk';
+import { VideoView } from '@dolbyio/comms-sdk-reactnative';
 
 import type { Participant } from '../../../../src/services/conference/models';
 

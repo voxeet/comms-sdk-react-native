@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import CommsAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-reactnative';
 
 export interface IRecordingProvider {
   isRecording?: Boolean;

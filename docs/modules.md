@@ -1,4 +1,4 @@
-# @dolbyio/react-native-iapi-sdk
+# @dolbyio/comms-sdk-reactnative
 
 ## Table of contents
 
