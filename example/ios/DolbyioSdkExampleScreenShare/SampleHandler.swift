@@ -39,6 +39,6 @@ extension SampleHandler: VoxeetScreenShareKitDelegate {
 private extension Bundle {
   /// Returns the App Group name from main Info.plist file
   static var appGroup: String? {
-    return Bundle.main.object(forInfoDictionaryKey: "DolbyioSdkAppGroupKey") as? String
+    return Bundle.main.object(forInfoDictionaryKey: "CommsSDKAppGroupKey") as? String
   }
 }

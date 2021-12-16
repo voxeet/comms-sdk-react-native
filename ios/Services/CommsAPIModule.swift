@@ -6,8 +6,8 @@ private enum EventKeys: String, CaseIterable {
 	case refreshToken = "EVENT_SDK_TOKEN_REFRESH"
 }
 
-@objc(RNDolbyioIAPISdk)
-public class DolbyIoIAPIModule: ReactEmitter {
+@objc(RNCommsAPIModule)
+public class CommsAPIModule: ReactEmitter {
 
 	private var refreshToken: ((String?) -> Void)?
 
@@ -17,7 +17,7 @@ public class DolbyIoIAPIModule: ReactEmitter {
 		return EventKeys.allCases.mapToStrings()
 	}
 
-	/// Initializes the Voxeet SDK using the customer key and secret.
+	/// Initializes the CommsSDK using the customer key and secret.
 	/// - Parameters:
 	///   - consumerKey: consumer key
 	///	  - consumerSecret: consumer secret
@@ -36,7 +36,7 @@ public class DolbyIoIAPIModule: ReactEmitter {
 	}
 
 	/// Initializes the SDK with an access token that is provided by the customer's backend
-	/// communicating with the Voxeet servers. 
+	/// communicating with the Dolbyio servers.
 	/// - Parameters:
 	///	  - accessToken: the access token that is provided by the customer's backend
 	///   - resolve: returns on success
@@ -101,11 +101,11 @@ public class DolbyIoIAPIModule: ReactEmitter {
 private extension Bundle {
 	/// Returns the App Group name from main Info.plist file
 	static var appGroup: String? {
-		return Bundle.main.object(forInfoDictionaryKey: "DolbyioSdkAppGroupKey") as? String
+		return Bundle.main.object(forInfoDictionaryKey: "CommsSDKAppGroupKey") as? String
 	}
 
 	/// Returns the Broadcast Extension Bundle Identifier from main Info.plist file
 	static var preferredExtension: String? {
-		return Bundle.main.object(forInfoDictionaryKey: "DolbyioSdkPreferredExtensionKey") as? String
+		return Bundle.main.object(forInfoDictionaryKey: "CommsSDKPreferredExtensionKey") as? String
 	}
 }

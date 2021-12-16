@@ -3,7 +3,7 @@
 #import <React/RCTViewManager.h>
 #import <React/RCTEventEmitter.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DIOVideoView, RNVideoViewManager, RCTViewManager)
+@interface RCT_EXTERN_REMAP_MODULE(COMVideoView, RNVideoViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(isMirror, BOOL);
 

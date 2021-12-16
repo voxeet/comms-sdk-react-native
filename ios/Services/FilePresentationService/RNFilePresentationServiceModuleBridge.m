@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_REMAP_MODULE(DolbyIoIAPIFilePresentationService, RNFilePresentationServiceModule, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(CommsAPIFilePresentationServiceModule, RNFilePresentationServiceModule, NSObject)
 
 RCT_EXTERN_METHOD(getCurrent:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
