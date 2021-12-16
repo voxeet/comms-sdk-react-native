@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 export interface IRecordingProvider {
   isRecording?: Boolean;
@@ -18,12 +18,12 @@ const RecordingProvider: React.FC = ({ children }) => {
   const [isRecording, setIsRecording] = useState(false);
 
   const startRecord = async () => {
-    await DolbyIoIAPI.recording.start();
+    await CommsAPI.recording.start();
     setIsRecording(true);
   };
 
   const stopRecord = async () => {
-    await DolbyIoIAPI.recording.stop();
+    await CommsAPI.recording.stop();
     setIsRecording(false);
   };
 

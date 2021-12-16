@@ -1,10 +1,10 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 export const startRecording = async () => {
   try {
-    await DolbyIoIAPI.recording.start();
+    await CommsAPI.recording.start();
   } catch (e) {
     Alert.alert('Start recording Error');
   }
@@ -12,7 +12,7 @@ export const startRecording = async () => {
 
 export const stopRecording = async () => {
   try {
-    await DolbyIoIAPI.recording.stop();
+    await CommsAPI.recording.stop();
   } catch (e) {
     Alert.alert('Stop recording Error');
   }
@@ -20,7 +20,7 @@ export const stopRecording = async () => {
 
 export const getCurrentRecording = async () => {
   try {
-    const recording = await DolbyIoIAPI.recording.current();
+    const recording = await CommsAPI.recording.current();
     Alert.alert('Current recording: ', JSON.stringify(recording, null, 2));
   } catch (e) {
     Alert.alert('Current recording Error');

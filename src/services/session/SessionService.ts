@@ -4,7 +4,7 @@ import type { ParticipantInfo } from '../conference/models';
 import type { User } from './models';
 import { transformToUser } from './transformers';
 
-const { DolbyIoIAPISessionServiceModule } = NativeModules;
+const { CommsAPISessionServiceModule } = NativeModules;
 
 /**
  * The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
@@ -12,7 +12,7 @@ const { DolbyIoIAPISessionServiceModule } = NativeModules;
 
 export class SessionService {
   /** @internal */
-  _nativeModule = DolbyIoIAPISessionServiceModule;
+  _nativeModule = CommsAPISessionServiceModule;
 
   /**
    * Opens a new session.

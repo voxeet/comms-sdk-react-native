@@ -12,7 +12,7 @@ import {
 } from '../models';
 import { transformToConference, transformToParticipant } from '../transformers';
 
-const { DolbyIoIAPIConferenceService } = NativeModules;
+const { CommsAPIConferenceServiceModule } = NativeModules;
 
 const testParticipant: Participant = {
   id: '123',
@@ -55,33 +55,37 @@ describe('ConferenceService', () => {
         alias: 'Example conference',
       };
       ConferenceService.create(options);
-      expect(DolbyIoIAPIConferenceService.create).toHaveBeenCalledWith(options);
+      expect(CommsAPIConferenceServiceModule.create).toHaveBeenCalledWith(
+        options
+      );
     });
 
     it('should invoke exported create method with empty object when invoked parameterless', () => {
       ConferenceService.create();
-      expect(DolbyIoIAPIConferenceService.create).toHaveBeenLastCalledWith({});
+      expect(CommsAPIConferenceServiceModule.create).toHaveBeenLastCalledWith(
+        {}
+      );
     });
   });
 
   describe('fetch()', () => {
     it('should invoke exported fetch method', () => {
       ConferenceService.fetch();
-      expect(DolbyIoIAPIConferenceService.fetch).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.fetch).toHaveBeenCalled();
     });
   });
 
   describe('current()', () => {
     it('should invoke exported current method', () => {
       ConferenceService.current();
-      expect(DolbyIoIAPIConferenceService.current).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.current).toHaveBeenCalled();
     });
   });
 
   describe('replay()', () => {
     it('should invoke exported replay method with correct arguments', () => {
       ConferenceService.replay(testConference, testConferenceReplayOptions);
-      expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.replay).toHaveBeenCalledWith(
         testConference,
         testConferenceReplayOptions
       );
@@ -89,7 +93,7 @@ describe('ConferenceService', () => {
 
     it('without replay options should invoke exported replay method with replay offset param set to 0', () => {
       ConferenceService.replay(testConference, undefined);
-      expect(DolbyIoIAPIConferenceService.replay).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.replay).toHaveBeenCalledWith(
         testConference,
         {
           offset: 0,
@@ -101,16 +105,16 @@ describe('ConferenceService', () => {
   describe('getAudioLevel()', () => {
     it('should invoke exported getAudioLevel method with correct arguments', () => {
       ConferenceService.getAudioLevel(testParticipant);
-      expect(DolbyIoIAPIConferenceService.getAudioLevel).toHaveBeenCalledWith(
-        testParticipant
-      );
+      expect(
+        CommsAPIConferenceServiceModule.getAudioLevel
+      ).toHaveBeenCalledWith(testParticipant);
     });
   });
 
   describe('getLocalStats()', () => {
     it('should invoke exported getLocalStats method', () => {
       ConferenceService.getLocalStats();
-      expect(DolbyIoIAPIConferenceService.getLocalStats).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.getLocalStats).toHaveBeenCalled();
     });
   });
 
@@ -118,7 +122,7 @@ describe('ConferenceService', () => {
     it('should invoke exported getMaxVideoForwarding method', () => {
       ConferenceService.getMaxVideoForwarding();
       expect(
-        DolbyIoIAPIConferenceService.getMaxVideoForwarding
+        CommsAPIConferenceServiceModule.getMaxVideoForwarding
       ).toHaveBeenCalled();
     });
   });
@@ -126,23 +130,23 @@ describe('ConferenceService', () => {
   describe('getParticipant()', () => {
     it('should invoke exported getParticipant method', () => {
       ConferenceService.getParticipant('123');
-      expect(DolbyIoIAPIConferenceService.getParticipant).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.getParticipant).toHaveBeenCalled();
     });
   });
 
   describe('getParticipants()', () => {
     it('should invoke exported getParticipants method with correct arguments', () => {
       ConferenceService.getParticipants(testConference);
-      expect(DolbyIoIAPIConferenceService.getParticipants).toHaveBeenCalledWith(
-        testConference
-      );
+      expect(
+        CommsAPIConferenceServiceModule.getParticipants
+      ).toHaveBeenCalledWith(testConference);
     });
   });
 
   describe('getStatus()', () => {
     it('should invoke exported getStatus method with correct arguments', () => {
       ConferenceService.getStatus(testConference);
-      expect(DolbyIoIAPIConferenceService.getStatus).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.getStatus).toHaveBeenCalledWith(
         testConference
       );
     });
@@ -151,14 +155,14 @@ describe('ConferenceService', () => {
   describe('isMuted()', () => {
     it('should invoke exported isMuted method', () => {
       ConferenceService.isMuted();
-      expect(DolbyIoIAPIConferenceService.isMuted).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.isMuted).toHaveBeenCalled();
     });
   });
 
   describe('isSpeaking()', () => {
     it('should invoke exported isSpeaking method with correct arguments', () => {
       ConferenceService.isSpeaking(testParticipant);
-      expect(DolbyIoIAPIConferenceService.isSpeaking).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.isSpeaking).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -168,14 +172,14 @@ describe('ConferenceService', () => {
     it('should invoke exported setAudioProcessing method with correct arguments', () => {
       ConferenceService.setAudioProcessing({});
       expect(
-        DolbyIoIAPIConferenceService.setAudioProcessing
+        CommsAPIConferenceServiceModule.setAudioProcessing
       ).toHaveBeenCalledWith({});
     });
 
     it('should invoke exported setAudioProcessing method with empty object when invoked parameterless', () => {
       ConferenceService.setAudioProcessing();
       expect(
-        DolbyIoIAPIConferenceService.setAudioProcessing
+        CommsAPIConferenceServiceModule.setAudioProcessing
       ).toHaveBeenCalledWith({});
     });
   });
@@ -184,14 +188,14 @@ describe('ConferenceService', () => {
     it('should invoke exported setMaxVideoForwarding method with correct arguments', () => {
       ConferenceService.setMaxVideoForwarding(2, []);
       expect(
-        DolbyIoIAPIConferenceService.setMaxVideoForwarding
+        CommsAPIConferenceServiceModule.setMaxVideoForwarding
       ).toHaveBeenCalledWith(2, []);
     });
 
     it('should invoke exported setMaxVideoForwarding method with 4 int when parameterless', () => {
       ConferenceService.setMaxVideoForwarding();
       expect(
-        DolbyIoIAPIConferenceService.setMaxVideoForwarding
+        CommsAPIConferenceServiceModule.setMaxVideoForwarding
       ).toHaveBeenCalledWith(4, []);
     });
   });
@@ -199,7 +203,7 @@ describe('ConferenceService', () => {
   describe('mute()', () => {
     it('should invoke exported mute method with correct arguments', () => {
       ConferenceService.mute(testParticipant, true);
-      expect(DolbyIoIAPIConferenceService.mute).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.mute).toHaveBeenCalledWith(
         testParticipant,
         true
       );
@@ -210,7 +214,7 @@ describe('ConferenceService', () => {
     it('should invoke exported updatePermissions method with correct arguments', () => {
       ConferenceService.updatePermissions([testParticipantPermissions]);
       expect(
-        DolbyIoIAPIConferenceService.updatePermissions
+        CommsAPIConferenceServiceModule.updatePermissions
       ).toHaveBeenCalledWith([testParticipantPermissions]);
     });
   });
@@ -218,7 +222,7 @@ describe('ConferenceService', () => {
   describe('startAudio()', () => {
     it('should invoke exported startAudio method with correct arguments', () => {
       ConferenceService.startAudio(testParticipant);
-      expect(DolbyIoIAPIConferenceService.startAudio).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.startAudio).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -227,7 +231,7 @@ describe('ConferenceService', () => {
   describe('startVideo()', () => {
     it('should invoke exported startVideo method with correct arguments', () => {
       ConferenceService.startVideo(testParticipant);
-      expect(DolbyIoIAPIConferenceService.startVideo).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.startVideo).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -236,7 +240,7 @@ describe('ConferenceService', () => {
   describe('stopAudio()', () => {
     it('should invoke exported stopAudio method with correct arguments', () => {
       ConferenceService.stopAudio(testParticipant);
-      expect(DolbyIoIAPIConferenceService.stopAudio).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.stopAudio).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -245,7 +249,7 @@ describe('ConferenceService', () => {
   describe('stopVideo()', () => {
     it('should invoke exported stopVideo method with correct arguments', () => {
       ConferenceService.stopVideo(testParticipant);
-      expect(DolbyIoIAPIConferenceService.stopVideo).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.stopVideo).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -254,7 +258,7 @@ describe('ConferenceService', () => {
   describe('join()', () => {
     it('should invoke exported join method with correct arguments', () => {
       ConferenceService.join(testConference, {});
-      expect(DolbyIoIAPIConferenceService.join).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.join).toHaveBeenCalledWith(
         testConference,
         {}
       );
@@ -264,7 +268,7 @@ describe('ConferenceService', () => {
   describe('kick()', () => {
     it('should invoke exported kick method with correct arguments', () => {
       ConferenceService.kick(testParticipant);
-      expect(DolbyIoIAPIConferenceService.kick).toHaveBeenCalledWith(
+      expect(CommsAPIConferenceServiceModule.kick).toHaveBeenCalledWith(
         testParticipant
       );
     });
@@ -273,7 +277,7 @@ describe('ConferenceService', () => {
   describe('leave()', () => {
     it('should invoke exported leave method', () => {
       ConferenceService.leave();
-      expect(DolbyIoIAPIConferenceService.leave).toHaveBeenCalled();
+      expect(CommsAPIConferenceServiceModule.leave).toHaveBeenCalled();
     });
   });
 
@@ -362,14 +366,18 @@ describe('ConferenceService', () => {
   describe('startScreenShare()', () => {
     it('should invoke exported startScreenShare method', () => {
       ConferenceService.startScreenShare();
-      expect(DolbyIoIAPIConferenceService.startScreenShare).toHaveBeenCalled();
+      expect(
+        CommsAPIConferenceServiceModule.startScreenShare
+      ).toHaveBeenCalled();
     });
   });
 
   describe('stopScreenShare()', () => {
     it('should invoke exported stopScreenShare method', () => {
       ConferenceService.stopScreenShare();
-      expect(DolbyIoIAPIConferenceService.stopScreenShare).toHaveBeenCalled();
+      expect(
+        CommsAPIConferenceServiceModule.stopScreenShare
+      ).toHaveBeenCalled();
     });
   });
 });

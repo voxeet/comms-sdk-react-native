@@ -26,16 +26,16 @@ import type {
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
-const { DolbyIoIAPIConferenceService } = NativeModules;
+const { CommsAPIConferenceServiceModule } = NativeModules;
 
 /**
  * The ConferenceService allows an application to manage the conference life-cycle and interact with a conference. The service allows creating, joining, and leaving conferences and managing the audio, video, and screen-share streams.
  */
 export class ConferenceService {
   /** @internal */
-  _nativeModule = DolbyIoIAPIConferenceService;
+  _nativeModule = CommsAPIConferenceServiceModule;
   /** @internal */
-  _nativeEvents = new NativeEvents(DolbyIoIAPIConferenceService);
+  _nativeEvents = new NativeEvents(CommsAPIConferenceServiceModule);
 
   /**
    * Creates a conference.
@@ -359,8 +359,8 @@ export class ConferenceService {
    * 	Starts a screen sharing session.
    * 	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
    * Instead of setting the following properties:
-   * - VoxeetSDK.shared.appGroup = "YOUR_APP_GROUP"
-   * - VoxeetSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
+   * - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
+   * - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
    *  Set up keys in your `Info.plist` file:
    * - Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
    * - Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").

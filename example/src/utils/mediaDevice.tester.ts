@@ -1,12 +1,12 @@
 import { Alert } from 'react-native';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 
 import type { ComfortNoiseLevel } from '../../../src/services/mediaDevice/models';
 
 export const isFrontCamera = async () => {
   try {
-    const frontCamera = await DolbyIoIAPI.mediaDevice.isFrontCamera();
+    const frontCamera = await CommsAPI.mediaDevice.isFrontCamera();
     Alert.alert('Front camera:', frontCamera.toString());
   } catch (e) {
     const msg = (e as Error).message;
@@ -16,7 +16,7 @@ export const isFrontCamera = async () => {
 
 export const getComfortNoiseLevel = async () => {
   try {
-    const noiseLevel = await DolbyIoIAPI.mediaDevice.getComfortNoiseLevel();
+    const noiseLevel = await CommsAPI.mediaDevice.getComfortNoiseLevel();
     Alert.alert('Comfort noise level:', noiseLevel.toString());
   } catch (e) {
     const msg = (e as Error).message;
@@ -26,7 +26,7 @@ export const getComfortNoiseLevel = async () => {
 
 export const setComfortNoiseLevel = async (noiseLevel: ComfortNoiseLevel) => {
   try {
-    await DolbyIoIAPI.mediaDevice.setComfortNoiseLevel(noiseLevel);
+    await CommsAPI.mediaDevice.setComfortNoiseLevel(noiseLevel);
     Alert.alert('setComfortNoiseLevel success');
   } catch (e) {
     const msg = (e as Error).message;
@@ -36,7 +36,7 @@ export const setComfortNoiseLevel = async (noiseLevel: ComfortNoiseLevel) => {
 
 export const switchCamera = async () => {
   try {
-    await DolbyIoIAPI.mediaDevice.switchCamera();
+    await CommsAPI.mediaDevice.switchCamera();
     Alert.alert('switchCamera success');
   } catch (e) {
     const msg = (e as Error).message;
@@ -46,7 +46,7 @@ export const switchCamera = async () => {
 
 export const switchSpeaker = async () => {
   try {
-    await DolbyIoIAPI.mediaDevice.switchSpeaker();
+    await CommsAPI.mediaDevice.switchSpeaker();
     Alert.alert('switchSpeaker success');
   } catch (e) {
     const msg = (e as Error).message;
