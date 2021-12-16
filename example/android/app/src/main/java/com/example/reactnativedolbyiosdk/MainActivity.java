@@ -1,8 +1,8 @@
 package com.example.reactnativedolbyiosdk;
 
-import io.dolby.sdk.reactnative.android.activities.DolbyioIAPISDKAppCompatActivity;
+import io.dolby.sdk.comms.reactnative.android.activities.CommsAPISDKAppCompatActivity;
 
-public class MainActivity extends DolbyioIAPISDKAppCompatActivity {
+public class MainActivity extends CommsAPISDKAppCompatActivity {
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
