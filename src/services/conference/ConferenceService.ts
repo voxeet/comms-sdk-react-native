@@ -157,7 +157,7 @@ export class ConferenceService {
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
-   * @param max The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value.
+   * @param max The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4.
    * @param prioritizedParticipants The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
    */
   public async setMaxVideoForwarding(
