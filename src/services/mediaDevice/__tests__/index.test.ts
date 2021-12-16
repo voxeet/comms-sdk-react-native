@@ -3,13 +3,13 @@ import { NativeModules } from 'react-native';
 import MediaDeviceService from '../MediaDeviceService';
 import { ComfortNoiseLevel } from '../models';
 
-const { DolbyIoIAPIMediaDeviceService } = NativeModules;
+const { CommsAPIMediaDeviceServiceModule } = NativeModules;
 
 describe('MediaDeviceService', () => {
   describe('isFrontCamera()', () => {
     it('should invoke exported method', () => {
       MediaDeviceService.isFrontCamera();
-      expect(DolbyIoIAPIMediaDeviceService.isFrontCamera).toHaveBeenCalled();
+      expect(CommsAPIMediaDeviceServiceModule.isFrontCamera).toHaveBeenCalled();
     });
   });
 
@@ -17,7 +17,7 @@ describe('MediaDeviceService', () => {
     it('should invoke exported method', () => {
       MediaDeviceService.getComfortNoiseLevel();
       expect(
-        DolbyIoIAPIMediaDeviceService.getComfortNoiseLevel
+        CommsAPIMediaDeviceServiceModule.getComfortNoiseLevel
       ).toHaveBeenCalled();
     });
   });
@@ -26,7 +26,7 @@ describe('MediaDeviceService', () => {
     it('should invoke exported method with correct arguments', () => {
       MediaDeviceService.setComfortNoiseLevel(ComfortNoiseLevel.Default);
       expect(
-        DolbyIoIAPIMediaDeviceService.setComfortNoiseLevel
+        CommsAPIMediaDeviceServiceModule.setComfortNoiseLevel
       ).toHaveBeenCalledWith(ComfortNoiseLevel.Default);
     });
   });
@@ -34,14 +34,14 @@ describe('MediaDeviceService', () => {
   describe('switchCamera()', () => {
     it('should invoke exported method', () => {
       MediaDeviceService.switchCamera();
-      expect(DolbyIoIAPIMediaDeviceService.switchCamera).toHaveBeenCalled();
+      expect(CommsAPIMediaDeviceServiceModule.switchCamera).toHaveBeenCalled();
     });
   });
 
   describe('switchSpeaker()', () => {
     it('should invoke exported method', () => {
       MediaDeviceService.switchSpeaker();
-      expect(DolbyIoIAPIMediaDeviceService.switchSpeaker).toHaveBeenCalled();
+      expect(CommsAPIMediaDeviceServiceModule.switchSpeaker).toHaveBeenCalled();
     });
   });
 });

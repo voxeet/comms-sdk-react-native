@@ -1,7 +1,7 @@
 import { NativeEventEmitter } from 'react-native';
 
 import type { VideoViewEventMap } from '../VideoView/events';
-import type { DolbyIoIAPIEventMap } from '../events';
+import type { CommsAPIEventMap } from '../events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
@@ -10,7 +10,7 @@ import type { VideoPresentationEventMap } from '../services/videoPresentation/ev
 import type { UnregisterListener } from './types';
 
 interface NativeEventType
-  extends DolbyIoIAPIEventMap,
+  extends CommsAPIEventMap,
     ConferenceServiceEventMap,
     NotificationServiceEventMap,
     FilePresentationServiceEventMap,

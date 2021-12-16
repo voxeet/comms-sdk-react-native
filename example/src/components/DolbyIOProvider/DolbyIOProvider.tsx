@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-import DolbyIoIAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/react-native-iapi-sdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
@@ -127,7 +127,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     refreshToken: () => Promise<string>
   ) => {
     try {
-      await DolbyIoIAPI.initializeToken(token, refreshToken);
+      await CommsAPI.initializeToken(token, refreshToken);
       setIsInitialized(true);
     } catch (e: any) {
       setIsInitialized(false);
@@ -137,12 +137,12 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const openSession = async (name: string, externalId?: string) => {
     const timeoutPromise = setTimeout(() => {
-      DolbyIoIAPI.session.close();
+      CommsAPI.session.close();
     }, 5000);
     try {
-      await DolbyIoIAPI.session.open({ name, externalId });
+      await CommsAPI.session.open({ name, externalId });
       clearTimeout(timeoutPromise);
-      setMe(await DolbyIoIAPI.session.getCurrentUser());
+      setMe(await CommsAPI.session.getCurrentUser());
     } catch (e: any) {
       clearTimeout(timeoutPromise);
       setMe(undefined);
@@ -152,11 +152,11 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const unsubscribers: UnsubscribeFunction[] = [
-      DolbyIoIAPI.conference.onStatusChange(onConferenceStatusChange),
-      DolbyIoIAPI.conference.onParticipantsChange(onParticipantsChange),
-      DolbyIoIAPI.conference.onStreamsChange(onStreamsChange),
-      DolbyIoIAPI.conference.onPermissionsChange(onPermissionsChange),
-      DolbyIoIAPI.command.onMessageReceived(onMessageReceived),
+      CommsAPI.conference.onStatusChange(onConferenceStatusChange),
+      CommsAPI.conference.onParticipantsChange(onParticipantsChange),
+      CommsAPI.conference.onStreamsChange(onStreamsChange),
+      CommsAPI.conference.onPermissionsChange(onPermissionsChange),
+      CommsAPI.command.onMessageReceived(onMessageReceived),
     ];
     return () => {
       unsubscribers.forEach((u) => u());
@@ -180,7 +180,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         params: conferenceParams,
       };
 
-      const createdConference = await DolbyIoIAPI.conference.create(
+      const createdConference = await CommsAPI.conference.create(
         conferenceOptions
       );
 
@@ -192,7 +192,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         maxVideoForwarding: 4,
         simulcast: false,
       };
-      const joinedConference = await DolbyIoIAPI.conference.join(
+      const joinedConference = await CommsAPI.conference.join(
         createdConference,
         joinOptions
       );
@@ -213,10 +213,8 @@ const DolbyIOProvider: React.FC = ({ children }) => {
 
   const joinWithId = async (conferenceId: string) => {
     try {
-      const fetchedConference = await DolbyIoIAPI.conference.fetch(
-        conferenceId
-      );
-      const joinedConference = await DolbyIoIAPI.conference.join(
+      const fetchedConference = await CommsAPI.conference.fetch(conferenceId);
+      const joinedConference = await CommsAPI.conference.join(
         fetchedConference
       );
       setConference(joinedConference);
@@ -240,7 +238,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         '@conference-previous'
       );
       if (prevConferenceString) {
-        const replayedConference = await DolbyIoIAPI.conference.replay(
+        const replayedConference = await CommsAPI.conference.replay(
           JSON.parse(prevConferenceString) as Conference
         );
         console.log(JSON.stringify(replayedConference, null, 2));
@@ -254,7 +252,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       const conferenceLeaveOptions = {
         leaveRoom,
       };
-      await DolbyIoIAPI.conference.leave(conferenceLeaveOptions);
+      await CommsAPI.conference.leave(conferenceLeaveOptions);
       setConference(undefined);
       setParticipants(new Map());
       if (leaveRoom) {

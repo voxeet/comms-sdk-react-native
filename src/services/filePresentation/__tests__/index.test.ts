@@ -3,7 +3,7 @@ import { NativeModules } from 'react-native';
 import FilePresentationService from '../FilePresentationService';
 import { FilePresentationServiceEventNames } from '../events';
 
-const { DolbyIoIAPIFilePresentationService } = NativeModules;
+const { CommsAPIFilePresentationServiceModule } = NativeModules;
 
 const testFileConverted = {
   id: '102030',
@@ -23,14 +23,14 @@ describe('FilePresentationService', () => {
   describe('stop()', () => {
     it('should invoke exported method', () => {
       FilePresentationService.stop();
-      expect(DolbyIoIAPIFilePresentationService.stop).toHaveBeenCalled();
+      expect(CommsAPIFilePresentationServiceModule.stop).toHaveBeenCalled();
     });
   });
 
   describe('start()', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.start(testFileConverted);
-      expect(DolbyIoIAPIFilePresentationService.start).toHaveBeenCalledWith(
+      expect(CommsAPIFilePresentationServiceModule.start).toHaveBeenCalledWith(
         testFileConverted
       );
     });
@@ -40,7 +40,7 @@ describe('FilePresentationService', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.getThumbnail(1);
       expect(
-        DolbyIoIAPIFilePresentationService.getThumbnail
+        CommsAPIFilePresentationServiceModule.getThumbnail
       ).toHaveBeenCalledWith(1);
     });
   });
@@ -48,34 +48,36 @@ describe('FilePresentationService', () => {
   describe('setPage()', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.setPage(2);
-      expect(DolbyIoIAPIFilePresentationService.setPage).toHaveBeenCalledWith(
-        2
-      );
+      expect(
+        CommsAPIFilePresentationServiceModule.setPage
+      ).toHaveBeenCalledWith(2);
     });
   });
 
   describe('convert()', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.convert(testFile);
-      expect(DolbyIoIAPIFilePresentationService.convert).toHaveBeenCalledWith(
-        testFile
-      );
+      expect(
+        CommsAPIFilePresentationServiceModule.convert
+      ).toHaveBeenCalledWith(testFile);
     });
   });
 
   describe('getCurrent()', () => {
     it('should invoke exported method', () => {
       FilePresentationService.getCurrent();
-      expect(DolbyIoIAPIFilePresentationService.getCurrent).toHaveBeenCalled();
+      expect(
+        CommsAPIFilePresentationServiceModule.getCurrent
+      ).toHaveBeenCalled();
     });
   });
 
   describe('getImage()', () => {
     it('should invoke exported method with correct arguments', () => {
       FilePresentationService.getImage(2);
-      expect(DolbyIoIAPIFilePresentationService.getImage).toHaveBeenCalledWith(
-        2
-      );
+      expect(
+        CommsAPIFilePresentationServiceModule.getImage
+      ).toHaveBeenCalledWith(2);
     });
   });
 

@@ -2,7 +2,7 @@
 
 jest.mock('react-native', () => {
   const RN: any = jest.requireActual('react-native');
-  RN.NativeModules.DolbyIoIAPIModule = {
+  RN.NativeModules.CommsAPIModule = {
     initialize: jest.fn(),
     initializeToken: jest.fn(),
     onAccessTokenOk: jest.fn(),
@@ -10,7 +10,7 @@ jest.mock('react-native', () => {
     removeListeners: jest.fn(),
     addListener: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPIConferenceService = {
+  RN.NativeModules.CommsAPIConferenceServiceModule = {
     create: jest.fn(),
     fetch: jest.fn(),
     current: jest.fn(),
@@ -41,25 +41,25 @@ jest.mock('react-native', () => {
     setSpatialEnvironment: jest.fn(),
     setSpatialPosition: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPISessionServiceModule = {
+  RN.NativeModules.CommsAPISessionServiceModule = {
     open: jest.fn(),
     close: jest.fn(),
     isOpen: jest.fn(),
     getParticipant: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPINotificationService = {
+  RN.NativeModules.CommsAPINotificationServiceModule = {
     invite: jest.fn(),
     decline: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPIRecordingServiceModule = {
+  RN.NativeModules.CommsAPIRecordingServiceModule = {
     current: jest.fn(),
     start: jest.fn(),
     stop: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPICommandServiceModule = {
+  RN.NativeModules.CommsAPICommandServiceModule = {
     send: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPIFilePresentationService = {
+  RN.NativeModules.CommsAPIFilePresentationServiceModule = {
     stop: jest.fn(),
     start: jest.fn(),
     getThumbnail: jest.fn(),
@@ -68,7 +68,7 @@ jest.mock('react-native', () => {
     getCurrent: jest.fn(),
     getImage: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPIVideoPresentationService = {
+  RN.NativeModules.CommsAPIVideoPresentationServiceModule = {
     pause: jest.fn(),
     play: jest.fn(),
     seek: jest.fn(),
@@ -77,7 +77,7 @@ jest.mock('react-native', () => {
     current: jest.fn(),
     state: jest.fn(),
   };
-  RN.NativeModules.DolbyIoIAPIMediaDeviceService = {
+  RN.NativeModules.CommsAPIMediaDeviceServiceModule = {
     isFrontCamera: jest.fn(),
     getComfortNoiseLevel: jest.fn(),
     setComfortNoiseLevel: jest.fn(),

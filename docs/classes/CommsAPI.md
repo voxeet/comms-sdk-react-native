@@ -1,32 +1,32 @@
-# Class: DolbyIoIAPI
+# Class: CommsAPI
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](DolbyIoIAPI.md#constructor)
+- [constructor](CommsAPI.md#constructor)
 
 ### Properties
 
-- [command](DolbyIoIAPI.md#command)
-- [conference](DolbyIoIAPI.md#conference)
-- [filePresentation](DolbyIoIAPI.md#filepresentation)
-- [mediaDevice](DolbyIoIAPI.md#mediadevice)
-- [notification](DolbyIoIAPI.md#notification)
-- [recording](DolbyIoIAPI.md#recording)
-- [session](DolbyIoIAPI.md#session)
-- [videoPresentation](DolbyIoIAPI.md#videopresentation)
+- [command](CommsAPI.md#command)
+- [conference](CommsAPI.md#conference)
+- [filePresentation](CommsAPI.md#filepresentation)
+- [mediaDevice](CommsAPI.md#mediadevice)
+- [notification](CommsAPI.md#notification)
+- [recording](CommsAPI.md#recording)
+- [session](CommsAPI.md#session)
+- [videoPresentation](CommsAPI.md#videopresentation)
 
 ### Methods
 
-- [initialize](DolbyIoIAPI.md#initialize)
-- [initializeToken](DolbyIoIAPI.md#initializetoken)
+- [initialize](CommsAPI.md#initialize)
+- [initializeToken](CommsAPI.md#initializetoken)
 
 ## Constructors
 
 ### constructor
 
-• **new DolbyIoIAPI**()
+• **new CommsAPI**()
 
 ## Properties
 
@@ -36,7 +36,7 @@
 
 Retrieves the CommandService instance that allows sending messages to conferences.
 
-___
+---
 
 ### conference
 
@@ -44,7 +44,7 @@ ___
 
 Retrieves the ConferenceService instance that allows interacting with conferences.
 
-___
+---
 
 ### filePresentation
 
@@ -52,7 +52,7 @@ ___
 
 Retrieves the FilePresentationService instance that allows presenting files during conferences.
 
-___
+---
 
 ### mediaDevice
 
@@ -60,7 +60,7 @@ ___
 
 Retrieves the MediaDeviceService instance that allows interacting with devices through the system.
 
-___
+---
 
 ### notification
 
@@ -68,7 +68,7 @@ ___
 
 Retrieves the NotificationService instance that allows inviting participants to a conference.
 
-___
+---
 
 ### recording
 
@@ -76,7 +76,7 @@ ___
 
 Retrieves the RecordingService instance that allows recording conferences.
 
-___
+---
 
 ### session
 
@@ -84,7 +84,7 @@ ___
 
 Retrieves the SessionService instance that allows using sessions.
 
-___
+---
 
 ### videoPresentation
 
@@ -96,29 +96,30 @@ Retrieves the VideoPresentationService instance that allows presenting videos du
 
 ### initialize
 
-▸ **initialize**(`consumerKey`, `consumerSecret`): `Promise`<``null``\>
+▸ **initialize**(`consumerKey`, `consumerSecret`): `Promise`<`null`\>
 
 Initializes the SDK using the customer key and secret.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `consumerKey` | `string` | The customer key. |
+| Name             | Type     | Description          |
+| :--------------- | :------- | :------------------- |
+| `consumerKey`    | `string` | The customer key.    |
 | `consumerSecret` | `string` | The customer secret. |
 
 #### Returns
 
-`Promise`<``null``\>
+`Promise`<`null`\>
 
-___
+---
 
 ### initializeToken
 
-▸ **initializeToken**(`accessToken`, `refreshAccessToken`): `Promise`<``null``\>
+▸ **initializeToken**(`accessToken`, `refreshAccessToken`): `Promise`<`null`\>
 
 Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
 The following diagram presents the authentication flow:
+
 ```
 Client          Customer Server       Dolby Server
 |                    |                    |
@@ -129,6 +130,7 @@ Client          Customer Server       Dolby Server
 |  initializeToken(accessToken, callback) |
 |---------------------------------------->|
 ```
+
 Where (1) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
 
 The access token has a limited period of validity and needs to be refreshed for security reasons. In such case, the SDK calls the callback provided to initializeToken. The callback must return a promise containing the refreshed access token by calling the customer backend, as presented in the following diagram:
@@ -140,15 +142,16 @@ Client          Customer Server       Dolby Server
 |    Access Token    |    Access Token    |
 |<-------------------|<-------------------|
 ```
+
 Where (2) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `accessToken` | ``null`` \| `string` | The access token provided by the customer's backend. |
+| Name                 | Type                     | Description                                                                                                                                                                             |
+| :------------------- | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessToken`        | `null` \| `string`       | The access token provided by the customer's backend.                                                                                                                                    |
 | `refreshAccessToken` | `RefreshAccessTokenType` | A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired. |
 
 #### Returns
 
-`Promise`<``null``\>
+`Promise`<`null`\>
