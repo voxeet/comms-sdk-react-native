@@ -1,6 +1,6 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.dolby.sdk.reactnative">
+          package="io.dolby.sdk.comms.reactnative">
     <!-- TODO check for the duplicates in this list and SDK -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -16,8 +16,8 @@
     <application>
 
         <provider
-            android:name=".android.RNDolbyioIAPISDKManifestComponent"
-            android:authorities="${applicationId}.manifests.RNDolbyioIAPISDKManifestComponent"
+            android:name=".android.RNCommsAPISDKManifestComponent"
+            android:authorities="${applicationId}.manifests.RNCommsAPISDKManifestComponent"
             android:enabled="true"
             android:exported="false" />
     </application>
