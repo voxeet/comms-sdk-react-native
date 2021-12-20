@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* DolbyioSdkExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DolbyioSdkExampleTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -15,27 +14,20 @@
 		390F6C5EDC864451B9D1D039 /* Avenir LT Std 55 Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12D44BD4F41545BEB27B506D /* Avenir LT Std 55 Roman.otf */; };
 		5B4AABE72731439F00C3640A /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4AABE62731439F00C3640A /* ReplayKit.framework */; };
 		5B4AABEA2731439F00C3640A /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4AABE92731439F00C3640A /* SampleHandler.swift */; };
-		5B4AABEF2731439F00C3640A /* DolbyioSdkExampleScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5B4AABE52731439F00C3640A /* DolbyioSdkExampleScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5B4AABEF2731439F00C3640A /* CommsSDKExampleScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5B4AABE52731439F00C3640A /* CommsSDKExampleScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5B4AABF727314BB500C3640A /* VoxeetScreenShareKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5B4AABF627314BB500C3640A /* VoxeetScreenShareKit */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C7D7BCFF56DE98FDE9099831 /* libPods-CommsSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4486C7706B9B681810818E /* libPods-CommsSDKExample.a */; };
 		D9FB17A646CE43D69D25E823 /* Avenir LT Std 95 Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B2437041E99C42998FD651A8 /* Avenir LT Std 95 Black.otf */; };
-		F33691B3A5F7865A715ADB6B /* libPods-DolbyioSdkExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B64FBF34CD8CA7037B43B94 /* libPods-DolbyioSdkExample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = DolbyioSdkExample;
-		};
 		5B4AABEC2731439F00C3640A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5B4AABE42731439F00C3640A;
-			remoteInfo = DolbyioSdkExampleScreenShare;
+			remoteInfo = CommsSDKExampleScreenShare;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -46,7 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5B4AABEF2731439F00C3640A /* DolbyioSdkExampleScreenShare.appex in Embed App Extensions */,
+				5B4AABEF2731439F00C3640A /* CommsSDKExampleScreenShare.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,45 +47,35 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* DolbyioSdkExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DolbyioSdkExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* DolbyioSdkExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DolbyioSdkExampleTests.m; sourceTree = "<group>"; };
 		12D44BD4F41545BEB27B506D /* Avenir LT Std 55 Roman.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir LT Std 55 Roman.otf"; path = "../src/assets/fonts/Avenir LT Std 55 Roman.otf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* DolbyioSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DolbyioSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DolbyioSdkExample/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = DolbyioSdkExample/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DolbyioSdkExample/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DolbyioSdkExample/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DolbyioSdkExample/main.m; sourceTree = "<group>"; };
-		26E9FC8E92A957A2D5135B35 /* Pods-DolbyioSdkExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DolbyioSdkExample.release.xcconfig"; path = "Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample.release.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* CommsSDKExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommsSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2DB0C6581D104D5484438EF1 /* Avenir LT Std 45 Book.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir LT Std 45 Book.otf"; path = "../src/assets/fonts/Avenir LT Std 45 Book.otf"; sourceTree = "<group>"; };
-		5B4AABE52731439F00C3640A /* DolbyioSdkExampleScreenShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DolbyioSdkExampleScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B4AABE52731439F00C3640A /* CommsSDKExampleScreenShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CommsSDKExampleScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4AABE62731439F00C3640A /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		5B4AABE92731439F00C3640A /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
 		5B4AABEB2731439F00C3640A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5B4AABF827314E0F00C3640A /* DolbyioSdkExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DolbyioSdkExample.entitlements; path = DolbyioSdkExample/DolbyioSdkExample.entitlements; sourceTree = "<group>"; };
-		5B4AABF927314E2700C3640A /* DolbyioSdkExampleScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DolbyioSdkExampleScreenShare.entitlements; sourceTree = "<group>"; };
-		7B64FBF34CD8CA7037B43B94 /* libPods-DolbyioSdkExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DolbyioSdkExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DolbyioSdkExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8AE5E73C3936EF5BCB4A2533 /* Pods-DolbyioSdkExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DolbyioSdkExample.debug.xcconfig"; path = "Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample.debug.xcconfig"; sourceTree = "<group>"; };
+		5B4AABF827314E0F00C3640A /* CommsSDKExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommsSDKExample.entitlements; sourceTree = "<group>"; };
+		5B4AABF927314E2700C3640A /* CommsSDKExampleScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommsSDKExampleScreenShare.entitlements; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83A67FA238BB6F218326F16A /* Pods-CommsSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommsSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
 		B2437041E99C42998FD651A8 /* Avenir LT Std 95 Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir LT Std 95 Black.otf"; path = "../src/assets/fonts/Avenir LT Std 95 Black.otf"; sourceTree = "<group>"; };
+		B48C14AFD52D024DD197CCB8 /* Pods-CommsSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommsSDKExample.release.xcconfig"; path = "Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample.release.xcconfig"; sourceTree = "<group>"; };
+		BB4486C7706B9B681810818E /* libPods-CommsSDKExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CommsSDKExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00E356EB1AD99517003FC87E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F33691B3A5F7865A715ADB6B /* libPods-DolbyioSdkExample.a in Frameworks */,
+				C7D7BCFF56DE98FDE9099831 /* libPods-CommsSDKExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,27 +91,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* DolbyioSdkExampleTests */ = {
+		13B07FAE1A68108700A75B9A /* CommsSDKExample */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* DolbyioSdkExampleTests.m */,
-				00E356F01AD99517003FC87E /* Supporting Files */,
-			);
-			path = DolbyioSdkExampleTests;
-			sourceTree = "<group>";
-		};
-		00E356F01AD99517003FC87E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F11AD99517003FC87E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		13B07FAE1A68108700A75B9A /* DolbyioSdkExample */ = {
-			isa = PBXGroup;
-			children = (
-				5B4AABF827314E0F00C3640A /* DolbyioSdkExample.entitlements */,
+				5B4AABF827314E0F00C3640A /* CommsSDKExample.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -138,7 +103,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = DolbyioSdkExample;
+			path = CommsSDKExample;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -147,26 +112,26 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				5B4AABE62731439F00C3640A /* ReplayKit.framework */,
-				7B64FBF34CD8CA7037B43B94 /* libPods-DolbyioSdkExample.a */,
+				BB4486C7706B9B681810818E /* libPods-CommsSDKExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5B4AABE82731439F00C3640A /* DolbyioSdkExampleScreenShare */ = {
+		5B4AABE82731439F00C3640A /* CommsSDKExampleScreenShare */ = {
 			isa = PBXGroup;
 			children = (
-				5B4AABF927314E2700C3640A /* DolbyioSdkExampleScreenShare.entitlements */,
+				5B4AABF927314E2700C3640A /* CommsSDKExampleScreenShare.entitlements */,
 				5B4AABE92731439F00C3640A /* SampleHandler.swift */,
 				5B4AABEB2731439F00C3640A /* Info.plist */,
 			);
-			path = DolbyioSdkExampleScreenShare;
+			path = CommsSDKExampleScreenShare;
 			sourceTree = "<group>";
 		};
 		6B9684456A2045ADE5A6E47E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8AE5E73C3936EF5BCB4A2533 /* Pods-DolbyioSdkExample.debug.xcconfig */,
-				26E9FC8E92A957A2D5135B35 /* Pods-DolbyioSdkExample.release.xcconfig */,
+				83A67FA238BB6F218326F16A /* Pods-CommsSDKExample.debug.xcconfig */,
+				B48C14AFD52D024DD197CCB8 /* Pods-CommsSDKExample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,10 +146,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* DolbyioSdkExample */,
+				13B07FAE1A68108700A75B9A /* CommsSDKExample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* DolbyioSdkExampleTests */,
-				5B4AABE82731439F00C3640A /* DolbyioSdkExampleScreenShare */,
+				5B4AABE82731439F00C3640A /* CommsSDKExampleScreenShare */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6B9684456A2045ADE5A6E47E /* Pods */,
@@ -198,9 +162,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* DolbyioSdkExample.app */,
-				00E356EE1AD99517003FC87E /* DolbyioSdkExampleTests.xctest */,
-				5B4AABE52731439F00C3640A /* DolbyioSdkExampleScreenShare.appex */,
+				13B07F961A680F5B00A75B9A /* CommsSDKExample.app */,
+				5B4AABE52731439F00C3640A /* CommsSDKExampleScreenShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,51 +181,33 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* DolbyioSdkExampleTests */ = {
+		13B07F861A680F5B00A75B9A /* CommsSDKExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DolbyioSdkExampleTests" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CommsSDKExample" */;
 			buildPhases = (
-				00E356EA1AD99517003FC87E /* Sources */,
-				00E356EB1AD99517003FC87E /* Frameworks */,
-				00E356EC1AD99517003FC87E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				00E356F51AD99517003FC87E /* PBXTargetDependency */,
-			);
-			name = DolbyioSdkExampleTests;
-			productName = DolbyioSdkExampleTests;
-			productReference = 00E356EE1AD99517003FC87E /* DolbyioSdkExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		13B07F861A680F5B00A75B9A /* DolbyioSdkExample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DolbyioSdkExample" */;
-			buildPhases = (
-				D9603B0A845CFCC1A3881A64 /* [CP] Check Pods Manifest.lock */,
+				23E97882AA5547A2A2E541CB /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				5B4AABEE2731439F00C3640A /* Embed App Extensions */,
-				A8D903F75E7D19D6BEBBBF47 /* [CP] Embed Pods Frameworks */,
-				3F207289C3AAA348867D7618 /* [CP] Copy Pods Resources */,
+				53865C5A3481C697C8253E5C /* [CP] Embed Pods Frameworks */,
+				832B8CBDDA086C3FD7096232 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				5B4AABED2731439F00C3640A /* PBXTargetDependency */,
 			);
-			name = DolbyioSdkExample;
-			productName = DolbyioSdkExample;
-			productReference = 13B07F961A680F5B00A75B9A /* DolbyioSdkExample.app */;
+			name = CommsSDKExample;
+			productName = CommsSDKExample;
+			productReference = 13B07F961A680F5B00A75B9A /* CommsSDKExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5B4AABE42731439F00C3640A /* DolbyioSdkExampleScreenShare */ = {
+		5B4AABE42731439F00C3640A /* CommsSDKExampleScreenShare */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5B4AABF22731439F00C3640A /* Build configuration list for PBXNativeTarget "DolbyioSdkExampleScreenShare" */;
+			buildConfigurationList = 5B4AABF22731439F00C3640A /* Build configuration list for PBXNativeTarget "CommsSDKExampleScreenShare" */;
 			buildPhases = (
 				5B4AABE12731439F00C3640A /* Sources */,
 				5B4AABE22731439F00C3640A /* Frameworks */,
@@ -272,12 +217,12 @@
 			);
 			dependencies = (
 			);
-			name = DolbyioSdkExampleScreenShare;
+			name = CommsSDKExampleScreenShare;
 			packageProductDependencies = (
 				5B4AABF627314BB500C3640A /* VoxeetScreenShareKit */,
 			);
-			productName = DolbyioSdkExampleScreenShare;
-			productReference = 5B4AABE52731439F00C3640A /* DolbyioSdkExampleScreenShare.appex */;
+			productName = CommsSDKExampleScreenShare;
+			productReference = 5B4AABE52731439F00C3640A /* CommsSDKExampleScreenShare.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -289,10 +234,6 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
-					00E356ED1AD99517003FC87E = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = W75N7T34M4;
 						LastSwiftMigration = 1120;
@@ -304,7 +245,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DolbyioSdkExample" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CommsSDKExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -320,21 +261,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* DolbyioSdkExample */,
-				00E356ED1AD99517003FC87E /* DolbyioSdkExampleTests */,
-				5B4AABE42731439F00C3640A /* DolbyioSdkExampleScreenShare */,
+				13B07F861A680F5B00A75B9A /* CommsSDKExample */,
+				5B4AABE42731439F00C3640A /* CommsSDKExampleScreenShare */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00E356EC1AD99517003FC87E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,47 +304,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		3F207289C3AAA348867D7618 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A8D903F75E7D19D6BEBBBF47 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample-frameworks.sh",
-				"${PODS_ROOT}/VoxeetSDK/VoxeetSDK.framework",
-				"${PODS_ROOT}/VoxeetSDK/WebRTC.framework",
-				"${PODS_ROOT}/VoxeetSDK/dvclient.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VoxeetSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dvclient.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DolbyioSdkExample/Pods-DolbyioSdkExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9603B0A845CFCC1A3881A64 /* [CP] Check Pods Manifest.lock */ = {
+		23E97882AA5547A2A2E541CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,11 +319,51 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DolbyioSdkExample-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CommsSDKExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53865C5A3481C697C8253E5C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample-frameworks.sh",
+				"${PODS_ROOT}/VoxeetSDK/VoxeetSDK.framework",
+				"${PODS_ROOT}/VoxeetSDK/WebRTC.framework",
+				"${PODS_ROOT}/VoxeetSDK/dvclient.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VoxeetSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dvclient.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		832B8CBDDA086C3FD7096232 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -455,14 +388,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00E356EA1AD99517003FC87E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00E356F31AD99517003FC87E /* DolbyioSdkExampleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,81 +408,27 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* DolbyioSdkExample */;
-			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
-		};
 		5B4AABED2731439F00C3640A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5B4AABE42731439F00C3640A /* DolbyioSdkExampleScreenShare */;
+			target = 5B4AABE42731439F00C3640A /* CommsSDKExampleScreenShare */;
 			targetProxy = 5B4AABEC2731439F00C3640A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		00E356F61AD99517003FC87E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DolbyioSdkExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativedolbyiosdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DolbyioSdkExample.app/DolbyioSdkExample";
-			};
-			name = Debug;
-		};
-		00E356F71AD99517003FC87E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = DolbyioSdkExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativedolbyiosdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DolbyioSdkExample.app/DolbyioSdkExample";
-			};
-			name = Release;
-		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AE5E73C3936EF5BCB4A2533 /* Pods-DolbyioSdkExample.debug.xcconfig */;
+			baseConfigurationReference = 83A67FA238BB6F218326F16A /* Pods-CommsSDKExample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = DolbyioSdkExample/DolbyioSdkExample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CommsSDKExample/CommsSDKExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W75N7T34M4;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				INFOPLIST_FILE = DolbyioSdkExample/Info.plist;
+				INFOPLIST_FILE = CommsSDKExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -569,7 +440,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example;
-				PRODUCT_NAME = DolbyioSdkExample;
+				PRODUCT_NAME = CommsSDKExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -578,15 +449,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26E9FC8E92A957A2D5135B35 /* Pods-DolbyioSdkExample.release.xcconfig */;
+			baseConfigurationReference = B48C14AFD52D024DD197CCB8 /* Pods-CommsSDKExample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = DolbyioSdkExample/DolbyioSdkExample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CommsSDKExample/CommsSDKExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W75N7T34M4;
-				INFOPLIST_FILE = DolbyioSdkExample/Info.plist;
+				INFOPLIST_FILE = CommsSDKExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,7 +469,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example;
-				PRODUCT_NAME = DolbyioSdkExample;
+				PRODUCT_NAME = CommsSDKExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -614,15 +485,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = DolbyioSdkExampleScreenShare/DolbyioSdkExampleScreenShare.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CommsSDKExampleScreenShare/CommsSDKExampleScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = W75N7T34M4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DolbyioSdkExampleScreenShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DolbyioSdkExampleScreenShare;
+				INFOPLIST_FILE = CommsSDKExampleScreenShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CommsSDKExampleScreenShare;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -654,7 +525,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = DolbyioSdkExampleScreenShare/DolbyioSdkExampleScreenShare.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CommsSDKExampleScreenShare/CommsSDKExampleScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -662,8 +533,8 @@
 				DEVELOPMENT_TEAM = W75N7T34M4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DolbyioSdkExampleScreenShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DolbyioSdkExampleScreenShare;
+				INFOPLIST_FILE = CommsSDKExampleScreenShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CommsSDKExampleScreenShare;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -808,16 +679,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DolbyioSdkExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DolbyioSdkExample" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CommsSDKExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -826,7 +688,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5B4AABF22731439F00C3640A /* Build configuration list for PBXNativeTarget "DolbyioSdkExampleScreenShare" */ = {
+		5B4AABF22731439F00C3640A /* Build configuration list for PBXNativeTarget "CommsSDKExampleScreenShare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B4AABF02731439F00C3640A /* Debug */,
@@ -835,7 +697,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DolbyioSdkExample" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CommsSDKExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
