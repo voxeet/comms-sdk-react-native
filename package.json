@@ -12,7 +12,7 @@
     "android",
     "ios",
     "src",
-    "dolbyio_react-native-iapi-sdk.podspec",
+    "comms-sdk-reactnative.podspec",
     "!android/build",
     "!ios/build"
   ],
