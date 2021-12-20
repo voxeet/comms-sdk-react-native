@@ -2,7 +2,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
-  - dolbyio_react-native-iapi-sdk (3.4.0):
+  - comms-sdk-reactnative (3.4.0):
     - React-Core
     - VoxeetSDK
   - DoubleConversion (1.1.6)
@@ -321,7 +321,7 @@ PODS:
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - dolbyio_react-native-iapi-sdk (from `../..`)
+  - comms-sdk-reactnative (from `../..`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -369,7 +369,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BVLinearGradient:
     :path: "../node_modules/react-native-linear-gradient"
-  dolbyio_react-native-iapi-sdk:
+  comms-sdk-reactnative:
     :path: "../.."
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
@@ -447,7 +447,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  dolbyio_react-native-iapi-sdk: 3005d7c11313474aaa106837e30e58323ec200cf
+  comms-sdk-reactnative: d163c68c51a1344a7ba2892a671648ae33ae1541
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 55f5afbbb8f5021a000c3d9289820d17cbc541b3
   FBReactNativeSpec: c2d85d69490fc5666bc4123dff3b9b72db06a987
@@ -486,6 +486,6 @@ SPEC CHECKSUMS:
   VoxeetSDK: a9fb7e90d4b3afcc79502b652e3079b3e6fac7dc
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
 
-PODFILE CHECKSUM: 28014ae0feb9be100e77e4cb0fe9212f00d13275
+PODFILE CHECKSUM: 247a76287e6b3c3718f9958cb070020acd2759c9
 
 COCOAPODS: 1.11.2

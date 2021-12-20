@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "DolbyioSdkExample.app"
-               BlueprintName = "DolbyioSdkExample"
-               ReferencedContainer = "container:DolbyioSdkExample.xcodeproj">
+               BuildableName = "CommsSDKExample.app"
+               BlueprintName = "CommsSDKExample"
+               ReferencedContainer = "container:CommsSDKExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "DolbyioSdkExample.app"
-            BlueprintName = "DolbyioSdkExample"
-            ReferencedContainer = "container:DolbyioSdkExample.xcodeproj">
+            BuildableName = "CommsSDKExample.app"
+            BlueprintName = "CommsSDKExample"
+            ReferencedContainer = "container:CommsSDKExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -56,9 +56,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "DolbyioSdkExampleTests.xctest"
-               BlueprintName = "DolbyioSdkExampleTests"
-               ReferencedContainer = "container:DolbyioSdkExample.xcodeproj">
+               BuildableName = "CommsSDKExampleTests.xctest"
+               BlueprintName = "CommsSDKExampleTests"
+               ReferencedContainer = "container:CommsSDKExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -78,9 +78,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "DolbyioSdkExample.app"
-            BlueprintName = "DolbyioSdkExample"
-            ReferencedContainer = "container:DolbyioSdkExample.xcodeproj">
+            BuildableName = "CommsSDKExample.app"
+            BlueprintName = "CommsSDKExample"
+            ReferencedContainer = "container:CommsSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "DolbyioSdkExample.app"
-            BlueprintName = "DolbyioSdkExample"
-            ReferencedContainer = "container:DolbyioSdkExample.xcodeproj">
+            BuildableName = "CommsSDKExample.app"
+            BlueprintName = "CommsSDKExample"
+            ReferencedContainer = "container:CommsSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
