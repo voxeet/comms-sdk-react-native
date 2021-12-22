@@ -38,8 +38,8 @@ export class ConferenceService {
   _nativeEvents = new NativeEvents(CommsAPIConferenceServiceModule);
 
   /**
-   * Creates a conference.
-   * @param options The conference options.
+   * Creates a conference and returns the Conference object.
+   * @param options The options for the conference creation.
    */
   public async create(
     options: ConferenceCreateOptions = {}
@@ -48,7 +48,7 @@ export class ConferenceService {
   }
 
   /**
-   * Provides a Conference object that allows joining a conference. If the parameter is not provided, the method returns the current Conference object.
+   * Returns a Conference object that can be used to join the conference. If the conference ID is not provided, the method returns the current Conference object.
    * @param conferenceId The conference ID.
    */
   public async fetch(conferenceId?: string): Promise<Conference> {
@@ -56,7 +56,7 @@ export class ConferenceService {
   }
 
   /**
-   * Returns information about the current conference.
+   * Returns the Conference object for the current conference.
    */
   public async current(): Promise<Conference> {
     return transformToConference(await this._nativeModule.current());
@@ -80,7 +80,7 @@ export class ConferenceService {
   }
 
   /**
-   * Gets the participant's audio level, in the range from 0.0 to 1.0.
+   * Returns the participant's audio level, in the range from 0.0 to 1.0.
    * @param participant The Participant object.
    */
   public async getAudioLevel(participant: Participant): Promise<AudioLevel> {
@@ -88,22 +88,22 @@ export class ConferenceService {
   }
 
   /**
-   * Provides the [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
+   * Gets the [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
    */
   public async getLocalStats(): Promise<RTCStatsType[]> {
     return this._nativeModule.getLocalStats();
   }
 
   /**
-   * Provides the number of video streams that are transmitted to the local user.
+   * Returns the maximum number of video streams that can be transmitted to the local user.
    */
   public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
     return this._nativeModule.getMaxVideoForwarding();
   }
 
   /**
-   * Information about a participant.
-   * @param participantId The participant's ID.
+   * Gets the Participant object for the specified ID.
+   * @param participantId The participant ID.
    */
   public async getParticipant(participantId: String): Promise<Participant> {
     return transformToParticipant(
@@ -112,7 +112,7 @@ export class ConferenceService {
   }
 
   /**
-   * Gets a list of conference participants.
+   * Gets the list of conference participant objects.
    * @param conference<Conference> The Conference object.
    */
   public async getParticipants(
@@ -123,7 +123,7 @@ export class ConferenceService {
   }
 
   /**
-   * Provides the conference status.
+   * Gets the conference status.
    * @param conference The Conference object.
    */
   public async getStatus(conference: Conference): Promise<ConferenceStatus> {
@@ -131,14 +131,14 @@ export class ConferenceService {
   }
 
   /**
-   * Gets the current mute state of the local participant.
+   * Returns the current mute state of the local participant.
    */
   public async isMuted(): Promise<boolean> {
     return this._nativeModule.isMuted();
   }
 
   /**
-   * Gets the participant's current speaking status for an active talker indicator.
+   * Returns the participant's current speaking status for an active talker indicator.
    * @param participant The Participant object.
    */
   public async isSpeaking(participant: Participant): Promise<boolean> {
@@ -230,7 +230,7 @@ export class ConferenceService {
   }
 
   /**
-   * Joins a conference.
+   * Joins a conference and returns the Conference object.
    * @param conference The Conference object.
    * @param options The additional options for the joining participant.
    */
@@ -244,7 +244,7 @@ export class ConferenceService {
   }
 
   /**
-   * Allows the conference owner or a participant with adequate permissions to kick another participant from the conference by revoking the conference access token.
+   * Kicks a participant out of the current conference. This actions requires you to be conference owner or to have the adequate permissions to kick a participant.
    * @param participant The participant who needs to be kicked from a conference.
    */
   public async kick(participant: Participant): Promise<void> {
@@ -252,7 +252,7 @@ export class ConferenceService {
   }
 
   /**
-   * Leaves a conference.
+   * Leaves the current conference.
    * @param options The additional options for the leaving participant.
    */
   public async leave(options?: ConferenceLeaveOptions): Promise<void> {
@@ -356,8 +356,8 @@ export class ConferenceService {
   }
 
   /**
-   * 	Starts a screen sharing session.
-   * 	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
+   * Starts a screen sharing session.
+   * The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
    * Instead of setting the following properties:
    * - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
    * - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
