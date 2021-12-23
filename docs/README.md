@@ -26,11 +26,11 @@ For example, with the Client SDKs you can build:
 1. Install module using `npm` or `yarn`:
 
    ```bash
-   npm install @dolbyio/comms-sdk-reactnative --save
+   npm install @dolbyio/comms-sdk-react-native --save
    ```
 
    ```bash
-   yarn add @dolbyio/comms-sdk-reactnative
+   yarn add @dolbyio/comms-sdk-react-native
    ```
 
 2. If you are using React Native version 0.60 or later:
@@ -59,7 +59,7 @@ For example, with the Client SDKs you can build:
 3. If you are using a React Native version prior to 0.60, link the native dependency:
 
    ```bash
-   react-native link @dolbyio/comms-sdk-reactnative
+   react-native link @dolbyio/comms-sdk-react-native
    ```
 
    Then, install from your /ios directory:
@@ -77,7 +77,7 @@ For example, with the Client SDKs you can build:
 1. Import the SDK to your project.
 
 ```js
-import CommsAPI from '@dolbyio/comms-sdk-reactnative';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 ```
 
 2. Initialize the SDK with your Dolby.io credentials.
@@ -117,13 +117,13 @@ const joinedConference = await CommsAPI.conference.join(
 5. Import some additional services.
 
 ```js
-import { Conference } from '@dolbyio/comms-sdk-reactnative';
+import { Conference } from '@dolbyio/comms-sdk-react-native';
 ```
 
 or
 
 ```js
-import CommsAPI from '@dolbyio/comms-sdk-reactnative';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 const { Conference } = CommsAPI;
 ```
 
@@ -132,7 +132,7 @@ const { Conference } = CommsAPI;
 1. Place the VideoView in your component.
 
 ```jsx
-import { VideoView } from '@dolbyio/comms-sdk-reactnative';
+import { VideoView } from '@dolbyio/comms-sdk-react-native';
 ...
 return (
 ...
@@ -232,7 +232,7 @@ allows sharing videos during a conference.
 
 ## SDK 3.3 License agreement
 
-Before using the latest version of the @dolbyio/comms-sdk-reactnative, please review and accept the [Dolby Software License Agreement](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE).
+Before using the latest version of the @dolbyio/comms-sdk-react-native, please review and accept the [Dolby Software License Agreement](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE).
 
 ## Third Party licenses
 
