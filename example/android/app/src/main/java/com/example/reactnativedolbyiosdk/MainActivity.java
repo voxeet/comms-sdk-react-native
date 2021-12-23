@@ -10,6 +10,6 @@ public class MainActivity extends CommsAPISDKAppCompatActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "DolbyioSdkExample";
+    return "CommsSDKExample";
   }
 }
