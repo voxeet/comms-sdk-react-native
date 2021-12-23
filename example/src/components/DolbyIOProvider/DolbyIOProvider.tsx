@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-import CommsAPI from '@dolbyio/comms-sdk-reactnative';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
