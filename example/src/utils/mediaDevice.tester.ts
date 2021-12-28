@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/react-native-iapi-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { ComfortNoiseLevel } from '../../../src/services/mediaDevice/models';
 
