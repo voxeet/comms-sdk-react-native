@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CommsSDKAppGroupKey</key>
-	<string>group.io.dolby.reactnative.example</string>
-	<key>CommsSDKPreferredExtensionKey</key>
-	<string>io.dolby.reactnative.example.screenshare</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,6 +22,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>CommsSDKAppGroupKey</key>
+	<string>group.com.example.reactnative.example</string>
+	<key>CommsSDKPreferredExtensionKey</key>
+	<string>com.example.reactnative.example.screenshare</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -56,7 +56,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
-		<string>fetch</string>
 		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

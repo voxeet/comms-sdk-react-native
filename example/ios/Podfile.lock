@@ -316,7 +316,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - VoxeetSDK (3.3.0-beta.5)
+  - VoxeetSDK (3.3.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -358,13 +358,13 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - VoxeetSDK (from `https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.5/VoxeetSDK.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - boost-for-react-native
     - fmt
+    - VoxeetSDK
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -439,8 +439,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
-  VoxeetSDK:
-    :podspec: https://raw.githubusercontent.com/voxeet/voxeet-sdk-ios/release/v3.3.0-beta.5/VoxeetSDK.podspec
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -483,9 +481,9 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNPermissions: 7043bacbf928eae25808275cfe73799b8f618911
   RNReanimated: ad24db8af24e3fe1b5c462785bc3db8d5baae2ee
-  VoxeetSDK: a9fb7e90d4b3afcc79502b652e3079b3e6fac7dc
+  VoxeetSDK: e55e29d93194dcf8d9122963f04479990896bb9e
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
 
-PODFILE CHECKSUM: 247a76287e6b3c3718f9958cb070020acd2759c9
+PODFILE CHECKSUM: 24a3b4c79ee10bc1ded485302df93c8c6dce0561
 
 COCOAPODS: 1.11.2

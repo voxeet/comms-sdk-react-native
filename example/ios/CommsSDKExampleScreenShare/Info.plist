@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CommsSDKAppGroupKey</key>
-	<string>group.io.dolby.reactnative.example</string>
+	<string>group.com.example.reactnative.example</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
