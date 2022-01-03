@@ -333,9 +333,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CommsSDKExample/Pods-CommsSDKExample-frameworks.sh",
-				"${PODS_ROOT}/VoxeetSDK/VoxeetSDK.framework",
-				"${PODS_ROOT}/VoxeetSDK/WebRTC.framework",
-				"${PODS_ROOT}/VoxeetSDK/dvclient.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/VoxeetSDK/VoxeetSDK.framework/VoxeetSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/VoxeetSDK/WebRTC.framework/WebRTC",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/VoxeetSDK/dvclient.framework/dvclient",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -439,7 +439,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example;
 				PRODUCT_NAME = CommsSDKExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -468,7 +468,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example;
 				PRODUCT_NAME = CommsSDKExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -504,7 +504,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example.screenshare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example.screenshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -544,7 +544,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.dolby.reactnative.example.screenshare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example.screenshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
