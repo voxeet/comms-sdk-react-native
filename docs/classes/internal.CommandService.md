@@ -27,7 +27,7 @@ The CommandService allows the application to send and receive text messages and 
 
 ▸ **onMessageReceived**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to events informing about received messages.
+Adds a listener to the event informing about new messages received.
 
 #### Parameters
 
@@ -47,7 +47,7 @@ ___
 
 ▸ **send**(`message`): `Promise`<`void`\>
 
-Sends a message to all conference participants. The message is in a form of a basic stream.
+Sends a message to all conference participants.
 
 #### Parameters
 
