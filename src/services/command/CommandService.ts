@@ -17,7 +17,7 @@ export class CommandService {
   _nativeEvents = new NativeEvents(CommsAPICommandServiceModule);
 
   /**
-   * Sends a message to all conference participants. The message is in a form of a basic stream.
+   * Sends a message to all conference participants.
    * @param message The message to send.
    */
   public async send(message: string): Promise<void> {
@@ -25,7 +25,7 @@ export class CommandService {
   }
 
   /**
-   * Adds a listener to events informing about received messages.
+   * Adds a listener to the event informing about new messages received.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
