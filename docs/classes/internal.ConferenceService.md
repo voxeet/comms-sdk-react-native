@@ -54,13 +54,13 @@ The ConferenceService allows an application to manage the conference life-cycle 
 
 ▸ **create**(`options?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Creates a conference.
+Creates a conference and returns the Conference object.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | [`ConferenceCreateOptions`](../interfaces/internal.ConferenceCreateOptions.md) | The conference options. |
+| `options` | [`ConferenceCreateOptions`](../interfaces/internal.ConferenceCreateOptions.md) | The options for the conference creation. |
 
 #### Returns
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **current**(): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Returns information about the current conference.
+Returns the Conference object for the current conference.
 
 #### Returns
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **fetch**(`conferenceId?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Provides a Conference object that allows joining a conference. If the parameter is not provided, the method returns the current Conference object.
+Returns a Conference object that can be used to join the conference. If the conference ID is not provided, the method returns the current Conference object.
 
 #### Parameters
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **getAudioLevel**(`participant`): `Promise`<`number`\>
 
-Gets the participant's audio level, in the range from 0.0 to 1.0.
+Returns the participant's audio level, in the range from 0.0 to 1.0.
 
 #### Parameters
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **getLocalStats**(): `Promise`<`RTCStatsType`[]\>
 
-Provides the [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
+Gets the [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
 
 #### Returns
 
@@ -132,7 +132,7 @@ ___
 
 ▸ **getMaxVideoForwarding**(): `Promise`<`number`\>
 
-Provides the number of video streams that are transmitted to the local user.
+Returns the maximum number of video streams that can be transmitted to the local user.
 
 #### Returns
 
@@ -144,13 +144,13 @@ ___
 
 ▸ **getParticipant**(`participantId`): `Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
-Information about a participant.
+Gets the Participant object for the specified ID.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `participantId` | `String` | The participant's ID. |
+| `participantId` | `String` | The participant ID. |
 
 #### Returns
 
@@ -162,7 +162,7 @@ ___
 
 ▸ **getParticipants**(`conference`): `Promise`<[`Participant`](../interfaces/internal.Participant.md)[]\>
 
-Gets a list of conference participants.
+Gets the list of conference participant objects.
 
 #### Parameters
 
@@ -180,7 +180,7 @@ ___
 
 ▸ **getStatus**(`conference`): `Promise`<[`ConferenceStatus`](../enums/internal.ConferenceStatus.md)\>
 
-Provides the conference status.
+Gets the conference status.
 
 #### Parameters
 
@@ -198,7 +198,7 @@ ___
 
 ▸ **isMuted**(): `Promise`<`boolean`\>
 
-Gets the current mute state of the local participant.
+Returns the current mute state of the local participant.
 
 #### Returns
 
@@ -210,7 +210,7 @@ ___
 
 ▸ **isSpeaking**(`participant`): `Promise`<`boolean`\>
 
-Gets the participant's current speaking status for an active talker indicator.
+Returns the participant's current speaking status for an active talker indicator.
 
 #### Parameters
 
@@ -228,7 +228,7 @@ ___
 
 ▸ **join**(`conference`, `options?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Joins a conference.
+Joins a conference and returns the Conference object.
 
 #### Parameters
 
@@ -247,7 +247,7 @@ ___
 
 ▸ **kick**(`participant`): `Promise`<`void`\>
 
-Allows the conference owner or a participant with adequate permissions to kick another participant from the conference by revoking the conference access token.
+Kicks a participant out of the current conference. This actions requires you to be conference owner or to have the adequate permissions to kick a participant.
 
 #### Parameters
 
@@ -265,7 +265,7 @@ ___
 
 ▸ **leave**(`options?`): `Promise`<`void`\>
 
-Leaves a conference.
+Leaves the current conference.
 
 #### Parameters
 
@@ -458,8 +458,8 @@ ___
 
 ▸ **startScreenShare**(): `Promise`<`void`\>
 
-	Starts a screen sharing session.
-	The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
+Starts a screen sharing session.
+The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
 Instead of setting the following properties:
 - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
 - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"

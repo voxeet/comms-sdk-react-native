@@ -53,7 +53,7 @@ ___
 
 ▸ **isOpen**(): `Promise`<`Boolean`\>
 
-Checks whether there is an open session that connects SDK with backend.
+Returns if a session that connects the SDK with the Dolby.io platform is opened or not.
 
 #### Returns
 
