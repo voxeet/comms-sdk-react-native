@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/comms-sdk-react-native';
+import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
 export const startVideoPresentation = async (url: string) => {
   try {
