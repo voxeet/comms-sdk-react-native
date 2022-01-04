@@ -35,7 +35,7 @@ export class SessionService {
   }
 
   /**
-   * Checks whether there is an open session that connects SDK with backend.
+   * Returns if a session that connects the SDK with the Dolby.io platform is opened or not.
    */
   public async isOpen(): Promise<Boolean> {
     return this._nativeModule.isOpen();
