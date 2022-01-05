@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
-import CommsAPI from '@dolbyio/comms-sdk-react-native';
+import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
 import type {
   VideoPresentationEventType,
