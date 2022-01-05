@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
-import CommsAPI from '@dolbyio/comms-sdk-react-native';
+import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
 import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import InvitationResponseButtons from './InvitationResponseButtons';
