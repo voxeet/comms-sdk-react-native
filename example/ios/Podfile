@@ -13,7 +13,7 @@ target 'CommsSDKExample' do
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
   
-  pod 'comms-sdk-reactnative', :path => '../..'
+  pod 'react-native-comms-sdk', :path => '../..'
 
   # Convert all permission pods into static libraries
   pre_install do |installer|
