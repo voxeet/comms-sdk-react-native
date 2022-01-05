@@ -42,7 +42,7 @@
   ],
   "repository": "https://dolby.io",
   "author": "Dolby.io (https://dolby.io/)",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://dolby.io/issues"
   },
