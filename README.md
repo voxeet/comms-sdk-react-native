@@ -313,11 +313,19 @@ const joinConference = async () => {
 
 Use the `onStreamsChange` event handler provided by the conference object of the SDK to integrate video into your application. This event is triggered when a participant video stream changes, for example, a new video stream coming in or the video is stopped. Add the following code to create `VideoView` objects and insert them into the `videoElements` dictionary. The `videoElements` dictionary is used to generate the UI within the function `getVideoElements`.
 
+Add the following import statement at the top of your document:
+
+```javascript
+import { VideoView } from '@dolbyio/react-native-iapi-sdk';
+```
+
+And insert the following code in the `const App = () => { };`:
+
 ```javascript
 CommsAPI.conference.onStreamsChange(async (data, eventType) => {
     try {
         if (data.mediaStream && data.mediaStream.videoTracks.length > 0) {
-            if (!videoElements[participant.id]) {
+            if (!videoElements[data.participant.id]) {
                 const videoElement = <VideoView
                     key={`video-${data.participant.id}`}
                     style={{ height: 200, width: 180 }}
@@ -327,7 +335,7 @@ CommsAPI.conference.onStreamsChange(async (data, eventType) => {
                 setVideoElements(videoElements);
             }
         } else {
-            videoElements[participant.id] = null;
+            videoElements[data.participant.id] = null;
             setVideoElements(videoElements);
 
             /*if (await videoView.current.isAttached()) {
