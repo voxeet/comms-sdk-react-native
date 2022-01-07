@@ -256,13 +256,13 @@ useEffect(async () => {
 ```
 ### Initialization
 
-Import the SDK to the application by adding the following line at the top of the `App.js` file:
+**1.** Import the SDK to the application by adding the following line at the top of the `App.js` file:
 
 ```js
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 ```
 
-Initialize the SDK with the Dolby.io credentials found in your dashboard. Replace the `APP_KEY` and the `APP_SECRET` with your application key and secret. Insert the following code after requesting the permissions for the microphone and camera:
+**2.** Initialize the SDK with the Dolby.io credentials found in your dashboard. Replace the `APP_KEY` and the `APP_SECRET` with your application key and secret. Insert the following code after requesting the permissions for the microphone and camera:
 
 ```javascript
 // WARNING: It is best practice to use the initializeToken function to initialize the SDK.
@@ -271,7 +271,7 @@ Initialize the SDK with the Dolby.io credentials found in your dashboard. Replac
 await CommsAPI.initialize(APP_KEY, APP_SECRET);
 ```
 
-Add the following code after the SDK initialization to automatically open a session after initializing the SDK. The session will open with a random user name.
+**3.** Add the following code after the SDK initialization to automatically open a session after initializing the SDK. The session will open with a random user name.
 
 ```javascript
 const rand = Math.round(Math.random() * 10000);
@@ -313,13 +313,13 @@ const joinConference = async () => {
 
 Use the `onStreamsChange` event handler provided by the conference object of the SDK to integrate video into your application. This event is triggered when a participant video stream changes, for example, a new video stream coming in or the video is stopped. Add the following code to create `VideoView` objects and insert them into the `videoElements` dictionary. The `videoElements` dictionary is used to generate the UI within the function `getVideoElements`.
 
-Add the following import statement at the top of your document:
+**1.** Add the following import statement at the top of your document:
 
 ```javascript
 import { VideoView } from '@dolbyio/react-native-iapi-sdk';
 ```
 
-And insert the following code in the `const App = () => { };`:
+**2.** Insert the following code in the `const App = () => { };`:
 
 ```javascript
 CommsAPI.conference.onStreamsChange(async (data, eventType) => {
