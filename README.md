@@ -316,7 +316,7 @@ Use the `onStreamsChange` event handler provided by the conference object of the
 **1.** Add the following import statement at the top of your document:
 
 ```javascript
-import { VideoView } from '@dolbyio/react-native-iapi-sdk';
+import { VideoView } from '@dolbyio/comms-sdk-react-native';
 ```
 
 **2.** Insert the following code in the `const App = () => { };`:
@@ -415,7 +415,7 @@ allows sharing videos during a conference.
 
 ## SDK 3.3 License agreement
 
-Before using the latest version of the @dolbyio/react-native-comms-sdk, please review and accept the [Dolby Software License Agreement](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE).
+Before using the latest version of the @dolbyio/comms-sdk-react-native, please review and accept the [Dolby Software License Agreement](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE).
 
 ## Third Party licenses
 
