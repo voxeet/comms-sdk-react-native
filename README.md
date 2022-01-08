@@ -15,13 +15,7 @@ Make sure that you have:
 For reference, see the [GitHub sample repository](https://github.com/dolbyio-samples/comms-sdk-react-native-getting-started).
 
 Please review [Supported Environments](https://docs.dolby.io/communications-apis/docs/overview-supported-environments) for more information on iOS and Android requirements.
-### iOS
 
-- Xcode 12 with the iOS 14 support
-- iOS 11.0+ for the target deployment
-### Android
-
-- Android 25+ for the target deployment
 ## Create a new project
 
 **1.** Create a new React Native project:
