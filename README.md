@@ -4,7 +4,7 @@
 
 This guide explains how to create a basic audio video conference application for mobile with React Native. It starts with importing the Dolby.io Communications SDK for React Native and guides you through the steps to launch a conference call.
 
-## Requirements
+## Prerequisites
 
 Make sure that you have:
 
@@ -13,6 +13,8 @@ Make sure that you have:
 - React Native 0.66+
 
 For reference, see the [GitHub sample repository](https://github.com/dolbyio-samples/comms-sdk-react-native-getting-started).
+
+Please review [Supported Environments](https://docs.dolby.io/communications-apis/docs/overview-supported-environments) for more information on iOS and Android requirements.
 ### iOS
 
 - Xcode 12 with the iOS 14 support
@@ -50,7 +52,7 @@ yarn add @dolbyio/comms-sdk-react-native
 
 **2.** Complete the installation:
 
-For iOS, iOS, install native dependencies via CocoaPods:
+For iOS, install native dependencies via CocoaPods:
 
 ```bash
 pod install --repo-update --project-directory=ios/
@@ -203,6 +205,11 @@ export default App;
 ```
 ### Permissions
 
+For iOS, establish privacy permissions by adding two new keys in `Info.plist`:
+
+- Privacy - Microphone Usage Description.
+- Privacy - Camera Usage Description.
+
 For Android, the application must request permissions to access the microphone and camera. When the application component loads, we will request the permissions. In the `const App = () => { };` add the following code:
 
 ```javascript
@@ -351,16 +358,16 @@ CommsAPI.conference.onStreamsChange(async (data, eventType) => {
 
 ## Run the application
 
-On Android, run the application:
-
-```bash
-npx react-native run-android
-```
-
 On iOS, run the application:
 
 ```bash
 npx react-native run-ios
+```
+
+On Android, run the application:
+
+```bash
+npx react-native run-android
 ```
 
 ## Documentation
