@@ -235,13 +235,10 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = W75N7T34M4;
 						LastSwiftMigration = 1120;
 					};
 					5B4AABE42731439F00C3640A = {
 						CreatedOnToolsVersion = 13.1;
-						DevelopmentTeam = W75N7T34M4;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -424,8 +421,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CommsSDKExample/CommsSDKExample.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W75N7T34M4;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = CommsSDKExample/Info.plist;
@@ -439,8 +437,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.miquido.commssdk.example;
 				PRODUCT_NAME = CommsSDKExample;
+				PROVISIONING_PROFILE_SPECIFIER = "Dolby Comms SDK Example Development";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -455,8 +454,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CommsSDKExample/CommsSDKExample.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W75N7T34M4;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
 				INFOPLIST_FILE = CommsSDKExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,8 +468,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.miquido.commssdk.example;
 				PRODUCT_NAME = CommsSDKExample;
+				PROVISIONING_PROFILE_SPECIFIER = "Dolby Comms SDK Example Development";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -486,10 +487,10 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = CommsSDKExampleScreenShare/CommsSDKExampleScreenShare.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = W75N7T34M4;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CommsSDKExampleScreenShare/Info.plist;
@@ -504,8 +505,9 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example.screenshare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.miquido.commssdk.example.screenshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Dolby Comms SDK Example Screenshare Development";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -526,11 +528,11 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = CommsSDKExampleScreenShare/CommsSDKExampleScreenShare.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = W75N7T34M4;
+				DEVELOPMENT_TEAM = HAWH5C9J75;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CommsSDKExampleScreenShare/Info.plist;
@@ -544,8 +546,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnative.example.screenshare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.miquido.commssdk.example.screenshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Dolby Comms SDK Example Screenshare Development";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
