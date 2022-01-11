@@ -325,12 +325,12 @@ import { VideoView } from '@dolbyio/comms-sdk-react-native';
 ```javascript
 CommsAPI.conference.onStreamsChange(async (data, eventType) => {
     try {
-        if (data.Stream && data.Stream.videoTracks.length > 0) {
+        if (data.stream && data.stream.videoTracks.length > 0) {
             if (!videoElements[data.participant.id]) {
                 const videoElement = <VideoView
                     key={`video-${data.participant.id}`}
                     style={{ height: 200, width: 180 }}
-                    ref={async (element) => { await element.attach(data.participant, data.Stream); }} />;
+                    ref={async (element) => { await element.attach(data.participant, data.stream); }} />;
 
                 videoElements[participant.id] = videoElement;
                 setVideoElements(videoElements);
