@@ -400,7 +400,7 @@ allows sharing videos during a conference.
 
 The Dolby.io Communications SDK for React Native and its repository are licensed under the Apache License, Version 2.0. Before using the latest version of the @dolbyio/comms-sdk-react-native, please review and accept the [Apache License](https://github.com/voxeet/voxeet-sdk-reactnative/blob/master/LICENSE).
 
-Before using this package, please review and accept the Dolby Software License Agreement for [Android](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE) and [iOS](https://github.com/voxeet/voxeet-sdk-ios/blob/master/LICENSE).
+Before using this package, please review and accept the Dolby Software License Agreement for [Android](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE) and [iOS](https://github.com/voxeet/voxeet-sdk-ios/blob/master/LICENSE), which are the underlying SDKs for the React Native SDK.
 
 ## Third Party licenses
 
