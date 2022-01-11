@@ -8,7 +8,6 @@ import type {
   ParticipantPermissions,
   AudioProcessingOptions,
 } from '../../../src/services/conference/models';
-import type { User } from '../../../src/services/session/models';
 
 export const current = async () => {
   try {
@@ -26,7 +25,7 @@ export const replay = async (conference: Conference) => {
     Alert.alert('Error');
   }
 };
-export const startVideo = async (user: User) => {
+export const startVideo = async (user: Participant) => {
   console.log(user);
   try {
     await CommsAPI.conference.startVideo(user);
@@ -35,7 +34,7 @@ export const startVideo = async (user: User) => {
     Alert.alert('Error');
   }
 };
-export const stopVideo = async (user: User) => {
+export const stopVideo = async (user: Participant) => {
   try {
     await CommsAPI.conference.stopVideo(user);
   } catch (e: any) {
@@ -43,14 +42,14 @@ export const stopVideo = async (user: User) => {
     Alert.alert('Error');
   }
 };
-export const startAudio = async (user: User) => {
+export const startAudio = async (user: Participant) => {
   try {
     await CommsAPI.conference.startAudio(user);
   } catch (e: any) {
     Alert.alert('Error');
   }
 };
-export const stopAudio = async (user: User) => {
+export const stopAudio = async (user: Participant) => {
   try {
     await CommsAPI.conference.stopAudio(user);
   } catch (e: any) {
@@ -58,7 +57,7 @@ export const stopAudio = async (user: User) => {
   }
 };
 
-export const getAudioLevel = async (user: User) => {
+export const getAudioLevel = async (user: Participant) => {
   try {
     const audioLevel = await CommsAPI.conference.getAudioLevel(user);
     Alert.alert('Audio level', JSON.stringify(audioLevel));
