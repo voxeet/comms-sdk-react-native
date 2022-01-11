@@ -1,8 +1,7 @@
 import { NativeModules } from 'react-native';
 
 import type { ParticipantInfo } from '../conference/models';
-import type { User } from './models';
-import { transformToUser } from './transformers';
+import type { Participant } from '../conference/models';
 
 const { CommsAPISessionServiceModule } = NativeModules;
 
@@ -44,8 +43,8 @@ export class SessionService {
   /**
    * Provides the local participant object that belongs to the current session.
    */
-  public async getCurrentUser(): Promise<User> {
-    return transformToUser(await this._nativeModule.getParticipant());
+  public async getParticipant(): Promise<Participant> {
+    return this._nativeModule.getParticipant();
   }
 }
 

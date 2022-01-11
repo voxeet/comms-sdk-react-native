@@ -13,7 +13,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 ### Methods
 
 - [close](internal.SessionService.md#close)
-- [getCurrentUser](internal.SessionService.md#getcurrentuser)
+- [getParticipant](internal.SessionService.md#getparticipant)
 - [isOpen](internal.SessionService.md#isopen)
 - [open](internal.SessionService.md#open)
 
@@ -35,19 +35,19 @@ Closes the current session.
 
 `Promise`<`void`\>
 
-___
+---
 
-### getCurrentUser
+### getParticipant
 
-▸ **getCurrentUser**(): `Promise`<[`User`](../interfaces/internal.User.md)\>
+▸ **getParticipant**(): `Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
 Provides the local participant object that belongs to the current session.
 
 #### Returns
 
-`Promise`<[`User`](../interfaces/internal.User.md)\>
+`Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
-___
+---
 
 ### isOpen
 
@@ -59,7 +59,7 @@ Returns if a session that connects the SDK with the Dolby.io platform is opened 
 
 `Promise`<`Boolean`\>
 
-___
+---
 
 ### open
 
@@ -69,8 +69,8 @@ Opens a new session.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name              | Type                                                           | Description                                           |
+| :---------------- | :------------------------------------------------------------- | :---------------------------------------------------- |
 | `participantInfo` | [`ParticipantInfo`](../interfaces/internal.ParticipantInfo.md) | The optional information about the local participant. |
 
 #### Returns
