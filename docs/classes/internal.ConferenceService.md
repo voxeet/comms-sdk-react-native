@@ -27,10 +27,6 @@ The ConferenceService allows an application to manage the conference life-cycle 
 - [kick](internal.ConferenceService.md#kick)
 - [leave](internal.ConferenceService.md#leave)
 - [mute](internal.ConferenceService.md#mute)
-- [onParticipantsChange](internal.ConferenceService.md#onparticipantschange)
-- [onPermissionsChange](internal.ConferenceService.md#onpermissionschange)
-- [onStatusChange](internal.ConferenceService.md#onstatuschange)
-- [onStreamsChange](internal.ConferenceService.md#onstreamschange)
 - [replay](internal.ConferenceService.md#replay)
 - [setAudioProcessing](internal.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](internal.ConferenceService.md#setmaxvideoforwarding)
@@ -41,6 +37,10 @@ The ConferenceService allows an application to manage the conference life-cycle 
 - [stopScreenShare](internal.ConferenceService.md#stopscreenshare)
 - [stopVideo](internal.ConferenceService.md#stopvideo)
 - [updatePermissions](internal.ConferenceService.md#updatepermissions)
+- [onStatusChange](internal.ConferenceService.md#onstatuschange)
+- [onPermissionsChange](internal.ConferenceService.md#onpermissionschange)
+- [onParticipantsChange](internal.ConferenceService.md#onparticipantschange)
+- [onStreamsChange](internal.ConferenceService.md#onstreamschange)
 
 ## Constructors
 
@@ -298,86 +298,6 @@ Stops playing the specified remote participants' audio to the local participant 
 
 ___
 
-### onParticipantsChange
-
-▸ **onParticipantsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the participants changed event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/internal.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/internal.md#participantadded) \| [`ParticipantUpdated`](../modules/internal.md#participantupdated)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
-### onPermissionsChange
-
-▸ **onPermissionsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the permissions changed event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/internal.PermissionsUpdatedEventType.md)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
-### onStatusChange
-
-▸ **onStatusChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the conference status changed event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/internal.ConferenceStatusUpdatedEventType.md)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
-### onStreamsChange
-
-▸ **onStreamsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the streams changed event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/internal.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/internal.md#streamadded) \| [`StreamUpdated`](../modules/internal.md#streamupdated) \| [`StreamRemoved`](../modules/internal.md#streamremoved)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
 ### replay
 
 ▸ **replay**(`conference`, `replayOptions?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
@@ -556,3 +476,83 @@ Updates the participant's conference permissions.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### onStatusChange
+
+▸ **onStatusChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the conference status changed event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ConferenceStatusUpdatedEventType`](../interfaces/internal.ConferenceStatusUpdatedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onPermissionsChange
+
+▸ **onPermissionsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the permissions changed event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`PermissionsUpdatedEventType`](../interfaces/internal.PermissionsUpdatedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onParticipantsChange
+
+▸ **onParticipantsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the participants changed event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ParticipantChangedEventType`](../interfaces/internal.ParticipantChangedEventType.md), `type?`: [`ParticipantAdded`](../modules/internal.md#participantadded) \| [`ParticipantUpdated`](../modules/internal.md#participantupdated)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onStreamsChange
+
+▸ **onStreamsChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the streams changed event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`StreamChangedEventType`](../interfaces/internal.StreamChangedEventType.md), `type?`: [`StreamAdded`](../modules/internal.md#streamadded) \| [`StreamUpdated`](../modules/internal.md#streamupdated) \| [`StreamRemoved`](../modules/internal.md#streamremoved)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.

@@ -11,8 +11,8 @@ The Participant interface gathers information about a conference participant.
 - [id](internal.Participant.md#id)
 - [info](internal.Participant.md#info)
 - [status](internal.Participant.md#status)
-- [streams](internal.Participant.md#streams)
 - [type](internal.Participant.md#type)
+- [streams](internal.Participant.md#streams)
 
 ## Properties
 
@@ -40,16 +40,16 @@ The participant's status.
 
 ___
 
-### streams
-
-• `Optional` **streams**: [`MediaStream`](../modules/internal.md#mediastream)[]
-
-The participant's streams.
-
-___
-
 ### type
 
 • `Optional` **type**: [`ParticipantType`](../enums/internal.ParticipantType.md)
 
 The participant's type.
+
+___
+
+### streams
+
+• `Optional` **streams**: [`MediaStream`](../modules/internal.md#mediastream)[]
+
+The participant's streams.
