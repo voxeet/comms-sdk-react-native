@@ -14,23 +14,17 @@ export class SessionService {
   _nativeModule = CommsAPISessionServiceModule;
 
   /**
-   * Opens a new session.
-   * @param participantInfo The optional information about the local participant.
-   */
-  public async open(participantInfo: ParticipantInfo = {}): Promise<void> {
-    const { name, avatarUrl, externalId } = participantInfo;
-    return this._nativeModule.open({
-      name,
-      avatarUrl,
-      externalId,
-    });
-  }
-
-  /**
    * Closes the current session.
    */
   public async close(): Promise<void> {
     return this._nativeModule.close();
+  }
+
+  /**
+   * Provides the local participant object that belongs to the current session.
+   */
+  public async getParticipant(): Promise<Participant> {
+    return this._nativeModule.getParticipant();
   }
 
   /**
@@ -41,10 +35,16 @@ export class SessionService {
   }
 
   /**
-   * Provides the local participant object that belongs to the current session.
+   * Opens a new session.
+   * @param participantInfo The optional information about the local participant.
    */
-  public async getParticipant(): Promise<Participant> {
-    return this._nativeModule.getParticipant();
+  public async open(participantInfo: ParticipantInfo = {}): Promise<void> {
+    const { name, avatarUrl, externalId } = participantInfo;
+    return this._nativeModule.open({
+      name,
+      avatarUrl,
+      externalId,
+    });
   }
 }
 

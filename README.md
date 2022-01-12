@@ -232,7 +232,7 @@ allows sharing videos during a conference.
 
 ## SDK 3.3 License agreement
 
-Before using the latest version of the @dolbyio/react-native-comms-sdk, please review and accept the [Dolby Software License Agreement](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE).
+Before using the latest version of the @dolbyio/react-native-comms-sdk, please review and accept the [Dolby Software License Agreement](./LICENSE).
 
 ## Third Party licenses
 

@@ -13,17 +13,17 @@ export class MediaDeviceService {
   _nativeModule = CommsAPIMediaDeviceServiceModule;
 
   /**
-   * Checks whether an application uses the front-facing (true) or back-facing camera (false).
-   */
-  public async isFrontCamera(): Promise<boolean> {
-    return this._nativeModule.isFrontCamera();
-  }
-
-  /**
    * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
    */
   public async getComfortNoiseLevel(): Promise<ComfortNoiseLevel> {
     return this._nativeModule.getComfortNoiseLevel();
+  }
+
+  /**
+   * Checks whether an application uses the front-facing (true) or back-facing camera (false).
+   */
+  public async isFrontCamera(): Promise<boolean> {
+    return this._nativeModule.isFrontCamera();
   }
 
   /**

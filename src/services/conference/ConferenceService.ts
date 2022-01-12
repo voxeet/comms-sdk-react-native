@@ -48,14 +48,6 @@ export class ConferenceService {
   }
 
   /**
-   * Returns a Conference object that can be used to join the conference. If the conference ID is not provided, the method returns the current Conference object.
-   * @param conferenceId The conference ID.
-   */
-  public async fetch(conferenceId?: string): Promise<Conference> {
-    return transformToConference(await this._nativeModule.fetch(conferenceId));
-  }
-
-  /**
    * Returns the Conference object for the current conference.
    */
   public async current(): Promise<Conference> {
@@ -63,20 +55,11 @@ export class ConferenceService {
   }
 
   /**
-   * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
-   * @param conference The Conference object.
-   * @param replayOptions The replay options.
+   * Returns a Conference object that can be used to join the conference. If the conference ID is not provided, the method returns the current Conference object.
+   * @param conferenceId The conference ID.
    */
-  public async replay(
-    conference: Conference,
-    replayOptions?: ConferenceReplayOptions
-  ): Promise<Conference> {
-    return transformToConference(
-      await this._nativeModule.replay(conference, {
-        offset: 0,
-        ...replayOptions,
-      })
-    );
+  public async fetch(conferenceId?: string): Promise<Conference> {
+    return transformToConference(await this._nativeModule.fetch(conferenceId));
   }
 
   /**
@@ -146,90 +129,6 @@ export class ConferenceService {
   }
 
   /**
-   * Enables and disables audio processing for a conference participant.
-   * @param options The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
-   */
-  public async setAudioProcessing(
-    options: AudioProcessingOptions = {}
-  ): Promise<void> {
-    return this._nativeModule.setAudioProcessing(options);
-  }
-
-  /**
-   * Sets the maximum number of video streams that may be transmitted to the local participant.
-   * @param max The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4.
-   * @param prioritizedParticipants The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
-   */
-  public async setMaxVideoForwarding(
-    max: MaxVideoForwarding = 4,
-    prioritizedParticipants: Participant[] = []
-  ): Promise<any> {
-    return this._nativeModule.setMaxVideoForwarding(
-      max,
-      prioritizedParticipants
-    );
-  }
-
-  /**
-   * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
-   * @param isMuted The mute state, `true` indicates that a participant is muted, `false` indicates that a participant is not muted.
-   * @param participant A remote participant.
-   */
-  public async mute(
-    participant: Participant,
-    isMuted: boolean
-  ): Promise<boolean> {
-    return this._nativeModule.mute(participant, isMuted);
-  }
-
-  /**
-   * Updates the participant's conference permissions.
-   * @param participantPermissions The set of participant's conference permissions.
-   */
-  public async updatePermissions(
-    participantPermissions: Array<ParticipantPermissions>
-  ): Promise<void> {
-    return this._nativeModule.updatePermissions(participantPermissions);
-  }
-
-  /**
-   * Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
-   * - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
-   * - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
-   * @param participant The selected participant. If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects.
-   */
-
-  public async startAudio(participant: Participant): Promise<void> {
-    return this._nativeModule.startAudio(participant);
-  }
-
-  /**
-   * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
-   * @param participant The participant who will receive the video stream, either remote or local.
-   */
-  public async startVideo(participant: Participant): Promise<void> {
-    return this._nativeModule.startVideo(participant);
-  }
-
-  /**
-   * Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
-   * - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
-   * - When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
-   * @param participant The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects.
-   */
-  public async stopAudio(participant: Participant): Promise<void> {
-    return this._nativeModule.stopAudio(participant);
-  }
-
-  /**
-   * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
-   * @param participant The participant who wants to stop receiving a video stream.
-   */
-  public async stopVideo(participant: Participant): Promise<void> {
-    return this._nativeModule.stopVideo(participant);
-  }
-
-  /**
    * Joins a conference and returns the Conference object.
    * @param conference The Conference object.
    * @param options The additional options for the joining participant.
@@ -263,6 +162,127 @@ export class ConferenceService {
     } else {
       return;
     }
+  }
+
+  /**
+   * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
+   * @param isMuted The mute state, `true` indicates that a participant is muted, `false` indicates that a participant is not muted.
+   * @param participant A remote participant.
+   */
+  public async mute(
+    participant: Participant,
+    isMuted: boolean
+  ): Promise<boolean> {
+    return this._nativeModule.mute(participant, isMuted);
+  }
+
+  /**
+   * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+   * @param conference The Conference object.
+   * @param replayOptions The replay options.
+   */
+  public async replay(
+    conference: Conference,
+    replayOptions?: ConferenceReplayOptions
+  ): Promise<Conference> {
+    return transformToConference(
+      await this._nativeModule.replay(conference, {
+        offset: 0,
+        ...replayOptions,
+      })
+    );
+  }
+
+  /**
+   * Enables and disables audio processing for a conference participant.
+   * @param options The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
+   */
+  public async setAudioProcessing(
+    options: AudioProcessingOptions = {}
+  ): Promise<void> {
+    return this._nativeModule.setAudioProcessing(options);
+  }
+
+  /**
+   * Sets the maximum number of video streams that may be transmitted to the local participant.
+   * @param max The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4.
+   * @param prioritizedParticipants The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
+   */
+  public async setMaxVideoForwarding(
+    max: MaxVideoForwarding = 4,
+    prioritizedParticipants: Participant[] = []
+  ): Promise<any> {
+    return this._nativeModule.setMaxVideoForwarding(
+      max,
+      prioritizedParticipants
+    );
+  }
+
+  /**
+   * Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
+   * - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
+   * - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
+   * @param participant The selected participant. If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects.
+   */
+  public async startAudio(participant: Participant): Promise<void> {
+    return this._nativeModule.startAudio(participant);
+  }
+
+  /**
+   * Starts a screen sharing session.
+   * The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
+   * Instead of setting the following properties:
+   * - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
+   * - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
+   *  Set up keys in your `Info.plist` file:
+   * - Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
+   * - Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
+   */
+  public async startScreenShare(): Promise<void> {
+    return this._nativeModule.startScreenShare();
+  }
+
+  /**
+   * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
+   * @param participant The participant who will receive the video stream, either remote or local.
+   */
+  public async startVideo(participant: Participant): Promise<void> {
+    return this._nativeModule.startVideo(participant);
+  }
+
+  /**
+   * Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
+   * - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
+   * - When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
+   * @param participant The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects.
+   */
+  public async stopAudio(participant: Participant): Promise<void> {
+    return this._nativeModule.stopAudio(participant);
+  }
+
+  /**
+   * Stops a screen sharing session.
+   */
+  public async stopScreenShare(): Promise<void> {
+    return this._nativeModule.stopScreenShare();
+  }
+
+  /**
+   * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
+   * @param participant The participant who wants to stop receiving a video stream.
+   */
+  public async stopVideo(participant: Participant): Promise<void> {
+    return this._nativeModule.stopVideo(participant);
+  }
+
+  /**
+   * Updates the participant's conference permissions.
+   * @param participantPermissions The set of participant's conference permissions.
+   */
+  public async updatePermissions(
+    participantPermissions: Array<ParticipantPermissions>
+  ): Promise<void> {
+    return this._nativeModule.updatePermissions(participantPermissions);
   }
 
   /**
@@ -353,27 +373,6 @@ export class ConferenceService {
       streamUpdatedEventUnsubscribe();
       streamRemovedEventUnsubscribe();
     };
-  }
-
-  /**
-   * Starts a screen sharing session.
-   * The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
-   * Instead of setting the following properties:
-   * - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
-   * - CommsSDK.shared.preferredExtension = "YOUR_BROADCAST_EXTENSION_BUNDLE_ID"
-   *  Set up keys in your `Info.plist` file:
-   * - Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
-   * - Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
-   */
-  public async startScreenShare(): Promise<void> {
-    return this._nativeModule.startScreenShare();
-  }
-
-  /**
-   * Stops a screen sharing session.
-   */
-  public async stopScreenShare(): Promise<void> {
-    return this._nativeModule.stopScreenShare();
   }
 }
 
