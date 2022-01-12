@@ -34,6 +34,13 @@ export class VideoPresentationService {
   );
 
   /**
+   * Returns information about the current video presentation.
+   */
+  public current(): Promise<VideoPresentation | null> {
+    return this._nativeModule.current();
+  }
+
+  /**
    * Pauses a video presentation.
    * @param timestamp The timestamp that informs when the video needs to be paused, in milliseconds.
    */
@@ -46,20 +53,6 @@ export class VideoPresentationService {
    */
   public play(): Promise<void> {
     return this._nativeModule.play();
-  }
-
-  /**
-   * Returns information about the current video presentation.
-   */
-  public current(): Promise<VideoPresentation | null> {
-    return this._nativeModule.current();
-  }
-
-  /**
-   * Provides the current state of a video presentation.
-   */
-  public state(): Promise<VideoPresentationState> {
-    return this._nativeModule.state();
   }
 
   /**
@@ -76,6 +69,13 @@ export class VideoPresentationService {
    */
   public start(url: string): Promise<void> {
     return this._nativeModule.start(url);
+  }
+
+  /**
+   * Provides the current state of a video presentation.
+   */
+  public state(): Promise<VideoPresentationState> {
+    return this._nativeModule.state();
   }
 
   /**

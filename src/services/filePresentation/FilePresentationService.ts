@@ -43,37 +43,6 @@ export class FilePresentationService {
   _nativeEvents = new NativeEvents(CommsAPIFilePresentationServiceModule || {});
 
   /**
-   * Stops a file presentation.
-   */
-  public async stop(): Promise<void> {
-    return this._nativeModule.stop();
-  }
-
-  /**
-   * Starts a file presentation.
-   * @param file The converted file that the presenter wants to share during the conference.
-   */
-  public async start(file: FileConverted): Promise<void> {
-    return this._nativeModule.start(file);
-  }
-
-  /**
-   * Provides the URL of a thumbnail that refers to a specific page of the presented file.
-   * @param page The number of the presented page. Files that do not contain any pages, for example, jpg images, require setting the value of this parameter to 0.
-   */
-  public async getThumbnail(page: number): Promise<string> {
-    return this._nativeModule.getThumbnail(page);
-  }
-
-  /**
-   * Informs the service to send the updated page number to conference participants.
-   * @param page The page number that corresponds to the required page.
-   */
-  public async setPage(page: number): Promise<void> {
-    return this._nativeModule.setPage(page);
-  }
-
-  /**
    * Converts a provided file into multiple images. The file is uploaded as FormData.
    *
    * The supported file formats are:
@@ -103,6 +72,37 @@ export class FilePresentationService {
    */
   public async getImage(page: number): Promise<string> {
     return this._nativeModule.getImage(page);
+  }
+
+  /**
+   * Provides the URL of a thumbnail that refers to a specific page of the presented file.
+   * @param page The number of the presented page. Files that do not contain any pages, for example, jpg images, require setting the value of this parameter to 0.
+   */
+  public async getThumbnail(page: number): Promise<string> {
+    return this._nativeModule.getThumbnail(page);
+  }
+
+  /**
+   * Informs the service to send the updated page number to conference participants.
+   * @param page The page number that corresponds to the required page.
+   */
+  public async setPage(page: number): Promise<void> {
+    return this._nativeModule.setPage(page);
+  }
+
+  /**
+   * Starts a file presentation.
+   * @param file The converted file that the presenter wants to share during the conference.
+   */
+  public async start(file: FileConverted): Promise<void> {
+    return this._nativeModule.start(file);
+  }
+
+  /**
+   * Stops a file presentation.
+   */
+  public async stop(): Promise<void> {
+    return this._nativeModule.stop();
   }
 
   /**
