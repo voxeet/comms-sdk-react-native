@@ -1,7 +1,6 @@
 import { NativeModules } from 'react-native';
 
 import SessionService from '../SessionService';
-import { transformToUser } from '../transformers';
 
 const { CommsAPISessionServiceModule } = NativeModules;
 
@@ -36,28 +35,8 @@ describe('SessionService', () => {
 
   describe('getsCurrentUser()', () => {
     it('should invoke exported method', () => {
-      SessionService.getCurrentUser();
+      SessionService.getParticipant();
       expect(CommsAPISessionServiceModule.getParticipant).toHaveBeenCalled();
-    });
-  });
-});
-
-describe('SessionService - transformers', () => {
-  describe('transformToUser()', () => {
-    it('should return User object', () => {
-      expect(
-        transformToUser({
-          info: {
-            name: 'Jack',
-          },
-          id: '111',
-        })
-      ).toStrictEqual({
-        info: {
-          name: 'Jack',
-        },
-        id: '111',
-      });
     });
   });
 });
