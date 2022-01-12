@@ -86,7 +86,7 @@
 
 Emitted when a presenter starts a file presentation.
 
----
+___
 
 ### FilePresentationStopped
 
@@ -94,7 +94,7 @@ Emitted when a presenter starts a file presentation.
 
 Emitted when a presenter ends a file presentation.
 
----
+___
 
 ### FilePresentationUpdated
 
@@ -102,7 +102,7 @@ Emitted when a presenter ends a file presentation.
 
 Emitted when the presenter changes the displayed page of the shared file.
 
----
+___
 
 ### ParticipantAdded
 
@@ -110,7 +110,7 @@ Emitted when the presenter changes the displayed page of the shared file.
 
 Emitted when a new participant is invited to a conference. The SDK does not emit the participantAdded event for the local participant. Listeners only receive the participantAdded events about users; they do not receive events for other listeners. Users receive the participantAdded events about users and do not receive any events about listeners.
 
----
+___
 
 ### ParticipantUpdated
 
@@ -118,7 +118,7 @@ Emitted when a new participant is invited to a conference. The SDK does not emit
 
 Emitted when a conference participant changes status. Listeners only receive the participantUpdated events about users; they do not receive events for other listeners. Users receive the participantUpdated events about users and do not receive any events about listeners.
 
----
+___
 
 ### StreamAdded
 
@@ -145,7 +145,7 @@ Based on the stream type, the application chooses to either render a camera view
 When a new participant joins a conference with enabled audio and video, the SDK emits the streamAdded event that includes audio and video tracks.
 The SDK can also emit the streamAdded event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute the selected remote participant who does not use a camera, the local participant receives the [streamRemoved](#streamremoved) event. After using the [startAudio](#startaudio) method for this remote participant, the local participant receives the streamAdded event.
 
----
+___
 
 ### StreamRemoved
 
@@ -154,7 +154,7 @@ The SDK can also emit the streamAdded event only for the local participant. When
 Emitted when the SDK removes a stream from a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant disables audio and video or stops a screen-share presentation, the SDK removes the proper stream and emits the streamRemoved event to all conference participants.
 The SDK can also emit the streamRemoved event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute a selected remote participant who does not use a camera, the local participant receives the streamRemoved event.
 
----
+___
 
 ### StreamUpdated
 
@@ -179,7 +179,7 @@ Emitted when a conference participant who is connected to the `audio and video` 
 [/block]
 The SDK can also emit the streamUpdated event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) or [startAudio](#startaudio) method to locally mute or unmute a selected remote participant who uses a camera, the local participant receives the streamUpdated event.
 
----
+___
 
 ### paused
 
@@ -187,7 +187,7 @@ The SDK can also emit the streamUpdated event only for the local participant. Wh
 
 Emitted when a video presentation is paused.
 
----
+___
 
 ### played
 
@@ -195,7 +195,7 @@ Emitted when a video presentation is paused.
 
 Emitted when a video presentation is resumed.
 
----
+___
 
 ### sought
 
@@ -203,7 +203,7 @@ Emitted when a video presentation is resumed.
 
 Emitted when a video presentation is sought.
 
----
+___
 
 ### started
 
@@ -219,7 +219,7 @@ Emitted when a video presentation is started.
 
 The AudioTrack type gathers audio tracks available in a stream.
 
----
+___
 
 ### MediaStream
 
@@ -229,15 +229,15 @@ The MediaStream type gathers information about media streams.
 
 #### Type declaration
 
-| Name          | Type                                                      | Description                               |
-| :------------ | :-------------------------------------------------------- | :---------------------------------------- |
-| `audioTracks` | [`AudioTrack`](internal.md#audiotrack)[]                  | The audio tracks available in the stream. |
-| `id`          | `String`                                                  | The media stream identifier.              |
-| `label`       | `String`                                                  | The media stream label.                   |
-| `type`        | [`MediaStreamType`](../enums/internal.MediaStreamType.md) | The media stream type.                    |
-| `videoTracks` | [`VideoTrack`](internal.md#videotrack)[]                  | The video tracks available in the stream. |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `audioTracks` | [`AudioTrack`](internal.md#audiotrack)[] | The audio tracks available in the stream. |
+| `id` | `String` | The media stream identifier. |
+| `label` | `String` | The media stream label. |
+| `type` | [`MediaStreamType`](../enums/internal.MediaStreamType.md) | The media stream type. |
+| `videoTracks` | [`VideoTrack`](internal.md#videotrack)[] | The video tracks available in the stream. |
 
----
+___
 
 ### UnsubscribeFunction
 
@@ -253,7 +253,7 @@ The UnsubscribeFunction unsubscribes from event listeners.
 
 `void`
 
----
+___
 
 ### VideoTrack
 

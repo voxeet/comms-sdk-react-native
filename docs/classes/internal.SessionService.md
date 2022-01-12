@@ -35,7 +35,7 @@ Closes the current session.
 
 `Promise`<`void`\>
 
----
+___
 
 ### getParticipant
 
@@ -47,7 +47,7 @@ Provides the local participant object that belongs to the current session.
 
 `Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
----
+___
 
 ### isOpen
 
@@ -59,7 +59,7 @@ Returns if a session that connects the SDK with the Dolby.io platform is opened 
 
 `Promise`<`Boolean`\>
 
----
+___
 
 ### open
 
@@ -69,8 +69,8 @@ Opens a new session.
 
 #### Parameters
 
-| Name              | Type                                                           | Description                                           |
-| :---------------- | :------------------------------------------------------------- | :---------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `participantInfo` | [`ParticipantInfo`](../interfaces/internal.ParticipantInfo.md) | The optional information about the local participant. |
 
 #### Returns
