@@ -8,27 +8,27 @@ The Conference interface gathers information about a conference.
 
 ### Properties
 
-- [alias](internal.Conference.md#alias)
 - [id](internal.Conference.md#id)
+- [alias](internal.Conference.md#alias)
 - [isNew](internal.Conference.md#isnew)
 - [participants](internal.Conference.md#participants)
 - [status](internal.Conference.md#status)
 
 ## Properties
 
-### alias
-
-• `Optional` **alias**: `string`
-
-The conference alias.
-
-___
-
 ### id
 
 • `Optional` **id**: `string`
 
 The conference ID.
+
+___
+
+### alias
+
+• `Optional` **alias**: `string`
+
+The conference alias.
 
 ___
 
