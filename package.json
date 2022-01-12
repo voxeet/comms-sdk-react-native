@@ -30,7 +30,7 @@
     "pods": "cd example/ios && pod install",
     "pods:x86_64": "cd example/ios && arch -x86_64 pod install",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "documentation": "rm -rf docs && typedoc --disableSources",
+    "documentation": "rm -rf docs && typedoc --disableSources --sort source-order",
     "documentation:convert": "yarn documentation && rm -rf scripts/docs && cd scripts && node convertDocs.js",
     "documentation:append": "git add docs",
     "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies"
