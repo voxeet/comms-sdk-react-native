@@ -94,7 +94,7 @@ const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
  * that as a new file to ./scripts/docs directory
  *
  * How to use:
- * Run `node convertDocs.js` in scripts directory. A docs directory should be created with all converted files.
+ * Run `node convertDocs.js` in scripts directory. A docs directory in /scripts/docs should be created with all converted files.
  */
 (async function () {
   const nodeVersion = process.versions.node.match(/(\d.)\.\d./);
@@ -105,6 +105,8 @@ const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
   } else {
     console.error('Unknown node version... Proceeding anyway.');
   }
+
+  // this is recursive function, it will populate FILE_PATHS constant
   buildFilesPathArray(DOCS_DIR);
 
   const FILTERED_FILE_PATHS = FILE_PATHS.filter(
@@ -114,16 +116,16 @@ const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
   if (!FILTERED_FILE_PATHS.length)
     throw new Error(`No file paths found to work on!`);
 
-  FILTERED_FILE_PATHS.forEach(convertDoc);
+  FILTERED_FILE_PATHS.forEach(convertDocFile);
 
   console.log('Conversion successful!');
 })();
 
-function createDocHeader(rawModuleName, slug, order) {
+function getHeader(module, slug, order) {
   return `---
 apiVersion: 1.0
 categoryName: React Native SDK
-title: ${rawModuleName}
+title: ${module}
 slug: ${slug}
 excerpt: None
 category: 60b289fa3ada0c007f41d5a9
@@ -132,7 +134,7 @@ hidden: False
 createdAt: ${new Date().toISOString()}
 updatedAt: ${new Date().toISOString()}
 metadata:
-  title: ${rawModuleName}
+  title: ${module}
   description: Explore our React Native SDK documentation to create a video conference application.
   image:
     [
@@ -146,87 +148,125 @@ metadata:
 `;
 }
 
-function convertDoc(filePath, index) {
+/**
+ * This function gets module name from filepath, e.g. from `../docs/interfaces/Conference.md`
+ * it should return `interfaces`
+ */
+function getFilePathModuleName(filePath) {
+  const moduleName = filePath.match(REGEXP_MATCH_DOC_MODULE);
+  if (!moduleName) {
+    throw new Error(`[${filePath}]: reading file module error `);
+  }
+  return moduleName[1];
+}
+
+/** This function gives us raw file name e.g. from Conference.md it will return Conference */
+function getFilePathRawFileName(filePath) {
+  const rawFileName = filePath.match(REGEXP_MATCH_DOC_FILENAME);
+  if (!rawFileName) {
+    throw new Error(`[${filePath}]: reading raw filename error`);
+  }
+  return rawFileName[1];
+}
+
+/**
+ * This function creates header slug (format: slug prefix + module + filename in lowercase)
+ * e.g. slug for a file `../docs/interfaces/internal.ConferenceMixingOptions.md` should look like
+ * `rn-client-sdk-interfaces-conferencemixingoptions`
+ */
+function getFilePathSlugName(module, rawFilename) {
+  return (
+    SLUG_PREFIX +
+    module +
+    (module === 'modules' ? '' : `-${rawFilename.toLowerCase()}`)
+  );
+}
+
+/** This function returns new file path where converted doc file will be saved */
+function getNewFilepath(oldPath, slug) {
+  const newFilePath = path.dirname(oldPath).substring(1);
+  return newFilePath + `/${slug}.md`;
+}
+
+function getFilePathMetadata(filePath) {
+  const module = getFilePathModuleName(filePath);
+  const rawFilename = getFilePathRawFileName(filePath);
+  const slug = getFilePathSlugName(module, rawFilename);
+  return [rawFilename, module, slug];
+}
+
+function convertDocFile(filePath, index) {
   let renamedFilepath = filePath;
 
-  /** one of requirements is to rename `interfaces` => `models`
-   * and `classes` => `references` do suit dolby documentation naming convention */
+  // we're renaming classes to references and interfaces to models
   if (/classes/.test(renamedFilepath)) {
     renamedFilepath = renamedFilepath.replace(/classes/, 'references');
   } else if (/interfaces/.test(renamedFilepath)) {
     renamedFilepath = renamedFilepath.replace(/interfaces/, 'models');
   }
 
-  let moduleName = getFilePathModuleName(renamedFilepath);
+  // we get all necessary metadata and header
+  const [rawFilename, module, slug] = getFilePathMetadata(renamedFilepath);
+  const header = getHeader(
+    module === 'internal' ? 'modules' : module,
+    slug,
+    index
+  );
 
-  /** we make sure our file has `internal.MyService` in its name */
-  if (isInternalDocFile(renamedFilepath) && moduleName) {
-    const rawFileName = filePath.match(REGEXP_MATCH_DOC_FILENAME);
-    if (!rawFileName) {
-      throw new Error(`[${renamedFilepath}]: reading raw filename error`);
-    }
-    const slug = createHeaderSlug(renamedFilepath);
-    const header = createDocHeader(
-      rawFileName[1] === 'internal' ? 'modules' : rawFileName[1],
-      slug,
-      index
+  // we get our new filename
+  const newFilePath = getNewFilepath(renamedFilepath, slug);
+
+  // we read the original file
+  const fileBuffer = fs.readFileSync(filePath);
+  if (!fileBuffer) {
+    throw new Error(`[${filePath}]: reading file error`);
+  }
+  const docAsString = fileBuffer.toString();
+
+  // we add header to the file as string
+  const docWithHeader = header + docAsString;
+
+  // we replace all necessary stuff following requirements from top of the page
+  let convertedDocAsString = '';
+  convertedDocAsString = docWithHeader
+    .replaceAll(REGEXP_MATCH_DOC_LINKS, (substring) =>
+      changeLinkFormatReplacerFn(substring, module)
+    )
+    .replaceAll(REGEXP_MATCH_INTERNAL_LINKS, '')
+    .replaceAll(REGEXP_MATCH_CLASS_TITLES, '')
+    .replaceAll(REGEXP_MATCH_DOC_TITLES, '')
+    .replaceAll(REGEXP_MATCH_BACKTICKS, (substring, _, captureGroupTwo) => {
+      return substring.replace(/(?<=\[)(`(\w+)`)(?=]\(.+\))/, captureGroupTwo);
+    })
+    .replaceAll(REGEXP_MATCH_EVENT_HANDLERS, (substring, captureGroup) => {
+      return `## Event handlers\n\n${substring}`;
+    });
+
+  // if file is CommsAPI we need to introduce custom behaviour
+  if (rawFilename === 'CommsAPI') {
+    convertedDocAsString = convertedDocAsString.replaceAll(
+      REGEXP_MATCH_TABLE_OF_CONTENTS_COMMS_FILE,
+      ''
     );
-
-    /** we use substring to create new path; here we're going from
-    ../docs/interface/.. to ./docs/interface/.. -- we also rename our files to
-     slugnames since it's also part of requirement */
-    const newFilePath = path.dirname(renamedFilepath).substring(1);
-    const newFileName = newFilePath + `/${slug}.md`;
-
-    const fileBuffer = fs.readFileSync(filePath);
-    if (!fileBuffer) {
-      throw new Error(`[${filePath}]: reading file error`);
-    }
-    const docAsString = fileBuffer.toString();
-    const docWithHeader = header + docAsString;
-    let convertedDocAsString = '';
-    convertedDocAsString = docWithHeader
-      .replaceAll(REGEXP_MATCH_DOC_LINKS, (substring) =>
-        changeLinkFormatReplacerFn(substring, moduleName)
-      )
-      .replaceAll(REGEXP_MATCH_INTERNAL_LINKS, '')
-      .replaceAll(REGEXP_MATCH_CLASS_TITLES, '')
-      .replaceAll(REGEXP_MATCH_DOC_TITLES, '')
-      .replaceAll(REGEXP_MATCH_BACKTICKS, (substring, _, captureGroupTwo) => {
-        return substring.replace(
-          /(?<=\[)(`(\w+)`)(?=]\(.+\))/,
-          captureGroupTwo
-        );
-      })
-      .replaceAll(REGEXP_MATCH_EVENT_HANDLERS, (substring, captureGroup) => {
-        return `## Event handlers\n\n${substring}`;
-      });
-    if (rawFileName[1] === 'CommsAPI') {
-      convertedDocAsString = convertedDocAsString.replaceAll(
-        REGEXP_MATCH_TABLE_OF_CONTENTS_COMMS_FILE,
-        ''
-      );
-    } else {
-      convertedDocAsString = convertedDocAsString.replaceAll(
-        REGEXP_MATCH_TABLE_OF_CONTENTS,
-        ''
-      );
-    }
-
-    try {
-      if (!fs.existsSync(newFilePath)) {
-        fs.mkdirSync(newFilePath, {
-          recursive: true,
-        });
-      }
-
-      fs.writeFileSync(newFileName, convertedDocAsString);
-    } catch (e) {
-      console.error(`[${filePath.substring(1)}]: writing or renaming error`);
-      console.error(e);
-    }
   } else {
-    console.error('Filepath not correct', filePath);
+    convertedDocAsString = convertedDocAsString.replaceAll(
+      REGEXP_MATCH_TABLE_OF_CONTENTS,
+      ''
+    );
+  }
+
+  // we write our newly generated file to disk
+  try {
+    if (!fs.existsSync(newFilePath)) {
+      fs.mkdirSync(newFilePath, {
+        recursive: true,
+      });
+    }
+
+    fs.writeFileSync(newFilePath, convertedDocAsString);
+  } catch (e) {
+    console.error(`[${filePath.substring(1)}]: writing or renaming error`);
+    console.error(e);
   }
 }
 
@@ -244,55 +284,30 @@ function buildFilesPathArray(dir) {
   });
 }
 
-/**
- * This function ensures that whatever file we're reading and changing, has `internal`
- * in its path (then it means it's Dolby documentation file)
- */
-function isInternalDocFile(filepath) {
-  return !!new RegExp(REGEXP_MATCH_DOC_FILENAME).test(filepath);
-}
-
-/**
- * This function creates header slug (format: slug prefix + module + filename in lowercase)
- * e.g. slug for a file `../docs/interfaces/internal.ConferenceMixingOptions.md` should look like
- * `rn-client-sdk-interfaces-conferencemixingoptions`
- * NOTE: at this point we assume filepath have internal.MyService filename format
- */
-function createHeaderSlug(filePath) {
-  const sdkModule = filePath.match(REGEXP_MATCH_DOC_MODULE)[1];
-  const rawFilename = filePath.match(REGEXP_MATCH_DOC_FILENAME)[1];
-  return (
-    SLUG_PREFIX +
-    sdkModule +
-    (sdkModule === 'modules' ? '' : `-${rawFilename.toLowerCase()}`)
-  );
-}
-
-/**
- * This function gets module name from filepath, e.g. from `../docs/interfaces/Conference.md`
- * it should return `interfaces`
- */
-function getFilePathModuleName(filePath) {
-  const moduleName = filePath.match(REGEXP_MATCH_DOC_MODULE);
-  if (moduleName) {
-    return moduleName[1];
-  }
-  return '';
-}
-
 function changeLinkFormatReplacerFn(substring, moduleName) {
   let replaceString;
+  // we check if string links to general `internal.md` file
   const isRootInternalModule = new RegExp('internal.md').test(substring);
   if (isRootInternalModule) {
+    // if it does, we apply custom prefix: `doc:rn-client-sdk-modules`
     replaceString = LINK_SLUG_PREFIX + 'modules';
     return substring.replace(/(?<=\[.+]\().+\.md(?=(#.+)?\))/, replaceString);
   }
+
+  // we rename internal document names according to requirement no. 4
+  // this will match (../models/internal.FileConverted.md) and capture `models`
   const module = substring
     .replace(/interfaces/, 'models')
     .replace(/classes/, 'references')
     .match(/\(\.\.\/(.+)\//);
-  const service = substring.match(/internal\.(.+)\.md(#.+)?\)/);
-  if (!service) {
+
+  // this will match [Recording](../interfaces/internal.Recording.md) and capture
+  // `Recording`
+  const methodName = substring.match(/internal\.(.+)\.md(#.+)?\)/);
+
+  // links in CommsAPI.md file are the only ones that point to themselves
+  // this means we have to apply custom replace behaviour in those cases
+  if (!methodName) {
     if (substring.match(REGEXP_MATCH_DOC_FILENAME)[0] === 'CommsAPI.md') {
       const link = substring.match(/#\w+/);
       return substring.replace(/(?<=.+\()(.+)(?=\))/, link[0]);
@@ -300,10 +315,11 @@ function changeLinkFormatReplacerFn(substring, moduleName) {
     console.error('service not found in changeLinkFormatReplaceFn', substring);
     return substring;
   }
+
   replaceString =
     LINK_SLUG_PREFIX +
     (module ? `${module[1]}-` : `${moduleName}-`) +
-    `${service[1].toLowerCase()}`;
+    `${methodName[1].toLowerCase()}`;
 
   return substring.replace(/(?<=\[.+]\().+\.md(?=.+\))?/, replaceString);
 }
