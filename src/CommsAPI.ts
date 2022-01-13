@@ -26,37 +26,43 @@ export class CommsAPI {
     null;
 
   /**
-   * Retrieves the ConferenceService instance that allows interacting with conferences.
-   */
-  conference = ConferenceService;
-  /**
-   * Retrieves the SessionService instance that allows using sessions.
-   */
-  session = SessionService;
-  /**
-   * Retrieves the RecordingService instance that allows recording conferences.
-   */
-  recording = RecordingService;
-  /**
    * Retrieves the CommandService instance that allows sending messages to conferences.
    */
   command = CommandService;
+
   /**
-   * Retrieves the NotificationService instance that allows inviting participants to a conference.
+   * Retrieves the ConferenceService instance that allows interacting with conferences.
    */
-  notification = NotificationService;
+  conference = ConferenceService;
+
   /**
    * Retrieves the FilePresentationService instance that allows presenting files during conferences.
    */
   filePresentation = FilePresentationService;
   /**
-   * Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
-   */
-  videoPresentation = VideoPresentationService;
-  /**
    * Retrieves the MediaDeviceService instance that allows interacting with devices through the system.
    */
   mediaDevice = MediaDeviceService;
+
+  /**
+   * Retrieves the NotificationService instance that allows inviting participants to a conference.
+   */
+  notification = NotificationService;
+
+  /**
+   * Retrieves the RecordingService instance that allows recording conferences.
+   */
+  recording = RecordingService;
+
+  /**
+   * Retrieves the SessionService instance that allows using sessions.
+   */
+  session = SessionService;
+
+  /**
+   * Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
+   */
+  videoPresentation = VideoPresentationService;
 
   /**
    * Initializes the SDK using the customer key and secret.
