@@ -2,33 +2,6 @@
 
 ## Table of contents
 
-### Enumerations
-
-- [Codec](../enums/internal.Codec.md)
-- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
-- [ConferencePermission](../enums/internal.ConferencePermission.md)
-- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
-- [MediaStreamType](../enums/internal.MediaStreamType.md)
-- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
-- [ParticipantType](../enums/internal.ParticipantType.md)
-- [RTCPMode](../enums/internal.RTCPMode.md)
-- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
-
-### Enumeration members
-
-- [FilePresentationStarted](internal.md#filepresentationstarted)
-- [FilePresentationStopped](internal.md#filepresentationstopped)
-- [FilePresentationUpdated](internal.md#filepresentationupdated)
-- [ParticipantAdded](internal.md#participantadded)
-- [ParticipantUpdated](internal.md#participantupdated)
-- [StreamAdded](internal.md#streamadded)
-- [StreamRemoved](internal.md#streamremoved)
-- [StreamUpdated](internal.md#streamupdated)
-- [paused](internal.md#paused)
-- [played](internal.md#played)
-- [sought](internal.md#sought)
-- [started](internal.md#started)
-
 ### Classes
 
 - [CommandService](../classes/internal.CommandService.md)
@@ -42,68 +15,70 @@
 
 ### Interfaces
 
-- [AudioProcessingOptions](../interfaces/internal.AudioProcessingOptions.md)
-- [AudioProcessingSenderOptions](../interfaces/internal.AudioProcessingSenderOptions.md)
-- [Conference](../interfaces/internal.Conference.md)
-- [ConferenceConstraints](../interfaces/internal.ConferenceConstraints.md)
-- [ConferenceCreateOptions](../interfaces/internal.ConferenceCreateOptions.md)
-- [ConferenceCreateParameters](../interfaces/internal.ConferenceCreateParameters.md)
-- [ConferenceJoinOptions](../interfaces/internal.ConferenceJoinOptions.md)
-- [ConferenceLeaveOptions](../interfaces/internal.ConferenceLeaveOptions.md)
-- [ConferenceMixingOptions](../interfaces/internal.ConferenceMixingOptions.md)
-- [ConferenceReplayOptions](../interfaces/internal.ConferenceReplayOptions.md)
-- [ConferenceStatusUpdatedEventType](../interfaces/internal.ConferenceStatusUpdatedEventType.md)
-- [File](../interfaces/internal.File.md)
-- [FileConverted](../interfaces/internal.FileConverted.md)
-- [FileConvertedEventType](../interfaces/internal.FileConvertedEventType.md)
-- [FilePresentation](../interfaces/internal.FilePresentation.md)
-- [FilePresentationChangedEventType](../interfaces/internal.FilePresentationChangedEventType.md)
-- [InvitationReceivedEventType](../interfaces/internal.InvitationReceivedEventType.md)
 - [MessageReceivedEventType](../interfaces/internal.MessageReceivedEventType.md)
-- [Participant](../interfaces/internal.Participant.md)
 - [ParticipantChangedEventType](../interfaces/internal.ParticipantChangedEventType.md)
+- [PermissionsUpdatedEventType](../interfaces/internal.PermissionsUpdatedEventType.md)
+- [ConferenceStatusUpdatedEventType](../interfaces/internal.ConferenceStatusUpdatedEventType.md)
+- [StreamChangedEventType](../interfaces/internal.StreamChangedEventType.md)
+- [Conference](../interfaces/internal.Conference.md)
+- [ConferenceCreateParameters](../interfaces/internal.ConferenceCreateParameters.md)
+- [ConferenceCreateOptions](../interfaces/internal.ConferenceCreateOptions.md)
+- [ConferenceLeaveOptions](../interfaces/internal.ConferenceLeaveOptions.md)
+- [ConferenceConstraints](../interfaces/internal.ConferenceConstraints.md)
+- [ConferenceJoinOptions](../interfaces/internal.ConferenceJoinOptions.md)
+- [ConferenceReplayOptions](../interfaces/internal.ConferenceReplayOptions.md)
+- [ConferenceMixingOptions](../interfaces/internal.ConferenceMixingOptions.md)
+- [Participant](../interfaces/internal.Participant.md)
 - [ParticipantInfo](../interfaces/internal.ParticipantInfo.md)
 - [ParticipantInvited](../interfaces/internal.ParticipantInvited.md)
 - [ParticipantPermissions](../interfaces/internal.ParticipantPermissions.md)
-- [PermissionsUpdatedEventType](../interfaces/internal.PermissionsUpdatedEventType.md)
+- [AudioProcessingOptions](../interfaces/internal.AudioProcessingOptions.md)
+- [AudioProcessingSenderOptions](../interfaces/internal.AudioProcessingSenderOptions.md)
+- [FileConvertedEventType](../interfaces/internal.FileConvertedEventType.md)
+- [FilePresentationChangedEventType](../interfaces/internal.FilePresentationChangedEventType.md)
+- [File](../interfaces/internal.File.md)
+- [FileConverted](../interfaces/internal.FileConverted.md)
+- [FilePresentation](../interfaces/internal.FilePresentation.md)
+- [InvitationReceivedEventType](../interfaces/internal.InvitationReceivedEventType.md)
 - [Recording](../interfaces/internal.Recording.md)
-- [StreamChangedEventType](../interfaces/internal.StreamChangedEventType.md)
-- [User](../interfaces/internal.User.md)
-- [VideoPresentation](../interfaces/internal.VideoPresentation.md)
 - [VideoPresentationEventType](../interfaces/internal.VideoPresentationEventType.md)
+- [VideoPresentation](../interfaces/internal.VideoPresentation.md)
+
+### Enumeration members
+
+- [ParticipantAdded](internal.md#participantadded)
+- [ParticipantUpdated](internal.md#participantupdated)
+- [StreamAdded](internal.md#streamadded)
+- [StreamUpdated](internal.md#streamupdated)
+- [StreamRemoved](internal.md#streamremoved)
+- [FilePresentationStarted](internal.md#filepresentationstarted)
+- [FilePresentationStopped](internal.md#filepresentationstopped)
+- [FilePresentationUpdated](internal.md#filepresentationupdated)
+- [VideoPresentationPaused](internal.md#videopresentationpaused)
+- [VideoPresentationPlayed](internal.md#videopresentationplayed)
+- [VideoPresentationSought](internal.md#videopresentationsought)
+- [VideoPresentationStarted](internal.md#videopresentationstarted)
+
+### Enumerations
+
+- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
+- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
+- [ParticipantType](../enums/internal.ParticipantType.md)
+- [RTCPMode](../enums/internal.RTCPMode.md)
+- [Codec](../enums/internal.Codec.md)
+- [ConferencePermission](../enums/internal.ConferencePermission.md)
+- [MediaStreamType](../enums/internal.MediaStreamType.md)
+- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
+- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
 ### Type aliases
 
 - [AudioTrack](internal.md#audiotrack)
+- [VideoTrack](internal.md#videotrack)
 - [MediaStream](internal.md#mediastream)
 - [UnsubscribeFunction](internal.md#unsubscribefunction)
-- [VideoTrack](internal.md#videotrack)
 
 ## Enumeration members
-
-### FilePresentationStarted
-
-• **FilePresentationStarted**: `Object` = `"EVENT_FILEPRESENTATION_STARTED"`
-
-Emitted when a presenter starts a file presentation.
-
-___
-
-### FilePresentationStopped
-
-• **FilePresentationStopped**: `Object` = `"EVENT_FILEPRESENTATION_STOPPED"`
-
-Emitted when a presenter ends a file presentation.
-
-___
-
-### FilePresentationUpdated
-
-• **FilePresentationUpdated**: `Object` = `"EVENT_FILEPRESENTATION_UPDATED"`
-
-Emitted when the presenter changes the displayed page of the shared file.
-
-___
 
 ### ParticipantAdded
 
@@ -148,15 +123,6 @@ The SDK can also emit the streamAdded event only for the local participant. When
 
 ___
 
-### StreamRemoved
-
-• **StreamRemoved**: `Object` = `"EVENT_CONFERENCE_STREAM_REMOVED"`
-
-Emitted when the SDK removes a stream from a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant disables audio and video or stops a screen-share presentation, the SDK removes the proper stream and emits the streamRemoved event to all conference participants.
-The SDK can also emit the streamRemoved event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute a selected remote participant who does not use a camera, the local participant receives the streamRemoved event.
-
-___
-
 ### StreamUpdated
 
 • **StreamUpdated**: `Object` = `"EVENT_CONFERENCE_STREAM_UPDATED"`
@@ -182,33 +148,66 @@ The SDK can also emit the streamUpdated event only for the local participant. Wh
 
 ___
 
-### paused
+### StreamRemoved
 
-• **paused**: `Object` = `"EVENT_VIDEOPRESENTATION_PAUSED"`
+• **StreamRemoved**: `Object` = `"EVENT_CONFERENCE_STREAM_REMOVED"`
+
+Emitted when the SDK removes a stream from a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant disables audio and video or stops a screen-share presentation, the SDK removes the proper stream and emits the streamRemoved event to all conference participants.
+The SDK can also emit the streamRemoved event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute a selected remote participant who does not use a camera, the local participant receives the streamRemoved event.
+
+___
+
+### FilePresentationStarted
+
+• **FilePresentationStarted**: `Object` = `"EVENT_FILEPRESENTATION_STARTED"`
+
+Emitted when a presenter starts a file presentation.
+
+___
+
+### FilePresentationStopped
+
+• **FilePresentationStopped**: `Object` = `"EVENT_FILEPRESENTATION_STOPPED"`
+
+Emitted when a presenter ends a file presentation.
+
+___
+
+### FilePresentationUpdated
+
+• **FilePresentationUpdated**: `Object` = `"EVENT_FILEPRESENTATION_UPDATED"`
+
+Emitted when the presenter changes the displayed page of the shared file.
+
+___
+
+### VideoPresentationPaused
+
+• **VideoPresentationPaused**: `Object` = `"EVENT_VIDEOPRESENTATION_PAUSED"`
 
 Emitted when a video presentation is paused.
 
 ___
 
-### played
+### VideoPresentationPlayed
 
-• **played**: `Object` = `"EVENT_VIDEOPRESENTATION_PLAYED"`
+• **VideoPresentationPlayed**: `Object` = `"EVENT_VIDEOPRESENTATION_PLAYED"`
 
 Emitted when a video presentation is resumed.
 
 ___
 
-### sought
+### VideoPresentationSought
 
-• **sought**: `Object` = `"EVENT_VIDEOPRESENTATION_SOUGHT"`
+• **VideoPresentationSought**: `Object` = `"EVENT_VIDEOPRESENTATION_SOUGHT"`
 
 Emitted when a video presentation is sought.
 
 ___
 
-### started
+### VideoPresentationStarted
 
-• **started**: `Object` = `"EVENT_VIDEOPRESENTATION_STARTED"`
+• **VideoPresentationStarted**: `Object` = `"EVENT_VIDEOPRESENTATION_STARTED"`
 
 Emitted when a video presentation is started.
 
@@ -222,6 +221,14 @@ The AudioTrack type gathers audio tracks available in a stream.
 
 ___
 
+### VideoTrack
+
+Ƭ **VideoTrack**: `any`
+
+The VideoTrack type gathers video tracks available in a stream.
+
+___
+
 ### MediaStream
 
 Ƭ **MediaStream**: `Object`
@@ -232,11 +239,11 @@ The MediaStream type gathers information about media streams.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `audioTracks` | [`AudioTrack`](internal.md#audiotrack)[] | The audio tracks available in the stream. |
 | `id` | `String` | The media stream identifier. |
-| `label` | `String` | The media stream label. |
 | `type` | [`MediaStreamType`](../enums/internal.MediaStreamType.md) | The media stream type. |
+| `audioTracks` | [`AudioTrack`](internal.md#audiotrack)[] | The audio tracks available in the stream. |
 | `videoTracks` | [`VideoTrack`](internal.md#videotrack)[] | The video tracks available in the stream. |
+| `label` | `String` | The media stream label. |
 
 ___
 
@@ -253,11 +260,3 @@ The UnsubscribeFunction unsubscribes from event listeners.
 ##### Returns
 
 `void`
-
-___
-
-### VideoTrack
-
-Ƭ **VideoTrack**: `any`
-
-The VideoTrack type gathers video tracks available in a stream.

@@ -169,6 +169,6 @@ class RNConferenceEventEmitter(
     private const val KEY_PARTICIPANT = "participant"
     private const val KEY_CONFERENCE_STATUS = "conferenceStatus"
     private const val KEY_PERMISSIONS = "permissions"
-    private const val KEY_MEDIA_STREAM = "mediaStream"
+    private const val KEY_MEDIA_STREAM = "stream"
   }
 }

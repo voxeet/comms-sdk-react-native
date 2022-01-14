@@ -4,7 +4,7 @@ import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
 export const getCurrentUser = async () => {
   try {
-    const currentUser = await CommsAPI.session.getCurrentUser();
+    const currentUser = await CommsAPI.session.getParticipant();
     Alert.alert('Current user', JSON.stringify(currentUser));
   } catch (e: any) {
     Alert.alert('Error', e.toString());

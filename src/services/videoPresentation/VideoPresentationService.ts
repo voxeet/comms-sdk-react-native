@@ -34,6 +34,13 @@ export class VideoPresentationService {
   );
 
   /**
+   * Returns information about the current video presentation.
+   */
+  public current(): Promise<VideoPresentation | null> {
+    return this._nativeModule.current();
+  }
+
+  /**
    * Pauses a video presentation.
    * @param timestamp The timestamp that informs when the video needs to be paused, in milliseconds.
    */
@@ -46,20 +53,6 @@ export class VideoPresentationService {
    */
   public play(): Promise<void> {
     return this._nativeModule.play();
-  }
-
-  /**
-   * Returns information about the current video presentation.
-   */
-  public current(): Promise<VideoPresentation | null> {
-    return this._nativeModule.current();
-  }
-
-  /**
-   * Provides the current state of a video presentation.
-   */
-  public state(): Promise<VideoPresentationState> {
-    return this._nativeModule.state();
   }
 
   /**
@@ -79,6 +72,13 @@ export class VideoPresentationService {
   }
 
   /**
+   * Provides the current state of a video presentation.
+   */
+  public state(): Promise<VideoPresentationState> {
+    return this._nativeModule.state();
+  }
+
+  /**
    * Stops a video presentation.
    */
   public stop(): Promise<void> {
@@ -94,30 +94,30 @@ export class VideoPresentationService {
     handler: (
       data: VideoPresentationEventType,
       type?:
-        | VideoPresentationEventNames.started
-        | VideoPresentationEventNames.sought
-        | VideoPresentationEventNames.paused
-        | VideoPresentationEventNames.played
+        | VideoPresentationEventNames.VideoPresentationStarted
+        | VideoPresentationEventNames.VideoPresentationSought
+        | VideoPresentationEventNames.VideoPresentationPaused
+        | VideoPresentationEventNames.VideoPresentationPlayed
     ) => void
   ): UnsubscribeFunction {
     const videoPresentationEventStartedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.started,
+        VideoPresentationEventNames.VideoPresentationStarted,
         handler
       );
     const videoPresentationEventPausedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.paused,
+        VideoPresentationEventNames.VideoPresentationPaused,
         handler
       );
     const videoPresentationEventPlayedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.played,
+        VideoPresentationEventNames.VideoPresentationPlayed,
         handler
       );
     const videoPresentationEventSoughtEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.sought,
+        VideoPresentationEventNames.VideoPresentationSought,
         handler
       );
     return () => {
@@ -134,7 +134,7 @@ export class VideoPresentationService {
    */
   onVideoPresentationStopped(handler: () => void): UnsubscribeFunction {
     return this._nativeEvents.addListener(
-      VideoPresentationEventNames.stopped,
+      VideoPresentationEventNames.VideoPresentationStopped,
       handler
     );
   }

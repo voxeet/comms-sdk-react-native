@@ -9,8 +9,8 @@ The MediaStreamType enum gathers the possible types of media streams.
 ### Enumeration members
 
 - [Camera](internal.MediaStreamType.md#camera)
-- [Custom](internal.MediaStreamType.md#custom)
 - [ScreenShare](internal.MediaStreamType.md#screenshare)
+- [Custom](internal.MediaStreamType.md#custom)
 
 ## Enumeration members
 
@@ -22,16 +22,16 @@ The camera media stream, either audio, video, or audio and video. This stream ty
 
 ___
 
-### Custom
-
-• **Custom** = `"CUSTOM"`
-
-A media stream produced by an external device.
-
-___
-
 ### ScreenShare
 
 • **ScreenShare** = `"SCREEN_SHARE"`
 
 The screen-share media stream.
+
+___
+
+### Custom
+
+• **Custom** = `"CUSTOM"`
+
+A media stream produced by an external device.

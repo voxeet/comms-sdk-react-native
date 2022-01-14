@@ -27,14 +27,14 @@ The VideoPresentationService allows sharing videos during a conference. To prese
 ### Methods
 
 - [current](internal.VideoPresentationService.md#current)
-- [onVideoPresentationChange](internal.VideoPresentationService.md#onvideopresentationchange)
-- [onVideoPresentationStopped](internal.VideoPresentationService.md#onvideopresentationstopped)
 - [pause](internal.VideoPresentationService.md#pause)
 - [play](internal.VideoPresentationService.md#play)
 - [seek](internal.VideoPresentationService.md#seek)
 - [start](internal.VideoPresentationService.md#start)
 - [state](internal.VideoPresentationService.md#state)
 - [stop](internal.VideoPresentationService.md#stop)
+- [onVideoPresentationChange](internal.VideoPresentationService.md#onvideopresentationchange)
+- [onVideoPresentationStopped](internal.VideoPresentationService.md#onvideopresentationstopped)
 
 ## Constructors
 
@@ -53,44 +53,6 @@ Returns information about the current video presentation.
 #### Returns
 
 `Promise`<``null`` \| [`VideoPresentation`](../interfaces/internal.VideoPresentation.md)\>
-
-___
-
-### onVideoPresentationChange
-
-▸ **onVideoPresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the video presentation started, sought, paused, and played events.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`paused`](../modules/internal.md#paused) \| [`played`](../modules/internal.md#played) \| [`sought`](../modules/internal.md#sought) \| [`started`](../modules/internal.md#started)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
-### onVideoPresentationStopped
-
-▸ **onVideoPresentationStopped**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the video presentation stopped event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | () => `void` | Event callback function |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
 ___
 
@@ -181,3 +143,41 @@ Stops a video presentation.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### onVideoPresentationChange
+
+▸ **onVideoPresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the video presentation started, sought, paused, and played events.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`VideoPresentationPaused`](../modules/internal.md#videopresentationpaused) \| [`VideoPresentationPlayed`](../modules/internal.md#videopresentationplayed) \| [`VideoPresentationSought`](../modules/internal.md#videopresentationsought) \| [`VideoPresentationStarted`](../modules/internal.md#videopresentationstarted)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onVideoPresentationStopped
+
+▸ **onVideoPresentationStopped**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the video presentation stopped event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | () => `void` | Event callback function |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)

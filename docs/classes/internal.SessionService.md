@@ -13,7 +13,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 ### Methods
 
 - [close](internal.SessionService.md#close)
-- [getCurrentUser](internal.SessionService.md#getcurrentuser)
+- [getParticipant](internal.SessionService.md#getparticipant)
 - [isOpen](internal.SessionService.md#isopen)
 - [open](internal.SessionService.md#open)
 
@@ -37,15 +37,15 @@ Closes the current session.
 
 ___
 
-### getCurrentUser
+### getParticipant
 
-▸ **getCurrentUser**(): `Promise`<[`User`](../interfaces/internal.User.md)\>
+▸ **getParticipant**(): `Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
 Provides the local participant object that belongs to the current session.
 
 #### Returns
 
-`Promise`<[`User`](../interfaces/internal.User.md)\>
+`Promise`<[`Participant`](../interfaces/internal.Participant.md)\>
 
 ___
 
