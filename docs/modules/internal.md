@@ -54,10 +54,10 @@
 - [FilePresentationStarted](internal.md#filepresentationstarted)
 - [FilePresentationStopped](internal.md#filepresentationstopped)
 - [FilePresentationUpdated](internal.md#filepresentationupdated)
-- [paused](internal.md#paused)
-- [played](internal.md#played)
-- [sought](internal.md#sought)
-- [started](internal.md#started)
+- [VideoPresentationPaused](internal.md#videopresentationpaused)
+- [VideoPresentationPlayed](internal.md#videopresentationplayed)
+- [VideoPresentationSought](internal.md#videopresentationsought)
+- [VideoPresentationStarted](internal.md#videopresentationstarted)
 
 ### Enumerations
 
@@ -181,33 +181,33 @@ Emitted when the presenter changes the displayed page of the shared file.
 
 ___
 
-### paused
+### VideoPresentationPaused
 
-• **paused**: `Object` = `"EVENT_VIDEOPRESENTATION_PAUSED"`
+• **VideoPresentationPaused**: `Object` = `"EVENT_VIDEOPRESENTATION_PAUSED"`
 
 Emitted when a video presentation is paused.
 
 ___
 
-### played
+### VideoPresentationPlayed
 
-• **played**: `Object` = `"EVENT_VIDEOPRESENTATION_PLAYED"`
+• **VideoPresentationPlayed**: `Object` = `"EVENT_VIDEOPRESENTATION_PLAYED"`
 
 Emitted when a video presentation is resumed.
 
 ___
 
-### sought
+### VideoPresentationSought
 
-• **sought**: `Object` = `"EVENT_VIDEOPRESENTATION_SOUGHT"`
+• **VideoPresentationSought**: `Object` = `"EVENT_VIDEOPRESENTATION_SOUGHT"`
 
 Emitted when a video presentation is sought.
 
 ___
 
-### started
+### VideoPresentationStarted
 
-• **started**: `Object` = `"EVENT_VIDEOPRESENTATION_STARTED"`
+• **VideoPresentationStarted**: `Object` = `"EVENT_VIDEOPRESENTATION_STARTED"`
 
 Emitted when a video presentation is started.
 

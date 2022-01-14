@@ -156,7 +156,7 @@ Adds a listener to the video presentation started, sought, paused, and played ev
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`paused`](../modules/internal.md#paused) \| [`played`](../modules/internal.md#played) \| [`sought`](../modules/internal.md#sought) \| [`started`](../modules/internal.md#started)) => `void` | An event callback function. |
+| `handler` | (`data`: [`VideoPresentationEventType`](../interfaces/internal.VideoPresentationEventType.md), `type?`: [`VideoPresentationPaused`](../modules/internal.md#videopresentationpaused) \| [`VideoPresentationPlayed`](../modules/internal.md#videopresentationplayed) \| [`VideoPresentationSought`](../modules/internal.md#videopresentationsought) \| [`VideoPresentationStarted`](../modules/internal.md#videopresentationstarted)) => `void` | An event callback function. |
 
 #### Returns
 
