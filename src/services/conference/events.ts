@@ -85,7 +85,7 @@ export interface StreamChangedEventType {
   /** The conference participant. */
   participant: Participant;
   /** The media stream. */
-  mediaStream: MediaStream;
+  stream: MediaStream;
 }
 
 export interface ConferenceServiceEventMap {

@@ -21,6 +21,14 @@ export class NotificationService {
   _nativeEvents = new NativeEvents(CommsAPINotificationServiceModule);
 
   /**
+   * Declines the conference invitation.
+   * @param conference The conference object.
+   */
+  public async decline(conference: Conference): Promise<void> {
+    return this._nativeModule.decline(conference);
+  }
+
+  /**
    * Notifies conference participants about a conference invitation.
    * @param conference The conference object.
    * @param participants Information about the invited application users.
@@ -30,14 +38,6 @@ export class NotificationService {
     participants: ParticipantInvited[]
   ): Promise<void> {
     return this._nativeModule.invite(conference, participants);
-  }
-
-  /**
-   * Declines the conference invitation.
-   * @param conference The conference object.
-   */
-  public async decline(conference: Conference): Promise<void> {
-    return this._nativeModule.decline(conference);
   }
 
   /**
