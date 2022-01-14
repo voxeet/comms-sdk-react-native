@@ -8,14 +8,14 @@
 
 ### Properties
 
-- [conference](CommsAPI.md#conference)
-- [session](CommsAPI.md#session)
-- [recording](CommsAPI.md#recording)
 - [command](CommsAPI.md#command)
-- [notification](CommsAPI.md#notification)
+- [conference](CommsAPI.md#conference)
 - [filePresentation](CommsAPI.md#filepresentation)
-- [videoPresentation](CommsAPI.md#videopresentation)
 - [mediaDevice](CommsAPI.md#mediadevice)
+- [notification](CommsAPI.md#notification)
+- [recording](CommsAPI.md#recording)
+- [session](CommsAPI.md#session)
+- [videoPresentation](CommsAPI.md#videopresentation)
 
 ### Methods
 
@@ -30,30 +30,6 @@
 
 ## Properties
 
-### conference
-
-• **conference**: [`ConferenceService`](internal.ConferenceService.md)
-
-Retrieves the ConferenceService instance that allows interacting with conferences.
-
-___
-
-### session
-
-• **session**: [`SessionService`](internal.SessionService.md)
-
-Retrieves the SessionService instance that allows using sessions.
-
-___
-
-### recording
-
-• **recording**: [`RecordingService`](internal.RecordingService.md)
-
-Retrieves the RecordingService instance that allows recording conferences.
-
-___
-
 ### command
 
 • **command**: [`CommandService`](internal.CommandService.md)
@@ -62,11 +38,11 @@ Retrieves the CommandService instance that allows sending messages to conference
 
 ___
 
-### notification
+### conference
 
-• **notification**: [`NotificationService`](internal.NotificationService.md)
+• **conference**: [`ConferenceService`](internal.ConferenceService.md)
 
-Retrieves the NotificationService instance that allows inviting participants to a conference.
+Retrieves the ConferenceService instance that allows interacting with conferences.
 
 ___
 
@@ -78,19 +54,43 @@ Retrieves the FilePresentationService instance that allows presenting files duri
 
 ___
 
-### videoPresentation
-
-• **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md)
-
-Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
-
-___
-
 ### mediaDevice
 
 • **mediaDevice**: [`MediaDeviceService`](internal.MediaDeviceService.md)
 
 Retrieves the MediaDeviceService instance that allows interacting with devices through the system.
+
+___
+
+### notification
+
+• **notification**: [`NotificationService`](internal.NotificationService.md)
+
+Retrieves the NotificationService instance that allows inviting participants to a conference.
+
+___
+
+### recording
+
+• **recording**: [`RecordingService`](internal.RecordingService.md)
+
+Retrieves the RecordingService instance that allows recording conferences.
+
+___
+
+### session
+
+• **session**: [`SessionService`](internal.SessionService.md)
+
+Retrieves the SessionService instance that allows using sessions.
+
+___
+
+### videoPresentation
+
+• **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md)
+
+Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
 
 ## Methods
 
