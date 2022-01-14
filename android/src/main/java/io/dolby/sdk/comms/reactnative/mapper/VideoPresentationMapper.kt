@@ -22,6 +22,7 @@ class VideoPresentationMapper(
   }
 
   fun stateToRN(state: PresentationState?) = when (state) {
+    PresentationState.STARTED,
     PresentationState.PLAY -> "playing"
     PresentationState.PAUSED -> "paused"
     PresentationState.STOP -> "stopped"
