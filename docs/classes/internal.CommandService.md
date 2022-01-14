@@ -12,8 +12,8 @@ The CommandService allows the application to send and receive text messages and 
 
 ### Methods
 
-- [onMessageReceived](internal.CommandService.md#onmessagereceived)
 - [send](internal.CommandService.md#send)
+- [onMessageReceived](internal.CommandService.md#onmessagereceived)
 
 ## Constructors
 
@@ -22,6 +22,24 @@ The CommandService allows the application to send and receive text messages and 
 • **new CommandService**()
 
 ## Methods
+
+### send
+
+▸ **send**(`message`): `Promise`<`void`\>
+
+Sends a message to all conference participants.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `message` | `string` | The message to send. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
 
 ### onMessageReceived
 
@@ -40,21 +58,3 @@ Adds a listener to the event informing about new messages received.
 [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
 A function that unsubscribes from event listeners.
-
-___
-
-### send
-
-▸ **send**(`message`): `Promise`<`void`\>
-
-Sends a message to all conference participants.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `message` | `string` | The message to send. |
-
-#### Returns
-
-`Promise`<`void`\>

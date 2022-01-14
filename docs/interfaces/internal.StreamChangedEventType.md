@@ -8,21 +8,21 @@ The StreamChangedEventType gathers events that inform about the added, updated, 
 
 ### Properties
 
-- [mediaStream](internal.StreamChangedEventType.md#mediastream)
 - [participant](internal.StreamChangedEventType.md#participant)
+- [stream](internal.StreamChangedEventType.md#stream)
 
 ## Properties
-
-### mediaStream
-
-• **mediaStream**: [`MediaStream`](../modules/internal.md#mediastream)
-
-The media stream.
-
-___
 
 ### participant
 
 • **participant**: [`Participant`](internal.Participant.md)
 
 The conference participant.
+
+___
+
+### stream
+
+• **stream**: [`MediaStream`](../modules/internal.md#mediastream)
+
+The media stream.

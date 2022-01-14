@@ -398,9 +398,9 @@ allows sharing videos during a conference.
 
 ## SDK License agreement
 
-The Dolby.io Communications SDK for React Native and its repository are licensed under the MiT License. Before using the latest version of the @dolbyio/comms-sdk-react-native, please review and accept the [MIT License](https://github.com/voxeet/voxeet-sdk-reactnative/blob/master/LICENSE).
+The Dolby.io Communications SDK for React Native and its repository are licensed under the MiT License.
 
-Before using this package, please review and accept the Dolby Software License Agreement for [Android](https://github.com/voxeet/voxeet-sdk-android/blob/main/LICENSE) and [iOS](https://github.com/voxeet/voxeet-sdk-ios/blob/master/LICENSE), which are the underlying SDKs for the React Native SDK.
+Before using the latest version of the @dolbyio/comms-sdk-react-native, please review and accept the [Dolby Software License Agreement](./LICENSE).
 
 ## Third Party licenses
 

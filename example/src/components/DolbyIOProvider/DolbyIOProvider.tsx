@@ -21,11 +21,10 @@ import type {
   Conference,
   Participant,
 } from '../../../../src/services/conference/models';
-import type { User } from '../../../../src/services/session/models';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
-  me?: User;
+  me?: Participant;
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
@@ -57,7 +56,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
 
 const DolbyIOProvider: React.FC = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [me, setMe] = useState<User | undefined>(undefined);
+  const [me, setMe] = useState<Participant | undefined>(undefined);
   const [conference, setConference] = useState<Conference | undefined>(
     undefined
   );
@@ -142,7 +141,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     try {
       await CommsAPI.session.open({ name, externalId });
       clearTimeout(timeoutPromise);
-      setMe(await CommsAPI.session.getCurrentUser());
+      setMe(await CommsAPI.session.getParticipant());
     } catch (e: any) {
       clearTimeout(timeoutPromise);
       setMe(undefined);

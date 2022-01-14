@@ -36,11 +36,11 @@ The FilePresentationService allows presenting files during a conference. The Dol
 - [getCurrent](internal.FilePresentationService.md#getcurrent)
 - [getImage](internal.FilePresentationService.md#getimage)
 - [getThumbnail](internal.FilePresentationService.md#getthumbnail)
-- [onFileConverted](internal.FilePresentationService.md#onfileconverted)
-- [onFilePresentationChange](internal.FilePresentationService.md#onfilepresentationchange)
 - [setPage](internal.FilePresentationService.md#setpage)
 - [start](internal.FilePresentationService.md#start)
 - [stop](internal.FilePresentationService.md#stop)
+- [onFileConverted](internal.FilePresentationService.md#onfileconverted)
+- [onFilePresentationChange](internal.FilePresentationService.md#onfilepresentationchange)
 
 ## Constructors
 
@@ -125,46 +125,6 @@ Provides the URL of a thumbnail that refers to a specific page of the presented 
 
 ___
 
-### onFileConverted
-
-▸ **onFileConverted**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the file converted event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`FileConvertedEventType`](../interfaces/internal.FileConvertedEventType.md)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
-### onFilePresentationChange
-
-▸ **onFilePresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-Adds a listener to the file presentation changed event.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `handler` | (`data`: [`FilePresentationChangedEventType`](../interfaces/internal.FilePresentationChangedEventType.md), `type?`: [`FilePresentationStarted`](../modules/internal.md#filepresentationstarted) \| [`FilePresentationStopped`](../modules/internal.md#filepresentationstopped) \| [`FilePresentationUpdated`](../modules/internal.md#filepresentationupdated)) => `void` | An event callback function. |
-
-#### Returns
-
-[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
-
-A function that unsubscribes from event listeners.
-
-___
-
 ### setPage
 
 ▸ **setPage**(`page`): `Promise`<`void`\>
@@ -210,3 +170,43 @@ Stops a file presentation.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### onFileConverted
+
+▸ **onFileConverted**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the file converted event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`FileConvertedEventType`](../interfaces/internal.FileConvertedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onFilePresentationChange
+
+▸ **onFilePresentationChange**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the file presentation changed event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`FilePresentationChangedEventType`](../interfaces/internal.FilePresentationChangedEventType.md), `type?`: [`FilePresentationStarted`](../modules/internal.md#filepresentationstarted) \| [`FilePresentationStopped`](../modules/internal.md#filepresentationstopped) \| [`FilePresentationUpdated`](../modules/internal.md#filepresentationupdated)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.

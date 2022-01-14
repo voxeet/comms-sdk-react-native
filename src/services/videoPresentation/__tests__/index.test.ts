@@ -63,7 +63,10 @@ describe('VideoPresentationService', () => {
         VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(VideoPresentationEventNames.started, handlerFn);
+      ).toHaveBeenCalledWith(
+        VideoPresentationEventNames.VideoPresentationStarted,
+        handlerFn
+      );
       unsubscribeFn();
       expect(removeListenerMock).toHaveBeenCalled();
     });
@@ -72,7 +75,10 @@ describe('VideoPresentationService', () => {
         VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(VideoPresentationEventNames.played, handlerFn);
+      ).toHaveBeenCalledWith(
+        VideoPresentationEventNames.VideoPresentationPlayed,
+        handlerFn
+      );
       unsubscribeFn();
       expect(removeListenerMock).toHaveBeenCalled();
     });
@@ -81,7 +87,10 @@ describe('VideoPresentationService', () => {
         VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(VideoPresentationEventNames.paused, handlerFn);
+      ).toHaveBeenCalledWith(
+        VideoPresentationEventNames.VideoPresentationPaused,
+        handlerFn
+      );
       unsubscribeFn();
       expect(removeListenerMock).toHaveBeenCalled();
     });
@@ -90,7 +99,10 @@ describe('VideoPresentationService', () => {
         VideoPresentationService.onVideoPresentationChange(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(VideoPresentationEventNames.sought, handlerFn);
+      ).toHaveBeenCalledWith(
+        VideoPresentationEventNames.VideoPresentationSought,
+        handlerFn
+      );
       unsubscribeFn();
       expect(removeListenerMock).toHaveBeenCalled();
     });
@@ -103,7 +115,10 @@ describe('VideoPresentationService', () => {
         VideoPresentationService.onVideoPresentationStopped(handlerFn);
       expect(
         VideoPresentationService._nativeEvents.addListener
-      ).toHaveBeenCalledWith(VideoPresentationEventNames.stopped, handlerFn);
+      ).toHaveBeenCalledWith(
+        VideoPresentationEventNames.VideoPresentationStopped,
+        handlerFn
+      );
       unsubscribeFn();
       expect(removeListenerMock).toHaveBeenCalled();
     });
