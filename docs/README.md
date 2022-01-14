@@ -10,7 +10,7 @@ Make sure that you have:
 
 - A Dolby.io account
 - An iOS or Android device to run the application on, or the device emulator
-- React Native 0.66+
+- React Native 0.66+ (including Expo projects)
 
 For reference, see the [GitHub sample repository](https://github.com/dolbyio-samples/comms-sdk-react-native-getting-started).
 
