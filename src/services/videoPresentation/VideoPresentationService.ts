@@ -94,30 +94,30 @@ export class VideoPresentationService {
     handler: (
       data: VideoPresentationEventType,
       type?:
-        | VideoPresentationEventNames.started
-        | VideoPresentationEventNames.sought
-        | VideoPresentationEventNames.paused
-        | VideoPresentationEventNames.played
+        | VideoPresentationEventNames.VideoPresentationStarted
+        | VideoPresentationEventNames.VideoPresentationSought
+        | VideoPresentationEventNames.VideoPresentationPaused
+        | VideoPresentationEventNames.VideoPresentationPlayed
     ) => void
   ): UnsubscribeFunction {
     const videoPresentationEventStartedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.started,
+        VideoPresentationEventNames.VideoPresentationStarted,
         handler
       );
     const videoPresentationEventPausedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.paused,
+        VideoPresentationEventNames.VideoPresentationPaused,
         handler
       );
     const videoPresentationEventPlayedEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.played,
+        VideoPresentationEventNames.VideoPresentationPlayed,
         handler
       );
     const videoPresentationEventSoughtEventUnsubscribe =
       this._nativeEvents.addListener(
-        VideoPresentationEventNames.sought,
+        VideoPresentationEventNames.VideoPresentationSought,
         handler
       );
     return () => {
@@ -134,7 +134,7 @@ export class VideoPresentationService {
    */
   onVideoPresentationStopped(handler: () => void): UnsubscribeFunction {
     return this._nativeEvents.addListener(
-      VideoPresentationEventNames.stopped,
+      VideoPresentationEventNames.VideoPresentationStopped,
       handler
     );
   }
