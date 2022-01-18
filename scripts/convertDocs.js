@@ -257,15 +257,21 @@ function convertDocFile(filePath, index) {
 
   // we write our newly generated file to disk
   try {
-    if (!fs.existsSync(newFilePath)) {
-      fs.mkdirSync(newFilePath, {
+    const newFile = path.dirname(renamedFilepath).substring(1);
+    if (!fs.existsSync(newFile)) {
+      fs.mkdirSync(newFile, {
         recursive: true,
       });
     }
 
     fs.writeFileSync(newFilePath, convertedDocAsString);
   } catch (e) {
-    console.error(`[${filePath.substring(1)}]: writing or renaming error`);
+    console.error(
+      `[${newFilePath.substring(
+        0,
+        newFilePath.length - 3
+      )}]: writing or renaming error`
+    );
     console.error(e);
   }
 }
