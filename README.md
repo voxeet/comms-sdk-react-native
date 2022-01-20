@@ -84,6 +84,7 @@ import {
     View,
     Button,
     TextInput,
+    Platform,
 } from 'react-native';
 
 import {
