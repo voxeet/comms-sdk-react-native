@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import Toast from 'react-native-toast-message';
+import { Alert } from 'react-native';
 
 import { FilePresentationContext } from '@components/FilePresentationHandler/FilePresentationProvider';
 import CommsAPI from '@dolbyio/react-native-comms-sdk';
@@ -16,20 +16,17 @@ const FilePresentationHandler: React.FC = () => {
   );
   const convertedFileEventHandler = (event: FileConvertedEventType) => {
     console.log('ON FILE CONVERTED\n', JSON.stringify(event, null, 2));
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'FILE CONVERTED EVENT DATA',
-        content: JSON.stringify(
-          {
-            fileId: event.fileConverted.id,
-            fileName: event.fileConverted.name,
-          },
-          null,
-          2
-        ),
-      },
-    });
+    Alert.alert(
+      'FILE CONVERTED EVENT DATA',
+      JSON.stringify(
+        {
+          fileId: event.fileConverted.id,
+          fileName: event.fileConverted.name,
+        },
+        null,
+        2
+      )
+    );
   };
 
   const filePresentationChangeEventHandler = async (
@@ -41,20 +38,18 @@ const FilePresentationHandler: React.FC = () => {
       JSON.stringify(event, null, 2),
       type
     );
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'FILE PRESENTATION CHANGE EVENT DATA',
-        content: JSON.stringify(
-          {
-            changeEventType: type,
-            fileId: event.filePresentation.id,
-          },
-          null,
-          2
-        ),
-      },
-    });
+
+    Alert.alert(
+      'FILE PRESENTATION CHANGE EVENT DATA',
+      JSON.stringify(
+        {
+          changeEventType: type,
+          fileId: event.filePresentation.id,
+        },
+        null,
+        2
+      )
+    );
     if (type === FilePresentationServiceEventNames.FilePresentationStopped) {
       resetFilePresentation();
       return;
