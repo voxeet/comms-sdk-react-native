@@ -5,7 +5,6 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
-import io.dolby.sdk.filePresentation
 import io.dolby.sdk.comms.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNFilePresentationEventEmitter
@@ -27,8 +26,8 @@ import io.dolby.sdk.comms.reactnative.mapper.SpatialAudioMapper
 import io.dolby.sdk.comms.reactnative.mapper.SystemPermissionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.VideoPresentationMapper
 import io.dolby.sdk.comms.reactnative.services.RNCommandServiceModule
-import io.dolby.sdk.comms.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNCommsAPISdkModule
+import io.dolby.sdk.comms.reactnative.services.RNConferenceServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNFilePresentationServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNMediaDeviceServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNNotificationServiceModule
@@ -149,7 +148,7 @@ class RNCommsAPISdkPackage : ReactPackage {
         eventEmitter = filePresentationEventEmitter,
         sessionService = VoxeetSDK.session(),
         conferenceService = VoxeetSDK.conference(),
-        filePresentationService = VoxeetSDK.instance().filePresentation(),
+        filePresentationService = VoxeetSDK.filePresentation(),
         filePresentationHolder = filePresentationHolder,
         filePresentationMapper = filePresentationMapper
       ),
