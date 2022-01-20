@@ -4,9 +4,9 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.services.ConferenceService
+import com.voxeet.sdk.services.FilePresentationService
 import com.voxeet.sdk.services.SessionService
 import com.voxeet.sdk.services.presentation.file.FilePresentation
-import io.dolby.sdk.FilePresentationService
 import io.dolby.sdk.comms.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.comms.reactnative.state.FilePresentationHolder
@@ -79,7 +79,7 @@ class RNFilePresentationServiceModule(
   fun convert(fileRN: ReadableMap, promise: ReactPromise) {
     Promises.promise({ filePresentationMapper.fileFromRN(fileRN) })
       .thenNestedPromise { file ->
-        filePresentationService.convertFile(file).thenValue { file to it }
+        filePresentationService.convert(file).thenValue { file to it }
       }
       .thenValue { (file, filePresentation) ->
         val ownerId = requireNotNull(sessionService.participantId)
@@ -148,7 +148,7 @@ class RNFilePresentationServiceModule(
   @ReactMethod
   fun getImage(page: Int, promise: ReactPromise) {
     getCurrentFileId()
-      .thenValue { filePresentationService.getImage(it, page) }
+      .thenValue { filePresentationService.image(it, page) }
       .forward(promise)
   }
 
@@ -162,7 +162,7 @@ class RNFilePresentationServiceModule(
   @ReactMethod
   fun getThumbnail(page: Int, promise: ReactPromise) {
     getCurrentFileId()
-      .thenValue { filePresentationService.getThumbnail(it, page) }
+      .thenValue { filePresentationService.thumbnail(it, page) }
       .forward(promise)
   }
 
