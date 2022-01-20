@@ -73,7 +73,7 @@ packagingOptions {
 Replace the content of your `App.js` with the following:
 
 ```javascript
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -84,6 +84,7 @@ import {
     View,
     Button,
     TextInput,
+    Platform,
 } from 'react-native';
 
 import {
@@ -118,21 +119,10 @@ const Section = ({children, title}) => {
 
 const App = () => {
     const [conferenceAlias, setConferenceAlias] = useState("react-native");
-    const [videoElements, setVideoElements] = useState({});
+    const [streamingParticipants, setStreamingParticipants] = useState([]);
 
     useEffect(() => {
-
     }, []);
-
-    const getVideoElements = () => {
-        const result = [];
-
-        for (var key in videoElements) {
-            result.push(videoElements[key]);
-        }
-
-        return result;
-    };
 
     const joinConference = async () => {
     };
@@ -163,7 +153,19 @@ const App = () => {
                     </Section>
 
                     <Section title="Videos" style={{backgroundColor: 'black'}}>
-                        {getVideoElements()}
+                      {streamingParticipants.map(({ participant, stream }) => (
+                        <VideoView
+                          key={`video-${participant.id}`}
+                          style={{height: 200, width: 180, borderWidth: 1}}
+                          ref={async element => {
+                            try {
+                              await element.attach(participant, stream);
+                            } catch (e) {
+                              console.log(e.toString());
+                            }
+                          }}
+                        />
+                      ))}
                     </Section>
                 </View>
             </ScrollView>
@@ -319,34 +321,28 @@ Use the `onStreamsChange` event handler provided by the conference object of the
 import { VideoView } from '@dolbyio/comms-sdk-react-native';
 ```
 
-**2.** Insert the following code in the `const App = () => { };`:
+**2.** Insert the following code in your App component:
 
 ```javascript
-CommsAPI.conference.onStreamsChange(async (data, eventType) => {
-    try {
-        if (data.stream && data.stream.videoTracks.length > 0) {
-            if (!videoElements[data.participant.id]) {
-                const videoElement = <VideoView
-                    key={`video-${data.participant.id}`}
-                    style={{ height: 200, width: 180 }}
-                    ref={async (element) => { await element.attach(data.participant, data.stream); }} />;
-
-                videoElements[participant.id] = videoElement;
-                setVideoElements(videoElements);
-            }
-        } else {
-            videoElements[data.participant.id] = null;
-            setVideoElements(videoElements);
-
-            /*if (await videoView.current.isAttached()) {
-                console.log('about to detach video stream');
-                await videoView.current.detach();
-            }*/
-        }
-    } catch (error) {
-        console.error(error);
+useEffect(() => {
+  const unsubscribe = CommsAPI.conference.onStreamsChange((data, type) => {
+    if (type === 'EVENT_CONFERENCE_STREAM_REMOVED') {
+      setStreamingParticipants(sp =>
+        sp.filter(d => d.participant.id !== data.participant.id),
+      );
+      return;
     }
-});
+    if (
+      !streamingParticipants
+        .map(d => d.participant.id)
+        .includes(data.participant.id) &&
+      data?.stream?.videoTracks?.length > 0
+    ) {
+      setStreamingParticipants(sp => [...sp, data]);
+    }
+  });
+  return () => unsubscribe();
+}, []);
 ```
 
 ## Run the application
