@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import Toast from 'react-native-toast-message';
 
 import CommsAPI from '@dolbyio/react-native-comms-sdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -112,13 +111,10 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       'MESSAGE RECEIVED EVENT DATA: \n',
       JSON.stringify(data, null, 2)
     );
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'MESSAGE RECEIVED EVENT DATA',
-        content: JSON.stringify(data.message, null, 2),
-      },
-    });
+    Alert.alert(
+      'MESSAGE RECEIVED EVENT DATA:',
+      JSON.stringify(data.message, null, 2)
+    );
   };
 
   const initialize = async (

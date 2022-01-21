@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import Toast from 'react-native-toast-message';
+import { Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
 import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
-import InvitationResponseButtons from './InvitationResponseButtons';
+import { accept, decline } from '../../utils/notification.tester';
 
 const InvitationHandler: React.FC = () => {
   const { joinWithId } = useContext(DolbyIOContext);
@@ -21,21 +21,15 @@ const InvitationHandler: React.FC = () => {
         info: { name },
       },
     } = data;
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'INVITATION RECEIVED EVENT DATA',
-        content: JSON.stringify(
-          { conferenceAlias, inviterName: name },
-          null,
-          2
-        ),
-        children: InvitationResponseButtons({
-          conferenceId,
-          joinWithId,
-        }),
-      },
-    });
+
+    Alert.alert(
+      'INVITATION RECEIVED EVENT DATA',
+      JSON.stringify({ conferenceAlias, inviterName: name }, null, 2),
+      [
+        { text: 'Accept', onPress: () => accept(conferenceId, joinWithId) },
+        { text: 'Decline', onPress: () => decline(conferenceId) },
+      ]
+    );
   };
 
   useEffect(() => {

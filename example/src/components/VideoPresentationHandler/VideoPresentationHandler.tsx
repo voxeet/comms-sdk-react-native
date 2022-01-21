@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Toast from 'react-native-toast-message';
+import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/react-native-comms-sdk';
 
@@ -10,12 +10,7 @@ import type {
 
 const VideoPresentationHandler: React.FC = () => {
   const videoPresentationStopped = () => {
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'VIDEO PRESENTATION STOPPED',
-      },
-    });
+    Alert.alert('VIDEO PRESENTATION STOPPED');
   };
 
   const videoPresentationChanged = async (
@@ -27,20 +22,18 @@ const VideoPresentationHandler: React.FC = () => {
       JSON.stringify(event, null, 2),
       type
     );
-    Toast.show({
-      type: 'custom',
-      props: {
-        title: 'VIDEO PRESENTATION CHANGE EVENT DATA',
-        content: JSON.stringify(
-          {
-            changeEventType: type,
-            fileURL: event.url,
-          },
-          null,
-          2
-        ),
-      },
-    });
+
+    Alert.alert(
+      'VIDEO PRESENTATION CHANGE EVENT DATA',
+      JSON.stringify(
+        {
+          changeEventType: type,
+          fileURL: event.url,
+        },
+        null,
+        2
+      )
+    );
   };
 
   useEffect(() => {

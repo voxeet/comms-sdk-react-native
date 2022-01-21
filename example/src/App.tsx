@@ -11,7 +11,6 @@ import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
 import VideoPresentationHandler from '@components/VideoPresentationHandler';
 import COLORS from '@constants/colors.constants';
-import { ToastInit } from '@ui/Toast';
 
 import Main from './Main';
 
@@ -32,7 +31,6 @@ export default class App extends Component<Props, State> {
             <RecordingProvider>
               <FilePresentationProvider>
                 <Main />
-                <ToastInit />
                 <FilePresentationHandler />
               </FilePresentationProvider>
             </RecordingProvider>

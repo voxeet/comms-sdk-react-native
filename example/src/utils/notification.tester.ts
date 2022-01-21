@@ -38,3 +38,23 @@ export const inviteRandomParticipant = async (conference: Conference) => {
     Alert.alert('Invite error', e.toString());
   }
 };
+
+export const decline = async (conferenceId: string) => {
+  try {
+    const conference = await CommsAPI.conference.fetch(conferenceId);
+    await CommsAPI.notification.decline(conference);
+  } catch (e: any) {
+    console.log('couldnt decline conference invitation\n', e.toString());
+  }
+};
+
+export const accept = async (
+  conferenceId: string,
+  joinWithId: (id: string) => void
+) => {
+  try {
+    joinWithId(conferenceId);
+  } catch (e: any) {
+    console.log('couldnt accept conference invitation\n', e.toString());
+  }
+};
