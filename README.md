@@ -153,7 +153,7 @@ const App = () => {
                     </Section>
 
                     <Section title="Videos" style={{backgroundColor: 'black'}}>
-                        {streamingParticipants.map(({ participant, stream }) => (
+                        {streamingUsers.map(({ participant, stream }) => (
                             <VideoView
                                 key={`video-${participant.id}`}
                                 style={{height: 200, width: 180, borderWidth: 1}}
