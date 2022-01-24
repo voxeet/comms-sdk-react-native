@@ -62,12 +62,13 @@ and also add following lines to your `android/app/build.gradle` file:
 
 ```
 packagingOptions {
-  pickFirst '**/armeabi-v7a/libc++_shared.so'
-  pickFirst '**/x86/libc++_shared.so'
-  pickFirst '**/arm64-v8a/libc++_shared.so'
-  pickFirst '**/x86_64/libc++_shared.so'
+    pickFirst '**/armeabi-v7a/libc++_shared.so'
+    pickFirst '**/x86/libc++_shared.so'
+    pickFirst '**/arm64-v8a/libc++_shared.so'
+    pickFirst '**/x86_64/libc++_shared.so'
 }
 ```
+
 ## Getting started
 
 Replace the content of your `App.js` with the following:
@@ -85,6 +86,7 @@ import {
     Button,
     TextInput,
     Platform,
+    PermissionsAndroid,
 } from 'react-native';
 
 import {
@@ -119,10 +121,7 @@ const Section = ({children, title}) => {
 
 const App = () => {
     const [conferenceAlias, setConferenceAlias] = useState("react-native");
-    const [streamingParticipants, setStreamingParticipants] = useState([]);
-
-    useEffect(() => {
-    }, []);
+    const [streamingUsers, setStreamingUsers] = useState([]);
 
     const joinConference = async () => {
     };
@@ -153,19 +152,19 @@ const App = () => {
                     </Section>
 
                     <Section title="Videos" style={{backgroundColor: 'black'}}>
-                      {streamingParticipants.map(({ participant, stream }) => (
-                        <VideoView
-                          key={`video-${participant.id}`}
-                          style={{height: 200, width: 180, borderWidth: 1}}
-                          ref={async element => {
-                            try {
-                              await element.attach(participant, stream);
-                            } catch (e) {
-                              console.log(e.toString());
-                            }
-                          }}
-                        />
-                      ))}
+                        {streamingUsers.map(({ participant, stream }) => (
+                            <VideoView
+                                key={`video-${participant.id}`}
+                                style={{height: 200, width: 180, borderWidth: 1}}
+                                ref={async element => {
+                                    try {
+                                        await element.attach(participant, stream);
+                                    } catch (error) {
+                                        console.error(error);
+                                    }
+                                }}
+                            />
+                        ))}
                     </Section>
                 </View>
             </ScrollView>
@@ -198,6 +197,7 @@ const styles = StyleSheet.create({
 
 export default App;
 ```
+
 ### Permissions
 
 For iOS, establish privacy permissions by adding two new keys in `Info.plist`:
@@ -243,28 +243,35 @@ const requestPermissions = async () => {
         } else {
             console.log("Camera permission denied");
         }
-    } catch (err) {
-        console.warn(err);
+    } catch (error) {
+        console.warn(error);
     }
 };
 
 useEffect(async () => {
-    if (Platform.OS === 'android') {
-        // Request the permissions to access the camera and the microphone
-        // required for Android only
-        await requestPermissions();
+    async function initialize() {
+        if (Platform.OS === 'android') {
+            // Request the permissions to access the camera and the microphone
+            // required for Android only
+            await requestPermissions();
+        }
+
+        // Initialization of the SDK...
     }
+
+    initialize();
 }, []);
 ```
+
 ### Initialization
 
 **1.** Import the SDK to the application by adding the following line at the top of the `App.js` file:
 
 ```js
-import CommsAPI from '@dolbyio/comms-sdk-react-native';
+import CommsAPI, { VideoView } from '@dolbyio/comms-sdk-react-native';
 ```
 
-**2.** Initialize the SDK with the Dolby.io credentials found in your dashboard. Replace the `APP_KEY` and the `APP_SECRET` with your application key and secret. Insert the following code after requesting the permissions for the microphone and camera:
+**2.** Initialize the SDK with the Dolby.io credentials found in your dashboard. Replace the `APP_KEY` and the `APP_SECRET` with your application key and secret. Insert the following code after requesting the permissions for the microphone and camera (look for `// Initialization of the SDK...`):
 
 ```javascript
 // WARNING: It is best practice to use the initializeToken function to initialize the SDK.
@@ -311,6 +318,7 @@ const joinConference = async () => {
     }
 };
 ```
+
 ## Integrate video
 
 Use the `onStreamsChange` event handler provided by the conference object of the SDK to integrate video into your application. This event is triggered when a participant video stream changes, for example, a new video stream coming in or the video is stopped. Add the following code to create `VideoView` objects and insert them into the `videoElements` dictionary. The `videoElements` dictionary is used to generate the UI within the function `getVideoElements`.
@@ -325,23 +333,24 @@ import { VideoView } from '@dolbyio/comms-sdk-react-native';
 
 ```javascript
 useEffect(() => {
-  const unsubscribe = CommsAPI.conference.onStreamsChange((data, type) => {
-    if (type === 'EVENT_CONFERENCE_STREAM_REMOVED') {
-      setStreamingParticipants(sp =>
-        sp.filter(d => d.participant.id !== data.participant.id),
-      );
-      return;
-    }
-    if (
-      !streamingParticipants
-        .map(d => d.participant.id)
-        .includes(data.participant.id) &&
-      data?.stream?.videoTracks?.length > 0
-    ) {
-      setStreamingParticipants(sp => [...sp, data]);
-    }
-  });
-  return () => unsubscribe();
+    const unsubscribe = CommsAPI.conference.onStreamsChange((data, type) => {
+        if (type === 'EVENT_CONFERENCE_STREAM_REMOVED') {
+            // Remove the users without a video stream
+            setStreamingUsers(usr => usr.filter(d => d.participant.id !== data.participant.id));
+            return;
+        }
+
+        if (
+            !streamingUsers
+            .map(d => d.participant.id)
+            .includes(data.participant.id) &&
+            data?.stream?.videoTracks?.length > 0
+        ) {
+            setStreamingUsers(sp => [...sp, data]);
+        }
+    });
+
+    return () => unsubscribe();
 }, []);
 ```
 
