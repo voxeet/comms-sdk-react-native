@@ -16,11 +16,11 @@ const path = require('path');
  *
  * KNOWN REQUIREMENTS as of 11.01.2022
  * 1. Documentation Files need to have a header for SEO and CI/CD purposes - this is
- * done with createDocHeader() function.
+ * done with getHeader() function.
  *
  * 2. Documentation Files need to have their slug generated based on their names. This
  * follows a convention of slugprefix-module-filename e.g.
- * rn-client-sdk-references-videopresentationservice. This is done with createHeaderSlug(filePath)
+ * rn-client-sdk-references-videopresentationservice. This is done with getFilePathSlugName()
  * function.
  *
  * 3. Documentation Files need to have their internal links swapped. Originally we have
@@ -40,6 +40,10 @@ const path = require('path');
  * ## Properties or ## Methods or ## Enumeration members).
  * One exception is CommsAPI file that should also have its Table of contents removed
  * but without ## Properties part.
+ *
+ * 6. All event handlers should have added `##Event handlers` category. It is important to keep
+ * all event handlers as last methods in our SDK code, because we can't reliably find all of them and group them
+ * together programmatically.
  */
 
 /**
@@ -84,6 +88,8 @@ const LINK_SLUG_PREFIX = 'doc:rn-client-sdk-';
 const FILE_PATHS = [];
 const DOCS_DIR = '../docs';
 
+const HEADER_DATE = '2022-01-26T00:00:00.000Z';
+
 const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
 
 /**
@@ -121,20 +127,20 @@ const IGNORED_FILES = ['modules.md', '.nojekyll', 'README.md'];
   console.log('Conversion successful!');
 })();
 
-function getHeader(module, slug, order) {
+function getHeader(title, slug, order) {
   return `---
 apiVersion: 1.0
 categoryName: React Native SDK
-title: ${module}
+title: ${title}
 slug: ${slug}
 excerpt: None
 category: 60b289fa3ada0c007f41d5a9
 order: ${order}
 hidden: False
-createdAt: ${new Date().toISOString()}
-updatedAt: ${new Date().toISOString()}
+createdAt: ${HEADER_DATE}
+updatedAt: ${HEADER_DATE}
 metadata:
-  title: ${module}
+  title: ${title}
   description: Explore our React Native SDK documentation to create a video conference application.
   image:
     [
@@ -208,7 +214,7 @@ function convertDocFile(filePath, index) {
   // we get all necessary metadata and header
   const [rawFilename, module, slug] = getFilePathMetadata(renamedFilepath);
   const header = getHeader(
-    module === 'internal' ? 'modules' : module,
+    rawFilename === 'internal' ? 'modules' : rawFilename,
     slug,
     index
   );
@@ -238,7 +244,7 @@ function convertDocFile(filePath, index) {
     .replaceAll(REGEXP_MATCH_BACKTICKS, (substring, _, captureGroupTwo) => {
       return substring.replace(/(?<=\[)(`(\w+)`)(?=]\(.+\))/, captureGroupTwo);
     })
-    .replaceAll(REGEXP_MATCH_EVENT_HANDLERS, (substring, captureGroup) => {
+    .replaceAll(REGEXP_MATCH_EVENT_HANDLERS, (substring) => {
       return `## Event handlers\n\n${substring}`;
     });
 
