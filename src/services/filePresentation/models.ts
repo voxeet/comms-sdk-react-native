@@ -24,10 +24,10 @@ export interface FileConverted {
 export interface FilePresentation {
   /** The file ID. */
   id: string;
-  /** The file owner. */
-  owner: Participant;
   /** The number of images within a file presentation. */
   imageCount?: number;
+  /** The file owner. */
+  owner: Participant;
   /** The number of the currently displayed image. */
   position?: number;
 }
