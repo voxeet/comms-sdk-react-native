@@ -9,8 +9,8 @@ The FilePresentation interface gathers information about a file presentation.
 ### Properties
 
 - [id](internal.FilePresentation.md#id)
-- [owner](internal.FilePresentation.md#owner)
 - [imageCount](internal.FilePresentation.md#imagecount)
+- [owner](internal.FilePresentation.md#owner)
 - [position](internal.FilePresentation.md#position)
 
 ## Properties
@@ -23,19 +23,19 @@ The file ID.
 
 ___
 
-### owner
-
-• **owner**: [`Participant`](internal.Participant.md)
-
-The file owner.
-
-___
-
 ### imageCount
 
 • `Optional` **imageCount**: `number`
 
 The number of images within a file presentation.
+
+___
+
+### owner
+
+• **owner**: [`Participant`](internal.Participant.md)
+
+The file owner.
 
 ___
 
