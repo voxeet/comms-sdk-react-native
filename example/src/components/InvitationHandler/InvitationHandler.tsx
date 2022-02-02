@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
 import { accept, decline } from '../../utils/notification.tester';
