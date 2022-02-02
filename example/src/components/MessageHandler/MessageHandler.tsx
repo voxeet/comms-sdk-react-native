@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
 

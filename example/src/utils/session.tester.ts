@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 export const getCurrentUser = async () => {
   try {
