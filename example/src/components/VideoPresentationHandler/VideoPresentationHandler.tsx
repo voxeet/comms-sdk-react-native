@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type {
   VideoPresentationEventType,

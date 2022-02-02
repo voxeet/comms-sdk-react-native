@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
