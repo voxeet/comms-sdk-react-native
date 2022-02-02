@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 import { FilePresentationContext } from '@components/FilePresentationHandler/FilePresentationProvider';
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type {
   FileConvertedEventType,

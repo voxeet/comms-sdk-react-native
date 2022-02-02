@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
-import CommsAPI from '@dolbyio/react-native-comms-sdk';
+import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
