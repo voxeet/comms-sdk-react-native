@@ -18,21 +18,21 @@ const { CommsAPIFilePresentationServiceModule } = NativeModules;
  *
  * **1.** The presenter calls the [convert](#convert) method to upload and convert a file.
  *
- * **2.** The presenter receives [information](doc:rn-client-sdk-interfaces-fileconverted) about the converted file via the [onFileConverted](#onfileconverted) listener.
+ * **2.** The presenter receives [information](doc:rn-client-sdk-models-fileconverted) about the converted file via the [onFileConverted](#onfileconverted) listener.
  *
  * **3.** The presenter calls the [start](#start) method to start presenting the file.
  *
- * **4.** The presenter and the viewers receive [information](doc:rn-client-sdk-interfaces-filepresentation) about the shared file via the [onFilePresentationChange](#onfilepresentationchange) listener. This information should trigger calling the [getImage](#getimage) method to download the converted file and display the proper page of the file by retrieving the individual images.
+ * **4.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the shared file via the [onFilePresentationChange](#onfilepresentationchange) listener. This information should trigger calling the [getImage](#getimage) method to download the converted file and display the proper page of the file by retrieving the individual images.
  *
  * **5.** The application is responsible for coordinating the page flip between the local and the presented files. The presenter calls the [update](#update) method to inform the service to send the updated page number to participants.
  *
- * **7.** The presenter and viewers receive [information](doc:rn-client-sdk-interfaces-filepresentation) about the updated file via the [onFilePresentationChange](#onfilepresentationchange) listener with the current page number. This information should trigger calling the [image](#image) method to display the proper page of the file.
+ * **7.** The presenter and viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the updated file via the [onFilePresentationChange](#onfilepresentationchange) listener with the current page number. This information should trigger calling the [image](#image) method to display the proper page of the file.
  *
  * **8.** The presenter may call the [getThumbnail](#getthumbnail) method to obtain thumbnail images of the file and implement a carousel control for the presenting user to flip pages locally.
  *
  * **9.** The presenter calls the [stop](#stop) method to end the file presentation.
  *
- * **10.** The presenter and the viewers receive [information](doc:rn-client-sdk-interfaces-filepresentation) about the end of the file presentation via the [onFilePresentationChange](#onfilepresentationchange) listener.
+ * **10.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the end of the file presentation via the [onFilePresentationChange](#onfilepresentationchange) listener.
  *
  */
 export class FilePresentationService {
