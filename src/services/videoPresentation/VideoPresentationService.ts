@@ -15,13 +15,13 @@ const { CommsAPIVideoPresentationServiceModule } = NativeModules;
  *
  * **1.** The presenter calls the [start](#start) method to start a video presentation. This method automatically starts playing the shared video file.
  *
- * **2.** All participants receive [information](doc:rn-client-sdk-interfaces-videopresentationeventtype) about the converted file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
+ * **2.** All participants receive [information](doc:rn-client-sdk-models-videopresentationeventtype) about the converted file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
  *
- * **3.** The presenter can call the [pause](#pause) method to pause the shared video. In such a situation, all conference participants receive [information](doc:rn-client-sdk-interfaces-videopresentationeventtype) about paused file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
+ * **3.** The presenter can call the [pause](#pause) method to pause the shared video. In such a situation, all conference participants receive [information](doc:rn-client-sdk-models-videopresentationeventtype) about paused file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
  *
- * **4.** The presenter can call the [play](#play) method to resume the paused video. In such a situation, all conference participants receive [information](doc:rn-client-sdk-interfaces-videopresentationeventtype) about the resumed file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
+ * **4.** The presenter can call the [play](#play) method to resume the paused video. In such a situation, all conference participants receive [information](doc:rn-client-sdk-models-videopresentationeventtype) about the resumed file via the [onVideoPresentationChange](#onvideopresentationchange) listener.
  *
- * **5.** The presenter can call the [seek](#seek) method to navigate to a specific section of the shared video. After calling the seek method, all conference participants receive [information](doc:rn-client-sdk-interfaces-videopresentationeventtype) about the updated timestamp via the [onVideoPresentationChange](#onvideopresentationchange) listener.
+ * **5.** The presenter can call the [seek](#seek) method to navigate to a specific section of the shared video. After calling the seek method, all conference participants receive [information](doc:rn-client-sdk-models-videopresentationeventtype) about the updated timestamp via the [onVideoPresentationChange](#onvideopresentationchange) listener.
  *
  * **6.** The presenter calls the [stop](#stop) method to stop the video presentation. In such a situation, all conference participants receive this information via the [onVideoPresentationStopped](#onvideopresentationstopped) listener.
  */
