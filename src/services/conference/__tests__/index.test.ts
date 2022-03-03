@@ -9,6 +9,9 @@ import {
   ConferenceStatus,
   ParticipantPermissions,
   Participant,
+  SpatialDirection,
+  SpatialScale,
+  SpatialPosition,
 } from '../models';
 import { transformToConference, transformToParticipant } from '../transformers';
 
@@ -42,6 +45,24 @@ const testParticipantPermissions: ParticipantPermissions = {
     ConferencePermission.JOIN,
     ConferencePermission.RECORD,
   ],
+};
+
+const testSpatialDirection: SpatialDirection = {
+  x: 1,
+  y: 2,
+  z: 3,
+};
+
+const testSpatialScale: SpatialScale = {
+  x: 1,
+  y: 2,
+  z: 3,
+};
+
+const testSpatialPosition: SpatialPosition = {
+  x: 1,
+  y: 2,
+  z: 3,
 };
 
 describe('ConferenceService', () => {
@@ -378,6 +399,46 @@ describe('ConferenceService', () => {
       expect(
         CommsAPIConferenceServiceModule.stopScreenShare
       ).toHaveBeenCalled();
+    });
+  });
+
+  describe('setSpatialDirection()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      ConferenceService.setSpatialDirection(testSpatialDirection);
+      expect(
+        CommsAPIConferenceServiceModule.setSpatialDirection
+      ).toHaveBeenCalledWith(testSpatialDirection);
+    });
+  });
+
+  describe('setSpatialEnvironment()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      ConferenceService.setSpatialEnvironment(
+        testSpatialScale,
+        testSpatialPosition,
+        testSpatialPosition,
+        testSpatialPosition
+      );
+      expect(
+        CommsAPIConferenceServiceModule.setSpatialEnvironment
+      ).toHaveBeenCalledWith(
+        testSpatialScale,
+        testSpatialPosition,
+        testSpatialPosition,
+        testSpatialPosition
+      );
+    });
+  });
+
+  describe('setSpatialPosition()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      ConferenceService.setSpatialPosition(
+        testParticipant,
+        testSpatialPosition
+      );
+      expect(
+        CommsAPIConferenceServiceModule.setSpatialPosition
+      ).toHaveBeenCalledWith(testParticipant, testSpatialPosition);
     });
   });
 });
