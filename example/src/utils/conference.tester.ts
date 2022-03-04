@@ -7,6 +7,9 @@ import type {
   Conference,
   ParticipantPermissions,
   AudioProcessingOptions,
+  SpatialDirection,
+  SpatialScale,
+  SpatialPosition,
 } from '../../../src/services/conference/models';
 
 export const current = async () => {
@@ -210,5 +213,50 @@ export const stopScreenShare = async () => {
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Stop screen sharing error', msg);
+  }
+};
+
+export const setSpatialDirection = async (
+  spatialDirection: SpatialDirection
+) => {
+  try {
+    await CommsAPI.conference.setSpatialDirection(spatialDirection);
+    Alert.alert('setSpatialDirection success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialDirection error', msg);
+  }
+};
+
+export const setSpatialEnvironment = async (
+  scale: SpatialScale,
+  forward: SpatialPosition,
+  up: SpatialPosition,
+  right: SpatialPosition
+) => {
+  try {
+    await CommsAPI.conference.setSpatialEnvironment(
+      scale,
+      forward,
+      up,
+      right
+    );
+    Alert.alert('setSpatialEnvironent success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialEnvironment error', msg);
+  }
+};
+
+export const setSpatialPosition = async (
+  participant: Participant,
+  position: SpatialPosition
+) => {
+  try {
+    await CommsAPI.conference.setSpatialPosition(participant, position);
+    Alert.alert('setSpatialPosition success');
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setSpatialPosition error', msg);
   }
 };
