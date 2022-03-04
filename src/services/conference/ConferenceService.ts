@@ -23,6 +23,9 @@ import type {
   ParticipantPermissions,
   UnsubscribeFunction,
   RTCStatsType,
+  SpatialDirection,
+  SpatialScale,
+  SpatialPosition,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
@@ -265,6 +268,42 @@ export class ConferenceService {
    */
   public async stopScreenShare(): Promise<void> {
     return this._nativeModule.stopScreenShare();
+  }
+
+  /**
+   * Sets the direction a participant is facing in space.
+   * @param direction The direction the local participant is facing in space.
+   */
+  public async setSpatialDirection(direction: SpatialDirection): Promise<void> {
+    return this._nativeModule.setSpatialDirection(direction);
+  }
+
+  /**
+   * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+   * @param scale The application's distance units or scale in application units per one meter. The value must be greater than 0.
+   * @param forward A vector describing the direction the application considers as forward. The value must be orthogonal to up and right.
+   * @param up A vector describing the direction the application considers as up. The value must be orthogonal to forward and right.
+   * @param right A vector describing the direction the application considers as right. The value must be orthogonal to forward and up.
+   */
+  public async setSpatialEnvironment(
+    scale: SpatialScale,
+    forward: SpatialPosition,
+    up: SpatialPosition,
+    right: SpatialPosition
+  ): Promise<void> {
+    return this._nativeModule.setSpatialEnvironment(scale, forward, up, right);
+  }
+
+  /**
+   * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
+   * @param participant The selected participant.
+   * @param position The participant's audio location from which their audio will be rendered.
+   */
+  public async setSpatialPosition(
+    participant: Participant,
+    position: SpatialPosition
+  ): Promise<void> {
+    return this._nativeModule.setSpatialPosition(participant, position);
   }
 
   /**
