@@ -12,6 +12,8 @@ internal extension VTJoinOptions {
 		joinOptions.maxVideoForwarding = dictionary.value(for: Keys.maxVideoForwarding)
 		joinOptions.conferenceAccessToken = dictionary.value(for: Keys.conferenceAccessToken)
 		joinOptions.constraints = VTJoinOptionsConstraints.create(with: dictionary.value(for: Keys.constraints))
+		let spatialAudio: NSNumber? = dictionary.value(for: Keys.spatialAudio)
+		joinOptions.spatialAudio = spatialAudio?.boolValue ?? false
 
 		return joinOptions
 	}
