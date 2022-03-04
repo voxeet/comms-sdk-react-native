@@ -596,7 +596,18 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+        guard let currentParticipantObject = VoxeetSDK.shared.session.participant else {
+            ModuleError.noCurrentParticipant.send(with: reject)
+            return
+        }
+        VoxeetSDK.shared.conference.setSpatialDirection(participant: currentParticipantObject,
+                                                        direction: VTSpatialDirection.create(with: direction)) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+        }
 	}
 
 	/// Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
@@ -616,7 +627,16 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+        VoxeetSDK.shared.conference.setSpatialEnvironment(scale: VTSpatialScale.create(with: scale),
+                                                          forward: VTSpatialPosition.create(with: forward),
+                                                          up: VTSpatialPosition.create(with: up),
+                                                          right: VTSpatialPosition.create(with: right)) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+        }
 	}
 
 	/// Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
@@ -632,7 +652,18 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		ModuleError.waitingForSDKImplementation("3.4").send(with: reject)
+        guard let participantObject = current?.findParticipant(with: participant.identifier) else {
+            ModuleError.noParticipant(participant.description).send(with: reject)
+            return
+        }
+        VoxeetSDK.shared.conference.setSpatialPosition(participant: participantObject,
+                                                       position: VTSpatialPosition.create(with: position)) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+		}
 	}
 }
 
