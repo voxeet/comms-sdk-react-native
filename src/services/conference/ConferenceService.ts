@@ -271,7 +271,20 @@ export class ConferenceService {
   }
 
   /**
-   * Sets the direction a participant is facing in space.
+   * Sets the direction the local participant is facing in space. The method is available only for the participant who:
+   * 
+   * - Joined a Dolby Voice conference with the [spatialAudio](doc:rn-client-sdk-models-conferencejoinoptions#spatialaudio) parameter enabled. 
+   * - Joined the conference as a [user](doc:rn-client-sdk-enums-participanttype#user), not as a [listener](doc:rn-client-sdk-enums-participanttype#listener). Setting the spatial direction for listeners is available only via the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+   * 
+   * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from front-right. If the local participant chooses to change the direction and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, the participant hears the speaker from the front-left position. The following video presents this example:
+   * 
+   * [block:html]
+   * {
+   * "html": "<div style=\"text-align:center\">\n<video controls width=\"289\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n\n</div>"
+   * }
+   * [/block]
+   * For more information, see the [SpatialDirection](doc:rn-client-sdk-models-spatialdirection) model.
+   * 
    * @param direction The direction the local participant is facing in space.
    */
   public async setSpatialDirection(direction: SpatialDirection): Promise<void> {
@@ -279,11 +292,40 @@ export class ConferenceService {
   }
 
   /**
-   * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
-   * @param scale The application's distance units or scale in application units per one meter. The value must be greater than 0.
-   * @param forward A vector describing the direction the application considers as forward. The value must be orthogonal to up and right.
-   * @param up A vector describing the direction the application considers as up. The value must be orthogonal to forward and right.
-   * @param right A vector describing the direction the application considers as right. The value must be orthogonal to forward and up.
+   * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance. The method is available only for the local participant who:
+   * 
+   * - Joined a Dolby Voice conference with the [spatialAudio](doc:rn-client-sdk-models-conferencejoinoptions#spatialaudio) parameter enabled. 
+   * - Joined the conference as a [user](doc:rn-client-sdk-enums-participanttype#user), not as a [listener](doc:rn-client-sdk-enums-participanttype#listener). Setting the spatial environment for listeners is available only via the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+   * 
+   * If not called, the SDK uses the default spatial environment, which consists of the following values:
+   * 
+   * - `forward` = (0, 0, 1), where +Z axis is in front
+   * - `up` = (0, 1, 0), where +Y axis is above
+   * - `right` = (1, 0, 0), where +X axis is to the right
+   * - `scale` = (1, 1, 1), where one unit on any axis is 1 meter
+   * 
+   * The default spatial environment is presented in the following diagram:
+   * [block:image]
+   * {
+   *   "images": [
+   *     {
+   *       "image": [
+   *         "https://files.readme.io/e43475b-defaultEnv.png",
+   *         "defaultEnv.png",
+   *         1920,
+   *         1080,
+   *         "#163b58"
+   *       ],
+   *       "sizing": "full"
+   *     }
+   *   ]
+   * }
+   * [/block]
+   * 
+   * @param scale A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-spatial-audio#configure-the-spatial-environment-scale) article.
+   * @param forward A vector describing the direction the application considers as forward. The value can be either +1, 0, or -1 and must be orthogonal to up and right.
+   * @param up A vector describing the direction the application considers as up. The value can be either +1, 0, or -1 and must be orthogonal to forward and right.
+   * @param right A vector describing the direction the application considers as right. The value can be either +1, 0, or -1 and must be orthogonal to forward and up.
    */
   public async setSpatialEnvironment(
     scale: SpatialScale,
@@ -295,9 +337,38 @@ export class ConferenceService {
   }
 
   /**
-   * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference.
-   * @param participant The selected participant.
-   * @param position The participant's audio location from which their audio will be rendered.
+   * Sets a participant's position in space to enable the spatial audio experience during a conference. The method is available only for the participant who:
+   * 
+   * - Joined a Dolby Voice conference with the [spatialAudio](doc:rn-client-sdk-models-conferencejoinoptions#spatialaudio) parameter enabled. 
+   * - Joined the conference as a [user](doc:rn-client-sdk-enums-participanttype#user), not as a [listener](doc:rn-client-sdk-enums-participanttype#listener). Setting the spatial position for listeners is available only via the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+   * 
+   * Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
+   * 
+   * - When the specified participant is the local participant, setSpatialPosition sets the location from which the local participant listens to the conference. If this location is not provided, the participant hears audio from the default location (0, 0, 0).
+   * 
+   * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified position in space. If the position of the remote participant is not provided, the participant does not have a default position and remains muted until a position is specified.
+   * 
+   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
+   * 
+   * [block:image]
+   * {
+   *   "images": [
+   *     {
+   *       "image": [
+   *         "https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png",
+   *         "05_Axis_People_v04_220202.png",
+   *         1920,
+   *         1080,
+   *         "#264159"
+   *       ],
+   *       "sizing": "full"
+   *     }
+   *   ]
+   * }
+   * [/block]
+   * 
+   * @param participant The selected participant, either local or remote. In a case of the local participant, the SDK sets the location from which the participant will hear a conference. In a case of a remote participant, the SDK sets the position from which the participant's audio will be rendered.
+   * @param position The participant's audio location.
    */
   public async setSpatialPosition(
     participant: Participant,
