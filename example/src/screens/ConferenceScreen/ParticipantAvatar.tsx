@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
@@ -7,7 +7,7 @@ import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { mute, unmute, kick, isSpeaking } from '@utils/conference.tester';
+import { mute, unmute, kick, isSpeaking, setSpatialPosition } from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
 import SpatialConfigModal from './SpatialConfigModal';
@@ -24,6 +24,10 @@ const ParticipantAvatar = (participant: Participant) => {
     useState<SpatialConfigModalTypeModel>(
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
+
+  useEffect(() => {
+    setSpatialPosition(participant, {x:0, y:0, z:0})
+  },[])
 
   const options: Options = [
     {
