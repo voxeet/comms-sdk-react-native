@@ -7,16 +7,22 @@ import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { mute, unmute, kick, isSpeaking, setSpatialPosition } from '@utils/conference.tester';
+import {
+  mute,
+  unmute,
+  kick,
+  isSpeaking,
+  setSpatialPosition,
+} from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
 import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
-import styles from './ConferenceScreen.style';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
-  const { me } = useContext(DolbyIOContext);
+  const { me, isSpatialAudioActive } = useContext(DolbyIOContext);
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
     useState(false);
@@ -26,8 +32,12 @@ const ParticipantAvatar = (participant: Participant) => {
     );
 
   useEffect(() => {
-    setSpatialPosition(participant, {x:0, y:0, z:0})
-  },[])
+    setTimeout(() => {
+      isSpatialAudioActive &&
+        participant.id !== me!.id &&
+        setSpatialPosition(participant, { x: 0, y: 0, z: 0 });
+    }, 300);
+  }, []);
 
   const options: Options = [
     {
