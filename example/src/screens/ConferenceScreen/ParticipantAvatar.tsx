@@ -31,12 +31,18 @@ const ParticipantAvatar = (participant: Participant) => {
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
 
+  const [wasSpatialized, setWasSpatialized] = useState<boolean>(false);
+
   useEffect(() => {
-    setTimeout(() => {
-      isSpatialAudioActive &&
-        participant.id !== me!.id &&
-        setSpatialPosition(participant, { x: 0, y: 0, z: 0 });
-    }, 300);
+    if (!wasSpatialized) {
+      setTimeout(() => {
+        isSpatialAudioActive &&
+          participant.id !== me!.id &&
+          setSpatialPosition(participant, { x: 0, y: 0, z: 0 });
+        setWasSpatialized(true);
+      }, 300);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const options: Options = [
