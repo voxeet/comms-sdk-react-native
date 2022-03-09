@@ -101,7 +101,7 @@ export interface ConferenceJoinOptions {
   preferSendMono?: boolean;
   /** Enables sending the Simulcast video streams to other conference participants. */
   simulcast?: boolean;
-  /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method. */
+  /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) method. */
   spatialAudio?: boolean;
 }
 
@@ -345,6 +345,22 @@ export enum RTCStatsType {
   'ice-server',
 }
 
+/** The SpatialDirection model defines the direction a participant is facing. The model is specified as a set of three Euler rotations about the corresponding axis in the order of z-x-y:
+ *
+ * The following properties define a rotation about the specified positive axis:
+ *
+ * - `x`: A rotation about the x-axis
+ * - `y`: A rotation about the y-axis
+ * - `z`: A rotation about the z-axis
+ *
+ * These properties correspond to yaw, pitch, and roll:
+ *
+ * [block:html]
+ * {
+ *   "html": "<div class=\"grid-container\">\n<div class=\"video-1\" >\n <p><b>Yaw:</b> A rotation about the up axis, where the default environment is the Y rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/08_SpatialDirectionYaw_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-2\">\n <p><b>Pitch:</b> A rotation about the right axis, where the default environment is the X rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/09_SpatialDirectionPitch_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-3\">\n <p><b>Roll:</b> A rotation about the forward axis, where the default environment is the Z rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/10_SpatialDirectionRoll_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n \n</div>\n</div>\n\n<style>\n .grid-container {\n display: grid; \n \n }\n \n .grid-container {\ndisplay: grid;\ngrid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\ngrid-column-gap: 10px;\ngrid-row-gap: 50px;\n}\n \n \n</style>"
+ * }
+ * [/block]
+ * When using custom environment directions set in [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment), the rotation is defined to always rotate about the relevant axis according to the left handed curl rule. In the animations above you can see, for the Y-axis rotation, if you curl your left hand up around with your thumb pointing down the +Y axis, the direction the participant will rotate is in the direction the fingers are curling around the given axis. You can see the rotation arrows in those reference animations which correspond to positive rotation direction are pointing the same direction as the fingers of the curled left hand. */
 export interface SpatialDirection {
   /** The Euler rotation about the x-axis, in degrees. */
   x: number;
@@ -354,6 +370,10 @@ export interface SpatialDirection {
   z: number;
 }
 
+/** The SpatialScale model defines how to convert units from the application's coordinate system (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, let's assume that SpatialScale is set to (100,100,100), which indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. If the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location.
+ *
+ * **Note**: The scale must have a value greater than zero. The default is (1,1,1).
+ */
 export interface SpatialScale {
   /** The x component of the SpatialScale vector. */
   x: number;
@@ -362,6 +382,16 @@ export interface SpatialScale {
   /** The z component of the SpatialScale vector. */
   z: number;
 }
+
+/** The SpatialPosition model represents a participant's audio position. The position is defined using Cartesian coordinates.
+ *
+ * You can define the direction of each axis in the coordinate system using the [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment) method. By default, the environment consists of the following axes:
+ *
+ * - X-axis: Extends positive to the right
+ * - Y-axis: Extends positive upwards
+ * - Z-axis: Extends positive forwards
+ *
+ * The [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment) method allows the application to choose the meaning of each axis and match the usage of the application. */
 export interface SpatialPosition {
   /** The x-coordinate of a new audio location. */
   x: number;
