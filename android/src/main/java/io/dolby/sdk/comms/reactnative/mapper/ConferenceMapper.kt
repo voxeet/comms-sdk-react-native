@@ -49,13 +49,13 @@ class ConferenceMapper(
     ConferenceStatus.DESTROYED -> "DESTROYED"
     ConferenceStatus.ENDED -> "ENDED"
     ConferenceStatus.ERROR -> "ERROR"
+    ConferenceStatus.FIRST_PARTICIPANT,
+    ConferenceStatus.NO_MORE_PARTICIPANT,
     ConferenceStatus.JOINED -> "JOINED"
     ConferenceStatus.LEFT -> "LEFT"
     ConferenceStatus.DEFAULT,
     ConferenceStatus.CREATING,
     ConferenceStatus.JOINING,
-    ConferenceStatus.FIRST_PARTICIPANT,
-    ConferenceStatus.NO_MORE_PARTICIPANT,
     ConferenceStatus.LEAVING -> "UNKNOWN"
   }
 
