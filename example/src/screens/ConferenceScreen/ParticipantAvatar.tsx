@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Alert } from 'react-native';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
@@ -7,16 +7,22 @@ import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { mute, unmute, kick, isSpeaking } from '@utils/conference.tester';
+import {
+  mute,
+  unmute,
+  kick,
+  isSpeaking,
+  setSpatialPosition,
+} from '@utils/conference.tester';
 
 import type { Participant } from '../../../../src/services/conference/models';
+import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
 import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
-import styles from './ConferenceScreen.style';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
-  const { me } = useContext(DolbyIOContext);
+  const { me, isSpatialAudioActive } = useContext(DolbyIOContext);
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
     useState(false);
@@ -24,6 +30,20 @@ const ParticipantAvatar = (participant: Participant) => {
     useState<SpatialConfigModalTypeModel>(
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
+
+  const [wasSpatialized, setWasSpatialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!wasSpatialized) {
+      setTimeout(() => {
+        isSpatialAudioActive &&
+          participant.id !== me!.id &&
+          setSpatialPosition(participant, { x: 0, y: 0, z: 0 });
+        setWasSpatialized(true);
+      }, 300);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const options: Options = [
     {
