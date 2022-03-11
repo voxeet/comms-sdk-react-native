@@ -52,10 +52,10 @@ repositories {
         url("$rootDir/../node_modules/react-native/android")
     }
     maven {
-        url("http://android-sdk.voxeet.com/release")
+        url("https://android-sdk.voxeet.com/release")
     }
     maven {
-      url("http://android-sdk.voxeet.com/beta")
+      url("https://android-sdk.voxeet.com/beta")
     }
     google()
     mavenCentral()
