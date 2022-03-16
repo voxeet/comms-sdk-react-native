@@ -22,7 +22,7 @@ const JoinScreen: FunctionComponent = () => {
   const { createAndJoin, replay } = useContext(DolbyIOContext);
 
   const joinConference = () => {
-    createAndJoin(alias, false, false);
+    createAndJoin(alias, false, true, true);
   };
 
   const replayLastConference = () => {
