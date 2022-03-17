@@ -27,15 +27,9 @@ export interface IDolbyIOProvider {
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
-  isSpatialAudioActive: boolean;
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
-  createAndJoin: (
-    alias: string,
-    liveRecording: boolean,
-    dolbyVoice: boolean,
-    spatialAudio: boolean
-  ) => void;
+  createAndJoin: (alias: string, liveRecording: boolean) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
@@ -47,7 +41,6 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   conference: undefined,
   conferenceStatus: undefined,
   participants: [],
-  isSpatialAudioActive: false,
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
@@ -68,8 +61,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   const [participants, setParticipants] = useState<Map<string, Participant>>(
     new Map()
   );
-  const [isSpatialAudioActive, setIsSpatialAudioActive] =
-    useState<boolean>(false);
 
   const onConferenceStatusChange = (data: ConferenceStatusUpdatedEventType) => {
     console.log(
@@ -162,19 +153,14 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       unsubscribers.forEach((u) => u());
     };
   }, []);
-  const createAndJoin = async (
-    alias: string,
-    liveRecording: boolean,
-    dolbyVoice: boolean,
-    spatialAudio: boolean
-  ) => {
+  const createAndJoin = async (alias: string, liveRecording: boolean) => {
     try {
       const conferenceParams = {
         liveRecording: liveRecording,
         rtcpMode: RTCPMode.AVERAGE,
         ttl: 0,
         videoCodec: Codec.H264,
-        dolbyVoice: dolbyVoice,
+        dolbyVoice: true,
       };
       const conferenceOptions = {
         alias,
@@ -192,14 +178,13 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         },
         maxVideoForwarding: 4,
         simulcast: false,
-        spatialAudio,
+        spatialAudio: true,
       };
       const joinedConference = await CommsAPI.conference.join(
         createdConference,
         joinOptions
       );
       setConference(joinedConference);
-      setIsSpatialAudioActive(spatialAudio);
       const participantsMap = new Map();
       joinedConference.participants.forEach((p) =>
         participantsMap.set(p.id, p)
@@ -272,7 +257,6 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     conference,
     conferenceStatus,
     participants: Array.from(participants.values()),
-    isSpatialAudioActive,
     initialize,
     openSession,
     createAndJoin,
