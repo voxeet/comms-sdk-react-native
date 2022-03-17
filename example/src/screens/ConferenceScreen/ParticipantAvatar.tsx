@@ -22,7 +22,7 @@ import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
-  const { me, isSpatialAudioActive } = useContext(DolbyIOContext);
+  const { me, conference } = useContext(DolbyIOContext);
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
     useState(false);
@@ -36,14 +36,13 @@ const ParticipantAvatar = (participant: Participant) => {
   useEffect(() => {
     if (!wasSpatialized) {
       setTimeout(() => {
-        isSpatialAudioActive &&
-          participant.id !== me!.id &&
+        participant.id !== me!.id &&
           setSpatialPosition(participant, { x: 0, y: 0, z: 0 });
         setWasSpatialized(true);
       }, 300);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [conference!.participants]);
 
   const options: Options = [
     {
