@@ -22,7 +22,7 @@ import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 
 const ParticipantAvatar = (participant: Participant) => {
-  const { me } = useContext(DolbyIOContext);
+  const { me, conference } = useContext(DolbyIOContext);
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
     useState(false);
@@ -42,7 +42,7 @@ const ParticipantAvatar = (participant: Participant) => {
       }, 300);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [conference!.participants]);
 
   const options: Options = [
     {
