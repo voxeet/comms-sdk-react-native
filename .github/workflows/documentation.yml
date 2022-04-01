@@ -2,8 +2,8 @@ name: ci-actions
 on:
   push:
     branches:
-      - develop
-      - master
+      - "feature/*"
+  pull_request:
 jobs:
   documentation:
     runs-on: macos-11
