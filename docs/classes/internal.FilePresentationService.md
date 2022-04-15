@@ -93,7 +93,7 @@ ___
 
 ▸ **getImage**(`page`): `Promise`<`string`\>
 
-Downloads and displays locally the presented file by retrieving URLs of the individual images.
+Provides the image's URL that refers to a specific page of the presented file.
 
 #### Parameters
 

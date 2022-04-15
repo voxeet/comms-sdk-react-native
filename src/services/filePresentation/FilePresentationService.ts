@@ -67,7 +67,7 @@ export class FilePresentationService {
   }
 
   /**
-   * Downloads and displays locally the presented file by retrieving URLs of the individual images.
+   * Provides the image's URL that refers to a specific page of the presented file.
    * @param page The number of the presented page. Files that do not have any pages, for example, jpg images, require setting the page value to 0.
    */
   public async getImage(page: number): Promise<string> {
