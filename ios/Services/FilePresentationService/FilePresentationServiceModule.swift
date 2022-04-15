@@ -123,7 +123,7 @@ public class FilePresentationServiceModule: ReactEmitter {
 
 	// MARK: - Getters
 
-	/// Downloads and displays locally the presented file by retrieving URLs of the individual images.
+	/// Provides the image's URL that refers to a specific page of the presented file.
 	/// - Parameters:
 	///	  - page: The number of the presented page.
 	///   - resolve: returns on success
