@@ -22,7 +22,7 @@ const { CommsAPIFilePresentationServiceModule } = NativeModules;
  *
  * **3.** The presenter calls the [start](#start) method to start presenting the file.
  *
- * **4.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the shared file via the [onFilePresentationChange](#onfilepresentationchange) listener. This information should trigger calling the [getImage](#getimage) method to download the converted file and display the proper page of the file by retrieving the individual images.
+ * **4.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the shared file via the [onFilePresentationChange](#onfilepresentationchange) listener. This information should trigger calling the [getImage](#getimage) method to get the converted file images URLs and display the proper page of the file by retrieving the individual images.
  *
  * **5.** The application is responsible for coordinating the page flip between the local and the presented files. The presenter calls the [update](#update) method to inform the service to send the updated page number to participants.
  *
