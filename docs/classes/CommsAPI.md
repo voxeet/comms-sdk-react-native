@@ -117,7 +117,7 @@ ___
 
 ▸ **initializeToken**(`accessToken`, `refreshAccessToken`): `Promise`<``null``\>
 
-Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
+Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the App key and App secret.
 The following diagram presents the authentication flow:
 ```
 Client          Customer Server       Dolby Server
