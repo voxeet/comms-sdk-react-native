@@ -13,6 +13,7 @@ internal extension VTConferenceOptions {
 		conferenceOptions.alias = dictionary.value(for: Keys.alias)
 		conferenceOptions.params.update(with: dictionary.value(for: Keys.params))
 		conferenceOptions.pinCode = dictionary.value(for: Keys.pinCode)
+		conferenceOptions.spatialAudioStyle = SpatialAudioStyle.fromReactModel(value: dictionary.value(for: Keys.spatialAudioStyle))
 
 		return conferenceOptions
 	}
@@ -26,13 +27,14 @@ extension VTConferenceOptions: ReactModelMappable {
 			Keys.alias: alias ?? NSNull(),
 			Keys.params: params.toReactModel(),
 			Keys.pinCode: pinCode ?? NSNull()
+			Keys.spatialAudioStyle: spatialAudioStyle?.toReactModelValue() ?? NSNull()
 		].mapKeysToRawValue()
 	}
 }
 
 // MARK: - ReactModel Keys
 private enum Keys: String {
-	case alias, params, pinCode
+	case alias, params, pinCode, spatialAudioStyle
 }
 
 
