@@ -416,11 +416,11 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   @Deprecated(
-    message = "Use setMaxVideoForwarding(strategy, max, participantsRN, promise) instead",
-    replaceWith = ReplaceWith("setMaxVideoForwarding(strategy, max, participantsRN, promise)")
+    message = "Use setVideoForwarding(strategy, max, participantsRN, promise) instead",
+    replaceWith = ReplaceWith("setVideoForwarding(strategy, max, participantsRN, promise)")
   )
   fun setMaxVideoForwarding(max: Int, participantsRN: ReadableArray, promise: ReactPromise) {
-    setMaxVideoForwarding(
+    setVideoForwarding(
       strategy = null,
       max = max,
       participantsRN = participantsRN,
@@ -447,7 +447,7 @@ class RNConferenceServiceModule(
    * @param promise         returns null
    */
   @ReactMethod
-  fun setMaxVideoForwarding(strategy: String?, max: Int, participantsRN: ReadableArray, promise: ReactPromise) {
+  fun setVideoForwarding(strategy: String?, max: Int, participantsRN: ReadableArray, promise: ReactPromise) {
     Promises.promise(participantMapper.participantIdsFromRN(participantsRN))
       .thenValue { participantId -> participantId.mapNotNull(conferenceService::findParticipantById) }
       .thenPromise { participants ->
