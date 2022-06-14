@@ -3,6 +3,7 @@ package io.dolby.sdk.comms.reactnative.mapper
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.media.constraints.Constraints
 import com.voxeet.sdk.models.Conference
+import com.voxeet.sdk.models.VideoForwardingStrategy
 import com.voxeet.sdk.services.builders.ConferenceJoinOptions
 import io.dolby.sdk.comms.reactnative.utils.RnCollections.getOptionalBoolean
 import io.dolby.sdk.comms.reactnative.utils.RnCollections.getOptionalInt
@@ -24,6 +25,9 @@ class ConferenceJoinOptionsMapper {
       .apply {
         optionsRN?.let {
           it.getString(CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN)?.let(::setConferenceAccessToken)
+          it.getString(CONFERENCE_JOIN_OPTIONS_VIDEO_FORWARDING_STRATEGY)
+            ?.let { videoForwardingStrategyFromRN(it) }
+            ?.let { setVideoForwardingStrategy(it) }
           it.getConstraints()?.let(::setConstraints)
           it.getOptionalInt(CONFERENCE_JOIN_OPTIONS_MAX_VIDEO_FORWARDING)
             ?.let(::setMaxVideoForwarding)
@@ -39,6 +43,12 @@ class ConferenceJoinOptionsMapper {
       return Constraints(hasAudio, hasVideo)
     }
 
+  fun videoForwardingStrategyFromRN(strategy: String) = when (strategy) {
+    "LAST_SPEAKER" -> VideoForwardingStrategy.LAST_SPEAKER
+    "CLOSEST_USER" -> VideoForwardingStrategy.CLOSEST_USER
+    else -> null
+  }
+
   companion object {
     private const val CONFERENCE_JOIN_OPTIONS_SPATIAL_AUDIO = "spatialAudio"
     private const val CONFERENCE_JOIN_OPTIONS_ACCESS_TOKEN = "conferenceAccessToken"
@@ -46,5 +56,6 @@ class ConferenceJoinOptionsMapper {
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS = "constraints"
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_AUDIO = "audio"
     private const val CONFERENCE_JOIN_OPTIONS_CONSTRAINTS_VIDEO = "video"
+    private const val CONFERENCE_JOIN_OPTIONS_VIDEO_FORWARDING_STRATEGY = "videoForwardingStrategy"
   }
 }
