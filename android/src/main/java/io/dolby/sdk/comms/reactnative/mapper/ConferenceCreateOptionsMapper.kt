@@ -37,7 +37,8 @@ class ConferenceCreateOptionsMapper {
       paramsMap.getString(CONFERENCE_PARAMS_VIDEO_CODEC)
         ?.let(paramsHolder::setVideoCodec)
       paramsMap.getString(CONFERENCE_PARAMS_SPATIAL_AUDIO_STYLE)
-        ?.let { paramsHolder.setSpatialAudioStyle(spatialAudioStyleFromRN(it)) }
+        ?.let { spatialAudioStyleFromRN(it) }
+        ?.let { paramsHolder.setSpatialAudioStyle(it) }
       paramsMap.getOptionalInt(CONFERENCE_PARAMS_TTL)
         ?.let { paramsHolder.putValue(CONFERENCE_PARAMS_TTL, it) }
       paramsMap.getString(CONFERENCE_PARAMS_RTCP_MODE)
@@ -56,7 +57,8 @@ class ConferenceCreateOptionsMapper {
   private fun spatialAudioStyleFromRN(style: String) = when (style) {
     "INDIVIDUAL" -> SpatialAudioStyle.INDIVIDUAL
     "SHARED" -> SpatialAudioStyle.SHARED
-    else -> SpatialAudioStyle.DISABLED
+    "DISABLED" -> SpatialAudioStyle.DISABLED
+    else -> null
   }
 
   companion object {
