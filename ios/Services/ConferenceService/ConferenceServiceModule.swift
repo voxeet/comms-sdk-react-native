@@ -474,7 +474,7 @@ public class ConferenceServiceModule: ReactEmitter {
 	///   - participants: The list of the prioritized participants.
 	///   - resolve: returns on success
 	///   - reject: returns error on failure
-	@available(*, deprecated, message: "You can now use the setVideoForwardingOptions.", renamed: "setVideoForwardingOptions:max:participants:resolver:rejecter:)")
+	@available(*, deprecated, message: "You can now use the setVideoForwarding.", renamed: "setVideoForwarding:max:participants:resolver:rejecter:)")
 	@objc(setMaxVideoForwarding:participants:resolver:rejecter:)
 	public func setMaxVideoForwarding(
 		maxVideoForwarding: Int,
@@ -501,8 +501,8 @@ public class ConferenceServiceModule: ReactEmitter {
 	///   - participants: The list of the prioritized participants.
 	///   - resolve: returns on success
 	///   - reject: returns error on failure
-	@objc(setVideoForwardingOptions:max:participants:resolver:rejecter:)
-	public func setVideoForwardingOptions(
+	@objc(setVideoForwarding:max:participants:resolver:rejecter:)
+	public func setVideoForwarding(
 		strategy: String?,
 		max: Int,
 		participants: [[String:Any]],
