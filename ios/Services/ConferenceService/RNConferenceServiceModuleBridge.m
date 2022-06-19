@@ -90,7 +90,7 @@ RCT_EXTERN_METHOD(setMaxVideoForwarding:(NSInteger)maxVideoForwarding
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
-RCT_EXTERN_METHOD(setVideoForwardingOptions:(NSString * _Nullable)strategy
+RCT_EXTERN_METHOD(setVideoForwarding:(NSString * _Nullable)strategy
 				  max:(NSInteger)max
 				  participants:(NSArray<NSDictionary *> * _Nonnull)participants
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
