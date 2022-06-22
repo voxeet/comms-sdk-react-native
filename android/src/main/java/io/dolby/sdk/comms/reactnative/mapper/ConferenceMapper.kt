@@ -99,6 +99,6 @@ class ConferenceMapper(
     private const val SEND = "send"
     private const val AUDIO_PROCESSING = "audioProcessing"
     private const val REPLAY_OPTIONS_OFFSET = "offset"
-    private const val CONFERENCE_SPATIAL_AUDIO_STYLE = "offset"
+    private const val CONFERENCE_SPATIAL_AUDIO_STYLE = "spatialAudioStyle"
   }
 }
