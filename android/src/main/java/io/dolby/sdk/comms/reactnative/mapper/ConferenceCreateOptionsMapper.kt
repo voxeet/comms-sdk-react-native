@@ -47,8 +47,6 @@ class ConferenceCreateOptionsMapper {
         ?.let { paramsHolder.putValue(CONFERENCE_PARAMS_LIVE_RECORDING, it) }
       paramsMap.getOptionalBoolean(CONFERENCE_PARAMS_DOLBY_VOICE)
         ?.let { paramsHolder.putValue(CONFERENCE_PARAMS_DOLBY_VOICE, it) }
-      paramsMap.getString(CONFERENCE_PARAMS_SPATIAL_AUDIO_STYLE)
-        ?.let { paramsHolder.putValue(CONFERENCE_PARAMS_SPATIAL_AUDIO_STYLE, it) }
     }
 
     return paramsHolder
