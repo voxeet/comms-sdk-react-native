@@ -463,7 +463,7 @@ class RNConferenceServiceModule(
           .build()
           .let { conferenceService.videoForwarding(it) }
       }
-      .rejectIfFalse { "Set maximum number of video streams for local participant operation failed" }
+      .rejectIfFalse { "Set video forwarding options for local participant failed" }
       .forward(promise)
   }
 
