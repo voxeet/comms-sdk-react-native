@@ -5,7 +5,7 @@ import type { Recording } from './models';
 const { CommsAPIRecordingServiceModule } = NativeModules;
 
 /**
- * The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording](doc:recording-javascript) and [Recording Mechanisms](doc:guides-recording-mechanisms) documents.
+ * The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording Conferences](doc:guides-recording-conferences).
  */
 export class RecordingService {
   /** @internal */

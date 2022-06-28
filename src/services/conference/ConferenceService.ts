@@ -180,7 +180,7 @@ export class ConferenceService {
   }
 
   /**
-   * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+   * Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
    * @param conference The Conference object.
    * @param replayOptions The replay options.
    */

@@ -47,7 +47,7 @@ ___
 
 • `Optional` **mixing**: [`ConferenceMixingOptions`](internal.ConferenceMixingOptions.md)
 
-Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms) article.
+Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
 ___
 
