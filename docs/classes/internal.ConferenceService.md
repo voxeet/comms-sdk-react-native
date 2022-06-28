@@ -305,7 +305,7 @@ ___
 
 ▸ **replay**(`conference`, `replayOptions?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
 #### Parameters
 

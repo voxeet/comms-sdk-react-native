@@ -93,7 +93,7 @@ export interface ConferenceJoinOptions {
   constraints?: ConferenceConstraints;
   /** Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. */
   maxVideoForwarding?: number;
-  /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms) article. */
+  /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
   mixing?: ConferenceMixingOptions;
   /** Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
   preferRecvMono?: boolean;
@@ -113,7 +113,7 @@ export interface ConferenceReplayOptions {
   offset: number;
 }
 
-/** The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article. */
+/** The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
 export interface ConferenceMixingOptions {
   /** A boolean that notifies the server whether a participant is a Mixer (true) or not (false). */
   enabled: boolean;
