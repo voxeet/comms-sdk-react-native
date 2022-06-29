@@ -26,7 +26,7 @@ extension VTConferenceOptions: ReactModelMappable {
 		return [
 			Keys.alias: alias ?? NSNull(),
 			Keys.params: params.toReactModel(),
-			Keys.pinCode: pinCode ?? NSNull()
+			Keys.pinCode: pinCode ?? NSNull(),
 			Keys.spatialAudioStyle: spatialAudioStyle?.toReactModelValue() ?? NSNull()
 		].mapKeysToRawValue()
 	}
