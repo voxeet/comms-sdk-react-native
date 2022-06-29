@@ -13,7 +13,7 @@ extension VTConference: ReactModelMappable {
 			Keys.params: params.toReactModel(),
 			Keys.status: status.toReactModelValue() ?? NSNull(),
 			Keys.pinCode: pinCode ?? NSNull(),
-			Keys.spatialAudio: spatialAudioStyle?.toReactModelValue() ?? NSNull()
+			Keys.spatialAudioStyle: spatialAudioStyle?.toReactModelValue() ?? NSNull()
 		].mapKeysToRawValue()
 	}
 

@@ -26,6 +26,7 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
+  VideoForwardingOptions,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
@@ -218,6 +219,18 @@ export class ConferenceService {
     return this._nativeModule.setMaxVideoForwarding(
       max,
       prioritizedParticipants
+    );
+  }
+
+  /**
+   * Sets the video forwarding functionality for the local participant.
+   * @param options The options for video forwarding.
+   */
+  public async videoForwarding(options: VideoForwardingOptions): Promise<any> {
+    return this._nativeModule.setVideoForwarding(
+      options.strategy,
+      options.max,
+      options.participants
     );
   }
 
