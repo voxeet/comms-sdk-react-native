@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.models.Conference
 import com.voxeet.sdk.services.conference.AudioProcessing
 import com.voxeet.sdk.services.conference.information.ConferenceStatus
+import com.voxeet.sdk.services.conference.spatialisation.SpatialAudioStyle
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_DOLBY_VOICE
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_LIVE_RECORDING
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCommonConstants.CONFERENCE_PARAMS_RTCP_MODE
@@ -42,6 +43,7 @@ class ConferenceMapper(
       putMap(CONFERENCE_PARAMS, toRNConferenceParams(conference))
       putArray(CONFERENCE_PERMISSIONS, permissionMapper.toRN(conference.permissions))
       putArray(CONFERENCE_PARTICIPANTS, participantMapper.toRN(conference.participants))
+      conference.spatialAudioStyle?.let { putString(CONFERENCE_SPATIAL_AUDIO_STYLE, toRNSpatialAudioStyle(it)) }
     }
 
   fun toRNConferenceStatus(status: ConferenceStatus): String = when (status) {
@@ -49,11 +51,9 @@ class ConferenceMapper(
     ConferenceStatus.DESTROYED -> "DESTROYED"
     ConferenceStatus.ENDED -> "ENDED"
     ConferenceStatus.ERROR -> "ERROR"
-    ConferenceStatus.FIRST_PARTICIPANT,
-    ConferenceStatus.NO_MORE_PARTICIPANT,
     ConferenceStatus.JOINED -> "JOINED"
     ConferenceStatus.LEFT -> "LEFT"
-    ConferenceStatus.DEFAULT,
+    ConferenceStatus.UNINITIALIZED,
     ConferenceStatus.CREATING,
     ConferenceStatus.JOINING,
     ConferenceStatus.LEAVING -> "UNKNOWN"
@@ -63,6 +63,12 @@ class ConferenceMapper(
     Arguments.createMap().apply {
       localStats.forEach { (key, value) -> putString(key, value.toString()) }
     }
+
+  private fun toRNSpatialAudioStyle(style: SpatialAudioStyle) : String = when(style) {
+    SpatialAudioStyle.INDIVIDUAL -> "INDIVIDUAL"
+    SpatialAudioStyle.SHARED -> "SHARED"
+    SpatialAudioStyle.DISABLED -> "DISABLED"
+  }
 
   private fun toRNConferenceParams(conference: Conference): ReadableMap {
     val map = Arguments.createMap()
@@ -93,5 +99,6 @@ class ConferenceMapper(
     private const val SEND = "send"
     private const val AUDIO_PROCESSING = "audioProcessing"
     private const val REPLAY_OPTIONS_OFFSET = "offset"
+    private const val CONFERENCE_SPATIAL_AUDIO_STYLE = "spatialAudioStyle"
   }
 }
