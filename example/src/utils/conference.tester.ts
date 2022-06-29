@@ -97,6 +97,16 @@ export const getMaxVideoForwarding = async () => {
   }
 };
 
+export const getSpatialAudioStyle = async () => {
+  try {
+    const current =
+      await CommsAPI.conference.current();
+    Alert.alert('Spatial audio style', current?.spatialAudioStyle?.toString());
+  } catch (e: any) {
+    Alert.alert('Cant get spatial audio style', e.toString());
+  }
+};
+
 export const kick = async (participant: Participant) => {
   try {
     console.log('KICKED PARTICIPANT', JSON.stringify(participant, null, 2));

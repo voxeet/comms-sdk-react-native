@@ -10,6 +10,10 @@ export interface Conference {
   participants: Participant[];
   /** The current conference status. */
   status: ConferenceStatus;
+  /** Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+   *
+   * Spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode. */
+  spatialAudioStyle?: SpatialAudioStyle;
 }
 
 /** The ConferenceCreateParameters interface gathers parameters settings for a requested conference. */
@@ -28,6 +32,10 @@ export interface ConferenceCreateParameters {
   ttl?: number;
   /** The preferred video codec that is used during a conference, either H264 or VP8. By default, the SDK uses the H264 codec. */
   videoCodec?: Codec;
+  /** Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+   *
+   * Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode. */
+  spatialAudioStyle?: SpatialAudioStyle;
 }
 
 /** The ConferenceCreateOptions interface gathers information about a new conference. */
@@ -38,6 +46,10 @@ export interface ConferenceCreateOptions {
   params?: ConferenceCreateParameters;
   /** The PIN code of a conference. */
   pinCode?: number;
+  /** Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+   *
+   * Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode. */
+  spatialAudioStyle?: SpatialAudioStyle;
 }
 
 /** The ConferenceLeaveOptions interface gathers information about preferences for leaving a conference. */
@@ -103,6 +115,8 @@ export interface ConferenceJoinOptions {
   simulcast?: boolean;
   /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) method. */
   spatialAudio?: boolean;
+  /** Changes the video forwarding strategy for the local participant. */
+  videoForwardingStrategy?: VideoForwardingStrategy;
 }
 
 /** The ConferenceReplayOptions interface gathers properties responsible for replaying conferences. */
@@ -399,4 +413,50 @@ export interface SpatialPosition {
   y: number;
   /** The z-coordinate of a new audio location. */
   z: number;
+}
+
+/** The SpatialAudioStyle enum defines how the spatial location is communicated between SDK and the Dolby.io server. */
+export enum SpatialAudioStyle {
+  /** Sets the spatial location that is based on the spatial scene, local participant's position, and remote participants'
+   * positions. This allows a client to control the position using the local, self-contained logic. However, the client has to
+   * communicate a large set of requests constantly to the server, which increases network traffic, log subsystem
+   * pressure, and complexity of the client-side application. This option is selected by default. We recommend this mode
+   * for A/V congruence scenarios in video conferencing and similar applications. */
+  INDIVIDUAL = 'INDIVIDUAL',
+  /** Sets the spatial location that is based on the spatial scene and the local participant's position, while the
+   * relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is
+   * shared by all participants, so that each client can set a position and participate in the shared scene. This
+   * approach simplifies communication between the client and the server and decreases network traffic. We
+   * recommend this mode for 2D virtual space scenarios, such as 2D games, trade shows, water cooler
+   * scenarios, etc. */
+  SHARED = 'SHARED',
+  /** Disables spatial audio in a conference. */
+  DISABLED = 'DISABLED',
+}
+
+/** The VideoForwardingStrategy enum defines how the SDK should select conference participants whose videos will be transmitted to the local participant.
+ * There are two possible values; the selection can be either based on the participants' audio volume or the distance from the local participant.
+ * Selecting the video forwarding strategy is supported only in SDK 3.6 and later. In earlier SDK, the SDK supports only the `LAST_SPEAKER`. */
+export enum VideoForwardingStrategy {
+  /** Selects participants based on their audio volume, which means that the local participant receives video streams only from active speakers. */
+  LAST_SPEAKER = 'LAST_SPEAKER',
+  /** Selects participants based on the distance from the local participant.
+   * This means that the local participant receives video streams only from the nearest participants.
+   * This strategy is available only in conferences enabled with spatial audio. */
+  CLOSEST_USER = 'CLOSEST_USER',
+}
+
+/** The VideoForwardingOptions model allows configuring the Video Forwarding functionality that allows:
+ *
+ * - Setting the maximum number of video streams that may be transmitted to the local participant
+ * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
+ * - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant */
+export interface VideoForwardingOptions {
+  /** Sets the maximum number of video streams that may be transmitted to the joining participant. */
+  max?: number;
+  /** The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's
+   * video streams and display their videos even when these participants do not talk. */
+  participants?: Participant[];
+  /** Sets the video forwarding strategy for the local participant. */
+  strategy?: VideoForwardingStrategy;
 }

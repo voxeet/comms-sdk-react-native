@@ -2,7 +2,7 @@ import { NativeModules } from 'react-native';
 
 import ConferenceService from '../ConferenceService';
 import { ConferenceServiceEventNames } from '../events';
-import type { Conference } from '../models';
+import { Conference, SpatialAudioStyle } from '../models';
 import {
   ConferencePermission,
   ConferenceReplayOptions,
@@ -419,6 +419,7 @@ describe('ConferenceService - transformers', () => {
           alias: 'Conference',
           id: '111',
           status: ConferenceStatus.DEFAULT,
+          spatialAudioStyle: SpatialAudioStyle.INDIVIDUAL,
         })
       ).toStrictEqual({
         participants: [
@@ -435,6 +436,7 @@ describe('ConferenceService - transformers', () => {
         id: '111',
         isNew: undefined,
         status: ConferenceStatus.DEFAULT,
+        spatialAudioStyle: SpatialAudioStyle.INDIVIDUAL,
       });
     });
   });

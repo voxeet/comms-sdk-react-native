@@ -7,14 +7,14 @@ extension VideoForwardingStrategy: ReactModelValueMappable {
 
 	static func fromReactModel(value: ReactModelValueType) -> VideoForwardingStrategy? {
 		guard let value = value else { return nil }
-		return VideoForwardingStrategyValue(rawValue: value)?.mapToVideoForwardingStrategyValue()
+		return VideoForwardingStrategyValue(rawValue: value)?.mapToVideoForwardingStrategy()
 	}
 
 	func toReactModelValue() -> ReactModelValueType {
-		return mapToVideoForwardingStrategyValue?.rawValue
+		return mapToVideoForwardingStrategyValue()?.rawValue
 	}
 
-	func mapToVideoForwardingStrategyValue() -> VideoForwardingStrategyValue? {
+	private func mapToVideoForwardingStrategyValue() -> VideoForwardingStrategyValue? {
 		switch self {
 		case .lastSpeaker:
 			return .lastSpeaker
@@ -25,18 +25,16 @@ extension VideoForwardingStrategy: ReactModelValueMappable {
 		}
 	}
 
-	private enum VideoForwardingStrategyValue: ReactModelValueType {
-		case lastSpeaker = "lastSpeakerStrategy"
-		case closestUser = "closestUserStrategy"
+	private enum VideoForwardingStrategyValue: String {
+		case lastSpeaker = "LAST_SPEAKER"
+		case closestUser = "CLOSEST_USER"
 
-		func mapToVideoForwardingStrategy() -> VideoForwardingStrategy? {
+		func mapToVideoForwardingStrategy() -> VideoForwardingStrategy {
 			switch self {
 			case .lastSpeaker:
 				return .lastSpeaker
 			case .closestUser:
 				return .closestUser
-			@unknown default:
-				return nil
 			}
 		}
 	}

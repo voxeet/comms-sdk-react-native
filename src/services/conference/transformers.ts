@@ -1,13 +1,14 @@
 import type { Conference, Participant } from './models';
 
 export const transformToConference = (c: Conference) => {
-  const { id, alias, isNew, participants, status } = c;
+  const { id, alias, isNew, participants, status, spatialAudioStyle } = c;
   return {
     id,
     alias,
     isNew,
     participants: participants.map(transformToParticipant),
     status,
+    spatialAudioStyle,
   };
 };
 

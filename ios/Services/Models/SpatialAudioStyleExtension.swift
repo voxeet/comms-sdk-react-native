@@ -11,10 +11,10 @@ extension SpatialAudioStyle: ReactModelValueMappable {
 	}
 
 	func toReactModelValue() -> ReactModelValueType {
-		return mapToSpatialAudioStyleValue?.rawValue
+		return mapToSpatialAudioStyleValue()?.rawValue
 	}
 
-	func mapToSpatialAudioStyleValue() -> SpatialAudioStyleValue? {
+	private func mapToSpatialAudioStyleValue() -> SpatialAudioStyleValue? {
 		switch self {
 		case .individual:
 			return .individual
@@ -27,10 +27,13 @@ extension SpatialAudioStyle: ReactModelValueMappable {
 		}
 	}
 
-	private enum SpatialAudioStyleValue: ReactModelValueType {
-		case individual, shared, disabled
+	private enum SpatialAudioStyleValue: String {
 
-		func mapToSpatialAudioStyle() -> SpatialAudioStyle? {
+		case individual = "INDIVIDUAL"
+		case shared = "SHARED"
+		case disabled = "DISABLED"
+
+		func mapToSpatialAudioStyle() -> SpatialAudioStyle {
 			switch self {
 			case .individual:
 				return .individual
@@ -38,8 +41,6 @@ extension SpatialAudioStyle: ReactModelValueMappable {
 				return .shared
 			case .disabled:
 				return .disabled
-			@unknown default:
-				return nil
 			}
 		}
 	}

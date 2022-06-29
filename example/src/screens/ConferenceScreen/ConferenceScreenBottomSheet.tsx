@@ -31,6 +31,7 @@ import {
   getLocalStats,
   getStatus,
   getMaxVideoForwarding,
+  getSpatialAudioStyle,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -176,6 +177,12 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Get max video forwarding"
               onPress={getMaxVideoForwarding}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Get spatial audio style"
+              onPress={getSpatialAudioStyle}
             />
             <Button
               size="small"
