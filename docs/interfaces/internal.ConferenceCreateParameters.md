@@ -48,7 +48,7 @@ ___
 
 • `Optional` **ttl**: `number`
 
-The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds.
+The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 30 seconds.
 
 ___
 

@@ -24,7 +24,7 @@ export interface ConferenceCreateParameters {
   liveRecording?: boolean;
   /** The bitrate adaptation mode for video transmission. The parameter triggers a server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
   rtcpMode?: RTCPMode;
-  /** The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds. */
+  /** The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 30 seconds. */
   ttl?: number;
   /** The preferred video codec that is used during a conference, either H264 or VP8. By default, the SDK uses the H264 codec. */
   videoCodec?: Codec;
