@@ -10,9 +10,7 @@ export interface Conference {
   participants: Participant[];
   /** The current conference status. */
   status: ConferenceStatus;
-  /** Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
-   *
-   * Spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode. */
+  /** The [spatial audio style](doc:rn-client-sdk-enums-spatialaudiostyle) that is used in the current conference. */
   spatialAudioStyle?: SpatialAudioStyle;
 }
 
@@ -24,7 +22,7 @@ export interface ConferenceCreateParameters {
    * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
    * - When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
    *
-   * This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms#recording-types) article. */
+   * This parameter does not start the recording; use the [start](doc:rn-client-sdk-references-recordingservice#start) method to turn it on. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
   liveRecording?: boolean;
   /** The bitrate adaptation mode for video transmission. The parameter triggers a server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
   rtcpMode?: RTCPMode;
@@ -105,7 +103,7 @@ export interface ConferenceJoinOptions {
   constraints?: ConferenceConstraints;
   /** Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. */
   maxVideoForwarding?: number;
-  /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms) article. */
+  /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
   mixing?: ConferenceMixingOptions;
   /** Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
   preferRecvMono?: boolean;
@@ -115,7 +113,7 @@ export interface ConferenceJoinOptions {
   simulcast?: boolean;
   /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) method. */
   spatialAudio?: boolean;
-  /** Changes the video forwarding strategy for the local participant. */
+  /** Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later. */
   videoForwardingStrategy?: VideoForwardingStrategy;
 }
 
@@ -127,7 +125,7 @@ export interface ConferenceReplayOptions {
   offset: number;
 }
 
-/** The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article. */
+/** The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
 export interface ConferenceMixingOptions {
   /** A boolean that notifies the server whether a participant is a Mixer (true) or not (false). */
   enabled: boolean;
@@ -415,7 +413,17 @@ export interface SpatialPosition {
   z: number;
 }
 
-/** The SpatialAudioStyle enum defines how the spatial location is communicated between SDK and the Dolby.io server. */
+/** The SpatialAudioStyle enum defines how the spatial location is communicated between SDK and the Dolby.io server. The style can be defined during a conference creation, although its value for each participant depends on the participant's spatial audio setting. The shared spatial audio style is only available for participants who joined a conference with spatial audio enabled. Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode and do not allow participants to join conferences created with the spatial audio style set to shared. The following table lists the possible spatial audio style settings for the local participant:
+ *
+ * | Create: SpatialAudioStyle | Join: SpatialAudio | Result                            |
+ * |---------------------------|--------------------|-----------------------------------|
+ * | Individual                | True               | Success                           |
+ * | Individual                | False              | Success                           |
+ * | Shared                    | True               | Success only on SDK 3.6 and later |
+ * | Shared                    | False              | Rejected                          |
+ * | Disabled                  | True               | Rejected                          |
+ * | Disabled                  | False              | Success                           |
+ */
 export enum SpatialAudioStyle {
   /** Sets the spatial location that is based on the spatial scene, local participant's position, and remote participants'
    * positions. This allows a client to control the position using the local, self-contained logic. However, the client has to
@@ -427,8 +435,7 @@ export enum SpatialAudioStyle {
    * relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is
    * shared by all participants, so that each client can set a position and participate in the shared scene. This
    * approach simplifies communication between the client and the server and decreases network traffic. We
-   * recommend this mode for 2D virtual space scenarios, such as 2D games, trade shows, water cooler
-   * scenarios, etc. */
+   * recommend this mode for virtual space scenarios, such as 2D or 3D games, trade shows, virtual museums, water cooler scenarios, etc. */
   SHARED = 'SHARED',
   /** Disables spatial audio in a conference. */
   DISABLED = 'DISABLED',
@@ -436,13 +443,14 @@ export enum SpatialAudioStyle {
 
 /** The VideoForwardingStrategy enum defines how the SDK should select conference participants whose videos will be transmitted to the local participant.
  * There are two possible values; the selection can be either based on the participants' audio volume or the distance from the local participant.
- * Selecting the video forwarding strategy is supported only in SDK 3.6 and later. In earlier SDK, the SDK supports only the `LAST_SPEAKER`. */
+ *
+ * Selecting the video forwarding strategy is supported only on SDK 3.6 and later. On earlier SDK versions, the SDK supports only the LAST_SPEAKER.
+ *
+ * By default, the SDK uses the LAST_SPEAKER strategy. */
 export enum VideoForwardingStrategy {
-  /** Selects participants based on their audio volume, which means that the local participant receives video streams only from active speakers. */
+  /** Selects participants based on their audio volume. This allows the local participant to receive video streams only from active speakers. */
   LAST_SPEAKER = 'LAST_SPEAKER',
-  /** Selects participants based on the distance from the local participant.
-   * This means that the local participant receives video streams only from the nearest participants.
-   * This strategy is available only in conferences enabled with spatial audio. */
+  /** Selects participants based on their distance from the local participant. This allows the local participant to receive video streams only from the nearest participants. This strategy is available only for participants who enabled spatial audio. */
   CLOSEST_USER = 'CLOSEST_USER',
 }
 
@@ -452,11 +460,10 @@ export enum VideoForwardingStrategy {
  * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
  * - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant */
 export interface VideoForwardingOptions {
-  /** Sets the maximum number of video streams that may be transmitted to the joining participant. */
+  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 4. The default value is 4. In the case of providing a value smaller than 0 or greater than 4, SDK triggers an error. */
   max?: number;
-  /** The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's
-   * video streams and display their videos even when these participants do not talk. */
+  /** The list of participants whose video streams should be always transmitted to the local participant. */
   participants?: Participant[];
-  /** Sets the video forwarding strategy for the local participant. */
+  /** The strategy that defines how the SDK should select conference participants whose videos will be transmitted to the local participant. The selection can be either based on the participants' audio volume or the distance from the local participant. */
   strategy?: VideoForwardingStrategy;
 }
