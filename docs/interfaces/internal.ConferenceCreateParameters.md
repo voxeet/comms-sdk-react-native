@@ -32,7 +32,7 @@ A boolean that enables and disables live recording. Specify this parameter durin
 - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
 - When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
 
-This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms#recording-types) article.
+This parameter does not start the recording; use the [start](doc:rn-client-sdk-references-recordingservice#start) method to turn it on. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
 ___
 
