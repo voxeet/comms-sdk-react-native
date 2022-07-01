@@ -11,6 +11,7 @@ The ConferenceCreateOptions interface gathers information about a new conference
 - [alias](internal.ConferenceCreateOptions.md#alias)
 - [params](internal.ConferenceCreateOptions.md#params)
 - [pinCode](internal.ConferenceCreateOptions.md#pincode)
+- [spatialAudioStyle](internal.ConferenceCreateOptions.md#spatialaudiostyle)
 
 ## Properties
 
@@ -35,3 +36,13 @@ ___
 • `Optional` **pinCode**: `number`
 
 The PIN code of a conference.
+
+___
+
+### spatialAudioStyle
+
+• `Optional` **spatialAudioStyle**: [`SpatialAudioStyle`](../enums/internal.SpatialAudioStyle.md)
+
+Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+
+Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode.
