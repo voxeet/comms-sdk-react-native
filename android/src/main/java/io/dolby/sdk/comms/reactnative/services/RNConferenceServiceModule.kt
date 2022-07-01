@@ -171,7 +171,7 @@ class RNConferenceServiceModule(
 
   /**
    * Replays the previously recorded conference. For more information, see the
-   * [Recording mechanism](https://docs.dolby.io/communications-apis/docs/guides-recording-mechanisms)
+   * [Recording Conferences](doc:guides-recording-conferences)
    * article.
    *
    * Possible rejection causes:
