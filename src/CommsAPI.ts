@@ -18,6 +18,9 @@ import NativeEvents from './utils/NativeEvents';
 
 const { CommsAPIModule } = NativeModules;
 
+/**
+ * CommsAPI is a main object that allows an application to interact with Dolby.io services.
+ */
 export class CommsAPI {
   /** @internal */
   private _nativeEvents = new NativeEvents(CommsAPIModule);
@@ -88,7 +91,7 @@ export class CommsAPI {
   }
 
   /**
-   * Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the customer key and secret.
+   * Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the App key and App secret.
    * The following diagram presents the authentication flow:
    * ```
    * Client          Customer Server       Dolby Server
