@@ -478,13 +478,13 @@ public class ConferenceServiceModule: ReactEmitter {
 	@objc(setVideoForwarding:max:participants:resolver:rejecter:)
 	public func setVideoForwarding(
 		strategy: String?,
-		max: NSNumber?,
+		max: NSNumber,
 		participants: [[String:Any]]?,
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
 		let videoForwardingOptions = VideoForwardingOptions(strategy: VideoForwardingStrategy.fromReactModel(value: strategy),
-															max: max?.intValue,
+															max: max.intValue,
 															participants: participants?.compactMap { current?.findParticipant(with: $0.identifier) })
 		VoxeetSDK.shared.conference.videoForwarding(options: videoForwardingOptions) { error in
 			guard let error = error else {
