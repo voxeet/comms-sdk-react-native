@@ -31,7 +31,7 @@ class RNCommsAPISDKManifestComponent : AbstractManifestComponentProvider() {
 
     //force a default voxeet preferences manager
     //in sdk mode, no issues
-    VoxeetPreferences.init(context, VoxeetEnvironmentHolder(context))
+    VoxeetPreferences.init(context)
   }
 
   override fun getComponentName(): String =
