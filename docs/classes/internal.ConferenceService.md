@@ -30,6 +30,7 @@ The ConferenceService allows an application to manage the conference life-cycle 
 - [replay](internal.ConferenceService.md#replay)
 - [setAudioProcessing](internal.ConferenceService.md#setaudioprocessing)
 - [setMaxVideoForwarding](internal.ConferenceService.md#setmaxvideoforwarding)
+- [videoForwarding](internal.ConferenceService.md#videoforwarding)
 - [startAudio](internal.ConferenceService.md#startaudio)
 - [startScreenShare](internal.ConferenceService.md#startscreenshare)
 - [startVideo](internal.ConferenceService.md#startvideo)
@@ -135,7 +136,7 @@ ___
 
 ▸ **getMaxVideoForwarding**(): `Promise`<`number`\>
 
-Returns the maximum number of video streams that can be transmitted to the local user.
+Returns the maximum number of video streams that can be transmitted to the local participant.
 
 #### Returns
 
@@ -305,7 +306,7 @@ ___
 
 ▸ **replay**(`conference`, `replayOptions?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
 
-Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
 #### Parameters
 
@@ -344,12 +345,38 @@ ___
 
 Sets the maximum number of video streams that may be transmitted to the local participant.
 
+This method is deprecated in SDK 3.6.
+
 #### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4. |
 | `prioritizedParticipants` | [`Participant`](../interfaces/internal.Participant.md)[] | `[]` | The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk. |
+
+#### Returns
+
+`Promise`<`any`\>
+
+___
+
+### videoForwarding
+
+▸ **videoForwarding**(`options`): `Promise`<`any`\>
+
+Sets the video forwarding functionality for the local participant. The method allows:
+
+- Setting the maximum number of video streams that may be transmitted to the local participant
+- Prioritizing specific participants' video streams that need to be transmitted to the local participant
+- Changing the [video forwarding strategy](doc:rn-client-sdk-enums-videoforwardingstrategy) that defines how the SDK should select conference participants whose videos will be received by the local participant
+
+This method is available only in SDK 3.6 and later.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | [`VideoForwardingOptions`](../interfaces/internal.VideoForwardingOptions.md) | The video forwarding options. |
 
 #### Returns
 

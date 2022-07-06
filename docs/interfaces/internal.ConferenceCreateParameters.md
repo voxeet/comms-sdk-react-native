@@ -13,6 +13,7 @@ The ConferenceCreateParameters interface gathers parameters settings for a reque
 - [rtcpMode](internal.ConferenceCreateParameters.md#rtcpmode)
 - [ttl](internal.ConferenceCreateParameters.md#ttl)
 - [videoCodec](internal.ConferenceCreateParameters.md#videocodec)
+- [spatialAudioStyle](internal.ConferenceCreateParameters.md#spatialaudiostyle)
 
 ## Properties
 
@@ -32,7 +33,7 @@ A boolean that enables and disables live recording. Specify this parameter durin
 - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
 - When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
 
-This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on. For more information, see the [Recording Mechanisms](doc:guides-recording-mechanisms#recording-types) article.
+This parameter does not start the recording; use the [start](doc:rn-client-sdk-references-recordingservice#start) method to turn it on. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
 ___
 
@@ -57,3 +58,13 @@ ___
 • `Optional` **videoCodec**: [`Codec`](../enums/internal.Codec.md)
 
 The preferred video codec that is used during a conference, either H264 or VP8. By default, the SDK uses the H264 codec.
+
+___
+
+### spatialAudioStyle
+
+• `Optional` **spatialAudioStyle**: [`SpatialAudioStyle`](../enums/internal.SpatialAudioStyle.md)
+
+Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+
+Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode.
