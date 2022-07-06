@@ -10,6 +10,7 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
+  VideoForwardingStrategy,
 } from '../../../src/services/conference/models';
 
 export const current = async () => {
@@ -193,6 +194,19 @@ export const setMaxVideoForwarding = async (max: number) => {
     Alert.alert('setMaxVideoForwarding success');
   } catch (e: any) {
     Alert.alert('setMaxVideoForwarding error', e.toString());
+  }
+};
+
+export const videoForwarding = async (max: number, strategy: VideoForwardingStrategy) => {
+  try {
+    await CommsAPI.conference.videoForwarding({
+      max,
+      participants: [],
+      strategy,
+    });
+    Alert.alert('videoForwarding success');
+  } catch (e: any) {
+    Alert.alert('videoForwarding error', e.toString());
   }
 };
 
