@@ -13,6 +13,7 @@ The Conference interface gathers information about a conference.
 - [isNew](internal.Conference.md#isnew)
 - [participants](internal.Conference.md#participants)
 - [status](internal.Conference.md#status)
+- [spatialAudioStyle](internal.Conference.md#spatialaudiostyle)
 
 ## Properties
 
@@ -53,3 +54,11 @@ ___
 • **status**: [`ConferenceStatus`](../enums/internal.ConferenceStatus.md)
 
 The current conference status.
+
+___
+
+### spatialAudioStyle
+
+• `Optional` **spatialAudioStyle**: [`SpatialAudioStyle`](../enums/internal.SpatialAudioStyle.md)
+
+The [spatial audio style](doc:rn-client-sdk-enums-spatialaudiostyle) that is used in the current conference.
