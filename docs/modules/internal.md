@@ -37,6 +37,7 @@
 - [SpatialDirection](../interfaces/internal.SpatialDirection.md)
 - [SpatialScale](../interfaces/internal.SpatialScale.md)
 - [SpatialPosition](../interfaces/internal.SpatialPosition.md)
+- [VideoForwardingOptions](../interfaces/internal.VideoForwardingOptions.md)
 - [FileConvertedEventType](../interfaces/internal.FileConvertedEventType.md)
 - [FilePresentationChangedEventType](../interfaces/internal.FilePresentationChangedEventType.md)
 - [File](../interfaces/internal.File.md)
@@ -71,6 +72,8 @@
 - [Codec](../enums/internal.Codec.md)
 - [ConferencePermission](../enums/internal.ConferencePermission.md)
 - [MediaStreamType](../enums/internal.MediaStreamType.md)
+- [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
+- [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
 - [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
 - [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
