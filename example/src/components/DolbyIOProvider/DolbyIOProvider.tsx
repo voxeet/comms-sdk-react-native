@@ -15,7 +15,7 @@ import type {
   ConferenceStatus,
   UnsubscribeFunction,
 } from '../../../../src/services/conference/models';
-import { Codec, RTCPMode } from '../../../../src/services/conference/models';
+import { Codec, RTCPMode, SpatialAudioStyle } from '../../../../src/services/conference/models';
 import type {
   Conference,
   Participant,
@@ -29,7 +29,7 @@ export interface IDolbyIOProvider {
   participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
-  createAndJoin: (alias: string, liveRecording: boolean) => void;
+  createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
@@ -153,7 +153,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       unsubscribers.forEach((u) => u());
     };
   }, []);
-  const createAndJoin = async (alias: string, liveRecording: boolean) => {
+  const createAndJoin = async (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => {
     try {
       const conferenceParams = {
         liveRecording: liveRecording,
@@ -161,6 +161,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         ttl: 0,
         videoCodec: Codec.H264,
         dolbyVoice: true,
+        spatialAudioStyle: spatialAudioStyle,
       };
       const conferenceOptions = {
         alias,
