@@ -53,7 +53,7 @@ pod install --repo-update --project-directory=ios/
 For Android, add the following line to your `android/build.gradle` file, in the `allprojects`, `repositories` section:
 
 ```
-maven { url("http://android-sdk.voxeet.com/release") }
+maven { url("https://android-sdk.voxeet.com/release") }
 ```
 
 and also add following lines to your `android/app/build.gradle` file:

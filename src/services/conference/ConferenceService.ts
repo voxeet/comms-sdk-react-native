@@ -26,6 +26,7 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
+  VideoForwardingOptions,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
@@ -81,7 +82,7 @@ export class ConferenceService {
   }
 
   /**
-   * Returns the maximum number of video streams that can be transmitted to the local user.
+   * Returns the maximum number of video streams that can be transmitted to the local participant.
    */
   public async getMaxVideoForwarding(): Promise<MaxVideoForwarding> {
     return this._nativeModule.getMaxVideoForwarding();
@@ -180,7 +181,7 @@ export class ConferenceService {
   }
 
   /**
-   * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+   * Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
    * @param conference The Conference object.
    * @param replayOptions The replay options.
    */
@@ -208,6 +209,8 @@ export class ConferenceService {
 
   /**
    * Sets the maximum number of video streams that may be transmitted to the local participant.
+   *
+   * This method is deprecated in SDK 3.6.
    * @param max The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4.
    * @param prioritizedParticipants The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
    */
@@ -218,6 +221,25 @@ export class ConferenceService {
     return this._nativeModule.setMaxVideoForwarding(
       max,
       prioritizedParticipants
+    );
+  }
+
+  /**
+   * Sets the video forwarding functionality for the local participant. The method allows:
+   *
+   * - Setting the maximum number of video streams that may be transmitted to the local participant
+   * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
+   * - Changing the [video forwarding strategy](doc:rn-client-sdk-enums-videoforwardingstrategy) that defines how the SDK should select conference participants whose videos will be received by the local participant
+   *
+   * This method is available only in SDK 3.6 and later.
+   *
+   * @param options The video forwarding options.
+   */
+  public async videoForwarding(options: VideoForwardingOptions): Promise<any> {
+    return this._nativeModule.setVideoForwarding(
+      options.strategy,
+      options.max,
+      options.participants
     );
   }
 

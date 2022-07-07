@@ -31,6 +31,8 @@ import {
   getLocalStats,
   getStatus,
   getMaxVideoForwarding,
+  getSpatialAudioStyle,
+  videoForwarding,
 } from '@utils/conference.tester';
 import {
   stop,
@@ -65,7 +67,7 @@ import {
 } from '@utils/videoPresentation.tester';
 
 import type { Conference } from '../../../../src/services/conference/models';
-import type { AudioProcessingOptions } from '../../../../src/services/conference/models';
+import { AudioProcessingOptions, VideoForwardingStrategy } from '../../../../src/services/conference/models';
 import { ComfortNoiseLevel } from '../../../../src/services/mediaDevice/models';
 import styles from './ConferenceScreen.style';
 
@@ -180,6 +182,12 @@ const ConferenceScreenBottomSheet = () => {
             <Button
               size="small"
               color="dark"
+              text="Get spatial audio style"
+              onPress={getSpatialAudioStyle}
+            />
+            <Button
+              size="small"
+              color="dark"
               text="Get Participant"
               onPress={() => getParticipant(participants[0].id)}
             />
@@ -212,6 +220,18 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Set Max Video Forwarding"
               onPress={() => setMaxVideoForwarding(2)}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Set VFS - CLOSEST USER"
+              onPress={() => videoForwarding(2, VideoForwardingStrategy.CLOSEST_USER)}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Set VFS - LAST SPEAKER"
+              onPress={() => videoForwarding(2, VideoForwardingStrategy.LAST_SPEAKER)}
             />
             <Button
               size="small"

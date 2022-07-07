@@ -8,6 +8,7 @@ import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
+import { SpatialAudioStyle } from '../../../../src/services/conference/models';
 
 type CreateConferenceButtonProps = {
   conferenceAlias: string;
@@ -17,17 +18,31 @@ const CreateConferenceButton: FunctionComponent<CreateConferenceButtonProps> =
     const { createAndJoin } = useContext(DolbyIOContext);
     const leaveOptions: Options = [
       {
+        text: 'Create conference with Individual Scene',
+        value: 'createConferenceWithIndividualScene',
+        onSelect: async () => {
+          await createAndJoin(conferenceAlias, false, SpatialAudioStyle.INDIVIDUAL);
+        },
+      },
+      {
+        text: 'Create conference with Shared Scene',
+        value: 'createConferenceWithSharedScene',
+        onSelect: async () => {
+          await createAndJoin(conferenceAlias, false, SpatialAudioStyle.SHARED);
+        },
+      },
+      {
         text: 'Create conference with mixer recording options, with Dolby Voice',
         value: 'createConferenceWithMixer',
         onSelect: async () => {
-          await createAndJoin(conferenceAlias, true);
+          await createAndJoin(conferenceAlias, true, SpatialAudioStyle.INDIVIDUAL);
         },
       },
       {
         text: 'Create conference without mixer recording options, with Dolby Voice',
         value: 'createConference',
         onSelect: async () => {
-          await createAndJoin(conferenceAlias, false);
+          await createAndJoin(conferenceAlias, false, SpatialAudioStyle.INDIVIDUAL);
         },
       },
     ];
