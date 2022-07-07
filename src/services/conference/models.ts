@@ -111,7 +111,14 @@ export interface ConferenceJoinOptions {
   preferSendMono?: boolean;
   /** Enables sending the Simulcast video streams to other conference participants. */
   simulcast?: boolean;
-  /** Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place remote participants in a 3D space using the [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) method. */
+  /** Enables spatial audio for the local participant who joins a Dolby Voice conference. By default, this parameter is set to false. When set to true in a conference that uses the individual [spatial audio style](doc:rn-client-sdk-enums-spatialaudiostyle), the application must place remote participants in a 3D space using the [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) method.
+   * [block:callout]
+   * {
+   * "type": "danger",
+   * "title": "Warning",
+   * "body": "In the individual spatial audio style, remote participants' audio is disabled until the participants are assigned to specific locations. We recommend calling [setSpatialPosition](doc:rn-client-sdk-references-conferenceservice#setspatialposition) from the [participantAdded](doc:rn-client-sdk-modules#participantadded) event to ensure that all participants are assigned to specific positions."
+   * }
+   * [/block] */
   spatialAudio?: boolean;
   /** Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later. */
   videoForwardingStrategy?: VideoForwardingStrategy;
