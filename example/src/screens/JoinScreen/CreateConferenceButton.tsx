@@ -25,7 +25,7 @@ const CreateConferenceButton: FunctionComponent<CreateConferenceButtonProps> =
         },
       },
       {
-        text: 'Create conference without Shared Scene',
+        text: 'Create conference with Shared Scene',
         value: 'createConferenceWithSharedScene',
         onSelect: async () => {
           await createAndJoin(conferenceAlias, false, SpatialAudioStyle.SHARED);
