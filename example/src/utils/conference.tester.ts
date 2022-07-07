@@ -10,6 +10,7 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
+  VideoForwardingStrategy,
 } from '../../../src/services/conference/models';
 
 export const current = async () => {
@@ -94,6 +95,16 @@ export const getMaxVideoForwarding = async () => {
     Alert.alert('Max video forwarding', JSON.stringify(maxVideoForwarding));
   } catch (e: any) {
     Alert.alert('Cant get max video forwarding', e.toString());
+  }
+};
+
+export const getSpatialAudioStyle = async () => {
+  try {
+    const current =
+      await CommsAPI.conference.current();
+    Alert.alert('Spatial audio style', current?.spatialAudioStyle?.toString());
+  } catch (e: any) {
+    Alert.alert('Cant get spatial audio style', e.toString());
   }
 };
 
@@ -183,6 +194,19 @@ export const setMaxVideoForwarding = async (max: number) => {
     Alert.alert('setMaxVideoForwarding success');
   } catch (e: any) {
     Alert.alert('setMaxVideoForwarding error', e.toString());
+  }
+};
+
+export const videoForwarding = async (max: number, strategy: VideoForwardingStrategy) => {
+  try {
+    await CommsAPI.conference.videoForwarding({
+      max,
+      participants: [],
+      strategy,
+    });
+    Alert.alert('videoForwarding success');
+  } catch (e: any) {
+    Alert.alert('videoForwarding error', e.toString());
   }
 };
 

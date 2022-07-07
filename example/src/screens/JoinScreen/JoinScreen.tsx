@@ -14,6 +14,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
+import { SpatialAudioStyle } from '../../../../src/services/conference/models';
 
 const chance = new Chance();
 
@@ -22,7 +23,7 @@ const JoinScreen: FunctionComponent = () => {
   const { createAndJoin, replay } = useContext(DolbyIOContext);
 
   const joinConference = () => {
-    createAndJoin(alias, false);
+    createAndJoin(alias, false, SpatialAudioStyle.INDIVIDUAL);
   };
 
   const replayLastConference = () => {

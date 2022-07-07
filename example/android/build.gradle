@@ -2,17 +2,16 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "30.0.2"
         minSdkVersion = 21
-        compileSdkVersion = 29
-        targetSdkVersion = 29
+        compileSdkVersion = 32
+        targetSdkVersion = 32
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+      classpath "com.android.tools.build:gradle:7.2.1"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -27,10 +26,10 @@ allprojects {
             url("$rootDir/../node_modules/react-native/android")
         }
         maven {
-            url("http://android-sdk.voxeet.com/release")
+            url("https://android-sdk.voxeet.com/release")
         }
          maven {
-            url("http://android-sdk.voxeet.com/beta")
+            url("https://android-sdk.voxeet.com/beta")
         }
         maven {
             // Android JSC is installed from npm

@@ -13,6 +13,7 @@ extension VTConference: ReactModelMappable {
 			Keys.params: params.toReactModel(),
 			Keys.status: status.toReactModelValue() ?? NSNull(),
 			Keys.pinCode: pinCode ?? NSNull(),
+			Keys.spatialAudioStyle: spatialAudioStyle?.toReactModelValue() ?? NSNull()
 		].mapKeysToRawValue()
 	}
 
@@ -24,6 +25,6 @@ extension VTConference: ReactModelMappable {
 
 // MARK: - ReactModel Keys
 private enum Keys: String {
-	case id, alias, isNew, participants, params, status, pinCode
+	case id, alias, isNew, participants, params, status, pinCode, spatialAudioStyle
 }
 

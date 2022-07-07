@@ -481,15 +481,43 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		VoxeetSDK.shared.conference.videoForwarding(
-			max: maxVideoForwarding,
-			participants: participants.compactMap { current?.findParticipant(with: $0.identifier) }) { error in
-				guard let error = error else {
-					resolve(NSNull())
-					return
-				}
-				error.send(with: reject)
+		let videoForwardingOptions = VideoForwardingOptions(strategy: nil,
+															max: maxVideoForwarding,
+															participants: participants.compactMap { current?.findParticipant(with: $0.identifier) })
+		VoxeetSDK.shared.conference.videoForwarding(options: videoForwardingOptions) { error in
+			guard let error = error else {
+				resolve(NSNull())
+				return
 			}
+			error.send(with: reject)
+		}
+	}
+
+	/// Sets the maximum number of video streams that may be transmitted to the local participant.
+	/// - Parameters:
+	///   - strategy: Defines how the SDK should select conference participants whose videos will be transmitted to the local participant. There are two possible values; the selection can be either based on the participants' audio volume or the distance from the local participant.
+	///   - max: The maximum number of video streams that may be transmitted to the local participant.
+	///   - participants: The list of the prioritized participants.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setVideoForwarding:max:participants:resolver:rejecter:)
+	public func setVideoForwarding(
+		strategy: String?,
+		max: NSNumber,
+		participants: [[String:Any]]?,
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		let videoForwardingOptions = VideoForwardingOptions(strategy: VideoForwardingStrategy.fromReactModel(value: strategy),
+															max: max.intValue,
+															participants: participants?.compactMap { current?.findParticipant(with: $0.identifier) })
+		VoxeetSDK.shared.conference.videoForwarding(options: videoForwardingOptions) { error in
+			guard let error = error else {
+				resolve(NSNull())
+				return
+			}
+			error.send(with: reject)
+		}
 	}
 	
 	/// Mutes or unmutes output (only compatible with Dolby Voice conferences).
