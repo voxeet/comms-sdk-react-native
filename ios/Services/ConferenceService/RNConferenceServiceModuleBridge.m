@@ -85,6 +85,11 @@ RCT_EXTERN_METHOD(setAudioProcessing:(NSDictionary * _Nonnull)processingOptions
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(setMaxVideoForwarding:(NSInteger)maxVideoForwarding
+				  participants:(NSArray<NSDictionary *> * _Nullable)participants
+				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 RCT_EXTERN_METHOD(setVideoForwarding:(NSString * _Nullable)strategy
 				  max:(NSNumber * _Nonnull)max
 				  participants:(NSArray<NSDictionary *> * _Nullable)participants

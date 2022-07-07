@@ -467,6 +467,31 @@ public class ConferenceServiceModule: ReactEmitter {
 		VoxeetSDK.shared.conference.audioProcessing(enable: audioProcessing.boolValue)
 		resolve(NSNull())
 	}
+	
+	/// Sets the maximum number of video streams that may be transmitted to the local participant.
+	/// - Parameters:
+	///   - maxVideoForwarding: The maximum number of video streams that may be transmitted to the local participant.
+	///   - participants: The list of the prioritized participants.
+	///   - resolve: returns on success
+	///   - reject: returns error on failure
+	@objc(setMaxVideoForwarding:participants:resolver:rejecter:)
+	public func setMaxVideoForwarding(
+		maxVideoForwarding: Int,
+		participants: [[String:Any]],
+		resolve: @escaping RCTPromiseResolveBlock,
+		reject: @escaping RCTPromiseRejectBlock
+	) {
+		let videoForwardingOptions = VideoForwardingOptions(strategy: nil,
+															max: maxVideoForwarding,
+															participants: participants.compactMap { current?.findParticipant(with: $0.identifier) })
+		VoxeetSDK.shared.conference.videoForwarding(options: videoForwardingOptions) { error in
+			guard let error = error else {
+				resolve(NSNull())
+				return
+			}
+			error.send(with: reject)
+		}
+	}
 
 	/// Sets the maximum number of video streams that may be transmitted to the local participant.
 	/// - Parameters:
