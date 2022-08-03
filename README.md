@@ -371,32 +371,32 @@ npx react-native run-android
 
 A complete list of available services in SDK along with method documentation
 
-[CommsAPI](classes/CommsAPI.md)
+[CommsAPI](docs/classes/CommsAPI.md)
 is the main module that allows the application to interact with DolbyIo services. The SDK is asynchronous and uses promise at its core.
 
-[CommandService](classes/internal.CommandService.md)
+[CommandService](docs/classes/internal.CommandService.md)
 allows the application to send text messages or notifications to all conference participants. The service also emits an received event to inform the application about received messages.
 
-[ConferenceService](classes/internal.ConferenceService.md)
+[ConferenceService](docs/classes/internal.ConferenceService.md)
 allows the application to manage the conference life-cycle and interact with the conference.
 
-[FilePresentationService](classes/internal.FilePresentationService.md)
+[FilePresentationService](docs/classes/internal.FilePresentationService.md)
 allows the application to manage the conference life-cycle and interact with the conference.
 
-[MediaDeviceService](classes/internal.MediaDeviceService.md)
+[MediaDeviceService](docs/classes/internal.MediaDeviceService.md)
 allows the application to manage media devices that are used during conferences.
 
-[NotificationService](classes/internal.NotificationService.md)
+[NotificationService](docs/classes/internal.NotificationService.md)
 enables inviting participants to a conference.
 
-[RecordingService](classes/internal.RecordingService.md)
+[RecordingService](docs/classes/internal.RecordingService.md)
 allows an application to record conferences by using the start and stop
 methods that turn the recording on and off.
 
-[SessionService](classes/internal.SessionService.md)
+[SessionService](docs/classes/internal.SessionService.md)
 allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
 
-[VideoPresentationService](classes/internal.VideoPresentationService.md)
+[VideoPresentationService](docs/classes/internal.VideoPresentationService.md)
 allows sharing videos during a conference.
 
 ## SDK License agreement
