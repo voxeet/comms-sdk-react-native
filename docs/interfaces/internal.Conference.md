@@ -21,7 +21,7 @@ The Conference interface gathers information about a conference.
 
 • `Optional` **alias**: `string`
 
-The conference alias.
+The conference alias. The alias is case insensitive, which means that using "foobar" and "FOObar" aliases results in joining the same conference.
 
 ___
 
