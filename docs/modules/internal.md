@@ -4,6 +4,9 @@
 
 ### Classes
 
+- [AudioService](../classes/internal.AudioService.md)
+- [LocalAudio](../classes/internal.LocalAudio.md)
+- [RemoteAudio](../classes/internal.RemoteAudio.md)
 - [CommandService](../classes/internal.CommandService.md)
 - [ConferenceService](../classes/internal.ConferenceService.md)
 - [FilePresentationService](../classes/internal.FilePresentationService.md)
@@ -11,10 +14,30 @@
 - [NotificationService](../classes/internal.NotificationService.md)
 - [RecordingService](../classes/internal.RecordingService.md)
 - [SessionService](../classes/internal.SessionService.md)
+- [LocalVideo](../classes/internal.LocalVideo.md)
+- [RemoteVideo](../classes/internal.RemoteVideo.md)
+- [VideoService](../classes/internal.VideoService.md)
 - [VideoPresentationService](../classes/internal.VideoPresentationService.md)
+
+### Enumerations
+
+- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
+- [AudioCaptureMode](../enums/internal.AudioCaptureMode.md)
+- [NoiseReductionLevel](../enums/internal.NoiseReductionLevel.md)
+- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
+- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
+- [ParticipantType](../enums/internal.ParticipantType.md)
+- [RTCPMode](../enums/internal.RTCPMode.md)
+- [Codec](../enums/internal.Codec.md)
+- [ConferencePermission](../enums/internal.ConferencePermission.md)
+- [MediaStreamType](../enums/internal.MediaStreamType.md)
+- [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
+- [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
+- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
 ### Interfaces
 
+- [AudioCaptureModeOptions](../interfaces/internal.AudioCaptureModeOptions.md)
 - [MessageReceivedEventType](../interfaces/internal.MessageReceivedEventType.md)
 - [ParticipantChangedEventType](../interfaces/internal.ParticipantChangedEventType.md)
 - [PermissionsUpdatedEventType](../interfaces/internal.PermissionsUpdatedEventType.md)
@@ -62,20 +85,6 @@
 - [VideoPresentationPlayed](internal.md#videopresentationplayed)
 - [VideoPresentationSought](internal.md#videopresentationsought)
 - [VideoPresentationStarted](internal.md#videopresentationstarted)
-
-### Enumerations
-
-- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
-- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
-- [ParticipantType](../enums/internal.ParticipantType.md)
-- [RTCPMode](../enums/internal.RTCPMode.md)
-- [Codec](../enums/internal.Codec.md)
-- [ConferencePermission](../enums/internal.ConferencePermission.md)
-- [MediaStreamType](../enums/internal.MediaStreamType.md)
-- [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
-- [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
-- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
-- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
 ### Type aliases
 
