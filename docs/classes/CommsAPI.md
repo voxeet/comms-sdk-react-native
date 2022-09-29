@@ -10,6 +10,7 @@ CommsAPI is a main object that allows an application to interact with Dolby.io s
 
 ### Properties
 
+- [audio](CommsAPI.md#audio)
 - [command](CommsAPI.md#command)
 - [conference](CommsAPI.md#conference)
 - [filePresentation](CommsAPI.md#filepresentation)
@@ -18,6 +19,7 @@ CommsAPI is a main object that allows an application to interact with Dolby.io s
 - [recording](CommsAPI.md#recording)
 - [session](CommsAPI.md#session)
 - [videoPresentation](CommsAPI.md#videopresentation)
+- [video](CommsAPI.md#video)
 
 ### Methods
 
@@ -31,6 +33,14 @@ CommsAPI is a main object that allows an application to interact with Dolby.io s
 • **new CommsAPI**()
 
 ## Properties
+
+### audio
+
+• **audio**: [`AudioService`](internal.AudioService.md)
+
+Retrieves the AudioService instance that allows changing audio settings for the local and remote participants.
+
+___
 
 ### command
 
@@ -93,6 +103,14 @@ ___
 • **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md)
 
 Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
+
+___
+
+### video
+
+• **video**: [`VideoService`](internal.VideoService.md)
+
+Retrieves the VideoService instance that allows enabling and disabling video for the local and remote participants.
 
 ## Methods
 
