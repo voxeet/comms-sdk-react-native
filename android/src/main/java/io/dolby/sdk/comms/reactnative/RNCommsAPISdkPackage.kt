@@ -12,13 +12,13 @@ import io.dolby.sdk.comms.reactnative.eventemitters.RNNotificationEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoPresentationEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoViewEventEmitter
+import io.dolby.sdk.comms.reactnative.mapper.AudioMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceJoinOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferencePermissionMapper
 import io.dolby.sdk.comms.reactnative.mapper.FilePresentationMapper
 import io.dolby.sdk.comms.reactnative.mapper.InvitationMapper
-import io.dolby.sdk.comms.reactnative.mapper.MediaMapper
 import io.dolby.sdk.comms.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.comms.reactnative.mapper.ParticipantPermissionMapper
 import io.dolby.sdk.comms.reactnative.mapper.RecordingMapper
@@ -35,6 +35,10 @@ import io.dolby.sdk.comms.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNSessionServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNSystemPermissionsModule
 import io.dolby.sdk.comms.reactnative.services.RNVideoPresentationServiceModule
+import io.dolby.sdk.comms.reactnative.services.audio.RNLocalAudioModule
+import io.dolby.sdk.comms.reactnative.services.audio.RNRemoteAudioModule
+import io.dolby.sdk.comms.reactnative.services.video.RNLocalVideoModule
+import io.dolby.sdk.comms.reactnative.services.video.RNRemoteVideoModule
 import io.dolby.sdk.comms.reactnative.state.FilePresentationHolder
 import io.dolby.sdk.comms.reactnative.state.VideoPresentationHolder
 import io.dolby.sdk.comms.reactnative.view.VideoViewManager
@@ -60,6 +64,7 @@ class RNCommsAPISdkPackage : ReactPackage {
       reactContext = reactContext,
       participantMapper = participantMapper
     )
+    val audioMapper = AudioMapper()
 
     val sdkEventEmitter = RNSdkEventEmitter(
       reactContext = reactContext
@@ -159,7 +164,29 @@ class RNCommsAPISdkPackage : ReactPackage {
       RNMediaDeviceServiceModule(
         reactContext = reactContext,
         mediaDeviceService = VoxeetSDK.mediaDevice(),
-        mediaMapper = MediaMapper()
+        audioMapper = AudioMapper()
+      ),
+      RNLocalAudioModule(
+        reactContext = reactContext,
+        audioService = VoxeetSDK.audio(),
+        mediaDeviceService = VoxeetSDK.mediaDevice(),
+        audioMapper = audioMapper
+      ),
+      RNRemoteAudioModule(
+        reactContext = reactContext,
+        audioService = VoxeetSDK.audio(),
+        conferenceService = VoxeetSDK.conference(),
+        participantMapper = participantMapper
+      ),
+      RNLocalVideoModule(
+        reactContext = reactContext,
+        videoService = VoxeetSDK.video()
+      ),
+      RNRemoteVideoModule(
+        reactContext = reactContext,
+        videoService = VoxeetSDK.video(),
+        conferenceService = VoxeetSDK.conference(),
+        participantMapper = participantMapper
       )
     )
   }

@@ -4,7 +4,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.voxeet.sdk.services.MediaDeviceService
-import io.dolby.sdk.comms.reactnative.mapper.MediaMapper
+import io.dolby.sdk.comms.reactnative.mapper.AudioMapper
 import io.dolby.sdk.comms.reactnative.utils.Promises
 import io.dolby.sdk.comms.reactnative.utils.Promises.forward
 import io.dolby.sdk.comms.reactnative.utils.Promises.rejectIfFalse
@@ -24,12 +24,12 @@ import io.dolby.sdk.comms.reactnative.utils.ReactPromise
  *
  * @param reactContext        react context
  * @param mediaDeviceService  [MediaDeviceService] from Android SDK
- * @param mediaMapper         [MediaMapper] mapper for a media-related models
+ * @param audioMapper         [AudioMapper] mapper for a media-related models
  */
 class RNMediaDeviceServiceModule constructor(
   reactContext: ReactApplicationContext,
   private val mediaDeviceService: MediaDeviceService,
-  private val mediaMapper: MediaMapper
+  private val audioMapper: AudioMapper
 ) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String = "CommsAPIMediaDeviceServiceModule"
@@ -46,7 +46,7 @@ class RNMediaDeviceServiceModule constructor(
    */
   @ReactMethod
   fun setComfortNoiseLevel(comfortNoiseLevelRN: String, promise: ReactPromise) {
-    Promises.promise({ mediaMapper.fromRN(comfortNoiseLevelRN) }) { "Invalid comfort noise level" }
+    Promises.promise({ audioMapper.fromRN(comfortNoiseLevelRN) }) { "Invalid comfort noise level" }
       .thenValue(mediaDeviceService::setComfortNoiseLevel)
       .forward(promise, ignoreReturnType = true)
   }
@@ -59,7 +59,7 @@ class RNMediaDeviceServiceModule constructor(
   @ReactMethod
   fun getComfortNoiseLevel(promise: ReactPromise) {
     Promises.promise({ mediaDeviceService.comfortNoiseLevel }) { "Could not get comfort noise level" }
-      .then(mediaMapper::toRN)
+      .then(audioMapper::toRN)
       .forward(promise)
   }
 

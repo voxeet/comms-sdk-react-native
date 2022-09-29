@@ -10,6 +10,8 @@ import Text from '@ui/Text';
 import {
   mute,
   unmute,
+  startRemoteAudio,
+  stopRemoteAudio,
   kick,
   isSpeaking,
   setSpatialPosition,
@@ -20,6 +22,7 @@ import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
 import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
+import { startRemoteVideo, stopRemoteVideo } from '@utils/video.tester';
 
 const ParticipantAvatar = (participant: Participant) => {
   const { me, conference } = useContext(DolbyIOContext);
@@ -64,6 +67,34 @@ const ParticipantAvatar = (participant: Participant) => {
       value: 'unmute',
       onSelect: async () => {
         await unmute(participant);
+      },
+    },
+    {
+      text: 'Start remote audio',
+      value: 'start',
+      onSelect: async () => {
+        await startRemoteAudio(participant);
+      },
+    },
+    {
+      text: 'Stop remote audio',
+      value: 'stop',
+      onSelect: async () => {
+        await stopRemoteAudio(participant);
+      },
+    },
+    {
+      text: 'Start remote video',
+      value: 'startVideo',
+      onSelect: async () => {
+        await startRemoteVideo(participant);
+      },
+    },
+    {
+      text: 'Stop remote video',
+      value: 'stopVideo',
+      onSelect: async () => {
+        await stopRemoteVideo(participant);
       },
     },
     {
