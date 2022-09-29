@@ -1,6 +1,5 @@
 package io.dolby.sdk.comms.reactnative.services
 
-import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.voxeet.sdk.services.CommandService
@@ -10,6 +9,7 @@ import io.dolby.sdk.comms.reactnative.utils.Promises
 import io.dolby.sdk.comms.reactnative.utils.Promises.forward
 import io.dolby.sdk.comms.reactnative.utils.Promises.rejectIfNull
 import io.dolby.sdk.comms.reactnative.utils.Promises.thenPromise
+import io.dolby.sdk.comms.reactnative.utils.ReactPromise
 
 /**
  * The [RNCommandServiceModule] allows the application to send [send] text messages to all other participants of
@@ -40,7 +40,7 @@ class RNCommandServiceModule(
    * @param promise returns null
    */
   @ReactMethod
-  fun send(message: String, promise: Promise) {
+  fun send(message: String, promise: ReactPromise) {
     Promises.promise(conferenceService.conferenceId) { "Couldn't find the conference" }
       .thenPromise { conferenceId -> commandService.send(conferenceId, message) }
       .rejectIfNull { "Send message operation failed" }

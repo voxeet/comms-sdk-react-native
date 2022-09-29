@@ -5,6 +5,7 @@ import type {
   RefreshAccessTokenType,
   RefreshAccessTokenInBackgroundType,
 } from './models';
+import AudioService from './services/audio/AudioService';
 import CommandService from './services/command/CommandService';
 import ConferenceService from './services/conference/ConferenceService';
 import FilePresentationService from './services/filePresentation/FilePresentationService';
@@ -12,6 +13,7 @@ import MediaDeviceService from './services/mediaDevice/MediaDeviceService';
 import NotificationService from './services/notification/NotificationService';
 import RecordingService from './services/recording/RecordingService';
 import SessionService from './services/session/SessionService';
+import VideoService from './services/video/VideoService';
 import VideoPresentationService from './services/videoPresentation/VideoPresentationService';
 import Logger from './utils/Logger';
 import NativeEvents from './utils/NativeEvents';
@@ -27,6 +29,11 @@ export class CommsAPI {
   /** @internal */
   private refreshAccessTokenInBackground?: RefreshAccessTokenInBackgroundType | null =
     null;
+
+  /**
+   * Retrieves the AudioService instance that allows changing audio settings for the local and remote participants.
+   */
+  audio = AudioService;
 
   /**
    * Retrieves the CommandService instance that allows sending messages to conferences.
@@ -66,6 +73,11 @@ export class CommsAPI {
    * Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
    */
   videoPresentation = VideoPresentationService;
+
+  /**
+   * Retrieves the VideoService instance that allows enabling and disabling video for the local and remote participants.
+   */
+  video = VideoService;
 
   /**
    * Initializes the SDK using the customer key and secret.
