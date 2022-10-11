@@ -24,6 +24,7 @@ The ConferenceService allows an application to manage the conference life-cycle 
 - [isMuted](internal.ConferenceService.md#ismuted)
 - [isSpeaking](internal.ConferenceService.md#isspeaking)
 - [join](internal.ConferenceService.md#join)
+- [listen](internal.ConferenceService.md#listen)
 - [kick](internal.ConferenceService.md#kick)
 - [leave](internal.ConferenceService.md#leave)
 - [mute](internal.ConferenceService.md#mute)
@@ -240,6 +241,25 @@ Joins a conference and returns the Conference object.
 | :------ | :------ | :------ |
 | `conference` | [`Conference`](../interfaces/internal.Conference.md) | The Conference object. |
 | `options?` | [`ConferenceJoinOptions`](../interfaces/internal.ConferenceJoinOptions.md) | The additional options for the joining participant. |
+
+#### Returns
+
+`Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
+
+___
+
+### listen
+
+▸ **listen**(`conference`, `options?`): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
+
+Joins the conference in the listener mode in which the conference participant can only receive video and audio and cannot transmit any media.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `conference` | [`Conference`](../interfaces/internal.Conference.md) | The Conference object. |
+| `options?` | [`ConferenceListenOptions`](../interfaces/internal.ConferenceListenOptions.md) | The additional options for the joining participant. |
 
 #### Returns
 
