@@ -30,6 +30,7 @@ export interface IDolbyIOProvider {
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
+  listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   leave: (leaveRoom: boolean) => void;
@@ -44,6 +45,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   initialize: () => {},
   openSession: () => {},
   createAndJoin: () => {},
+  listen: () => {},
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
@@ -200,6 +202,46 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     }
   };
 
+  const listen = async (alias: string) => {
+    try {
+      const conferenceParams = {
+        rtcpMode: RTCPMode.AVERAGE,
+        ttl: 0,
+        videoCodec: Codec.H264,
+        dolbyVoice: true
+      };
+      const conferenceOptions = {
+        alias,
+        params: conferenceParams,
+      };
+
+      const createdConference = await CommsAPI.conference.create(
+        conferenceOptions
+      );
+
+      const listenOptions = {
+        maxVideoForwarding: 4,
+        spatialAudio: false,
+      };
+      const joinedConference = await CommsAPI.conference.listen(
+        createdConference,
+        listenOptions
+      );
+      setConference(joinedConference);
+      const participantsMap = new Map();
+      joinedConference.participants.forEach((p) =>
+        participantsMap.set(p.id, p)
+      );
+      setParticipants(participantsMap);
+      AsyncStorage.setItem(
+        '@conference-previous',
+        JSON.stringify(joinedConference)
+      );
+    } catch (e: any) {
+      Alert.alert('Conference not joined', e.toString());
+    }
+  };
+
   const joinWithId = async (conferenceId: string) => {
     try {
       const fetchedConference = await CommsAPI.conference.fetch(conferenceId);
@@ -261,6 +303,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     initialize,
     openSession,
     createAndJoin,
+    listen,
     joinWithId,
     replay,
     leave,

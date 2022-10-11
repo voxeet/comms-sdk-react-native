@@ -27,6 +27,7 @@ import type {
   SpatialScale,
   SpatialPosition,
   VideoForwardingOptions,
+  ConferenceListenOptions,
 } from './models';
 import { transformToConference, transformToParticipant } from './transformers';
 
@@ -143,6 +144,20 @@ export class ConferenceService {
   ): Promise<Conference> {
     return transformToConference(
       await this._nativeModule.join(conference, options)
+    );
+  }
+
+  /**
+   * Joins the conference in the listener mode in which the conference participant can only receive video and audio and cannot transmit any media.
+   * @param conference The Conference object.
+   * @param options The additional options for the joining participant.
+   */
+  public async listen(
+    conference: Conference,
+    options?: ConferenceListenOptions
+  ): Promise<Conference> {
+    return transformToConference(
+      await this._nativeModule.listen(conference, options)
     );
   }
 
