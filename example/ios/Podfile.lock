@@ -210,9 +210,9 @@ PODS:
     - React-jsi (= 0.65.0)
     - React-perflogger (= 0.65.0)
   - React-jsinspector (0.65.0)
-  - react-native-comms-sdk (3.6.0):
+  - react-native-comms-sdk (3.7.0):
     - React-Core
-    - VoxeetSDK (~> 3.6)
+    - VoxeetSDK (~> 3.7)
   - react-native-document-picker (7.1.1):
     - React-Core
   - react-native-safe-area-context (3.3.2):
@@ -316,7 +316,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - VoxeetSDK (3.6.0)
+  - VoxeetSDK (3.7.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -462,7 +462,7 @@ SPEC CHECKSUMS:
   React-jsi: 875bcbe2037c9cae07fbda7dd5827fbca06cbdc6
   React-jsiexecutor: 11ec08ad247abb44113ccb3d2b66f7e856d1cdf4
   React-jsinspector: 2aa5dc1b9a02a81c0dcc70c00f2cbe1cd4b875c4
-  react-native-comms-sdk: b908385edf21e68f99b880c3bf4c3a5438b55f26
+  react-native-comms-sdk: bdf14cef490d8782563e3ae50661de53d57b2f55
   react-native-document-picker: f4cc4df2eff8c9015d862a59bdaef11a153f1292
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: 494c61caaf9b7da0a0a612fa4ed570ab7ab5819b
@@ -481,7 +481,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNPermissions: 7043bacbf928eae25808275cfe73799b8f618911
   RNReanimated: ad24db8af24e3fe1b5c462785bc3db8d5baae2ee
-  VoxeetSDK: 1d4e4ad0b2c67b1b49607834d212283e126f7c32
+  VoxeetSDK: 697c5b240f29344bd72053a647ea5c59b45cda85
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
 
 PODFILE CHECKSUM: ec4a937f6298fa77356754ad5e6a197f4856de29
