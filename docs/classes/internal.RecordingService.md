@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).RecordingService
 
-The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording Conferences](doc:guides-recording-conferences).
+The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording Conferences](doc:guides-recording-conferences) document.
 
 ## Table of contents
 
