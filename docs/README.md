@@ -274,7 +274,7 @@ import CommsAPI, { VideoView } from '@dolbyio/comms-sdk-react-native';
 ```javascript
 // WARNING: It is best practice to use the initializeToken function to initialize the SDK.
 // Please read the documentation at:
-// https://docs.dolby.io/communications-apis/docs/rn-client-sdk-classes-commsapi#initializetoken
+// https://docs.dolby.io/communications-apis/docs/rn-client-sdk-references-commsapi#initializetoken
 await CommsAPI.initialize(APP_KEY, APP_SECRET);
 ```
 
