@@ -61,11 +61,11 @@ class RNCommsAPISdkModule(
 
   /**
    * Initializes the SDK with an access token that is provided by the customer's backend
-   * communicating with the Voxeet servers. The access token allows securing the customer key and
-   * secret. Due to a limited period of validity for security reasons, the token needs to be
+   * communicating with the Voxeet servers. The access token allows securing the App key and
+   * App secret. Due to a limited period of validity for security reasons, the token needs to be
    * refreshed. To refresh the token, the Android Voxeet SDK calls the callback that calls the
    * customer's backend and returns a promise containing the refreshed access token. Then this
-   * method emitts a refreshToken event that can be handled by the React Native.
+   * method emits a refreshToken event that can be handled by the React Native.
    *
    * @param accessToken the access token that is provided by the customer's backend
    * @param promise     returns null
