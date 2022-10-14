@@ -16,12 +16,14 @@ import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.ScreenShareService
 import com.voxeet.sdk.services.builders.ConferenceCreateOptions
 import com.voxeet.sdk.services.builders.ConferenceJoinOptions
+import com.voxeet.sdk.services.builders.ConferenceListenOptions
 import com.voxeet.sdk.services.builders.VideoForwardingOptions
 import com.voxeet.sdk.services.conference.information.ConferenceStatus
 import io.dolby.sdk.comms.reactnative.android.permissions.ScreenSharePermissions
 import io.dolby.sdk.comms.reactnative.eventemitters.RNEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceJoinOptionsMapper
+import io.dolby.sdk.comms.reactnative.mapper.ConferenceListenOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.comms.reactnative.mapper.ParticipantMapper
 import io.dolby.sdk.comms.reactnative.mapper.ParticipantPermissionMapper
@@ -96,6 +98,7 @@ class RNConferenceServiceModule(
   private val conferenceMapper: ConferenceMapper,
   private val conferenceCreateOptionsMapper: ConferenceCreateOptionsMapper,
   private val conferenceJoinOptionsMapper: ConferenceJoinOptionsMapper,
+  private val conferenceListenOptionsMapper: ConferenceListenOptionsMapper,
   private val spatialAudioMapper: SpatialAudioMapper,
   private val participantMapper: ParticipantMapper,
   private val participantPermissionMapper: ParticipantPermissionMapper,
@@ -165,6 +168,32 @@ class RNConferenceServiceModule(
       )
     }) { "Couldn't get the conference join options" }
       .thenPromise(conferenceService::join)
+      .thenValue(conferenceMapper::toRN)
+      .forward(promise)
+  }
+
+  /**
+   * Joins the conference in the listener mode in which the conference participant can only receive video and audio and cannot transmit any media.
+   *
+   * Possible rejection causes :
+   *  * [ServerErrorException]
+   *  * [InConferenceException]
+   *  * [MediaEngineException]
+   *  * [ParticipantAddedErrorEventException]
+   *
+   * @param conferenceRN a conference to join
+   * @param optionsRN    the holder of the options to listen
+   * @param promise      returns a joined conference
+   */
+  @ReactMethod
+  fun listen(conferenceRN: ReadableMap, optionsRN: ReadableMap?, promise: ReactPromise) {
+    Promises.promise({
+      toConferenceListenOptions(
+        conferenceRN,
+        optionsRN
+      )
+    }) { "Couldn't get the conference listen options" }
+      .thenPromise(conferenceService::listen)
       .thenValue(conferenceMapper::toRN)
       .forward(promise)
   }
@@ -711,6 +740,22 @@ class RNConferenceServiceModule(
   ): ConferenceJoinOptions {
     val conference = toConference(conferenceRN)
     return conferenceJoinOptionsMapper.fromRN(conference, optionsRN)
+  }
+
+  /**
+   * Creates a [ConferenceListenOptions] based on provided `optionsRN` for a given
+   * `conferenceRN`. Throws [IllegalArgumentException] if conference id is invalid.
+   *
+   * @param conferenceRN a conference to join
+   * @param optionsRN    the holder of the options to join
+   * @return [ConferenceJoinOptions]
+   */
+  private fun toConferenceListenOptions(
+    conferenceRN: ReadableMap,
+    optionsRN: ReadableMap?
+  ): ConferenceListenOptions {
+    val conference = toConference(conferenceRN)
+    return conferenceListenOptionsMapper.fromRN(conference, optionsRN)
   }
 
   /**
