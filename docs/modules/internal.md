@@ -26,6 +26,7 @@
 - [ConferenceLeaveOptions](../interfaces/internal.ConferenceLeaveOptions.md)
 - [ConferenceConstraints](../interfaces/internal.ConferenceConstraints.md)
 - [ConferenceJoinOptions](../interfaces/internal.ConferenceJoinOptions.md)
+- [ConferenceListenOptions](../interfaces/internal.ConferenceListenOptions.md)
 - [ConferenceReplayOptions](../interfaces/internal.ConferenceReplayOptions.md)
 - [ConferenceMixingOptions](../interfaces/internal.ConferenceMixingOptions.md)
 - [Participant](../interfaces/internal.Participant.md)

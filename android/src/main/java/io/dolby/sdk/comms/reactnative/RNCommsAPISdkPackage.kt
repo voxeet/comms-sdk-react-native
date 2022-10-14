@@ -14,6 +14,7 @@ import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoPresentationEventEmit
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoViewEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceCreateOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceJoinOptionsMapper
+import io.dolby.sdk.comms.reactnative.mapper.ConferenceListenOptionsMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.comms.reactnative.mapper.ConferencePermissionMapper
 import io.dolby.sdk.comms.reactnative.mapper.FilePresentationMapper
@@ -110,6 +111,7 @@ class RNCommsAPISdkPackage : ReactPackage {
         conferenceMapper = conferenceMapper,
         conferenceCreateOptionsMapper = ConferenceCreateOptionsMapper(),
         conferenceJoinOptionsMapper = ConferenceJoinOptionsMapper(),
+        conferenceListenOptionsMapper = ConferenceListenOptionsMapper(),
         spatialAudioMapper = SpatialAudioMapper(),
         participantMapper = participantMapper,
         eventEmitter = conferenceEventEmitter,

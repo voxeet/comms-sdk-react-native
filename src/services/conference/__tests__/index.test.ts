@@ -286,6 +286,16 @@ describe('ConferenceService', () => {
     });
   });
 
+  describe('listen()', () => {
+    it('should invoke exported listen method with correct arguments', () => {
+      ConferenceService.listen(testConference, {});
+      expect(CommsAPIConferenceServiceModule.join).toHaveBeenCalledWith(
+        testConference,
+        {}
+      );
+    });
+  });
+
   describe('kick()', () => {
     it('should invoke exported kick method with correct arguments', () => {
       ConferenceService.kick(testParticipant);
