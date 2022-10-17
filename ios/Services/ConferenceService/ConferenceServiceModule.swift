@@ -103,7 +103,35 @@ public class ConferenceServiceModule: ReactEmitter {
 				}
 		}
 	}
-	
+
+    /// Joins the conference in the listener mode in which the conference participant can only receive video and audio and cannot transmit any media.
+    /// - Parameters:
+    ///   - conference: conference object
+    ///   - options: listen options
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(listen:options:resolver:rejecter:)
+    public func listen(
+        conference: [String: Any],
+        options: [String: Any]?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        guard let conferenceId = conference.identifier else {
+            ModuleError.noConferenceId.send(with: reject)
+            return
+        }
+        VoxeetSDK.shared.conference.fetch(conferenceID: conferenceId) { conference in
+            VoxeetSDK.shared.conference.listen(
+                conference: conference,
+                options: VTListenOptions.create(with: options)) { conference in
+                    resolve(conference.toReactModel())
+                } fail: { error in
+                    error.send(with: reject)
+                }
+        }
+    }
+
 	/// Kicks the participant from a conference.
 	/// - Parameters:
 	///   - participant: Remote participant to kick.
