@@ -17,6 +17,11 @@ RCT_EXTERN_METHOD(join:(NSDictionary * _Nonnull)conference
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(listen:(NSDictionary * _Nonnull)conference
+                  options:(NSDictionary * _Nullable)options
+                  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 RCT_EXTERN_METHOD(kick:(NSDictionary * _Nonnull)participant
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
