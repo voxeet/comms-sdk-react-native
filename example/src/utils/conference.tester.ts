@@ -29,37 +29,6 @@ export const replay = async (conference: Conference) => {
     Alert.alert('Error');
   }
 };
-export const startVideo = async (user: Participant) => {
-  console.log(user);
-  try {
-    await CommsAPI.conference.startVideo(user);
-  } catch (e: any) {
-    console.log(e);
-    Alert.alert('Error');
-  }
-};
-export const stopVideo = async (user: Participant) => {
-  try {
-    await CommsAPI.conference.stopVideo(user);
-  } catch (e: any) {
-    console.log(e);
-    Alert.alert('Error');
-  }
-};
-export const startAudio = async (user: Participant) => {
-  try {
-    await CommsAPI.conference.startAudio(user);
-  } catch (e: any) {
-    Alert.alert('Error');
-  }
-};
-export const stopAudio = async (user: Participant) => {
-  try {
-    await CommsAPI.conference.stopAudio(user);
-  } catch (e: any) {
-    Alert.alert('Error');
-  }
-};
 
 export const getAudioLevel = async (user: Participant) => {
   try {
@@ -130,6 +99,24 @@ export const unmute = async (participant: Participant) => {
   try {
     await CommsAPI.conference.mute(participant, false);
     Alert.alert('Unmute success');
+  } catch (e: any) {
+    Alert.alert('Error', e.toString());
+  }
+};
+
+export const startRemoteAudio = async (participant: Participant) => {
+  try {
+    await CommsAPI.audio.getRemote().start(participant);
+    Alert.alert('Start remote audio success');
+  } catch (e: any) {
+    Alert.alert('Error', e.toString());
+  }
+};
+
+export const stopRemoteAudio = async (participant: Participant) => {
+  try {
+    await CommsAPI.audio.getRemote().stop(participant);
+    Alert.alert('Stop remote audio success');
   } catch (e: any) {
     Alert.alert('Error', e.toString());
   }

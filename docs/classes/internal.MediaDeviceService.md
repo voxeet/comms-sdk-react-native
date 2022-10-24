@@ -31,6 +31,7 @@ The MediaDeviceService allows an application to manage media devices that are us
 ▸ **getComfortNoiseLevel**(): `Promise`<[`ComfortNoiseLevel`](../enums/internal.ComfortNoiseLevel.md)\>
 
 Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
+This method is deprecated in SDK 3.7. Please use LocalAudio.getComfortNoiseLevel method
 
 #### Returns
 
@@ -55,6 +56,7 @@ ___
 ▸ **setComfortNoiseLevel**(`noiseLevel`): `Promise`<`void`\>
 
 Configures the comfort noise level for output devices in Dolby Voice conferences.
+This method is deprecated in SDK 3.7. Please use LocalAudio.setComfortNoiseLevel method
 
 #### Parameters
 
