@@ -1,7 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 
 import Logger from '../../utils/Logger';
-import type { ComfortNoiseLevel } from './models';
+import type { ComfortNoiseLevel } from '../audio/models';
 
 const { CommsAPIMediaDeviceServiceModule } = NativeModules;
 
@@ -14,6 +14,7 @@ export class MediaDeviceService {
 
   /**
    * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
+   * This method is deprecated in SDK 3.7. Please use LocalAudio.getComfortNoiseLevel method
    */
   public async getComfortNoiseLevel(): Promise<ComfortNoiseLevel> {
     return this._nativeModule.getComfortNoiseLevel();
@@ -28,6 +29,8 @@ export class MediaDeviceService {
 
   /**
    * Configures the comfort noise level for output devices in Dolby Voice conferences.
+   * This method is deprecated in SDK 3.7. Please use LocalAudio.setComfortNoiseLevel method
+   *
    * @param noiseLevel The selected comfort noise level.
    */
   public async setComfortNoiseLevel(

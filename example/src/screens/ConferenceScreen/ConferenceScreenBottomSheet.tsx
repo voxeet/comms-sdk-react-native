@@ -12,12 +12,16 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import Button from '@ui/Button';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
+import {
+  getAudioCaptureMode,
+  getComfortNoiseLevel,
+  setAudioCaptureMode,
+  setComfortNoiseLevel,
+  startLocalAudio,
+  stopLocalAudio,
+} from '@utils/audio.tester';
 import { sendCommandMessage } from '@utils/command.tester';
 import {
-  startVideo,
-  stopVideo,
-  startAudio,
-  stopAudio,
   getAudioLevel,
   current,
   getParticipant,
@@ -44,9 +48,7 @@ import {
   getImage,
 } from '@utils/filePresentation.tester';
 import {
-  getComfortNoiseLevel,
   isFrontCamera,
-  setComfortNoiseLevel,
   switchCamera,
   switchSpeaker,
 } from '@utils/mediaDevice.tester';
@@ -68,8 +70,9 @@ import {
 
 import type { Conference } from '../../../../src/services/conference/models';
 import { AudioProcessingOptions, VideoForwardingStrategy } from '../../../../src/services/conference/models';
-import { ComfortNoiseLevel } from '../../../../src/services/mediaDevice/models';
 import styles from './ConferenceScreen.style';
+import { AudioCaptureMode, ComfortNoiseLevel, NoiseReductionLevel } from '../../../../src/services/audio/models';
+import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -116,23 +119,41 @@ const ConferenceScreenBottomSheet = () => {
     text: string;
     onClick: () => void;
   }> = [
-    {
-      text: 'setComfortNoiseLevel - Default',
-      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Default),
-    },
-    {
-      text: 'setComfortNoiseLevel - Low',
-      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Low),
-    },
-    {
-      text: 'setComfortNoiseLevel - Medium',
-      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Medium),
-    },
-    {
-      text: 'setComfortNoiseLevel - Off',
-      onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Off),
-    },
-  ];
+      {
+        text: 'setComfortNoiseLevel - Default',
+        onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Default),
+      },
+      {
+        text: 'setComfortNoiseLevel - Low',
+        onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Low),
+      },
+      {
+        text: 'setComfortNoiseLevel - Medium',
+        onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Medium),
+      },
+      {
+        text: 'setComfortNoiseLevel - Off',
+        onClick: () => setComfortNoiseLevel(ComfortNoiseLevel.Off),
+      },
+    ];
+
+  const audioCaptureModeOptions: Array<{
+    text: string;
+    onClick: () => void;
+  }> = [
+      {
+        text: 'setAudioCaptureMode - standard low',
+        onClick: () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low }),
+      },
+      {
+        text: 'setAudioCaptureMode - standard high',
+        onClick: () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.High }),
+      },
+      {
+        text: 'setAudioCaptureMode - Unprocessed',
+        onClick: () => setAudioCaptureMode({ mode: AudioCaptureMode.Unprocessed }),
+      },
+    ];
 
   const audioOptions: AudioProcessingOptions = {
     send: {
@@ -166,6 +187,12 @@ const ConferenceScreenBottomSheet = () => {
               color="dark"
               text="Get local stats"
               onPress={getLocalStats}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Get audio level"
+              onPress={() => getAudioLevel(me)}
             />
             <Button
               size="small"
@@ -248,46 +275,74 @@ const ConferenceScreenBottomSheet = () => {
           </Space>
           <Space mb="xs">
             <Text size="s" color={COLORS.BLACK}>
-              Audio
+              Audio service
             </Text>
           </Space>
           <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
-              text="Get audio level"
-              onPress={() => getAudioLevel(me)}
+              text="getComfortNoiseLevel"
+              onPress={getComfortNoiseLevel}
+            />
+            {comfortNoiseLevelOptions.map((option) => {
+              return (
+                <Button
+                  key={option.text}
+                  size="small"
+                  color="dark"
+                  text={option.text}
+                  onPress={option.onClick}
+                />
+              );
+            })}
+            <Button
+              size="small"
+              color="dark"
+              text="getAudioCaptureMode"
+              onPress={getAudioCaptureMode}
+            />
+            {audioCaptureModeOptions.map((option) => {
+              return (
+                <Button
+                  key={option.text}
+                  size="small"
+                  color="dark"
+                  text={option.text}
+                  onPress={option.onClick}
+                />
+              );
+            })}
+            <Button
+              size="small"
+              color="dark"
+              text="Start local audio"
+              onPress={() => startLocalAudio()}
             />
             <Button
               size="small"
               color="dark"
-              text="Start audio"
-              onPress={() => startAudio(me)}
-            />
-            <Button
-              size="small"
-              color="dark"
-              text="Stop audio"
-              onPress={() => stopAudio(me)}
+              text="Stop local audio"
+              onPress={() => stopLocalAudio()}
             />
           </Space>
           <Space mb="xs">
             <Text size="s" color={COLORS.BLACK}>
-              Video
+              Video service
             </Text>
           </Space>
           <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
               color="dark"
-              text="Start video"
-              onPress={() => startVideo(me)}
+              text="Start local video"
+              onPress={() => startLocalVideo()}
             />
             <Button
               size="small"
               color="dark"
-              text="Stop video"
-              onPress={() => stopVideo(me)}
+              text="Stop local video"
+              onPress={() => stopLocalVideo()}
             />
           </Space>
 
@@ -467,23 +522,6 @@ const ConferenceScreenBottomSheet = () => {
               text="isFrontCamera"
               onPress={isFrontCamera}
             />
-            <Button
-              size="small"
-              color="dark"
-              text="getComfortNoiseLevel"
-              onPress={getComfortNoiseLevel}
-            />
-            {comfortNoiseLevelOptions.map((option) => {
-              return (
-                <Button
-                  key={option.text}
-                  size="small"
-                  color="dark"
-                  text={option.text}
-                  onPress={option.onClick}
-                />
-              );
-            })}
             <Button
               size="small"
               color="dark"

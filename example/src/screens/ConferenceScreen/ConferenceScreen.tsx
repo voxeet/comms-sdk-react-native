@@ -14,7 +14,7 @@ import { RecordingDotsText } from '@screens/ConferenceScreen/RecordingDots';
 import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
-import { startVideo, stopVideo, mute, unmute } from '@utils/conference.tester';
+import { mute, unmute } from '@utils/conference.tester';
 
 import { ParticipantStatus } from '../../../../src/services/conference/models';
 import type { Participant } from '../../../../src/services/conference/models';
@@ -22,6 +22,7 @@ import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import MessageModal from './MessageModal';
 import ParticipantAvatar from './ParticipantAvatar';
+import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const DISPLAYED_STATUSES: ParticipantStatus[] = [
   ParticipantStatus.CONNECTED,
@@ -124,7 +125,7 @@ const ConferenceScreen: FunctionComponent = () => {
                   <Space mh="xxs">
                     <TouchableOpacity
                       style={[styles.videoButton, styles.videoButtonGreen]}
-                      onPress={() => startVideo(me)}
+                      onPress={() => startLocalVideo()}
                     >
                       <Text size="xs" align="center">
                         START VIDEO
@@ -134,7 +135,7 @@ const ConferenceScreen: FunctionComponent = () => {
                   <Space mh="xxs">
                     <TouchableOpacity
                       style={[styles.videoButton, styles.videoButtonRed]}
-                      onPress={() => stopVideo(me)}
+                      onPress={() => stopLocalVideo()}
                     >
                       <Text size="xs" align="center">
                         STOP VIDEO
