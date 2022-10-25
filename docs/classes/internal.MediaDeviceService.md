@@ -30,7 +30,7 @@ The MediaDeviceService allows an application to manage media devices that are us
 
 ▸ **getComfortNoiseLevel**(): `Promise`<[`ComfortNoiseLevel`](../enums/internal.ComfortNoiseLevel.md)\>
 
-**Note**: This method is deprecated in SDK 3.7 and replaced with the LocalAudio.getComfortNoiseLevel method.
+**Note**: This method is deprecated in SDK 3.7 and replaced with the [getComfortNoiseLevel](doc:rn-client-sdk-model-localaudio#getcomfortnoiselevel) method available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) model
 
 Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **setComfortNoiseLevel**(`noiseLevel`): `Promise`<`void`\>
 
-**Note**: This method is deprecated in SDK 3.7 and replaced with the LocalAudio.setComfortNoiseLevel method.
+**Note**: This method is deprecated in SDK 3.7 and replaced with the [setComfortNoiseLevel](doc:rn-client-sdk-model-localaudio#setcomfortnoiselevel) method available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) model.
 
 Configures the comfort noise level for output devices in Dolby Voice conferences.
 
