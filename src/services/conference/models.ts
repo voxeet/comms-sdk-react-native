@@ -485,7 +485,7 @@ export enum VideoForwardingStrategy {
  * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
  * - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant */
 export interface VideoForwardingOptions {
-  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 4. The default value is 4. In the case of providing a value smaller than 0 or greater than 4, SDK triggers an error. */
+  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 25. The default value is 4. In the case of providing a value smaller than 0 or greater than 25, SDK triggers an error. */
   max?: number;
   /** The list of participants whose video streams should be always transmitted to the local participant. */
   participants?: Participant[];
