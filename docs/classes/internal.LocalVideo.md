@@ -4,6 +4,8 @@
 
 The LocalVideo model allows enabling and disabling the local participant's video.
 
+This model is supported only in SDK 3.7 and later.
+
 ## Table of contents
 
 ### Constructors

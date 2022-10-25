@@ -3,6 +3,8 @@ import { RemoteAudio } from './RemoteAudio';
 
 /**
  * The AudioService allows changing audio settings for the local and remote participants.
+ *
+ * This service is available in SDK 3.7 and later.
  */
 export class AudioService {
   /** @internal */

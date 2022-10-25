@@ -5,7 +5,9 @@ import type { AudioCaptureModeOptions, ComfortNoiseLevel } from './models';
 const { CommsAPILocalAudioModule } = NativeModules;
 
 /**
- * The LocalAudio model allows managing the local participant's audio settings.
+ * The LocalAudio model allows enabling and disabling the local participant's audio as well as setting and checking the capture mode and comfort noise level.
+ *
+ * This model is supported only in SDK 3.7 and later.
  */
 export class LocalAudio {
   /** @internal */

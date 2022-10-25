@@ -6,16 +6,15 @@ const { CommsAPIRemoteAudioModule } = NativeModules;
 
 /**
  * The RemoteAudio model allows the local participant to locally mute and unmute remote participants.
+ *
+ * This model is supported only in SDK 3.7 and later.
  */
 export class RemoteAudio {
   /** @internal */
   _remoteAudio = CommsAPIRemoteAudioModule;
 
   /**
-   * Allows the local participant to unmute a specific remote participant who is locally muted through the stop method.
-   * The start method does not impact audio transmission between remote participants and a conference and does not allow
-   * the local participant to force sending remote participants’ streams to the conference or to the local participant.
-   * This method is not available for listeners in Dolby Voice conferences.
+   * Allows the local participant to unmute a specific remote participant who is locally muted through the stop method. The start method does not impact audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. This method is not available for listeners in Dolby Voice conferences.
    *
    * The start method requires up to a few seconds to become effective.
    *
@@ -27,10 +26,7 @@ export class RemoteAudio {
   }
 
   /**
-   * Allows the local participant to locally mute specific remote participants.
-   * This method does not impact audio transmission between remote participants and a conference and does not allow the local
-   * participant to stop sending remote participants’ streams to the conference.
-   * This method is not available for listeners in Dolby Voice conferences.
+   * Allows the local participant to locally mute specific remote participants. This method does not impact audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. This method is not available for listeners in Dolby Voice conferences.
    *
    * The stop method requires up to a few seconds to become effective.
    *
