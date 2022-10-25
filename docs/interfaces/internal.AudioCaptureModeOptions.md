@@ -3,6 +3,7 @@
 [internal](../modules/internal.md).AudioCaptureModeOptions
 
 The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and the preferred noise reduction level.
+
 This model is available in SDK 3.7 and later.
 
 ## Table of contents
