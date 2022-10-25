@@ -49,7 +49,7 @@ ___
 
 • `Optional` **ttl**: `number`
 
-The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds.
+The time to live defines the number of seconds a conference is kept running when empty. A minimum of 30 seconds is given when creating the conference to allow time for participants to join. The default value is 0.
 
 ___
 
