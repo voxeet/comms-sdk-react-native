@@ -14,6 +14,7 @@ For reference, see the [GitHub sample repository](https://github.com/dolbyio-sam
 
 Please review [Supported Environments](https://docs.dolby.io/communications-apis/docs/overview-supported-environments) for more information on iOS and Android requirements.
 
+Please see the [documentation](https://docs.dolby.io/communications-apis/docs/react-native-overview) for a complete list of available services and methods.
 ## Create a new project
 
 **1.** Create a new React Native project:
@@ -365,39 +366,6 @@ On Android, run the application:
 ```bash
 npx react-native run-android
 ```
-
-## Documentation
-
-A complete list of available services in SDK along with method documentation
-
-[CommsAPI](docs/classes/CommsAPI.md)
-is the main module that allows the application to interact with DolbyIo services. The SDK is asynchronous and uses promise at its core.
-
-[CommandService](docs/classes/internal.CommandService.md)
-allows the application to send text messages or notifications to all conference participants. The service also emits an received event to inform the application about received messages.
-
-[ConferenceService](docs/classes/internal.ConferenceService.md)
-allows the application to manage the conference life-cycle and interact with the conference.
-
-[FilePresentationService](docs/classes/internal.FilePresentationService.md)
-allows the application to manage the conference life-cycle and interact with the conference.
-
-[MediaDeviceService](docs/classes/internal.MediaDeviceService.md)
-allows the application to manage media devices that are used during conferences.
-
-[NotificationService](docs/classes/internal.NotificationService.md)
-enables inviting participants to a conference.
-
-[RecordingService](docs/classes/internal.RecordingService.md)
-allows an application to record conferences by using the start and stop
-methods that turn the recording on and off.
-
-[SessionService](docs/classes/internal.SessionService.md)
-allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
-
-[VideoPresentationService](docs/classes/internal.VideoPresentationService.md)
-allows sharing videos during a conference.
-
 ## SDK License agreement
 
 The Dolby.io Communications SDK for React Native and its repository are licensed under the MiT License.
