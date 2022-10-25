@@ -345,6 +345,8 @@ ___
 
 ▸ **setAudioProcessing**(`options?`): `Promise`<`void`\>
 
+**Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-model-localaudio#setcapturemode) method.
+
 Enables and disables audio processing for a conference participant.
 
 #### Parameters
@@ -408,6 +410,8 @@ ___
 
 ▸ **startAudio**(`participant`): `Promise`<`void`\>
 
+**Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) and [RemoteAudio](doc:rn-client-sdk-model-remoteaudio) models.
+
 Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
 - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
 - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
@@ -447,6 +451,8 @@ ___
 
 ▸ **startVideo**(`participant`): `Promise`<`void`\>
 
+**Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](doc:rn-client-sdk-model-localvideo) and [RemoteVideo](doc:rn-client-sdk-model-remotevideo) models.
+
 Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
 
 #### Parameters
@@ -464,6 +470,8 @@ ___
 ### stopAudio
 
 ▸ **stopAudio**(`participant`): `Promise`<`void`\>
+
+**Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) and [RemoteAudio](doc:rn-client-sdk-model-remoteaudio) models.
 
 Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
 - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
@@ -622,6 +630,8 @@ ___
 ### stopVideo
 
 ▸ **stopVideo**(`participant`): `Promise`<`void`\>
+
+**Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](doc:rn-client-sdk-model-localvideo) and [RemoteVideo](doc:rn-client-sdk-model-remotevideo) models.
 
 Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
 
