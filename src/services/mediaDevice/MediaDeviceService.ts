@@ -13,8 +13,9 @@ export class MediaDeviceService {
   _nativeModule = CommsAPIMediaDeviceServiceModule;
 
   /**
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the LocalAudio.getComfortNoiseLevel method.
+   *
    * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
-   * This method is deprecated in SDK 3.7. Please use LocalAudio.getComfortNoiseLevel method
    */
   public async getComfortNoiseLevel(): Promise<ComfortNoiseLevel> {
     return this._nativeModule.getComfortNoiseLevel();
@@ -28,9 +29,9 @@ export class MediaDeviceService {
   }
 
   /**
-   * Configures the comfort noise level for output devices in Dolby Voice conferences.
-   * This method is deprecated in SDK 3.7. Please use LocalAudio.setComfortNoiseLevel method
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the LocalAudio.setComfortNoiseLevel method.
    *
+   * Configures the comfort noise level for output devices in Dolby Voice conferences.
    * @param noiseLevel The selected comfort noise level.
    */
   public async setComfortNoiseLevel(
