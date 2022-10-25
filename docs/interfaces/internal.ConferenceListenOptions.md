@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ConferenceListenOptions
 
-The ConferenceListenOptions interface defines how an application expects to join a conference as listener in terms of media preference.
+The ConferenceListenOptions interface defines how the application expects to join a conference using the listen method.
 
 ## Table of contents
 
@@ -19,7 +19,7 @@ The ConferenceListenOptions interface defines how an application expects to join
 
 • `Optional` **conferenceAccessToken**: `string`
 
-The conference access token that is required to join a protected conference if the conference is created using the [create](ref:conference#operation-create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
+The conference access token that is required to join a protected conference if the conference is created using the [create](ref:create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
 
 ___
 
