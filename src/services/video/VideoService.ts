@@ -2,7 +2,9 @@ import { LocalVideo } from './LocalVideo';
 import { RemoteVideo } from './RemoteVideo';
 
 /**
- * The AudioService allows changing audio settings for the local and remote participants.
+ * The VideoService allows managing the local participant's and remote participants' video.
+ *
+ * This service is available in SDK 3.7 and later.
  */
 export class VideoService {
   /** @internal */

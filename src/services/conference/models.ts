@@ -20,13 +20,13 @@ export interface ConferenceCreateParameters {
   dolbyVoice?: boolean;
   /** A boolean that enables and disables live recording. Specify this parameter during the conference creation:
    * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
-   * - When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
+   * - When set to `false`, the [remix API](ref:introduction-to-remix-api) must be called after the conference to generate and retrieve the recorded file.
    *
    * This parameter does not start the recording; use the [start](doc:rn-client-sdk-references-recordingservice#start) method to turn it on. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
   liveRecording?: boolean;
   /** The bitrate adaptation mode for video transmission. The parameter triggers a server to monitor the receivers’ available bandwidth. Based on the analyzed value, the server informs the video sender to automatically adjust the quality of the transmitted video streams. */
   rtcpMode?: RTCPMode;
-  /** The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds. */
+  /** The time to live defines the number of seconds a conference is kept running when empty. A minimum of 30 seconds is given when creating the conference to allow time for participants to join. The default value is 0. */
   ttl?: number;
   /** The preferred video codec that is used during a conference, either H264 or VP8. By default, the SDK uses the H264 codec. */
   videoCodec?: Codec;
@@ -97,7 +97,7 @@ export interface ConferenceConstraints {
 
 /** The ConferenceJoinOptions interface defines how an application expects to join a conference in terms of media preference. */
 export interface ConferenceJoinOptions {
-  /** The conference access token that is required to join a protected conference if the conference is created using the [create](ref:conference#operation-create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document. */
+  /** The conference access token that is required to join a protected conference if the conference is created using the [create](ref:create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document. */
   conferenceAccessToken?: string;
   /** Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}`. */
   constraints?: ConferenceConstraints;
@@ -124,9 +124,9 @@ export interface ConferenceJoinOptions {
   videoForwardingStrategy?: VideoForwardingStrategy;
 }
 
-/** The ConferenceListenOptions interface defines how an application expects to join a conference as listener in terms of media preference. */
+/** The ConferenceListenOptions interface defines how the application expects to join a conference using the listen method. */
 export interface ConferenceListenOptions {
-  /** The conference access token that is required to join a protected conference if the conference is created using the [create](ref:conference#operation-create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document. */
+  /** The conference access token that is required to join a protected conference if the conference is created using the [create](ref:create-conference) REST API. If the conference is created using the create method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document. */
   conferenceAccessToken?: string;
   /** Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter values are between 0 and 4 for mobile browsers, with 4 set as the default value. */
   maxVideoForwarding?: number;
@@ -383,22 +383,21 @@ export enum RTCStatsType {
   'ice-server',
 }
 
-/** The SpatialDirection model defines the direction a participant is facing. The model is specified as a set of three Euler rotations about the corresponding axis in the order of z-x-y:
- *
- * The following properties define a rotation about the specified positive axis:
+/** The SpatialDirection model defines the direction a participant is facing. The model is specified as a set of three Euler rotations about the corresponding axis. The following properties define a rotation about the specified positive axis:
  *
  * - `x`: A rotation about the x-axis
  * - `y`: A rotation about the y-axis
  * - `z`: A rotation about the z-axis
  *
- * These properties correspond to yaw, pitch, and roll:
- *
  * [block:html]
  * {
- *   "html": "<div class=\"grid-container\">\n<div class=\"video-1\" >\n <p><b>Yaw:</b> A rotation about the up axis, where the default environment is the Y rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/08_SpatialDirectionYaw_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-2\">\n <p><b>Pitch:</b> A rotation about the right axis, where the default environment is the X rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/09_SpatialDirectionPitch_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-3\">\n <p><b>Roll:</b> A rotation about the forward axis, where the default environment is the Z rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/10_SpatialDirectionRoll_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n \n</div>\n</div>\n\n<style>\n .grid-container {\n display: grid; \n \n }\n \n .grid-container {\ndisplay: grid;\ngrid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\ngrid-column-gap: 10px;\ngrid-row-gap: 50px;\n}\n \n \n</style>"
+ *   "html": "<div class=\"grid-container\">\n<div class=\"video-1\" >\n <p><b>Yaw:</b> A rotation about the up axis, where the default environment is the y rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/08_SpatialDirectionYaw_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-2\">\n <p><b>Pitch:</b> A rotation about the right axis, where the default environment is the x rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/09_SpatialDirectionPitch_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n</div>\n\n<div class=\"video-3\">\n <p><b>Roll:</b> A rotation about the forward axis, where the default environment is the z rotation.</p>\n<video controls width=\"250\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/10_SpatialDirectionRoll_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n \n</div>\n</div>\n\n<style>\n .grid-container {\n display: grid; \n \n }\n \n .grid-container {\ndisplay: grid;\ngrid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\ngrid-column-gap: 10px;\ngrid-row-gap: 50px;\n}\n \n \n</style>"
  * }
  * [/block]
- * When using custom environment directions set in [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment), the rotation is defined to always rotate about the relevant axis according to the left handed curl rule. In the animations above you can see, for the Y-axis rotation, if you curl your left hand up around with your thumb pointing down the +Y axis, the direction the participant will rotate is in the direction the fingers are curling around the given axis. You can see the rotation arrows in those reference animations which correspond to positive rotation direction are pointing the same direction as the fingers of the curled left hand. */
+ *
+ * When using custom environment directions set in [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment), the rotation is defined to always rotate about the relevant axis according to the left handed curl rule. In the animations above you can see, for the y-axis rotation, if you curl your left hand up around with your thumb pointing down the +y axis, the direction the participant will rotate is in the direction the fingers are curling around the given axis. You can see the rotation arrows in those reference animations which correspond to positive rotation direction are pointing the same direction as the fingers of the curled left hand.
+ *
+ * When a direction contains rotations around more than one axis, the rotations are applied in a defined order: yaw, pitch, and then roll. With the standard environment, this corresponds to y, x, and then z. When using custom environment directions, the directions are always in the order of yaw/pitch/roll, but which (x,y,z) axis those correspond to is different. */
 export interface SpatialDirection {
   /** The Euler rotation about the x-axis, in degrees. */
   x: number;
@@ -486,7 +485,7 @@ export enum VideoForwardingStrategy {
  * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
  * - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant */
 export interface VideoForwardingOptions {
-  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 4. The default value is 4. In the case of providing a value smaller than 0 or greater than 4, SDK triggers an error. */
+  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 25. The default value is 4. In the case of providing a value smaller than 0 or greater than 25, SDK triggers an error. */
   max?: number;
   /** The list of participants whose video streams should be always transmitted to the local participant. */
   participants?: Participant[];
