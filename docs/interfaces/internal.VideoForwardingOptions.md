@@ -22,7 +22,7 @@ The VideoForwardingOptions model allows configuring the Video Forwarding functio
 
 • `Optional` **max**: `number`
 
-The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 4. The default value is 4. In the case of providing a value smaller than 0 or greater than 4, SDK triggers an error.
+The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 25. The default value is 4. In the case of providing a value smaller than 0 or greater than 25, SDK triggers an error.
 
 ___
 
