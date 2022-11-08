@@ -2,7 +2,9 @@
 
 [internal](../modules/internal.md).LocalAudio
 
-The LocalAudio model allows managing the local participant's audio settings.
+The LocalAudio model allows enabling and disabling the local participant's audio as well as setting and checking the capture mode and comfort noise level.
+
+This model is supported only in SDK 3.7 and later.
 
 ## Table of contents
 

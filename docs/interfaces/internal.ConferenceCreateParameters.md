@@ -31,7 +31,7 @@ ___
 
 A boolean that enables and disables live recording. Specify this parameter during the conference creation:
 - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
-- When set to `false`, the [remix API](ref:remix) must be called after the conference to generate and retrieve the recorded file.
+- When set to `false`, the [remix API](ref:introduction-to-remix-api) must be called after the conference to generate and retrieve the recorded file.
 
 This parameter does not start the recording; use the [start](doc:rn-client-sdk-references-recordingservice#start) method to turn it on. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
@@ -49,7 +49,7 @@ ___
 
 • `Optional` **ttl**: `number`
 
-The time to live that allows customizing time after which the SDK terminates empty conferences (is seconds). The default ttl value is 0 seconds.
+The time to live defines the number of seconds a conference is kept running when empty. A minimum of 30 seconds is given when creating the conference to allow time for participants to join. The default value is 0.
 
 ___
 
