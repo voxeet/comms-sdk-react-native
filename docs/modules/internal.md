@@ -33,6 +33,7 @@
 - [MediaStreamType](../enums/internal.MediaStreamType.md)
 - [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
 - [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
+- [RecordingStatus](../enums/internal.RecordingStatus.md)
 - [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
 ### Interfaces
@@ -68,6 +69,7 @@
 - [FileConverted](../interfaces/internal.FileConverted.md)
 - [FilePresentation](../interfaces/internal.FilePresentation.md)
 - [InvitationReceivedEventType](../interfaces/internal.InvitationReceivedEventType.md)
+- [RecordingStatusUpdatedEventType](../interfaces/internal.RecordingStatusUpdatedEventType.md)
 - [Recording](../interfaces/internal.Recording.md)
 - [VideoPresentationEventType](../interfaces/internal.VideoPresentationEventType.md)
 - [VideoPresentation](../interfaces/internal.VideoPresentation.md)
