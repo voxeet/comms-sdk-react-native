@@ -9,6 +9,7 @@ import io.dolby.sdk.comms.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNFilePresentationEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNNotificationEventEmitter
+import io.dolby.sdk.comms.reactnative.eventemitters.RNRecordingEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoPresentationEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoViewEventEmitter
@@ -99,6 +100,9 @@ class RNCommsAPISdkPackage : ReactPackage {
       filePresentationMapper = filePresentationMapper,
       filePresentationHolder = filePresentationHolder
     )
+    val recordingEventEmitter = RNRecordingEventEmitter(
+      reactContext = reactContext,
+    )
     return listOf(
       RNCommsAPISdkModule(
         reactContext = reactContext,
@@ -132,6 +136,7 @@ class RNCommsAPISdkPackage : ReactPackage {
         conferenceService = VoxeetSDK.conference(),
         recordingService = VoxeetSDK.recording(),
         reactContext = reactContext,
+        eventEmitter = recordingEventEmitter,
         recordingMapper = RecordingMapper()
       ),
       RNNotificationServiceModule(
