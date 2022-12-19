@@ -1,10 +1,10 @@
 package io.dolby.sdk.comms.reactnative.services
 
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.RecordingService
+import io.dolby.sdk.comms.reactnative.eventemitters.RNRecordingEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.RecordingMapper
 import io.dolby.sdk.comms.reactnative.utils.Promises
 import io.dolby.sdk.comms.reactnative.utils.Promises.forward
@@ -27,8 +27,9 @@ class RNRecordingServiceModule(
   private val conferenceService: ConferenceService,
   private val recordingService: RecordingService,
   reactContext: ReactApplicationContext,
+  eventEmitter: RNRecordingEventEmitter,
   private val recordingMapper: RecordingMapper
-) : ReactContextBaseJavaModule(reactContext) {
+) : RNEventEmitterModule(reactContext, eventEmitter) {
 
   override fun getName(): String = "CommsAPIRecordingServiceModule"
 
@@ -69,4 +70,18 @@ class RNRecordingServiceModule(
       .rejectIfNull()
       .forward(promise)
   }
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun addListener(eventName: String) = super.addListener(eventName)
+
+
+  /**
+   * Every emitter module must implement this method in place, otherwise JS cannot receive event
+   */
+  @ReactMethod
+  override fun removeListeners(count: Int) = super.removeListeners(count)
+
 }
