@@ -18,7 +18,7 @@
     "os": "^0.1.2",
     "path": "^0.12.7",
     "react": "16.13.1",
-    "react-native": "0.65.0",
+    "react-native": "0.65.3",
     "react-native-document-picker": "^7.1.1",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-linear-gradient": "^2.5.6",
