@@ -5,6 +5,7 @@ import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
+import type { RecordingStatusUpdatedEventType } from '../../../../src/services/recording/events';
 import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
@@ -83,6 +84,14 @@ const DolbyIOProvider: React.FC = ({ children }) => {
     );
   };
 
+  const onRecordingStatusChange = (data: RecordingStatusUpdatedEventType) => {
+    console.log(
+      'RECORDING STATUS CHANGED EVENT: \n',
+      JSON.stringify(data, null, 2)
+    );
+    Alert.alert('Recording Status changed:', JSON.stringify(data, null, 2));
+  };
+
   const onStreamsChange = (data: StreamChangedEventType) => {
     console.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
     setParticipants((participants) => {
@@ -150,6 +159,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       CommsAPI.conference.onStreamsChange(onStreamsChange),
       CommsAPI.conference.onPermissionsChange(onPermissionsChange),
       CommsAPI.command.onMessageReceived(onMessageReceived),
+      CommsAPI.recording.onRecordingStatusUpdated(onRecordingStatusChange),
     ];
     return () => {
       unsubscribers.forEach((u) => u());

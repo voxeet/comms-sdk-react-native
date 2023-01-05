@@ -6,6 +6,7 @@ import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
 import type { NotificationServiceEventMap } from '../services/notification/events';
+import type { RecordingServiceEventMap } from '../services/recording/events';
 import type { VideoPresentationEventMap } from '../services/videoPresentation/events';
 import type { UnregisterListener } from './types';
 
@@ -13,6 +14,7 @@ interface NativeEventType
   extends CommsAPIEventMap,
     ConferenceServiceEventMap,
     NotificationServiceEventMap,
+    RecordingServiceEventMap,
     FilePresentationServiceEventMap,
     CommandServiceEventMap,
     VideoPresentationEventMap,

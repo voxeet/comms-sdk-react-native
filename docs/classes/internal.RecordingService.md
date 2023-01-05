@@ -15,6 +15,7 @@ The RecordingService is responsible for recording conferences. For more informat
 - [current](internal.RecordingService.md#current)
 - [start](internal.RecordingService.md#start)
 - [stop](internal.RecordingService.md#stop)
+- [onRecordingStatusUpdated](internal.RecordingService.md#onrecordingstatusupdated)
 
 ## Constructors
 
@@ -57,3 +58,23 @@ Stops recording a conference.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### onRecordingStatusUpdated
+
+▸ **onRecordingStatusUpdated**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the invitation received event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`RecordingStatusUpdatedEventType`](../interfaces/internal.RecordingStatusUpdatedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
