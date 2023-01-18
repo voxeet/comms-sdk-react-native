@@ -4,11 +4,11 @@ jobs:
   lint:
     runs-on: macos-11
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - uses: c-hive/gha-yarn-cache@v2
+          node-version: '16'
+          cache: 'yarn'
       - uses: actions/cache@v2
         with:
           path:
@@ -28,19 +28,19 @@ jobs:
   test:
     runs-on: macos-11
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - uses: c-hive/gha-yarn-cache@v2
-      - uses: actions/cache@v2
+          node-version: '16'
+          cache: 'yarn'
+      - uses: actions/cache@v3
         with:
           path:
             ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path:
             example/ios/Pods

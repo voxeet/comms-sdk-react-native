@@ -8,11 +8,11 @@ jobs:
   documentation:
     runs-on: macos-11
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - uses: c-hive/gha-yarn-cache@v2
+          node-version: '16'
+          cache: 'yarn'
       - uses: actions/cache@v2
         with:
           path:
@@ -29,7 +29,8 @@ jobs:
             ${{ runner.os }}-example-pods-
       - run: yarn
       - run: yarn documentation
-      - uses: EndBug/add-and-commit@v7.4.0
+      - name: Update docs
+        uses: ./.github/actions/add-and-commit-9.1.1
         with:
           add: 'docs'
           author_name: Dolby.io
