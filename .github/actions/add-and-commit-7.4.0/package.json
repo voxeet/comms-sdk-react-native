@@ -1,0 +1,56 @@
+{
+  "name": "add-and-commit",
+  "version": "7.4.0",
+  "private": true,
+  "description": "Add & commit files from a path directly from GitHub Actions",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "ncc build src/main.ts --minify --out lib",
+    "watch": "ncc build src/main.ts --watch --out lib",
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --ext .ts --fix src",
+    "changelog": "ts-node scripts/changelog.ts && npm i",
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EndBug/add-and-commit.git"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "version",
+    "npm",
+    "node"
+  ],
+  "author": "Federico Grandi <fgrandi30@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EndBug/add-and-commit/issues"
+  },
+  "homepage": "https://github.com/EndBug/add-and-commit#readme",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "actions-toolkit": "github:EndBug/actions-toolkit#core-actions",
+    "js-yaml": "^4.1.0",
+    "simple-git": "^2.27.0",
+    "string-argv": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.3",
+    "@types/node": "^12.12.54",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.32.0",
+    "@vercel/ncc": "^0.31.1",
+    "all-contributors-cli": "^6.20.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3",
+    "yamljs": "^0.3.0"
+  }
+}
