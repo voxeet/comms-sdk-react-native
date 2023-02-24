@@ -21,9 +21,10 @@ module.exports = {
       modules.map(
         (m) =>
           new RegExp(`^${escape(path.join(root, 'node_modules', m))}\\/.*$`)
+      ).concat(
+        new RegExp(`^${escape(path.join(root, '\.github'))}\\/.*$`)
       )
     ),
-
     extraNodeModules: modules.reduce((acc, name) => {
       acc[name] = path.join(__dirname, 'node_modules', name);
       return acc;

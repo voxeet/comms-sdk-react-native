@@ -5,7 +5,7 @@ buildscript {
         }
 
         dependencies {
-            classpath "com.android.tools.build:gradle:7.2.1"
+            classpath "com.android.tools.build:gradle:7.3.0"
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
         }
 }
@@ -18,10 +18,10 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('DolbyioSdk_compileSdkVersion', 32)
+    compileSdkVersion safeExtGet('DolbyioSdk_compileSdkVersion', 33)
     defaultConfig {
         minSdkVersion safeExtGet('DolbyioSdk_minSdkVersion', 21)
-        targetSdkVersion safeExtGet('DolbyioSdk_targetSdkVersion', 32)
+        targetSdkVersion safeExtGet('DolbyioSdk_targetSdkVersion', 33)
         versionCode 1
         versionName "1.0"
     }
@@ -72,7 +72,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.annotation:annotation:1.1.0"
 
-    implementation "com.voxeet.sdk:sdk:3.7.0"
+    implementation "com.voxeet.sdk:sdk:3.8.0"
+    implementation("org.greenrobot:eventbus:3.3.1")
 
     testImplementation("junit:junit:${JUNIT_VERSION}")
     testImplementation("org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}")
