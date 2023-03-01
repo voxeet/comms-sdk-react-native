@@ -17,7 +17,11 @@ export const FilePresentationContext =
     startFilePresentation: () => {},
   });
 
-export const FilePresentationProvider: React.FC = ({ children }) => {
+  type FilePresentationProps = {
+    children: React.ReactNode;
+  };
+
+export const FilePresentationProvider: React.FC<FilePresentationProps> = ({ children }) => {
   const [isPresentingFile, setIsPresentingFile] = useState(false);
   const [fileOwnerName, setFileOwnerName] = useState('');
   const [fileSrc, setFileSrc] = useState('');
