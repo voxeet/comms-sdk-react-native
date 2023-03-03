@@ -221,8 +221,10 @@ object Promises {
    */
   fun <T, R> PromiseInOut<T, R>.forward(promise: ReactPromise, ignoreReturnType: Boolean = false) =
     then(ThenVoid { result ->
+      android.util.Log.d("[KB]", "forward to react promise")
       if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
     }).error {
+      android.util.Log.e("[KB]", "error during forwarding: $it")
       Log.d(TAG, "Dispatch error", it)
       promise.reject(it)
     }
