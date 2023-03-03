@@ -250,9 +250,21 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun leave(promise: ReactPromise) {
+    android.util.Log.d("[KB]", "leave conference")
     conferenceService.leave()
-      .rejectIfFalse { "Leave conference operation failed" }
-      .forward(promise)
+      .then {
+        android.util.Log.d("[KB]", "conference closed: $it")
+      }.error {
+        android.util.Log.e("[KB]", "Error appear during closing conference: $it")
+      }
+
+    promise.resolve(true)
+
+//    conferenceService.leave()
+//      .rejectIfFalse {
+//        android.util.Log.d("[KB]", "reject")
+//        "Leave conference operation failed" }
+//      .forward(promise)
   }
 
   /**
