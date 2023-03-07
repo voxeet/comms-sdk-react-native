@@ -250,7 +250,6 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun leave(promise: ReactPromise) {
-    android.util.Log.d("[KB]", "leave conference")
     conferenceService.leave()
       .rejectIfFalse {
         "Leave conference operation failed" }
