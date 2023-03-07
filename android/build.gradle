@@ -46,15 +46,8 @@ android {
 
 repositories {
     mavenLocal()
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url("$rootDir/../node_modules/react-native/android")
-    }
     google()
     mavenCentral()
-    maven {
-        url "https://www.jitpack.io"
-    }
 }
 
 dependencies {
@@ -66,9 +59,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.annotation:annotation:1.1.0"
 
-//    implementation "com.voxeet.sdk:sdk:3.7.0"
     implementation "io.dolby:sdk:3.8.1"
-//    implementation("org.greenrobot:eventbus:3.3.1")
 
     testImplementation("junit:junit:${JUNIT_VERSION}")
     testImplementation("org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}")

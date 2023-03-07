@@ -33,6 +33,7 @@ jest.mock('react-native', () => {
     stopAudio: jest.fn(),
     stopVideo: jest.fn(),
     join: jest.fn(),
+    listen: jest.fn(),
     kick: jest.fn(),
     leave: jest.fn(),
     startScreenShare: jest.fn(),
