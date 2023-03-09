@@ -324,9 +324,9 @@ export class ConferenceService {
    * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from front-right. If the local participant chooses to change the direction and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, the participant hears the speaker from the front-left position. The following video presents this example:
    *
    * [block:html]
-   * {
+   * \{
    * "html": "<div style=\"text-align:center\">\n<video controls width=\"289\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n\n</div>"
-   * }
+   * \}
    * [/block]
    * For more information, see the [SpatialDirection](doc:rn-client-sdk-models-spatialdirection) model.
    *
@@ -351,9 +351,9 @@ export class ConferenceService {
    *
    * The default spatial environment is presented in the following diagram:
    * [block:image]
-   * {
+   * \{
    *   "images": [
-   *     {
+   *     \{
    *       "image": [
    *         "https://files.readme.io/e43475b-defaultEnv.png",
    *         "defaultEnv.png",
@@ -362,9 +362,9 @@ export class ConferenceService {
    *         "#163b58"
    *       ],
    *       "sizing": "full"
-   *     }
+   *     \}
    *   ]
-   * }
+   * \}
    * [/block]
    *
    * @param scale A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-individual-spatial-audio#configure-the-spatial-environment-scale) article.
@@ -393,12 +393,12 @@ export class ConferenceService {
    *
    * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified position in space. If the position of the remote participant is not provided, the participant does not have a default position and remains muted until a position is specified.
    *
-   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
+   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, \{x:3,y:0,z:0\}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, \{x:7,y:1,z:2\}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
    *
    * [block:image]
-   * {
+   * \{
    *   "images": [
-   *     {
+   *     \{
    *       "image": [
    *         "https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png",
    *         "05_Axis_People_v04_220202.png",
@@ -407,9 +407,9 @@ export class ConferenceService {
    *         "#264159"
    *       ],
    *       "sizing": "full"
-   *     }
+   *     \}
    *   ]
-   * }
+   * \}
    * [/block]
    *
    * @param participant The selected participant, either local or remote. In a case of the local participant, the SDK sets the location from which the participant will hear a conference. In a case of a remote participant, the SDK sets the position from which the participant's audio will be rendered.
