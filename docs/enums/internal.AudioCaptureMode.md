@@ -10,16 +10,16 @@ This model is available in SDK 3.7 and later.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [Standard](internal.AudioCaptureMode.md#standard)
 - [Unprocessed](internal.AudioCaptureMode.md#unprocessed)
 
-## Enumeration members
+## Enumeration Members
 
 ### Standard
 
-• **Standard** = `"STANDARD"`
+• **Standard** = ``"STANDARD"``
 
 Enables audio processing to improve voice quality.
 
@@ -27,6 +27,6 @@ ___
 
 ### Unprocessed
 
-• **Unprocessed** = `"UNPROCESSED"`
+• **Unprocessed** = ``"UNPROCESSED"``
 
 Disables audio processing to allow transmitting non-voice audio to a conference.

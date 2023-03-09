@@ -6,7 +6,7 @@
 
 - [CommsAPI](classes/CommsAPI.md)
 
-### Properties
+### Variables
 
 - [default](modules.md#default)
 
@@ -14,7 +14,7 @@
 
 - [internal](modules/internal.md)
 
-## Properties
+## Variables
 
 ### default
 

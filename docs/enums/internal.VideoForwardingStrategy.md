@@ -11,16 +11,16 @@ By default, the SDK uses the LAST_SPEAKER strategy.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
-- [LAST_SPEAKER](internal.VideoForwardingStrategy.md#last_speaker)
-- [CLOSEST_USER](internal.VideoForwardingStrategy.md#closest_user)
+- [LAST\_SPEAKER](internal.VideoForwardingStrategy.md#last_speaker)
+- [CLOSEST\_USER](internal.VideoForwardingStrategy.md#closest_user)
 
-## Enumeration members
+## Enumeration Members
 
 ### LAST\_SPEAKER
 
-• **LAST\_SPEAKER** = `"LAST_SPEAKER"`
+• **LAST\_SPEAKER** = ``"LAST_SPEAKER"``
 
 Selects participants based on their audio volume. This allows the local participant to receive video streams only from active speakers.
 
@@ -28,6 +28,6 @@ ___
 
 ### CLOSEST\_USER
 
-• **CLOSEST\_USER** = `"CLOSEST_USER"`
+• **CLOSEST\_USER** = ``"CLOSEST_USER"``
 
 Selects participants based on their distance from the local participant. This allows the local participant to receive video streams only from the nearest participants. This strategy is available only for participants who enabled spatial audio.
