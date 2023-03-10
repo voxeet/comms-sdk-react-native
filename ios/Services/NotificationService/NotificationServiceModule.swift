@@ -26,6 +26,30 @@ public class NotificationServiceModule: ReactEmitter {
 		VoxeetSDK.shared.notification.delegate = nil;
 	}
 
+    /// Subscribes to the specified notifications.
+    /// - Parameters:
+    ///   - events: An array of the subscribed subscription types.
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(subscribe:resolver:rejecter:)
+    public func subscribe(events: [[String: Any]],
+                          resolve: @escaping RCTPromiseResolveBlock,
+                          reject: @escaping RCTPromiseRejectBlock) {
+        VoxeetSDK.shared.notification.subscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    }
+
+    /// Unsubscribes from the specified notifications.
+    /// - Parameters:
+    ///   - events: An array of the subscribed subscription types.
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(unsubscribe:resolver:rejecter:)
+    public func unsubscribe(events: [[String: Any]],
+                            resolve: @escaping RCTPromiseResolveBlock,
+                            reject: @escaping RCTPromiseRejectBlock) {
+        VoxeetSDK.shared.notification.unsubscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    }
+
 	/// Notifies conference participants about a conference invitation.
 	/// - Parameters:
 	///   - conference: The conference object.

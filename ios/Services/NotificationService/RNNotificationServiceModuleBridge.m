@@ -3,6 +3,14 @@
 
 @interface RCT_EXTERN_REMAP_MODULE(CommsAPINotificationServiceModule, RNNotificationServiceModule, NSObject)
 
+RCT_EXTERN_METHOD(subscribe:(NSArray<NSDictionary *> * _Nonnull)events
+                  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(unsubscribe:(NSArray<NSDictionary *> * _Nonnull)events
+                  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 RCT_EXTERN_METHOD(invite:(NSDictionary * _Nonnull)conference
 				  participants:(NSArray<NSDictionary *> * _Nonnull)participants
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve

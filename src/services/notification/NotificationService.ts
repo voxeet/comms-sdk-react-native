@@ -8,6 +8,7 @@ import type {
 } from '../conference/models';
 import { NotificationServiceEventNames } from './events';
 import type { InvitationReceivedEventType } from './events';
+import type { Subscription } from './models';
 
 const { CommsAPINotificationServiceModule } = NativeModules;
 
@@ -19,6 +20,22 @@ export class NotificationService {
   _nativeModule = CommsAPINotificationServiceModule;
   /** @internal */
   _nativeEvents = new NativeEvents(CommsAPINotificationServiceModule);
+
+  /**
+   * Subscribes to the specified notifications.
+   * @param events An array of the subscribed subscription types.
+   */
+  public async subscribe(events: Subscription[]): Promise<void> {
+    return this._nativeModule.subscribe(events);
+  }
+
+  /**
+   * Unsubscribes from the specified notifications.
+   * @param events An array of the subscribed subscription types.
+   */
+  public async unsubscribe(events: Subscription[]): Promise<void> {
+    return this._nativeModule.unsubscribe(events);
+  }
 
   /**
    * Declines the conference invitation.

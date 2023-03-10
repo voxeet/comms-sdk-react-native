@@ -21,6 +21,9 @@ import type {
   Conference,
   Participant,
 } from '../../../../src/services/conference/models';
+import {
+  SubscriptionType
+} from '../../../../src/services/notification/models';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
@@ -207,6 +210,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         '@conference-previous',
         JSON.stringify(joinedConference)
       );
+
+      await CommsAPI.notification.subscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: alias } })
+      );
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
     }
@@ -290,6 +304,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
   };
   const leave = async (leaveRoom: boolean) => {
     try {
+      await CommsAPI.notification.unsubscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
+      );
+
       const conferenceLeaveOptions = {
         leaveRoom,
       };
