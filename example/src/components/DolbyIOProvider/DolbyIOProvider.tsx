@@ -52,7 +52,11 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   leave: () => {},
 });
 
-const DolbyIOProvider: React.FC = ({ children }) => {
+type DolbyProps = {
+  children: React.ReactNode
+};
+
+const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
   const [conference, setConference] = useState<Conference | undefined>(

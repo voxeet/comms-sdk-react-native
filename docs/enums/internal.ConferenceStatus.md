@@ -6,7 +6,7 @@ The ConferenceStatus enum gathers the possible conference statuses.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [CREATED](internal.ConferenceStatus.md#created)
 - [CREATING](internal.ConferenceStatus.md#creating)
@@ -19,11 +19,11 @@ The ConferenceStatus enum gathers the possible conference statuses.
 - [LEAVING](internal.ConferenceStatus.md#leaving)
 - [LEFT](internal.ConferenceStatus.md#left)
 
-## Enumeration members
+## Enumeration Members
 
 ### CREATED
 
-• **CREATED** = `"CREATED"`
+• **CREATED** = ``"CREATED"``
 
 A new conference is created.
 
@@ -31,7 +31,7 @@ ___
 
 ### CREATING
 
-• **CREATING** = `"CREATING"`
+• **CREATING** = ``"CREATING"``
 
 The SDK is creating a conference.
 
@@ -39,7 +39,7 @@ ___
 
 ### DEFAULT
 
-• **DEFAULT** = `"DEFAULT"`
+• **DEFAULT** = ``"DEFAULT"``
 
 The default conference status.
 
@@ -47,7 +47,7 @@ ___
 
 ### DESTROYED
 
-• **DESTROYED** = `"DESTROYED"`
+• **DESTROYED** = ``"DESTROYED"``
 
 Informs that the conference is destroyed. This status may be triggered by the following situations:
 - All conference participants left a conference
@@ -58,7 +58,7 @@ ___
 
 ### ENDED
 
-• **ENDED** = `"ENDED"`
+• **ENDED** = ``"ENDED"``
 
 A conference is ended.
 
@@ -66,7 +66,7 @@ ___
 
 ### ERROR
 
-• **ERROR** = `"ERROR"`
+• **ERROR** = ``"ERROR"``
 
 An error occurred during a conference.
 
@@ -74,7 +74,7 @@ ___
 
 ### JOINED
 
-• **JOINED** = `"JOINED"`
+• **JOINED** = ``"JOINED"``
 
 The local participant successfully joined a conference.
 
@@ -82,7 +82,7 @@ ___
 
 ### JOINING
 
-• **JOINING** = `"JOINING"`
+• **JOINING** = ``"JOINING"``
 
 The local participant is joining a conference.
 
@@ -90,7 +90,7 @@ ___
 
 ### LEAVING
 
-• **LEAVING** = `"LEAVING"`
+• **LEAVING** = ``"LEAVING"``
 
 The local participant is leaving a conference.
 
@@ -98,6 +98,6 @@ ___
 
 ### LEFT
 
-• **LEFT** = `"LEFT"`
+• **LEFT** = ``"LEFT"``
 
 The local participant successfully left a conference.

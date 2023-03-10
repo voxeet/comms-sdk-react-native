@@ -1,7 +1,7 @@
 {
   "name": "react-native-comms-sdk-example",
   "description": "Example app for react-native-dolbyio-sdk",
-  "version": "0.0.1",
+  "version": "3.8.0",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -17,8 +17,8 @@
     "chance": "^1.1.8",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "react": "16.13.1",
-    "react-native": "0.65.3",
+    "react": "18.2.0",
+    "react-native": "0.71.3",
     "react-native-document-picker": "^7.1.1",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-linear-gradient": "^2.5.6",
@@ -28,12 +28,11 @@
     "react-native-safe-area-context": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/runtime": "^7.12.5",
+    "@babel/core": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
     "@types/react-native-permissions": "^2.0.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "npm-license-crawler": "^0.2.1",
-    "react-native-codegen": "^0.0.7"
+    "metro-react-native-babel-preset": "^0.72.1",
+    "npm-license-crawler": "^0.2.1"
   }
 }

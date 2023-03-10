@@ -251,7 +251,8 @@ class RNConferenceServiceModule(
   @ReactMethod
   fun leave(promise: ReactPromise) {
     conferenceService.leave()
-      .rejectIfFalse { "Leave conference operation failed" }
+      .rejectIfFalse {
+        "Leave conference operation failed" }
       .forward(promise)
   }
 

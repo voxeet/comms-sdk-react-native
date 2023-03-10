@@ -36,7 +36,7 @@ CommsAPI is a main object that allows an application to interact with Dolby.io s
 
 ### audio
 
-• **audio**: [`AudioService`](internal.AudioService.md)
+• **audio**: [`AudioService`](internal.AudioService.md) = `AudioService`
 
 Retrieves the AudioService instance that allows changing audio settings for the local and remote participants.
 
@@ -44,7 +44,7 @@ ___
 
 ### command
 
-• **command**: [`CommandService`](internal.CommandService.md)
+• **command**: [`CommandService`](internal.CommandService.md) = `CommandService`
 
 Retrieves the CommandService instance that allows sending messages to conferences.
 
@@ -52,7 +52,7 @@ ___
 
 ### conference
 
-• **conference**: [`ConferenceService`](internal.ConferenceService.md)
+• **conference**: [`ConferenceService`](internal.ConferenceService.md) = `ConferenceService`
 
 Retrieves the ConferenceService instance that allows interacting with conferences.
 
@@ -60,7 +60,7 @@ ___
 
 ### filePresentation
 
-• **filePresentation**: [`FilePresentationService`](internal.FilePresentationService.md)
+• **filePresentation**: [`FilePresentationService`](internal.FilePresentationService.md) = `FilePresentationService`
 
 Retrieves the FilePresentationService instance that allows presenting files during conferences.
 
@@ -68,7 +68,7 @@ ___
 
 ### mediaDevice
 
-• **mediaDevice**: [`MediaDeviceService`](internal.MediaDeviceService.md)
+• **mediaDevice**: [`MediaDeviceService`](internal.MediaDeviceService.md) = `MediaDeviceService`
 
 Retrieves the MediaDeviceService instance that allows interacting with devices through the system.
 
@@ -76,7 +76,7 @@ ___
 
 ### notification
 
-• **notification**: [`NotificationService`](internal.NotificationService.md)
+• **notification**: [`NotificationService`](internal.NotificationService.md) = `NotificationService`
 
 Retrieves the NotificationService instance that allows inviting participants to a conference.
 
@@ -84,7 +84,7 @@ ___
 
 ### recording
 
-• **recording**: [`RecordingService`](internal.RecordingService.md)
+• **recording**: [`RecordingService`](internal.RecordingService.md) = `RecordingService`
 
 Retrieves the RecordingService instance that allows recording conferences.
 
@@ -92,7 +92,7 @@ ___
 
 ### session
 
-• **session**: [`SessionService`](internal.SessionService.md)
+• **session**: [`SessionService`](internal.SessionService.md) = `SessionService`
 
 Retrieves the SessionService instance that allows using sessions.
 
@@ -100,7 +100,7 @@ ___
 
 ### videoPresentation
 
-• **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md)
+• **videoPresentation**: [`VideoPresentationService`](internal.VideoPresentationService.md) = `VideoPresentationService`
 
 Retrieves the VideoPresentationService instance that allows presenting videos during conferences.
 
@@ -108,7 +108,7 @@ ___
 
 ### video
 
-• **video**: [`VideoService`](internal.VideoService.md)
+• **video**: [`VideoService`](internal.VideoService.md) = `VideoService`
 
 Retrieves the VideoService instance that allows enabling and disabling video for the local and remote participants.
 

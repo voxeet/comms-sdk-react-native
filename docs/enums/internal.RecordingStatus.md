@@ -6,16 +6,16 @@ The recording status.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [RECORDING](internal.RecordingStatus.md#recording)
-- [NOT_RECORDING](internal.RecordingStatus.md#not_recording)
+- [NOT\_RECORDING](internal.RecordingStatus.md#not_recording)
 
-## Enumeration members
+## Enumeration Members
 
 ### RECORDING
 
-• **RECORDING** = `"RECORDING"`
+• **RECORDING** = ``"RECORDING"``
 
 The recording is started.
 
@@ -23,6 +23,6 @@ ___
 
 ### NOT\_RECORDING
 
-• **NOT\_RECORDING** = `"NOT_RECORDING"`
+• **NOT\_RECORDING** = ``"NOT_RECORDING"``
 
 The recording is stopped.

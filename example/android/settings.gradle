@@ -4,3 +4,5 @@ include ':app'
 
 include ':dolbyio_react-native-iapi-sdk'
 project(':dolbyio_react-native-iapi-sdk').projectDir = new File(rootProject.projectDir, '../../android')
+
+includeBuild('../node_modules/react-native-gradle-plugin')

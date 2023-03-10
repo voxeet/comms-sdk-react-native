@@ -9,7 +9,11 @@ type Screen = {
   children: string;
 };
 
-const Screen: FunctionComponent = ({ children }) => {
+type ScreenProps = {
+  children: React.ReactNode;
+};
+
+const Screen: FunctionComponent<ScreenProps> = ({ children }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Space vm="m" style={styles.wrapper}>

@@ -16,9 +16,9 @@ export enum ConferenceServiceEventNames {
   StatusUpdated = 'EVENT_CONFERENCE_STATUS_UPDATED',
   /** Emitted when the SDK adds a new stream to a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant enables audio or video, the SDK adds the `audio and video` stream to the participant and emits the streamAdded event to all participants. When a participant is connected to the `audio and video` stream and changes the stream, for example, enables a camera while using a microphone, the SDK updates the `audio and video` stream and emits the [streamUpdated](#streamupdated) event. When a participant starts sharing a screen, the SDK adds the `screen-share` stream to this participants and emits the streamAdded event to all participants. The following graphic shows this behavior:
    * [block:image]
-   * {
+   * \{
    * "images": [
-   * {
+   * \{
    * "image": [
    * "https://files.readme.io/21575c1-conference-stream-added.png",
    * "conference-stream-added.png",
@@ -27,9 +27,9 @@ export enum ConferenceServiceEventNames {
    * "#f6f7f7"
    * ],
    * "caption": "The difference between the streamAdded and streamUpdated events"
-   * }
+   * \}
    * ]
-   * }
+   * \}
    * [/block]
    * Based on the stream type, the application chooses to either render a camera view or a screen-share view.
    * When a new participant joins a conference with enabled audio and video, the SDK emits the streamAdded event that includes audio and video tracks.
@@ -38,9 +38,9 @@ export enum ConferenceServiceEventNames {
   StreamAdded = 'EVENT_CONFERENCE_STREAM_ADDED',
   /** Emitted when a conference participant who is connected to the `audio and video` stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone. The event is emitted to all conference participants. The following graphic shows this behavior:
    * [block:image]
-   * {
+   * \{
    * "images": [
-   * {
+   * \{
    * "image": [
    * "https://files.readme.io/21575c1-conference-stream-added.png",
    * "conference-stream-added.png",
@@ -49,9 +49,9 @@ export enum ConferenceServiceEventNames {
    * "#f6f7f7"
    * ],
    * "caption": "The difference between the streamAdded and streamUpdated events"
-   * }
+   * \}
    * ]
-   * }
+   * \}
    * [/block]
    * The SDK can also emit the streamUpdated event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) or [startAudio](#startaudio) method to locally mute or unmute a selected remote participant who uses a camera, the local participant receives the streamUpdated event.
    */
