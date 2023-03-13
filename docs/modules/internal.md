@@ -69,6 +69,7 @@
 - [FileConverted](../interfaces/internal.FileConverted.md)
 - [FilePresentation](../interfaces/internal.FilePresentation.md)
 - [InvitationReceivedEventType](../interfaces/internal.InvitationReceivedEventType.md)
+- [Subscription](../interfaces/internal.Subscription.md)
 - [RecordingStatusUpdatedEventType](../interfaces/internal.RecordingStatusUpdatedEventType.md)
 - [Recording](../interfaces/internal.Recording.md)
 - [VideoPresentationEventType](../interfaces/internal.VideoPresentationEventType.md)
