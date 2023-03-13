@@ -14,6 +14,28 @@ const testConference: Conference = {
 describe('NotificationService', () => {
   NotificationService._nativeEvents.addListener = jest.fn();
 
+  describe('subscribe()', () => {
+    it('should invoke subscribe method with correct arguments', () => {
+      NotificationService.subscribe([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+      expect(CommsAPINotificationServiceModule.subscribe).toHaveBeenCalledWith([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+    });
+  });
+
+  describe('unsubscribe()', () => {
+    it('should invoke unsubscribe method with correct arguments', () => {
+      NotificationService.unsubscribe([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+      expect(
+        CommsAPINotificationServiceModule.unsubscribe
+      ).toHaveBeenCalledWith([{ type: 'event', conferenceAlias: 'alias' }]);
+    });
+  });
+
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
       NotificationService.invite(testConference, [{ info: {} }]);

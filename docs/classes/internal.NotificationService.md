@@ -12,6 +12,8 @@ The NotificationService allows inviting participants to a conference.
 
 ### Methods
 
+- [subscribe](internal.NotificationService.md#subscribe)
+- [unsubscribe](internal.NotificationService.md#unsubscribe)
 - [decline](internal.NotificationService.md#decline)
 - [invite](internal.NotificationService.md#invite)
 - [onInvitationReceived](internal.NotificationService.md#oninvitationreceived)
@@ -23,6 +25,42 @@ The NotificationService allows inviting participants to a conference.
 • **new NotificationService**()
 
 ## Methods
+
+### subscribe
+
+▸ **subscribe**(`events`): `Promise`<`void`\>
+
+Subscribes to the specified notifications.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `events` | [`Subscription`](../interfaces/internal.Subscription.md)[] | An array of the subscribed subscription types. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
+
+### unsubscribe
+
+▸ **unsubscribe**(`events`): `Promise`<`void`\>
+
+Unsubscribes from the specified notifications.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `events` | [`Subscription`](../interfaces/internal.Subscription.md)[] | An array of the subscribed subscription types. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
 
 ### decline
 

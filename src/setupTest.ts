@@ -49,6 +49,8 @@ jest.mock('react-native', () => {
     getParticipant: jest.fn(),
   };
   RN.NativeModules.CommsAPINotificationServiceModule = {
+    subscribe: jest.fn(),
+    unsubscribe: jest.fn(),
     invite: jest.fn(),
     decline: jest.fn(),
   };
