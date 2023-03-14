@@ -102,4 +102,28 @@ describe('NotificationService', () => {
       );
     });
   });
+
+  describe('onParticipantJoined()', () => {
+    it('should invoke NativeEvents.addListener with ParticipantJoined event', () => {
+      NotificationService.onParticipantJoined(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ParticipantJoined,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onParticipantLeft()', () => {
+    it('should invoke NativeEvents.addListener with ParticipantLeft event', () => {
+      NotificationService.onParticipantLeft(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ParticipantLeft,
+        expect.any(Function)
+      );
+    });
+  });
 });

@@ -16,6 +16,8 @@ import COLORS from '@constants/colors.constants';
 
 import Main from './Main';
 import ConferenceStatusHandler from '@components/ConferenceStatusHandler';
+import ParticipantJoinedHandler from '@components/ParticipantJoinedHandler';
+import ParticipantLeftHandler from '@components/ParticipantLeftHandler';
 
 export interface Props {}
 
@@ -43,6 +45,8 @@ export default class App extends Component<Props, State> {
             <ConferenceStatusHandler />
             <ConferenceCreatedHandler />
             <ConferenceEndedHandler />
+            <ParticipantJoinedHandler />
+            <ParticipantLeftHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
