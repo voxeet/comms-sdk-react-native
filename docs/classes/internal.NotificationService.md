@@ -20,6 +20,8 @@ The NotificationService allows inviting participants to a conference.
 - [onConferenceStatus](internal.NotificationService.md#onconferencestatus)
 - [onConferenceCreated](internal.NotificationService.md#onconferencecreated)
 - [onConferenceEnded](internal.NotificationService.md#onconferenceended)
+- [onParticipantJoined](internal.NotificationService.md#onparticipantjoined)
+- [onParticipantLeft](internal.NotificationService.md#onparticipantleft)
 
 ## Constructors
 
@@ -173,6 +175,46 @@ Adds a listener to the conference ended event.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `handler` | (`data`: [`ConferenceEndedEventType`](../interfaces/internal.ConferenceEndedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onParticipantJoined
+
+▸ **onParticipantJoined**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the participant joined event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ParticipantJoinedEventType`](../interfaces/internal.ParticipantJoinedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onParticipantLeft
+
+▸ **onParticipantLeft**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the participant left event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ParticipantLeftEventType`](../interfaces/internal.ParticipantLeftEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
