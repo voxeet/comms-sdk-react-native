@@ -6,11 +6,13 @@ import type {
   UnsubscribeFunction,
   ParticipantInvited,
 } from '../conference/models';
-import {
+import { NotificationServiceEventNames } from './events';
+import type {
+  ConferenceCreatedEventType,
   ConferenceStatusEventType,
-  NotificationServiceEventNames,
+  ConferenceEndedEventType,
+  InvitationReceivedEventType,
 } from './events';
-import type { InvitationReceivedEventType } from './events';
 import type { Subscription } from './models';
 
 const { CommsAPINotificationServiceModule } = NativeModules;
@@ -84,6 +86,34 @@ export class NotificationService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       NotificationServiceEventNames.ConferenceStatus,
+      handler
+    );
+  }
+
+  /**
+   * Adds a listener to the conference created event.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
+   */
+  public onConferenceCreated(
+    handler: (data: ConferenceCreatedEventType) => void
+  ): UnsubscribeFunction {
+    return this._nativeEvents.addListener(
+      NotificationServiceEventNames.ConferenceCreated,
+      handler
+    );
+  }
+
+  /**
+   * Adds a listener to the conference ended event.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
+   */
+  public onConferenceEnded(
+    handler: (data: ConferenceEndedEventType) => void
+  ): UnsubscribeFunction {
+    return this._nativeEvents.addListener(
+      NotificationServiceEventNames.ConferenceEnded,
       handler
     );
   }

@@ -78,4 +78,28 @@ describe('NotificationService', () => {
       );
     });
   });
+
+  describe('onConferenceCreated()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceCreated event', () => {
+      NotificationService.onConferenceCreated(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceCreated,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onConferenceEnded()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceEnded event', () => {
+      NotificationService.onConferenceEnded(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceEnded,
+        expect.any(Function)
+      );
+    });
+  });
 });
