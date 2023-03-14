@@ -6,6 +6,8 @@ import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.push.center.subscription.event.ConferenceCreatedNotificationEvent
 import com.voxeet.sdk.push.center.subscription.event.ConferenceEndedNotificationEvent
 import com.voxeet.sdk.push.center.subscription.event.InvitationReceivedNotificationEvent
+import com.voxeet.sdk.push.center.subscription.event.ParticipantJoinedNotificationEvent
+import com.voxeet.sdk.push.center.subscription.event.ParticipantLeftNotificationEvent
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.notification.events.ConferenceStatusNotificationEvent
 import io.dolby.sdk.comms.reactnative.mapper.ParticipantMapper
@@ -76,8 +78,43 @@ class RNNotificationEventEmitter(
       .apply {
         putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
         putString(KEY_CONFERENCE_ID, event.conferenceId)
+        putBoolean(KEY_CONFERENCE_LIVE, event.isLive)
+        putArray(KEY_PARTICIPANT_LIST, Arguments.createArray().apply {
+          event.participants
+            .filterNotNull()
+            .map(participantMapper::toRN)
+            .forEach(::pushMap)
+        })
       }
       .also { send(NotificationEvent.ConferenceStatus.withData(it)) }
+  }
+
+  /**
+   * Emitted when participant joined to conference.
+   */
+  @Subscribe(threadMode = MAIN)
+  fun on(event: ParticipantJoinedNotificationEvent) {
+    Arguments.createMap()
+      .apply {
+        putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
+        putString(KEY_CONFERENCE_ID, event.conferenceId)
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant))
+      }
+      .also { send(NotificationEvent.ParticipantJoined.withData(it)) }
+  }
+
+  /**
+   * Emitted when participant left conference.
+   */
+  @Subscribe(threadMode = MAIN)
+  fun on(event: ParticipantLeftNotificationEvent) {
+    Arguments.createMap()
+      .apply {
+        putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
+        putString(KEY_CONFERENCE_ID, event.conferenceId)
+        putMap(KEY_PARTICIPANT, participantMapper.toRN(event.participant))
+      }
+      .also { send(NotificationEvent.ParticipantLeft.withData(it)) }
   }
 
   /**
@@ -88,6 +125,8 @@ class RNNotificationEventEmitter(
     object ConferenceCreated : RNEvent("EVENT_NOTIFICATION_CONFERENCE_CREATED")
     object ConferenceEnded : RNEvent("EVENT_NOTIFICATION_CONFERENCE_ENDED")
     object ConferenceStatus : RNEvent("EVENT_NOTIFICATION_CONFERENCE_STATUS")
+    object ParticipantJoined : RNEvent("EVENT_NOTIFICATION_PARTICIPANT_JOINED")
+    object ParticipantLeft : RNEvent("EVENT_NOTIFICATION_PARTICIPANT_LEFT")
   }
 
   /**
@@ -97,5 +136,7 @@ class RNNotificationEventEmitter(
     private const val KEY_CONFERENCE_ALIAS = "conferenceAlias"
     private const val KEY_CONFERENCE_ID = "conferenceId"
     private const val KEY_PARTICIPANT = "participant"
+    private const val KEY_PARTICIPANT_LIST = "participants"
+    private const val KEY_CONFERENCE_LIVE = "live"
   }
 }
