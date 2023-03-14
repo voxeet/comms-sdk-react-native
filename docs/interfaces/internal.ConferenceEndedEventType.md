@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ConferenceEndedEventType
 
-The NotificationConferenceEndedEventType interface gathers information about the received invitation.
+The ConferenceEndedEventType interface gathers information about the received invitation.
 
 ## Table of contents
 
