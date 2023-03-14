@@ -66,4 +66,16 @@ describe('NotificationService', () => {
       );
     });
   });
+
+  describe('onConferenceStatus()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceStatus event', () => {
+      NotificationService.onConferenceStatus(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceStatus,
+        expect.any(Function)
+      );
+    });
+  });
 });

@@ -5,6 +5,7 @@ import VoxeetSDK
 private enum EventKeys: String, CaseIterable {
 	/// Emitted when the application user received an invitation.
 	case invitationReceived = "EVENT_NOTIFICATION_INVITATION_RECEIVED"
+    case conferenceStatus = "EVENT_NOTIFICATION_CONFERENCE_STATUS"
 }
 
 @objc(RNNotificationServiceModule)
@@ -117,7 +118,14 @@ extension NotificationServiceModule: VTNotificationDelegate {
 	}
 
 	public func activeParticipants(notification: VTActiveParticipantsNotification) {}
-	public func conferenceStatus(notification: VTConferenceStatusNotification) {}
+
+    public func conferenceStatus(notification: VTConferenceStatusNotification) {
+        send(
+            event: EventKeys.conferenceStatus,
+            body: notification.toReactModel()
+        )
+    }
+
 	public func conferenceCreated(notification: VTConferenceCreatedNotification) {}
 	public func conferenceEnded(notification: VTConferenceEndedNotification) {}
 	public func participantJoined(notification: VTParticipantJoinedNotification) {}
