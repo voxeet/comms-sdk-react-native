@@ -18,6 +18,8 @@ The NotificationService allows inviting participants to a conference.
 - [invite](internal.NotificationService.md#invite)
 - [onInvitationReceived](internal.NotificationService.md#oninvitationreceived)
 - [onConferenceStatus](internal.NotificationService.md#onconferencestatus)
+- [onConferenceCreated](internal.NotificationService.md#onconferencecreated)
+- [onConferenceEnded](internal.NotificationService.md#onconferenceended)
 
 ## Constructors
 
@@ -131,6 +133,46 @@ Adds a listener to the conference status event.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `handler` | (`data`: [`ConferenceStatusEventType`](../interfaces/internal.ConferenceStatusEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onConferenceCreated
+
+▸ **onConferenceCreated**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the conference created event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ConferenceCreatedEventType`](../interfaces/internal.ConferenceCreatedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onConferenceEnded
+
+▸ **onConferenceEnded**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the conference ended event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ConferenceEndedEventType`](../interfaces/internal.ConferenceEndedEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
