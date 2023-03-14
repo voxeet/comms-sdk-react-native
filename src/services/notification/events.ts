@@ -40,7 +40,7 @@ export interface ConferenceCreatedEventType {
   conferenceId: string;
 }
 
-/** The NotificationConferenceEndedEventType interface gathers information about the received invitation. */
+/** The ConferenceEndedEventType interface gathers information about the received invitation. */
 export interface ConferenceEndedEventType {
   /** The conference alias. */
   conferenceAlias: string;

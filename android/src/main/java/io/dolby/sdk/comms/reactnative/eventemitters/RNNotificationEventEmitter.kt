@@ -46,7 +46,6 @@ class RNNotificationEventEmitter(
    */
   @Subscribe(threadMode = MAIN)
   fun on(event: ConferenceCreatedNotificationEvent) {
-    android.util.Log.d("[KB]", "on conference created")
     Arguments.createMap()
       .apply {
         putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
@@ -60,7 +59,6 @@ class RNNotificationEventEmitter(
    */
   @Subscribe(threadMode = MAIN)
   fun on(event: ConferenceEndedNotificationEvent) {
-    android.util.Log.d("[KB]", "on conference ended: ${event.conferenceAlias}")
     Arguments.createMap()
       .apply {
         putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
@@ -70,12 +68,26 @@ class RNNotificationEventEmitter(
   }
 
   /**
+   * Emitted when conference status change.
+   */
+  @Subscribe(threadMode = MAIN)
+  fun on(event: ConferenceStatusNotificationEvent) {
+    Arguments.createMap()
+      .apply {
+        putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
+        putString(KEY_CONFERENCE_ID, event.conferenceId)
+      }
+      .also { send(NotificationEvent.ConferenceStatus.withData(it)) }
+  }
+
+  /**
    * Notification events
    */
   private object NotificationEvent {
     object InvitationReceived : RNEvent("EVENT_NOTIFICATION_INVITATION_RECEIVED")
     object ConferenceCreated : RNEvent("EVENT_NOTIFICATION_CONFERENCE_CREATED")
     object ConferenceEnded : RNEvent("EVENT_NOTIFICATION_CONFERENCE_ENDED")
+    object ConferenceStatus : RNEvent("EVENT_NOTIFICATION_CONFERENCE_STATUS")
   }
 
   /**
