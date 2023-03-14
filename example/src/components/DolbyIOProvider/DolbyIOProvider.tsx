@@ -187,6 +187,17 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         params: conferenceParams,
       };
 
+      await CommsAPI.notification.subscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: alias } })
+      );
+
       const createdConference = await CommsAPI.conference.create(
         conferenceOptions
       );
@@ -215,16 +226,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         JSON.stringify(joinedConference)
       );
 
-      await CommsAPI.notification.subscribe(
-        [
-          SubscriptionType.ActiveParticipants,
-          SubscriptionType.ConferenceCreated,
-          SubscriptionType.ConferenceEnded,
-          SubscriptionType.InvitationReceived,
-          SubscriptionType.ParticipantJoined,
-          SubscriptionType.ParticipantLeft
-        ].map( (s) => { return { type: s, conferenceAlias: alias } })
-      );
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
     }

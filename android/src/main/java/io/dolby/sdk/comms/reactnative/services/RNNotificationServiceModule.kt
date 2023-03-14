@@ -106,10 +106,12 @@ class RNNotificationServiceModule constructor(
    * @param subscribeRNList An array of the subscribed subscription types.
    */
   @ReactMethod
-  fun subscribe(subscribeRNList: ReadableArray) {
+  fun subscribe(subscribeRNList: ReadableArray, promise: ReactPromise) {
     val subscribeList = SubscribeMapper.fromRNSubscribeList(subscribeRNList)
-    android.util.Log.d("[KB]", "subscribe to: $subscribeList")
-    notificationService.subscribe(subscribeList)
+    notificationService
+      .subscribe(subscribeList)
+      .rejectIfFalse {"Subscribe to specific subscribe type failed" }
+      .forward(promise)
   }
 
   /**
@@ -117,8 +119,11 @@ class RNNotificationServiceModule constructor(
    * @param subscribeRNList An array of the subscribed subscription types.
    */
   @ReactMethod
-  fun unsubscribe(subscribeRNList: ReadableArray) {
+  fun unsubscribe(subscribeRNList: ReadableArray, promise: ReactPromise) {
     val subscribeList = SubscribeMapper.fromRNSubscribeList(subscribeRNList)
-    notificationService.unsubscribe(subscribeList)
+    notificationService
+      .unsubscribe(subscribeList)
+      .rejectIfFalse { "Cannot unsubscribe for given subscribe type" }
+      .forward(promise)
   }
 }
