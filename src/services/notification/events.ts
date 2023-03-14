@@ -7,6 +7,8 @@ export enum NotificationServiceEventNames {
   ConferenceStatus = 'EVENT_NOTIFICATION_CONFERENCE_STATUS',
   ConferenceCreated = 'EVENT_NOTIFICATION_CONFERENCE_CREATED',
   ConferenceEnded = 'EVENT_NOTIFICATION_CONFERENCE_ENDED',
+  ParticipantJoined = 'EVENT_NOTIFICATION_PARTICIPANT_JOINED',
+  ParticipantLeft = 'EVENT_NOTIFICATION_PARTICIPANT_LEFT',
 }
 
 /** The InvitationReceivedEventType interface gathers information about the received invitation. */
@@ -48,9 +50,29 @@ export interface ConferenceEndedEventType {
   conferenceId: string;
 }
 
+export interface ParticipantJoinedEventType {
+  /** The conference alias. */
+  conferenceAlias: string;
+  /** The conference ID. */
+  conferenceId: string;
+  /** The participant who joined the conference. */
+  participant: Participant;
+}
+
+export interface ParticipantLeftEventType {
+  /** The conference alias. */
+  conferenceAlias: string;
+  /** The conference ID. */
+  conferenceId: string;
+  /** The participant who left the conference. */
+  participant: Participant;
+}
+
 export interface NotificationServiceEventMap {
   [NotificationServiceEventNames.InvitationReceived]: InvitationReceivedEventType;
   [NotificationServiceEventNames.ConferenceStatus]: ConferenceStatusEventType;
   [NotificationServiceEventNames.ConferenceCreated]: ConferenceCreatedEventType;
   [NotificationServiceEventNames.ConferenceEnded]: ConferenceEndedEventType;
+  [NotificationServiceEventNames.ParticipantJoined]: ParticipantJoinedEventType;
+  [NotificationServiceEventNames.ParticipantLeft]: ParticipantLeftEventType;
 }
