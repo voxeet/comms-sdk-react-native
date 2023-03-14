@@ -6,6 +6,8 @@ private enum EventKeys: String, CaseIterable {
 	/// Emitted when the application user received an invitation.
 	case invitationReceived = "EVENT_NOTIFICATION_INVITATION_RECEIVED"
     case conferenceStatus = "EVENT_NOTIFICATION_CONFERENCE_STATUS"
+    case conferenceCreated = "EVENT_NOTIFICATION_CONFERENCE_CREATED"
+    case conferenceEnded = "EVENT_NOTIFICATION_CONFERENCE_ENDED"
     case participantJoined = "EVENT_NOTIFICATION_PARTICIPANT_JOINED"
     case participantLeft = "EVENT_NOTIFICATION_PARTICIPANT_LEFT"
 }
@@ -128,8 +130,19 @@ extension NotificationServiceModule: VTNotificationDelegate {
         )
     }
 
-	public func conferenceCreated(notification: VTConferenceCreatedNotification) {}
-	public func conferenceEnded(notification: VTConferenceEndedNotification) {}
+    public func conferenceCreated(notification: VTConferenceCreatedNotification) {
+        send(
+            event: EventKeys.conferenceCreated,
+            body: notification.toReactModel()
+        )
+    }
+
+    public func conferenceEnded(notification: VTConferenceEndedNotification) {
+        send(
+            event: EventKeys.conferenceEnded,
+            body: notification.toReactModel()
+        )
+    }
 
     public func participantJoined(notification: VTParticipantJoinedNotification) {
         send(
