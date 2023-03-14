@@ -6,7 +6,10 @@ import type {
   UnsubscribeFunction,
   ParticipantInvited,
 } from '../conference/models';
-import { NotificationServiceEventNames } from './events';
+import {
+  ConferenceStatusEventType,
+  NotificationServiceEventNames,
+} from './events';
 import type { InvitationReceivedEventType } from './events';
 import type { Subscription } from './models';
 
@@ -67,6 +70,20 @@ export class NotificationService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       NotificationServiceEventNames.InvitationReceived,
+      handler
+    );
+  }
+
+  /**
+   * Adds a listener to the conference status event.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
+   */
+  public onConferenceStatus(
+    handler: (data: ConferenceStatusEventType) => void
+  ): UnsubscribeFunction {
+    return this._nativeEvents.addListener(
+      NotificationServiceEventNames.ConferenceStatus,
       handler
     );
   }

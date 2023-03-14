@@ -17,6 +17,7 @@ The NotificationService allows inviting participants to a conference.
 - [decline](internal.NotificationService.md#decline)
 - [invite](internal.NotificationService.md#invite)
 - [onInvitationReceived](internal.NotificationService.md#oninvitationreceived)
+- [onConferenceStatus](internal.NotificationService.md#onconferencestatus)
 
 ## Constructors
 
@@ -110,6 +111,26 @@ Adds a listener to the invitation received event.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `handler` | (`data`: [`InvitationReceivedEventType`](../interfaces/internal.InvitationReceivedEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onConferenceStatus
+
+▸ **onConferenceStatus**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the conference status event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ConferenceStatusEventType`](../interfaces/internal.ConferenceStatusEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 

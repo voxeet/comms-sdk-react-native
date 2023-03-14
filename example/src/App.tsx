@@ -13,6 +13,7 @@ import VideoPresentationHandler from '@components/VideoPresentationHandler';
 import COLORS from '@constants/colors.constants';
 
 import Main from './Main';
+import ConferenceStatusHandler from '@components/ConferenceStatusHandler/ConferenceStatusHandler';
 
 export interface Props {}
 
@@ -37,6 +38,7 @@ export default class App extends Component<Props, State> {
             <VideoPresentationHandler />
             <MessageHandler />
             <InvitationHandler />
+            <ConferenceStatusHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
