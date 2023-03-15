@@ -22,6 +22,7 @@ The NotificationService allows inviting participants to a conference.
 - [onConferenceEnded](internal.NotificationService.md#onconferenceended)
 - [onParticipantJoined](internal.NotificationService.md#onparticipantjoined)
 - [onParticipantLeft](internal.NotificationService.md#onparticipantleft)
+- [onActiveParticipants](internal.NotificationService.md#onactiveparticipants)
 
 ## Constructors
 
@@ -215,6 +216,26 @@ Adds a listener to the participant left event.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `handler` | (`data`: [`ParticipantLeftEventType`](../interfaces/internal.ParticipantLeftEventType.md)) => `void` | An event callback function. |
+
+#### Returns
+
+[`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+A function that unsubscribes from event listeners.
+
+___
+
+### onActiveParticipants
+
+▸ **onActiveParticipants**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
+
+Adds a listener to the participant active event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `handler` | (`data`: [`ActiveParticipantsEventType`](../interfaces/internal.ActiveParticipantsEventType.md)) => `void` | An event callback function. |
 
 #### Returns
 
