@@ -2,15 +2,6 @@
 
 [internal](../modules/internal.md).ActiveParticipantsEventType
 
-## Table of contents
-
-### Properties
-
-- [conferenceAlias](internal.ActiveParticipantsEventType.md#conferencealias)
-- [conferenceId](internal.ActiveParticipantsEventType.md#conferenceid)
-- [participantCount](internal.ActiveParticipantsEventType.md#participantcount)
-- [participants](internal.ActiveParticipantsEventType.md#participants)
-
 ## Properties
 
 ### conferenceAlias

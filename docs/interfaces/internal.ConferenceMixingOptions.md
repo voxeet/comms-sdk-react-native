@@ -4,12 +4,6 @@
 
 The ConferenceMixingOptions interface notifies a server that a participant who joins or replays a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
 
-## Table of contents
-
-### Properties
-
-- [enabled](internal.ConferenceMixingOptions.md#enabled)
-
 ## Properties
 
 ### enabled

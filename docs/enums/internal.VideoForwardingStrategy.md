@@ -9,13 +9,6 @@ Selecting the video forwarding strategy is supported only on SDK 3.6 and later. 
 
 By default, the SDK uses the LAST_SPEAKER strategy.
 
-## Table of contents
-
-### Enumeration Members
-
-- [LAST\_SPEAKER](internal.VideoForwardingStrategy.md#last_speaker)
-- [CLOSEST\_USER](internal.VideoForwardingStrategy.md#closest_user)
-
 ## Enumeration Members
 
 ### LAST\_SPEAKER

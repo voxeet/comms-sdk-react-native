@@ -4,15 +4,6 @@
 
 The ConferenceListenOptions interface defines how the application expects to join a conference using the listen method.
 
-## Table of contents
-
-### Properties
-
-- [conferenceAccessToken](internal.ConferenceListenOptions.md#conferenceaccesstoken)
-- [maxVideoForwarding](internal.ConferenceListenOptions.md#maxvideoforwarding)
-- [spatialAudio](internal.ConferenceListenOptions.md#spatialaudio)
-- [videoForwardingStrategy](internal.ConferenceListenOptions.md#videoforwardingstrategy)
-
 ## Properties
 
 ### conferenceAccessToken

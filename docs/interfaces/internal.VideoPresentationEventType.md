@@ -4,14 +4,6 @@
 
 The VideoPresentationEventType interface gathers information about a video presentation.
 
-## Table of contents
-
-### Properties
-
-- [owner](internal.VideoPresentationEventType.md#owner)
-- [timestamp](internal.VideoPresentationEventType.md#timestamp)
-- [url](internal.VideoPresentationEventType.md#url)
-
 ## Properties
 
 ### owner

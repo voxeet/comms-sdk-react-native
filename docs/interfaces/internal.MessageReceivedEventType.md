@@ -4,13 +4,6 @@
 
 The MessageReceivedEventType interface gathers information about the received message.
 
-## Table of contents
-
-### Properties
-
-- [message](internal.MessageReceivedEventType.md#message)
-- [participant](internal.MessageReceivedEventType.md#participant)
-
 ## Properties
 
 ### message

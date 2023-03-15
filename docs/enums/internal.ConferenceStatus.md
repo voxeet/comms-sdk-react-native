@@ -4,21 +4,6 @@
 
 The ConferenceStatus enum gathers the possible conference statuses.
 
-## Table of contents
-
-### Enumeration Members
-
-- [CREATED](internal.ConferenceStatus.md#created)
-- [CREATING](internal.ConferenceStatus.md#creating)
-- [DEFAULT](internal.ConferenceStatus.md#default)
-- [DESTROYED](internal.ConferenceStatus.md#destroyed)
-- [ENDED](internal.ConferenceStatus.md#ended)
-- [ERROR](internal.ConferenceStatus.md#error)
-- [JOINED](internal.ConferenceStatus.md#joined)
-- [JOINING](internal.ConferenceStatus.md#joining)
-- [LEAVING](internal.ConferenceStatus.md#leaving)
-- [LEFT](internal.ConferenceStatus.md#left)
-
 ## Enumeration Members
 
 ### CREATED

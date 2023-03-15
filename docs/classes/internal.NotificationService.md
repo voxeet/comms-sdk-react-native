@@ -4,26 +4,6 @@
 
 The NotificationService allows inviting participants to a conference and subscribing to and unsubscribing from notifications.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.NotificationService.md#constructor)
-
-### Methods
-
-- [subscribe](internal.NotificationService.md#subscribe)
-- [unsubscribe](internal.NotificationService.md#unsubscribe)
-- [decline](internal.NotificationService.md#decline)
-- [invite](internal.NotificationService.md#invite)
-- [onInvitationReceived](internal.NotificationService.md#oninvitationreceived)
-- [onConferenceStatus](internal.NotificationService.md#onconferencestatus)
-- [onConferenceCreated](internal.NotificationService.md#onconferencecreated)
-- [onConferenceEnded](internal.NotificationService.md#onconferenceended)
-- [onParticipantJoined](internal.NotificationService.md#onparticipantjoined)
-- [onParticipantLeft](internal.NotificationService.md#onparticipantleft)
-- [onActiveParticipants](internal.NotificationService.md#onactiveparticipants)
-
 ## Constructors
 
 ### constructor

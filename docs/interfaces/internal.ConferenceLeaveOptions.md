@@ -4,12 +4,6 @@
 
 The ConferenceLeaveOptions interface gathers information about preferences for leaving a conference.
 
-## Table of contents
-
-### Properties
-
-- [leaveRoom](internal.ConferenceLeaveOptions.md#leaveroom)
-
 ## Properties
 
 ### leaveRoom

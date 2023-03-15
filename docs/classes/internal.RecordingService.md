@@ -4,19 +4,6 @@
 
 The RecordingService is responsible for recording conferences. For more information about the recording function, see the [Recording Conferences](doc:guides-recording-conferences) document.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.RecordingService.md#constructor)
-
-### Methods
-
-- [current](internal.RecordingService.md#current)
-- [start](internal.RecordingService.md#start)
-- [stop](internal.RecordingService.md#stop)
-- [onRecordingStatusUpdated](internal.RecordingService.md#onrecordingstatusupdated)
-
 ## Constructors
 
 ### constructor

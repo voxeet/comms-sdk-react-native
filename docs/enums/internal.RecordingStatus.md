@@ -4,13 +4,6 @@
 
 The RecordingStatus model gathers the possible recording statuses.
 
-## Table of contents
-
-### Enumeration Members
-
-- [RECORDING](internal.RecordingStatus.md#recording)
-- [NOT\_RECORDING](internal.RecordingStatus.md#not_recording)
-
 ## Enumeration Members
 
 ### RECORDING

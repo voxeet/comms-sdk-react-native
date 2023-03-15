@@ -4,14 +4,6 @@
 
 The MediaStreamType enum gathers the possible types of media streams.
 
-## Table of contents
-
-### Enumeration Members
-
-- [Camera](internal.MediaStreamType.md#camera)
-- [Custom](internal.MediaStreamType.md#custom)
-- [ScreenShare](internal.MediaStreamType.md#screenshare)
-
 ## Enumeration Members
 
 ### Camera

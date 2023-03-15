@@ -8,13 +8,6 @@ By default, the Dolby Voice audio processing algorithm is enabled in Dolby Voice
 
 This model is available in SDK 3.7 and later.
 
-## Table of contents
-
-### Enumeration Members
-
-- [Standard](internal.AudioCaptureMode.md#standard)
-- [Unprocessed](internal.AudioCaptureMode.md#unprocessed)
-
 ## Enumeration Members
 
 ### Standard

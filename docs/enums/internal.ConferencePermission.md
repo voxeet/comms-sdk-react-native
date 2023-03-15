@@ -4,23 +4,6 @@
 
 The ConferencePermission enum gathers the possible permissions a participant may have in a conference.
 
-## Table of contents
-
-### Enumeration Members
-
-- [INVITE](internal.ConferencePermission.md#invite)
-- [JOIN](internal.ConferencePermission.md#join)
-- [KICK](internal.ConferencePermission.md#kick)
-- [RECORD](internal.ConferencePermission.md#record)
-- [SEND\_AUDIO](internal.ConferencePermission.md#send_audio)
-- [SEND\_MESSAGE](internal.ConferencePermission.md#send_message)
-- [SEND\_VIDEO](internal.ConferencePermission.md#send_video)
-- [SHARE\_FILE](internal.ConferencePermission.md#share_file)
-- [SHARE\_SCREEN](internal.ConferencePermission.md#share_screen)
-- [SHARE\_VIDEO](internal.ConferencePermission.md#share_video)
-- [STREAM](internal.ConferencePermission.md#stream)
-- [UPDATE\_PERMISSIONS](internal.ConferencePermission.md#update_permissions)
-
 ## Enumeration Members
 
 ### INVITE

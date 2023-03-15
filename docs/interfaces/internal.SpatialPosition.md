@@ -12,14 +12,6 @@ You can define the direction of each axis in the coordinate system using the [se
 
 The [setSpatialEnvironment](doc:rn-client-sdk-references-conferenceservice#setspatialenvironment) method allows the application to choose the meaning of each axis and match the usage of the application.
 
-## Table of contents
-
-### Properties
-
-- [x](internal.SpatialPosition.md#x)
-- [y](internal.SpatialPosition.md#y)
-- [z](internal.SpatialPosition.md#z)
-
 ## Properties
 
 ### x

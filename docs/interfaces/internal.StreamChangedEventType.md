@@ -4,13 +4,6 @@
 
 The StreamChangedEventType gathers events that inform about the added, updated, and removed streams.
 
-## Table of contents
-
-### Properties
-
-- [participant](internal.StreamChangedEventType.md#participant)
-- [stream](internal.StreamChangedEventType.md#stream)
-
 ## Properties
 
 ### participant

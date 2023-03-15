@@ -1,8 +1,6 @@
 # Namespace: internal
 
-## Table of contents
-
-### Classes
+## Classes
 
 - [AudioService](../classes/internal.AudioService.md)
 - [LocalAudio](../classes/internal.LocalAudio.md)
@@ -19,7 +17,7 @@
 - [VideoService](../classes/internal.VideoService.md)
 - [VideoPresentationService](../classes/internal.VideoPresentationService.md)
 
-### Enumerations
+## Enumerations
 
 - [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
 - [AudioCaptureMode](../enums/internal.AudioCaptureMode.md)
@@ -36,7 +34,7 @@
 - [RecordingStatus](../enums/internal.RecordingStatus.md)
 - [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
-### Interfaces
+## Interfaces
 
 - [AudioCaptureModeOptions](../interfaces/internal.AudioCaptureModeOptions.md)
 - [MessageReceivedEventType](../interfaces/internal.MessageReceivedEventType.md)
@@ -80,28 +78,6 @@
 - [Recording](../interfaces/internal.Recording.md)
 - [VideoPresentationEventType](../interfaces/internal.VideoPresentationEventType.md)
 - [VideoPresentation](../interfaces/internal.VideoPresentation.md)
-
-### Enumeration Members
-
-- [ParticipantAdded](internal.md#participantadded)
-- [ParticipantUpdated](internal.md#participantupdated)
-- [StreamAdded](internal.md#streamadded)
-- [StreamUpdated](internal.md#streamupdated)
-- [StreamRemoved](internal.md#streamremoved)
-- [FilePresentationStarted](internal.md#filepresentationstarted)
-- [FilePresentationStopped](internal.md#filepresentationstopped)
-- [FilePresentationUpdated](internal.md#filepresentationupdated)
-- [VideoPresentationPaused](internal.md#videopresentationpaused)
-- [VideoPresentationPlayed](internal.md#videopresentationplayed)
-- [VideoPresentationSought](internal.md#videopresentationsought)
-- [VideoPresentationStarted](internal.md#videopresentationstarted)
-
-### Type Aliases
-
-- [AudioTrack](internal.md#audiotrack)
-- [VideoTrack](internal.md#videotrack)
-- [MediaStream](internal.md#mediastream)
-- [UnsubscribeFunction](internal.md#unsubscribefunction)
 
 ## Enumeration Members
 

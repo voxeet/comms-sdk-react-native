@@ -4,16 +4,6 @@
 
 The Participant interface gathers information about a conference participant.
 
-## Table of contents
-
-### Properties
-
-- [id](internal.Participant.md#id)
-- [info](internal.Participant.md#info)
-- [status](internal.Participant.md#status)
-- [streams](internal.Participant.md#streams)
-- [type](internal.Participant.md#type)
-
 ## Properties
 
 ### id

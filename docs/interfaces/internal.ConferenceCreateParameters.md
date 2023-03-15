@@ -4,17 +4,6 @@
 
 The ConferenceCreateParameters interface gathers parameters settings for a requested conference.
 
-## Table of contents
-
-### Properties
-
-- [dolbyVoice](internal.ConferenceCreateParameters.md#dolbyvoice)
-- [liveRecording](internal.ConferenceCreateParameters.md#liverecording)
-- [rtcpMode](internal.ConferenceCreateParameters.md#rtcpmode)
-- [ttl](internal.ConferenceCreateParameters.md#ttl)
-- [videoCodec](internal.ConferenceCreateParameters.md#videocodec)
-- [spatialAudioStyle](internal.ConferenceCreateParameters.md#spatialaudiostyle)
-
 ## Properties
 
 ### dolbyVoice

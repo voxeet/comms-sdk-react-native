@@ -18,24 +18,6 @@ The VideoPresentationService allows sharing videos during a conference. To prese
 
 **6.** The presenter calls the [stop](#stop) method to stop the video presentation. In such a situation, all conference participants receive this information via the [onVideoPresentationStopped](#onvideopresentationstopped) listener.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.VideoPresentationService.md#constructor)
-
-### Methods
-
-- [current](internal.VideoPresentationService.md#current)
-- [pause](internal.VideoPresentationService.md#pause)
-- [play](internal.VideoPresentationService.md#play)
-- [seek](internal.VideoPresentationService.md#seek)
-- [start](internal.VideoPresentationService.md#start)
-- [state](internal.VideoPresentationService.md#state)
-- [stop](internal.VideoPresentationService.md#stop)
-- [onVideoPresentationChange](internal.VideoPresentationService.md#onvideopresentationchange)
-- [onVideoPresentationStopped](internal.VideoPresentationService.md#onvideopresentationstopped)
-
 ## Constructors
 
 ### constructor
