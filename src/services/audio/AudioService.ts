@@ -20,7 +20,7 @@ export class AudioService {
   }
 
   /**
-   * Audio settings for the local participant.
+   * Audio settings for a remote participant.
    */
   public getRemote(): RemoteAudio {
     return this._remoteAudio;
