@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantJoinedEventType
 
+The ParticipantJoinedEventType interface gathers information about a participant who joined a conference.
+
 ## Table of contents
 
 ### Properties

@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).RecordingStatus
 
-The recording status.
+The RecordingStatus model gathers the possible recording statuses.
 
 ## Table of contents
 
