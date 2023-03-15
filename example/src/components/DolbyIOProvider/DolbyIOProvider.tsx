@@ -187,7 +187,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         params: conferenceParams,
       };
 
-      await CommsAPI.notification.subscribe(
+      CommsAPI.notification.subscribe(
         [
           SubscriptionType.ActiveParticipants,
           SubscriptionType.ConferenceCreated,
@@ -309,17 +309,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   };
   const leave = async (leaveRoom: boolean) => {
     try {
-      await CommsAPI.notification.unsubscribe(
-        [
-          SubscriptionType.ActiveParticipants,
-          SubscriptionType.ConferenceCreated,
-          SubscriptionType.ConferenceEnded,
-          SubscriptionType.InvitationReceived,
-          SubscriptionType.ParticipantJoined,
-          SubscriptionType.ParticipantLeft
-        ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
-      );
-
       const conferenceLeaveOptions = {
         leaveRoom,
       };
@@ -329,6 +318,17 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       if (leaveRoom) {
         setMe(undefined);
       }
+
+      CommsAPI.notification.unsubscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
+      );
     } catch (e: any) {
       Alert.alert('Conference not left', e);
     }
