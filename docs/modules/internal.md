@@ -74,6 +74,7 @@
 - [ConferenceEndedEventType](../interfaces/internal.ConferenceEndedEventType.md)
 - [ParticipantJoinedEventType](../interfaces/internal.ParticipantJoinedEventType.md)
 - [ParticipantLeftEventType](../interfaces/internal.ParticipantLeftEventType.md)
+- [ActiveParticipantsEventType](../interfaces/internal.ActiveParticipantsEventType.md)
 - [Subscription](../interfaces/internal.Subscription.md)
 - [RecordingStatusUpdatedEventType](../interfaces/internal.RecordingStatusUpdatedEventType.md)
 - [Recording](../interfaces/internal.Recording.md)

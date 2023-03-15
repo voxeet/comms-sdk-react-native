@@ -18,6 +18,7 @@ import Main from './Main';
 import ConferenceStatusHandler from '@components/ConferenceStatusHandler';
 import ParticipantJoinedHandler from '@components/ParticipantJoinedHandler';
 import ParticipantLeftHandler from '@components/ParticipantLeftHandler';
+import ActiveParticipantsHandler from '@components/ActiveParticipantsHandler';
 
 export interface Props {}
 
@@ -47,6 +48,7 @@ export default class App extends Component<Props, State> {
             <ConferenceEndedHandler />
             <ParticipantJoinedHandler />
             <ParticipantLeftHandler />
+            <ActiveParticipantsHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>
