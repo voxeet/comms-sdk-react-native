@@ -8,14 +8,6 @@ The VideoForwardingOptions model allows configuring the Video Forwarding functio
 - Prioritizing specific participants' video streams that need to be transmitted to the local participant
 - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant
 
-## Table of contents
-
-### Properties
-
-- [max](internal.VideoForwardingOptions.md#max)
-- [participants](internal.VideoForwardingOptions.md#participants)
-- [strategy](internal.VideoForwardingOptions.md#strategy)
-
 ## Properties
 
 ### max

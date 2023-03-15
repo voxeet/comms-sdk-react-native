@@ -1,16 +1,10 @@
 # @dolbyio/comms-sdk-react-native
 
-## Table of contents
-
-### Classes
+## Classes
 
 - [CommsAPI](classes/CommsAPI.md)
 
-### Variables
-
-- [default](modules.md#default)
-
-### Namespaces
+## Namespaces
 
 - [internal](modules/internal.md)
 

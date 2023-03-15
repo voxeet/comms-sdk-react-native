@@ -4,15 +4,6 @@
 
 The FilePresentation interface gathers information about a file presentation.
 
-## Table of contents
-
-### Properties
-
-- [id](internal.FilePresentation.md#id)
-- [imageCount](internal.FilePresentation.md#imagecount)
-- [owner](internal.FilePresentation.md#owner)
-- [position](internal.FilePresentation.md#position)
-
 ## Properties
 
 ### id

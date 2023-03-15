@@ -4,20 +4,6 @@
 
 The ConferenceJoinOptions interface defines how an application expects to join a conference in terms of media preference.
 
-## Table of contents
-
-### Properties
-
-- [conferenceAccessToken](internal.ConferenceJoinOptions.md#conferenceaccesstoken)
-- [constraints](internal.ConferenceJoinOptions.md#constraints)
-- [maxVideoForwarding](internal.ConferenceJoinOptions.md#maxvideoforwarding)
-- [mixing](internal.ConferenceJoinOptions.md#mixing)
-- [preferRecvMono](internal.ConferenceJoinOptions.md#preferrecvmono)
-- [preferSendMono](internal.ConferenceJoinOptions.md#prefersendmono)
-- [simulcast](internal.ConferenceJoinOptions.md#simulcast)
-- [spatialAudio](internal.ConferenceJoinOptions.md#spatialaudio)
-- [videoForwardingStrategy](internal.ConferenceJoinOptions.md#videoforwardingstrategy)
-
 ## Properties
 
 ### conferenceAccessToken

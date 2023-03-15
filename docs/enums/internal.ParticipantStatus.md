@@ -4,20 +4,6 @@
 
 The ParticipantStatus enum gathers the possible statuses of conference participants.
 
-## Table of contents
-
-### Enumeration Members
-
-- [CONNECTED](internal.ParticipantStatus.md#connected)
-- [CONNECTING](internal.ParticipantStatus.md#connecting)
-- [DECLINE](internal.ParticipantStatus.md#decline)
-- [ERROR](internal.ParticipantStatus.md#error)
-- [INACTIVE](internal.ParticipantStatus.md#inactive)
-- [KICKED](internal.ParticipantStatus.md#kicked)
-- [LEFT](internal.ParticipantStatus.md#left)
-- [RESERVED](internal.ParticipantStatus.md#reserved)
-- [WARNING](internal.ParticipantStatus.md#warning)
-
 ## Enumeration Members
 
 ### CONNECTED

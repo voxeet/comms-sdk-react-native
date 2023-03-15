@@ -4,13 +4,6 @@
 
 The ParticipantPermissions interface gathers information about the invited participants and their conference permissions.
 
-## Table of contents
-
-### Properties
-
-- [participant](internal.ParticipantPermissions.md#participant)
-- [permissions](internal.ParticipantPermissions.md#permissions)
-
 ## Properties
 
 ### participant

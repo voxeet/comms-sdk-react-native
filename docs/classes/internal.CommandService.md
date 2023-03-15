@@ -4,17 +4,6 @@
 
 The CommandService allows the application to send and receive text messages and notifications during a conference.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.CommandService.md#constructor)
-
-### Methods
-
-- [send](internal.CommandService.md#send)
-- [onMessageReceived](internal.CommandService.md#onmessagereceived)
-
 ## Constructors
 
 ### constructor

@@ -4,14 +4,6 @@
 
 The ParticipantInfo interface gathers information about a conference participant.
 
-## Table of contents
-
-### Properties
-
-- [avatarUrl](internal.ParticipantInfo.md#avatarurl)
-- [externalId](internal.ParticipantInfo.md#externalid)
-- [name](internal.ParticipantInfo.md#name)
-
 ## Properties
 
 ### avatarUrl

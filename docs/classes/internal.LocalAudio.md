@@ -6,21 +6,6 @@ The LocalAudio model allows enabling and disabling the local participant's audio
 
 This model is supported only in SDK 3.7 and later.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.LocalAudio.md#constructor)
-
-### Methods
-
-- [getCaptureMode](internal.LocalAudio.md#getcapturemode)
-- [setCaptureMode](internal.LocalAudio.md#setcapturemode)
-- [getComfortNoiseLevel](internal.LocalAudio.md#getcomfortnoiselevel)
-- [setComfortNoiseLevel](internal.LocalAudio.md#setcomfortnoiselevel)
-- [start](internal.LocalAudio.md#start)
-- [stop](internal.LocalAudio.md#stop)
-
 ## Constructors
 
 ### constructor

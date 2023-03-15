@@ -4,12 +4,6 @@
 
 The PermissionsUpdatedEventType gathers events that inform about the updated permissions of the local participant.
 
-## Table of contents
-
-### Properties
-
-- [permissions](internal.PermissionsUpdatedEventType.md#permissions)
-
 ## Properties
 
 ### permissions

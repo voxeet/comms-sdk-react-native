@@ -4,49 +4,6 @@
 
 The ConferenceService allows an application to manage the conference life-cycle and interact with a conference. The service allows creating, joining, and leaving conferences and managing the audio, video, and screen-share streams.
 
-## Table of contents
-
-### Constructors
-
-- [constructor](internal.ConferenceService.md#constructor)
-
-### Methods
-
-- [create](internal.ConferenceService.md#create)
-- [current](internal.ConferenceService.md#current)
-- [fetch](internal.ConferenceService.md#fetch)
-- [getAudioLevel](internal.ConferenceService.md#getaudiolevel)
-- [getLocalStats](internal.ConferenceService.md#getlocalstats)
-- [getMaxVideoForwarding](internal.ConferenceService.md#getmaxvideoforwarding)
-- [getParticipant](internal.ConferenceService.md#getparticipant)
-- [getParticipants](internal.ConferenceService.md#getparticipants)
-- [getStatus](internal.ConferenceService.md#getstatus)
-- [isMuted](internal.ConferenceService.md#ismuted)
-- [isSpeaking](internal.ConferenceService.md#isspeaking)
-- [join](internal.ConferenceService.md#join)
-- [listen](internal.ConferenceService.md#listen)
-- [kick](internal.ConferenceService.md#kick)
-- [leave](internal.ConferenceService.md#leave)
-- [mute](internal.ConferenceService.md#mute)
-- [replay](internal.ConferenceService.md#replay)
-- [setAudioProcessing](internal.ConferenceService.md#setaudioprocessing)
-- [setMaxVideoForwarding](internal.ConferenceService.md#setmaxvideoforwarding)
-- [videoForwarding](internal.ConferenceService.md#videoforwarding)
-- [startAudio](internal.ConferenceService.md#startaudio)
-- [startScreenShare](internal.ConferenceService.md#startscreenshare)
-- [startVideo](internal.ConferenceService.md#startvideo)
-- [stopAudio](internal.ConferenceService.md#stopaudio)
-- [stopScreenShare](internal.ConferenceService.md#stopscreenshare)
-- [setSpatialDirection](internal.ConferenceService.md#setspatialdirection)
-- [setSpatialEnvironment](internal.ConferenceService.md#setspatialenvironment)
-- [setSpatialPosition](internal.ConferenceService.md#setspatialposition)
-- [stopVideo](internal.ConferenceService.md#stopvideo)
-- [updatePermissions](internal.ConferenceService.md#updatepermissions)
-- [onStatusChange](internal.ConferenceService.md#onstatuschange)
-- [onPermissionsChange](internal.ConferenceService.md#onpermissionschange)
-- [onParticipantsChange](internal.ConferenceService.md#onparticipantschange)
-- [onStreamsChange](internal.ConferenceService.md#onstreamschange)
-
 ## Constructors
 
 ### constructor
