@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ParticipantLeftEventType
 
+The ParticipantLeftEventType interface gathers information about a participant who left a conference.
+
 ## Table of contents
 
 ### Properties

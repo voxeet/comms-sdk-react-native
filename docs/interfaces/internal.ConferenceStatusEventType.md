@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ConferenceStatusEventType
 
+The ConferenceStatusEventType interface informs about the conference status.
+
 ## Table of contents
 
 ### Properties

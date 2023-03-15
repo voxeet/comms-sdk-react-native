@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).NotificationService
 
-The NotificationService allows inviting participants to a conference.
+The NotificationService allows inviting participants to a conference and subscribing to and unsubscribing from notifications.
 
 ## Table of contents
 

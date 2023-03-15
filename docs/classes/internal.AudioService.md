@@ -41,7 +41,7 @@ ___
 
 ▸ **getRemote**(): [`RemoteAudio`](internal.RemoteAudio.md)
 
-Audio settings for the local participant.
+Audio settings for a remote participant.
 
 #### Returns
 
