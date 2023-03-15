@@ -24,6 +24,7 @@ export interface InvitationReceivedEventType {
   participant: Participant;
 }
 
+/** The ConferenceStatusEventType interface informs about the conference status. */
 export interface ConferenceStatusEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -51,6 +52,7 @@ export interface ConferenceEndedEventType {
   conferenceId: string;
 }
 
+/** The ParticipantJoinedEventType interface gathers information about a participant who joined a conference. */
 export interface ParticipantJoinedEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -60,6 +62,7 @@ export interface ParticipantJoinedEventType {
   participant: Participant;
 }
 
+/** The ParticipantLeftEventType interface gathers information about a participant who left a conference. */
 export interface ParticipantLeftEventType {
   /** The conference alias. */
   conferenceAlias: string;
