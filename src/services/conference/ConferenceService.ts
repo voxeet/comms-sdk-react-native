@@ -219,7 +219,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-references-localaudio#setcapturemode)method.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-references-localaudio#setcapturemode) method.
    *
    * Enables and disables audio processing for a conference participant.
    * @param options The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.

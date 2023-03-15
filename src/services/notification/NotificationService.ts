@@ -20,7 +20,7 @@ import type { Subscription } from './models';
 const { CommsAPINotificationServiceModule } = NativeModules;
 
 /**
- * The NotificationService allows inviting participants to a conference.
+ * The NotificationService allows inviting participants to a conference and subscribing to and unsubscribing from notifications.
  */
 export class NotificationService {
   /** @internal */
