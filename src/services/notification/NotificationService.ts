@@ -14,6 +14,7 @@ import type {
   InvitationReceivedEventType,
   ParticipantJoinedEventType,
   ParticipantLeftEventType,
+  ActiveParticipantsEventType,
 } from './events';
 import type { Subscription } from './models';
 
@@ -144,6 +145,20 @@ export class NotificationService {
   ): UnsubscribeFunction {
     return this._nativeEvents.addListener(
       NotificationServiceEventNames.ParticipantLeft,
+      handler
+    );
+  }
+
+  /**
+   * Adds a listener to the participant active event.
+   * @param handler An event callback function.
+   * @returns A function that unsubscribes from event listeners.
+   */
+  public onActiveParticipants(
+    handler: (data: ActiveParticipantsEventType) => void
+  ): UnsubscribeFunction {
+    return this._nativeEvents.addListener(
+      NotificationServiceEventNames.ActiveParticipants,
       handler
     );
   }

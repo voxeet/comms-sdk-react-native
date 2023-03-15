@@ -3,6 +3,7 @@ package io.dolby.sdk.comms.reactnative.eventemitters
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.voxeet.sdk.models.Participant
+import com.voxeet.sdk.push.center.subscription.event.ActiveParticipantsEvent
 import com.voxeet.sdk.push.center.subscription.event.ConferenceCreatedNotificationEvent
 import com.voxeet.sdk.push.center.subscription.event.ConferenceEndedNotificationEvent
 import com.voxeet.sdk.push.center.subscription.event.InvitationReceivedNotificationEvent
@@ -118,6 +119,26 @@ class RNNotificationEventEmitter(
   }
 
   /**
+   * Emitted when participant left conference.
+   */
+  @Subscribe(threadMode = MAIN)
+  fun on(event: ActiveParticipantsEvent) {
+    Arguments.createMap()
+      .apply {
+        putString(KEY_CONFERENCE_ALIAS, event.conferenceAlias)
+        putString(KEY_CONFERENCE_ID, event.conferenceId)
+        putInt(KEY_PARTICIPANTS_COUNT, event.participantCount)
+        putArray(KEY_PARTICIPANT_LIST, Arguments.createArray().apply {
+          event.participants
+            .filterNotNull()
+            .map(participantMapper::toRN)
+            .forEach(::pushMap)
+        })
+      }
+      .also { send(NotificationEvent.ActiveParticipants.withData(it)) }
+  }
+
+  /**
    * Notification events
    */
   private object NotificationEvent {
@@ -127,6 +148,7 @@ class RNNotificationEventEmitter(
     object ConferenceStatus : RNEvent("EVENT_NOTIFICATION_CONFERENCE_STATUS")
     object ParticipantJoined : RNEvent("EVENT_NOTIFICATION_PARTICIPANT_JOINED")
     object ParticipantLeft : RNEvent("EVENT_NOTIFICATION_PARTICIPANT_LEFT")
+    object ActiveParticipants : RNEvent("EVENT_NOTIFICATION_ACTIVE_PARTICIPANTS")
   }
 
   /**
@@ -136,6 +158,7 @@ class RNNotificationEventEmitter(
     private const val KEY_CONFERENCE_ALIAS = "conferenceAlias"
     private const val KEY_CONFERENCE_ID = "conferenceId"
     private const val KEY_PARTICIPANT = "participant"
+    private const val KEY_PARTICIPANTS_COUNT = "participantCount"
     private const val KEY_PARTICIPANT_LIST = "participants"
     private const val KEY_CONFERENCE_LIVE = "live"
   }

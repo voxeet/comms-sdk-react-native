@@ -126,4 +126,16 @@ describe('NotificationService', () => {
       );
     });
   });
+
+  describe('onActiveParticipnats()', () => {
+    it('should invoke NativeEvents.addListener with ActiveParticipants event', () => {
+      NotificationService.onActiveParticipants(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ActiveParticipants,
+        expect.any(Function)
+      );
+    });
+  });
 });
