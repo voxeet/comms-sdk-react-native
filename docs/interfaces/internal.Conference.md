@@ -4,6 +4,17 @@
 
 The Conference interface gathers information about a conference.
 
+## Table of contents
+
+### Properties
+
+- [alias](internal.Conference.md#alias)
+- [id](internal.Conference.md#id)
+- [isNew](internal.Conference.md#isnew)
+- [participants](internal.Conference.md#participants)
+- [status](internal.Conference.md#status)
+- [spatialAudioStyle](internal.Conference.md#spatialaudiostyle)
+
 ## Properties
 
 ### alias

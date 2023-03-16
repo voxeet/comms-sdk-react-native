@@ -4,6 +4,12 @@
 
 The FilePresentationChangedEventType interface gathers information about the presented file.
 
+## Table of contents
+
+### Properties
+
+- [filePresentation](internal.FilePresentationChangedEventType.md#filepresentation)
+
 ## Properties
 
 ### filePresentation

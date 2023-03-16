@@ -6,6 +6,13 @@ The NoiseReductionLevel model allows selecting the preferred level of noise redu
 
 This model is available in SDK 3.7 and later.
 
+## Table of contents
+
+### Enumeration Members
+
+- [High](internal.NoiseReductionLevel.md#high)
+- [Low](internal.NoiseReductionLevel.md#low)
+
 ## Enumeration Members
 
 ### High

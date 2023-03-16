@@ -2,6 +2,30 @@
 
 CommsAPI is a main object that allows an application to interact with Dolby.io services.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](CommsAPI.md#constructor)
+
+### Properties
+
+- [audio](CommsAPI.md#audio)
+- [command](CommsAPI.md#command)
+- [conference](CommsAPI.md#conference)
+- [filePresentation](CommsAPI.md#filepresentation)
+- [mediaDevice](CommsAPI.md#mediadevice)
+- [notification](CommsAPI.md#notification)
+- [recording](CommsAPI.md#recording)
+- [session](CommsAPI.md#session)
+- [videoPresentation](CommsAPI.md#videopresentation)
+- [video](CommsAPI.md#video)
+
+### Methods
+
+- [initialize](CommsAPI.md#initialize)
+- [initializeToken](CommsAPI.md#initializetoken)
+
 ## Constructors
 
 ### constructor

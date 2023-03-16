@@ -4,6 +4,14 @@
 
 The ParticipantJoinedEventType interface gathers information about a participant who joined a conference.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.ParticipantJoinedEventType.md#conferencealias)
+- [conferenceId](internal.ParticipantJoinedEventType.md#conferenceid)
+- [participant](internal.ParticipantJoinedEventType.md#participant)
+
 ## Properties
 
 ### conferenceAlias

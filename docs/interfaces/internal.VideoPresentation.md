@@ -4,6 +4,14 @@
 
 The VideoPresentation interface gathers information about a video presentation.
 
+## Table of contents
+
+### Properties
+
+- [owner](internal.VideoPresentation.md#owner)
+- [timestamp](internal.VideoPresentation.md#timestamp)
+- [url](internal.VideoPresentation.md#url)
+
 ## Properties
 
 ### owner

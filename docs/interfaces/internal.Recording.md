@@ -4,6 +4,13 @@
 
 The Recording interface gathers information about a conference recording.
 
+## Table of contents
+
+### Properties
+
+- [participantId](internal.Recording.md#participantid)
+- [startTimestamp](internal.Recording.md#starttimestamp)
+
 ## Properties
 
 ### participantId

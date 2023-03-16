@@ -6,6 +6,17 @@ The AudioService allows changing audio settings for the local and remote partici
 
 This service is available in SDK 3.7 and later.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.AudioService.md#constructor)
+
+### Methods
+
+- [getLocal](internal.AudioService.md#getlocal)
+- [getRemote](internal.AudioService.md#getremote)
+
 ## Constructors
 
 ### constructor

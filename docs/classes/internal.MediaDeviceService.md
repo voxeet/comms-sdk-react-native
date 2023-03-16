@@ -4,6 +4,20 @@
 
 The MediaDeviceService allows an application to manage media devices that are used during a conference.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.MediaDeviceService.md#constructor)
+
+### Methods
+
+- [getComfortNoiseLevel](internal.MediaDeviceService.md#getcomfortnoiselevel)
+- [isFrontCamera](internal.MediaDeviceService.md#isfrontcamera)
+- [setComfortNoiseLevel](internal.MediaDeviceService.md#setcomfortnoiselevel)
+- [switchCamera](internal.MediaDeviceService.md#switchcamera)
+- [switchSpeaker](internal.MediaDeviceService.md#switchspeaker)
+
 ## Constructors
 
 ### constructor

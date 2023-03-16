@@ -4,6 +4,13 @@
 
 The ParticipantInvited interface gathers information about the invited participant.
 
+## Table of contents
+
+### Properties
+
+- [info](internal.ParticipantInvited.md#info)
+- [permissions](internal.ParticipantInvited.md#permissions)
+
 ## Properties
 
 ### info

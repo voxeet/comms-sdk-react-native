@@ -6,6 +6,17 @@ The VideoService allows managing the local participant's and remote participants
 
 This service is available in SDK 3.7 and later.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.VideoService.md#constructor)
+
+### Methods
+
+- [getLocal](internal.VideoService.md#getlocal)
+- [getRemote](internal.VideoService.md#getremote)
+
 ## Constructors
 
 ### constructor
