@@ -10,7 +10,7 @@ import io.dolby.sdk.comms.reactnative.eventemitters.RNSdkEventEmitter
 import io.dolby.sdk.comms.reactnative.utils.lockCatching
 import io.dolby.sdk.comms.reactnative.utils.unlockCatching
 import org.webrtc.CodecDescriptorFactory
-import org.webrtc.VideoCodecType
+import org.webrtc.VideoCodecMimeType
 import org.webrtc.codecs.CodecDescriptor
 import java.util.concurrent.locks.ReentrantLock
 
@@ -146,7 +146,7 @@ class RNCommsAPISdkModule(
 
   private fun enableOnEmulator() {
     CodecDescriptorFactory
-      .getEncoders(VideoCodecType.H264)
+      .getEncoders(VideoCodecMimeType.H264)
       ?.register(CodecDescriptor("OMX.google", 16, true))
     CodecDescriptorFactory
       .getDecoders()

@@ -14,7 +14,11 @@ export const RecordingContext = React.createContext<IRecordingProvider>({
   stopRecord: () => {},
 });
 
-const RecordingProvider: React.FC = ({ children }) => {
+type RecordingProps = {
+  children: React.ReactNode;
+};
+
+const RecordingProvider: React.FC<RecordingProps> = ({ children }) => {
   const [isRecording, setIsRecording] = useState(false);
 
   const startRecord = async () => {

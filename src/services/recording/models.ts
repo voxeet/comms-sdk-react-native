@@ -6,7 +6,7 @@ export interface Recording {
   startTimestamp: number;
 }
 
-/** The recording status. */
+/** The RecordingStatus model gathers the possible recording statuses. */
 export enum RecordingStatus {
   /** The recording is started. */
   RECORDING = 'RECORDING',

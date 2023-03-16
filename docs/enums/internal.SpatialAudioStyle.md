@@ -15,17 +15,17 @@ The SpatialAudioStyle enum defines how the spatial location is communicated betw
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [INDIVIDUAL](internal.SpatialAudioStyle.md#individual)
 - [SHARED](internal.SpatialAudioStyle.md#shared)
 - [DISABLED](internal.SpatialAudioStyle.md#disabled)
 
-## Enumeration members
+## Enumeration Members
 
 ### INDIVIDUAL
 
-• **INDIVIDUAL** = `"INDIVIDUAL"`
+• **INDIVIDUAL** = ``"INDIVIDUAL"``
 
 Sets the spatial location that is based on the spatial scene, local participant's position, and remote participants'
 positions. This allows a client to control the position using the local, self-contained logic. However, the client has to
@@ -37,7 +37,7 @@ ___
 
 ### SHARED
 
-• **SHARED** = `"SHARED"`
+• **SHARED** = ``"SHARED"``
 
 Sets the spatial location that is based on the spatial scene and the local participant's position, while the
 relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is
@@ -49,6 +49,6 @@ ___
 
 ### DISABLED
 
-• **DISABLED** = `"DISABLED"`
+• **DISABLED** = ``"DISABLED"``
 
 Disables spatial audio in a conference.

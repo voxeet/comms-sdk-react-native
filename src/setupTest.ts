@@ -33,6 +33,7 @@ jest.mock('react-native', () => {
     stopAudio: jest.fn(),
     stopVideo: jest.fn(),
     join: jest.fn(),
+    listen: jest.fn(),
     kick: jest.fn(),
     leave: jest.fn(),
     startScreenShare: jest.fn(),
@@ -48,6 +49,8 @@ jest.mock('react-native', () => {
     getParticipant: jest.fn(),
   };
   RN.NativeModules.CommsAPINotificationServiceModule = {
+    subscribe: jest.fn(),
+    unsubscribe: jest.fn(),
     invite: jest.fn(),
     decline: jest.fn(),
   };

@@ -220,7 +220,7 @@ object Promises {
    * @param ignoreReturnType flag if [ReactPromise] returns null
    */
   fun <T, R> PromiseInOut<T, R>.forward(promise: ReactPromise, ignoreReturnType: Boolean = false) =
-    then<Void>(ThenVoid { result ->
+    then(ThenVoid { result ->
       if (ignoreReturnType) promise.resolve(null) else promise.resolve(result)
     }).error {
       Log.d(TAG, "Dispatch error", it)

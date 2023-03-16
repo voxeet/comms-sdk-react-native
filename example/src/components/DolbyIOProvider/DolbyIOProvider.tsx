@@ -21,6 +21,9 @@ import type {
   Conference,
   Participant,
 } from '../../../../src/services/conference/models';
+import {
+  SubscriptionType
+} from '../../../../src/services/notification/models';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
@@ -52,7 +55,11 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   leave: () => {},
 });
 
-const DolbyIOProvider: React.FC = ({ children }) => {
+type DolbyProps = {
+  children: React.ReactNode
+};
+
+const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
   const [conference, setConference] = useState<Conference | undefined>(
@@ -180,6 +187,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         params: conferenceParams,
       };
 
+      CommsAPI.notification.subscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: alias } })
+      );
+
       const createdConference = await CommsAPI.conference.create(
         conferenceOptions
       );
@@ -207,6 +225,7 @@ const DolbyIOProvider: React.FC = ({ children }) => {
         '@conference-previous',
         JSON.stringify(joinedConference)
       );
+
     } catch (e: any) {
       Alert.alert('Conference not joined', e.toString());
     }
@@ -299,6 +318,17 @@ const DolbyIOProvider: React.FC = ({ children }) => {
       if (leaveRoom) {
         setMe(undefined);
       }
+
+      CommsAPI.notification.unsubscribe(
+        [
+          SubscriptionType.ActiveParticipants,
+          SubscriptionType.ConferenceCreated,
+          SubscriptionType.ConferenceEnded,
+          SubscriptionType.InvitationReceived,
+          SubscriptionType.ParticipantJoined,
+          SubscriptionType.ParticipantLeft
+        ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
+      );
     } catch (e: any) {
       Alert.alert('Conference not left', e);
     }

@@ -185,6 +185,12 @@ export class ConferenceService {
 
   /**
    * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference.
+   *
+   * **Note**: The mute method depends on the Dolby Voice usage:
+   * - In conferences where Dolby Voice is not enabled, conference participants can mute themselves or remote participants.
+   * - In conferences where Dolby Voice is enabled, conference participants can only mute themselves.
+   *
+   * If you wish to mute remote participants in Dolby Voice conferences, you must use the stopAudio API. This API allows the conference participants to stop receiving the specific audio streams from the server.
    * @param isMuted The mute state, `true` indicates that a participant is muted, `false` indicates that a participant is not muted.
    * @param participant A remote participant.
    */
@@ -213,7 +219,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-model-localaudio#setcapturemode) method.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-references-localaudio#setcapturemode) method.
    *
    * Enables and disables audio processing for a conference participant.
    * @param options The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing.
@@ -261,7 +267,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) and [RemoteAudio](doc:rn-client-sdk-model-remoteaudio) models.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) and [RemoteAudio](doc:rn-client-sdk-references-remoteaudio) models.
    *
    * Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
    * - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
@@ -287,7 +293,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](doc:rn-client-sdk-model-localvideo) and [RemoteVideo](doc:rn-client-sdk-model-remotevideo) models.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](doc:rn-client-sdk-references-localvideo) and [RemoteVideo](doc:rn-client-sdk-references-remotevideo) models.
    *
    * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
    * @param participant The participant who will receive the video stream, either remote or local.
@@ -297,7 +303,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](doc:rn-client-sdk-model-localaudio) and [RemoteAudio](doc:rn-client-sdk-model-remoteaudio) models.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) and [RemoteAudio](doc:rn-client-sdk-references-remoteaudio) models.
    *
    * Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
    * - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
@@ -324,9 +330,9 @@ export class ConferenceService {
    * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from front-right. If the local participant chooses to change the direction and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, the participant hears the speaker from the front-left position. The following video presents this example:
    *
    * [block:html]
-   * {
+   * \{
    * "html": "<div style=\"text-align:center\">\n<video controls width=\"289\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n\n</div>"
-   * }
+   * \}
    * [/block]
    * For more information, see the [SpatialDirection](doc:rn-client-sdk-models-spatialdirection) model.
    *
@@ -351,9 +357,9 @@ export class ConferenceService {
    *
    * The default spatial environment is presented in the following diagram:
    * [block:image]
-   * {
+   * \{
    *   "images": [
-   *     {
+   *     \{
    *       "image": [
    *         "https://files.readme.io/e43475b-defaultEnv.png",
    *         "defaultEnv.png",
@@ -362,9 +368,9 @@ export class ConferenceService {
    *         "#163b58"
    *       ],
    *       "sizing": "full"
-   *     }
+   *     \}
    *   ]
-   * }
+   * \}
    * [/block]
    *
    * @param scale A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-individual-spatial-audio#configure-the-spatial-environment-scale) article.
@@ -393,12 +399,12 @@ export class ConferenceService {
    *
    * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified position in space. If the position of the remote participant is not provided, the participant does not have a default position and remains muted until a position is specified.
    *
-   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
+   * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, \{x:3,y:0,z:0\}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, \{x:7,y:1,z:2\}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
    *
    * [block:image]
-   * {
+   * \{
    *   "images": [
-   *     {
+   *     \{
    *       "image": [
    *         "https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png",
    *         "05_Axis_People_v04_220202.png",
@@ -407,9 +413,9 @@ export class ConferenceService {
    *         "#264159"
    *       ],
    *       "sizing": "full"
-   *     }
+   *     \}
    *   ]
-   * }
+   * \}
    * [/block]
    *
    * @param participant The selected participant, either local or remote. In a case of the local participant, the SDK sets the location from which the participant will hear a conference. In a case of a remote participant, the SDK sets the position from which the participant's audio will be rendered.
@@ -423,7 +429,7 @@ export class ConferenceService {
   }
 
   /**
-   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](doc:rn-client-sdk-model-localvideo) and [RemoteVideo](doc:rn-client-sdk-model-remotevideo) models.
+   * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](doc:rn-client-sdk-references-localvideo) and [RemoteVideo](doc:rn-client-sdk-references-remotevideo) models.
    *
    * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
    * @param participant The participant who wants to stop receiving a video stream.

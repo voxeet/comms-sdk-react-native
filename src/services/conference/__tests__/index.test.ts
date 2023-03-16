@@ -70,11 +70,16 @@ describe('ConferenceService', () => {
   ConferenceService._nativeEvents.addListener = jest
     .fn()
     .mockReturnValue(removeListenerMock);
+
   describe('create()', () => {
     it('should invoke exported create method with correct arguments', () => {
       const options = {
         alias: 'Example conference',
       };
+
+      CommsAPIConferenceServiceModule.create.mockImplementation(() =>
+        Promise.resolve(testConference)
+      );
       ConferenceService.create(options);
       expect(CommsAPIConferenceServiceModule.create).toHaveBeenCalledWith(
         options
@@ -88,8 +93,10 @@ describe('ConferenceService', () => {
       );
     });
   });
-
   describe('fetch()', () => {
+    CommsAPIConferenceServiceModule.fetch.mockImplementationOnce(() =>
+      Promise.resolve(testConference)
+    );
     it('should invoke exported fetch method', () => {
       ConferenceService.fetch();
       expect(CommsAPIConferenceServiceModule.fetch).toHaveBeenCalled();
@@ -97,6 +104,9 @@ describe('ConferenceService', () => {
   });
 
   describe('current()', () => {
+    CommsAPIConferenceServiceModule.current.mockImplementationOnce(() =>
+      Promise.resolve(testConference)
+    );
     it('should invoke exported current method', () => {
       ConferenceService.current();
       expect(CommsAPIConferenceServiceModule.current).toHaveBeenCalled();
@@ -104,6 +114,9 @@ describe('ConferenceService', () => {
   });
 
   describe('replay()', () => {
+    CommsAPIConferenceServiceModule.replay.mockImplementation(() =>
+      Promise.resolve(testConference)
+    );
     it('should invoke exported replay method with correct arguments', () => {
       ConferenceService.replay(testConference, testConferenceReplayOptions);
       expect(CommsAPIConferenceServiceModule.replay).toHaveBeenCalledWith(
@@ -149,6 +162,9 @@ describe('ConferenceService', () => {
   });
 
   describe('getParticipant()', () => {
+    CommsAPIConferenceServiceModule.getParticipant.mockImplementationOnce(() =>
+      Promise.resolve(testParticipant)
+    );
     it('should invoke exported getParticipant method', () => {
       ConferenceService.getParticipant('123');
       expect(CommsAPIConferenceServiceModule.getParticipant).toHaveBeenCalled();
@@ -156,6 +172,9 @@ describe('ConferenceService', () => {
   });
 
   describe('getParticipants()', () => {
+    CommsAPIConferenceServiceModule.getParticipants.mockImplementationOnce(() =>
+      Promise.resolve(testConference.participants)
+    );
     it('should invoke exported getParticipants method with correct arguments', () => {
       ConferenceService.getParticipants(testConference);
       expect(
@@ -277,6 +296,9 @@ describe('ConferenceService', () => {
   });
 
   describe('join()', () => {
+    CommsAPIConferenceServiceModule.join.mockImplementationOnce(() =>
+      Promise.resolve(testConference)
+    );
     it('should invoke exported join method with correct arguments', () => {
       ConferenceService.join(testConference, {});
       expect(CommsAPIConferenceServiceModule.join).toHaveBeenCalledWith(
@@ -287,6 +309,9 @@ describe('ConferenceService', () => {
   });
 
   describe('listen()', () => {
+    CommsAPIConferenceServiceModule.listen.mockImplementationOnce(() =>
+      Promise.resolve(testConference)
+    );
     it('should invoke exported listen method with correct arguments', () => {
       ConferenceService.listen(testConference, {});
       expect(CommsAPIConferenceServiceModule.join).toHaveBeenCalledWith(

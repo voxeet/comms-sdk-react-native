@@ -69,7 +69,7 @@ const REGEXP_MATCH_INTERNAL_LINKS = /\[internal].+/g;
 const REGEXP_MATCH_CLASS_TITLES = /# Class: \w+/g;
 const REGEXP_MATCH_DOC_TITLES = /(# Interface:|# Enumeration:|# Namespace:).+/g;
 const REGEXP_MATCH_TABLE_OF_CONTENTS =
-  /(## Table of contents[\S\s*]*)(?=## Properties|## Methods|## Enumeration members)/g;
+  /(## Table of contents[\S\s*]*)(?=## Properties|## Methods|## Enumeration Members)/g;
 
 const REGEXP_MATCH_TABLE_OF_CONTENTS_COMMS_FILE =
   /(## Table of contents[\S\s*]*)(?=## Properties)/g;

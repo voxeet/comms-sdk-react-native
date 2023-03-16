@@ -6,17 +6,17 @@ The VideoPresentationState enum gathers the possible statuses of a video present
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [PAUSED](internal.VideoPresentationState.md#paused)
 - [PLAYING](internal.VideoPresentationState.md#playing)
 - [STOPPED](internal.VideoPresentationState.md#stopped)
 
-## Enumeration members
+## Enumeration Members
 
 ### PAUSED
 
-• **PAUSED** = `"paused"`
+• **PAUSED** = ``"paused"``
 
 The video presentation is paused.
 
@@ -24,7 +24,7 @@ ___
 
 ### PLAYING
 
-• **PLAYING** = `"playing"`
+• **PLAYING** = ``"playing"``
 
 The video presentation is played.
 
@@ -32,6 +32,6 @@ ___
 
 ### STOPPED
 
-• **STOPPED** = `"stopped"`
+• **STOPPED** = ``"stopped"``
 
 The video presentation is stopped.

@@ -6,11 +6,13 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.voxeet.sdk.json.ParticipantInvited
 import com.voxeet.sdk.models.Conference
+import com.voxeet.sdk.push.center.subscription.register.BaseSubscription
 import com.voxeet.sdk.services.ConferenceService
 import com.voxeet.sdk.services.NotificationService
 import io.dolby.sdk.comms.reactnative.eventemitters.RNNotificationEventEmitter
 import io.dolby.sdk.comms.reactnative.mapper.ConferenceMapper
 import io.dolby.sdk.comms.reactnative.mapper.InvitationMapper
+import io.dolby.sdk.comms.reactnative.mapper.SubscribeMapper
 import io.dolby.sdk.comms.reactnative.utils.Promises
 import io.dolby.sdk.comms.reactnative.utils.Promises.forward
 import io.dolby.sdk.comms.reactnative.utils.Promises.rejectIfFalse
@@ -99,4 +101,29 @@ class RNNotificationServiceModule constructor(
   @ReactMethod
   override fun removeListeners(count: Int) = super.removeListeners(count)
 
+  /**
+   * Subscribes to the specified notifications.
+   * @param subscribeRNList An array of the subscribed subscription types.
+   */
+  @ReactMethod
+  fun subscribe(subscribeRNList: ReadableArray, promise: ReactPromise) {
+    val subscribeList = SubscribeMapper.fromRNSubscribeList(subscribeRNList)
+    notificationService
+      .subscribe(subscribeList)
+      .rejectIfFalse {"Subscribe to specific subscribe type failed" }
+      .forward(promise)
+  }
+
+  /**
+   * Unsubscribes from the specified notifications.
+   * @param subscribeRNList An array of the subscribed subscription types.
+   */
+  @ReactMethod
+  fun unsubscribe(subscribeRNList: ReadableArray, promise: ReactPromise) {
+    val subscribeList = SubscribeMapper.fromRNSubscribeList(subscribeRNList)
+    notificationService
+      .unsubscribe(subscribeList)
+      .rejectIfFalse { "Cannot unsubscribe for given subscribe type" }
+      .forward(promise)
+  }
 }

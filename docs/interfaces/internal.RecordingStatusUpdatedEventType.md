@@ -35,7 +35,7 @@ ___
 
 • **participantId**: `string`
 
-The unique identifier the participant who changed the recording status.
+The unique identifier of the participant who changed the recording status.
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **timestamp**: `number`
 
-The timestamp of when the recording status changed.
+The timestamp that informs when the recording status changed.

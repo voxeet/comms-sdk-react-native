@@ -5,6 +5,12 @@ import VoxeetSDK
 private enum EventKeys: String, CaseIterable {
 	/// Emitted when the application user received an invitation.
 	case invitationReceived = "EVENT_NOTIFICATION_INVITATION_RECEIVED"
+    case activeParticipants = "EVENT_NOTIFICATION_ACTIVE_PARTICIPANTS"
+    case conferenceStatus = "EVENT_NOTIFICATION_CONFERENCE_STATUS"
+    case conferenceCreated = "EVENT_NOTIFICATION_CONFERENCE_CREATED"
+    case conferenceEnded = "EVENT_NOTIFICATION_CONFERENCE_ENDED"
+    case participantJoined = "EVENT_NOTIFICATION_PARTICIPANT_JOINED"
+    case participantLeft = "EVENT_NOTIFICATION_PARTICIPANT_LEFT"
 }
 
 @objc(RNNotificationServiceModule)
@@ -25,6 +31,30 @@ public class NotificationServiceModule: ReactEmitter {
 		super.stopObserving()
 		VoxeetSDK.shared.notification.delegate = nil;
 	}
+
+    /// Subscribes to the specified notifications.
+    /// - Parameters:
+    ///   - events: An array of the subscribed subscription types.
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(subscribe:resolver:rejecter:)
+    public func subscribe(events: [[String: Any]],
+                          resolve: @escaping RCTPromiseResolveBlock,
+                          reject: @escaping RCTPromiseRejectBlock) {
+        VoxeetSDK.shared.notification.subscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    }
+
+    /// Unsubscribes from the specified notifications.
+    /// - Parameters:
+    ///   - events: An array of the subscribed subscription types.
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(unsubscribe:resolver:rejecter:)
+    public func unsubscribe(events: [[String: Any]],
+                            resolve: @escaping RCTPromiseResolveBlock,
+                            reject: @escaping RCTPromiseRejectBlock) {
+        VoxeetSDK.shared.notification.unsubscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    }
 
 	/// Notifies conference participants about a conference invitation.
 	/// - Parameters:
@@ -92,10 +122,45 @@ extension NotificationServiceModule: VTNotificationDelegate {
 		)
 	}
 
-	public func activeParticipants(notification: VTActiveParticipantsNotification) {}
-	public func conferenceStatus(notification: VTConferenceStatusNotification) {}
-	public func conferenceCreated(notification: VTConferenceCreatedNotification) {}
-	public func conferenceEnded(notification: VTConferenceEndedNotification) {}
-	public func participantJoined(notification: VTParticipantJoinedNotification) {}
-	public func participantLeft(notification: VTParticipantLeftNotification) {}
+    public func activeParticipants(notification: VTActiveParticipantsNotification) {
+        send(
+            event: EventKeys.activeParticipants,
+            body: notification.toReactModel()
+        )
+    }
+
+    public func conferenceStatus(notification: VTConferenceStatusNotification) {
+        send(
+            event: EventKeys.conferenceStatus,
+            body: notification.toReactModel()
+        )
+    }
+
+    public func conferenceCreated(notification: VTConferenceCreatedNotification) {
+        send(
+            event: EventKeys.conferenceCreated,
+            body: notification.toReactModel()
+        )
+    }
+
+    public func conferenceEnded(notification: VTConferenceEndedNotification) {
+        send(
+            event: EventKeys.conferenceEnded,
+            body: notification.toReactModel()
+        )
+    }
+
+    public func participantJoined(notification: VTParticipantJoinedNotification) {
+        send(
+            event: EventKeys.participantJoined,
+            body: notification.toReactModel()
+        )
+    }
+    
+    public func participantLeft(notification: VTParticipantLeftNotification) {
+        send(
+            event: EventKeys.participantLeft,
+            body: notification.toReactModel()
+        )
+    }
 }

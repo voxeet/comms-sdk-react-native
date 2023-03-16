@@ -7,12 +7,18 @@ import FilePresentationHandler, {
   FilePresentationProvider,
 } from '@components/FilePresentationHandler';
 import InvitationHandler from '@components/InvitationHandler';
+import ConferenceCreatedHandler from '@components/ConferenceCreatedHandler';
+import ConferenceEndedHandler from '@components/ConferenceEndedHandler';
 import MessageHandler from '@components/MessageHandler';
 import RecordingProvider from '@components/RecordingProvider';
 import VideoPresentationHandler from '@components/VideoPresentationHandler';
 import COLORS from '@constants/colors.constants';
 
 import Main from './Main';
+import ConferenceStatusHandler from '@components/ConferenceStatusHandler';
+import ParticipantJoinedHandler from '@components/ParticipantJoinedHandler';
+import ParticipantLeftHandler from '@components/ParticipantLeftHandler';
+import ActiveParticipantsHandler from '@components/ActiveParticipantsHandler';
 
 export interface Props {}
 
@@ -37,6 +43,12 @@ export default class App extends Component<Props, State> {
             <VideoPresentationHandler />
             <MessageHandler />
             <InvitationHandler />
+            <ConferenceStatusHandler />
+            <ConferenceCreatedHandler />
+            <ConferenceEndedHandler />
+            <ParticipantJoinedHandler />
+            <ParticipantLeftHandler />
+            <ActiveParticipantsHandler />
           </DolbyIOProvider>
         </KeyboardAvoidingView>
       </GestureHandlerRootView>

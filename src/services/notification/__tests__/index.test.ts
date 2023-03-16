@@ -14,6 +14,28 @@ const testConference: Conference = {
 describe('NotificationService', () => {
   NotificationService._nativeEvents.addListener = jest.fn();
 
+  describe('subscribe()', () => {
+    it('should invoke subscribe method with correct arguments', () => {
+      NotificationService.subscribe([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+      expect(CommsAPINotificationServiceModule.subscribe).toHaveBeenCalledWith([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+    });
+  });
+
+  describe('unsubscribe()', () => {
+    it('should invoke unsubscribe method with correct arguments', () => {
+      NotificationService.unsubscribe([
+        { type: 'event', conferenceAlias: 'alias' },
+      ]);
+      expect(
+        CommsAPINotificationServiceModule.unsubscribe
+      ).toHaveBeenCalledWith([{ type: 'event', conferenceAlias: 'alias' }]);
+    });
+  });
+
   describe('invite()', () => {
     it('should invoke exported invite method with correct arguments', () => {
       NotificationService.invite(testConference, [{ info: {} }]);
@@ -40,6 +62,78 @@ describe('NotificationService', () => {
         NotificationService._nativeEvents.addListener
       ).toHaveBeenCalledWith(
         NotificationServiceEventNames.InvitationReceived,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onConferenceStatus()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceStatus event', () => {
+      NotificationService.onConferenceStatus(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceStatus,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onConferenceCreated()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceCreated event', () => {
+      NotificationService.onConferenceCreated(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceCreated,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onConferenceEnded()', () => {
+    it('should invoke NativeEvents.addListener with ConferenceEnded event', () => {
+      NotificationService.onConferenceEnded(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ConferenceEnded,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onParticipantJoined()', () => {
+    it('should invoke NativeEvents.addListener with ParticipantJoined event', () => {
+      NotificationService.onParticipantJoined(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ParticipantJoined,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onParticipantLeft()', () => {
+    it('should invoke NativeEvents.addListener with ParticipantLeft event', () => {
+      NotificationService.onParticipantLeft(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ParticipantLeft,
+        expect.any(Function)
+      );
+    });
+  });
+
+  describe('onActiveParticipnats()', () => {
+    it('should invoke NativeEvents.addListener with ActiveParticipants event', () => {
+      NotificationService.onActiveParticipants(() => {});
+      expect(
+        NotificationService._nativeEvents.addListener
+      ).toHaveBeenCalledWith(
+        NotificationServiceEventNames.ActiveParticipants,
         expect.any(Function)
       );
     });
