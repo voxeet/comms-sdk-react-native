@@ -30,10 +30,5 @@ jobs:
             ${{ runner.os }}-example-pods-
       - run: yarn
       - run: yarn documentation
-      - name: Update docs
-        uses: ./.github/actions/add-and-commit-9.1.1
-        with:
-          add: 'docs'
-          author_name: Dolby.io
-          author_email: hello@dolby.io
-          message: 'Documentation update'
+      - name: Ensure documentation is up to date
+        run: ./scripts/ensureDocsAreUpdated.sh
