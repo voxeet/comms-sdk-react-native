@@ -13,6 +13,14 @@ The SpatialAudioStyle enum defines how the spatial location is communicated betw
 | Disabled                  | True               | Rejected                          |
 | Disabled                  | False              | Success                           |
 
+## Table of contents
+
+### Enumeration Members
+
+- [INDIVIDUAL](internal.SpatialAudioStyle.md#individual)
+- [SHARED](internal.SpatialAudioStyle.md#shared)
+- [DISABLED](internal.SpatialAudioStyle.md#disabled)
+
 ## Enumeration Members
 
 ### INDIVIDUAL

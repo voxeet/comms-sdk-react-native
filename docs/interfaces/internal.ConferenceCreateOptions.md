@@ -4,6 +4,15 @@
 
 The ConferenceCreateOptions interface gathers information about a new conference.
 
+## Table of contents
+
+### Properties
+
+- [alias](internal.ConferenceCreateOptions.md#alias)
+- [params](internal.ConferenceCreateOptions.md#params)
+- [pinCode](internal.ConferenceCreateOptions.md#pincode)
+- [spatialAudioStyle](internal.ConferenceCreateOptions.md#spatialaudiostyle)
+
 ## Properties
 
 ### alias

@@ -4,6 +4,13 @@
 
 The ParticipantTypes enum gathers the possible types of conference participants.
 
+## Table of contents
+
+### Enumeration Members
+
+- [LISTENER](internal.ParticipantType.md#listener)
+- [USER](internal.ParticipantType.md#user)
+
 ## Enumeration Members
 
 ### LISTENER

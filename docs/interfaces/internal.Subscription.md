@@ -4,6 +4,13 @@
 
 The Subscription model is an interface for all subscription types.
 
+## Table of contents
+
+### Properties
+
+- [type](internal.Subscription.md#type)
+- [conferenceAlias](internal.Subscription.md#conferencealias)
+
 ## Properties
 
 ### type

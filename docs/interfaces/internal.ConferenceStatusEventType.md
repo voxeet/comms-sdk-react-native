@@ -4,6 +4,15 @@
 
 The ConferenceStatusEventType interface informs about the conference status.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.ConferenceStatusEventType.md#conferencealias)
+- [conferenceId](internal.ConferenceStatusEventType.md#conferenceid)
+- [live](internal.ConferenceStatusEventType.md#live)
+- [participants](internal.ConferenceStatusEventType.md#participants)
+
 ## Properties
 
 ### conferenceAlias

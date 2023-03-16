@@ -4,6 +4,13 @@
 
 The Codec enum gathers the available video codecs.
 
+## Table of contents
+
+### Enumeration Members
+
+- [H264](internal.Codec.md#h264)
+- [VP8](internal.Codec.md#vp8)
+
 ## Enumeration Members
 
 ### H264

@@ -4,6 +4,13 @@
 
 The ConferenceConstraints interface gathers information about the preferred conference constraints.
 
+## Table of contents
+
+### Properties
+
+- [audio](internal.ConferenceConstraints.md#audio)
+- [video](internal.ConferenceConstraints.md#video)
+
 ## Properties
 
 ### audio

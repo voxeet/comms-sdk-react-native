@@ -4,6 +4,19 @@
 
 The SessionService allows opening and closing sessions. Opening a session is mandatory before interacting with any service.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.SessionService.md#constructor)
+
+### Methods
+
+- [close](internal.SessionService.md#close)
+- [getParticipant](internal.SessionService.md#getparticipant)
+- [isOpen](internal.SessionService.md#isopen)
+- [open](internal.SessionService.md#open)
+
 ## Constructors
 
 ### constructor

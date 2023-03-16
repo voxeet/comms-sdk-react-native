@@ -4,6 +4,13 @@
 
 The ConferenceCreatedEventType interface gathers information about the received invitation.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.ConferenceCreatedEventType.md#conferencealias)
+- [conferenceId](internal.ConferenceCreatedEventType.md#conferenceid)
+
 ## Properties
 
 ### conferenceAlias

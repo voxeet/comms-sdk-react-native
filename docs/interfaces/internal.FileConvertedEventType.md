@@ -4,6 +4,12 @@
 
 The FileConvertedEventType interface gathers information about the converted file.
 
+## Table of contents
+
+### Properties
+
+- [fileConverted](internal.FileConvertedEventType.md#fileconverted)
+
 ## Properties
 
 ### fileConverted

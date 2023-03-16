@@ -24,6 +24,24 @@ The FilePresentationService allows presenting files during a conference. The Dol
 
 **10.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the end of the file presentation via the [onFilePresentationChange](#onfilepresentationchange) listener.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.FilePresentationService.md#constructor)
+
+### Methods
+
+- [convert](internal.FilePresentationService.md#convert)
+- [getCurrent](internal.FilePresentationService.md#getcurrent)
+- [getImage](internal.FilePresentationService.md#getimage)
+- [getThumbnail](internal.FilePresentationService.md#getthumbnail)
+- [setPage](internal.FilePresentationService.md#setpage)
+- [start](internal.FilePresentationService.md#start)
+- [stop](internal.FilePresentationService.md#stop)
+- [onFileConverted](internal.FilePresentationService.md#onfileconverted)
+- [onFilePresentationChange](internal.FilePresentationService.md#onfilepresentationchange)
+
 ## Constructors
 
 ### constructor

@@ -18,6 +18,14 @@ When using custom environment directions set in [setSpatialEnvironment](doc:rn-c
 
 When a direction contains rotations around more than one axis, the rotations are applied in a defined order: yaw, pitch, and then roll. With the standard environment, this corresponds to y, x, and then z. When using custom environment directions, the directions are always in the order of yaw/pitch/roll, but which (x,y,z) axis those correspond to is different.
 
+## Table of contents
+
+### Properties
+
+- [x](internal.SpatialDirection.md#x)
+- [y](internal.SpatialDirection.md#y)
+- [z](internal.SpatialDirection.md#z)
+
 ## Properties
 
 ### x

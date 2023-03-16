@@ -4,6 +4,14 @@
 
 The ParticipantLeftEventType interface gathers information about a participant who left a conference.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.ParticipantLeftEventType.md#conferencealias)
+- [conferenceId](internal.ParticipantLeftEventType.md#conferenceid)
+- [participant](internal.ParticipantLeftEventType.md#participant)
+
 ## Properties
 
 ### conferenceAlias

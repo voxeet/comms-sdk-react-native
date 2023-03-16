@@ -6,6 +6,17 @@ The RemoteAudio model allows the local participant to locally mute and unmute re
 
 This model is supported only in SDK 3.7 and later.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.RemoteAudio.md#constructor)
+
+### Methods
+
+- [start](internal.RemoteAudio.md#start)
+- [stop](internal.RemoteAudio.md#stop)
+
 ## Constructors
 
 ### constructor
