@@ -4,6 +4,14 @@
 
 The RTCPMode enum gathers the possible bitrate adaptation modes for video transmission.
 
+## Table of contents
+
+### Enumeration Members
+
+- [AVERAGE](internal.RTCPMode.md#average)
+- [BEST](internal.RTCPMode.md#best)
+- [WORST](internal.RTCPMode.md#worst)
+
 ## Enumeration Members
 
 ### AVERAGE

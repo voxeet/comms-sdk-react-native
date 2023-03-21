@@ -4,6 +4,16 @@
 
 The FileConverted interface gathers information about the converted file.
 
+## Table of contents
+
+### Properties
+
+- [id](internal.FileConverted.md#id)
+- [imageCount](internal.FileConverted.md#imagecount)
+- [name](internal.FileConverted.md#name)
+- [ownerId](internal.FileConverted.md#ownerid)
+- [size](internal.FileConverted.md#size)
+
 ## Properties
 
 ### id

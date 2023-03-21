@@ -4,6 +4,15 @@
 
 The ComfortNoiseLevel enum gathers the available comfort noise levels.
 
+## Table of contents
+
+### Enumeration Members
+
+- [Default](internal.ComfortNoiseLevel.md#default)
+- [Low](internal.ComfortNoiseLevel.md#low)
+- [Medium](internal.ComfortNoiseLevel.md#medium)
+- [Off](internal.ComfortNoiseLevel.md#off)
+
 ## Enumeration Members
 
 ### Default

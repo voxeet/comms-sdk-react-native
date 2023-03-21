@@ -6,6 +6,17 @@ The RemoteVideo model allows the local participant to locally mute and unmute re
 
 This model is supported only in SDK 3.7 and later.
 
+## Table of contents
+
+### Constructors
+
+- [constructor](internal.RemoteVideo.md#constructor)
+
+### Methods
+
+- [start](internal.RemoteVideo.md#start)
+- [stop](internal.RemoteVideo.md#stop)
+
 ## Constructors
 
 ### constructor

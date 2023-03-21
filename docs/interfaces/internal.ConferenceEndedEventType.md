@@ -4,6 +4,13 @@
 
 The ConferenceEndedEventType interface gathers information about the received invitation.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.ConferenceEndedEventType.md#conferencealias)
+- [conferenceId](internal.ConferenceEndedEventType.md#conferenceid)
+
 ## Properties
 
 ### conferenceAlias

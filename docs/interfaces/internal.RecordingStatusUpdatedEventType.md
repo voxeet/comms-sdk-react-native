@@ -4,6 +4,15 @@
 
 The RecordingStatusUpdated interface gathers information about the received invitation.
 
+## Table of contents
+
+### Properties
+
+- [recordingStatus](internal.RecordingStatusUpdatedEventType.md#recordingstatus)
+- [conferenceId](internal.RecordingStatusUpdatedEventType.md#conferenceid)
+- [participantId](internal.RecordingStatusUpdatedEventType.md#participantid)
+- [timestamp](internal.RecordingStatusUpdatedEventType.md#timestamp)
+
 ## Properties
 
 ### recordingStatus

@@ -4,6 +4,15 @@
 
 The InvitationReceivedEventType interface gathers information about the received invitation.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAlias](internal.InvitationReceivedEventType.md#conferencealias)
+- [conferenceId](internal.InvitationReceivedEventType.md#conferenceid)
+- [conferenceToken](internal.InvitationReceivedEventType.md#conferencetoken)
+- [participant](internal.InvitationReceivedEventType.md#participant)
+
 ## Properties
 
 ### conferenceAlias

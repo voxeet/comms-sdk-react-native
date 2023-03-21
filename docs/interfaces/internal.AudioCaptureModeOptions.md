@@ -6,6 +6,13 @@ The AudioCaptureModeOptions model allows selecting the preferred audio capture m
 
 This model is available in SDK 3.7 and later.
 
+## Table of contents
+
+### Properties
+
+- [mode](internal.AudioCaptureModeOptions.md#mode)
+- [noiseReduction](internal.AudioCaptureModeOptions.md#noisereduction)
+
 ## Properties
 
 ### mode

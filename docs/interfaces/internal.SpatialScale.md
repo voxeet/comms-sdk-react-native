@@ -6,6 +6,14 @@ The SpatialScale model defines how to convert units from the application's coord
 
 **Note**: The scale must have a value greater than zero. The default is (1,1,1).
 
+## Table of contents
+
+### Properties
+
+- [x](internal.SpatialScale.md#x)
+- [y](internal.SpatialScale.md#y)
+- [z](internal.SpatialScale.md#z)
+
 ## Properties
 
 ### x

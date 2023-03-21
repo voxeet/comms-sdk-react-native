@@ -4,6 +4,13 @@
 
 The ConferenceReplayOptions interface gathers properties responsible for replaying conferences.
 
+## Table of contents
+
+### Properties
+
+- [conferenceAccessToken](internal.ConferenceReplayOptions.md#conferenceaccesstoken)
+- [offset](internal.ConferenceReplayOptions.md#offset)
+
 ## Properties
 
 ### conferenceAccessToken
