@@ -48,6 +48,7 @@ import io.dolby.sdk.comms.reactnative.view.VideoViewManager
 class RNCommsAPISdkPackage : ReactPackage {
 
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+    VoxeetSDK.registerComponentVersion(BuildConfig.COMPONENT_NAME, BuildConfig.SDK_VERSION)
     val filePresentationHolder = FilePresentationHolder()
     val videoPresentationHolder = VideoPresentationHolder()
 
