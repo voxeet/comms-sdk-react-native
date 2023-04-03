@@ -25,6 +25,8 @@ import {
   SubscriptionType
 } from '../../../../src/services/notification/models';
 
+import { PermissionsAndroid } from 'react-native';
+
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
   me?: Participant;
@@ -174,11 +176,11 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   }, []);
   const createAndJoin = async (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => {
     try {
+      await checkPermissions();
       const conferenceParams = {
         liveRecording: liveRecording,
         rtcpMode: RTCPMode.AVERAGE,
         ttl: 0,
-        videoCodec: Codec.H264,
         dolbyVoice: true,
         spatialAudioStyle: spatialAudioStyle,
       };
@@ -187,7 +189,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         params: conferenceParams,
       };
 
-      CommsAPI.notification.subscribe(
+      await CommsAPI.notification.subscribe(
         [
           SubscriptionType.ActiveParticipants,
           SubscriptionType.ConferenceCreated,
@@ -333,6 +335,63 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       Alert.alert('Conference not left', e);
     }
   };
+
+  const checkPermissions = async () => {
+    try {
+        const cameraGranted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+                title: "Camera Permission",
+                message:"This App needs access to your camera",
+                buttonNeutral: "Ask Me Later",
+                buttonNegative: "Cancel",
+                buttonPositive: "OK"
+            }
+        );
+
+        if (cameraGranted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can use the camera");
+        } else {
+            console.log("Camera permission denied");
+        }
+
+        const micGranted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+            {
+                title: "Microphone Permission",
+                message: "This App needs access to your microphone so you can talk to people.",
+                buttonNeutral: "Ask Me Later",
+                buttonNegative: "Cancel",
+                buttonPositive: "OK"
+            }
+        );
+
+        if (micGranted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can use the microphone");
+        } else {
+            console.log("Camera permission denied");
+        }
+        console.log(`get bluetooth permision: ${PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT}`);
+        const bluetoothConnectGranted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+          {
+              title: "Bluetooth connect",
+              message: "This App neeed access for bluetooth and bluetooth connect permission is required since Android 33 API.",
+              buttonNeutral: "Ask Me Later",
+              buttonNegative: "Cancel",
+              buttonPositive: "OK"
+          }
+      );
+
+      if (bluetoothConnectGranted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("You can use the blueetooth");
+      } else {
+          console.log("Bluetooth connect permission denied");
+      }
+    } catch (error) {
+        console.warn(error);
+    }
+  }
 
   const contextValue = {
     isInitialized,
