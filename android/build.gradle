@@ -29,6 +29,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField "String", "SDK_VERSION", COMMS_SDK_VERSION
+            buildConfigField "String", "COMPONENT_NAME", COMPONENT_NAME
+        }
+
+        debug {
+            buildConfigField "String", "SDK_VERSION", COMMS_SDK_VERSION
+            buildConfigField "String", "COMPONENT_NAME", COMPONENT_NAME
         }
     }
     lintOptions {
