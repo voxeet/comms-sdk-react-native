@@ -6,6 +6,9 @@ private enum EventKeys: String, CaseIterable {
 	case refreshToken = "EVENT_SDK_TOKEN_REFRESH"
 }
 
+private let componentName = "react-native-sdk"
+private let sdkVersion = "3.8.0"
+
 @objc(RNCommsAPIModule)
 public class CommsAPIModule: ReactEmitter {
 
@@ -86,7 +89,7 @@ public class CommsAPIModule: ReactEmitter {
 	}
 
 	private func setupSDK() {
-		VoxeetSDK.shared.telemetry.platform = .reactNative
+		VoxeetSDK.shared._registerComponentVersion(name: componentName, version: sdkVersion)
 
 		if let appGroup = Bundle.appGroup {
 			VoxeetSDK.shared.appGroup = appGroup
