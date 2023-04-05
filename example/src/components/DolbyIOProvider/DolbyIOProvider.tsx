@@ -25,7 +25,7 @@ import {
   SubscriptionType
 } from '../../../../src/services/notification/models';
 
-import { PermissionsAndroid } from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
@@ -337,6 +337,9 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   };
 
   const checkPermissions = async () => {
+    if (Platform.OS == "ios") {
+      return;
+    }
     try {
         const cameraGranted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.CAMERA,
