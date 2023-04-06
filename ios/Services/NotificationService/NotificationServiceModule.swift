@@ -38,10 +38,20 @@ public class NotificationServiceModule: ReactEmitter {
     ///   - resolve: returns on success
     ///   - reject: returns error on failure
     @objc(subscribe:resolver:rejecter:)
-    public func subscribe(events: [[String: Any]],
-                          resolve: @escaping RCTPromiseResolveBlock,
-                          reject: @escaping RCTPromiseRejectBlock) {
-        VoxeetSDK.shared.notification.subscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    public func subscribe(
+        events: [[String: Any]],
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        VoxeetSDK.shared.notification.subscribe(
+            subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() }
+        ) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+        }
     }
 
     /// Unsubscribes from the specified notifications.
@@ -50,10 +60,20 @@ public class NotificationServiceModule: ReactEmitter {
     ///   - resolve: returns on success
     ///   - reject: returns error on failure
     @objc(unsubscribe:resolver:rejecter:)
-    public func unsubscribe(events: [[String: Any]],
-                            resolve: @escaping RCTPromiseResolveBlock,
-                            reject: @escaping RCTPromiseRejectBlock) {
-        VoxeetSDK.shared.notification.unsubscribe(subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() })
+    public func unsubscribe(
+        events: [[String: Any]],
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        VoxeetSDK.shared.notification.unsubscribe(
+            subscriptions: events.compactMap { SubscriptionDTO.create(with:$0)?.subscription() }
+        ) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+        }
     }
 
 	/// Notifies conference participants about a conference invitation.
