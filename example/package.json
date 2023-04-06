@@ -1,7 +1,7 @@
 {
   "name": "react-native-comms-sdk-example",
   "description": "Example app for react-native-dolbyio-sdk",
-  "version": "3.8.0-beta.1",
+  "version": "3.8.0+1",
   "license": "MIT",
   "private": true,
   "scripts": {
