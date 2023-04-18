@@ -14,8 +14,11 @@ const ActiveParticipantsHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onActiveParticipants(onActiveParticipants);
+    var unsubscribe = CommsAPI.notification.onActiveParticipants(onActiveParticipants);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;
