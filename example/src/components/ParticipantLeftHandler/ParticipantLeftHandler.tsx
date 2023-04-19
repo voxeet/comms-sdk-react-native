@@ -19,8 +19,10 @@ const ParticipantLeftHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onParticipantLeft(onParticipantLeft);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    var unsubscribe = CommsAPI.notification.onParticipantLeft(onParticipantLeft);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;
