@@ -4,7 +4,7 @@ import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { ConferenceEndedEventType } from '../../../../src/services/notification/events';
 
-const ConferenceCreatedHandler: React.FC = () => {
+const ConferenceEndedHandler: React.FC = () => {
   const onConferenceEnded = (data: ConferenceEndedEventType) => {
     console.log(
       'CONFERENCE ENDED EVENT DATA: \n',
@@ -14,11 +14,13 @@ const ConferenceCreatedHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onConferenceEnded(onConferenceEnded);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    var unsubscribe = CommsAPI.notification.onConferenceEnded(onConferenceEnded);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;
 };
 
-export default ConferenceCreatedHandler;
+export default ConferenceEndedHandler;

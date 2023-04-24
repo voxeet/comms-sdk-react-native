@@ -1,4 +1,4 @@
-import { NativeEventEmitter } from 'react-native';
+import { NativeEventEmitter, NativeModule } from 'react-native';
 
 import type { VideoViewEventMap } from '../VideoView/events';
 import type { CommsAPIEventMap } from '../events';
@@ -21,9 +21,9 @@ interface NativeEventType
     VideoViewEventMap {}
 
 export default class NativeEvents {
-  private _nativeEventEmitter: any = undefined;
+  private _nativeEventEmitter: NativeEventEmitter;
 
-  constructor(module: any) {
+  constructor(module: NativeModule) {
     this._nativeEventEmitter = new NativeEventEmitter(module);
   }
 
@@ -31,9 +31,22 @@ export default class NativeEvents {
     type: K,
     listener: (event: NativeEventType[K], type?: K) => void
   ): UnregisterListener {
-    return this?._nativeEventEmitter?.addListener(
+    let emitterSubscription = this?._nativeEventEmitter?.addListener(
       type,
       (event: NativeEventType[K]) => listener(event, type)
     );
+
+    // This is a work around to keep backward compability.
+    // Previously we were returning a object that had a remove method rather
+    // than just returnign function, as per documentation. We are now returning a function
+    // that can be called to unsubscribe but to preserve backward compability we add
+    // remove method to the function.
+    function unregisterListener() {
+      emitterSubscription.remove();
+    }
+    unregisterListener.remove = function () {
+      emitterSubscription.remove();
+    };
+    return unregisterListener;
   }
 }

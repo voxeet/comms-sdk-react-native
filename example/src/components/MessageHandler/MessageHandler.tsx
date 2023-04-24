@@ -13,7 +13,10 @@ const MessageHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.command.onMessageReceived(onMessageReceived);
+    var unsubscribe = CommsAPI.command.onMessageReceived(onMessageReceived);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;

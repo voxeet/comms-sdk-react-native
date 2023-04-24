@@ -33,8 +33,10 @@ const InvitationHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onInvitationReceived(onInvitationReceived);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    var unsubscribe = CommsAPI.notification.onInvitationReceived(onInvitationReceived);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;

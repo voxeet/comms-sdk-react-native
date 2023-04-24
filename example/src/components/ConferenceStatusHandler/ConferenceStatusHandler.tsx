@@ -19,8 +19,10 @@ const ConferenceStatusHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onConferenceStatus(onConferenceStatus);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    var unsubscribe = CommsAPI.notification.onConferenceStatus(onConferenceStatus);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;

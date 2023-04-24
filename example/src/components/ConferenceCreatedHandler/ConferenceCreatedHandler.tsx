@@ -15,8 +15,10 @@ const ConferenceCreatedHandler: React.FC = () => {
   
 
   useEffect(() => {
-    return CommsAPI.notification.onConferenceCreated(onConferenceCreated);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    var unsubscribe = CommsAPI.notification.onConferenceCreated(onConferenceCreated);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return null;

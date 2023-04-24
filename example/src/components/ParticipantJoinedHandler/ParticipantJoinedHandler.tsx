@@ -19,7 +19,10 @@ const ParticipantJoinedHandler: React.FC = () => {
   };
 
   useEffect(() => {
-    return CommsAPI.notification.onParticipantJoined(onParticipantJoined);
+    var unsubscribe = CommsAPI.notification.onParticipantJoined(onParticipantJoined);
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
