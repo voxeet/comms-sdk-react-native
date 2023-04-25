@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
+
+import type { Models } from '@dolbyio/comms-sdk-react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { MessageReceivedEventType } from '../../../../src/services/command/events';
@@ -13,14 +16,9 @@ import type {
   PermissionsUpdatedEventType,
 } from '../../../../src/services/conference/events';
 import type {
-  ConferenceStatus,
   UnsubscribeFunction,
 } from '../../../../src/services/conference/models';
 import { Codec, RTCPMode, SpatialAudioStyle } from '../../../../src/services/conference/models';
-import type {
-  Conference,
-  Participant,
-} from '../../../../src/services/conference/models';
 import {
   SubscriptionType
 } from '../../../../src/services/notification/models';
@@ -29,10 +27,10 @@ import { Platform, PermissionsAndroid } from 'react-native';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
-  me?: Participant;
-  conference?: Conference;
-  conferenceStatus?: ConferenceStatus;
-  participants: Participant[];
+  me?: Models.Participant;
+  conference?: Models.Conference;
+  conferenceStatus?: Models.ConferenceStatus;
+  participants: Models.Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
@@ -63,14 +61,14 @@ type DolbyProps = {
 
 const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [me, setMe] = useState<Participant | undefined>(undefined);
-  const [conference, setConference] = useState<Conference | undefined>(
+  const [me, setMe] = useState<Models.Participant | undefined>(undefined);
+  const [conference, setConference] = useState<Models.Conference | undefined>(
     undefined
   );
   const [conferenceStatus, setConferenceStatus] = useState<
-    ConferenceStatus | undefined
+    Models.ConferenceStatus | undefined
   >(undefined);
-  const [participants, setParticipants] = useState<Map<string, Participant>>(
+  const [participants, setParticipants] = useState<Map<string, Models.Participant>>(
     new Map()
   );
 
@@ -301,7 +299,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       );
       if (prevConferenceString) {
         const replayedConference = await CommsAPI.conference.replay(
-          JSON.parse(prevConferenceString) as Conference
+          JSON.parse(prevConferenceString) as Models.Conference
         );
         console.log(JSON.stringify(replayedConference, null, 2));
       }
