@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { Models } from '@dolbyio/comms-sdk-react-native';
+import type { Participant, Conference, ConferenceStatus } from '@dolbyio/comms-sdk-react-native/models';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,10 +27,10 @@ import { Platform, PermissionsAndroid } from 'react-native';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
-  me?: Models.Participant;
-  conference?: Models.Conference;
-  conferenceStatus?: Models.ConferenceStatus;
-  participants: Models.Participant[];
+  me?: Participant;
+  conference?: Conference;
+  conferenceStatus?: ConferenceStatus;
+  participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
@@ -61,14 +61,14 @@ type DolbyProps = {
 
 const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [me, setMe] = useState<Models.Participant | undefined>(undefined);
-  const [conference, setConference] = useState<Models.Conference | undefined>(
+  const [me, setMe] = useState<Participant | undefined>(undefined);
+  const [conference, setConference] = useState<Conference | undefined>(
     undefined
   );
   const [conferenceStatus, setConferenceStatus] = useState<
-    Models.ConferenceStatus | undefined
+    ConferenceStatus | undefined
   >(undefined);
-  const [participants, setParticipants] = useState<Map<string, Models.Participant>>(
+  const [participants, setParticipants] = useState<Map<string, Participant>>(
     new Map()
   );
 
@@ -299,7 +299,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       );
       if (prevConferenceString) {
         const replayedConference = await CommsAPI.conference.replay(
-          JSON.parse(prevConferenceString) as Models.Conference
+          JSON.parse(prevConferenceString) as Conference
         );
         console.log(JSON.stringify(replayedConference, null, 2));
       }
