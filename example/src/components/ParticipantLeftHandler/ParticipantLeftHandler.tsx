@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { ParticipantLeftEventType } from '../../../../src/services/notification/events';
+import type { ParticipantLeftEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const ParticipantLeftHandler: React.FC = () => {
   const onParticipantLeft = (data: ParticipantLeftEventType) => {

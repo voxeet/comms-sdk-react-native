@@ -7,21 +7,21 @@ import type { Participant, Conference, ConferenceStatus } from '@dolbyio/comms-s
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { MessageReceivedEventType } from '../../../../src/services/command/events';
-import type { RecordingStatusUpdatedEventType } from '../../../../src/services/recording/events';
+import type { MessageReceivedEventType } from '@dolbyio/comms-sdk-react-native/models';
+import type { RecordingStatusUpdatedEventType } from '@dolbyio/comms-sdk-react-native/models';
 import type {
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
   StreamChangedEventType,
   PermissionsUpdatedEventType,
-} from '../../../../src/services/conference/events';
+} from '@dolbyio/comms-sdk-react-native/models';
 import type {
   UnsubscribeFunction,
-} from '../../../../src/services/conference/models';
-import { Codec, RTCPMode, SpatialAudioStyle } from '../../../../src/services/conference/models';
+} from '@dolbyio/comms-sdk-react-native/models';
+import { Codec, RTCPMode, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 import {
   SubscriptionType
-} from '../../../../src/services/notification/models';
+} from '@dolbyio/comms-sdk-react-native/models';
 
 import { Platform, PermissionsAndroid } from 'react-native';
 

@@ -68,10 +68,10 @@ import {
   stateOfVideoPresentation,
 } from '@utils/videoPresentation.tester';
 
-import type { Conference } from '../../../../src/services/conference/models';
-import { AudioProcessingOptions, VideoForwardingStrategy } from '../../../../src/services/conference/models';
+import type { Conference } from '@dolbyio/comms-sdk-react-native/models';
+import { AudioProcessingOptions, VideoForwardingStrategy } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
-import { AudioCaptureMode, ComfortNoiseLevel, NoiseReductionLevel } from '../../../../src/services/audio/models';
+import { AudioCaptureMode, ComfortNoiseLevel, NoiseReductionLevel } from '@dolbyio/comms-sdk-react-native/models';
 import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const ConferenceScreenBottomSheet = () => {

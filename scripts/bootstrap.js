@@ -27,12 +27,8 @@ function createModelsModule() {
 
   console.log(`Generated models package.json at ${modelPackageJsonPath}`);
 }
-
-console.log("dirname: " + __dirname);
 const root = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
-console.log("args: " + args);
-console.log("process : " + process.cwd());
 const options = {
   cwd: process.cwd(),
   env: process.env,

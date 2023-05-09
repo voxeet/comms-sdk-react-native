@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { MessageReceivedEventType } from '../../../../src/services/command/events';
+import type { MessageReceivedEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const MessageHandler: React.FC = () => {
   const onMessageReceived = (data: MessageReceivedEventType) => {

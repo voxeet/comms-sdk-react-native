@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { InvitationReceivedEventType } from '../../../../src/services/notification/events';
+import type { InvitationReceivedEventType } from '@dolbyio/comms-sdk-react-native/models';
 import { accept, decline } from '../../utils/notification.tester';
 
 const InvitationHandler: React.FC = () => {

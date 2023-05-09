@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { ConferenceStatusEventType } from '../../../../src/services/notification/events';
+import type { ConferenceStatusEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const ConferenceStatusHandler: React.FC = () => {
   const onConferenceStatus = (data: ConferenceStatusEventType) => {
