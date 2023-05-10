@@ -9,6 +9,7 @@ module.exports = {
       {
         extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
+          "@dolbyio/comms-sdk-react-native/models": path.join(__dirname, '..', "src", "models"),
           [pak.name]: path.join(__dirname, '..', pak.source),
           '@assets': './src/assets',
           '@components': './src/components',

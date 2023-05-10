@@ -3,23 +3,24 @@ import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { Participant, Conference, ConferenceStatus } from '@dolbyio/comms-sdk-react-native/models';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { MessageReceivedEventType } from '@dolbyio/comms-sdk-react-native/models';
-import type { RecordingStatusUpdatedEventType } from '@dolbyio/comms-sdk-react-native/models';
-import type {
+import type { 
+  Participant, 
+  Conference, 
+  ConferenceStatus,
+  MessageReceivedEventType, 
+  RecordingStatusUpdatedEventType,
   ConferenceStatusUpdatedEventType,
   ParticipantChangedEventType,
   StreamChangedEventType,
   PermissionsUpdatedEventType,
-} from '@dolbyio/comms-sdk-react-native/models';
-import type {
   UnsubscribeFunction,
 } from '@dolbyio/comms-sdk-react-native/models';
-import { Codec, RTCPMode, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
-import {
+import { 
+  Codec, 
+  RTCPMode, 
+  SpatialAudioStyle,
   SubscriptionType
 } from '@dolbyio/comms-sdk-react-native/models';
 

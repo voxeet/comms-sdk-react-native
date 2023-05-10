@@ -43,8 +43,8 @@ if (process.cwd() !== root || args.length) {
   // In this case, forward the command to `yarn`
   result = child_process.spawnSync('yarn', args, options);
 } else {
-  // If `yarn` is run without arguments, perform bootstrap
   createModelsModule();
+  // If `yarn` is run without arguments, perform bootstrap
   result = child_process.spawnSync('yarn', ['bootstrap'], options);
 }
 
