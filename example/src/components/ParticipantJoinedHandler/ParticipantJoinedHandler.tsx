@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { ParticipantJoinedEventType } from '../../../../src/services/notification/events';
+import type { ParticipantJoinedEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const ParticipantJoinedHandler: React.FC = () => {
   const onParticipantJoined = (data: ParticipantJoinedEventType) => {

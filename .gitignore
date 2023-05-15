@@ -63,6 +63,9 @@ lib/
 # generated for licenses
 .hook_commit
 
+# generated models module
+/models/
+
 # .env file
 .env
 

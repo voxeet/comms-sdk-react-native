@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@dolbyio/comms-sdk-react-native/models": ["./src/models"],
       "@dolbyio/comms-sdk-react-native": ["./src/index"],
       "@assets/*": ["./example/src/assets/*"],
       "@components/*": ["./example/src/components/*"],

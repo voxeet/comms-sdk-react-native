@@ -6,8 +6,8 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { updatePermissions } from '@utils/conference.tester';
 
-import type { Participant } from '../../../../src/services/conference/models';
-import { ConferencePermission } from '../../../../src/services/conference/models';
+import type { Participant } from '@dolbyio/comms-sdk-react-native/models';
+import { ConferencePermission } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 
 type UpdatePermissionsModalProps = {

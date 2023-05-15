@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { ConferenceEndedEventType } from '../../../../src/services/notification/events';
+import type { ConferenceEndedEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const ConferenceEndedHandler: React.FC = () => {
   const onConferenceEnded = (data: ConferenceEndedEventType) => {

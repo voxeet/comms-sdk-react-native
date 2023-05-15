@@ -8,7 +8,7 @@ import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { SpatialAudioStyle } from '../../../../src/services/conference/models';
+import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 
 type CreateConferenceButtonProps = {
   conferenceAlias: string;
