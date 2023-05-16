@@ -27,6 +27,13 @@ extension AudioCaptureMode: ReactModelMappable {
         return self.noiseReduction.toReactModelValue()
     }
 
+    var voiceFontString: String? {
+        guard let self = self as? StandardAudioCaptureMode else {
+            return nil
+        }
+        return self.voiceFont.toReactModelValue()
+    }
+
     static func create(with dictionary: [String: Any]) -> AudioCaptureMode? {
         guard let mode: String = dictionary.value(for: Keys.mode) else {
             return nil
@@ -36,7 +43,8 @@ extension AudioCaptureMode: ReactModelMappable {
             guard let noiseReduction = StandardAudioCaptureMode.NoiseReduction.fromReactModel(value: dictionary.value(for: Keys.noiseReduction)) else {
                 return nil
             }
-            return standard(noiseReduction: noiseReduction)
+            let voiceFont = VoiceFont.fromReactModel(value: dictionary.value(for: Keys.voiceFont)) ?? .none
+            return standard(noiseReduction: noiseReduction, voiceFont: voiceFont)
         case .unprocessed:
             return unprocessed()
         default:
@@ -48,11 +56,12 @@ extension AudioCaptureMode: ReactModelMappable {
         return [
             Keys.mode: mode?.rawValue ?? NSNull(),
             Keys.noiseReduction: noiseReductionString ?? NSNull(),
+            Keys.voiceFont: voiceFontString ?? NSNull()
         ].mapKeysToRawValue()
     }
 }
 
 // MARK: - ReactModel Keys
 private enum Keys: String {
-    case mode, noiseReduction
+    case mode, noiseReduction, voiceFont
 }
