@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 
-import type { Participant } from '../../../../src/services/conference/models';
+import type { Participant } from '@dolbyio/comms-sdk-react-native/models';
 import Video from './Video';
 
 const GRID = [

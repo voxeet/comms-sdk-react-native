@@ -17,7 +17,7 @@ import {
   setSpatialPosition,
 } from '@utils/conference.tester';
 
-import type { Participant } from '../../../../src/services/conference/models';
+import type { Participant } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
 import { SpatialConfigModalTypeModel } from './SpatialConfigModal';

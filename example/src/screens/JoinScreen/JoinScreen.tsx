@@ -14,7 +14,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { SpatialAudioStyle } from '../../../../src/services/conference/models';
+import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 
 const chance = new Chance();
 

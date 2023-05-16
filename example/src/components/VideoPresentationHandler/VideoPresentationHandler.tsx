@@ -6,7 +6,7 @@ import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import type {
   VideoPresentationEventType,
   VideoPresentationEventNames,
-} from '../../../../src/services/videoPresentation/events';
+} from '@dolbyio/comms-sdk-react-native/models';
 
 const VideoPresentationHandler: React.FC = () => {
   const videoPresentationStopped = () => {

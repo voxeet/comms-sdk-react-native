@@ -16,8 +16,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { mute, unmute } from '@utils/conference.tester';
 
-import { ParticipantStatus } from '../../../../src/services/conference/models';
-import type { Participant } from '../../../../src/services/conference/models';
+import { ParticipantStatus, Participant } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import MessageModal from './MessageModal';

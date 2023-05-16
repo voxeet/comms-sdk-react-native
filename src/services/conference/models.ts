@@ -215,9 +215,11 @@ export enum ParticipantStatus {
 /** The ParticipantTypes enum gathers the possible types of conference participants. */
 export enum ParticipantType {
   /** A participant who cannot send any audio or video stream during a conference. */
-  LISTENER = 'listener',
+  LISTENER = 'LISTENER',
   /** A participant who can send and receive audio and video during the conference. */
-  USER = 'user',
+  USER = 'USER',
+  /** Any other type that is unsupported in react-native. */
+  UNKNOWN = 'UNKNOWN',
 }
 
 /** The RTCPMode enum gathers the possible bitrate adaptation modes for video transmission. */

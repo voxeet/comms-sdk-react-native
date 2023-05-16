@@ -7,8 +7,8 @@ import CommsAPI from '@dolbyio/comms-sdk-react-native';
 import type {
   FileConvertedEventType,
   FilePresentationChangedEventType,
-} from '../../../../src/services/filePresentation/events';
-import { FilePresentationServiceEventNames } from '../../../../src/services/filePresentation/events';
+} from '@dolbyio/comms-sdk-react-native/models';
+import { FilePresentationServiceEventNames } from '@dolbyio/comms-sdk-react-native/models';
 
 const FilePresentationHandler: React.FC = () => {
   const { resetFilePresentation, startFilePresentation } = useContext(

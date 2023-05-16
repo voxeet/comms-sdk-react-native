@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
-import type { ConferenceCreatedEventType } from '../../../../src/services/notification/events';
+import type { ConferenceCreatedEventType } from '@dolbyio/comms-sdk-react-native/models';
 
 const ConferenceCreatedHandler: React.FC = () => {
   const onConferenceCreated = (data: ConferenceCreatedEventType) => {

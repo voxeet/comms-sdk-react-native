@@ -15,7 +15,7 @@ import type {
   SpatialDirection,
   SpatialScale,
   SpatialPosition,
-} from '../../../../src/services/conference/models';
+} from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 
 export enum SpatialConfigModalTypeModel {

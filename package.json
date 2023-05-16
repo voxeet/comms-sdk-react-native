@@ -1,6 +1,6 @@
 {
   "name": "@dolbyio/comms-sdk-react-native",
-  "version": "3.8.1-beta.1",
+  "version": "3.8.1-beta.2",
   "description": "Dolby.io iAPI SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -12,6 +12,7 @@
     "android",
     "ios",
     "src",
+    "models",
     "react-native-comms-sdk.podspec",
     "!android/build",
     "!ios/build"
