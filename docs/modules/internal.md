@@ -24,6 +24,7 @@
 - [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
 - [AudioCaptureMode](../enums/internal.AudioCaptureMode.md)
 - [NoiseReductionLevel](../enums/internal.NoiseReductionLevel.md)
+- [VoiceFont](../enums/internal.VoiceFont.md)
 - [ConferenceStatus](../enums/internal.ConferenceStatus.md)
 - [ParticipantStatus](../enums/internal.ParticipantStatus.md)
 - [ParticipantType](../enums/internal.ParticipantType.md)

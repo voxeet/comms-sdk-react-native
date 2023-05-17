@@ -11,7 +11,7 @@ export enum ComfortNoiseLevel {
 }
 
 /**
- * The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and the preferred noise reduction level.
+ * The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and additional options for the selected mode.
  *
  * This model is available in SDK 3.7 and later.
  */
@@ -20,6 +20,8 @@ export interface AudioCaptureModeOptions {
   mode: AudioCaptureMode;
   /** The selected noise reduction level. */
   noiseReduction?: NoiseReductionLevel;
+  /** The preferred voice modification effect that you can use to change the local participant's voice in real time.*/
+  voiceFont?: VoiceFont;
 }
 
 /** The AudioCaptureMode model allows enabling and disabling audio processing for the local participant.
@@ -47,4 +49,25 @@ export enum NoiseReductionLevel {
    * Removes stationary background sounds, such as the sound of a computer fan, air conditioning, or microphone hum, from audio transmitted to a conference. In this mode, non-stationary sounds are transmitted to give participants full context of other participants' environments and create a more realistic audio experience. If you want to send only voice to a conference, use the High level.
    */
   Low = 'LOW',
+}
+
+/**
+ * The VoiceFont model gathers the possible voice modification effects that you can use to change the local participant's voice in real time.
+ *
+ * This model is available in SDK 3.9 and later.
+ */
+export enum VoiceFont {
+  None = 'NONE',
+  Masculine = 'MASCULINE',
+  Feminine = 'FEMININE',
+  Helium = 'HELIUM',
+  DarkModulation = 'DARK_MODULATION',
+  BrokenRobot = 'BROKEN_ROBOT',
+  Interference = 'INTERFERENCE',
+  Abyss = 'ABYSS',
+  Wobble = 'WOBBLE',
+  StarshipCaptain = 'STARSHIP_CAPTAIN"',
+  NervousRobot = 'NERVOUS_ROBOT',
+  Swarm = 'SWARM',
+  AmRadio = 'AM_RADIO',
 }

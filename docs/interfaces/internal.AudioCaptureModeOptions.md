@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).AudioCaptureModeOptions
 
-The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and the preferred noise reduction level.
+The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and additional options for the selected mode.
 
 This model is available in SDK 3.7 and later.
 
@@ -12,6 +12,7 @@ This model is available in SDK 3.7 and later.
 
 - [mode](internal.AudioCaptureModeOptions.md#mode)
 - [noiseReduction](internal.AudioCaptureModeOptions.md#noisereduction)
+- [voiceFont](internal.AudioCaptureModeOptions.md#voicefont)
 
 ## Properties
 
@@ -28,3 +29,11 @@ ___
 • `Optional` **noiseReduction**: [`NoiseReductionLevel`](../enums/internal.NoiseReductionLevel.md)
 
 The selected noise reduction level.
+
+___
+
+### voiceFont
+
+• `Optional` **voiceFont**: [`VoiceFont`](../enums/internal.VoiceFont.md)
+
+The preferred voice modification effect that you can use to change the local participant's voice in real time.
