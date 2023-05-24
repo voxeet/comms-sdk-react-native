@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
-import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { ParticipantJoinedEventType } from '@dolbyio/comms-sdk-react-native/models';
+import Logger from '@utils/Logger/Logger';
 
 const ParticipantJoinedHandler: React.FC = () => {
   const onParticipantJoined = (data: ParticipantJoinedEventType) => {
-    console.log(
+    Logger.log(
       'PARTICIPANT JOINED EVENT DATA: \n',
       JSON.stringify(data, null, 2)
-    );
-
-    Alert.alert(
-      'PARTICIPANT JOINED EVENT DATA',
-      JSON.stringify(data, null, 2),
     );
   };
 
