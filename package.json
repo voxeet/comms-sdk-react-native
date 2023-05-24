@@ -1,6 +1,6 @@
 {
   "name": "@dolbyio/comms-sdk-react-native",
-  "version": "3.8.1-beta.2",
+  "version": "3.8.1-beta.3",
   "description": "Dolby.io iAPI SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -25,7 +25,7 @@
     "lint:fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
     "prettier:check": "prettier --check \"src/**/*.{js,ts,tsx}\"\n",
     "prettier:fix": "prettier --write \"src/**/*.{js,ts,tsx}\"\n",
-    "prepare": "bob build",
+    "prepare": "bob build && cd scripts  && node expose_models.js",
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example/ios && pod install",
