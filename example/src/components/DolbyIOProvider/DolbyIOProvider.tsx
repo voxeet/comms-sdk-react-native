@@ -308,14 +308,19 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       Alert.alert('Conference not replayed', e.toString());
     }
   };
+
+  const leaveActions = () => {
+    setConference(undefined);
+    setParticipants(new Map());
+  };
+
   const leave = async (leaveRoom: boolean) => {
     try {
       const conferenceLeaveOptions = {
         leaveRoom,
       };
       await CommsAPI.conference.leave(conferenceLeaveOptions);
-      setConference(undefined);
-      setParticipants(new Map());
+      leaveActions();
       if (leaveRoom) {
         setMe(undefined);
       }
@@ -331,7 +336,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
       );
     } catch (e: any) {
-      Alert.alert('Conference not left', e);
+      Alert.alert('Conference leave with errors', e);
+      leaveActions();
     }
   };
 
