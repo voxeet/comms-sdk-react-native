@@ -82,7 +82,7 @@ ___
 
 ### StarshipCaptain
 
-• **StarshipCaptain** = ``"STARSHIP_CAPTAIN\""``
+• **StarshipCaptain** = ``"STARSHIP_CAPTAIN"``
 
 ___
 

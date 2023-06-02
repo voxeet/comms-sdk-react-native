@@ -66,7 +66,7 @@ export enum VoiceFont {
   Interference = 'INTERFERENCE',
   Abyss = 'ABYSS',
   Wobble = 'WOBBLE',
-  StarshipCaptain = 'STARSHIP_CAPTAIN"',
+  StarshipCaptain = 'STARSHIP_CAPTAIN',
   NervousRobot = 'NERVOUS_ROBOT',
   Swarm = 'SWARM',
   AmRadio = 'AM_RADIO',
