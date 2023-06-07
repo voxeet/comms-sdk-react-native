@@ -103,30 +103,9 @@ export class CommsAPI {
   }
 
   /**
-   * Initializes the SDK with an access token that is provided by the customer backend communicating with Dolby.io servers. The token allows securing the App key and App secret.
-   * The following diagram presents the authentication flow:
-   * ```
-   * Client          Customer Server       Dolby Server
-   * |                    |                    |
-   * |  Get Access Token  |  /oauth2/token (1) |
-   * |------------------->|------------------->|
-   * |    Access Token    |    Access Token    |
-   * |<-------------------|<-------------------|
-   * |  initializeToken(accessToken, callback) |
-   * |---------------------------------------->|
-   * ```
-   * Where (1) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
-   *
-   * The access token has a limited period of validity and needs to be refreshed for security reasons. In such case, the SDK calls the callback provided to initializeToken. The callback must return a promise containing the refreshed access token by calling the customer backend, as presented in the following diagram:
-   *
-   * ```
-   * Client          Customer Server       Dolby Server
-   * |      callback      |  /oauth2/token (2) |
-   * |------------------->|------------------->|
-   * |    Access Token    |    Access Token    |
-   * |<-------------------|<-------------------|
-   * ```
-   * Where (2) is the REST API endpoint that is available on Dolby.io servers and documented on the developer portal.
+   * Initializes the SDK with the client access token provided by the Dolby.io platform. The client access token protects customer's conferences from unauthorized access and can be generated only by the Dolby.io platform via an application's authentication server and the [client access token](ref:get-client-access-token) request.
+   * The method requires providing two parameters - the **client access token** received from the Dolby.io platform and the **refresh access token** callback. The callback must be a function that requests a new token and returns a promise containing the refreshed client access token when the token is incorrect or needs to be refreshed. The refresh token callback uses an **isExpired** boolean parameter to inform whether the currently used client access token is expired.
+   * For more information, see the [Accessing Dolby.io Platform](doc:guides-accessing-dolbyio-platform) guide.
    * @param accessToken  The access token provided by the customer's backend.
    * @param refreshAccessToken  A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired.
    */
