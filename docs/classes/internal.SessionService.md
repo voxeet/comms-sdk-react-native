@@ -16,6 +16,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 - [getParticipant](internal.SessionService.md#getparticipant)
 - [isOpen](internal.SessionService.md#isopen)
 - [open](internal.SessionService.md#open)
+- [updateParticipantInfo](internal.SessionService.md#updateparticipantinfo)
 
 ## Constructors
 
@@ -72,6 +73,25 @@ Opens a new session.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `participantInfo` | [`ParticipantInfo`](../interfaces/internal.ParticipantInfo.md) | The optional information about the local participant. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
+
+### updateParticipantInfo
+
+▸ **updateParticipantInfo**(`name`, `avatarUrl`): `Promise`<`void`\>
+
+Update actual participant name and avatarUrl.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `String` |
+| `avatarUrl` | `String` |
 
 #### Returns
 
