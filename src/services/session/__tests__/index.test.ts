@@ -39,4 +39,13 @@ describe('SessionService', () => {
       expect(CommsAPISessionServiceModule.getParticipant).toHaveBeenCalled();
     });
   });
+
+  describe('updateParticipantInfo()', () => {
+    it('should invoke exported method with correct arguments', () => {
+      SessionService.updateParticipantInfo('John', 'avatarUrl');
+      expect(
+        CommsAPISessionServiceModule.updateParticipantInfo
+      ).toHaveBeenCalledWith('John', 'avatarUrl');
+    });
+  });
 });

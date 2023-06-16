@@ -46,6 +46,16 @@ export class SessionService {
       externalId,
     });
   }
+
+  /**
+   * Update actual participant name and avatarUrl.
+   */
+  public async updateParticipantInfo(
+    name: String,
+    avatarUrl: String
+  ): Promise<void> {
+    return this._nativeModule.updateParticipantInfo(name, avatarUrl);
+  }
 }
 
 export default new SessionService();

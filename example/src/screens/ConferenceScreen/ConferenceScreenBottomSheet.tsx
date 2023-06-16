@@ -57,7 +57,7 @@ import {
   getCurrentRecording, // startRecording,
   // stopRecording,
 } from '@utils/recording.tester';
-import { getCurrentUser } from '@utils/session.tester';
+import { getCurrentUser, updateParticipantInfo } from '@utils/session.tester';
 import {
   pauseVideoPresentation,
   startVideoPresentation,
@@ -535,6 +535,12 @@ const ConferenceScreenBottomSheet = () => {
             </Text>
           </Space>
           <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Update participant info"
+              onPress={updateParticipantInfo}
+            />
             <Button
               size="small"
               color="dark"
