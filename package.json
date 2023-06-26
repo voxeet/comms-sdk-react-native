@@ -1,6 +1,6 @@
 {
   "name": "@dolbyio/comms-sdk-react-native",
-  "version": "3.8.1-beta.3",
+  "version": "3.8.1",
   "description": "Dolby.io iAPI SDK for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -73,7 +73,7 @@
     "react": "18.2.0",
     "react-native": "0.71.3",
     "react-native-builder-bob": "^0.18.0",
-    "release-it": "^14.2.2",
+    "release-it": "^15.10.5",
     "typedoc": "^0.23.4",
     "typedoc-plugin-markdown": "^3.14.0",
     "typedoc-plugin-missing-exports": "^0.23.0",

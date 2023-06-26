@@ -35,7 +35,8 @@ export class SessionService {
   }
 
   /**
-   * Opens a new session.
+   * Opens a new session. If you initialize the SDK with a [client access token](ref:get-client-access-token), provide the external ID in the REST API request, not in the open method. Otherwise, you may expect the platform to either ignore the external ID provided in the open method or receive an error if the provided ID is different from the one provided in the REST API request.
+   * **Note**: The external ID field in this API has been deprecated; now you can provide the external ID only when requesting a [client access token](ref:get-client-access-token). If you provide to this API an external ID that is different from the one in your client access token, it will be rejected.
    * @param participantInfo The optional information about the local participant.
    */
   public async open(participantInfo: ParticipantInfo = {}): Promise<void> {
