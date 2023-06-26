@@ -458,7 +458,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.6.0)
-  - VoxeetSDK (3.8.0)
+  - VoxeetSDK (3.8.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -697,7 +697,7 @@ SPEC CHECKSUMS:
   RNPermissions: 314155ed6ce65237e7bd9fb6239219cce83228d3
   RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  VoxeetSDK: b2efa65652c4070ec4474b25ab0b8e5b2a393ad2
+  VoxeetSDK: 164aa55773192104d4a57a6952507722330d15f1
   Yoga: 5ed1699acbba8863755998a4245daa200ff3817b
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
