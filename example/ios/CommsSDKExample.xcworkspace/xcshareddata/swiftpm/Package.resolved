@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "VoxeetScreenShareKit",
-        "repositoryURL": "https://github.com/voxeet/voxeet-screensharekit-ios",
-        "state": {
-          "branch": null,
-          "revision": "008551948ad395988ea8c7fcda20a63aac15e845",
-          "version": "1.0.10"
-        }
+  "pins" : [
+    {
+      "identity" : "voxeet-screensharekit-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/voxeet/voxeet-screensharekit-ios",
+      "state" : {
+        "revision" : "008551948ad395988ea8c7fcda20a63aac15e845",
+        "version" : "1.0.10"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
