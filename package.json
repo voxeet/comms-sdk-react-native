@@ -25,12 +25,10 @@
     "lint:fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
     "prettier:check": "prettier --check \"src/**/*.{js,ts,tsx}\"\n",
     "prettier:fix": "prettier --write \"src/**/*.{js,ts,tsx}\"\n",
-    "prepare": "bob build && cd scripts  && node expose_models.js",
-    "release": "release-it",
-    "example": "yarn --cwd example",
+    "build": "bob build && cd scripts && node expose_models.js",
+    "example": "yarn && yarn build && yarn --cwd example && yarn pods && yarn --cwd example",
     "pods": "cd example/ios && pod install",
     "pods:x86_64": "cd example/ios && arch -x86_64 pod install",
-    "bootstrap": "yarn example && yarn && yarn pods",
     "documentation": "rm -rf docs && typedoc --disableSources --sort source-order",
     "documentation:convert": "yarn documentation && rm -rf scripts/docs && cd scripts && node convertDocs.js",
     "documentation:append": "git add docs",
@@ -48,13 +46,9 @@
     "url": "https://dolby.io/issues"
   },
   "homepage": "https://dolby.io#readme",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^3.2.0",
-    "@release-it/conventional-changelog": "^2.0.0",
     "@trivago/prettier-plugin-sort-imports": "^2.0.4",
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.28",
@@ -73,7 +67,6 @@
     "react": "18.2.0",
     "react-native": "0.71.3",
     "react-native-builder-bob": "^0.18.0",
-    "release-it": "^15.10.5",
     "typedoc": "^0.23.4",
     "typedoc-plugin-markdown": "^3.14.0",
     "typedoc-plugin-missing-exports": "^0.23.0",
@@ -109,23 +102,6 @@
     "extends": [
       "jira"
     ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    }
   },
   "eslintConfig": {
     "root": true,
