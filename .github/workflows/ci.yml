@@ -24,6 +24,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-example-pods-
       - run: yarn install
+      - run: yarn build
       - run: yarn lint
   test:
     runs-on: macos-11
@@ -48,4 +49,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-example-pods-
       - run: yarn install
+      - run: yarn build
       - run: yarn test
