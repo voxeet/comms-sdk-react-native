@@ -20,11 +20,25 @@ import ParticipantJoinedHandler from '@components/ParticipantJoinedHandler';
 import ParticipantLeftHandler from '@components/ParticipantLeftHandler';
 import ActiveParticipantsHandler from '@components/ActiveParticipantsHandler';
 
+import FloatingButton from '@ui/FloatingButton';
+import LoggerView from '@utils/Logger/LoggerView';
+
 export interface Props {}
 
-export interface State {}
+export interface State {
+  isOverlayVisible: boolean;
+  isOverlayTouchable: boolean;
+}
 
 export default class App extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      isOverlayVisible: false,
+      isOverlayTouchable: true
+    };
+  }
   render() {
     return (
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -37,6 +51,11 @@ export default class App extends Component<Props, State> {
             <RecordingProvider>
               <FilePresentationProvider>
                 <Main />
+                <LoggerView isVisible={this.state.isOverlayVisible} isTouchable={this.state.isOverlayTouchable} />
+                <FloatingButton 
+                onPress={() => {this.setState({isOverlayVisible: !this.state.isOverlayVisible})}}
+                onLongPress={() => {this.setState({isOverlayTouchable: !this.state.isOverlayTouchable})}}
+                />
                 <FilePresentationHandler />
               </FilePresentationProvider>
             </RecordingProvider>

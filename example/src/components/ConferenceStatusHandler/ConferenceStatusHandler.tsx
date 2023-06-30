@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
-import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { ConferenceStatusEventType } from '@dolbyio/comms-sdk-react-native/models';
+import Logger from '@utils/Logger/Logger';
 
 const ConferenceStatusHandler: React.FC = () => {
   const onConferenceStatus = (data: ConferenceStatusEventType) => {
-    console.log(
-      'CONFERENCE STATUS EVENT DATA: \n',
+    Logger.log(
+      'CONFERENCE STATUS EVENT DATA:',
       JSON.stringify(data, null, 2)
-    );
-
-    Alert.alert(
-      'CONFERENCE STATUS EVENT DATA',
-      JSON.stringify(data, null, 2),
     );
   };
 

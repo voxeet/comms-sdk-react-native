@@ -65,7 +65,7 @@ export const setComfortNoiseLevel = async (noiseLevel: ComfortNoiseLevel) => {
 export const getAudioCaptureMode = async () => {
   try {
     const captureMode = await CommsAPI.audio.getLocal().getCaptureMode();
-    Alert.alert('Capture mode:', `${captureMode.mode} ${captureMode.noiseReduction?.toString()}`);
+    Alert.alert('Capture mode:', `${captureMode.mode} ${captureMode.noiseReduction?.toString()} ${captureMode.voiceFont}`);
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('getAudioCaptureMode error', msg);
@@ -75,7 +75,11 @@ export const getAudioCaptureMode = async () => {
 export const setAudioCaptureMode = async (audioCaptureModeOptions: AudioCaptureModeOptions) => {
   try {
     await CommsAPI.audio.getLocal().setCaptureMode(audioCaptureModeOptions);
-    Alert.alert('setAudioCaptureMode success');
+    if (audioCaptureModeOptions.voiceFont != null) {
+      Alert.alert('Voice Font updated:', `${audioCaptureModeOptions.voiceFont}`);
+    } else {
+      Alert.alert('setAudioCaptureMode success');
+    }
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('setAudioCaptureMode error', msg);

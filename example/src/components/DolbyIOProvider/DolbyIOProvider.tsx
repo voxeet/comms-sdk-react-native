@@ -25,6 +25,7 @@ import {
 } from '@dolbyio/comms-sdk-react-native/models';
 
 import { Platform, PermissionsAndroid } from 'react-native';
+import Logger from '@utils/Logger/Logger';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
@@ -74,15 +75,15 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   );
 
   const onConferenceStatusChange = (data: ConferenceStatusUpdatedEventType) => {
-    console.log(
-      'CONFERENCE STATUS CHANGE EVENT DATA: \n',
+    Logger.log(
+      'CONFERENCE STATUS CHANGE EVENT DATA:',
       JSON.stringify(data, null, 2)
     );
     setConferenceStatus(data.status);
   };
 
   const onParticipantsChange = (data: ParticipantChangedEventType) => {
-    console.log(
+    Logger.log(
       'PARTICIPANT CHANGE EVENT DATA: \n',
       JSON.stringify(data, null, 2)
     );
@@ -93,15 +94,14 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   };
 
   const onRecordingStatusChange = (data: RecordingStatusUpdatedEventType) => {
-    console.log(
+    Logger.log(
       'RECORDING STATUS CHANGED EVENT: \n',
       JSON.stringify(data, null, 2)
     );
-    Alert.alert('Recording Status changed:', JSON.stringify(data, null, 2));
   };
 
   const onStreamsChange = (data: StreamChangedEventType) => {
-    console.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
+    Logger.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
     setParticipants((participants) => {
       let p = participants.get(data.participant.id);
       if (p) {
@@ -114,21 +114,16 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   };
 
   const onPermissionsChange = (data: PermissionsUpdatedEventType) => {
-    console.log(
+    Logger.log(
       'PERMISSIONS UPDATED EVENT DATA: \n',
       JSON.stringify(data, null, 2)
     );
-    Alert.alert('Permissions updated event');
   };
 
   const onMessageReceived = (data: MessageReceivedEventType) => {
-    console.log(
+    Logger.log(
       'MESSAGE RECEIVED EVENT DATA: \n',
       JSON.stringify(data, null, 2)
-    );
-    Alert.alert(
-      'MESSAGE RECEIVED EVENT DATA:',
-      JSON.stringify(data.message, null, 2)
     );
   };
 
@@ -302,20 +297,25 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         const replayedConference = await CommsAPI.conference.replay(
           JSON.parse(prevConferenceString) as Conference
         );
-        console.log(JSON.stringify(replayedConference, null, 2));
+        Logger.log(JSON.stringify(replayedConference, null, 2));
       }
     } catch (e: any) {
       Alert.alert('Conference not replayed', e.toString());
     }
   };
+
+  const leaveActions = () => {
+    setConference(undefined);
+    setParticipants(new Map());
+  };
+
   const leave = async (leaveRoom: boolean) => {
     try {
       const conferenceLeaveOptions = {
         leaveRoom,
       };
       await CommsAPI.conference.leave(conferenceLeaveOptions);
-      setConference(undefined);
-      setParticipants(new Map());
+      leaveActions();
       if (leaveRoom) {
         setMe(undefined);
       }
@@ -331,7 +331,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
       );
     } catch (e: any) {
-      Alert.alert('Conference not left', e);
+      Alert.alert('Conference leave with errors', e);
+      leaveActions();
     }
   };
 
@@ -352,9 +353,9 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         );
 
         if (cameraGranted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("You can use the camera");
+            Logger.log("You can use the camera");
         } else {
-            console.log("Camera permission denied");
+            Logger.log("Camera permission denied");
         }
 
         const micGranted = await PermissionsAndroid.request(
@@ -369,11 +370,11 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         );
 
         if (micGranted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("You can use the microphone");
+            Logger.log("You can use the microphone");
         } else {
-            console.log("Camera permission denied");
+            Logger.log("Camera permission denied");
         }
-        console.log(`get bluetooth permision: ${PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT}`);
+        Logger.log(`get bluetooth permision: ${PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT}`);
         const bluetoothConnectGranted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
           {
@@ -386,9 +387,9 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       );
 
       if (bluetoothConnectGranted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log("You can use the blueetooth");
+          Logger.log("You can use the blueetooth");
       } else {
-          console.log("Bluetooth connect permission denied");
+          Logger.log("Bluetooth connect permission denied");
       }
     } catch (error) {
         console.warn(error);
