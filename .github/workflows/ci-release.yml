@@ -17,9 +17,15 @@ jobs:
         node-version: 16
         registry-url: 'https://registry.npmjs.org'
         always-auth: true
+        cache: 'yarn'
     - name: install dependencies
       run: |
-          npm install
+          yarn
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
+    - name: build
+      run: |
+          yarn build
       env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
     - name: publish
