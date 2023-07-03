@@ -26,13 +26,17 @@
     "prettier:check": "prettier --check \"src/**/*.{js,ts,tsx}\"\n",
     "prettier:fix": "prettier --write \"src/**/*.{js,ts,tsx}\"\n",
     "build": "bob build && cd scripts && node expose_models.js",
-    "example": "yarn && yarn build && yarn --cwd example && yarn pods && yarn --cwd example",
+    "build:all": "yarn && yarn build && yarn --cwd example && yarn pods && yarn typescript",
+    "example": "yarn build:all && yarn --cwd example",
     "pods": "cd example/ios && pod install",
     "pods:x86_64": "cd example/ios && arch -x86_64 pod install",
     "documentation": "rm -rf docs && typedoc --disableSources --sort source-order",
     "documentation:convert": "yarn documentation && rm -rf scripts/docs && cd scripts && node convertDocs.js",
     "documentation:append": "git add docs",
-    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies"
+    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --exclude ./example --onlyDirectDependencies",
+    "clean": "rm -rf lib && rm -rf models && rm -rf node_modules",
+    "clean:all": "yarn clean && yarn --cwd example clean"
+
   },
   "keywords": [
     "react-native",
