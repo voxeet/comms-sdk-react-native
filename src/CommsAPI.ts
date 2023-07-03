@@ -32,6 +32,8 @@ export class CommsAPI {
 
   /**
    * Retrieves the AudioService instance that allows changing audio settings for the local and remote participants.
+   *
+   * This API is available in SDK 3.7 and later.
    */
   audio = AudioService;
 
@@ -76,6 +78,8 @@ export class CommsAPI {
 
   /**
    * Retrieves the VideoService instance that allows enabling and disabling video for the local and remote participants.
+   *
+   * This API is available in SDK 3.7 and later.
    */
   video = VideoService;
 
@@ -104,7 +108,9 @@ export class CommsAPI {
 
   /**
    * Initializes the SDK with the client access token provided by the Dolby.io platform. The client access token protects customer's conferences from unauthorized access and can be generated only by the Dolby.io platform via an application's authentication server and the [client access token](ref:get-client-access-token) request.
+   *
    * The method requires providing two parameters - the **client access token** received from the Dolby.io platform and the **refresh access token** callback. The callback must be a function that requests a new token and returns a promise containing the refreshed client access token when the token is incorrect or needs to be refreshed. The refresh token callback uses an **isExpired** boolean parameter to inform whether the currently used client access token is expired.
+   *
    * For more information, see the [Accessing Dolby.io Platform](doc:guides-accessing-dolbyio-platform) guide.
    * @param accessToken  The access token provided by the customer's backend.
    * @param refreshAccessToken  A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the isExpired boolean parameter to check if the previous token has expired.

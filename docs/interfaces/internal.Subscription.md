@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).Subscription
 
-The Subscription model is an interface for all subscription types.
+The Subscription model is an interface for all subscription types. The model is supported in SDK 3.8 and later.
 
 ## Table of contents
 
