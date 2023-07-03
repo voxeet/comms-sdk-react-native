@@ -24,7 +24,7 @@ export interface InvitationReceivedEventType {
   participant: Participant;
 }
 
-/** The ConferenceStatusEventType interface informs about the conference status. */
+/** The ConferenceStatusEventType interface informs about the conference status. The model is supported in SDK 3.8 and later. */
 export interface ConferenceStatusEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -36,7 +36,7 @@ export interface ConferenceStatusEventType {
   participants: [Participant];
 }
 
-/** The ConferenceCreatedEventType interface gathers information about the received invitation. */
+/** The ConferenceCreatedEventType interface gathers information about the received invitation. The model is supported in SDK 3.8 and later. */
 export interface ConferenceCreatedEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -44,7 +44,7 @@ export interface ConferenceCreatedEventType {
   conferenceId: string;
 }
 
-/** The ConferenceEndedEventType interface gathers information about the received invitation. */
+/** The ConferenceEndedEventType interface gathers information about the received invitation. The model is supported in SDK 3.8 and later. */
 export interface ConferenceEndedEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -52,7 +52,7 @@ export interface ConferenceEndedEventType {
   conferenceId: string;
 }
 
-/** The ParticipantJoinedEventType interface gathers information about a participant who joined a conference. */
+/** The ParticipantJoinedEventType interface gathers information about a participant who joined a conference. The model is supported in SDK 3.8 and later. */
 export interface ParticipantJoinedEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -62,7 +62,7 @@ export interface ParticipantJoinedEventType {
   participant: Participant;
 }
 
-/** The ParticipantLeftEventType interface gathers information about a participant who left a conference. */
+/** The ParticipantLeftEventType interface gathers information about a participant who left a conference. The model is supported in SDK 3.8 and later. */
 export interface ParticipantLeftEventType {
   /** The conference alias. */
   conferenceAlias: string;
@@ -72,6 +72,7 @@ export interface ParticipantLeftEventType {
   participant: Participant;
 }
 
+/** The ActiveParticipantsEventType model gathers information about participants who joined a specific conference. The model is supported in SDK 3.8 and later. */
 export interface ActiveParticipantsEventType {
   /** The conference alias. */
   conferenceAlias: string;

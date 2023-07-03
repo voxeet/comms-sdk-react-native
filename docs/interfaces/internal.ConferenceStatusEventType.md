@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ConferenceStatusEventType
 
-The ConferenceStatusEventType interface informs about the conference status.
+The ConferenceStatusEventType interface informs about the conference status. The model is supported in SDK 3.8 and later.
 
 ## Table of contents
 

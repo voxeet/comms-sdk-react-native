@@ -2,6 +2,8 @@
 
 [internal](../modules/internal.md).ActiveParticipantsEventType
 
+The ActiveParticipantsEventType model gathers information about participants who joined a specific conference. The model is supported in SDK 3.8 and later.
+
 ## Table of contents
 
 ### Properties

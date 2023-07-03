@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
-import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
 
 import type { ParticipantLeftEventType } from '@dolbyio/comms-sdk-react-native/models';
+import Logger from '@utils/Logger/Logger';
 
 const ParticipantLeftHandler: React.FC = () => {
   const onParticipantLeft = (data: ParticipantLeftEventType) => {
-    console.log(
+    Logger.log(
       'PARTICIPANT LEFT EVENT DATA: \n',
       JSON.stringify(data, null, 2)
-    );
-
-    Alert.alert(
-      'PARTICIPANT LEFT EVENT DATA',
-      JSON.stringify(data, null, 2),
     );
   };
 

@@ -21,7 +21,13 @@ export class LocalAudio {
   }
 
   /**
-   * Sets the local participant's audio capture mode in Dolby Voice conferences.
+   * Sets the local participant's audio capture mode. The following modes are available:
+   *
+   * - Standard: The default mode that optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode is supported in SDK 3.7 and later.
+   *
+   * - Unprocessed: Reduces latency that comes from audio processing and prevents over-processing audio in some scenarios. The mode is supported in SDK 3.7 and later.
+   *
+   * Note: In SDK 3.8 and prior releases, this API is supported only in Dolby Voice conferences.
    */
   public async setCaptureMode(options: AudioCaptureModeOptions): Promise<void> {
     return this._localAudio.setCaptureMode(options);

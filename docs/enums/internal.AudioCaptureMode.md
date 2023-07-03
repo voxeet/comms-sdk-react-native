@@ -2,9 +2,7 @@
 
 [internal](../modules/internal.md).AudioCaptureMode
 
-The AudioCaptureMode model allows enabling and disabling audio processing for the local participant.
-
-By default, the Dolby Voice audio processing algorithm is enabled in Dolby Voice conferences to improve voice communication. However, audio processing lowers the quality of non-voice audio. To send non-voice audio, such as music, disable audio processing by using the Unprocessed mode.
+The AudioCaptureMode model allows selecting the preferred mode for capturing the local participant's audio.
 
 This model is available in SDK 3.7 and later.
 
@@ -21,7 +19,7 @@ This model is available in SDK 3.7 and later.
 
 • **Standard** = ``"STANDARD"``
 
-Enables audio processing to improve voice quality.
+The default mode aimed at enhancing speech to create a conversation-focused conference environment. This mode optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode is supported in SDK 3.7 and later.
 
 ___
 
@@ -29,4 +27,4 @@ ___
 
 • **Unprocessed** = ``"UNPROCESSED"``
 
-Disables audio processing to allow transmitting non-voice audio to a conference.
+Disables audio processing to allow transmitting non-voice audio to a conference. The mode is supported in SDK 3.7 and later.

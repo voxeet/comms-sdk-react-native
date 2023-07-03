@@ -25,6 +25,28 @@ public class SessionServiceModule: NSObject {
 		}
 	}
 
+    /// Update actual participant name and avatarUrl
+    /// - Parameters:
+    ///   - name: The preferred participant name.
+    ///   - avatarUrl: The preferred avatar URL.
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(updateParticipantInfo:avatarUrl:resolver:rejecter:)
+    public func updateParticipantInfo(
+        name: String,
+        avatarUrl: String,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        VoxeetSDK.shared.session.updateParticipantInfo(name: name, avatarUrl: avatarUrl) { error in
+            guard let error = error else {
+                resolve(NSNull())
+                return
+            }
+            error.send(with: reject)
+        }
+    }
+
 	/// Closes the current session.
 	/// Close a session is like a logout, it will stop the socket and stop sending VoIP push notification.
 	/// - Parameters:

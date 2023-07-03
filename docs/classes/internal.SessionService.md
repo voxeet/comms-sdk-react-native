@@ -16,6 +16,7 @@ The SessionService allows opening and closing sessions. Opening a session is man
 - [getParticipant](internal.SessionService.md#getparticipant)
 - [isOpen](internal.SessionService.md#isopen)
 - [open](internal.SessionService.md#open)
+- [updateParticipantInfo](internal.SessionService.md#updateparticipantinfo)
 
 ## Constructors
 
@@ -73,6 +74,25 @@ Opens a new session. If you initialize the SDK with a [client access token](ref:
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `participantInfo` | [`ParticipantInfo`](../interfaces/internal.ParticipantInfo.md) | The optional information about the local participant. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
+
+### updateParticipantInfo
+
+▸ **updateParticipantInfo**(`name`, `avatarUrl`): `Promise`<`void`\>
+
+Updates the local participant's name and avatar URL. This method is supported in SDK 3.10 and later.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `String` |
+| `avatarUrl` | `String` |
 
 #### Returns
 

@@ -47,6 +47,16 @@ export class SessionService {
       externalId,
     });
   }
+
+  /**
+   * Updates the local participant's name and avatar URL. This method is supported in SDK 3.10 and later.
+   */
+  public async updateParticipantInfo(
+    name: String,
+    avatarUrl: String
+  ): Promise<void> {
+    return this._nativeModule.updateParticipantInfo(name, avatarUrl);
+  }
 }
 
 export default new SessionService();

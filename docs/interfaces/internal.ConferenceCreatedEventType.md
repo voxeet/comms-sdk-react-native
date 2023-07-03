@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ConferenceCreatedEventType
 
-The ConferenceCreatedEventType interface gathers information about the received invitation.
+The ConferenceCreatedEventType interface gathers information about the received invitation. The model is supported in SDK 3.8 and later.
 
 ## Table of contents
 

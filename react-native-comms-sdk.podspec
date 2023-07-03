@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "VoxeetSDK", '~> 3.8.0'
+  s.dependency "VoxeetSDK", '~> 3.10.0'
 end

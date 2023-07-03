@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ParticipantJoinedEventType
 
-The ParticipantJoinedEventType interface gathers information about a participant who joined a conference.
+The ParticipantJoinedEventType interface gathers information about a participant who joined a conference. The model is supported in SDK 3.8 and later.
 
 ## Table of contents
 

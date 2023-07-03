@@ -57,7 +57,7 @@ import {
   getCurrentRecording, // startRecording,
   // stopRecording,
 } from '@utils/recording.tester';
-import { getCurrentUser } from '@utils/session.tester';
+import { getCurrentUser, updateParticipantInfo } from '@utils/session.tester';
 import {
   pauseVideoPresentation,
   startVideoPresentation,
@@ -68,7 +68,7 @@ import {
   stateOfVideoPresentation,
 } from '@utils/videoPresentation.tester';
 
-import type { Conference } from '@dolbyio/comms-sdk-react-native/models';
+import { Conference, VoiceFont } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import { 
   AudioProcessingOptions, 
@@ -157,6 +157,67 @@ const ConferenceScreenBottomSheet = () => {
       {
         text: 'setAudioCaptureMode - Unprocessed',
         onClick: () => setAudioCaptureMode({ mode: AudioCaptureMode.Unprocessed }),
+      },
+    ];
+
+  const voiceFontAction: (voiceFont: VoiceFont) => () => void = (voiceFont) => { 
+    return  () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low, voiceFont: voiceFont }) 
+  };
+  const voiceFontOptions: Array<{
+    text: string;
+    onClick: () => void;
+  }> = [
+      {
+        text: 'None',
+        onClick: voiceFontAction(VoiceFont.None),
+      },
+      {
+        text: 'Masculine',
+        onClick: voiceFontAction(VoiceFont.Masculine),
+      },
+      {
+        text: 'Feminine',
+        onClick: voiceFontAction(VoiceFont.Feminine),
+      },
+      {
+        text: 'Helium',
+        onClick: voiceFontAction(VoiceFont.Helium),
+      },
+      {
+        text: 'Dark modulation',
+        onClick: voiceFontAction(VoiceFont.DarkModulation),
+      },
+      {
+        text: 'Broken robot',
+        onClick: voiceFontAction(VoiceFont.BrokenRobot),
+      },
+      {
+        text: 'Interference',
+        onClick: voiceFontAction(VoiceFont.Interference),
+      },
+      {
+        text: 'Abyss',
+        onClick: voiceFontAction(VoiceFont.Abyss),
+      },
+      {
+        text: 'Wobble',
+        onClick: voiceFontAction(VoiceFont.Wobble),
+      },
+      {
+        text: 'Starship captain',
+        onClick: voiceFontAction(VoiceFont.StarshipCaptain),
+      },
+      {
+        text: 'Nervous robot',
+        onClick: voiceFontAction(VoiceFont.NervousRobot),
+      },
+      {
+        text: 'Swarm',
+        onClick: voiceFontAction(VoiceFont.Swarm),
+      },
+      {
+        text: 'AM radio',
+        onClick: voiceFontAction(VoiceFont.AmRadio),
       },
     ];
 
@@ -283,6 +344,18 @@ const ConferenceScreenBottomSheet = () => {
               Audio service
             </Text>
           </Space>
+          <Button
+              size="small"
+              color="dark"
+              text="Start local audio"
+              onPress={() => startLocalAudio()}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="Stop local audio"
+              onPress={() => stopLocalAudio()}
+            />
           <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
@@ -318,19 +391,26 @@ const ConferenceScreenBottomSheet = () => {
                 />
               );
             })}
-            <Button
-              size="small"
-              color="dark"
-              text="Start local audio"
-              onPress={() => startLocalAudio()}
-            />
-            <Button
-              size="small"
-              color="dark"
-              text="Stop local audio"
-              onPress={() => stopLocalAudio()}
-            />
           </Space>
+          <Space mb="xs">
+            <Text size="s" color={COLORS.BLACK}>
+              Voice Font
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            {voiceFontOptions.map((option) => {
+                return (
+                  <Button
+                    key={option.text}
+                    size="small"
+                    color="dark"
+                    text={option.text}
+                    onPress={option.onClick}
+                  />
+                );
+              })}
+          </Space>
+          
           <Space mb="xs">
             <Text size="s" color={COLORS.BLACK}>
               Video service
@@ -455,6 +535,12 @@ const ConferenceScreenBottomSheet = () => {
             </Text>
           </Space>
           <Space mb="s" style={styles.actionButtons}>
+            <Button
+              size="small"
+              color="dark"
+              text="Update participant info"
+              onPress={updateParticipantInfo}
+            />
             <Button
               size="small"
               color="dark"

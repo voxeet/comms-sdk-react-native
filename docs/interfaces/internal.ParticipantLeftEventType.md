@@ -2,7 +2,7 @@
 
 [internal](../modules/internal.md).ParticipantLeftEventType
 
-The ParticipantLeftEventType interface gathers information about a participant who left a conference.
+The ParticipantLeftEventType interface gathers information about a participant who left a conference. The model is supported in SDK 3.8 and later.
 
 ## Table of contents
 

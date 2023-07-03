@@ -36,7 +36,7 @@ The NotificationService allows inviting participants to a conference and subscri
 
 ▸ **subscribe**(`events`): `Promise`<`void`\>
 
-Subscribes to the specified notifications.
+Subscribes to the specified notifications. This method is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -54,7 +54,7 @@ ___
 
 ▸ **unsubscribe**(`events`): `Promise`<`void`\>
 
-Unsubscribes from the specified notifications.
+Unsubscribes from the specified notifications. This method is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **onConferenceStatus**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the conference status event.
+Adds a listener to the conference status event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **onConferenceCreated**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the conference created event.
+Adds a listener to the conference created event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -169,7 +169,7 @@ ___
 
 ▸ **onConferenceEnded**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the conference ended event.
+Adds a listener to the conference ended event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **onParticipantJoined**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the participant joined event.
+Adds a listener to the participant joined event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **onParticipantLeft**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the participant left event.
+Adds a listener to the participant left event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 
@@ -229,7 +229,7 @@ ___
 
 ▸ **onActiveParticipants**(`handler`): [`UnsubscribeFunction`](../modules/internal.md#unsubscribefunction)
 
-Adds a listener to the participant active event.
+Adds a listener to the participant active event. This API is supported in SDK 3.8 and later.
 
 #### Parameters
 

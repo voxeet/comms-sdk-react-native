@@ -10,3 +10,12 @@ export const getCurrentUser = async () => {
     Alert.alert('Error', e.toString());
   }
 };
+
+export const updateParticipantInfo = async () => {
+  try {
+    await CommsAPI.session.updateParticipantInfo('John', 'url');
+    Alert.alert('Update participant information success');
+  } catch (e: any) {
+    Alert.alert('Update participant information error', e.toString());
+  }
+};

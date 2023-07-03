@@ -87,4 +87,20 @@ class RNSessionServiceModule(
       .promise(sessionService.isOpen)
       .forward(promise)
   }
+
+  /**
+   * Updates the local participant's name and avatar URL.
+   * This method is supported in SDK 3.9 and later.
+   *
+   * @param name The preferred participant name.
+   * @param avatarUrl The preferred avatar URL.
+   * @param promise returns null
+   */
+  @ReactMethod
+  fun updateParticipantInfo(name: String, avatarUrl: String, promise: Promise) {
+    sessionService
+      .update(name, avatarUrl)
+      .rejectIfFalse { "Update participant operation failed" }
+      .forward(promise)
+  }
 }

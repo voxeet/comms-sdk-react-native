@@ -47,6 +47,7 @@ jest.mock('react-native', () => {
     close: jest.fn(),
     isOpen: jest.fn(),
     getParticipant: jest.fn(),
+    updateParticipantInfo: jest.fn(),
   };
   RN.NativeModules.CommsAPINotificationServiceModule = {
     subscribe: jest.fn(),
