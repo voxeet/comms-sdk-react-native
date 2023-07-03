@@ -85,7 +85,7 @@ ___
 
 ▸ **updateParticipantInfo**(`name`, `avatarUrl`): `Promise`<`void`\>
 
-Update actual participant name and avatarUrl.
+Updates the local participant's name and avatar URL. This method is supported in SDK 3.10 and later.
 
 #### Parameters
 
