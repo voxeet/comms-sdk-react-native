@@ -8,7 +8,7 @@ export enum SubscriptionType {
   ParticipantLeft = 'SUBSCRIPTION_TYPE_PARTICIPANT_LEFT',
 }
 
-/** The Subscription model is an interface for all subscription types. */
+/** The Subscription model is an interface for all subscription types. The model is supported in SDK 3.8 and later. */
 export interface Subscription {
   /** The subscription type. */
   type: string;

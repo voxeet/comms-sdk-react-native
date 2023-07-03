@@ -30,7 +30,7 @@ export class NotificationService {
   _nativeEvents = new NativeEvents(CommsAPINotificationServiceModule);
 
   /**
-   * Subscribes to the specified notifications.
+   * Subscribes to the specified notifications. This method is supported in SDK 3.8 and later.
    * @param events An array of the subscribed subscription types.
    */
   public async subscribe(events: Subscription[]): Promise<void> {
@@ -38,7 +38,7 @@ export class NotificationService {
   }
 
   /**
-   * Unsubscribes from the specified notifications.
+   * Unsubscribes from the specified notifications. This method is supported in SDK 3.8 and later.
    * @param events An array of the subscribed subscription types.
    */
   public async unsubscribe(events: Subscription[]): Promise<void> {
@@ -80,7 +80,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the conference status event.
+   * Adds a listener to the conference status event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
@@ -94,7 +94,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the conference created event.
+   * Adds a listener to the conference created event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
@@ -108,7 +108,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the conference ended event.
+   * Adds a listener to the conference ended event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
@@ -122,7 +122,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the participant joined event.
+   * Adds a listener to the participant joined event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
@@ -136,7 +136,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the participant left event.
+   * Adds a listener to the participant left event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
@@ -150,7 +150,7 @@ export class NotificationService {
   }
 
   /**
-   * Adds a listener to the participant active event.
+   * Adds a listener to the participant active event. This API is supported in SDK 3.8 and later.
    * @param handler An event callback function.
    * @returns A function that unsubscribes from event listeners.
    */
