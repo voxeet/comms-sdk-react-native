@@ -8,7 +8,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --onlyDirectDependencies"
+    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --onlyDirectDependencies",
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.1.0",
