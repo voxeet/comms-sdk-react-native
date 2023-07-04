@@ -52,13 +52,13 @@ ___
 
 ### isOpen
 
-▸ **isOpen**(): `Promise`<`Boolean`\>
+▸ **isOpen**(): `Promise`<`boolean`\>
 
 Returns if a session that connects the SDK with the Dolby.io platform is opened or not.
 
 #### Returns
 
-`Promise`<`Boolean`\>
+`Promise`<`boolean`\>
 
 ___
 
