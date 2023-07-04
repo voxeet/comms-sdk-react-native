@@ -15,3 +15,5 @@ export * from './services/recording/models';
 export * from './services/recording/events';
 export * from './services/videoPresentation/models';
 export * from './services/videoPresentation/events';
+export * from './services/audio/models';
+export * from './services/audio/events';

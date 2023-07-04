@@ -145,3 +145,11 @@ export enum VoiceFont {
   Swarm = 'SWARM',
   AmRadio = 'AM_RADIO',
 }
+
+export enum RecorderStatus {
+  noRecordingAvailable,
+  RecordingAvailable,
+  recording,
+  playing,
+  released,
+}

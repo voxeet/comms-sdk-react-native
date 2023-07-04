@@ -2,6 +2,7 @@ import { NativeEventEmitter, NativeModule } from 'react-native';
 
 import type { VideoViewEventMap } from '../VideoView/events';
 import type { CommsAPIEventMap } from '../events';
+import type { AudioPreviewStatusChangedEventMap } from '../services/audio/events';
 import type { CommandServiceEventMap } from '../services/command/events';
 import type { ConferenceServiceEventMap } from '../services/conference/events';
 import type { FilePresentationServiceEventMap } from '../services/filePresentation/events';
@@ -18,6 +19,7 @@ interface NativeEventType
     FilePresentationServiceEventMap,
     CommandServiceEventMap,
     VideoPresentationEventMap,
+    AudioPreviewStatusChangedEventMap,
     VideoViewEventMap {}
 
 export default class NativeEvents {
