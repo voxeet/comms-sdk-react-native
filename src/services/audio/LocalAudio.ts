@@ -1,5 +1,6 @@
 import { NativeModules } from 'react-native';
 
+import { AudioPreview } from './AudioPreview';
 import type { AudioCaptureModeOptions, ComfortNoiseLevel } from './models';
 
 const { CommsAPILocalAudioModule } = NativeModules;
@@ -12,6 +13,8 @@ const { CommsAPILocalAudioModule } = NativeModules;
 export class LocalAudio {
   /** @internal */
   _localAudio = CommsAPILocalAudioModule;
+  /** @internal */
+  _audioPreview = new AudioPreview();
 
   /**
    * Returns the local participant's audio capture mode in Dolby Voice conferences.
@@ -71,6 +74,10 @@ export class LocalAudio {
    */
   public async stop(): Promise<void> {
     return this._localAudio.stop();
+  }
+
+  public preview(): AudioPreview {
+    return this._audioPreview;
   }
 }
 
