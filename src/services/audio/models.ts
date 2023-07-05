@@ -146,10 +146,20 @@ export enum VoiceFont {
   AmRadio = 'AM_RADIO',
 }
 
+/**
+ * The RecorderStatus model gathers all possible statuses of audio samples recording for audio preview.
+ *
+ * This model is available in SDK 3.10 and later.
+ */
 export enum RecorderStatus {
-  noRecordingAvailable,
+  /** There is no recording available. */
+  NoRecordingAvailable,
+  /** The recording is available. */
   RecordingAvailable,
-  recording,
-  playing,
-  released,
+  /** Recording is in progress. */
+  Recording,
+  /** The recording is played. */
+  Playing,
+  /** The audio session configuration is restarted; there are no recording in the memory. */
+  Released,
 }

@@ -26,6 +26,7 @@ export default class NativeEvents {
   private _nativeEventEmitter: NativeEventEmitter;
 
   constructor(module: NativeModule) {
+    console.log(module);
     this._nativeEventEmitter = new NativeEventEmitter(module);
   }
 

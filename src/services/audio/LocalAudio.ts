@@ -13,6 +13,7 @@ const { CommsAPILocalAudioModule } = NativeModules;
 export class LocalAudio {
   /** @internal */
   _localAudio = CommsAPILocalAudioModule;
+  /** @internal */
   _audioPreview = new AudioPreview();
 
   /**
