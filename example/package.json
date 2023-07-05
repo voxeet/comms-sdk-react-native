@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "yarn pods && react-native run-ios",
     "start": "react-native start",
+    "pods": "cd ios && pod install",
+    "pods:x86_64": "cd ios && arch -x86_64 pod install",
     "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --onlyDirectDependencies",
     "clean": "rm -rf node_modules"
   },
