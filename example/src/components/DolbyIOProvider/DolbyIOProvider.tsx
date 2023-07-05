@@ -35,6 +35,7 @@ export interface IDolbyIOProvider {
   participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
+  isOpen: () => Promise<boolean>;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
   listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
@@ -50,6 +51,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   participants: [],
   initialize: () => {},
   openSession: () => {},
+  isOpen: () => { return Promise.resolve(false); },
   createAndJoin: () => {},
   listen: () => {},
   joinWithId: () => {},
@@ -139,6 +141,10 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       Alert.alert('App not initialized', e);
     }
   };
+
+  const isOpen = async () => {
+    return await CommsAPI.session.isOpen();
+  }
 
   const openSession = async (name: string, externalId?: string) => {
     const timeoutPromise = setTimeout(() => {
@@ -404,6 +410,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     participants: Array.from(participants.values()),
     initialize,
     openSession,
+    isOpen,
     createAndJoin,
     listen,
     joinWithId,
