@@ -29,6 +29,7 @@ import Logger from '@utils/Logger/Logger';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
+  isAudioPreviewScreen: Boolean;
   me?: Participant;
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
@@ -40,6 +41,7 @@ export interface IDolbyIOProvider {
   listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
+  goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
 }
 
@@ -48,6 +50,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   me: undefined,
   conference: undefined,
   conferenceStatus: undefined,
+  isAudioPreviewScreen: false,
   participants: [],
   initialize: () => {},
   openSession: () => {},
@@ -57,6 +60,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
+  goToAudioPreviewScreen: () => {},
 });
 
 type DolbyProps = {
@@ -66,6 +70,7 @@ type DolbyProps = {
 const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
+  const [isAudioPreviewScreen, setIsAudioPreviewScreen] = useState(false);
   const [conference, setConference] = useState<Conference | undefined>(
     undefined
   );
@@ -402,8 +407,13 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   }
 
+  const goToAudioPreviewScreen = (isVisible: boolean) => {
+    setIsAudioPreviewScreen(isVisible);
+  }
+
   const contextValue = {
     isInitialized,
+    isAudioPreviewScreen,
     me,
     conference,
     conferenceStatus,
@@ -416,6 +426,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     joinWithId,
     replay,
     leave,
+    goToAudioPreviewScreen,
   };
 
   return (
