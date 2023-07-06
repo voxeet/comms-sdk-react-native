@@ -24,14 +24,14 @@ abstract class RNEventEmitter(
   /**
    * Register the event emitter for native events
    */
-  fun registerNativeEventBus() {
+  open fun registerNativeEventBus() {
     VoxeetSDK.instance().register(this)
   }
 
   /**
    * Unregister the event emitter, and it won't receive any native events
    */
-  fun unregisterNativeEventBus() {
+  open fun unregisterNativeEventBus() {
     VoxeetSDK.instance().unregister(this)
   }
 }
