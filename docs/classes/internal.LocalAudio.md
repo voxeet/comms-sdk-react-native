@@ -20,6 +20,7 @@ This model is supported only in SDK 3.7 and later.
 - [setComfortNoiseLevel](internal.LocalAudio.md#setcomfortnoiselevel)
 - [start](internal.LocalAudio.md#start)
 - [stop](internal.LocalAudio.md#stop)
+- [preview](internal.LocalAudio.md#preview)
 
 ## Constructors
 
@@ -122,3 +123,13 @@ The method requires up to a few seconds to become effective.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### preview
+
+▸ **preview**(): [`AudioPreview`](internal.AudioPreview.md)
+
+#### Returns
+
+[`AudioPreview`](internal.AudioPreview.md)
