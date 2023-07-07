@@ -20,7 +20,7 @@ This model is available in SDK 3.10 and later.
 
 ### NoRecordingAvailable
 
-• **NoRecordingAvailable** = ``0``
+• **NoRecordingAvailable** = ``"NoRecordingAvailable"``
 
 There is no recording available.
 
@@ -28,7 +28,7 @@ ___
 
 ### RecordingAvailable
 
-• **RecordingAvailable** = ``1``
+• **RecordingAvailable** = ``"RecordingAvailable"``
 
 The recording is available.
 
@@ -36,7 +36,7 @@ ___
 
 ### Recording
 
-• **Recording** = ``2``
+• **Recording** = ``"Recording"``
 
 Recording is in progress.
 
@@ -44,7 +44,7 @@ ___
 
 ### Playing
 
-• **Playing** = ``3``
+• **Playing** = ``"Playing"``
 
 The recording is played.
 
@@ -52,6 +52,6 @@ ___
 
 ### Released
 
-• **Released** = ``4``
+• **Released** = ``"Released"``
 
 The audio session configuration is restarted; there are no recording in the memory.
