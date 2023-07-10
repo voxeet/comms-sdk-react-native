@@ -3,6 +3,7 @@ import Chance from 'chance';
 import React, {
   FunctionComponent,
   useContext,
+  useEffect,
 } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,11 +23,10 @@ import {
   play,
   cancel,
   release,
+  setAudioCaptureMode,
+  observeStatus,
 } from '@utils/audioPreview.testers';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
-import {
-  setAudioCaptureMode,
-} from '@utils/audio.tester';
 import { View } from 'react-native';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -37,10 +37,10 @@ const AudioPreviewScreen: FunctionComponent = () => {
 
   const onBackButton = () => {
     goToAudioPreviewScreen(false);
-  }
+  };
 
-  const voiceFontAction: (voiceFont: VoiceFont) => () => void = (voiceFont) => {
-    return () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low, voiceFont: voiceFont })
+  const voiceFontAction: (voiceFont: VoiceFont) => void = (voiceFont) => {
+    setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low, voiceFont: voiceFont });
   };
 
   const options: Options = [
@@ -136,6 +136,10 @@ const AudioPreviewScreen: FunctionComponent = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    return observeStatus();
+  }, []);
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
