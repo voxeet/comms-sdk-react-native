@@ -5,6 +5,7 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.voxeet.VoxeetSDK
+import io.dolby.sdk.comms.reactnative.eventemitters.RNAudioPreviewEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNCommandEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNConferenceEventEmitter
 import io.dolby.sdk.comms.reactnative.eventemitters.RNFilePresentationEventEmitter
@@ -37,6 +38,7 @@ import io.dolby.sdk.comms.reactnative.services.RNRecordingServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNSessionServiceModule
 import io.dolby.sdk.comms.reactnative.services.RNSystemPermissionsModule
 import io.dolby.sdk.comms.reactnative.services.RNVideoPresentationServiceModule
+import io.dolby.sdk.comms.reactnative.services.audio.RNAudioPreviewModule
 import io.dolby.sdk.comms.reactnative.services.audio.RNLocalAudioModule
 import io.dolby.sdk.comms.reactnative.services.audio.RNRemoteAudioModule
 import io.dolby.sdk.comms.reactnative.services.video.RNLocalVideoModule
@@ -103,6 +105,11 @@ class RNCommsAPISdkPackage : ReactPackage {
     )
     val recordingEventEmitter = RNRecordingEventEmitter(
       reactContext = reactContext,
+    )
+
+    val audioPreviewEmitter = RNAudioPreviewEventEmitter(
+      reactContext,
+      audioService = VoxeetSDK.audio()
     )
     return listOf(
       RNCommsAPISdkModule(
@@ -179,6 +186,12 @@ class RNCommsAPISdkPackage : ReactPackage {
         audioService = VoxeetSDK.audio(),
         mediaDeviceService = VoxeetSDK.mediaDevice(),
         audioMapper = audioMapper
+      ),
+      RNAudioPreviewModule(
+        reactContext = reactContext,
+        localAudio = VoxeetSDK.audio().local,
+        audioMapper = audioMapper,
+        eventEmitter = audioPreviewEmitter
       ),
       RNRemoteAudioModule(
         reactContext = reactContext,

@@ -153,13 +153,13 @@ export enum VoiceFont {
  */
 export enum RecorderStatus {
   /** There is no recording available. */
-  NoRecordingAvailable,
+  NoRecordingAvailable = 'NoRecordingAvailable',
   /** The recording is available. */
-  RecordingAvailable,
+  RecordingAvailable = 'RecordingAvailable',
   /** Recording is in progress. */
-  Recording,
+  Recording = 'Recording',
   /** The recording is played. */
-  Playing,
+  Playing = 'Playing',
   /** The audio session configuration is restarted; there are no recording in the memory. */
-  Released,
+  Released = 'Released',
 }
