@@ -9,9 +9,7 @@ import type { RecorderStatus, AudioCaptureModeOptions } from './models';
 const { CommsAPIAudioPreviewModule } = NativeModules;
 
 /**
- * The AudioPreview allows to test audio settings (voice font, noise reduction, capture mode) before join to conference.
- *
- * This feature is available in SDK 3.10 and later.
+ * The AudioPreview model allows the local participant to test different capture modes and voice fonts before a conference. The model is supported only in SDK 3.10 and later.
  */
 export class AudioPreview {
   /** @internal */
@@ -21,7 +19,7 @@ export class AudioPreview {
 
   /**
    * Gets the recording status.
-   * @returns RecorderStatus
+   * @returns 
    */
   public async status(): Promise<RecorderStatus> {
     return this._audioPreview.status();
@@ -29,7 +27,7 @@ export class AudioPreview {
 
   /**
    * Gets an audio capture mode for the audio preview.
-   * @returns AudioCaptureModeOptions
+   * @returns 
    */
   public async getCaptureMode(): Promise<AudioCaptureModeOptions> {
     return this._audioPreview.getCaptureMode();
@@ -38,7 +36,7 @@ export class AudioPreview {
   /**
    * Sets an audio capture mode for the audio preview.
    * @param captureMode
-   * @returns void
+   * @returns 
    */
   public async setCaptureMode(
     captureMode: AudioCaptureModeOptions
@@ -56,8 +54,7 @@ export class AudioPreview {
   }
 
   /**
-   * Plays back the recorded audio sample. To test how your audio sounds while using different capture modes and voice fonts,
-   * set the captureMode to a preferred setting before using the method.
+   * Starts recording an audio sample if no recording is in progress.
    * @param duration - The preferred recording duration, in seconds.
    */
   public async record(duration: number): Promise<void> {
@@ -66,15 +63,15 @@ export class AudioPreview {
 
   /**
    * Cancels recording or playing an audio sample.
-   * @returns true for success, false when failed
+   * @returns 
    */
   public async cancel(): Promise<boolean> {
     return this._audioPreview.cancel();
   }
 
   /**
-   * Release the internal memory and restart the audio session configuration.
-   * @returns void
+   * Releases the internal memory and restarts the audio session configuration.
+   * @returns 
    */
   public async release(): Promise<void> {
     return this._audioPreview.release();
