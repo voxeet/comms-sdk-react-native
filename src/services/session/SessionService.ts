@@ -30,7 +30,7 @@ export class SessionService {
   /**
    * Returns if a session that connects the SDK with the Dolby.io platform is opened or not.
    */
-  public async isOpen(): Promise<Boolean> {
+  public async isOpen(): Promise<boolean> {
     return this._nativeModule.isOpen();
   }
 

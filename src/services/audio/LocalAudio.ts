@@ -1,5 +1,6 @@
 import { NativeModules } from 'react-native';
 
+import { AudioPreview } from './AudioPreview';
 import type { AudioCaptureModeOptions, ComfortNoiseLevel } from './models';
 
 const { CommsAPILocalAudioModule } = NativeModules;
@@ -12,6 +13,8 @@ const { CommsAPILocalAudioModule } = NativeModules;
 export class LocalAudio {
   /** @internal */
   _localAudio = CommsAPILocalAudioModule;
+  /** @internal */
+  _audioPreview = new AudioPreview();
 
   /**
    * Returns the local participant's audio capture mode in Dolby Voice conferences.
@@ -71,6 +74,13 @@ export class LocalAudio {
    */
   public async stop(): Promise<void> {
     return this._localAudio.stop();
+  }
+
+  /**
+   * Allows the local participant to test different capture modes and voice fonts before a conference. The method sets a preview recorder that records the participant's audio and plays it back. Before playing the recorded audio, set the [captureMode](#setCaptureMode) to a preferred setting that you wish to try. The method is supported only in SDK 3.10 and later.
+   */
+  public preview(): AudioPreview {
+    return this._audioPreview;
   }
 }
 

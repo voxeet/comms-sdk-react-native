@@ -20,6 +20,7 @@ This model is supported only in SDK 3.7 and later.
 - [setComfortNoiseLevel](internal.LocalAudio.md#setcomfortnoiselevel)
 - [start](internal.LocalAudio.md#start)
 - [stop](internal.LocalAudio.md#stop)
+- [preview](internal.LocalAudio.md#preview)
 
 ## Constructors
 
@@ -122,3 +123,15 @@ The method requires up to a few seconds to become effective.
 #### Returns
 
 `Promise`<`void`\>
+
+___
+
+### preview
+
+▸ **preview**(): [`AudioPreview`](internal.AudioPreview.md)
+
+Allows the local participant to test different capture modes and voice fonts before a conference. The method sets a preview recorder that records the participant's audio and plays it back. Before playing the recorded audio, set the [captureMode](#setCaptureMode) to a preferred setting that you wish to try. The method is supported only in SDK 3.10 and later.
+
+#### Returns
+
+[`AudioPreview`](internal.AudioPreview.md)

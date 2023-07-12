@@ -4,6 +4,7 @@
 
 ### Classes
 
+- [AudioPreview](../classes/internal.AudioPreview.md)
 - [AudioService](../classes/internal.AudioService.md)
 - [LocalAudio](../classes/internal.LocalAudio.md)
 - [RemoteAudio](../classes/internal.RemoteAudio.md)
@@ -19,26 +20,9 @@
 - [VideoService](../classes/internal.VideoService.md)
 - [VideoPresentationService](../classes/internal.VideoPresentationService.md)
 
-### Enumerations
-
-- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
-- [AudioCaptureMode](../enums/internal.AudioCaptureMode.md)
-- [NoiseReductionLevel](../enums/internal.NoiseReductionLevel.md)
-- [VoiceFont](../enums/internal.VoiceFont.md)
-- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
-- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
-- [ParticipantType](../enums/internal.ParticipantType.md)
-- [RTCPMode](../enums/internal.RTCPMode.md)
-- [Codec](../enums/internal.Codec.md)
-- [ConferencePermission](../enums/internal.ConferencePermission.md)
-- [MediaStreamType](../enums/internal.MediaStreamType.md)
-- [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
-- [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
-- [RecordingStatus](../enums/internal.RecordingStatus.md)
-- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
-
 ### Interfaces
 
+- [AudioPreviewStatusChangedEventType](../interfaces/internal.AudioPreviewStatusChangedEventType.md)
 - [AudioCaptureModeOptions](../interfaces/internal.AudioCaptureModeOptions.md)
 - [MessageReceivedEventType](../interfaces/internal.MessageReceivedEventType.md)
 - [ParticipantChangedEventType](../interfaces/internal.ParticipantChangedEventType.md)
@@ -81,6 +65,25 @@
 - [Recording](../interfaces/internal.Recording.md)
 - [VideoPresentationEventType](../interfaces/internal.VideoPresentationEventType.md)
 - [VideoPresentation](../interfaces/internal.VideoPresentation.md)
+
+### Enumerations
+
+- [ComfortNoiseLevel](../enums/internal.ComfortNoiseLevel.md)
+- [AudioCaptureMode](../enums/internal.AudioCaptureMode.md)
+- [NoiseReductionLevel](../enums/internal.NoiseReductionLevel.md)
+- [VoiceFont](../enums/internal.VoiceFont.md)
+- [RecorderStatus](../enums/internal.RecorderStatus.md)
+- [ConferenceStatus](../enums/internal.ConferenceStatus.md)
+- [ParticipantStatus](../enums/internal.ParticipantStatus.md)
+- [ParticipantType](../enums/internal.ParticipantType.md)
+- [RTCPMode](../enums/internal.RTCPMode.md)
+- [Codec](../enums/internal.Codec.md)
+- [ConferencePermission](../enums/internal.ConferencePermission.md)
+- [MediaStreamType](../enums/internal.MediaStreamType.md)
+- [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
+- [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
+- [RecordingStatus](../enums/internal.RecordingStatus.md)
+- [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
 ### Enumeration Members
 

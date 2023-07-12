@@ -88,5 +88,15 @@ jest.mock('react-native', () => {
     switchCamera: jest.fn(),
     switchSpeaker: jest.fn(),
   };
+
+  RN.NativeModules.CommsAPIAudioPreviewModule = {
+    play: jest.fn(),
+    record: jest.fn(),
+    cancel: jest.fn(),
+    release: jest.fn(),
+    status: jest.fn(),
+    getCaptureMode: jest.fn(),
+    setCaptureMode: jest.fn(),
+  };
   return RN;
 });

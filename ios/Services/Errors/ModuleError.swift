@@ -19,6 +19,8 @@ internal enum ModuleError: Error {
 	case noConference(String)
 	case noParticipant(String)
 	case noParticipantId(String)
+	case invalidAudioCaptureModeData([String: Any])
+	case invalidAudioCaptureStatus
 	case waitingForSDKImplementation(String)
 }
 
@@ -60,6 +62,10 @@ internal extension ModuleError {
 			return "Couldn't find the participant: \(participant)"
 		case let .noParticipantId(participantId):
 			return "Couldn't find the participant with id: \(participantId)"
+		case let .invalidAudioCaptureModeData(data):
+			return "invalid AudioCaptureMode data: \(data)"
+		case .invalidAudioCaptureStatus:
+			return "invalide AudioCapture status"
 		case let .waitingForSDKImplementation(version):
 			return "Waiting for implementation in iOS SDK version: \(version)"
 		}

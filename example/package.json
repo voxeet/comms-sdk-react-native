@@ -1,14 +1,17 @@
 {
   "name": "react-native-comms-sdk-example",
   "description": "Example app for react-native-dolbyio-sdk",
-  "version": "3.10.0-beta.1+1",
+  "version": "3.10.0-beta.2+1",
   "license": "MIT",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "yarn pods && react-native run-ios",
     "start": "react-native start",
-    "license": "yarn npm-license-crawler --production --start ./ --json ./LICENSES.json --onlyDirectDependencies"
+    "pods": "cd ios && pod install",
+    "pods:x86_64": "cd ios && arch -x86_64 pod install",
+    "license": "yarn list --json > ./LICENSES.json",
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.1.0",
@@ -32,7 +35,6 @@
     "@babel/runtime": "^7.20.0",
     "@types/react-native-permissions": "^2.0.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "metro-react-native-babel-preset": "^0.72.1",
-    "npm-license-crawler": "^0.2.1"
+    "metro-react-native-babel-preset": "^0.72.1"
   }
 }
