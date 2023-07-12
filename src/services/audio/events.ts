@@ -4,6 +4,7 @@ import type { RecorderStatus } from './models';
  * The model is supported in SDK 3.10 and later.
  */
 export interface AudioPreviewStatusChangedEventType {
+  /** The recording status.  */
   status: RecorderStatus;
 }
 

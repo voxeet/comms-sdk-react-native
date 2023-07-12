@@ -16,3 +16,5 @@ The model is supported in SDK 3.10 and later.
 ### status
 
 • **status**: [`RecorderStatus`](../enums/internal.RecorderStatus.md)
+
+The recording status.
