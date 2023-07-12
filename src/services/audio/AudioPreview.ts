@@ -19,7 +19,7 @@ export class AudioPreview {
 
   /**
    * Gets the recording status.
-   * @returns 
+   * @returns
    */
   public async status(): Promise<RecorderStatus> {
     return this._audioPreview.status();
@@ -27,7 +27,7 @@ export class AudioPreview {
 
   /**
    * Gets an audio capture mode for the audio preview.
-   * @returns 
+   * @returns
    */
   public async getCaptureMode(): Promise<AudioCaptureModeOptions> {
     return this._audioPreview.getCaptureMode();
@@ -36,7 +36,7 @@ export class AudioPreview {
   /**
    * Sets an audio capture mode for the audio preview.
    * @param captureMode
-   * @returns 
+   * @returns
    */
   public async setCaptureMode(
     captureMode: AudioCaptureModeOptions
@@ -63,7 +63,7 @@ export class AudioPreview {
 
   /**
    * Cancels recording or playing an audio sample.
-   * @returns 
+   * @returns
    */
   public async cancel(): Promise<boolean> {
     return this._audioPreview.cancel();
@@ -71,7 +71,7 @@ export class AudioPreview {
 
   /**
    * Releases the internal memory and restarts the audio session configuration.
-   * @returns 
+   * @returns
    */
   public async release(): Promise<void> {
     return this._audioPreview.release();
