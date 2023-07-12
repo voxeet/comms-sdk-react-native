@@ -30,7 +30,7 @@ export const record = async () => {
 
 export const play = async () => {
     try {
-      CommsAPI.audio.getLocal().preview().play(false);
+      await CommsAPI.audio.getLocal().preview().play(false);
       console.log('Play success');
     } catch (e: any) {
       console.log(e);

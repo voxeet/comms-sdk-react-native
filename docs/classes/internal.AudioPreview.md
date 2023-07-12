@@ -2,9 +2,7 @@
 
 [internal](../modules/internal.md).AudioPreview
 
-The AudioPreview allows to test audio settings (voice font, noise reduction, capture mode) before join to conference.
-
-This feature is available in SDK 3.10 and later.
+The AudioPreview model allows the local participant to test different capture modes and voice fonts before a conference. The model is supported only in SDK 3.10 and later.
 
 ## Table of contents
 
@@ -41,8 +39,6 @@ Gets the recording status.
 
 `Promise`<[`RecorderStatus`](../enums/internal.RecorderStatus.md)\>
 
-RecorderStatus
-
 ___
 
 ### getCaptureMode
@@ -54,8 +50,6 @@ Gets an audio capture mode for the audio preview.
 #### Returns
 
 `Promise`<[`AudioCaptureModeOptions`](../interfaces/internal.AudioCaptureModeOptions.md)\>
-
-AudioCaptureModeOptions
 
 ___
 
@@ -74,8 +68,6 @@ Sets an audio capture mode for the audio preview.
 #### Returns
 
 `Promise`<`void`\>
-
-void
 
 ___
 
@@ -101,8 +93,7 @@ ___
 
 ▸ **record**(`duration`): `Promise`<`void`\>
 
-Plays back the recorded audio sample. To test how your audio sounds while using different capture modes and voice fonts,
-set the captureMode to a preferred setting before using the method.
+Starts recording an audio sample if no recording is in progress.
 
 #### Parameters
 
@@ -126,21 +117,17 @@ Cancels recording or playing an audio sample.
 
 `Promise`<`boolean`\>
 
-true for success, false when failed
-
 ___
 
 ### release
 
 ▸ **release**(): `Promise`<`void`\>
 
-Release the internal memory and restart the audio session configuration.
+Releases the internal memory and restarts the audio session configuration.
 
 #### Returns
 
 `Promise`<`void`\>
-
-void
 
 ___
 

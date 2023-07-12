@@ -18,6 +18,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './LoginScreen.style';
+import Logger from '@utils/Logger/Logger';
 
 const chance = new Chance();
 
@@ -39,8 +40,14 @@ const LoginScreen: FunctionComponent = () => {
   }, []);
 
   const login = () => {
+    (async () => {
+      try {
+        await openSession(name, externalId); 
+      } catch (e) {
+        Logger.log(`Login error: ${e}`);
+      }
+    })() 
     console.log(externalId, 'externalId');
-    openSession(name, externalId);
   };
 
   useEffect(() => {
@@ -48,6 +55,7 @@ const LoginScreen: FunctionComponent = () => {
       try {
         await CommsAPI.conference.leave({ leaveRoom: true });
       } catch (e) {
+        Logger.log(`Leave error: ${e}`);
         try {
           await CommsAPI.session.close();
         } catch (e2) {}
