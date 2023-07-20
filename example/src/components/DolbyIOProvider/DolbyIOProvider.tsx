@@ -41,6 +41,7 @@ export interface IDolbyIOProvider {
   listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
+  getCurrentConference: () => void;
   goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
 }
@@ -60,6 +61,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
+  getCurrentConference: () => {},
   goToAudioPreviewScreen: () => {},
 });
 
@@ -407,6 +409,19 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   }
 
+  const getCurrentConference = async () => {
+    try {
+      let conference = await CommsAPI.conference.current();
+      if (conference != null) {
+        Alert.alert("Current confrence is: ", JSON.stringify(conference));
+      } else {
+        Alert.alert("Current conference is null");
+      }
+    } catch (e: any) {
+      Alert.alert('Getting conference errors: ', e);
+    }
+  }
+
   const goToAudioPreviewScreen = (isVisible: boolean) => {
     setIsAudioPreviewScreen(isVisible);
   }
@@ -426,6 +441,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     joinWithId,
     replay,
     leave,
+    getCurrentConference,
     goToAudioPreviewScreen,
   };
 
