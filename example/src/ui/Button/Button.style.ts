@@ -6,6 +6,7 @@ import {
   SPACE_S,
   SPACE_XL,
   SPACE_L,
+  SPACE_M,
 } from '@constants/sizes.constants';
 
 export default StyleSheet.create({
@@ -30,6 +31,15 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     marginRight: SPACE_XXS,
     marginBottom: SPACE_XXS,
+    borderRadius: SPACE_XXS,
+  },
+  'size-xsmall': {
+    height: SPACE_M,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
     borderRadius: SPACE_XXS,
   },
   'color-light': {

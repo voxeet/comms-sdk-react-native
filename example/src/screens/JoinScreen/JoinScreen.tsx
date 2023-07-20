@@ -7,24 +7,43 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
-import CreateConferenceButton from '@screens/JoinScreen/CreateConferenceButton';
 import Button from '@ui/Button';
 import Input from '@ui/Input';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
+import { ConferenceCreateParameters, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
+import { View } from 'react-native';
+import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
+import ExtendedOptions from '@ui/ExtendedOptions';
+import Switch from '@ui/Switch';
 
 const chance = new Chance();
 
 const JoinScreen: FunctionComponent = () => {
+
+  const [isDolbyVoice, setDolbyVoice] = useState(false);
+
+  const [isLiveRecording, setLiveRecording] = useState(false);
+
+  const [spatialAudioStyle, setSpatialAudioStyle] = useState(SpatialAudioStyle.DISABLED);
+
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
   const { createAndJoin, replay, listen, goToAudioPreviewScreen } = useContext(DolbyIOContext);
 
   const joinConference = () => {
-    createAndJoin(alias, false, SpatialAudioStyle.INDIVIDUAL);
+    var params: ConferenceCreateParameters = {
+      dolbyVoice: isDolbyVoice,
+      liveRecording: isLiveRecording, 
+      spatialAudioStyle: spatialAudioStyle
+    }
+    createAndJoin(alias, params);
   };
+
+  const createConference = async () => {
+    await createAndJoin(alias, {dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
+  }
 
   const listenConference = () => {
     listen(alias);
@@ -36,6 +55,60 @@ const JoinScreen: FunctionComponent = () => {
 
   const onAudioPreviewButton = () => {
     goToAudioPreviewScreen(true);
+  }
+
+  const onDoblyVoiceChanged = () => {
+    var newValue = !isDolbyVoice;
+    setDolbyVoice(newValue);
+    if (!newValue) {
+      setSpatialAudioStyle(SpatialAudioStyle.DISABLED);
+    }
+  }
+
+  const onLiveRecordingChanged = () => {
+    setLiveRecording(!isLiveRecording);
+  }
+
+  const spatialAudioOptions : Options = [
+    {
+      text: 'Disabled',
+      value: 'DISABLED',
+      onSelect: async () => {
+        setSpatialAudioStyle(SpatialAudioStyle.DISABLED);
+      },
+    },
+    {
+      text: 'Individual',
+      value: 'INDIVIDUAL',
+      onSelect: async () => {
+        setSpatialAudioStyle(SpatialAudioStyle.INDIVIDUAL);
+      },
+    },
+    {
+      text: 'Shared',
+      value: 'SHARED',
+      onSelect: async () => {
+        setSpatialAudioStyle(SpatialAudioStyle.SHARED);
+      },
+    },
+  ];
+
+  const renderSpatialAudioChooser = () => {
+    if (isDolbyVoice) {
+      return(
+        <Space mt='s'>
+          <MenuOptionsButton options={spatialAudioOptions} >
+            <View style={styles.menuSpatialAudio}>
+              <Text size='s' color={COLORS.WHITE} align='center'>
+                Choose Spatial audio style
+              </Text>
+            </View>
+          </MenuOptionsButton>
+        </Space>
+      );
+    } else {
+      return;
+    }
   }
 
   return (
@@ -68,8 +141,13 @@ const JoinScreen: FunctionComponent = () => {
                 value={alias}
               />
             </Space>
+            <ExtendedOptions label='Conference options:' verticalSpace='m'>
+              <Switch nativeID='dolbyVoice' label='Dolby voice' onValueChanged={onDoblyVoiceChanged} value={isDolbyVoice} verticalSpace='s' />
+              <Switch nativeID='liveRecording' label='Live recording' onValueChanged={onLiveRecordingChanged} value={isLiveRecording} verticalSpace='s' />
+              {renderSpatialAudioChooser()}
+            </ExtendedOptions>
             <Space mt="m">
-              <CreateConferenceButton conferenceAlias={alias} />
+              <Button text="Create a new conference" onPress={createConference} />
             </Space>
             <Space mt="m">
               <Button
