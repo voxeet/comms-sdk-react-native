@@ -36,6 +36,7 @@ export interface IDolbyIOProvider {
   participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => void;
+  closeSession: () => void;
   isOpen: () => Promise<boolean>;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
   listen: (alias: string) => void;
@@ -44,6 +45,7 @@ export interface IDolbyIOProvider {
   getCurrentConference: () => void;
   goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
+  setSessionParticipant: () => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
@@ -55,6 +57,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   participants: [],
   initialize: () => {},
   openSession: () => {},
+  closeSession: () => {},
   isOpen: () => { return Promise.resolve(false); },
   createAndJoin: () => {},
   listen: () => {},
@@ -63,6 +66,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   leave: () => {},
   getCurrentConference: () => {},
   goToAudioPreviewScreen: () => {},
+  setSessionParticipant: () => {},
 });
 
 type DolbyProps = {
@@ -160,13 +164,28 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     try {
       await CommsAPI.session.open({ name, externalId });
       clearTimeout(timeoutPromise);
-      setMe(await CommsAPI.session.getParticipant());
     } catch (e: any) {
       clearTimeout(timeoutPromise);
-      setMe(undefined);
       Alert.alert('Session not opened', e.toString());
     }
   };
+
+  const closeSession = async () => {
+    try {
+      await CommsAPI.session.close();
+      setIsInitialized(false);
+    } catch (e: any) {
+      Alert.alert('Session not opened', e.toString());
+    }
+  };
+
+  const setSessionParticipant = async () => {
+    try {
+      setMe(await CommsAPI.session.getParticipant());
+    } catch (e: any) {
+      setMe(undefined);
+    }
+  }
 
   useEffect(() => {
     const unsubscribers: UnsubscribeFunction[] = [
@@ -435,6 +454,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     participants: Array.from(participants.values()),
     initialize,
     openSession,
+    closeSession,
     isOpen,
     createAndJoin,
     listen,
@@ -443,6 +463,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     leave,
     getCurrentConference,
     goToAudioPreviewScreen,
+    setSessionParticipant,
   };
 
   return (

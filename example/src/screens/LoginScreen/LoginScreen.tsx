@@ -25,30 +25,30 @@ const chance = new Chance();
 const LoginScreen: FunctionComponent = () => {
   const [name, setName] = useState(`${chance.first()} ${chance.last()}`);
   const [externalId, setExternalId] = useState('');
-  const { openSession } = useContext(DolbyIOContext);
+  const { isOpen, openSession, closeSession, setSessionParticipant } = useContext(DolbyIOContext);
 
-  useEffect(() => {
-    (async function () {
-      try {
-        await CommsAPI.conference.leave({ leaveRoom: true });
-      } catch (e: any) {
-        try {
-          await CommsAPI.session.close();
-        } catch {}
-      }
-    })();
-  }, []);
+  const goToJoinScreen = async () => {
+    const isSessionOpen = await isOpen();
+    if (isSessionOpen == true) {
+      setSessionParticipant();
+    }
+  }
 
-  const login = () => {
-    (async () => {
-      try {
-        await openSession(name, externalId); 
-      } catch (e) {
-        Logger.log(`Login error: ${e}`);
-      }
-    })() 
-    console.log(externalId, 'externalId');
-  };
+  const openSessionButton = async () => {
+    const isSessionOpen = await isOpen();
+    if (isSessionOpen == false) {
+      openSession(name, externalId);
+      Logger.log(`logged in ${name}, ${externalId}`);
+    }
+  }
+
+  const closeSessionButton = async () => {
+    const isSessionOpen = await isOpen();
+    if (isSessionOpen == true) {
+      closeSession();
+      Logger.log(`logged out`);
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -92,7 +92,13 @@ const LoginScreen: FunctionComponent = () => {
             />
           </Space>
           <Space mt="m">
-            <Button text="Log in" onPress={login} />
+            <Button text={"Open session"} onPress={openSessionButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={"Close session"} onPress={closeSessionButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={'Go to create conference screen'} onPress={goToJoinScreen} />
           </Space>
         </Space>
       </SafeAreaView>
