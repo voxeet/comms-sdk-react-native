@@ -263,7 +263,12 @@ class RNConferenceServiceModule(
    */
   @ReactMethod
   fun current(promise: ReactPromise) {
-    Promises.promise(conferenceService.conference) { "Missing current conference" }
+    val conference = conferenceService.conference
+    if (conference == null || !conferenceService.isInConference) {
+      promise.resolve(null);
+      return
+    }
+    Promises.promise(conference) { "Couldn't get current conference" }
       .thenValue(conferenceMapper::toRN)
       .forward(promise)
   }

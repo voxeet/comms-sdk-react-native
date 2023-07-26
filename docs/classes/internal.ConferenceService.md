@@ -75,13 +75,13 @@ ___
 
 ### current
 
-▸ **current**(): `Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
+▸ **current**(): `Promise`<``null`` \| [`Conference`](../interfaces/internal.Conference.md)\>
 
 Returns the Conference object for the current conference.
 
 #### Returns
 
-`Promise`<[`Conference`](../interfaces/internal.Conference.md)\>
+`Promise`<``null`` \| [`Conference`](../interfaces/internal.Conference.md)\>
 
 ___
 

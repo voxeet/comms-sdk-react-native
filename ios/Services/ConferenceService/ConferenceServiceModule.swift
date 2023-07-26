@@ -330,11 +330,7 @@ public class ConferenceServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		guard let conference = current else {
-			ModuleError.noCurrentConference.send(with: reject)
-			return
-		}
-		resolve(conference.toReactModel())
+        resolve(current?.toReactModel() ?? NSNull())
 	}
 	
 	/// Gets the participant's audio level. The audio level value ranges from 0.0 to 1.0.

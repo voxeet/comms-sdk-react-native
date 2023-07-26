@@ -20,7 +20,7 @@ const chance = new Chance();
 
 const JoinScreen: FunctionComponent = () => {
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
-  const { createAndJoin, replay, listen, goToAudioPreviewScreen } = useContext(DolbyIOContext);
+  const { createAndJoin, replay, listen, getCurrentConference, goToAudioPreviewScreen } = useContext(DolbyIOContext);
 
   const joinConference = () => {
     createAndJoin(alias, false, SpatialAudioStyle.INDIVIDUAL);
@@ -87,6 +87,12 @@ const JoinScreen: FunctionComponent = () => {
               <Button
                 text="Replay last conference"
                 onPress={replayLastConference}
+              />
+            </Space>
+            <Space mt="m">
+              <Button
+                text="Get current conference"
+                onPress={getCurrentConference}
               />
             </Space>
             <Space mt="m">
