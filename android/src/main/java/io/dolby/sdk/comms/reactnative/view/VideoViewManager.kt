@@ -1,13 +1,18 @@
 package io.dolby.sdk.comms.reactnative.view
 
+import android.content.Context
+import android.widget.FrameLayout
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.uimanager.ReactStylesDiffMap
 import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.uimanager.StateWrapper
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import com.facebook.yoga.YogaMeasureMode
 import com.voxeet.android.media.MediaStream
 import com.voxeet.sdk.services.ConferenceService
-import com.voxeet.sdk.views.VideoView
 import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoViewEventEmitter
 
 /**
@@ -18,11 +23,11 @@ import io.dolby.sdk.comms.reactnative.eventemitters.RNVideoViewEventEmitter
 class VideoViewManager(
   private val eventEmitter: RNVideoViewEventEmitter,
   private val conferenceService: ConferenceService
-) : SimpleViewManager<VideoView>() {
+) : SimpleViewManager<VideoViewWrapper>() {
 
   override fun getName() = VIDEO_VIEW_NAME
 
-  override fun createViewInstance(reactContext: ThemedReactContext) = VideoView(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext) = VideoViewWrapper(reactContext)
 
   /**
    * Exposes available commands to RN
@@ -34,7 +39,7 @@ class VideoViewManager(
    * Receives RN command specified in [getCommandsMap]
    * Sends back result in form of a event using [RNVideoViewEventEmitter]
    */
-  override fun receiveCommand(videoView: VideoView, commandId: String?, args: ReadableArray?) {
+  override fun receiveCommand(videoView: VideoViewWrapper, commandId: String?, args: ReadableArray?) {
     super.receiveCommand(videoView, commandId, args)
     val requestId = args?.getInt(REQUEST_ID_ARG) ?: return
 
@@ -72,7 +77,7 @@ class VideoViewManager(
    * @param mirror boolean telling if video image should be flipped horizontally
    */
   @ReactProp(name = "isMirror")
-  fun setMirror(videoView: VideoView, mirror: Boolean) = videoView.setMirror(mirror)
+  fun setMirror(videoView: VideoViewWrapper, mirror: Boolean) = videoView.setMirror(mirror)
 
   /**
    * Allows changing video scaling type.
@@ -80,19 +85,23 @@ class VideoViewManager(
    * @param scaleType String with "fill" or "fit" value
    */
   @ReactProp(name = "scaleType")
-  fun setScaleType(videoView: VideoView, scaleType: String): Unit = when (scaleType) {
-    SCALE_TYPE_FILL -> videoView.setVideoFill()
-    else -> videoView.setVideoFit()
+  fun setScaleType(videoView: VideoViewWrapper, scaleType: String): Unit {
+    when (scaleType) {
+      SCALE_TYPE_FILL -> {
+        videoView.setVideoFill()
+      }
+      else -> videoView.setVideoFit()
+    }
   }
 
-  private fun detach(videoView: VideoView) = try {
+  private fun detach(videoView: VideoViewWrapper) = try {
     videoView.unAttach()
     true
   } catch (exception: Exception) {
     false
   }
 
-  private fun attach(participantId: String?, streamId: String?, videoView: VideoView): Boolean {
+  private fun attach(participantId: String?, streamId: String?, videoView: VideoViewWrapper): Boolean {
     return try {
       if (participantId == null || streamId == null) return false
       findMediaStream(participantId, streamId)?.let {
