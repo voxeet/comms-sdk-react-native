@@ -35,8 +35,8 @@ export interface IDolbyIOProvider {
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
-  openSession: (name: string, externalId?: string) => void;
-  closeSession: () => void;
+  openSession: (name: string, externalId?: string) => Promise<void>;
+  closeSession: () => Promise<void>;
   isOpen: () => Promise<boolean>;
   createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
   listen: (alias: string) => void;
@@ -56,8 +56,8 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   isAudioPreviewScreen: false,
   participants: [],
   initialize: () => {},
-  openSession: () => {},
-  closeSession: () => {},
+  openSession: () => { return Promise.resolve(); },
+  closeSession: () => { return Promise.resolve(); },
   isOpen: () => { return Promise.resolve(false); },
   createAndJoin: () => {},
   listen: () => {},

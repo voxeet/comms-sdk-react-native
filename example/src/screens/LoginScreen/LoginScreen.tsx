@@ -19,6 +19,7 @@ import Text from '@ui/Text';
 
 import styles from './LoginScreen.style';
 import Logger from '@utils/Logger/Logger';
+import { Alert } from 'react-native';
 
 const chance = new Chance();
 
@@ -31,22 +32,31 @@ const LoginScreen: FunctionComponent = () => {
     const isSessionOpen = await isOpen();
     if (isSessionOpen == true) {
       setSessionParticipant();
+    } else {
+      Alert.alert("The session is not open.");
     }
   }
 
   const openSessionButton = async () => {
-    const isSessionOpen = await isOpen();
-    if (isSessionOpen == false) {
-      openSession(name, externalId);
+    try {
+      await openSession(name, externalId);
       Logger.log(`logged in ${name}, ${externalId}`);
+    } catch (e) {
+      Logger.log(`Open session error: ${e}`);
     }
   }
 
-  const closeSessionButton = async () => {
+  const isSessionOpenButton = async () => {
     const isSessionOpen = await isOpen();
-    if (isSessionOpen == true) {
-      closeSession();
+    Alert.alert(`Session isOpen: ${isSessionOpen}`)
+  }
+
+  const closeSessionButton = async () => {
+    try {
+      await closeSession();
       Logger.log(`logged out`);
+    } catch (e) {
+      Logger.log(`Close session error: ${e}`);
     }
   }
 
@@ -93,6 +103,9 @@ const LoginScreen: FunctionComponent = () => {
           </Space>
           <Space mt="m">
             <Button text={"Open session"} onPress={openSessionButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={"Is session open"} onPress={isSessionOpenButton} />
           </Space>
           <Space mt="m">
             <Button text={"Close session"} onPress={closeSessionButton} />
