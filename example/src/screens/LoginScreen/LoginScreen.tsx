@@ -19,36 +19,46 @@ import Text from '@ui/Text';
 
 import styles from './LoginScreen.style';
 import Logger from '@utils/Logger/Logger';
+import { Alert } from 'react-native';
 
 const chance = new Chance();
 
 const LoginScreen: FunctionComponent = () => {
   const [name, setName] = useState(`${chance.first()} ${chance.last()}`);
   const [externalId, setExternalId] = useState('');
-  const { openSession } = useContext(DolbyIOContext);
+  const { isOpen, openSession, closeSession, setSessionParticipant } = useContext(DolbyIOContext);
 
-  useEffect(() => {
-    (async function () {
-      try {
-        await CommsAPI.conference.leave({ leaveRoom: true });
-      } catch (e: any) {
-        try {
-          await CommsAPI.session.close();
-        } catch {}
-      }
-    })();
-  }, []);
+  const goToJoinScreen = async () => {
+    const isSessionOpen = await isOpen();
+    if (isSessionOpen == true) {
+      setSessionParticipant();
+    } else {
+      Alert.alert("The session is not open.");
+    }
+  }
 
-  const login = () => {
-    (async () => {
-      try {
-        await openSession(name, externalId); 
-      } catch (e) {
-        Logger.log(`Login error: ${e}`);
-      }
-    })() 
-    console.log(externalId, 'externalId');
-  };
+  const openSessionButton = async () => {
+    try {
+      await openSession(name, externalId);
+      Logger.log(`logged in ${name}, ${externalId}`);
+    } catch (e) {
+      Logger.log(`Open session error: ${e}`);
+    }
+  }
+
+  const isSessionOpenButton = async () => {
+    const isSessionOpen = await isOpen();
+    Alert.alert(`Session isOpen: ${isSessionOpen}`)
+  }
+
+  const closeSessionButton = async () => {
+    try {
+      await closeSession();
+      Logger.log(`logged out`);
+    } catch (e) {
+      Logger.log(`Close session error: ${e}`);
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -92,7 +102,16 @@ const LoginScreen: FunctionComponent = () => {
             />
           </Space>
           <Space mt="m">
-            <Button text="Log in" onPress={login} />
+            <Button text={"Open session"} onPress={openSessionButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={"Is session open"} onPress={isSessionOpenButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={"Close session"} onPress={closeSessionButton} />
+          </Space>
+          <Space mt="m">
+            <Button text={'Go to create conference screen'} onPress={goToJoinScreen} />
           </Space>
         </Space>
       </SafeAreaView>
