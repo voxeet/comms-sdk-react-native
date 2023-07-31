@@ -32,7 +32,6 @@ export default StyleSheet.create({
   menuSpatialAudio: {
     justifyContent: 'center',
     flexDirection: 'row',
-    // flexWrap: 'wrap',
     backgroundColor: COLORS.BLUE_DARK,
     borderRadius: SPACE_M,
   },
