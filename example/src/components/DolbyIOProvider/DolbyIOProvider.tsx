@@ -16,11 +16,12 @@ import type {
   StreamChangedEventType,
   PermissionsUpdatedEventType,
   UnsubscribeFunction,
+  ConferenceCreateParameters,
 } from '@dolbyio/comms-sdk-react-native/models';
 import { 
   Codec, 
   RTCPMode, 
-  SpatialAudioStyle,
+  SpatialAudioStyle, 
   SubscriptionType
 } from '@dolbyio/comms-sdk-react-native/models';
 
@@ -38,7 +39,7 @@ export interface IDolbyIOProvider {
   openSession: (name: string, externalId?: string) => Promise<void>;
   closeSession: () => Promise<void>;
   isOpen: () => Promise<boolean>;
-  createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
+  createAndJoin: (alias: string, params: ConferenceCreateParameters) => void;
   listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
@@ -200,15 +201,15 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       unsubscribers.forEach((u) => u());
     };
   }, []);
-  const createAndJoin = async (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => {
+  const createAndJoin = async (alias: string, params: ConferenceCreateParameters) => {
     try {
       await checkPermissions();
-      const conferenceParams = {
-        liveRecording: liveRecording,
-        rtcpMode: RTCPMode.AVERAGE,
-        ttl: 0,
-        dolbyVoice: true,
-        spatialAudioStyle: spatialAudioStyle,
+      const conferenceParams: ConferenceCreateParameters = {
+        liveRecording: params.liveRecording,
+        rtcpMode: params?.rtcpMode ?? RTCPMode.AVERAGE,
+        ttl: params?.ttl ?? 0,
+        dolbyVoice: params.dolbyVoice,
+        spatialAudioStyle: params.spatialAudioStyle,
       };
       const conferenceOptions = {
         alias,
@@ -229,6 +230,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       const createdConference = await CommsAPI.conference.create(
         conferenceOptions
       );
+      var isSpatialAudio = conferenceParams.spatialAudioStyle != undefined 
+        && conferenceParams.spatialAudioStyle != SpatialAudioStyle.DISABLED;
 
       const joinOptions = {
         constraints: {
@@ -237,7 +240,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         },
         maxVideoForwarding: 4,
         simulcast: false,
-        spatialAudio: true,
+        spatialAudio: isSpatialAudio,
       };
       const joinedConference = await CommsAPI.conference.join(
         createdConference,

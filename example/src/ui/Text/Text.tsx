@@ -14,6 +14,8 @@ type CustomTextProps = {
   underline?: boolean;
   color?: string;
   children?: ReactNode;
+  nativeID?: string;
+  ariaLabel?: string;
 };
 
 const CustomText = React.memo(
@@ -26,6 +28,8 @@ const CustomText = React.memo(
     weight,
     underline = false,
     align = 'left',
+    nativeID,
+    ariaLabel,
     ...rest
   }: CustomTextProps) => {
     const textStyles: string[] = [
@@ -42,7 +46,7 @@ const CustomText = React.memo(
     ];
     return (
       // @ts-ignore
-      <Text style={textStyles} {...rest}>
+      <Text nativeID={nativeID} aria-label={ariaLabel} style={textStyles} {...rest}>
         {children}
       </Text>
     );
