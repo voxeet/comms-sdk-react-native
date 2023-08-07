@@ -64,7 +64,20 @@ export const getCurrent = async () => {
   try {
     const currentFilePresentation =
       await CommsAPI.filePresentation.getCurrent();
-    console.log('Get current done:', currentFilePresentation);
+      Alert.alert(
+        'Current file presentation',
+        JSON.stringify(
+          {
+            id: currentFilePresentation.id,
+            imageCount: currentFilePresentation.imageCount,
+            owner: currentFilePresentation.owner,
+            position: currentFilePresentation.position,
+          },
+          null,
+          2
+        )
+      );
+    console.log('Get current done:', JSON.stringify(currentFilePresentation, null, 2));
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('Get current error', msg);
