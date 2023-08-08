@@ -17,6 +17,7 @@ import type {
   PermissionsUpdatedEventType,
   UnsubscribeFunction,
   ConferenceCreateParameters,
+  ConferenceServiceEventNames,
 } from '@dolbyio/comms-sdk-react-native/models';
 import { 
   Codec, 
@@ -114,8 +115,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     );
   };
 
-  const onStreamsChange = (data: StreamChangedEventType) => {
-    Logger.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
+  const onStreamsChange = (data: StreamChangedEventType, type?: ConferenceServiceEventNames) => {
+    Logger.log('STREAMS CHANGE EVENT DATA: \n', type?.toString() + '\n' + JSON.stringify(data, null, 2));
     setParticipants((participants) => {
       let p = participants.get(data.participant.id);
       if (p) {
