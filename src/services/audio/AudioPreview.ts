@@ -4,7 +4,7 @@ import NativeEvents from '../../utils/NativeEvents';
 import type { UnsubscribeFunction } from '../conference/models';
 import { AudioPreviewEventNames } from './events';
 import type { AudioPreviewStatusChangedEventType } from './events';
-import type { RecorderStatus, AudioCaptureModeOptions } from './models';
+import type { AudioPreviewStatus, AudioCaptureModeOptions } from './models';
 
 const { CommsAPIAudioPreviewModule } = NativeModules;
 
@@ -20,7 +20,7 @@ export class AudioPreview {
   /**
    * Gets the recording status.
    */
-  public async status(): Promise<RecorderStatus> {
+  public async status(): Promise<AudioPreviewStatus> {
     return this._audioPreview.status();
   }
 
@@ -58,10 +58,10 @@ export class AudioPreview {
   }
 
   /**
-   * Cancels recording or playing an audio sample.
+   * Stops recording or playing an audio sample.
    */
-  public async cancel(): Promise<boolean> {
-    return this._audioPreview.cancel();
+  public async stop(): Promise<void> {
+    return this._audioPreview.stop();
   }
 
   /**

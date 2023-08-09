@@ -21,7 +21,7 @@ RCT_EXTERN_METHOD(record:(NSNumber * _Nonnull)duration
 				  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
-RCT_EXTERN_METHOD(cancel:(RCTPromiseResolveBlock _Nonnull)resolve
+RCT_EXTERN_METHOD(stop:(RCTPromiseResolveBlock _Nonnull)resolve
 				  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
 RCT_EXTERN_METHOD(release:(RCTPromiseResolveBlock _Nonnull)resolve

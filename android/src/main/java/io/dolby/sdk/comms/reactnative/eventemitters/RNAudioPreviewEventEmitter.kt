@@ -2,7 +2,7 @@ package io.dolby.sdk.comms.reactnative.eventemitters
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
-import com.voxeet.android.media.capture.audio.preview.RecorderStatus
+import com.voxeet.android.media.capture.audio.preview.AudioPreviewStatus
 import com.voxeet.sdk.services.AudioService
 
 /**
@@ -19,7 +19,7 @@ class RNAudioPreviewEventEmitter (
   /**
    * Emitted when the application user received an audio preview status changed.
    */
-  private val previewCallback: (RecorderStatus) -> Unit = { status ->
+  private val previewCallback: (AudioPreviewStatus) -> Unit = { status ->
     if (isRegister) {
       Arguments.createMap()
         .apply {
@@ -33,12 +33,12 @@ class RNAudioPreviewEventEmitter (
 
   override fun registerNativeEventBus() {
     isRegister = true
-    audioService.local.preview().callback = previewCallback
+    audioService.local.preview().onStatusChanged = previewCallback
   }
 
   override fun unregisterNativeEventBus() {
     isRegister = false
-    audioService.local.preview().callback = null
+    audioService.local.preview().onStatusChanged = null
   }
 
   private object NotificationEvent {

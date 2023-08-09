@@ -38,10 +38,10 @@ export const play = async () => {
     }
 };
 
-export const cancel = async () => {
+export const stop = async () => {
     try {
-      const cancel = await CommsAPI.audio.getLocal().preview().cancel();
-      console.log('Cancel: ', cancel.toString());
+      await CommsAPI.audio.getLocal().preview().stop();
+      console.log('Stop success');
     } catch (e: any) {
       console.log(e);
       Alert.alert(`Error ${JSON.stringify(e)}`);
