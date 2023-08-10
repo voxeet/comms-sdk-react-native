@@ -7,7 +7,7 @@ private enum EventKeys: String, CaseIterable {
 }
 
 private let componentName = "react-native-sdk"
-private let sdkVersion = "3.10.0-beta.2"
+private let sdkVersion = "3.10.0-beta.3"
 
 @objc(RNCommsAPIModule)
 public class CommsAPIModule: ReactEmitter {
