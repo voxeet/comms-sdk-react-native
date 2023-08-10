@@ -21,7 +21,7 @@ import styles from './AudioPreviewScreen.style';
 import {
   record,
   play,
-  cancel,
+  stop,
   release,
   setAudioCaptureMode,
   observeStatus,
@@ -192,8 +192,8 @@ const AudioPreviewScreen: FunctionComponent = () => {
               <Button
                 size="small"
                 color="dark"
-                text="Cancel"
-                onPress={cancel}
+                text="Stop"
+                onPress={stop}
               />
               <Button
                 size="small"

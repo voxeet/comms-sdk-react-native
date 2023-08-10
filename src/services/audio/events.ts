@@ -1,11 +1,11 @@
-import type { RecorderStatus } from './models';
+import type { AudioPreviewStatus } from './models';
 
 /** The AudioPreviewStatusChangedEventType model gathers information about changes of audio preview status.
  * The model is supported in SDK 3.10 and later.
  */
 export interface AudioPreviewStatusChangedEventType {
   /** The recording status.  */
-  status: RecorderStatus;
+  status: AudioPreviewStatus;
 }
 
 /** The AudioPreviewEventNames enum gathers the AudioPreview events.  */

@@ -17,7 +17,7 @@ The AudioPreview model allows the local participant to test different capture mo
 - [setCaptureMode](internal.AudioPreview.md#setcapturemode)
 - [play](internal.AudioPreview.md#play)
 - [record](internal.AudioPreview.md#record)
-- [cancel](internal.AudioPreview.md#cancel)
+- [stop](internal.AudioPreview.md#stop)
 - [release](internal.AudioPreview.md#release)
 - [onStatusChanged](internal.AudioPreview.md#onstatuschanged)
 
@@ -31,13 +31,13 @@ The AudioPreview model allows the local participant to test different capture mo
 
 ### status
 
-▸ **status**(): `Promise`<[`RecorderStatus`](../enums/internal.RecorderStatus.md)\>
+▸ **status**(): `Promise`<[`AudioPreviewStatus`](../enums/internal.AudioPreviewStatus.md)\>
 
 Gets the recording status.
 
 #### Returns
 
-`Promise`<[`RecorderStatus`](../enums/internal.RecorderStatus.md)\>
+`Promise`<[`AudioPreviewStatus`](../enums/internal.AudioPreviewStatus.md)\>
 
 ___
 
@@ -107,15 +107,15 @@ Starts recording an audio sample if no recording is in progress.
 
 ___
 
-### cancel
+### stop
 
-▸ **cancel**(): `Promise`<`boolean`\>
+▸ **stop**(): `Promise`<`void`\>
 
-Cancels recording or playing an audio sample.
+Stops recording or playing an audio sample.
 
 #### Returns
 
-`Promise`<`boolean`\>
+`Promise`<`void`\>
 
 ___
 

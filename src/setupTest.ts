@@ -92,7 +92,7 @@ jest.mock('react-native', () => {
   RN.NativeModules.CommsAPIAudioPreviewModule = {
     play: jest.fn(),
     record: jest.fn(),
-    cancel: jest.fn(),
+    stop: jest.fn(),
     release: jest.fn(),
     status: jest.fn(),
     getCaptureMode: jest.fn(),

@@ -147,11 +147,11 @@ export enum VoiceFont {
 }
 
 /**
- * The RecorderStatus model gathers all possible statuses of audio samples recording for audio preview.
+ * The AudioPreviewStatus model gathers all possible statuses of audio samples recording for audio preview.
  *
  * This model is available in SDK 3.10 and later.
  */
-export enum RecorderStatus {
+export enum AudioPreviewStatus {
   /** There is no recording available. */
   NoRecordingAvailable = 'NoRecordingAvailable',
   /** The recording is available. */

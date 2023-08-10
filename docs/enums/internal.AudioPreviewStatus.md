@@ -1,8 +1,8 @@
-# Enumeration: RecorderStatus
+# Enumeration: AudioPreviewStatus
 
-[internal](../modules/internal.md).RecorderStatus
+[internal](../modules/internal.md).AudioPreviewStatus
 
-The RecorderStatus model gathers all possible statuses of audio samples recording for audio preview.
+The AudioPreviewStatus model gathers all possible statuses of audio samples recording for audio preview.
 
 This model is available in SDK 3.10 and later.
 
@@ -10,11 +10,11 @@ This model is available in SDK 3.10 and later.
 
 ### Enumeration Members
 
-- [NoRecordingAvailable](internal.RecorderStatus.md#norecordingavailable)
-- [RecordingAvailable](internal.RecorderStatus.md#recordingavailable)
-- [Recording](internal.RecorderStatus.md#recording)
-- [Playing](internal.RecorderStatus.md#playing)
-- [Released](internal.RecorderStatus.md#released)
+- [NoRecordingAvailable](internal.AudioPreviewStatus.md#norecordingavailable)
+- [RecordingAvailable](internal.AudioPreviewStatus.md#recordingavailable)
+- [Recording](internal.AudioPreviewStatus.md#recording)
+- [Playing](internal.AudioPreviewStatus.md#playing)
+- [Released](internal.AudioPreviewStatus.md#released)
 
 ## Enumeration Members
 
