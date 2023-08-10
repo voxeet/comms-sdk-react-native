@@ -7,7 +7,7 @@ public class AudioPreviewServiceModule: ReactEmitter {
 	public override init() {
 		super.init()
 		VoxeetSDK.shared.audio.local.preview.onStatusChanged
-			= { [weak self] (_ status: RecorderStatus) -> Void in
+			= { [weak self] (_ status: AudioPreviewStatus) -> Void in
 				guard let status = status.toReactModelValue() else {
 					return
 				}
@@ -87,13 +87,15 @@ public class AudioPreviewServiceModule: ReactEmitter {
 		}
 	}
 
-	@objc(cancel:rejecter:)
-	public func cancel(
+	@objc(stop:rejecter:)
+	public func stop(
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-		VoxeetSDK.shared.audio.local.preview.cancel()
-		resolve(true)
+        if !VoxeetSDK.shared.audio.local.preview.stop() {
+            ModuleError.audioPreviewGenericError.send(with: reject)
+        }
+		resolve(nil)
 	}
 	
 	@objc(release:rejecter:)

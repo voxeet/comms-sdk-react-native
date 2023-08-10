@@ -32,7 +32,7 @@ const VideoGallery = ({ participants, scaleType }: VideoGalleryProps) => {
   };
 
   return (
-    <View onLayout={onLayout} style={{ flex: 1 }}>
+    <View onLayout={onLayout} style={{ flex: 1, flexWrap: "wrap", flexDirection: "row", alignContent: "flex-start" }}>
       {participants.map((p) => (
         <Video
           key={p.id}
@@ -40,6 +40,7 @@ const VideoGallery = ({ participants, scaleType }: VideoGalleryProps) => {
           width={width / GRID[participants.length - 1][0]}
           height={height / GRID[participants.length - 1][1]}
           scaleType={scaleType}
+          
         />
       ))}
     </View>

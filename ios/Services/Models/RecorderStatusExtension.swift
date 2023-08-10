@@ -1,7 +1,7 @@
 import Foundation
 import VoxeetSDK
 
-extension RecorderStatus: ReactModelValueMappable {
+extension AudioPreviewStatus: ReactModelValueMappable {
 	
 	typealias ReactModelValueType = String?
 	

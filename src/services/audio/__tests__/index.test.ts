@@ -5,7 +5,7 @@ import {
   AudioCaptureMode,
   AudioCaptureModeOptions,
   NoiseReductionLevel,
-  RecorderStatus,
+  AudioPreviewStatus,
   VoiceFont,
 } from '../models';
 
@@ -25,7 +25,7 @@ describe('AudioPreview', () => {
 
   describe('status()', () => {
     it('should invoke exported status method', async () => {
-      const mockStatus = RecorderStatus.NoRecordingAvailable;
+      const mockStatus = AudioPreviewStatus.NoRecordingAvailable;
       CommsAPIAudioPreviewModule.status.mockImplementation(() =>
         Promise.resolve(mockStatus)
       );
@@ -86,13 +86,13 @@ describe('AudioPreview', () => {
     });
   });
 
-  describe('cancel()', () => {
-    it('should invoke exported cancel method', () => {
-      CommsAPIAudioPreviewModule.cancel.mockImplementation(() =>
-        Promise.resolve(true)
+  describe('stop()', () => {
+    it('should invoke exported stop method', () => {
+      CommsAPIAudioPreviewModule.stop.mockImplementation(() =>
+        Promise.resolve()
       );
-      AudioPreview.cancel();
-      expect(CommsAPIAudioPreviewModule.cancel).toHaveBeenCalled();
+      AudioPreview.stop();
+      expect(CommsAPIAudioPreviewModule.stop).toHaveBeenCalled();
     });
   });
 });

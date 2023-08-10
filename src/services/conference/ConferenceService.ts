@@ -55,8 +55,12 @@ export class ConferenceService {
   /**
    * Returns the Conference object for the current conference.
    */
-  public async current(): Promise<Conference> {
-    return transformToConference(await this._nativeModule.current());
+  public async current(): Promise<Conference | null> {
+    let conference = await this._nativeModule.current();
+    if (conference != null) {
+      return transformToConference(conference);
+    }
+    return null;
   }
 
   /**

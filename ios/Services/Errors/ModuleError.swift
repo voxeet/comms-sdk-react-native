@@ -22,6 +22,7 @@ internal enum ModuleError: Error {
 	case invalidAudioCaptureModeData([String: Any])
 	case invalidAudioCaptureStatus
 	case waitingForSDKImplementation(String)
+    case audioPreviewGenericError
 }
 
 internal extension ModuleError {
@@ -68,6 +69,8 @@ internal extension ModuleError {
 			return "invalide AudioCapture status"
 		case let .waitingForSDKImplementation(version):
 			return "Waiting for implementation in iOS SDK version: \(version)"
+        case .audioPreviewGenericError:
+            return "An AudioPreview error occured."
 		}
 	}
 }

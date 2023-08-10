@@ -16,11 +16,13 @@ import type {
   StreamChangedEventType,
   PermissionsUpdatedEventType,
   UnsubscribeFunction,
+  ConferenceCreateParameters,
+  ConferenceServiceEventNames,
 } from '@dolbyio/comms-sdk-react-native/models';
 import { 
   Codec, 
   RTCPMode, 
-  SpatialAudioStyle,
+  SpatialAudioStyle, 
   SubscriptionType
 } from '@dolbyio/comms-sdk-react-native/models';
 
@@ -35,14 +37,17 @@ export interface IDolbyIOProvider {
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
-  openSession: (name: string, externalId?: string) => void;
+  openSession: (name: string, externalId?: string) => Promise<void>;
+  closeSession: () => Promise<void>;
   isOpen: () => Promise<boolean>;
-  createAndJoin: (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => void;
+  createAndJoin: (alias: string, params: ConferenceCreateParameters) => void;
   listen: (alias: string) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
+  getCurrentConference: () => void;
   goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
+  setSessionParticipant: () => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
@@ -53,14 +58,17 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   isAudioPreviewScreen: false,
   participants: [],
   initialize: () => {},
-  openSession: () => {},
+  openSession: () => { return Promise.resolve(); },
+  closeSession: () => { return Promise.resolve(); },
   isOpen: () => { return Promise.resolve(false); },
   createAndJoin: () => {},
   listen: () => {},
   joinWithId: () => {},
   replay: () => {},
   leave: () => {},
+  getCurrentConference: () => {},
   goToAudioPreviewScreen: () => {},
+  setSessionParticipant: () => {},
 });
 
 type DolbyProps = {
@@ -107,8 +115,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     );
   };
 
-  const onStreamsChange = (data: StreamChangedEventType) => {
-    Logger.log('STREAMS CHANGE EVENT DATA: \n', JSON.stringify(data, null, 2));
+  const onStreamsChange = (data: StreamChangedEventType, type?: ConferenceServiceEventNames) => {
+    Logger.log('STREAMS CHANGE EVENT DATA: \n', type?.toString() + '\n' + JSON.stringify(data, null, 2));
     setParticipants((participants) => {
       let p = participants.get(data.participant.id);
       if (p) {
@@ -158,13 +166,28 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     try {
       await CommsAPI.session.open({ name, externalId });
       clearTimeout(timeoutPromise);
-      setMe(await CommsAPI.session.getParticipant());
     } catch (e: any) {
       clearTimeout(timeoutPromise);
-      setMe(undefined);
       Alert.alert('Session not opened', e.toString());
     }
   };
+
+  const closeSession = async () => {
+    try {
+      await CommsAPI.session.close();
+      setIsInitialized(false);
+    } catch (e: any) {
+      Alert.alert('Session not opened', e.toString());
+    }
+  };
+
+  const setSessionParticipant = async () => {
+    try {
+      setMe(await CommsAPI.session.getParticipant());
+    } catch (e: any) {
+      setMe(undefined);
+    }
+  }
 
   useEffect(() => {
     const unsubscribers: UnsubscribeFunction[] = [
@@ -179,15 +202,15 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       unsubscribers.forEach((u) => u());
     };
   }, []);
-  const createAndJoin = async (alias: string, liveRecording: boolean, spatialAudioStyle: SpatialAudioStyle) => {
+  const createAndJoin = async (alias: string, params: ConferenceCreateParameters) => {
     try {
       await checkPermissions();
-      const conferenceParams = {
-        liveRecording: liveRecording,
-        rtcpMode: RTCPMode.AVERAGE,
-        ttl: 0,
-        dolbyVoice: true,
-        spatialAudioStyle: spatialAudioStyle,
+      const conferenceParams: ConferenceCreateParameters = {
+        liveRecording: params.liveRecording,
+        rtcpMode: params?.rtcpMode ?? RTCPMode.AVERAGE,
+        ttl: params?.ttl ?? 0,
+        dolbyVoice: params.dolbyVoice,
+        spatialAudioStyle: params.spatialAudioStyle,
       };
       const conferenceOptions = {
         alias,
@@ -208,6 +231,8 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
       const createdConference = await CommsAPI.conference.create(
         conferenceOptions
       );
+      var isSpatialAudio = conferenceParams.spatialAudioStyle != undefined 
+        && conferenceParams.spatialAudioStyle != SpatialAudioStyle.DISABLED;
 
       const joinOptions = {
         constraints: {
@@ -216,7 +241,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         },
         maxVideoForwarding: 4,
         simulcast: false,
-        spatialAudio: true,
+        spatialAudio: isSpatialAudio,
       };
       const joinedConference = await CommsAPI.conference.join(
         createdConference,
@@ -407,6 +432,19 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   }
 
+  const getCurrentConference = async () => {
+    try {
+      let conference = await CommsAPI.conference.current();
+      if (conference != null) {
+        Alert.alert("Current confrence is: ", JSON.stringify(conference));
+      } else {
+        Alert.alert("Current conference is null");
+      }
+    } catch (e: any) {
+      Alert.alert('Getting conference errors: ', e);
+    }
+  }
+
   const goToAudioPreviewScreen = (isVisible: boolean) => {
     setIsAudioPreviewScreen(isVisible);
   }
@@ -420,13 +458,16 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     participants: Array.from(participants.values()),
     initialize,
     openSession,
+    closeSession,
     isOpen,
     createAndJoin,
     listen,
     joinWithId,
     replay,
     leave,
+    getCurrentConference,
     goToAudioPreviewScreen,
+    setSessionParticipant,
   };
 
   return (

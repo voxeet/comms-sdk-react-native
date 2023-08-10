@@ -133,7 +133,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     setState: any
   ) => {
     return (
-      <Space ml="xs" mr="xs">
+      <Space ml="xs" mr="xs" key={element.title}>
         <Text size="m" align="left" color="black">
           {element.title}
         </Text>
@@ -173,7 +173,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
     setState: any
   ) => {
     return (
-      <Space ml="xs" mr="xs">
+      <Space ml="xs" mr="xs" key={element.title}>
         <Text size="m" align="left" color="black">
           {element.title}
         </Text>
@@ -245,7 +245,7 @@ const SpatialConfigModal: FunctionComponent<SetSpatialConfigModalProps> = ({
   };
 
   return (
-    <Modal visible={open} animationType="fade" transparent>
+    <Modal visible={open} animationType="fade" transparent key={`spatial_modal_${type}`}>
       <Space fw fh style={styles.modalBackground}>
         <Space style={styles.modalContainer}>
           <Space fw style={styles.modalTitleSection}>

@@ -8,7 +8,7 @@ import styles from './Button.style';
 
 type ButtonProps = {
   text: string;
-  size?: 'small' | 'large';
+  size?: 'xsmall' | 'small' | 'large';
   style?: ViewStyle;
   color?: 'light' | 'dark' | 'green' | 'red';
   onPress?: () => void;
