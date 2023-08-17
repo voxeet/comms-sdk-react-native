@@ -13,7 +13,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { ConferenceCreateParameters, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
+import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 import { View } from 'react-native';
 import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import ExtendedOptions from '@ui/ExtendedOptions';
@@ -32,17 +32,8 @@ const JoinScreen: FunctionComponent = () => {
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
   const { createAndJoin, replay, listen, getCurrentConference, goToAudioPreviewScreen } = useContext(DolbyIOContext);
 
-  const joinConference = () => {
-    var params: ConferenceCreateParameters = {
-      dolbyVoice: isDolbyVoice,
-      liveRecording: isLiveRecording, 
-      spatialAudioStyle: spatialAudioStyle
-    }
-    createAndJoin(alias, params);
-  };
-
   const createConference = async () => {
-    await createAndJoin(alias, {dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
+    await createAndJoin(alias, { dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
   }
 
   const listenConference = () => {
@@ -69,7 +60,7 @@ const JoinScreen: FunctionComponent = () => {
     setLiveRecording(!isLiveRecording);
   }
 
-  const spatialAudioOptions : Options = [
+  const spatialAudioOptions: Options = [
     {
       text: 'Disabled',
       value: 'DISABLED',
@@ -95,7 +86,7 @@ const JoinScreen: FunctionComponent = () => {
 
   const renderSpatialAudioChooser = () => {
     if (isDolbyVoice) {
-      return(
+      return (
         <Space mt='s'>
           <MenuOptionsButton options={spatialAudioOptions} >
             <View style={styles.menuSpatialAudio}>
@@ -120,19 +111,8 @@ const JoinScreen: FunctionComponent = () => {
       <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
         <SafeAreaView style={styles.wrapper}>
           <Space mh="m" mv="s">
-            <Space mb="l">
-              <Text color={COLORS.WHITE} header>
-                Dolby.io
-              </Text>
-              <Text color={COLORS.WHITE} size="s">
-                IAPI SDK for React Native
-              </Text>
-              <Text color={COLORS.WHITE} size="xs" header>
-                TEST APP
-              </Text>
-            </Space>
-            <Text color={COLORS.WHITE} header size="s">
-              Join Conference
+            <Text color={COLORS.WHITE} header size="m">
+              Join or Create the Conference
             </Text>
             <Space mt="m">
               <Input
@@ -151,13 +131,7 @@ const JoinScreen: FunctionComponent = () => {
             </Space>
             <Space mt="m">
               <Button
-                text="Join existing conference"
-                onPress={joinConference}
-              />
-            </Space>
-            <Space mt="m">
-              <Button
-                text="Join to existing conference as listener"
+                text="Join as listener"
                 onPress={listenConference}
               />
             </Space>
@@ -168,6 +142,9 @@ const JoinScreen: FunctionComponent = () => {
               />
             </Space>
             <Space mt="m">
+              <Text color={COLORS.WHITE} size="xs">
+                We need this button to test if getCurrent can return null
+              </Text>
               <Button
                 text="Get current conference"
                 onPress={getCurrentConference}
