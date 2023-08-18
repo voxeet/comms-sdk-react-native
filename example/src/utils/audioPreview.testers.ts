@@ -40,8 +40,8 @@ export const play = async () => {
 
 export const stop = async () => {
     try {
-      await CommsAPI.audio.getLocal().preview().stop();
-      console.log('Stop success');
+      const stop = await CommsAPI.audio.getLocal().preview().stop();
+      console.log('Stop: ', stop.toString());
     } catch (e: any) {
       console.log(e);
       Alert.alert(`Error ${JSON.stringify(e)}`);
