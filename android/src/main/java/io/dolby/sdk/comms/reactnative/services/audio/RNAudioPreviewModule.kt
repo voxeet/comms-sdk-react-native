@@ -99,12 +99,12 @@ class RNAudioPreviewModule(
 
   /**
    * Stops recording or playing an audio sample.
-   * @param promise returns null
+   * @param promise returns Boolean.
    */
   @ReactMethod
   fun stop(promise: ReactPromise) {
     Promises.promise({ localAudio.preview().stop() })
-      .forward(promise, ignoreReturnType = true)
+      .forward(promise)
   }
 
   /**

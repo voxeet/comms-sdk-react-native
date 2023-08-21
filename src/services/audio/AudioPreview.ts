@@ -60,7 +60,7 @@ export class AudioPreview {
   /**
    * Stops recording or playing an audio sample.
    */
-  public async stop(): Promise<void> {
+  public async stop(): Promise<boolean> {
     return this._audioPreview.stop();
   }
 

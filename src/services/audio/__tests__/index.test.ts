@@ -89,7 +89,7 @@ describe('AudioPreview', () => {
   describe('stop()', () => {
     it('should invoke exported stop method', () => {
       CommsAPIAudioPreviewModule.stop.mockImplementation(() =>
-        Promise.resolve()
+        Promise.resolve(true)
       );
       AudioPreview.stop();
       expect(CommsAPIAudioPreviewModule.stop).toHaveBeenCalled();

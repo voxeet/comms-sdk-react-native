@@ -109,13 +109,13 @@ ___
 
 ### stop
 
-▸ **stop**(): `Promise`<`void`\>
+▸ **stop**(): `Promise`<`boolean`\>
 
 Stops recording or playing an audio sample.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`boolean`\>
 
 ___
 

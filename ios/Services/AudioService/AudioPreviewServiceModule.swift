@@ -92,10 +92,8 @@ public class AudioPreviewServiceModule: ReactEmitter {
 		resolve: @escaping RCTPromiseResolveBlock,
 		reject: @escaping RCTPromiseRejectBlock
 	) {
-        if !VoxeetSDK.shared.audio.local.preview.stop() {
-            ModuleError.audioPreviewGenericError.send(with: reject)
-        }
-		resolve(nil)
+		let stop = VoxeetSDK.shared.audio.local.preview.stop()
+		resolve(stop)
 	}
 	
 	@objc(release:rejecter:)
