@@ -44,6 +44,7 @@ const ConferenceScreen: FunctionComponent = () => {
       (p) => p.status && DISPLAYED_STATUSES.includes(p.status)
     );
   }, [participants]);
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -61,6 +62,16 @@ const ConferenceScreen: FunctionComponent = () => {
             <View style={styles.top}>
               <Space mh="m" mv="m">
                 <Space mb="s" style={styles.topBar}>
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setIsBottomSheetVisible(!isBottomSheetVisible);
+                    }}
+                  >
+                    <Text size="xxs" align="center">
+                      TEST BUTTONS
+                    </Text>
+                  </TouchableOpacity>
                   <Text size="xs">Logged as: {me.info.name}</Text>
                   <LeaveConferenceButton />
                 </Space>
@@ -183,7 +194,7 @@ const ConferenceScreen: FunctionComponent = () => {
             </View>
           </SafeAreaView>
         </MenuProvider>
-        <ConferenceScreenBottomSheet />
+        {isBottomSheetVisible ? (<ConferenceScreenBottomSheet />) : null}
       </View>
       <View style={styles.layerVideo} pointerEvents="none">
         <VideoGallery
