@@ -16,6 +16,10 @@ private enum EventKeys: String, CaseIterable {
 @objc(RNFilePresentationServiceModule)
 public class FilePresentationServiceModule: ReactEmitter {
 
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	@Atomic
 	private var fileConvertedCache: [String: VTFileConverted] = [:]
 

@@ -3,7 +3,11 @@ import VoxeetSDK
 
 @objc(RNAudioPreviewServiceModule)
 public class AudioPreviewServiceModule: ReactEmitter {
-	
+
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	public override init() {
 		super.init()
 		VoxeetSDK.shared.audio.local.preview.onStatusChanged

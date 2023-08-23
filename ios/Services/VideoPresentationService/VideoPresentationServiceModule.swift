@@ -18,6 +18,10 @@ private enum EventKeys: String, CaseIterable {
 @objc(RNVideoPresentationServiceModule)
 public class VideoPresentationServiceModule: ReactEmitter {
 
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	// MARK: - Events Setup
 	@objc(supportedEvents)
 	override public func supportedEvents() -> [String] {

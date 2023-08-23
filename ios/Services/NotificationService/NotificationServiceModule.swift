@@ -16,6 +16,10 @@ private enum EventKeys: String, CaseIterable {
 @objc(RNNotificationServiceModule)
 public class NotificationServiceModule: ReactEmitter {
 
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	// MARK: - Events Setup
 	@objc(supportedEvents)
 	override public func supportedEvents() -> [String] {
