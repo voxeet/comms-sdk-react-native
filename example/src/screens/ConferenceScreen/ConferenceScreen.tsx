@@ -38,6 +38,8 @@ const ConferenceScreen: FunctionComponent = () => {
   const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
   const [isMessageModalActive, setIsMessageModalActive] =
     useState<boolean>(false);
+  const [isVideoOn, setIsVideoOn] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const connectedParticipants = useMemo(() => {
     return participants.filter(
@@ -49,6 +51,24 @@ const ConferenceScreen: FunctionComponent = () => {
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
+
+  const onPressVideoButton = () => {
+    if (isVideoOn) {
+      stopLocalVideo();
+    } else {
+      startLocalVideo();
+    }
+    setIsVideoOn(!isVideoOn);
+  };
+
+  const onPressMuteButton = () => {
+    if (isMuted) {
+      unmute(me);
+    } else {
+      mute(me);
+    }
+    setIsMuted(!isMuted);
+  };
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
@@ -95,78 +115,6 @@ const ConferenceScreen: FunctionComponent = () => {
                 </View>
               </View>
             ) : null}
-            <View style={styles.center}>
-              <View style={styles.centerButtons}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton]}
-                      onPress={() => setIsMessageModalActive(true)}
-                    >
-                      <Text size="xs" align="center">
-                        SEND MSG
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonRed]}
-                      onPress={() => {
-                        mute(me);
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        MUTE ME
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonGreen]}
-                      onPress={() => {
-                        unmute(me);
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        UNMUTE ME
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonGreen]}
-                      onPress={() => startLocalVideo()}
-                    >
-                      <Text size="xs" align="center">
-                        START VIDEO
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonRed]}
-                      onPress={() => stopLocalVideo()}
-                    >
-                      <Text size="xs" align="center">
-                        STOP VIDEO
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={styles.videoButton}
-                      onPress={() => {
-                        setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        FILL/FIT
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                </ScrollView>
-              </View>
-            </View>
             <View style={styles.bottom}>
               <Space
                 mh="m"
@@ -191,6 +139,42 @@ const ConferenceScreen: FunctionComponent = () => {
                   </Space>
                 </ScrollView>
               </Space>
+            </View>
+            <View style={styles.center}>
+              <View style={styles.centerButtons}>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={isMuted ? [styles.videoButton, styles.videoButtonRed] : [styles.videoButton, styles.videoButtonGreen]}
+                    onPress={() => onPressMuteButton()}
+                  >
+                    <Text size="xs" align="center">
+                      {isMuted ? 'UNMUTE ME' : 'MUTE ME'}
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={isVideoOn ? [styles.videoButton, styles.videoButtonRed] : [styles.videoButton, styles.videoButtonGreen]}
+                    onPress={() => onPressVideoButton()}
+                  >
+                    <Text size="xs" align="center">
+                      {isVideoOn ? 'STOP VIDEO' : 'START VIDEO'}
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
+                    }}
+                  >
+                    <Text size="xs" align="center">
+                      FILL/FIT
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+              </View>
             </View>
           </SafeAreaView>
         </MenuProvider>
