@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNRemoteVideoServiceModule)
 public class RemoteVideoServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
     /// If the local participant used the stop method to stop receiving video streams from selected remote participants.
     /// - Parameters:
     ///   - participant: The selected remote participant who is locally muted through the stop method.

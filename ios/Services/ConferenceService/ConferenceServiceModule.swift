@@ -21,6 +21,11 @@ private enum EventKeys: String, CaseIterable {
 
 @objc(RNConferenceServiceModule)
 public class ConferenceServiceModule: ReactEmitter {
+
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	var current: VTConference? {
 		VoxeetSDK.shared.conference.current
 	}

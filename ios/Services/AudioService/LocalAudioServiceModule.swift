@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNLocalAudioServiceModule)
 public class LocalAudioServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
     /// Returns the local participant's audio capture mode in Dolby Voice conferences.
     /// - Parameters:
     ///   - resolve: returns ComfortNoiseLevel on success

@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNRemoteAudioServiceModule)
 public class RemoteAudioServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
     /// Allows the local participant to unmute a specific remote participant who is locally muted through the stop method.
     /// - Parameters:
     ///   - participant: The selected remote participant who is locally muted through the stop method.

@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNLocalVideoServiceModule)
 public class LocalVideoServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
     /// Enables the local participant's video and sends the video to a conference.
     /// - Parameters:
     ///   - resolve: returns on success
