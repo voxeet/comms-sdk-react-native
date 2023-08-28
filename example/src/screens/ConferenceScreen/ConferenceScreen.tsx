@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useContext, useMemo, useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
@@ -15,12 +13,10 @@ import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { mute, unmute } from '@utils/conference.tester';
-
-import { ParticipantStatus, Participant } from '@dolbyio/comms-sdk-react-native/models';
+import { ParticipantStatus } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import MessageModal from './MessageModal';
-import ParticipantAvatar from './ParticipantAvatar';
 import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const DISPLAYED_STATUSES: ParticipantStatus[] = [
@@ -102,8 +98,13 @@ const ConferenceScreen: FunctionComponent = () => {
                   <RecordingDotsText text="Conference is being recorded" />
                 ) : null}
               </Space>
+              <View>
+                <VideoGallery
+                  participants={connectedParticipants}
+                  scaleType={scaleType}
+                />
+              </View>
             </View>
-
             {isPresentingFile && fileSrc ? (
               <View style={styles.filePresentationWrapper}>
                 <View style={styles.filePresentation}>
@@ -115,31 +116,6 @@ const ConferenceScreen: FunctionComponent = () => {
                 </View>
               </View>
             ) : null}
-            <View style={styles.bottom}>
-              <Space
-                mh="m"
-                mt="m"
-                mb="s"
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Text
-                  header
-                  size="s"
-                >{`Participants (${connectedParticipants.length})`}</Text>
-              </Space>
-              <Space mb="m">
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <Space mh="m" style={styles.participantsList}>
-                    {connectedParticipants.map((p: Participant) => (
-                      <ParticipantAvatar key={p.id} {...p} />
-                    ))}
-                  </Space>
-                </ScrollView>
-              </Space>
-            </View>
             <View style={styles.center}>
               <View style={styles.centerButtons}>
                 <Space mh="xxs">
@@ -179,12 +155,6 @@ const ConferenceScreen: FunctionComponent = () => {
           </SafeAreaView>
         </MenuProvider>
         {isBottomSheetVisible ? (<ConferenceScreenBottomSheet />) : null}
-      </View>
-      <View style={styles.layerVideo} pointerEvents="none">
-        <VideoGallery
-          participants={connectedParticipants}
-          scaleType={scaleType}
-        />
       </View>
       <MessageModal
         open={isMessageModalActive}

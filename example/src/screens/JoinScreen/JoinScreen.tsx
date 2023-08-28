@@ -112,7 +112,7 @@ const JoinScreen: FunctionComponent = () => {
         <SafeAreaView style={styles.wrapper}>
           <Space mh="m" mv="s">
             <Text color={COLORS.WHITE} header size="m">
-              Join or Create the Conference
+              Join the Conference
             </Text>
             <Space mt="m">
               <Input
@@ -142,9 +142,7 @@ const JoinScreen: FunctionComponent = () => {
               />
             </Space>
             <Space mt="m">
-              <Text color={COLORS.WHITE} size="xs">
-                We need this button to test if getCurrent can return null
-              </Text>
+              {/* We need this button to test if getCurrent can return null */}
               <Button
                 text="Get current conference"
                 onPress={getCurrentConference}
