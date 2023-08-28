@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { View, Alert } from 'react-native';
-
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
@@ -16,15 +15,20 @@ import {
   isSpeaking,
   setSpatialPosition,
 } from '@utils/conference.tester';
-
 import type { Participant } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import SpatialConfigModal from './SpatialConfigModal';
 import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 import { startRemoteVideo, stopRemoteVideo } from '@utils/video.tester';
+import Video from './Video';
 
-const ParticipantAvatar = (participant: Participant) => {
+type ParticipantAvatarProps = {
+  participant: Participant;
+  scaleType?: 'fill' | 'fit';
+};
+
+const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) => {
   const { me, conference } = useContext(DolbyIOContext);
   const [permissionsModalActive, setPermissionsModalActive] = useState(false);
   const [spatialConfigModalActive, setSpatialConfigModalActive] =
@@ -157,13 +161,16 @@ const ParticipantAvatar = (participant: Participant) => {
 
   return (
     <Space mr="xs">
+      <Video
+        participant={participant}
+        width={150}
+        height={150}
+        scaleType={scaleType}
+      />
       <MenuOptionsButton options={options}>
         <View style={styles.participant} key={participant.id}>
-          <Text size="s" color={COLORS.WHITE}>
-            {participant.info.name}
-            <Text size="s" color={COLORS.WHITE}>
-              ({participant.status})
-            </Text>
+          <Text size="xxs" color={COLORS.WHITE}>
+            {participant.info.name!.slice(0, 10) + " " + participant.status}
           </Text>
         </View>
       </MenuOptionsButton>
