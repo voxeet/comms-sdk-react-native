@@ -86,6 +86,7 @@ class ParticipantMapper {
     ParticipantType.ROBOT_LISTENER,
     ParticipantType.ROBOT_PSTN,
     ParticipantType.ROBOT_MIXER,
+    ParticipantType.MIXER_MIX,
     ParticipantType.ROBOT_NONE -> "UNKNOWN"
   }
 
