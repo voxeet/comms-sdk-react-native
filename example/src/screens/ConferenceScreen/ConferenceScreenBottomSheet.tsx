@@ -81,7 +81,7 @@ import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const { me, conference } = useContext(DolbyIOContext);
+  const { me, conference, setBottomSheetVisibility } = useContext(DolbyIOContext);
   const { startRecord, stopRecord } = useContext(RecordingContext);
   const { participants } = conference as Conference;
   let convertedFile: FileConverted | null = null;
@@ -228,7 +228,7 @@ const ConferenceScreenBottomSheet = () => {
   };
 
   return (
-    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[140, 500]}>
+    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={['40%', '80%']} enablePanDownToClose={true} onClose={() => setBottomSheetVisibility(false)}>
       <ScrollView>
         <Space mh="m" mb="s">
           <Text header size="s" color={COLORS.BLACK}>

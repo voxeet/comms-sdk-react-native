@@ -111,10 +111,12 @@ const JoinScreen: FunctionComponent = () => {
       <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
         <SafeAreaView style={styles.wrapper}>
           <Space mh="m" mv="s">
-            <Text color={COLORS.WHITE} header size="m">
-              Join the Conference
-            </Text>
-            <Space mt="m">
+            <Space mt="s" style={styles.center}>
+              <Text color={COLORS.WHITE} header size="m">
+                Join the Conference
+              </Text>
+            </Space>
+            <Space mt="l">
               <Input
                 label="Conference alias"
                 onChange={setAlias}

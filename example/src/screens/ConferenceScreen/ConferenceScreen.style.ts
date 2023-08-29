@@ -25,7 +25,7 @@ export default StyleSheet.create({
   top: {},
   topBar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   center: {
@@ -130,6 +130,7 @@ export default StyleSheet.create({
   },
   centerButtons: {
     flexDirection: 'row',
+    marginBottom: 20,
   },
   videoButtonGreen: {
     backgroundColor: COLORS.GREEN,
