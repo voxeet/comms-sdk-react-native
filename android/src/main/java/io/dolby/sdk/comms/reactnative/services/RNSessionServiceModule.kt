@@ -59,7 +59,7 @@ class RNSessionServiceModule(
     sessionService
       .close()
       .rejectIfFalse { "Close session operation failed" }
-      .forward(promise)
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**

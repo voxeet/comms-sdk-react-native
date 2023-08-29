@@ -41,7 +41,7 @@ import React, {
                 <Input label="Your token" onChange={setToken} value={token} />
               </Space>
               <Space mt="m">
-                <Button text="Initialize" onPress={() => initialize(token, async () => "")} />
+                <Button text="Initialize" onPress={() => initialize(token, async () => token)} />
               </Space>
             </Space>
           </SafeAreaView>
