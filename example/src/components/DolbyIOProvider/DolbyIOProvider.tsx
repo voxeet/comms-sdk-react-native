@@ -160,14 +160,9 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   }
 
   const openSession = async (name: string, externalId?: string) => {
-    const timeoutPromise = setTimeout(() => {
-      CommsAPI.session.close();
-    }, 5000);
     try {
       await CommsAPI.session.open({ name, externalId });
-      clearTimeout(timeoutPromise);
     } catch (e: any) {
-      clearTimeout(timeoutPromise);
       Alert.alert('Session not opened', e.toString());
     }
   };
@@ -175,7 +170,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const closeSession = async () => {
     try {
       await CommsAPI.session.close();
-      setIsInitialized(false);
     } catch (e: any) {
       Alert.alert('Session not opened', e.toString());
     }
@@ -347,16 +341,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
 
   const leave = async (leaveRoom: boolean) => {
     try {
-      const conferenceLeaveOptions = {
-        leaveRoom,
-      };
-      await CommsAPI.conference.leave(conferenceLeaveOptions);
-      leaveActions();
-      if (leaveRoom) {
-        setMe(undefined);
-      }
-
-      CommsAPI.notification.unsubscribe(
+      await CommsAPI.notification.unsubscribe(
         [
           SubscriptionType.ActiveParticipants,
           SubscriptionType.ConferenceCreated,
@@ -366,6 +351,15 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
           SubscriptionType.ParticipantLeft
         ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
       );
+
+      const conferenceLeaveOptions = {
+        leaveRoom,
+      };
+      await CommsAPI.conference.leave(conferenceLeaveOptions);
+      leaveActions();
+      if (leaveRoom) {
+        setMe(undefined);
+      }
     } catch (e: any) {
       Alert.alert('Conference leave with errors', e);
       leaveActions();
