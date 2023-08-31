@@ -36,6 +36,7 @@ export interface IDolbyIOProvider {
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
+  isBottomSheetVisible: Boolean
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => Promise<void>;
   closeSession: () => Promise<void>;
@@ -48,10 +49,12 @@ export interface IDolbyIOProvider {
   goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
   setSessionParticipant: () => void;
+  setBottomSheetVisibility: (isVisible: boolean) => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   isInitialized: false,
+  isBottomSheetVisible: false,
   me: undefined,
   conference: undefined,
   conferenceStatus: undefined,
@@ -69,6 +72,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   getCurrentConference: () => {},
   goToAudioPreviewScreen: () => {},
   setSessionParticipant: () => {},
+  setBottomSheetVisibility: () => {},
 });
 
 type DolbyProps = {
@@ -76,6 +80,7 @@ type DolbyProps = {
 };
 
 const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
   const [isAudioPreviewScreen, setIsAudioPreviewScreen] = useState(false);
@@ -443,8 +448,13 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     setIsAudioPreviewScreen(isVisible);
   }
 
+  const setBottomSheetVisibility = (isVisible: boolean) => {
+    setIsBottomSheetVisible(isVisible);
+  }
+
   const contextValue = {
     isInitialized,
+    isBottomSheetVisible,
     isAudioPreviewScreen,
     me,
     conference,
@@ -462,6 +472,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     getCurrentConference,
     goToAudioPreviewScreen,
     setSessionParticipant,
+    setBottomSheetVisibility,
   };
 
   return (

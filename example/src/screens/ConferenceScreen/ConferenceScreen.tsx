@@ -25,7 +25,7 @@ const DISPLAYED_STATUSES: ParticipantStatus[] = [
 ];
 
 const ConferenceScreen: FunctionComponent = () => {
-  const { me, conference, participants } = useContext(DolbyIOContext);
+  const { me, conference, participants, isBottomSheetVisible, setBottomSheetVisibility } = useContext(DolbyIOContext);
   const { isRecording } = useContext(RecordingContext);
   const { fileSrc, isPresentingFile, fileOwnerName } = useContext(
     FilePresentationContext
@@ -42,7 +42,6 @@ const ConferenceScreen: FunctionComponent = () => {
       (p) => p.status && DISPLAYED_STATUSES.includes(p.status)
     );
   }, [participants]);
-  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
@@ -77,23 +76,14 @@ const ConferenceScreen: FunctionComponent = () => {
           <SafeAreaView style={styles.wrapper}>
             <View style={styles.top}>
               <Space mh="m" mv="m">
-                <Space mb="s" style={styles.topBar}>
-                  <TouchableOpacity
-                    style={styles.videoButton}
-                    onPress={() => {
-                      setIsBottomSheetVisible(!isBottomSheetVisible);
-                    }}
-                  >
-                    <Text size="xxs" align="center">
-                      TEST BUTTONS
+                <Space mb="s" ml="s" style={styles.topBar}>
+                  <Space mr="m">
+                    <Text size="s" align="center">
+                      Conference: <Text weight="bold">{conference.alias}</Text>
                     </Text>
-                  </TouchableOpacity>
-                  <Text size="xs">Logged as: {me.info.name}</Text>
+                  </Space>
                   <LeaveConferenceButton />
                 </Space>
-                <Text size="s" align="center">
-                  Conference: <Text weight="bold">{conference.alias}</Text>
-                </Text>
                 {isRecording ? (
                   <RecordingDotsText text="Conference is being recorded" />
                 ) : null}
@@ -147,6 +137,18 @@ const ConferenceScreen: FunctionComponent = () => {
                   >
                     <Text size="xs" align="center">
                       FILL/FIT
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space>
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setBottomSheetVisibility(true);
+                    }}
+                  >
+                    <Text size="xxs" align="center">
+                      TEST BUTTONS
                     </Text>
                   </TouchableOpacity>
                 </Space>

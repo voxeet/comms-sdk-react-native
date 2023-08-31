@@ -4,4 +4,7 @@ export default StyleSheet.create({
   wrapper: {
     flex: 1,
   },
+  center: {
+    alignItems: 'center',
+  },
 });

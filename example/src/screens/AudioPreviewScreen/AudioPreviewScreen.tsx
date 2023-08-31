@@ -150,7 +150,7 @@ const AudioPreviewScreen: FunctionComponent = () => {
       >
         <SafeAreaView style={styles.wrapper}>
           <Space mh="m" mv="s">
-            <Space mb="l">
+            <Space mb="l" mt='s' style={styles.center}>
               <Text color={COLORS.WHITE} header>
                 Dolby.io
               </Text>

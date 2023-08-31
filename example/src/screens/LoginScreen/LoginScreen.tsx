@@ -77,7 +77,7 @@ const LoginScreen: FunctionComponent = () => {
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
       <SafeAreaView style={styles.wrapper}>
         <Space mh="m" mv="s">
-          <Space mb="l">
+          <Space mb="s" style={styles.center}>
             <Text color={COLORS.WHITE} header>
               Dolby.io
             </Text>
