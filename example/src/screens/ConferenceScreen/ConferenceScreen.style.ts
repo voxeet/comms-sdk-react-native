@@ -87,7 +87,17 @@ export default StyleSheet.create({
     elevation: SHADOWS.m.elevation,
     flexDirection: 'column',
   },
-
+  volumeModalContainer: {
+    backgroundColor: 'lightgray',
+    borderRadius: SPACE_XXS,
+    width: '80%',
+    height: '30%',
+    shadowOffset: SHADOWS.m.shadowOffset,
+    shadowOpacity: SHADOWS.m.shadowOpacity,
+    shadowRadius: SHADOWS.m.shadowRadius,
+    elevation: SHADOWS.m.elevation,
+    flexDirection: 'column',
+  },
   modalTitleSection: {
     flex: 1,
   },

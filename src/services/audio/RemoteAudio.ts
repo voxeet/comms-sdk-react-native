@@ -35,6 +35,23 @@ export class RemoteAudio {
   public async stop(participant: Participant): Promise<void> {
     return this._remoteAudio.stop(participant);
   }
+
+  /**
+   * Sets the volume of a selected participant in non-Dolby Voice conferences to a preferred value between 0 and 1.
+   * Providing an unsupported number results in constraining the volume to either 0 or 1.
+   * Using the method for a selected participant after calling setOutputVolume overwrites the participant's volume.
+   *
+   * This method is supported in SDK 3.11 and later.
+   *
+   * @param participant The selected remote participant.
+   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
+   */
+  public async setVolume(
+    participant: Participant,
+    volume: number
+  ): Promise<void> {
+    return this._remoteAudio.setVolume(participant, volume);
+  }
 }
 
 export default new RemoteAudio();

@@ -72,6 +72,20 @@ class RNRemoteAudioModule(
   }
 
   /**
+   * Sets the volume of a selected participant in non-Dolby Voice conferences to a preferred value between 0 and 1.
+   * Providing an unsupported number results in constraining the volume to either 0 or 1. Using the method for a selected participant
+   * after calling setOutputVolume overwrites the participant's volume. This method is supported in SDK 3.11 and later.
+   *
+   * @param participantRN The selected remote participant.
+   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
+   */
+  @ReactMethod
+  fun setVolume(participantRN: ReadableMap, volume: Float, promise: ReactPromise) {
+    Promises.promise(audioService.remote.setVolume(toParticipant(participantRN), volume))
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
    * Gets [Participant] based on a React Native participant model. Throws
    * [IllegalArgumentException] if participant id is invalid.
    *
