@@ -30,6 +30,7 @@ class ConferenceListenOptionsMapper {
           it.getOptionalInt(CONFERENCE_LISTEN_OPTIONS_MAX_VIDEO_FORWARDING)
             ?.let(::setMaxVideoForwarding)
           it.getOptionalBoolean(CONFERENCE_LISTEN_OPTIONS_SPATIAL_AUDIO)?.let(::setSpatialAudio)
+          it.getString(CONFERENCE_LISTEN_OPTIONS_LISTEN_TYPE)?.let(ListenTypeMapper::convertToModel)?.let(::setListenType)
         }
       }
       .build()
@@ -45,5 +46,6 @@ class ConferenceListenOptionsMapper {
     private const val CONFERENCE_LISTEN_OPTIONS_ACCESS_TOKEN = "conferenceAccessToken"
     private const val CONFERENCE_LISTEN_OPTIONS_MAX_VIDEO_FORWARDING = "maxVideoForwarding"
     private const val CONFERENCE_LISTEN_OPTIONS_VIDEO_FORWARDING_STRATEGY = "videoForwardingStrategy"
+    private const val CONFERENCE_LISTEN_OPTIONS_LISTEN_TYPE = "listenType"
   }
 }

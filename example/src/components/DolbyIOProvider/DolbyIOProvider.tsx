@@ -18,9 +18,11 @@ import type {
   UnsubscribeFunction,
   ConferenceCreateParameters,
   ConferenceServiceEventNames,
+  ConferenceListenOptions,
 } from '@dolbyio/comms-sdk-react-native/models';
 import { 
   Codec, 
+  ListenType, 
   RTCPMode, 
   SpatialAudioStyle, 
   SubscriptionType
@@ -262,7 +264,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   };
 
-  const listen = async (alias: string) => {
+  const listen = async (alias: string, listenType: ListenType = ListenType.REGULAR) => {
     try {
       const conferenceParams = {
         rtcpMode: RTCPMode.AVERAGE,
@@ -279,9 +281,10 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         conferenceOptions
       );
 
-      const listenOptions = {
+      const listenOptions: ConferenceListenOptions = {
         maxVideoForwarding: 4,
         spatialAudio: false,
+        listenType: listenType
       };
       const joinedConference = await CommsAPI.conference.listen(
         createdConference,

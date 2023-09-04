@@ -141,6 +141,7 @@ export interface ConferenceListenOptions {
   spatialAudio?: boolean;
   /** Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later. */
   videoForwardingStrategy?: VideoForwardingStrategy;
+  listenType?: ListenType; 
 }
 
 /** The ConferenceReplayOptions interface gathers properties responsible for replaying conferences. */
@@ -497,4 +498,9 @@ export interface VideoForwardingOptions {
   participants?: Participant[];
   /** The strategy that defines how the SDK should select conference participants whose videos will be transmitted to the local participant. The selection can be either based on the participants' audio volume or the distance from the local participant. */
   strategy?: VideoForwardingStrategy;
+}
+
+export enum ListenType {
+  REGULAR = "REGULAR",
+  MIXED = "MIXED",
 }
