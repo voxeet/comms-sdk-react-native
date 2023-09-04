@@ -220,6 +220,8 @@ export enum ParticipantType {
   LISTENER = 'LISTENER',
   /** A participant who can send and receive audio and video during the conference. */
   USER = 'USER',
+  /** A special participant responsible for mixing video and sending one mixed video stream from a conference to each participant who joined the conference as a mixed listener. This type is available in SDK 3.11 and later. */
+  MIXER_MIX = 'MIXER_MIX',
   /** Any other type that is unsupported in react-native. */
   UNKNOWN = 'UNKNOWN',
 }
