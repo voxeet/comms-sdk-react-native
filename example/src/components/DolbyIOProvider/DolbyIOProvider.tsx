@@ -44,7 +44,7 @@ export interface IDolbyIOProvider {
   closeSession: () => Promise<void>;
   isOpen: () => Promise<boolean>;
   createAndJoin: (alias: string, params: ConferenceCreateParameters) => void;
-  listen: (alias: string) => void;
+  listen: (alias: string, listenType?: ListenType) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   getCurrentConference: () => void;

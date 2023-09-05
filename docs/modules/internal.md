@@ -82,6 +82,7 @@
 - [MediaStreamType](../enums/internal.MediaStreamType.md)
 - [SpatialAudioStyle](../enums/internal.SpatialAudioStyle.md)
 - [VideoForwardingStrategy](../enums/internal.VideoForwardingStrategy.md)
+- [ListenType](../enums/internal.ListenType.md)
 - [RecordingStatus](../enums/internal.RecordingStatus.md)
 - [VideoPresentationState](../enums/internal.VideoPresentationState.md)
 
