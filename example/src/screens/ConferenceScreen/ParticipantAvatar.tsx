@@ -22,6 +22,7 @@ import { SpatialConfigModalTypeModel } from './SpatialConfigModal';
 import UpdatePermissionsModal from './UpdatePermissionsModal';
 import { startRemoteVideo, stopRemoteVideo } from '@utils/video.tester';
 import Video from './Video';
+import SetVolumeModal from './VolumeModal';
 
 type ParticipantAvatarProps = {
   participant: Participant;
@@ -37,6 +38,7 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
     useState<SpatialConfigModalTypeModel>(
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
+    const [volumeModalActive, setVolumeModalActive] = useState(false); 
 
   const [wasSpatialized, setWasSpatialized] = useState<boolean>(false);
 
@@ -57,6 +59,20 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
       value: 'kick',
       onSelect: async () => {
         await kick(participant);
+      },
+    },
+    {
+      text: 'Set participant volume',
+      value: 'set participant volume',
+      onSelect: () => {
+        if (me!.id !== participant.id) {
+          setVolumeModalActive(!volumeModalActive);
+        } else {
+          Alert.alert(
+            'Error',
+            'Action available only from remote participant avatar'
+          );
+        }
       },
     },
     {
@@ -184,6 +200,11 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
         participant={participant}
         open={spatialConfigModalActive}
         closeModal={() => setSpatialConfigModalActive(false)}
+      />
+      <SetVolumeModal 
+      open={volumeModalActive}
+      closeModal={() => setVolumeModalActive(false)}
+      participant={participant}
       />
     </Space>
   );

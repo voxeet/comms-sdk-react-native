@@ -6,6 +6,7 @@ import type {
   Participant,
 } from '../../../src/services/conference/models';
 import type { AudioCaptureModeOptions, ComfortNoiseLevel } from 'src/services/audio/models';
+import Logger from '@utils/Logger/Logger';
 
 export const startLocalAudio = async () => {
   try {
@@ -83,5 +84,15 @@ export const setAudioCaptureMode = async (audioCaptureModeOptions: AudioCaptureM
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('setAudioCaptureMode error', msg);
+  }
+};
+
+export const setVolume = async (participant: Participant, volume: number) => {
+  try {
+    await CommsAPI.audio.getRemote().setVolume(participant, volume);
+    Logger.log(`Participant: ${participant.info.name}, volume: ${volume}`);
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setVolume error', msg);
   }
 };
