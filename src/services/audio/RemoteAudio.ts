@@ -52,6 +52,18 @@ export class RemoteAudio {
   ): Promise<void> {
     return this._remoteAudio.setVolume(participant, volume);
   }
+
+  /**
+   * Sets the conference volume for the local participant. The method sets the volume of all remote participants to a preferred value between 0 and 1.
+   * Providing an unsupported volume results in constraining volume to a either 0 or 1.
+   *
+   * This method is supported in SDK 3.11 and later.
+   *
+   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
+   */
+  public async setAllParticipantsVolume(volume: number): Promise<void> {
+    return this._remoteAudio.setAllParticipantsVolume(volume);
+  }
 }
 
 export default new RemoteAudio();

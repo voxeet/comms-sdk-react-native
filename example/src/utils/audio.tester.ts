@@ -1,12 +1,11 @@
 import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
-
+import Logger from '@utils/Logger/Logger';
 import type {
   Participant,
 } from '../../../src/services/conference/models';
 import type { AudioCaptureModeOptions, ComfortNoiseLevel } from 'src/services/audio/models';
-import Logger from '@utils/Logger/Logger';
 
 export const startLocalAudio = async () => {
   try {
@@ -94,5 +93,14 @@ export const setVolume = async (participant: Participant, volume: number) => {
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('setVolume error', msg);
+  }
+};
+
+export const setAllParticipantsVolume = async (volume: number) => {
+  try {
+    await CommsAPI.audio.getRemote().setAllParticipantsVolume(volume);
+    Logger.log(`All participants volume: ${volume}`);
+  } catch (e: any) {
+    Alert.alert('Error');
   }
 };
