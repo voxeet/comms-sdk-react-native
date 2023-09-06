@@ -141,6 +141,8 @@ export interface ConferenceListenOptions {
   spatialAudio?: boolean;
   /** Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later. */
   videoForwardingStrategy?: VideoForwardingStrategy;
+  /** the listener type that indicates whether a participant wishes to join a conference as a regular listener or a mixed listener. This property is available in SDK 3.11 and later. */
+  listenType?: ListenType;
 }
 
 /** The ConferenceReplayOptions interface gathers properties responsible for replaying conferences. */
@@ -497,4 +499,14 @@ export interface VideoForwardingOptions {
   participants?: Participant[];
   /** The strategy that defines how the SDK should select conference participants whose videos will be transmitted to the local participant. The selection can be either based on the participants' audio volume or the distance from the local participant. */
   strategy?: VideoForwardingStrategy;
+}
+
+/**
+ * The ListenType model gathers the possible types of listeners. This model is available in SDK 3.11 and later.
+ */
+export enum ListenType {
+  /** A regular listener who receives one mixed audio stream from a conference and one video stream from each participant who sends video to a conference. */
+  REGULAR = 'REGULAR',
+  /** A participant who receives one mixed audio stream and one mixed video stream from a conference, which increases the conference capacity. The platform can support up to 60,000 mixed listeners while maintaining under half a second of latency. */
+  MIXED = 'MIXED',
 }
