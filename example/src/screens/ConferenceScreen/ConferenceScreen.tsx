@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
+import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
 import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
@@ -25,7 +26,8 @@ const DISPLAYED_STATUSES: ParticipantStatus[] = [
 ];
 
 const ConferenceScreen: FunctionComponent = () => {
-  const { me, conference, participants, isBottomSheetVisible, setBottomSheetVisibility } = useContext(DolbyIOContext);
+  const { me, conference, participants, leave, isBottomSheetVisible, setBottomSheetVisibility } = useContext(DolbyIOContext);
+  const { setScreen } = useContext(NavigationContext);
   const { isRecording } = useContext(RecordingContext);
   const { fileSrc, isPresentingFile, fileOwnerName } = useContext(
     FilePresentationContext
@@ -65,6 +67,16 @@ const ConferenceScreen: FunctionComponent = () => {
     setIsMuted(!isMuted);
   };
 
+  const onPressLeaveButton = async (closeSession: boolean) => {
+    await leave(closeSession);
+    if (closeSession) {
+      setScreen(ScreenType.LoginScreen)
+    } else {
+      setScreen(ScreenType.JoinScreen);
+    }
+    
+  }
+
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
       <View style={styles.layerInfo}>
@@ -81,8 +93,9 @@ const ConferenceScreen: FunctionComponent = () => {
                     <Text size="s" align="center">
                       Conference: <Text weight="bold">{conference.alias}</Text>
                     </Text>
+
                   </Space>
-                  <LeaveConferenceButton />
+                  <LeaveConferenceButton onPress={onPressLeaveButton} />
                 </Space>
                 {isRecording ? (
                   <RecordingDotsText text="Conference is being recorded" />

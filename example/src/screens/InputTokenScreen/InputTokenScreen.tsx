@@ -7,6 +7,7 @@ import React, {
   import { SafeAreaView } from 'react-native-safe-area-context';
   
   import { DolbyIOContext } from '@components/DolbyIOProvider';
+  import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
   import COLORS from '@constants/colors.constants';
   import Input from '@ui/Input';
   import Space from '@ui/Space';
@@ -17,7 +18,13 @@ import React, {
   
   const InputTokenScreen: FunctionComponent = () => {
     const { initialize } = useContext(DolbyIOContext);
+    const { setScreen } = useContext(NavigationContext);
     const [token, setToken] = useState('');
+
+    const onInitialize = async () => {
+      await initialize(token, async () => token);
+      setScreen(ScreenType.LoginScreen);
+    }
   
     return (
         <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
@@ -41,7 +48,7 @@ import React, {
                 <Input label="Your token" onChange={setToken} value={token} />
               </Space>
               <Space mt="m">
-                <Button text="Initialize" onPress={() => initialize(token, async () => token)} />
+                <Button text="Initialize" onPress={onInitialize} />
               </Space>
             </Space>
           </SafeAreaView>

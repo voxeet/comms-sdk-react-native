@@ -20,6 +20,7 @@ import Text from '@ui/Text';
 import styles from './LoginScreen.style';
 import Logger from '@utils/Logger/Logger';
 import { Alert } from 'react-native';
+import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
 
 const chance = new Chance();
 
@@ -27,11 +28,13 @@ const LoginScreen: FunctionComponent = () => {
   const [name, setName] = useState(`${chance.first()} ${chance.last()}`);
   const [externalId, setExternalId] = useState('');
   const { isOpen, openSession, closeSession, setSessionParticipant } = useContext(DolbyIOContext);
+  const { setScreen } = useContext(NavigationContext);
 
   const goToJoinScreen = async () => {
     const isSessionOpen = await isOpen();
     if (isSessionOpen == true) {
       setSessionParticipant();
+      setScreen(ScreenType.JoinScreen);
     } else {
       Alert.alert("The session is not open.");
     }
