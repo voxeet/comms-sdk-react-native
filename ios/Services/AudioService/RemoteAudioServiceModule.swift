@@ -55,4 +55,25 @@ public class RemoteAudioServiceModule: NSObject {
             error.send(with: reject)
         }
     }
+    
+    /// Sets the volume of a selected participant in non-Dolby Voice conferences to a preferred value between 0 and 1.
+    /// - Parameters:
+    ///   - participant: The selected remote participant who should be locally muted.
+    ///   - volume: The preferred volume level between 0 (no audio) and 1 (full volume).
+    ///   - resolve: returns on success
+    ///   - reject: returns error on failure
+    @objc(setVolume:volume:resolver:rejecter:)
+    public func setVolume(
+        participant: [String: Any],
+        volume: Float,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        guard let participantObject = VoxeetSDK.shared.conference.current?.findParticipant(with: participant.identifier) else {
+            ModuleError.noParticipant(participant.description).send(with: reject)
+            return
+        }
+        let result = VoxeetSDK.shared.audio.remote.setVolume(participant: participantObject, volume: volume)
+        resolve(result)
+    }
 }
