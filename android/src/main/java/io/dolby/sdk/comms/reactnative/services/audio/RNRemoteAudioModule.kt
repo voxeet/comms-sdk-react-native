@@ -1,5 +1,4 @@
 package io.dolby.sdk.comms.reactnative.services.audio
-
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -82,6 +81,20 @@ class RNRemoteAudioModule(
   @ReactMethod
   fun setVolume(participantRN: ReadableMap, volume: Float, promise: ReactPromise) {
     Promises.promise(audioService.remote.setVolume(toParticipant(participantRN), volume))
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Sets the conference volume for the local participant.
+   * The method sets the volume of all remote participants to a preferred value between 0 and 1.
+   * Providing an unsupported volume results in constraining volume to a either 0 or 1.
+   * This method is supported in SDK 3.11 and later.
+   *
+   * @param volume
+   */
+  @ReactMethod
+  fun setAllParticipantsVolume(volume: Float, promise: ReactPromise) {
+    Promises.promise(audioService.remote.setOutputVolume(volume))
       .forward(promise, ignoreReturnType = true)
   }
 

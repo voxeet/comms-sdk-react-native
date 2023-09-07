@@ -17,6 +17,7 @@ This model is supported only in SDK 3.7 and later.
 - [start](internal.RemoteAudio.md#start)
 - [stop](internal.RemoteAudio.md#stop)
 - [setVolume](internal.RemoteAudio.md#setvolume)
+- [setAllParticipantsVolume](internal.RemoteAudio.md#setallparticipantsvolume)
 
 ## Constructors
 
@@ -81,6 +82,27 @@ This method is supported in SDK 3.11 and later.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected remote participant. |
+| `volume` | `number` | The preferred volume level between 0 (no audio) and 1 (full volume). |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
+
+### setAllParticipantsVolume
+
+▸ **setAllParticipantsVolume**(`volume`): `Promise`<`void`\>
+
+Sets the conference volume for the local participant. The method sets the volume of all remote participants to a preferred value between 0 and 1.
+Providing an unsupported volume results in constraining volume to a either 0 or 1.
+
+This method is supported in SDK 3.11 and later.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `volume` | `number` | The preferred volume level between 0 (no audio) and 1 (full volume). |
 
 #### Returns
