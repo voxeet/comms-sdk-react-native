@@ -18,6 +18,8 @@ extension VTParticipantType: ReactModelValueMappable {
 			return "LISTENER"
 		case .mixer:
 			return "MIXER"
+        case .mixerMix:
+            return "MIXER_MIX"
 		@unknown default:
 			return nil
 		}
