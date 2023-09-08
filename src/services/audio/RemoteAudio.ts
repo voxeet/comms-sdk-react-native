@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import type { Participant } from '../conference/models';
+import type { MediaStream, Participant } from '../conference/models';
 
 const { CommsAPIRemoteAudioModule } = NativeModules;
 
@@ -46,11 +46,28 @@ export class RemoteAudio {
    * @param participant The selected remote participant.
    * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
    */
-  public async setVolume(
+  public async setParticipantVolume(
     participant: Participant,
     volume: number
   ): Promise<void> {
-    return this._remoteAudio.setVolume(participant, volume);
+    return this._remoteAudio.setParticipantVolume(participant, volume);
+  }
+
+  /**
+   * Sets the volume of a selected media stream in non-Dolby Voice conferences to a preferred value between 0 and 1.
+   * Providing an unsupported number results in constraining volume to a either 0 or 1.
+   * Using the method for a selected media stream after calling setOutputVolume or other setVolume methods overwrites the media stream's volume.
+   *
+   * This method is supported in SDK 3.11 and later.
+   *
+   * @param mediaStream The selected media stream.
+   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
+   */
+  public async setStreamVolume(
+    mediaStream: MediaStream,
+    volume: number
+  ): Promise<void> {
+    return this._remoteAudio.setStreamVolume(mediaStream, volume);
   }
 
   /**
