@@ -29,14 +29,15 @@ import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import { View } from 'react-native';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import { MenuProvider } from 'react-native-popup-menu';
-import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 
 
 const AudioPreviewScreen: FunctionComponent = () => {
   const { setScreen } = useContext(NavigationContext);
 
   const onBackButton = () => {
-    setScreen(ScreenType.JoinScreen);
+    setScreen(Screens.JoinScreen);
   };
 
   const voiceFontAction: (voiceFont: VoiceFont) => void = (voiceFont) => {

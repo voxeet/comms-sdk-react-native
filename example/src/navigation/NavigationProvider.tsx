@@ -10,59 +10,34 @@ import ParticipantJoinedHandler from "@components/ParticipantJoinedHandler";
 import ParticipantLeftHandler from "@components/ParticipantLeftHandler";
 import RecordingProvider from "@components/RecordingProvider";
 import VideoPresentationHandler from "@components/VideoPresentationHandler";
-import AudioPreviewScreen from "@screens/AudioPreviewScreen/AudioPreviewScreen";
-import ConferenceScreen from "@screens/ConferenceScreen";
-import InputTokenScreen from "@screens/InputTokenScreen/InputTokenScreen";
-import JoinScreen from "@screens/JoinScreen/JoinScreen";
-import LoginScreen from "@screens/LoginScreen";
 import React, { useState } from "react";
+import { Screens, Screen } from "./ScreenFactory";
 
-export enum ScreenType {
-    InputTokenScreen,
-    LoginScreen,
-    JoinScreen, 
-    AudioPreviewScreen,
-    ConferenceScreen
-}
+
 
 export interface INavigationProvider {
-    currentScreen: ScreenType,
-    setScreen: (screen: ScreenType) => void
+    currentScreen: Screen,
+    setScreen: (screen: Screen) => void
 }
 
 export const NavigationContext = React.createContext<INavigationProvider>({
-    currentScreen: ScreenType.InputTokenScreen,
-    setScreen: (_: ScreenType) => undefined
+    currentScreen: Screens.InputTokenScreen,
+    setScreen: (_: Screen) => undefined
 });
 
 const NavigationProvider: React.FC = () => {
-    const [currentScreen, setScreen] = useState(ScreenType.InputTokenScreen);
+    const [currentScreen, setScreen] = useState(Screens.InputTokenScreen);
     const data = {
         currentScreen: currentScreen,
         setScreen: setScreen
     };
-
-    const getScreen = (screen: ScreenType) => {
-        switch(screen) {
-            case ScreenType.InputTokenScreen:
-                return <InputTokenScreen/>
-            case ScreenType.LoginScreen:
-                return <LoginScreen/>
-            case ScreenType.JoinScreen:
-                return <JoinScreen/>
-            case ScreenType.ConferenceScreen:
-                return <ConferenceScreen/>
-            case ScreenType.AudioPreviewScreen:
-                return <AudioPreviewScreen/>
-        }
-    }
 
     return (
         <NavigationContext.Provider value={data}>
             <DolbyIOProvider>
             <RecordingProvider>
               <FilePresentationProvider>
-                {getScreen(currentScreen)}
+                {currentScreen.create()}
                 <FilePresentationHandler />
               </FilePresentationProvider>
             </RecordingProvider>

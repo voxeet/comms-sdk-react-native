@@ -18,7 +18,8 @@ import { View } from 'react-native';
 import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import ExtendedOptions from '@ui/ExtendedOptions';
 import Switch from '@ui/Switch';
-import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 
 const chance = new Chance();
 
@@ -36,7 +37,7 @@ const JoinScreen: FunctionComponent = () => {
 
   const createConference = async () => {
     await createAndJoin(alias, { dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
-    setScreen(ScreenType.ConferenceScreen);
+    setScreen(Screens.ConferenceScreen);
   }
 
   const listenConference = () => {
@@ -48,7 +49,7 @@ const JoinScreen: FunctionComponent = () => {
   };
 
   const onAudioPreviewButton = () => {
-    setScreen(ScreenType.AudioPreviewScreen);
+    setScreen(Screens.AudioPreviewScreen);
   }
 
   const onDoblyVoiceChanged = () => {

@@ -4,7 +4,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DolbyIOContext } from '@components/DolbyIOProvider';
-import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
 import COLORS from '@constants/colors.constants';
@@ -70,9 +71,9 @@ const ConferenceScreen: FunctionComponent = () => {
   const onPressLeaveButton = async (closeSession: boolean) => {
     await leave(closeSession);
     if (closeSession) {
-      setScreen(ScreenType.LoginScreen)
+      setScreen(Screens.LoginScreen)
     } else {
-      setScreen(ScreenType.JoinScreen);
+      setScreen(Screens.JoinScreen);
     }
     
   }

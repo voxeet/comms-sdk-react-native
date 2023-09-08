@@ -7,7 +7,8 @@ import React, {
   import { SafeAreaView } from 'react-native-safe-area-context';
   
   import { DolbyIOContext } from '@components/DolbyIOProvider';
-  import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
+  import { NavigationContext } from '../../navigation/NavigationProvider';
+  import { Screens } from '../../navigation/ScreenFactory';
   import COLORS from '@constants/colors.constants';
   import Input from '@ui/Input';
   import Space from '@ui/Space';
@@ -23,7 +24,7 @@ import React, {
 
     const onInitialize = async () => {
       await initialize(token, async () => token);
-      setScreen(ScreenType.LoginScreen);
+      setScreen(Screens.LoginScreen);
     }
   
     return (

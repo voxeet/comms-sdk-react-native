@@ -20,7 +20,8 @@ import Text from '@ui/Text';
 import styles from './LoginScreen.style';
 import Logger from '@utils/Logger/Logger';
 import { Alert } from 'react-native';
-import { NavigationContext, ScreenType } from '../../navigation/NavigationProvider';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 
 const chance = new Chance();
 
@@ -31,10 +32,11 @@ const LoginScreen: FunctionComponent = () => {
   const { setScreen } = useContext(NavigationContext);
 
   const goToJoinScreen = async () => {
+    console.log("go to join screen");
     const isSessionOpen = await isOpen();
     if (isSessionOpen == true) {
       setSessionParticipant();
-      setScreen(ScreenType.JoinScreen);
+      setScreen(Screens.JoinScreen);
     } else {
       Alert.alert("The session is not open.");
     }
