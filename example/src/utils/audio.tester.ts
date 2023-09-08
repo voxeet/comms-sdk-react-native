@@ -86,9 +86,9 @@ export const setAudioCaptureMode = async (audioCaptureModeOptions: AudioCaptureM
   }
 };
 
-export const setVolume = async (participant: Participant, volume: number) => {
+export const setParticipantVolume = async (participant: Participant, volume: number) => {
   try {
-    await CommsAPI.audio.getRemote().setVolume(participant, volume);
+    await CommsAPI.audio.getRemote().setParticipantVolume(participant, volume);
     Logger.log(`Participant: ${participant.info.name}, volume: ${volume}`);
   } catch (e) {
     const msg = (e as Error).message;
@@ -102,5 +102,16 @@ export const setAllParticipantsVolume = async (volume: number) => {
     Logger.log(`All participants volume: ${volume}`);
   } catch (e: any) {
     Alert.alert('Error');
+  }
+};
+
+export const setStreamVolume = async (participant: Participant, volume: number) => {
+  try {
+    const mediaStream = participant!.streams![0];
+    await CommsAPI.audio.getRemote().setStreamVolume(mediaStream, volume);
+    Logger.log(`Stream label: ${mediaStream.label}, volume: ${volume}`);
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setVolume error', msg);
   }
 };

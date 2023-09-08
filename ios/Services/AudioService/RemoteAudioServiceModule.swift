@@ -62,8 +62,8 @@ public class RemoteAudioServiceModule: NSObject {
     ///   - volume: The preferred volume level between 0 (no audio) and 1 (full volume).
     ///   - resolve: returns on success
     ///   - reject: returns error on failure
-    @objc(setVolume:volume:resolver:rejecter:)
-    public func setVolume(
+    @objc(setParticipantVolume:volume:resolver:rejecter:)
+    public func setParticipantVolume(
         participant: [String: Any],
         volume: Float,
         resolve: @escaping RCTPromiseResolveBlock,

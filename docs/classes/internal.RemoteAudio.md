@@ -16,7 +16,8 @@ This model is supported only in SDK 3.7 and later.
 
 - [start](internal.RemoteAudio.md#start)
 - [stop](internal.RemoteAudio.md#stop)
-- [setVolume](internal.RemoteAudio.md#setvolume)
+- [setParticipantVolume](internal.RemoteAudio.md#setparticipantvolume)
+- [setStreamVolume](internal.RemoteAudio.md#setstreamvolume)
 - [setAllParticipantsVolume](internal.RemoteAudio.md#setallparticipantsvolume)
 
 ## Constructors
@@ -67,9 +68,9 @@ The stop method requires up to a few seconds to become effective.
 
 ___
 
-### setVolume
+### setParticipantVolume
 
-▸ **setVolume**(`participant`, `volume`): `Promise`<`void`\>
+▸ **setParticipantVolume**(`participant`, `volume`): `Promise`<`void`\>
 
 Sets the volume of a selected participant in non-Dolby Voice conferences to a preferred value between 0 and 1.
 Providing an unsupported number results in constraining the volume to either 0 or 1.
@@ -82,6 +83,29 @@ This method is supported in SDK 3.11 and later.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected remote participant. |
+| `volume` | `number` | The preferred volume level between 0 (no audio) and 1 (full volume). |
+
+#### Returns
+
+`Promise`<`void`\>
+
+___
+
+### setStreamVolume
+
+▸ **setStreamVolume**(`mediaStream`, `volume`): `Promise`<`void`\>
+
+Sets the volume of a selected media stream in non-Dolby Voice conferences to a preferred value between 0 and 1.
+Providing an unsupported number results in constraining volume to a either 0 or 1.
+Using the method for a selected media stream after calling setOutputVolume or other setVolume methods overwrites the media stream's volume.
+
+This method is supported in SDK 3.11 and later.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `mediaStream` | [`MediaStream`](../modules/internal.md#mediastream) | The selected media stream. |
 | `volume` | `number` | The preferred volume level between 0 (no audio) and 1 (full volume). |
 
 #### Returns
