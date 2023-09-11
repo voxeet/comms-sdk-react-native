@@ -13,7 +13,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
+import { ListenType, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 import { View } from 'react-native';
 import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import ExtendedOptions from '@ui/ExtendedOptions';
@@ -36,8 +36,12 @@ const JoinScreen: FunctionComponent = () => {
     await createAndJoin(alias, { dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
   }
 
-  const listenConference = () => {
-    listen(alias);
+  const joinAsRegularListener = () => {
+    listen(alias, ListenType.REGULAR);
+  };
+
+  const joinAsStreamingListener = () => {
+    listen(alias, ListenType.MIXED);
   };
 
   const replayLastConference = () => {
@@ -133,8 +137,14 @@ const JoinScreen: FunctionComponent = () => {
             </Space>
             <Space mt="m">
               <Button
-                text="Join as listener"
-                onPress={listenConference}
+                text="Join as regular listener"
+                onPress={joinAsRegularListener}
+              />
+            </Space>
+            <Space mt="m">
+              <Button
+                text="Join as streaming listener"
+                onPress={joinAsStreamingListener}
               />
             </Space>
             <Space mt="m">
