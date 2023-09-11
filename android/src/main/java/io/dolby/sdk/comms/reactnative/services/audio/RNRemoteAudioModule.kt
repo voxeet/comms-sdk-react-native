@@ -3,7 +3,6 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
-import com.voxeet.android.media.MediaStream
 import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.services.AudioService
 import com.voxeet.sdk.services.ConferenceService
@@ -96,21 +95,6 @@ class RNRemoteAudioModule(
   @ReactMethod
   fun setAllParticipantsVolume(volume: Float, promise: ReactPromise) {
     Promises.promise(audioService.remote.setOutputVolume(volume))
-      .forward(promise, ignoreReturnType = true)
-  }
-
-  /**
-   * Sets the volume of a selected media stream in non-Dolby Voice conferences to a preferred value between 0 and 1.
-   * Providing an unsupported number results in constraining volume to a either 0 or 1.
-   * Using the method for a selected media stream after calling setOutputVolume or other setVolume methods overwrites
-   * the media stream's volume. This method is supported in SDK 3.11 and later.
-   *
-   * @param mediaStreamRN The selected media stream.
-   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
-   */
-  @ReactMethod
-  fun setStreamVolume(mediaStreamRN: ReadableMap, volume: Float, promise: ReactPromise) {
-    Promises.promise(audioService.remote.setVolume(participantMapper.fromRNMediaStream(mediaStreamRN, conferenceService), volume))
       .forward(promise, ignoreReturnType = true)
   }
 

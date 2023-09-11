@@ -104,14 +104,3 @@ export const setAllParticipantsVolume = async (volume: number) => {
     Alert.alert('Error');
   }
 };
-
-export const setStreamVolume = async (participant: Participant, volume: number) => {
-  try {
-    const mediaStream = participant!.streams![0];
-    await CommsAPI.audio.getRemote().setStreamVolume(mediaStream, volume);
-    Logger.log(`Stream label: ${mediaStream.label}, volume: ${volume}`);
-  } catch (e) {
-    const msg = (e as Error).message;
-    Alert.alert('setVolume error', msg);
-  }
-};

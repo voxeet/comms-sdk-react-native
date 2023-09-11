@@ -13,7 +13,6 @@ import com.voxeet.sdk.models.Participant
 import com.voxeet.sdk.models.ParticipantNotification
 import com.voxeet.sdk.models.v1.ConferenceParticipantStatus
 import com.voxeet.sdk.models.v2.ParticipantType
-import com.voxeet.sdk.services.ConferenceService
 
 /**
  * Provides methods that map [Participant] and [Participant]-related models to React Native models and vice versa
@@ -68,25 +67,11 @@ class ParticipantMapper {
 
   fun toRNMediaStream(stream: MediaStream): ReadableMap =
     Arguments.createMap().apply {
-      putString(PARTICIPANT_STREAMS_ID, stream.peerId())
-      putString(PARTICIPANT_STREAMS_LABEL, stream.label())
+      putString(PARTICIPANT_STREAMS_ID, stream.label())
       putString(PARTICIPANT_STREAMS_TYPE, toRNMediaStreamType(stream.type))
       putArray(PARTICIPANT_STREAMS_AUDIO_TRACKS, toRNAudioTracks(stream.audioTracks()))
       putArray(PARTICIPANT_STREAMS_VIDEO_TRACKS, toRNVideoTracks(stream.videoTracks()))
     }
-
-  @Throws(Exception::class)
-  fun fromRNMediaStream(stream: ReadableMap, conferenceService: ConferenceService): MediaStream {
-    val peerId = stream.getString(PARTICIPANT_STREAMS_ID) ?: throw IllegalArgumentException("MediaStream should contain id")
-    val label = stream.getString(PARTICIPANT_STREAMS_LABEL) ?: throw IllegalArgumentException("MediaStream should contain label")
-    return findMediaStream(peerId, label, conferenceService) ?: throw Exception("Couldn't find the media stream")
-  }
-  
-  private fun findMediaStream(peerId: String, label: String, conferenceService: ConferenceService): MediaStream? =
-    conferenceService
-      .findParticipantById(peerId)
-      ?.streams()
-      ?.find { it.label() == label }
 
   private fun toRNParticipantType(participantType: ParticipantType) = when (participantType) {
     ParticipantType.USER -> "USER"
