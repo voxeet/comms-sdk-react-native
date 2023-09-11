@@ -39,7 +39,7 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
       SpatialConfigModalTypeModel.setSpatialDirectionType
     );
   const [volumeModalActive, setVolumeModalActive] = useState(false);
-  const [isSetStreamVolumeModal, setIsSetStreamVolumeModal] = useState(false);
+
   const [wasSpatialized, setWasSpatialized] = useState<boolean>(false);
 
   useEffect(() => {
@@ -66,22 +66,6 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
       value: 'set participant volume',
       onSelect: () => {
         if (me!.id !== participant.id) {
-          setIsSetStreamVolumeModal(false);
-          setVolumeModalActive(!volumeModalActive);
-        } else {
-          Alert.alert(
-            'Error',
-            'Action available only from remote participant avatar'
-          );
-        }
-      },
-    },
-    {
-      text: 'Set stream volume',
-      value: 'set stream volume',
-      onSelect: () => {
-        if (me!.id !== participant.id) {
-          setIsSetStreamVolumeModal(true);
           setVolumeModalActive(!volumeModalActive);
         } else {
           Alert.alert(
@@ -217,11 +201,10 @@ const ParticipantAvatar = ({ participant, scaleType }: ParticipantAvatarProps) =
         open={spatialConfigModalActive}
         closeModal={() => setSpatialConfigModalActive(false)}
       />
-      <SetVolumeModal
-        isSetStreamVolume={isSetStreamVolumeModal}
-        open={volumeModalActive}
-        closeModal={() => setVolumeModalActive(false)}
-        participant={participant}
+      <SetVolumeModal 
+      open={volumeModalActive}
+      closeModal={() => setVolumeModalActive(false)}
+      participant={participant}
       />
     </Space>
   );
