@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNMediaDeviceServiceModule)
 public class MediaDeviceServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	/// Changes the device camera (front or back).
 	/// - Parameters:
 	///   - resolve: returns on success

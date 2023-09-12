@@ -76,6 +76,7 @@ class ParticipantMapper {
   private fun toRNParticipantType(participantType: ParticipantType) = when (participantType) {
     ParticipantType.USER -> "USER"
     ParticipantType.LISTENER -> "LISTENER"
+    ParticipantType.MIXER_MIX -> "MIXER_MIX"
     ParticipantType.SPEAKER,
     ParticipantType.PSTN,
     ParticipantType.MIXER,

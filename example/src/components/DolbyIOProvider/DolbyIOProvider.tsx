@@ -18,9 +18,11 @@ import type {
   UnsubscribeFunction,
   ConferenceCreateParameters,
   ConferenceServiceEventNames,
+  ConferenceListenOptions,
 } from '@dolbyio/comms-sdk-react-native/models';
 import { 
   Codec, 
+  ListenType, 
   RTCPMode, 
   SpatialAudioStyle, 
   SubscriptionType
@@ -36,22 +38,25 @@ export interface IDolbyIOProvider {
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
   participants: Participant[];
+  isBottomSheetVisible: Boolean
   initialize: (token: string, refreshToken: () => Promise<string>) => void;
   openSession: (name: string, externalId?: string) => Promise<void>;
   closeSession: () => Promise<void>;
   isOpen: () => Promise<boolean>;
   createAndJoin: (alias: string, params: ConferenceCreateParameters) => void;
-  listen: (alias: string) => void;
+  listen: (alias: string, listenType?: ListenType) => void;
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   getCurrentConference: () => void;
   goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
   setSessionParticipant: () => void;
+  setBottomSheetVisibility: (isVisible: boolean) => void;
 }
 
 export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   isInitialized: false,
+  isBottomSheetVisible: false,
   me: undefined,
   conference: undefined,
   conferenceStatus: undefined,
@@ -69,6 +74,7 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   getCurrentConference: () => {},
   goToAudioPreviewScreen: () => {},
   setSessionParticipant: () => {},
+  setBottomSheetVisibility: () => {},
 });
 
 type DolbyProps = {
@@ -76,6 +82,7 @@ type DolbyProps = {
 };
 
 const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
   const [isAudioPreviewScreen, setIsAudioPreviewScreen] = useState(false);
@@ -160,14 +167,9 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   }
 
   const openSession = async (name: string, externalId?: string) => {
-    const timeoutPromise = setTimeout(() => {
-      CommsAPI.session.close();
-    }, 5000);
     try {
       await CommsAPI.session.open({ name, externalId });
-      clearTimeout(timeoutPromise);
     } catch (e: any) {
-      clearTimeout(timeoutPromise);
       Alert.alert('Session not opened', e.toString());
     }
   };
@@ -175,7 +177,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const closeSession = async () => {
     try {
       await CommsAPI.session.close();
-      setIsInitialized(false);
     } catch (e: any) {
       Alert.alert('Session not opened', e.toString());
     }
@@ -263,7 +264,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   };
 
-  const listen = async (alias: string) => {
+  const listen = async (alias: string, listenType: ListenType = ListenType.REGULAR) => {
     try {
       const conferenceParams = {
         rtcpMode: RTCPMode.AVERAGE,
@@ -280,9 +281,10 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
         conferenceOptions
       );
 
-      const listenOptions = {
+      const listenOptions: ConferenceListenOptions = {
         maxVideoForwarding: 4,
         spatialAudio: false,
+        listenType: listenType
       };
       const joinedConference = await CommsAPI.conference.listen(
         createdConference,
@@ -347,16 +349,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
 
   const leave = async (leaveRoom: boolean) => {
     try {
-      const conferenceLeaveOptions = {
-        leaveRoom,
-      };
-      await CommsAPI.conference.leave(conferenceLeaveOptions);
-      leaveActions();
-      if (leaveRoom) {
-        setMe(undefined);
-      }
-
-      CommsAPI.notification.unsubscribe(
+      await CommsAPI.notification.unsubscribe(
         [
           SubscriptionType.ActiveParticipants,
           SubscriptionType.ConferenceCreated,
@@ -366,6 +359,15 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
           SubscriptionType.ParticipantLeft
         ].map( (s) => { return { type: s, conferenceAlias: conference?.alias ?? "" } })
       );
+
+      const conferenceLeaveOptions = {
+        leaveRoom,
+      };
+      await CommsAPI.conference.leave(conferenceLeaveOptions);
+      leaveActions();
+      if (leaveRoom) {
+        setMe(undefined);
+      }
     } catch (e: any) {
       Alert.alert('Conference leave with errors', e);
       leaveActions();
@@ -449,8 +451,13 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     setIsAudioPreviewScreen(isVisible);
   }
 
+  const setBottomSheetVisibility = (isVisible: boolean) => {
+    setIsBottomSheetVisible(isVisible);
+  }
+
   const contextValue = {
     isInitialized,
+    isBottomSheetVisible,
     isAudioPreviewScreen,
     me,
     conference,
@@ -468,6 +475,7 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     getCurrentConference,
     goToAudioPreviewScreen,
     setSessionParticipant,
+    setBottomSheetVisibility,
   };
 
   return (

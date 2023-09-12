@@ -12,4 +12,7 @@ export default StyleSheet.create({
     padding: 10,
     borderRadius: SPACE_XXS,
   },
+  center: {
+    alignItems: 'center',
+  },
 });

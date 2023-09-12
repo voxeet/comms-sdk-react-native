@@ -24,6 +24,8 @@ The FilePresentationService allows presenting files during a conference. The Dol
 
 **10.** The presenter and the viewers receive [information](doc:rn-client-sdk-models-filepresentation) about the end of the file presentation via the [onFilePresentationChange](#onfilepresentationchange) listener.
 
+The service is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
+
 ## Table of contents
 
 ### Constructors

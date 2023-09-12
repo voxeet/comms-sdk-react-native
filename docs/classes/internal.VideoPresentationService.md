@@ -18,6 +18,8 @@ The VideoPresentationService allows sharing videos during a conference. To prese
 
 **6.** The presenter calls the [stop](#stop) method to stop the video presentation. In such a situation, all conference participants receive this information via the [onVideoPresentationStopped](#onvideopresentationstopped) listener.
 
+The service is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
+
 ## Table of contents
 
 ### Constructors

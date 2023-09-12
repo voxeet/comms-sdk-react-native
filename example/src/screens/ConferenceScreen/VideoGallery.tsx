@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
-import { View, LayoutChangeEvent } from 'react-native';
-
+import React from 'react';
+import { Dimensions, View } from 'react-native';
 import type { Participant } from '@dolbyio/comms-sdk-react-native/models';
-import Video from './Video';
-
-const GRID = [
-  [1, 1],
-  [1, 2],
-  [2, 2],
-  [2, 2],
-  [2, 3],
-  [2, 3],
-  [3, 3],
-  [3, 3],
-  [3, 3],
-];
+import { StyleSheet } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import ParticipantAvatar from './ParticipantAvatar';
 
 type VideoGalleryProps = {
   participants: Participant[];
@@ -22,28 +11,38 @@ type VideoGalleryProps = {
 };
 
 const VideoGallery = ({ participants, scaleType }: VideoGalleryProps) => {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width: newWidth, height: newHeight } = event.nativeEvent.layout;
-    setWidth(newWidth);
-    setHeight(newHeight);
-  };
+  const numColumns = 2;
+  const renderItem = ({ item }: { item: Participant }) => (
+    <View style={styles.item}>
+      <ParticipantAvatar participant={item} scaleType={scaleType} />
+    </View>
+  );
+
+  const styles = StyleSheet.create({
+    container: {
+      justifyContent: 'space-between',
+      paddingHorizontal: 16,
+      paddingTop: 16,
+    },
+    item: {
+      flex: 1,
+      margin: 8,
+      padding: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: Dimensions.get('window').width / numColumns - 24,
+    },
+  });
 
   return (
-    <View onLayout={onLayout} style={{ flex: 1, flexWrap: "wrap", flexDirection: "row", alignContent: "flex-start" }}>
-      {participants.map((p) => (
-        <Video
-          key={p.id}
-          participant={p}
-          width={width / GRID[participants.length - 1][0]}
-          height={height / GRID[participants.length - 1][1]}
-          scaleType={scaleType}
-          
-        />
-      ))}
-    </View>
+    <FlatList
+      data={participants}
+      renderItem={renderItem}
+      keyExtractor={item => item.id}
+      numColumns={numColumns}
+      contentContainerStyle={styles.container}>
+    </FlatList>
   );
 };
 

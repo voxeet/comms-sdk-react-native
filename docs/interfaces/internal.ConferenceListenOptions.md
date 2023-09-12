@@ -12,6 +12,7 @@ The ConferenceListenOptions interface defines how the application expects to joi
 - [maxVideoForwarding](internal.ConferenceListenOptions.md#maxvideoforwarding)
 - [spatialAudio](internal.ConferenceListenOptions.md#spatialaudio)
 - [videoForwardingStrategy](internal.ConferenceListenOptions.md#videoforwardingstrategy)
+- [listenType](internal.ConferenceListenOptions.md#listentype)
 
 ## Properties
 
@@ -51,3 +52,11 @@ ___
 • `Optional` **videoForwardingStrategy**: [`VideoForwardingStrategy`](../enums/internal.VideoForwardingStrategy.md)
 
 Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later.
+
+___
+
+### listenType
+
+• `Optional` **listenType**: [`ListenType`](../enums/internal.ListenType.md)
+
+The listener type that indicates whether a participant wishes to join a conference as a regular listener or a mixed listener. This property is available in SDK 3.11 and later.

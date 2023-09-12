@@ -19,7 +19,11 @@ export default StyleSheet.create({
     borderRadius: SPACE_S,
     height: SPACE_XL,
   },
-
+  center: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
   menuButton: {
     justifyContent: 'center',
     flexDirection: 'row',

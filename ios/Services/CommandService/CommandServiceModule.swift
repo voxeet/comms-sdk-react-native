@@ -9,6 +9,10 @@ private enum EventKeys: String, CaseIterable {
 @objc(RNCommandServiceModule)
 public class CommandServiceModule: ReactEmitter {
 
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	// MARK: - Events Setup
 	@objc(supportedEvents)
 	override public func supportedEvents() -> [String] {

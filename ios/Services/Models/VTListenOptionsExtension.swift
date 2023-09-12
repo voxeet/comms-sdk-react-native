@@ -15,7 +15,8 @@ internal extension VTListenOptions {
 		listenOptions.spatialAudio = spatialAudio?.boolValue ?? false
 		let strategy: String? = dictionary.value(for: Keys.videoForwardingStrategy)
 		listenOptions.videoForwardingStrategy = VideoForwardingStrategy.fromReactModel(value: strategy)
-
+        let listenType: String? = dictionary.value(for: Keys.listenType)
+        listenOptions.type = ListenType.create(with: listenType) ?? .regular
 		return listenOptions
 	}
 }
@@ -34,5 +35,5 @@ extension VTListenOptions: ReactModelMappable {
 
 // MARK: - ReactModel Keys
 private enum Keys: String {
-	case maxVideoForwarding, conferenceAccessToken, spatialAudio, videoForwardingStrategy
+	case maxVideoForwarding, conferenceAccessToken, spatialAudio, videoForwardingStrategy, listenType
 }

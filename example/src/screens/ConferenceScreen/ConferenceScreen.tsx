@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useContext, useMemo, useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { DolbyIOContext } from '@components/DolbyIOProvider';
 import { FilePresentationContext } from '@components/FilePresentationHandler';
 import { RecordingContext } from '@components/RecordingProvider';
@@ -15,12 +13,10 @@ import VideoGallery from '@screens/ConferenceScreen/VideoGallery';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 import { mute, unmute } from '@utils/conference.tester';
-
-import { ParticipantStatus, Participant } from '@dolbyio/comms-sdk-react-native/models';
+import { ParticipantStatus } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
 import ConferenceScreenBottomSheet from './ConferenceScreenBottomSheet';
 import MessageModal from './MessageModal';
-import ParticipantAvatar from './ParticipantAvatar';
 import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const DISPLAYED_STATUSES: ParticipantStatus[] = [
@@ -29,7 +25,7 @@ const DISPLAYED_STATUSES: ParticipantStatus[] = [
 ];
 
 const ConferenceScreen: FunctionComponent = () => {
-  const { me, conference, participants } = useContext(DolbyIOContext);
+  const { me, conference, participants, isBottomSheetVisible, setBottomSheetVisibility } = useContext(DolbyIOContext);
   const { isRecording } = useContext(RecordingContext);
   const { fileSrc, isPresentingFile, fileOwnerName } = useContext(
     FilePresentationContext
@@ -38,6 +34,8 @@ const ConferenceScreen: FunctionComponent = () => {
   const [scaleType, setScaleType] = useState<'fill' | 'fit'>('fill');
   const [isMessageModalActive, setIsMessageModalActive] =
     useState<boolean>(false);
+  const [isVideoOn, setIsVideoOn] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const connectedParticipants = useMemo(() => {
     return participants.filter(
@@ -48,6 +46,24 @@ const ConferenceScreen: FunctionComponent = () => {
   if (!conference || !me) {
     return <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper} />;
   }
+
+  const onPressVideoButton = () => {
+    if (isVideoOn) {
+      stopLocalVideo();
+    } else {
+      startLocalVideo();
+    }
+    setIsVideoOn(!isVideoOn);
+  };
+
+  const onPressMuteButton = () => {
+    if (isMuted) {
+      unmute(me);
+    } else {
+      mute(me);
+    }
+    setIsMuted(!isMuted);
+  };
 
   return (
     <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
@@ -60,19 +76,25 @@ const ConferenceScreen: FunctionComponent = () => {
           <SafeAreaView style={styles.wrapper}>
             <View style={styles.top}>
               <Space mh="m" mv="m">
-                <Space mb="s" style={styles.topBar}>
-                  <Text size="xs">Logged as: {me.info.name}</Text>
+                <Space mb="s" ml="s" style={styles.topBar}>
+                  <Space mr="m">
+                    <Text size="s" align="center">
+                      Conference: <Text weight="bold">{conference.alias}</Text>
+                    </Text>
+                  </Space>
                   <LeaveConferenceButton />
                 </Space>
-                <Text size="s" align="center">
-                  Conference: <Text weight="bold">{conference.alias}</Text>
-                </Text>
                 {isRecording ? (
                   <RecordingDotsText text="Conference is being recorded" />
                 ) : null}
               </Space>
+              <View>
+                <VideoGallery
+                  participants={connectedParticipants}
+                  scaleType={scaleType}
+                />
+              </View>
             </View>
-
             {isPresentingFile && fileSrc ? (
               <View style={styles.filePresentationWrapper}>
                 <View style={styles.filePresentation}>
@@ -86,110 +108,55 @@ const ConferenceScreen: FunctionComponent = () => {
             ) : null}
             <View style={styles.center}>
               <View style={styles.centerButtons}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton]}
-                      onPress={() => setIsMessageModalActive(true)}
-                    >
-                      <Text size="xs" align="center">
-                        SEND MSG
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonRed]}
-                      onPress={() => {
-                        mute(me);
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        MUTE ME
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonGreen]}
-                      onPress={() => {
-                        unmute(me);
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        UNMUTE ME
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonGreen]}
-                      onPress={() => startLocalVideo()}
-                    >
-                      <Text size="xs" align="center">
-                        START VIDEO
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={[styles.videoButton, styles.videoButtonRed]}
-                      onPress={() => stopLocalVideo()}
-                    >
-                      <Text size="xs" align="center">
-                        STOP VIDEO
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                  <Space mh="xxs">
-                    <TouchableOpacity
-                      style={styles.videoButton}
-                      onPress={() => {
-                        setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
-                      }}
-                    >
-                      <Text size="xs" align="center">
-                        FILL/FIT
-                      </Text>
-                    </TouchableOpacity>
-                  </Space>
-                </ScrollView>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={isMuted ? [styles.videoButton, styles.videoButtonRed] : [styles.videoButton, styles.videoButtonGreen]}
+                    onPress={() => onPressMuteButton()}
+                  >
+                    <Text size="xs" align="center">
+                      {isMuted ? 'UNMUTE ME' : 'MUTE ME'}
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={isVideoOn ? [styles.videoButton, styles.videoButtonRed] : [styles.videoButton, styles.videoButtonGreen]}
+                    onPress={() => onPressVideoButton()}
+                  >
+                    <Text size="xs" align="center">
+                      {isVideoOn ? 'STOP VIDEO' : 'START VIDEO'}
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space mh="xxs">
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setScaleType(scaleType === 'fill' ? 'fit' : 'fill');
+                    }}
+                  >
+                    <Text size="xs" align="center">
+                      FILL/FIT
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
+                <Space>
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() => {
+                      setBottomSheetVisibility(true);
+                    }}
+                  >
+                    <Text size="xxs" align="center">
+                      TEST BUTTONS
+                    </Text>
+                  </TouchableOpacity>
+                </Space>
               </View>
-            </View>
-            <View style={styles.bottom}>
-              <Space
-                mh="m"
-                mt="m"
-                mb="s"
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Text
-                  header
-                  size="s"
-                >{`Participants (${connectedParticipants.length})`}</Text>
-              </Space>
-              <Space mb="m">
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <Space mh="m" style={styles.participantsList}>
-                    {connectedParticipants.map((p: Participant) => (
-                      <ParticipantAvatar key={p.id} {...p} />
-                    ))}
-                  </Space>
-                </ScrollView>
-              </Space>
             </View>
           </SafeAreaView>
         </MenuProvider>
-        <ConferenceScreenBottomSheet />
-      </View>
-      <View style={styles.layerVideo} pointerEvents="none">
-        <VideoGallery
-          participants={connectedParticipants}
-          scaleType={scaleType}
-        />
+        {isBottomSheetVisible ? (<ConferenceScreenBottomSheet />) : null}
       </View>
       <MessageModal
         open={isMessageModalActive}

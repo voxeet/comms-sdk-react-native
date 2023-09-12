@@ -465,6 +465,7 @@ describe('ConferenceService - transformers', () => {
             id: '111',
             status: undefined,
             type: undefined,
+            streams: undefined,
           },
         ],
         alias: 'Conference',
@@ -492,6 +493,7 @@ describe('ConferenceService - transformers', () => {
         id: '111',
         status: undefined,
         type: undefined,
+        streams: undefined,
       });
     });
   });

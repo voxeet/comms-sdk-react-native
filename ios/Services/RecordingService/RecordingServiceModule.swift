@@ -10,6 +10,10 @@ private enum EventKeys: String, CaseIterable {
 @objc(RNRecordingServiceModule)
 public class RecordingServiceModule: ReactEmitter {
 
+    @objc public override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	@Atomic
 	private var currentRecording: RecordingModel?
 

@@ -19,6 +19,7 @@ import {
   setComfortNoiseLevel,
   startLocalAudio,
   stopLocalAudio,
+  setAllParticipantsVolume,
 } from '@utils/audio.tester';
 import { sendCommandMessage } from '@utils/command.tester';
 import {
@@ -70,18 +71,18 @@ import {
 
 import { Conference, VoiceFont } from '@dolbyio/comms-sdk-react-native/models';
 import styles from './ConferenceScreen.style';
-import { 
-  AudioProcessingOptions, 
-  VideoForwardingStrategy, 
-  AudioCaptureMode, 
-  ComfortNoiseLevel, 
-  NoiseReductionLevel 
+import {
+  AudioProcessingOptions,
+  VideoForwardingStrategy,
+  AudioCaptureMode,
+  ComfortNoiseLevel,
+  NoiseReductionLevel
 } from '@dolbyio/comms-sdk-react-native/models';
 import { startLocalVideo, stopLocalVideo } from '@utils/video.tester';
 
 const ConferenceScreenBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const { me, conference } = useContext(DolbyIOContext);
+  const { me, conference, setBottomSheetVisibility } = useContext(DolbyIOContext);
   const { startRecord, stopRecord } = useContext(RecordingContext);
   const { participants } = conference as Conference;
   let convertedFile: FileConverted | null = null;
@@ -160,8 +161,8 @@ const ConferenceScreenBottomSheet = () => {
       },
     ];
 
-  const voiceFontAction: (voiceFont: VoiceFont) => () => void = (voiceFont) => { 
-    return  () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low, voiceFont: voiceFont }) 
+  const voiceFontAction: (voiceFont: VoiceFont) => () => void = (voiceFont) => {
+    return () => setAudioCaptureMode({ mode: AudioCaptureMode.Standard, noiseReduction: NoiseReductionLevel.Low, voiceFont: voiceFont })
   };
   const voiceFontOptions: Array<{
     text: string;
@@ -228,7 +229,7 @@ const ConferenceScreenBottomSheet = () => {
   };
 
   return (
-    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={[140, 500]}>
+    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={['40%', '80%']} enablePanDownToClose={true} onClose={() => setBottomSheetVisibility(false)}>
       <ScrollView>
         <Space mh="m" mb="s">
           <Text header size="s" color={COLORS.BLACK}>
@@ -345,17 +346,54 @@ const ConferenceScreenBottomSheet = () => {
             </Text>
           </Space>
           <Button
+            size="small"
+            color="dark"
+            text="Start local audio"
+            onPress={() => startLocalAudio()}
+          />
+          <Button
+            size="small"
+            color="dark"
+            text="Stop local audio"
+            onPress={() => stopLocalAudio()}
+          />
+          <Space mb="xs">
+            <Text size="s" color={COLORS.BLACK}>
+              Set all participants volume
+            </Text>
+          </Space>
+          <Space mb="s" style={styles.actionButtons}>
+            <Button
               size="small"
               color="dark"
-              text="Start local audio"
-              onPress={() => startLocalAudio()}
+              text="0.0"
+              onPress={() => setAllParticipantsVolume(0.0)}
             />
             <Button
               size="small"
               color="dark"
-              text="Stop local audio"
-              onPress={() => stopLocalAudio()}
+              text="0.25"
+              onPress={() => setAllParticipantsVolume(0.25)}
             />
+            <Button
+              size="small"
+              color="dark"
+              text="0.5"
+              onPress={() => setAllParticipantsVolume(0.5)}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="0.75"
+              onPress={() => setAllParticipantsVolume(0.75)}
+            />
+            <Button
+              size="small"
+              color="dark"
+              text="1.0"
+              onPress={() => setAllParticipantsVolume(1.0)}
+            />
+          </Space>
           <Space mb="s" style={styles.actionButtons}>
             <Button
               size="small"
@@ -399,18 +437,18 @@ const ConferenceScreenBottomSheet = () => {
           </Space>
           <Space mb="s" style={styles.actionButtons}>
             {voiceFontOptions.map((option) => {
-                return (
-                  <Button
-                    key={option.text}
-                    size="small"
-                    color="dark"
-                    text={option.text}
-                    onPress={option.onClick}
-                  />
-                );
-              })}
+              return (
+                <Button
+                  key={option.text}
+                  size="small"
+                  color="dark"
+                  text={option.text}
+                  onPress={option.onClick}
+                />
+              );
+            })}
           </Space>
-          
+
           <Space mb="xs">
             <Text size="s" color={COLORS.BLACK}>
               Video service

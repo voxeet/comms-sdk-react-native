@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 
 import CommsAPI from '@dolbyio/comms-sdk-react-native';
-
+import Logger from '@utils/Logger/Logger';
 import type {
   Participant,
 } from '../../../src/services/conference/models';
@@ -83,5 +83,24 @@ export const setAudioCaptureMode = async (audioCaptureModeOptions: AudioCaptureM
   } catch (e) {
     const msg = (e as Error).message;
     Alert.alert('setAudioCaptureMode error', msg);
+  }
+};
+
+export const setParticipantVolume = async (participant: Participant, volume: number) => {
+  try {
+    await CommsAPI.audio.getRemote().setParticipantVolume(participant, volume);
+    Logger.log(`Participant: ${participant.info.name}, volume: ${volume}`);
+  } catch (e) {
+    const msg = (e as Error).message;
+    Alert.alert('setVolume error', msg);
+  }
+};
+
+export const setAllParticipantsVolume = async (volume: number) => {
+  try {
+    await CommsAPI.audio.getRemote().setAllParticipantsVolume(volume);
+    Logger.log(`All participants volume: ${volume}`);
+  } catch (e: any) {
+    Alert.alert('Error');
   }
 };

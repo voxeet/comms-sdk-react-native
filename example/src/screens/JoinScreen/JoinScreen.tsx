@@ -13,7 +13,7 @@ import Space from '@ui/Space';
 import Text from '@ui/Text';
 
 import styles from './JoinScreen.style';
-import { SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
+import { ListenType, SpatialAudioStyle } from '@dolbyio/comms-sdk-react-native/models';
 import { View } from 'react-native';
 import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import ExtendedOptions from '@ui/ExtendedOptions';
@@ -36,8 +36,12 @@ const JoinScreen: FunctionComponent = () => {
     await createAndJoin(alias, { dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
   }
 
-  const listenConference = () => {
-    listen(alias);
+  const joinAsRegularListener = () => {
+    listen(alias, ListenType.REGULAR);
+  };
+
+  const joinAsStreamingListener = () => {
+    listen(alias, ListenType.MIXED);
   };
 
   const replayLastConference = () => {
@@ -111,10 +115,12 @@ const JoinScreen: FunctionComponent = () => {
       <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
         <SafeAreaView style={styles.wrapper}>
           <Space mh="m" mv="s">
-            <Text color={COLORS.WHITE} header size="m">
-              Join or Create the Conference
-            </Text>
-            <Space mt="m">
+            <Space mt="s" style={styles.center}>
+              <Text color={COLORS.WHITE} header size="m">
+                Join the Conference
+              </Text>
+            </Space>
+            <Space mt="l">
               <Input
                 label="Conference alias"
                 onChange={setAlias}
@@ -131,8 +137,14 @@ const JoinScreen: FunctionComponent = () => {
             </Space>
             <Space mt="m">
               <Button
-                text="Join as listener"
-                onPress={listenConference}
+                text="Join as regular listener"
+                onPress={joinAsRegularListener}
+              />
+            </Space>
+            <Space mt="m">
+              <Button
+                text="Join as streaming listener"
+                onPress={joinAsStreamingListener}
               />
             </Space>
             <Space mt="m">
@@ -142,9 +154,7 @@ const JoinScreen: FunctionComponent = () => {
               />
             </Space>
             <Space mt="m">
-              <Text color={COLORS.WHITE} size="xs">
-                We need this button to test if getCurrent can return null
-              </Text>
+              {/* We need this button to test if getCurrent can return null */}
               <Button
                 text="Get current conference"
                 onPress={getCurrentConference}

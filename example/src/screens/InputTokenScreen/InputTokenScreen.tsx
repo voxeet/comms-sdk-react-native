@@ -23,7 +23,7 @@ import React, {
         <LinearGradient colors={COLORS.GRADIENT} style={styles.wrapper}>
           <SafeAreaView style={styles.wrapper}>
             <Space mh="m" mv="s">
-              <Space mb="l">
+              <Space mb="l" style={styles.center}>
                 <Text color={COLORS.WHITE} header>
                   Dolby.io
                 </Text>
@@ -41,7 +41,7 @@ import React, {
                 <Input label="Your token" onChange={setToken} value={token} />
               </Space>
               <Space mt="m">
-                <Button text="Initialize" onPress={() => initialize(token, async () => "")} />
+                <Button text="Initialize" onPress={() => initialize(token, async () => token)} />
               </Space>
             </Space>
           </SafeAreaView>

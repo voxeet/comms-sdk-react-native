@@ -1,5 +1,4 @@
 package io.dolby.sdk.comms.reactnative.services.audio
-
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -69,6 +68,34 @@ class RNRemoteAudioModule(
       .thenPromise { participant -> audioService.remote.stop(participant) }
       .rejectIfFalse { "Stop audio operation failed" }
       .forward(promise)
+  }
+
+  /**
+   * Sets the volume of a selected participant in non-Dolby Voice conferences to a preferred value between 0 and 1.
+   * Providing an unsupported number results in constraining the volume to either 0 or 1. Using the method for a selected participant
+   * after calling setOutputVolume overwrites the participant's volume. This method is supported in SDK 3.11 and later.
+   *
+   * @param participantRN The selected remote participant.
+   * @param volume The preferred volume level between 0 (no audio) and 1 (full volume).
+   */
+  @ReactMethod
+  fun setParticipantVolume(participantRN: ReadableMap, volume: Float, promise: ReactPromise) {
+    Promises.promise(audioService.remote.setVolume(toParticipant(participantRN), volume))
+      .forward(promise, ignoreReturnType = true)
+  }
+
+  /**
+   * Sets the conference volume for the local participant.
+   * The method sets the volume of all remote participants to a preferred value between 0 and 1.
+   * Providing an unsupported volume results in constraining volume to a either 0 or 1.
+   * This method is supported in SDK 3.11 and later.
+   *
+   * @param volume
+   */
+  @ReactMethod
+  fun setAllParticipantsVolume(volume: Float, promise: ReactPromise) {
+    Promises.promise(audioService.remote.setOutputVolume(volume))
+      .forward(promise, ignoreReturnType = true)
   }
 
   /**

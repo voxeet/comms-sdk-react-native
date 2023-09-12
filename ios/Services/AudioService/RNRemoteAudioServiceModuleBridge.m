@@ -11,4 +11,13 @@ RCT_EXTERN_METHOD(stop:(NSDictionary * _Nonnull)participant
                   resolver:(RCTPromiseResolveBlock _Nonnull)resolve
                   rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
 
+RCT_EXTERN_METHOD(setParticipantVolume:(NSDictionary * _Nonnull)participant
+                  volume:(float)volume
+                  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
+RCT_EXTERN_METHOD(setAllParticipantsVolume:(float)volume
+                  resolver:(RCTPromiseResolveBlock _Nonnull)resolve
+                  rejecter:(RCTPromiseRejectBlock _Nonnull)reject);
+
 @end

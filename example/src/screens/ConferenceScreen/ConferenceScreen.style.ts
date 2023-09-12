@@ -25,7 +25,7 @@ export default StyleSheet.create({
   top: {},
   topBar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   center: {
@@ -87,7 +87,17 @@ export default StyleSheet.create({
     elevation: SHADOWS.m.elevation,
     flexDirection: 'column',
   },
-
+  volumeModalContainer: {
+    backgroundColor: 'lightgray',
+    borderRadius: SPACE_XXS,
+    width: '80%',
+    height: '30%',
+    shadowOffset: SHADOWS.m.shadowOffset,
+    shadowOpacity: SHADOWS.m.shadowOpacity,
+    shadowRadius: SHADOWS.m.shadowRadius,
+    elevation: SHADOWS.m.elevation,
+    flexDirection: 'column',
+  },
   modalTitleSection: {
     flex: 1,
   },
@@ -130,6 +140,7 @@ export default StyleSheet.create({
   },
   centerButtons: {
     flexDirection: 'row',
+    marginBottom: 20,
   },
   videoButtonGreen: {
     backgroundColor: COLORS.GREEN,

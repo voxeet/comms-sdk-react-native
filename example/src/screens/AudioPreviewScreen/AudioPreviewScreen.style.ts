@@ -27,4 +27,7 @@ export default StyleSheet.create({
       backgroundColor: COLORS.BLUE,
       borderRadius: SPACE_L,
     },
+    center: {
+      alignItems: 'center',
+    },
   });

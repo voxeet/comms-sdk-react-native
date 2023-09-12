@@ -4,6 +4,10 @@ import VoxeetSDK
 @objc(RNSessionServiceModule)
 public class SessionServiceModule: NSObject {
 
+    @objc public static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
 	/// Opens a new session.
 	/// - Parameters:
 	///   - userInfo: user info

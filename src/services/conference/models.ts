@@ -105,9 +105,9 @@ export interface ConferenceJoinOptions {
   maxVideoForwarding?: number;
   /** Allows joining conferences as a special participant called Mixer. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article. */
   mixing?: ConferenceMixingOptions;
-  /** Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
+  /** Indicates whether a participant wants to receive mono sound. By default, the property is set to false. */
   preferRecvMono?: boolean;
-  /** Indicates whether a participant wants to send mono sound to a conference. By default, when using the Opus codec, participants' audio is sent as stereo. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences. */
+  /** Indicates whether a participant wants to send mono sound to a conference. By default, the property is set to true in most cases. The only situation when the property is set to false is when you set the [capture mode](doc:rn-client-sdk-references-localaudio#setcapturemode) to Unprocessed before joining a conference while using Opus. */
   preferSendMono?: boolean;
   /** Enables sending the Simulcast video streams to other conference participants. */
   simulcast?: boolean;
@@ -141,6 +141,8 @@ export interface ConferenceListenOptions {
   spatialAudio?: boolean;
   /** Changes the video forwarding strategy for the local participant. This option is available only in SDK 3.6 and later. */
   videoForwardingStrategy?: VideoForwardingStrategy;
+  /** The listener type that indicates whether a participant wishes to join a conference as a regular listener or a mixed listener. This property is available in SDK 3.11 and later. */
+  listenType?: ListenType;
 }
 
 /** The ConferenceReplayOptions interface gathers properties responsible for replaying conferences. */
@@ -159,15 +161,15 @@ export interface ConferenceMixingOptions {
 
 /** The Participant interface gathers information about a conference participant. */
 export interface Participant {
-  /**  The participant's ID. */
+  /**  The participant ID. */
   id: string;
   /**  Information about a conference participant. */
   info: ParticipantInfo;
-  /** The participant's status. */
+  /** The participant status. */
   status?: ParticipantStatus;
   /** The participant's streams. */
   streams?: MediaStream[];
-  /** The participant's type. */
+  /** The participant type. */
   type?: ParticipantType;
 }
 
@@ -220,6 +222,8 @@ export enum ParticipantType {
   LISTENER = 'LISTENER',
   /** A participant who can send and receive audio and video during the conference. */
   USER = 'USER',
+  /** A special participant responsible for mixing video and sending one mixed video stream from a conference to each participant who joined the conference as a mixed listener. This type is available in SDK 3.11 and later. */
+  MIXER_MIX = 'MIXER_MIX',
   /** Any other type that is unsupported in react-native. */
   UNKNOWN = 'UNKNOWN',
 }
@@ -489,10 +493,20 @@ export enum VideoForwardingStrategy {
  * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
  * - Changing the video forwarding strategy that defines how the SDK should select conference participants whose videos will be received by the local participant */
 export interface VideoForwardingOptions {
-  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 25. The default value is 4. In the case of providing a value smaller than 0 or greater than 25, SDK triggers an error. */
+  /** The maximum number of video streams that may be transmitted to the local participant. The valid values are between 0 and 49. The default value is 4. In the case of providing a value smaller than 0 or greater than 49, SDK triggers an error. */
   max?: number;
   /** The list of participants whose video streams should be always transmitted to the local participant. */
   participants?: Participant[];
   /** The strategy that defines how the SDK should select conference participants whose videos will be transmitted to the local participant. The selection can be either based on the participants' audio volume or the distance from the local participant. */
   strategy?: VideoForwardingStrategy;
+}
+
+/**
+ * The ListenType model gathers the possible types of listeners. This model is available in SDK 3.11 and later.
+ */
+export enum ListenType {
+  /** A regular listener who receives one mixed audio stream from a conference and one video stream from each participant who sends video to a conference. */
+  REGULAR = 'REGULAR',
+  /** A participant who receives one mixed audio stream and one mixed video stream from a conference, which increases the conference capacity. The platform can support up to 60,000 mixed listeners while maintaining under half a second of latency. */
+  MIXED = 'MIXED',
 }
