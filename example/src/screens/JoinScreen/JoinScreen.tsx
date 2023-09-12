@@ -18,6 +18,8 @@ import { View } from 'react-native';
 import { MenuOptionsButton, type Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import ExtendedOptions from '@ui/ExtendedOptions';
 import Switch from '@ui/Switch';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 
 const chance = new Chance();
 
@@ -30,10 +32,12 @@ const JoinScreen: FunctionComponent = () => {
   const [spatialAudioStyle, setSpatialAudioStyle] = useState(SpatialAudioStyle.DISABLED);
 
   const [alias, setAlias] = useState(`${chance.country({ full: true })}`);
-  const { createAndJoin, replay, listen, getCurrentConference, goToAudioPreviewScreen } = useContext(DolbyIOContext);
+  const { createAndJoin, replay, listen, getCurrentConference } = useContext(DolbyIOContext);
+  const { setScreen } = useContext(NavigationContext);
 
   const createConference = async () => {
     await createAndJoin(alias, { dolbyVoice: isDolbyVoice, liveRecording: isLiveRecording, spatialAudioStyle: spatialAudioStyle });
+    setScreen(Screens.ConferenceScreen);
   }
 
   const joinAsRegularListener = () => {
@@ -49,7 +53,7 @@ const JoinScreen: FunctionComponent = () => {
   };
 
   const onAudioPreviewButton = () => {
-    goToAudioPreviewScreen(true);
+    setScreen(Screens.AudioPreviewScreen);
   }
 
   const onDoblyVoiceChanged = () => {

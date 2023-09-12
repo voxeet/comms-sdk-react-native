@@ -33,7 +33,6 @@ import Logger from '@utils/Logger/Logger';
 
 export interface IDolbyIOProvider {
   isInitialized?: Boolean;
-  isAudioPreviewScreen: Boolean;
   me?: Participant;
   conference?: Conference;
   conferenceStatus?: ConferenceStatus;
@@ -48,7 +47,6 @@ export interface IDolbyIOProvider {
   joinWithId: (conferenceId: string) => void;
   replay: () => void;
   getCurrentConference: () => void;
-  goToAudioPreviewScreen: (isVisible: boolean) => void;
   leave: (leaveRoom: boolean) => void;
   setSessionParticipant: () => void;
   setBottomSheetVisibility: (isVisible: boolean) => void;
@@ -60,7 +58,6 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   me: undefined,
   conference: undefined,
   conferenceStatus: undefined,
-  isAudioPreviewScreen: false,
   participants: [],
   initialize: () => {},
   openSession: () => { return Promise.resolve(); },
@@ -72,7 +69,6 @@ export const DolbyIOContext = React.createContext<IDolbyIOProvider>({
   replay: () => {},
   leave: () => {},
   getCurrentConference: () => {},
-  goToAudioPreviewScreen: () => {},
   setSessionParticipant: () => {},
   setBottomSheetVisibility: () => {},
 });
@@ -85,7 +81,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [me, setMe] = useState<Participant | undefined>(undefined);
-  const [isAudioPreviewScreen, setIsAudioPreviewScreen] = useState(false);
   const [conference, setConference] = useState<Conference | undefined>(
     undefined
   );
@@ -447,10 +442,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     }
   }
 
-  const goToAudioPreviewScreen = (isVisible: boolean) => {
-    setIsAudioPreviewScreen(isVisible);
-  }
-
   const setBottomSheetVisibility = (isVisible: boolean) => {
     setIsBottomSheetVisible(isVisible);
   }
@@ -458,7 +449,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
   const contextValue = {
     isInitialized,
     isBottomSheetVisible,
-    isAudioPreviewScreen,
     me,
     conference,
     conferenceStatus,
@@ -473,7 +463,6 @@ const DolbyIOProvider: React.FC<DolbyProps> = ({ children }) => {
     replay,
     leave,
     getCurrentConference,
-    goToAudioPreviewScreen,
     setSessionParticipant,
     setBottomSheetVisibility,
   };

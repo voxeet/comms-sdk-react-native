@@ -11,7 +11,6 @@ import COLORS from '@constants/colors.constants';
 import Space from '@ui/Space';
 import Text from '@ui/Text';
 import Button from '@ui/Button';
-import { DolbyIOContext } from '@components/DolbyIOProvider';
 import {
   VoiceFont,
   AudioCaptureMode,
@@ -30,13 +29,15 @@ import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
 import { View } from 'react-native';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import { MenuProvider } from 'react-native-popup-menu';
+import { NavigationContext } from '../../navigation/NavigationProvider';
+import { Screens } from '../../navigation/ScreenFactory';
 
 
 const AudioPreviewScreen: FunctionComponent = () => {
-  const { goToAudioPreviewScreen } = useContext(DolbyIOContext);
+  const { setScreen } = useContext(NavigationContext);
 
   const onBackButton = () => {
-    goToAudioPreviewScreen(false);
+    setScreen(Screens.JoinScreen);
   };
 
   const voiceFontAction: (voiceFont: VoiceFont) => void = (voiceFont) => {

@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-
-import { DolbyIOContext } from '@components/DolbyIOProvider';
 import COLORS from '@constants/colors.constants';
 import MenuOptionsButton from '@ui/MenuOptionsButton';
 import type { Options } from '@ui/MenuOptionsButton/MenuOptionsButton';
@@ -9,22 +7,21 @@ import Text from '@ui/Text';
 
 import styles from './ConferenceScreen.style';
 
-const LeaveConferenceButton = () => {
-  const { leave } = useContext(DolbyIOContext);
+type LeaveBtnProps = {
+  onPress: (closeSession: boolean) => void
+};
+
+const LeaveConferenceButton: React.FC<LeaveBtnProps> = ({ onPress }) => {
   const leaveOptions: Options = [
     {
       text: 'Leave and close session',
       value: 'leaveAndCloseSession',
-      onSelect: async () => {
-        await leave(true);
-      },
+      onSelect: () => onPress(true),
     },
     {
       text: 'Leave without closing session',
       value: 'leaveWithoutClosingSession',
-      onSelect: async () => {
-        await leave(false);
-      },
+      onSelect: () => onPress(false),
     },
   ];
 
