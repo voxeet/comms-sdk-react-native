@@ -56,7 +56,7 @@ ___
 
 • `Optional` **preferRecvMono**: `boolean`
 
-Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences.
+Indicates whether a participant wants to receive mono sound. By default, the property is set to false.
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • `Optional` **preferSendMono**: `boolean`
 
-Indicates whether a participant wants to send mono sound to a conference. By default, when using the Opus codec, participants' audio is sent as stereo. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences.
+Indicates whether a participant wants to send mono sound to a conference. By default, the property is set to true in most cases. The only situation when the property is set to false is when you set the [capture mode](doc:rn-client-sdk-references-localaudio#setcapturemode) to Unprocessed before joining a conference while using Opus.
 
 ___
 

@@ -100,10 +100,9 @@ ___
 
 ▸ **start**(): `Promise`<`void`\>
 
-Starts sending the local participant’s audio streams from the local client to the conference.
-This method is not available for listeners in Dolby Voice conferences.
+Starts sending the local participant’s audio stream to a conference. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
 
-The method requires up to a few seconds to become effective.
+The method requires a few seconds to become effective.
 
 #### Returns
 
@@ -115,8 +114,7 @@ ___
 
 ▸ **stop**(): `Promise`<`void`\>
 
-Stops sending local participant’s audio from the local client to the conference.
-This method is not available for listeners in Dolby Voice conferences.
+Stops sending local participant’s audio to a conference. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
 
 The method requires up to a few seconds to become effective.
 

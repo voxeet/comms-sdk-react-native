@@ -16,7 +16,7 @@ export class RemoteVideo {
   /**
    * If the local participant used the stop method to stop receiving video streams from selected remote participants, the start method allows the participant to start receiving video streams from these participants. The start method does not impact the video transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant.
    *
-   * The start method requires a few seconds to become effective.
+   * The start method requires a few seconds to become effective. The method is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
    *
    * @param participant The selected remote participant who is locally muted through the stop method.
    *
@@ -28,7 +28,7 @@ export class RemoteVideo {
   /**
    * Allows the local participant to stop receiving video from specific remote participants. This method does not impact audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference.
    *
-   * The stop method requires a few seconds to become effective.
+   * The stop method requires a few seconds to become effective. The method is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
    *
    * @param participant The selected remote participant who should be locally muted.
    */

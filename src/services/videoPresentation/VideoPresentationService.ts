@@ -24,6 +24,8 @@ const { CommsAPIVideoPresentationServiceModule } = NativeModules;
  * **5.** The presenter can call the [seek](#seek) method to navigate to a specific section of the shared video. After calling the seek method, all conference participants receive [information](doc:rn-client-sdk-models-videopresentationeventtype) about the updated timestamp via the [onVideoPresentationChange](#onvideopresentationchange) listener.
  *
  * **6.** The presenter calls the [stop](#stop) method to stop the video presentation. In such a situation, all conference participants receive this information via the [onVideoPresentationStopped](#onvideopresentationstopped) listener.
+ *
+ * The service is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
  */
 export class VideoPresentationService {
   /** @internal */

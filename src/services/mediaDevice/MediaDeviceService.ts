@@ -14,6 +14,7 @@ export class MediaDeviceService {
 
   /**
    * **Note**: This method is deprecated in SDK 3.7 and replaced with the [getComfortNoiseLevel](doc:rn-client-sdk-references-localaudio#getcomfortnoiselevel) method available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) model
+   * @ignore
    *
    * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
    */
@@ -30,6 +31,7 @@ export class MediaDeviceService {
 
   /**
    * **Note**: This method is deprecated in SDK 3.7 and replaced with the [setComfortNoiseLevel](doc:rn-client-sdk-references-localaudio#setcomfortnoiselevel) method available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) model.
+   * @ignore
    *
    * Configures the comfort noise level for output devices in Dolby Voice conferences.
    *
