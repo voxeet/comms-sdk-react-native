@@ -20,7 +20,7 @@ The Participant interface gathers information about a conference participant.
 
 • **id**: `string`
 
-The participant's ID.
+The participant ID.
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • `Optional` **status**: [`ParticipantStatus`](../enums/internal.ParticipantStatus.md)
 
-The participant's status.
+The participant status.
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 • `Optional` **type**: [`ParticipantType`](../enums/internal.ParticipantType.md)
 
-The participant's type.
+The participant type.
