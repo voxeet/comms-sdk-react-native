@@ -29,18 +29,12 @@ The ConferenceService allows an application to manage the conference life-cycle 
 - [leave](internal.ConferenceService.md#leave)
 - [mute](internal.ConferenceService.md#mute)
 - [replay](internal.ConferenceService.md#replay)
-- [setAudioProcessing](internal.ConferenceService.md#setaudioprocessing)
-- [setMaxVideoForwarding](internal.ConferenceService.md#setmaxvideoforwarding)
 - [videoForwarding](internal.ConferenceService.md#videoforwarding)
-- [startAudio](internal.ConferenceService.md#startaudio)
 - [startScreenShare](internal.ConferenceService.md#startscreenshare)
-- [startVideo](internal.ConferenceService.md#startvideo)
-- [stopAudio](internal.ConferenceService.md#stopaudio)
 - [stopScreenShare](internal.ConferenceService.md#stopscreenshare)
 - [setSpatialDirection](internal.ConferenceService.md#setspatialdirection)
 - [setSpatialEnvironment](internal.ConferenceService.md#setspatialenvironment)
 - [setSpatialPosition](internal.ConferenceService.md#setspatialposition)
-- [stopVideo](internal.ConferenceService.md#stopvideo)
 - [updatePermissions](internal.ConferenceService.md#updatepermissions)
 - [onStatusChange](internal.ConferenceService.md#onstatuschange)
 - [onPermissionsChange](internal.ConferenceService.md#onpermissionschange)
@@ -271,7 +265,7 @@ ___
 
 ▸ **kick**(`participant`): `Promise`<`void`\>
 
-Kicks a participant out of the current conference. This actions requires you to be conference owner or to have the adequate permissions to kick a participant.
+Kicks a participant out of the current conference. This actions requires you to be conference owner or to have the adequate permissions to kick a participant. This method is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
 
 #### Parameters
 
@@ -347,47 +341,6 @@ Replays a previously recorded conference. For more information, see the [Recordi
 
 ___
 
-### setAudioProcessing
-
-▸ **setAudioProcessing**(`options?`): `Promise`<`void`\>
-
-**Note**: This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](doc:rn-client-sdk-references-localaudio#setcapturemode) method.
-
-Enables and disables audio processing for a conference participant.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `options` | [`AudioProcessingOptions`](../interfaces/internal.AudioProcessingOptions.md) | The AudioProcessingOptions model includes the AudioProcessingSenderOptions model responsible for enabling and disabling audio processing. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### setMaxVideoForwarding
-
-▸ **setMaxVideoForwarding**(`max?`, `prioritizedParticipants?`): `Promise`<`any`\>
-
-Sets the maximum number of video streams that may be transmitted to the local participant.
-
-This method is deprecated in SDK 3.6.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `max` | `number` | `4` | The maximum number of video streams that may be transmitted to the local participant. The valid parameter values are between 0 and 4. By default, the parameter is set to 4. |
-| `prioritizedParticipants` | [`Participant`](../interfaces/internal.Participant.md)[] | `[]` | The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk. |
-
-#### Returns
-
-`Promise`<`any`\>
-
-___
-
 ### videoForwarding
 
 ▸ **videoForwarding**(`options`): `Promise`<`any`\>
@@ -398,7 +351,7 @@ Sets the video forwarding functionality for the local participant. The method al
 - Prioritizing specific participants' video streams that need to be transmitted to the local participant
 - Changing the [video forwarding strategy](doc:rn-client-sdk-enums-videoforwardingstrategy) that defines how the SDK should select conference participants whose videos will be received by the local participant
 
-This method is available only in SDK 3.6 and later.
+This method is available only in SDK 3.6 and later and is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
 
 #### Parameters
 
@@ -412,33 +365,12 @@ This method is available only in SDK 3.6 and later.
 
 ___
 
-### startAudio
-
-▸ **startAudio**(`participant`): `Promise`<`void`\>
-
-**Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) and [RemoteAudio](doc:rn-client-sdk-references-remoteaudio) models.
-
-Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
-- When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
-- When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
 ### startScreenShare
 
 ▸ **startScreenShare**(): `Promise`<`void`\>
 
-Starts a screen sharing session.
+Starts a screen sharing session. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
+
 The ScreenShare with iOS document (https://docs.dolby.io/communications-apis/docs/screenshare-with-ios) describes how to set up screen-share outside the application.
 Instead of setting the following properties:
 - CommsSDK.shared.appGroup = "YOUR_APP_GROUP"
@@ -447,47 +379,7 @@ Instead of setting the following properties:
 - Add a new `DolbyioSdkAppGroupKey` as a string type and enter the group name ("YOUR_APP_GROUP").
 - Add a new `DolbyioSdkPreferredExtensionKey` as a string type and enter the broadcast extension bundle ID ("YOUR_BROADCAST_EXTENSION_BUNDLE_ID").
 
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### startVideo
-
-▸ **startVideo**(`participant`): `Promise`<`void`\>
-
-**Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](doc:rn-client-sdk-references-localvideo) and [RemoteVideo](doc:rn-client-sdk-references-remotevideo) models.
-
-Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who will receive the video stream, either remote or local. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### stopAudio
-
-▸ **stopAudio**(`participant`): `Promise`<`void`\>
-
-**Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](doc:rn-client-sdk-references-localaudio) and [RemoteAudio](doc:rn-client-sdk-references-remoteaudio) models.
-
-Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
-- When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
-- When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects. |
+The SDK 3.10 and earlier support sharing only one screen per conference. The SDK 3.11 and later allow sharing two screens in one conference, so two participants can share their screens at the same time.
 
 #### Returns
 
@@ -499,7 +391,7 @@ ___
 
 ▸ **stopScreenShare**(): `Promise`<`void`\>
 
-Stops a screen sharing session.
+Stops a screen sharing session. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
 
 #### Returns
 
@@ -626,26 +518,6 @@ For example, if a local participant Eric, who does not have a set direction, cal
 | :------ | :------ | :------ |
 | `participant` | [`Participant`](../interfaces/internal.Participant.md) | The selected participant, either local or remote. In a case of the local participant, the SDK sets the location from which the participant will hear a conference. In a case of a remote participant, the SDK sets the position from which the participant's audio will be rendered. |
 | `position` | [`SpatialPosition`](../interfaces/internal.SpatialPosition.md) | The participant's audio location. |
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
-### stopVideo
-
-▸ **stopVideo**(`participant`): `Promise`<`void`\>
-
-**Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](doc:rn-client-sdk-references-localvideo) and [RemoteVideo](doc:rn-client-sdk-references-remotevideo) models.
-
-Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `participant` | [`Participant`](../interfaces/internal.Participant.md) | The participant who wants to stop receiving a video stream. |
 
 #### Returns
 

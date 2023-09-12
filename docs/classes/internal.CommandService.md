@@ -27,7 +27,7 @@ The CommandService allows the application to send and receive text messages and 
 
 ▸ **send**(`message`): `Promise`<`void`\>
 
-Sends a message to all conference participants.
+Sends a message to all conference participants. This method is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
 
 #### Parameters
 

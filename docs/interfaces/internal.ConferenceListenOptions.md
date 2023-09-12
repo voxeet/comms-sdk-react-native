@@ -59,4 +59,4 @@ ___
 
 • `Optional` **listenType**: [`ListenType`](../enums/internal.ListenType.md)
 
-the listener type that indicates whether a participant wishes to join a conference as a regular listener or a mixed listener. This property is available in SDK 3.11 and later.
+The listener type that indicates whether a participant wishes to join a conference as a regular listener or a mixed listener. This property is available in SDK 3.11 and later.

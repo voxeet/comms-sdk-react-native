@@ -17,7 +17,7 @@ export class CommandService {
   _nativeEvents = new NativeEvents(CommsAPICommandServiceModule);
 
   /**
-   * Sends a message to all conference participants.
+   * Sends a message to all conference participants. This method is not available for [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners.
    * @param message The message to send.
    */
   public async send(message: string): Promise<void> {

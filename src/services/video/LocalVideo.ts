@@ -12,7 +12,7 @@ export class LocalVideo {
   _localVideo = CommsAPILocalVideoModule;
 
   /**
-   * Enables the local participant's video and sends the video to a conference.
+   * Enables the local participant's video and sends the video to a conference. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
    *
    */
   public async start(): Promise<void> {
@@ -20,7 +20,8 @@ export class LocalVideo {
   }
 
   /**
-   * Disables the local participant's video and stops sending the video to a conference.
+   * Disables the local participant's video and stops sending the video to a conference. The method is available only to participants who joined a conference using the [join](doc:rn-client-sdk-conferenceservice#join) method; it is not available for listeners.
+   *
    * Use this method only when the current participant is at the conference.
    */
   public async stop(): Promise<void> {

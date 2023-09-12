@@ -14,9 +14,9 @@ export class RemoteAudio {
   _remoteAudio = CommsAPIRemoteAudioModule;
 
   /**
-   * Allows the local participant to unmute a specific remote participant who is locally muted through the stop method. The start method does not impact audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. This method is not available for listeners in Dolby Voice conferences.
+   * Allows the local participant to start receiving audio from a specific remote participant. The start method does not impact audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. The method requires a few seconds to become effective.
    *
-   * The start method requires up to a few seconds to become effective.
+   * In Dolby Voice conferences and in the case of [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners, the method works as [mute](doc:rn-client-sdk-conferenceservice#mute), so it locally starts playing audio from a remote participant.
    *
    * @param participant The selected remote participant who is locally muted through the stop method.
    *
@@ -26,9 +26,9 @@ export class RemoteAudio {
   }
 
   /**
-   * Allows the local participant to locally mute specific remote participants. This method does not impact audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. This method is not available for listeners in Dolby Voice conferences.
+   * Allows the local participant to stop receiving audio from specific remote participants. This method does not impact audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. The method requires up to a few seconds to become effective.
    *
-   * The stop method requires up to a few seconds to become effective.
+   * In Dolby Voice conferences and in the case of [mixed](doc:rn-client-sdk-enums-listentype#mixed) listeners, the method works as [mute](doc:rn-client-sdk-conferenceservice#mute), so it locally stops playing audio while the audio stream is still received.
    *
    * @param participant The selected remote participant who should be locally muted.
    */
