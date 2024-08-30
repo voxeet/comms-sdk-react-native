@@ -1,3 +1,5 @@
+# :warning: This repository is no longer maintained :warning:
+
 # Dolby.io Communications SDK for React Native
 
 This guide explains how to create a basic audio video conference application for mobile with React Native. It starts with importing the Dolby.io Communications SDK for React Native and guides you through the steps to launch a conference call.
